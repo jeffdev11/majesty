@@ -1,0 +1,253 @@
+Esta é a **Documentação Técnica Completa do Motor Psicológico e Narrativo (The Soul Engine)** de *Heroes of Majesty - Console Edition*.
+
+Este documento unifica todas as decisões de design sobre comportamento, IA, cálculos matemáticos e geração de narrativa. Ele serve como o manual de engenharia para implementar a "vida" do jogo no Backend (Deno) e a visualização no Frontend (Angular).
+
+---
+
+# 📘 THE SOUL ENGINE: DOCUMENTAÇÃO MESTRA
+
+**Versão:** 3.0 (Behavioral & Interaction Systems)
+**Escopo:** IA de Heróis, IA de Monstros, Personalidade do Conselheiro, Redes Sociais e Geração de Logs.
+
+---
+
+# PARTE I: O MOTOR DE HERÓIS (SISTEMA P.E.R.M.A.)
+
+Para garantir que cada herói pareça uma pessoa única e não um robô, abandonamos booleanos (`isBrave = true`) e adotamos **Vetores de Ponto Flutuante (0.0 a 1.0)**.
+
+### 1.1. Os 5 Vetores Base
+
+Estes valores são gerados na criação do herói (Seed) e raramente mudam permanentemente, definindo sua "Essência".
+
+| Vetor | Nome | 0.0 (Baixo) | 1.0 (Alto) | Impacto no Gameplay |
+| --- | --- | --- | --- | --- |
+| **P** | **Power (Audácia)** | **Covarde:** Foge com 80% HP. Evita Elites. | **Temerário:** Luta até 0% HP. Ataca Boss sozinho. | Define o `FleeThreshold` e o peso do risco no cálculo de IA. |
+| **E** | **Ethics (Ética)** | **Oportunista:** Rouba Kills (KS), ignora curar aliados. | **Paladino:** Cura aliados, divide loot, obedece ordens. | Define interação social e obediência ao jogador. |
+| **R** | **Resource (Ganância)** | **Altruísta:** Ignora ouro no chão durante combate. | **Kleptomaníaco:** Para de lutar para pegar loot. | Define prioridade de `LOOT` vs `COMBAT`. |
+| **M** | **Mind (Intelecto)** | **Instintivo:** Ataca o alvo mais próximo. | **Tático:** Foca Healers/Magos, usa itens eficientemente. | Define seleção de alvo e uso de inventário. |
+| **A** | **Affect (Humor)** | **Instável:** Humor volátil, quebra fácil sob pressão. | **Estoico:** Mantém a calma, ignora insultos. | Define a volatilidade dos outros vetores sob estresse. |
+
+---
+
+### 1.2. Camadas de Modificação (O Contexto)
+
+O comportamento final não é apenas o vetor base. Ele é o resultado de uma soma de camadas.
+
+**Fórmula Mestra de Comportamento:**
+`Vetor_Efetivo = Clamp((Vetor_Base + Estado_Temporário + Memória_Relacional) * Fator_Estresse, 0.0, 1.0)`
+
+#### **A. Estados Temporários (Status Effects)**
+
+Condições passageiras que alteram a personalidade.
+
+| Estado | Gatilho | Modificadores Matemáticos | Descrição Lógica |
+| --- | --- | --- | --- |
+| **BÊBADO** | Evento: Taverna | `P +0.3`, `M -0.4`, `E -0.2` | Fica corajoso e burro. Pode bater em amigos. |
+| **FAMINTO** | Timer: Sem comida | `R +0.4`, `E -0.3` | Fica ganancioso e egoísta. |
+| **INSPIRADO** | Evento: Carta Real | `P +0.2`, `E +0.2` | Bônus temporário após interação positiva. |
+| **AMEDRONTADO** | Evento: Escuridão | `P -0.3` (Se não tiver tocha) | Penalidade por falta de luz. |
+
+#### **B. Peculiaridades (Quirks & Overrides)**
+
+São "Cartas Coringa" binárias que, se ativadas, **ignoram a matemática** e forçam uma ação.
+
+* `ARACHNOPHOBIA`: Se `Target == SPIDER` -> `Audácia = 0.0` (Fuga Imediata).
+* `GAMBLER`: Se `Location == TAVERN` -> Gasta 100% do Ouro.
+* `HATE_UNDEAD`: Se `Target == ZOMBIE` -> `Audácia = 1.0` (Fúria incontrolável).
+
+---
+
+# PARTE II: O MOTOR DE MONSTROS (SISTEMA P.A.I.N.)
+
+Monstros precisam ser previsíveis o suficiente para serem combatidos, mas vivos o suficiente para surpreender.
+
+### 2.1. Os 4 Vetores Bestiais
+
+| Vetor | Nome | 0.0 (Baixo) | 1.0 (Alto) | Comportamento |
+| --- | --- | --- | --- | --- |
+| **P** | **Preservation** | **Berserker:** Nunca foge. (Zumbis) | **Covarde:** Foge se ferido. (Goblins) |  |
+| **A** | **Aggression** | **Passivo:** Só contra-ataca. (Ents) | **Predador:** Persegue por todo o mapa. (Lobos) |  |
+| **I** | **Intellect** | **Bestial:** Ataca o mais próximo. | **Maligno:** Usa skills, foca o mais fraco. |  |
+| **N** | **Nature** | **Solitário:** Luta sozinho. (Ursos) | **Enxame:** Ganha buff se tiver aliados. (Ratos) |  |
+
+### 2.2. Sistema de Nêmesis (Evolução)
+
+Se um monstro matar um herói (Last Hit), ele executa a rotina `promoteToNemesis()`:
+
+1. **Ganho de Nome:** "Goblin" -> "Grak, o Matador de Kaelen".
+2. **Buff de Stats:** HP +50%, Dano +20%.
+3. **Memória de Ódio:** Ganha um vetor `Target_Priority` alto contra os *amigos* do herói morto.
+4. **Banter:** Passa a ter linhas de diálogo provocativas no log.
+
+---
+
+# PARTE III: O CONSELHEIRO (O FILTRO DE VIÉS)
+
+O Conselheiro (P7) é um NPC com **Vieses Cognitivos**. Ele não reporta a realidade crua; ele reporta a interpretação dele.
+
+### 3.1. Arquétipos (Sorteado no Início do Jogo)
+
+| Arquétipo | Viés Principal | Fator de Risco | Estilo de Comunicação |
+| --- | --- | --- | --- |
+| **O BAJULADOR** | `Medo` | Esconde falhas, exagera vitórias. | "Uma retirada estratégica brilhante, senhor!" (Sobre uma fuga covarde). |
+| **O CÉTICO** | `Pessimismo` | Desencoraja exploração. | "Vamos todos morrer naquela caverna. Recomendo ficar na vila." |
+| **O BUROCRATA** | `Avareza` | Foca 100% em economizar ouro. | "Aquele herói está gastando muitas poções. Corte o suprimento." |
+| **O FANÁTICO** | `Agressão` | Incentiva morte e glória. | "Sangue! Mais sangue! Mande eles atacarem o Dragão agora!" |
+
+### 3.2. Dinâmica de Humor
+
+O humor do Conselheiro afeta a **precisão** das informações.
+
+* **Reino Rico/Estável:** Conselheiro calmo. Dicas precisas.
+* **Reino em Crise:** Conselheiro estressado. Dicas erráticas, uso de CAPS LOCK, interrupções frequentes.
+
+---
+
+# PARTE IV: MATEMÁTICA DE DECISÃO (UTILITY AI)
+
+Este é o algoritmo que roda a cada tick no Backend para decidir o que o herói faz.
+
+### 4.1. Cálculo de Score (Pontuação de Ação)
+
+Para cada entidade, o sistema avalia ações possíveis e atribui uma nota (Score). A maior nota vence.
+
+**Fórmula Geral:**
+`Score = (Recompensa_Base * Multiplicador_Personalidade) - (Risco / Audácia)`
+
+#### **Exemplo Prático: Herói diante de um Baú com um Guarda**
+
+* **Herói:** Ganância 0.9, Audácia 0.2 (Ladrão Covarde).
+* **Ação A: Lutar com Guarda**
+* Recompensa Base (XP/Glória): 50
+* Mult. Personalidade (Audácia 0.2): `50 * 0.2 = 10`
+* Risco (Dano estimado): 40
+* *Score Final:* `10 - (40 / 0.2)` = **-190** (Pânico Total).
+
+
+* **Ação B: Tentar Roubar e Correr**
+* Recompensa Base (Ouro): 100
+* Mult. Personalidade (Ganância 0.9): `100 * 0.9 = 90`
+* Risco (Chance de falha): 20
+* *Score Final:* `90 - (20 / 0.2)` = **-10** (Ainda medroso demais).
+
+
+* **Ação C: Fugir**
+* Recompensa Base (Sobrevivência): 100 (se Risco > 0)
+* *Score Final:* **100**.
+
+
+
+**Decisão:** O herói foge.
+
+---
+
+# PARTE V: DINÂMICA SOCIAL E DIÁLOGO
+
+### 5.1. Matriz de Relacionamento
+
+Cada par de heróis tem um `Affinity Score` (-100 a +100).
+
+| Evento | Impacto na Afinidade | Condição |
+| --- | --- | --- |
+| **Salvar Vida (Cura/Tank)** | +10 a +30 | Se o alvo estava com HP < 30%. |
+| **Compartilhar Loot** | +5 | Se Ética do receptor > 0.5. |
+| **Kill Steal (KS)** | -20 a -50 | Se Ganância da vítima > 0.6. |
+| **Fogo Amigo (Dano)** | -10 | Acidental. |
+| **Traição (PvP)** | -100 (Nêmesis) | Ataque direto intencional. |
+
+### 5.2. O Sistema de "Banter" (Conversa)
+
+O texto do diálogo é montado via **Slots Dinâmicos**.
+
+**Estrutura do JSON de Diálogo:**
+
+```json
+{
+  "trigger": "KS_EVENT",
+  "speaker_trait": "ARROGANT",
+  "relationship": "RIVAL",
+  "templates": [
+    "Olhe e aprenda, {target}. É assim que se mata.",
+    "Lento demais. O ouro é meu.",
+    "Talvez na próxima vida você seja mais rápido, {target_class}."
+  ]
+}
+
+```
+
+**Algoritmo de Seleção:**
+
+1. Detectar Evento (KS).
+2. Identificar Traço Dominante do Falante (Se Ganância > outros, usa tag `GREEDY`).
+3. Identificar Status de Relação (Se Afinidade < -20, usa tag `RIVAL`).
+4. Sortear template compatível.
+
+---
+
+# PARTE VI: VISUALIZAÇÃO E UX (O QUE O JOGADOR VÊ)
+
+O jogador não vê os números. Ele vê **Conceitos**.
+
+### 6.1. Tradução de Dados (Backend -> Frontend)
+
+O serviço `NarrativeTranslator` converte os floats em Strings para a UI.
+
+| Valor P.E.R.M.A. | String Exibida (F3 Library) |
+| --- | --- |
+| Audácia 0.0 - 0.2 | "Covarde" |
+| Audácia 0.3 - 0.6 | "Cauteloso" |
+| Audácia 0.7 - 0.9 | "Bravio" |
+| Audácia 0.95+ | "Suicida / Temerário" |
+
+### 6.2. Cards de Insight (Timeline P5)
+
+Quando uma decisão crítica é tomada baseada em personalidade, o log se expande.
+
+**Visual no Log:**
+
+```text
+[14:02] 🏃 KAELEN FUGIU DO COMBATE!
++--------------------------------------------------+
+| 🧠 INSIGHT: PÂNICO                               |
+| O herói entrou em colapso mental.                |
+| > Gatilho: Inimigo ARANHA (Fobia)                |
+| > Estado: Isolado na Escuridão                   |
++--------------------------------------------------+
+
+```
+
+### 6.3. Visualização de Rede (Aviary F5)
+
+Um gráfico de nós onde:
+
+* **Distância:** Inversamente proporcional à Afinidade (Perto = Amigo, Longe = Rival).
+* **Cor da Linha:** Verde (Aliança), Vermelha (Rivalidade), Cinza (Neutro).
+* **Hover:** Exibe o "Motivo Principal" da relação (ex: "Unidos pela Batalha do Dragão").
+
+---
+
+# PARTE VII: INTEGRAÇÃO TÉCNICA (RESUMO)
+
+1. **Deno (Backend):**
+* Mantém o estado `GameState` com todos os vetores.
+* Roda o loop `UtilityAI` a 4Hz.
+* Processa `RelationshipUpdates` após cada evento de combate.
+* Envia `LogEvents` enriquecidos com metadados para o Frontend.
+
+
+2. **Angular (Frontend):**
+* Recebe JSON via WebSocket.
+* `LogComponent`: Renderiza o texto e, se houver metadados de `Insight`, renderiza o Card abaixo.
+* `LibraryComponent`: Traduz os números recebidos em Strings (Covarde, Leal) para exibição.
+* `AviaryComponent`: Renderiza o grafo de relações usando SVG ou Canvas simples.
+
+
+3. **LLM (Integração Externa):**
+* Usada APENAS para: Cartas (F5), Diálogos de Acampamento (Flavor) e Resumo de Crônicas.
+* Não usada para: Combate em tempo real (muito lento).
+
+
+
+---
+
+Esta documentação cobre todas as nuances necessárias para criar um sistema emergente, profundo e infinitamente replayable, onde a matemática invisível gera histórias visíveis.

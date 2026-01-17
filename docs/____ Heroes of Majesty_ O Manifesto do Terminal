@@ -1,0 +1,1706 @@
+📜 Heroes of Majesty: O Manifesto do Terminal
+Do RTS Visual para a Simulação Profunda: Uma Nova Direção
+Para todos que acompanham o desenvolvimento de Heroes of Majesty, trazemos uma atualização crítica. O projeto passou por uma metamorfose completa. Deixamos para trás a ideia de um jogo 3D/2D feito em Godot para abraçar algo mais cru, mais complexo e, ironicamente, muito mais imersivo.
+
+Apresentamos a nova visão: Heroes of Majesty - Console Edition.
+
+1. A Filosofia: "O Sistema Operacional do Reino"
+A proposta original focava em ver bonequinhos andando na tela. Percebemos que isso limitava a profundidade da simulação. Ao remover a complexidade gráfica (física, pathfinding visual, animações de esqueleto), liberamos recursos para focar no que realmente importa: o cérebro dos heróis e a narrativa emergente.
+
+O jogo agora adota uma estética "Cyber-Fantasy Terminal". Imagine que você não está flutuando sobre o castelo, mas sentado na sala de guerra, operando um sistema mágico de monitoramento via texto, logs e mapas ASCII. Você é o Operador. O Reino é o Sistema.
+
+2. A Nova Interface: O Conceito de Workspaces (TTY)
+Inspirado em ferramentas de produtividade como tmux e sistemas Linux, o jogo agora opera através de Workspaces (Áreas de Trabalho) acessíveis via teclado. Não há menus arrastados; há comando instantâneo.
+
+[F1] OPS CENTER ("The War Room"): Onde o caos acontece. Logs de combate em tempo real, monitoramento de heróis e chat com o Conselheiro. É o "aquário" onde você vê a simulação rodar.
+
+[F2] ADMIN ("The Tycoon"): Gestão econômica pura. Árvores de habilidades, estoques de poções e infraestrutura. O lugar onde você gasta o ouro.
+
+[F3] LIBRARY ("The Archive"): Um leitor de dados profundo para Lore, Bestiário e análise psicológica dos heróis.
+
+[F4] WORLD MAP ("The Conquest"): Mapa ASCII global para gestão de expansão, postos avançados e visualização de ciclos climáticos.
+
+[F5] THE AVIARY ("Royal Mail") [NOVO!]: Um sistema dedicado de correspondência.
+
+3. Novas Mecânicas de Profundidade
+Com a mudança para uma interface baseada em texto rico, introduzimos mecânicas que seriam impossíveis na versão anterior:
+
+📩 O Aviário e a Correspondência Assíncrona
+Você não "clica" num herói para falar. Você envia um Corvo.
+
+Escreva cartas para seus heróis (ex: "Pare de ser covarde e ataque!").
+
+Espere o tempo de viagem do pássaro.
+
+Receba respostas baseadas na personalidade e no estado atual deles. Se o herói estiver ocupado lutando, ele pode ignorar sua carta ou responder com raiva.
+
+🔋 Mana Social (Influência)
+Para dar peso às suas decisões, introduzimos os Pontos de Influência (IP). Falar com o Conselheiro (IA) ou enviar cartas custa IP. Isso impede o spam e torna cada interação estratégica. Ações básicas (comprar, construir) continuam gratuitas.
+
+📜 Narrativa via "Flavor Text" Dinâmico
+Esqueça o "Kaelen atacou Goblin (5 de dano)". O sistema agora gera milhares de variações de logs baseados em contexto:
+
+Um Guerreiro Arrogante roubando uma kill: "{actor} riu enquanto dava o golpe final que pertencia a {target}."
+
+Um Mago desajeitado: "{actor} tropeçou na própria túnica e errou a bola de fogo." Isso garante que ler o log seja tão emocionante quanto assistir a um filme.
+
+4. Estética e "Juice" (Visual e Sonoro)
+Ser baseado em texto não significa ser feio. Estamos utilizando o poder da Web Moderna (Angular + CSS) para criar uma experiência vibrante:
+
+Portraits Dinâmicos: Rostos em Pixel Art que reagem ao dano (estilo Doom). Se o herói está quase morrendo, o retrato aparece ensanguentado e em pânico.
+
+Ícones Vivos: Micro-animações e GIFs em pixel art misturados ao texto (espadas colidindo, poções borbulhando).
+
+Sonoplastia Imersiva: Uma trilha sonora que muda conforme o Workspace (Orquestral no Combate, Barroco na Economia) e sons de interface (teclado mecânico, beeps de terminal) extremamente satisfatórios.
+
+5. Por que a Mudança? (Viabilidade Técnica)
+Como um Solopreneur e Senior Web Developer, essa mudança alinha o desenvolvimento com minhas maiores forças técnicas (Deno, Angular, PostgreSQL).
+
+Backend Robusto: A simulação roda num servidor Deno real, permitindo milhares de cálculos de IA sem travar seu computador.
+
+Acessibilidade: Roda no navegador, leve, rápido, jogável 100% via teclado (para os amantes de atalhos) ou mouse.
+
+Heroes of Majesty deixou de ser um jogo que você assiste para ser um sistema que você opera. Preparem seus teclados. A gestão do reino começa em breve.
+
+===
+
+REGRAS GLOBAIS DE INTERAÇÃO (SYSTEM-WIDE)
+Navegação de Foco (Tab): A tecla Tab cicla o foco ativo entre os Painéis (P1 -> P2 -> ...). O painel focado ganha um realce de borda (ex: verde neon ou branco brilhante).
+
+Comando Rápido (/): Pressionar / foca imediatamente o Input do Conselheiro (P7), independente de onde você esteja.
+
+Atalhos de Painel (Alt + Num): Alt+1 foca P1, Alt+2 foca P2, etc.
+
+Mouse UX: Todo elemento listado tem estado :hover. O layout é responsivo ao clique, mas otimizado para teclado.
+
+[F1] TTY1: OPS CENTER ("The War Room")
+Foco Principal: Monitoramento em Tempo Real (O "Aquário") e Combate Tático.
+
+Descrição do Layout:
+
+Esquerda (P1): Lista de Heróis. Roster rápido mostrando HP, nível e status atual (dormindo, lutando).
+
+Centro (P2): O Mapa Lógico. Uma lista de nós (locais) mostrando onde cada entidade está fisicamente. É o "coração" da simulação.
+
+Direita (P3): Estado do Reino. Dashboard financeiro e ambiental (Ouro, Mana, Ciclo Dia/Noite, Clima).
+
+Inferior Esquerda (P4): Inspetor (Detalhes). Mostra os metadados do herói ou inimigo selecionado em P1 ou P2.
+
+Inferior Centro (P5): Timeline Social (Logs). Feed de eventos em tempo real (combate, diálogos, loot).
+
+Inferior Direita (P6): Decretos/Loja. Menu de ações táticas rápidas (curar, buffs, recrutamento).
+
+Rodapé (P7): Conselheiro Real. Chat para input de comandos e feedback da IA sobre o combate.
+
+Representação Visual:
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
+| [1] Sir Kaelen      |                                          |                     |
+|     HP: 80% | Lvl 3 |  > VILA REAL (Seguro)                    |  OURO: 1,250        |
+|     Sts: Dormindo   |    [H] Sir Kaelen (Dormindo)             |  DIA: 45 (Noite)    |
+|                     |    [N] Conselheiro                       |  MANA: 300          |
+| [2] Lila Rogue      |                                          |                     |
+|     HP: 40% | Lvl 5 |  > FLORESTA SOMBRIA (Combate!)           |  -- CLIMA --        |
+|     Sts: LUTA (Ogro)|    [H] Lila Rogue                        |  Chuva (Visão -2)   |
+|                     |    [M] Ogro (HP: 10%)                    |                     |
+| [3] Vazio           |                                          |  -- ALERTAS --      |
+|     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
+|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
++---------------------+------------------------------------------+---------------------+
+| P4: DETALHES (INSP) |          P5: TIMELINE SOCIAL (LOGS)      | P6: DECRETOS/LOJA   |
+| Selecionado: [2]    | [12:01] Lila encontrou um Ogro.          | [A] Curar (100g)    |
+| Lila a Ladina       | [12:02] Ogro acertou Lila (20 dmg).      | [B] Buff Dano (300g)|
+| Traço: Gananciosa   | [12:02] Lila: "Preciso de cura!"         | [C] Recrutar        |
+| Inv: Poção (0)      | [12:03] Sir Kaelen acordou.              | [D] Expandir Loja   |
+| Alvo: Ogro          | [12:03] Conselheiro: "Senhor, Lila vai   |                     |
+|                     |         morrer se não ajudarmos..."      | (Use setas ou num)  |
++---------------------+------------------------------------------+---------------------+
+|                        P7: CONSELHEIRO REAL (CHAT & INPUT)                           |
+| IA: "Majestade, a Lila está sendo espancada por um Ogro. Se ela morrer, perdemos o   |
+|      equipamento. Sugiro um decreto de cura ou colocar um prêmio no Ogro."           |
+|                                                                                      |
+| > /bounty ogro 500_                                                                  |
++--------------------------------------------------------------------------------------+
+Interação e UX (F1):
+
+Seleção Rápida (P1):
+
+Teclado: Teclas numéricas 1 a 9 selecionam instantaneamente o herói correspondente e carregam seus dados no P4.
+
+Mouse: Clique em um herói para selecionar.
+
+Filtro de Log (P2 -> P5):
+
+Teclado: Setas Cima/Baixo navegam no mapa. Enter filtra o P5.
+
+Mouse: Clicar em um local (ex: "Floresta Sombria") filtra o P5 (Timeline) para mostrar apenas eventos daquele local.
+
+Freeze Log (P5):
+
+Mouse: Clicar em um log "pausa" o texto (freeze) para leitura. Clicar novamente retoma o real-time.
+
+Ações Rápidas (P6):
+
+Teclado: As letras [A], [B], [C] são atalhos. Pressionar A abre um mini-input modal sobre o P6 perguntando: Alvo? (1-9).
+
+Mouse: Clique no botão da ação. Abre menu de contexto (dropdown simples) para selecionar o alvo.
+
+[F2] TTY2: ADMINISTRAÇÃO & ECONOMIA ("The Tycoon")
+Foco Principal: Gestão de Recursos, Construção e Curadoria de Habilidades.
+
+Descrição do Layout:
+
+Esquerda (P1): Infraestrutura. Lista das guildas e edifícios com nível atual, vagas disponíveis e custo de upgrade.
+
+Centro (P2): Árvore de Skills (Tech Tree). Visualização hierárquica das habilidades que podem ser compradas/liberadas para as classes.
+
+Direita (P3): Logística e Stocks. Monitoramento de estoques (poções, armas) e fluxo financeiro (salários, lucro/min).
+
+Inferior Esquerda (P4): Detalhe da Construção. Informações sobre custos, manutenção diária e buffs passivos do prédio selecionado.
+
+Inferior Centro (P5): Ordem de Serviço (Logs). Logs filtrados focados em economia (vendas, construções finalizadas, alertas de estoque).
+
+Inferior Direita (P6): Ações de Manutenção. Atalhos para reabastecer estoques, reparar prédios e pagar salários atrasados.
+
+Rodapé (P7): Conselheiro Real (Gestão). Contexto focado em sugerir compras e avisar sobre riscos de falência.
+
+Representação Visual:
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: INFRAESTRUTURA  |        P2: CURADORIA DE SKILLS           | P3: LOGÍSTICA/STOCK |
+| [1] Guilda Guerreiro|                                          |                     |
+|     Lvl: 2 (Max 5)  |  CLASSE: GUERREIRO (Pontos: 5)           |  > MERCADORIAS      |
+|     Vagas: 3/5      |                                          |  [A] Poção Vida (S) |
+|     Custo Up: 500g  |  [Raiz] Ataque Básico (Desbloqueado)     |      Qtd: 12        |
+|                     |   |                                      |      Preço: 50g     |
+| [2] Guilda Mago     |   +-- [1] Golpe Giratório (Custo: 200g)  |      Status: BAIXO! |
+|     Lvl: 1          |   |    |-- Requer: Força Lvl 2           |                     |
+|     Vagas: 1/3      |   |                                      |  [B] Poção Mana (M) |
+|     (Construindo...)|   +-- [2] Grito Provocação (BLOQUEADO)   |      Qtd: 45        |
+|                     |        |-- Requer: Guilda Lvl 3          |      Preço: 80g     |
+| [3] Torre de Vigia  |                                          |                     |
+|     Alcance: +2     |  CLASSE: LADINO                          |  > FINANÇAS         |
+|     Estado: OK      |   +-- [3] Adaga Envenenada (500g)        |  Salários: -20g/min |
+|                     |                                          |  Lucro: +150g/min   |
++---------------------+------------------------------------------+---------------------+
+| P4: DETALHE CONSTRU |          P5: ORDEM DE SERVIÇO (LOGS)     | P6: AÇÕES RÁPIDAS   |
+| Selecionado: [1]    | [ADMIN] Guilda Mago iniciou construção.  | [R] Reparar Tudo    |
+| Guilda Guerreiros   | [ECO]   Venda: Poção Vida (-1) p/ Lila.  | [S] Reabastecer (A) |
+| Buff: +10% XP       | [ECO]   Lucro: +200g (Loot de Ogro).     | [T] Pagar Salários  |
+| Manut: 5g/dia       | [ALERTA] Estoque de Poção Vida CRÍTICO.  | [U] Upgrade Prédio  |
+| "Treina os bravos"  | [ADMIN] Skill "Golpe Giratório" Ativa.   |                     |
+|                     |                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: CONSELHEIRO REAL (MODO GESTÃO)                            |
+| IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um |
+|      ataque agora, os heróis morrerão. Recomendo comprar o lote imediatamente."      |
+|                                                                                      |
+| > /buy A 20_                                                                         |
++--------------------------------------------------------------------------------------+
+Interação e UX (F2):
+
+P1 (Infraestrutura):
+
+Teclado: Setas Cima/Baixo percorrem a lista. Enter seleciona e mostra dados no P4. Espaço inicia upgrade (se tiver ouro).
+
+Mouse: Clique seleciona. Duplo-clique inicia upgrade.
+
+P2 (Skill Tree):
+
+Teclado: Navegação hierárquica. Setas para mover entre nós, Enter para comprar a skill selecionada.
+
+Mouse: Hover sobre a skill mostra Tooltip flutuante com descrição completa do que a habilidade faz. Clique compra.
+
+P3 (Logística):
+
+Compra Rápida: Ao selecionar um item (ex: Poção [A]) e pressionar Enter (ou clicar), o foco vai para o P7 (Input) pré-preenchido com /buy A [quantidade], esperando você digitar o número.
+
+P6 (Ações Rápidas):
+
+Contexto: Funciona como um menu de contexto para o item selecionado no P1 ou P3. Se "Guilda" estiver selecionada em P1, pressionar U (Upgrade) tenta evoluir o prédio.
+
+[F3] TTY3: ARQUIVOS REAIS ("The Library")
+Foco Principal: Lore, Psicologia Profunda, Bestiário e Estatísticas (Pausa Tática).
+
+Descrição do Layout:
+
+Esquerda (P1): Índice de Dados. Navegação tipo explorador de arquivos entre Heróis (Vivos/Mortos), Monstros e Capítulos da História.
+
+Centro (P2): Leitor de Dados (Reader). Área larga de texto para leitura confortável de biografias, sussurros mentais, crônicas e descrições de monstros.
+
+Direita (P3): Estatísticas. Gráficos ASCII ou numéricos (Kills por tipo, Curva de Ouro/Hora, Score da partida).
+
+Inferior Esquerda (P4): Metadados. Dados técnicos imutáveis da entidade selecionada (IDs, Status, Data de Criação).
+
+Inferior Centro (P5): Registo do Historiador. Log histórico filtrado apenas para "Grandes Feitos" (não mostra combate genérico).
+
+Inferior Direita (P6): Filtros de Visualização. Comandos para alterar o modo de visualização do P2 (Texto vs Gráficos).
+
+Rodapé (P7): Pesquisa & Consulta. Input para busca semântica ou por palavra-chave nos arquivos.
+
+Representação Visual:
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: ÍNDICE DE DADOS |        P2: LEITOR DE DADOS (READER)      | P3: ESTATÍSTICAS    |
+| > HERÓIS ATIVOS     | DOSSIÊ: SIR KAELEN (Guerreiro)           |  -- OURO / DIA --   |
+|  [1] Sir Kaelen     |                                          |  Dia 43: ####       |
+|  [2] Lila Rogue     | [SUSSURROS RECENTES]                     |  Dia 44: ######     |
+|                     | "Aquele Ogro parecia ter medo de fogo... |  Dia 45: ##         |
+| > MEMORIAL (MORTOS) |  Devia ter comprado uma tocha."          |                     |
+|  [3] Gandalf (Mago) |                                          |  -- KILLS / TIPO -- |
+|                     | [TRAÇOS DE PERSONALIDADE]                |  Ogros: 12 [|||..]  |
+| > BESTIÁRIO         | Coragem: [||||||||..] (Alta)             |  Goblins: 45 [||||]|
+|  [4] Ogro das Cvs.  | Ganância: [||........] (Baixa)           |  Dragões: 0  [.....]|
+|  [5] Dragão Sombra  | Lealdade: "Pelo Rei!"                    |                     |
+|                     |                                          |  -- PARTIDA --      |
+| > HISTÓRICO         | [BIOGRAFIA GERADA]                       |  Tempo: 02:14:00    |
+|  [6] Crônica Atual  | Nascido nas montanhas do norte, Kaelen   |  Score: B+          |
+|                     | jurou proteger os fracos após...         |                     |
++---------------------+------------------------------------------+---------------------+
+| P4: METADADOS       |          P5: REGISTO DO HISTORIADOR      | P6: FILTROS         |
+| ID: Hero_001        | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis      |
+| Status: Vivo        | [Dia 15] Kaelen recusou suborno.         | [M] Ver Monstros    |
+| Kills: 42           | [Dia 20] Adquiriu título "O Bravo".      | [L] Ver Lore        |
+| Mortes: 0           | [Dia 45] Atualmente a dormir na Vila.    | [G] Ver Gráficos    |
+|                     |                                          |                     |
+| "A lenda viva."     |                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: PESQUISA & CONSULTA (MODO ARQUIVO)                        |
+| IA: "Aqui estão os registos mentais de Sir Kaelen. A sua lealdade é inabalável, mas  |
+|      notei que ele tem uma fobia secreta de aranhas baseada na biografia."           |
+|                                                                                      |
+| > /search "fobia"_                                                                   |
++--------------------------------------------------------------------------------------+
+Interação e UX (F3):
+
+P1 (Índice):
+
+Teclado: Setas navegam na árvore de arquivos. Direita expande categoria, Esquerda recolhe. Enter carrega o conteúdo no P2.
+
+Mouse: Clique simples carrega conteúdo.
+
+P2 (Leitor):
+
+Scroll (Global): Teclas PageUp e PageDown rolam o conteúdo deste painel independentemente de qual painel está focado (útil para leitura longa sem precisar focar no painel).
+
+Seleção: Mouse pode selecionar texto para Copy/Paste.
+
+P6 (Filtros):
+
+Teclado: Pressionar a tecla de filtro (ex: G) alterna o P2 para exibir os gráficos correspondentes.
+
+P7 (Pesquisa):
+
+Comando: /search [termo] filtra o P1 e destaca ocorrências no texto do P2.
+
+[F4] TTY4: MAPA MUNDI ("The Conquest")
+Foco Principal: Macro-estratégia, Expansão Territorial e Eventos Globais.
+
+Descrição do Layout:
+
+Esquerda (P1): Domínios Reais. Lista da Capital e dos Postos Avançados (Vassalos) com status de lealdade e produção.
+
+Centro (P2): Mapa de Satélite (ASCII). Uma representação em grade do mundo inteiro (visão afastada). Usa caracteres para representar biomas.
+
+Direita (P3): Previsão Global. Ciclos de tempo atuais (Estação do ano), previsão de próximos eventos e clima global.
+
+Inferior Esquerda (P4): Detalhe do Nó/Setor. Informações detalhadas sobre a célula selecionada no mapa (Coordenadas, Bioma, Dono, Ameaça).
+
+Inferior Centro (P5): Log de Expedição. Logs de eventos que ocorrem longe da capital (mudanças de ciclo, descobertas de batedores).
+
+Inferior Direita (P6): Comandos de Expedição. Ações de alto nível estratégico (Fundar Posto, Mover Capital, Diplomacia).
+
+Rodapé (P7): Estratégia Global. Chat para decisões políticas, envio de recursos a vassalos e negociações.
+
+Representação Visual:
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: DOMÍNIOS REAIS  |        P2: MAPA DE SATÉLITE (ASCII)      | P3: PREVISÃO GLOBAL |
+| > CAPITAL (Sede)    |                                          |                     |
+|   Regente: Você     |   [~] [~] [M] [M] [F] [F] [C]            |  -- CICLO ATUAL --  |
+|   Pop: 12/12        |   [~] [P] [.] [.] [F] [T] [C]            |  Ciclo: 1 de 3      |
+|   Ouro: 100% Taxa   |   [~] [.] [V] [.] [.] [.] [M]            |  Tipo: "Primavera"  |
+|                     |   [~] [.] [.] [R] [R] [.] [M]            |  Monstros: T1 (Fraco|
+| > POSTO NORTE       |   [M] [M] [F] [R] [?] [?] [?]            |                     |
+|   Capitão: Rurik    |   [M] [C] [F] [?] [?] [?] [?]            |  -- TEMPO --        |
+|   Status: AUTÓNOMO  |                                          |  Próx. Evento:      |
+|   Lealdade: 80%     |   Legenda:                               |  "Lua de Sangue"    |
+|   (Vassalo)         |   [V]ila  [.]Campo  [F]loresta           |  Em: 05:00 min      |
+|                     |   [M]ont  [~]Água   [C]averna            |                     |
+| > POSTO LESTE       |   [T]orre [P]osto   [?]Névoa             |  -- AMEAÇAS --      |
+|   (Destruído)       |                                          |  [!] Invasão Norte  |
+|                     |                                          |  [!] Peste na Vila  |
++---------------------+------------------------------------------+---------------------+
+| P4: DETALHE DO NÓ   |          P5: LOG DE EXPEDIÇÃO            | P6: COMANDOS EXP.   |
+| Coords: X:5 Y:8     | [GLOBAL] Novo ciclo iniciado: Chuvas.    | [N] Novo Posto      |
+| Bioma: Floresta     | [POSTO]  Rurik solicita reforços (Ouro). | [M] Mover Capital   |
+| Dono: Neutro        | [EVENTO] Terramoto abriu passagem em C4. | [E] Enviar Espião   |
+| Recurso: Madeira    | [EXPLOR] Lila descobriu "Ruínas Antigas".| [D] Diplomacia      |
+|                     | [ALERTA] Movimento inimigo no setor Norte|                     |
+| Ameaça: Alta (ursus)|                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: ESTRATÉGIA GLOBAL (MODO CONQUISTA)                        |
+| IA: "Majestade, o Capitão Rurik está a pedir ouro. Se recusarmos, a lealdade dele    |
+|      cairá. Além disso, a Lua de Sangue aproxima-se. Devemos recuar os batedores?"   |
+|                                                                                      |
+| > /send gold 500 posto_norte_                                                        |
++--------------------------------------------------------------------------------------+
+Interação e UX (F4):
+
+P2 (Mapa de Satélite):
+
+Teclado: WASD ou Setas movem um cursor piscante [ ] (retícula) pelo grid. O painel P4 atualiza instantaneamente com os dados da célula sob o cursor.
+
+Mouse: Hover sobre uma célula mostra tooltip simples (ex: "Floresta"). Clique "trava" a seleção no P4 e mostra opções de ação possíveis para aquela célula no P6.
+
+P1 (Domínios):
+
+Atalho: Clicar/Selecionar um Posto na lista centra o cursor do mapa (P2) na localização daquele posto.
+
+P6 (Comandos de Expedição):
+
+Contextual: As opções mudam baseadas no cursor do mapa (P2).
+
+Se cursor em Espaço Vazio (.): Opção [N] Novo Posto.
+
+Se cursor em Posto (P): Opção [D] Diplomacia ou [S] Enviar Suprimentos.
+
+Input Modal: Pressionar a tecla da ação abre um pequeno prompt no centro da tela (ex: "Quantos heróis enviar? [1-3]").
+
+[F5] TTY5: THE AVIARY ("Royal Communications")
+Foco: Histórico de Cartas, Gestão de Relacionamento e Arquivo de Mensagens. Metáfora: Um cliente de e-mail retro-futurista misturado com um pombal medieval.
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: CAIXA DE CORREIO|        P2: LEITURA DE MENSAGEM           | P3: PERFIL DO ALVO  |
+| > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen (Avatar|
+|  [1] Sir Kaelen (N) | PARA: Vossa Majestade                    |                     |
+|      "Sobre o Ouro" | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
+|      14:02          |                                          | Humor: Irritado     |
+|                     | ASSUNTO: Re: Covardia                    | Lealdade: 45% (Baixa|
+|  [2] Lila Rogue     |                                          |                     |
+|      "Pedido..."    | "Majestade, com todo o respeito, chamar  | Última Carta:       |
+|      Ontem          |  retirada estratégica de 'covardia' é    | Há 2 dias (Ignorada)|
+|                     |  fácil para quem está sentado no trono.  |                     |
+| > ENVIADOS          |  O Ogro tinha vantagem de terreno!"      | Custo Envio:        |
+|  [3] P/ Conselheiro |                                          | 25 IP (Influência)  |
+|                     | [ANEXO: Relatório de Danos.log]          |                     |
+| > RASCUNHOS         |                                          |                     |
+|  (Vazio)            | ---------------------------------------- |                     |
+|                     | > [R] RESPONDER   > [A] ARQUIVAR         |                     |
++---------------------+------------------------------------------+---------------------+
+| P4: LISTA DE CONTATO|          P5: RASCUNHO ATUAL (EDITOR)     | P6: AÇÕES DE ENVIO  |
+| [H] Sir Kaelen      | PARA: Sir Kaelen                         | [Enter] Enviar      |
+| [H] Lila Rogue      |                                          | [S] Salvar Rascunho |
+| [H] Gandalf         | "Entendo seu ponto, Kaelen. Mas preciso  | [D] Descartar       |
+| [N] Conselheiro     |  que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro     |
+| [E] Guilda Mercante |                                          |                     |
+|                     | (Digite sua mensagem aqui...)            |                     |
++---------------------+------------------------------------------+---------------------+
+|                        P7: STATUS DA REDE DE CORVOS                                  |
+| STATUS: 2 Pássaros em voo.                                                           |
+| NOTIF: A resposta de Lila deve chegar em 30 segundos.                                |
+| > /send_                                                                             |
++--------------------------------------------------------------------------------------+
+UX & Interação (F5):
+
+P1 (Inbox): Setas Cima/Baixo navegam. Enter abre a mensagem no P2. (N) indica Não Lida.
+
+P2 (Leitura): Mostra a thread (conversa) anterior em scroll.
+
+P5 (Editor): Área de texto livre.
+
+P6 (Ações): T abre um modal numérico para anexar Ouro à carta (suborno/ajuda).
+
+===
+
+Essa é uma ideia fantástica. Em Game Design, chamamos isso de "Juice" ou "Feedback Visual".Como você está usando uma Web Stack (Angular) para simular um terminal, você tem uma vantagem enorme sobre um terminal real: você pode misturar a estética "hardcore" de texto (ASCII/Fira Code) com a fluidez moderna de SVG, CSS Animations e Pixel Art GIFs. Isso quebra a monotonia da leitura e ajuda o jogador a identificar eventos críticos (como um combate) na visão periférica sem ter que ler o log.Aqui está uma "Biblioteca de Assets Visualização" massiva e categorizada, pensada para manter a estética de "Terminal Moderno/Retro":1. O Sistema de Combate & Ação (Feedback Crítico)Esses ícones devem piscar ou ter animações rápidas para chamar a atenção no "Mapa Lógico" (P2) ou na "Timeline" (P5).ContextoÍcone Sugerido (FontAwesome/Lucide)Conceito do GIF / Animação CSSBatalha Ativafa-swords (Espadas Cruzadas)GIF: Duas espadas de pixel art batendo uma na outra e soltando faíscas brancas.Dano Críticofa-burst ou fa-star-explosionAnim: O ícone treme violentamente (CSS shake) e pisca em vermelho/branco.Morte (Herói/Mob)fa-skull (Caveira)GIF: Uma caveira que sobe flutuando e desaparece (fade-out) como uma alma.Magia (Fogo)fa-fireGIF: Uma chama de pixel art crepitando (loop 3 frames).Magia (Gelo)fa-snowflakeAnim: Ícone girando lentamente e brilhando em azul ciano.Magia (Cura)fa-sparkles ou fa-crossGIF: Partículas verdes (+) subindo suavemente ao redor do alvo.Fuga (Covarde)fa-person-running ou fa-windAnim: Ícone deslizando rapidamente para a esquerda ("dash").Defesa/Bloqueiofa-shield-halvedGIF: Um escudo metálico que brilha/reflete luz quando atingido.Kill Steal (KS)fa-hand-holding-dollar ou !??GIF: Um ícone de "Riso Maligno" ou um saco de dinheiro piscando rapidamente.2. Interação Social & Psicologia (Os "Balões")Essenciais para dar vida aos heróis. Devem aparecer flutuando sobre o nome do herói na lista (P1) ou no Mapa (P2).ContextoÍcone SugeridoConceito do GIF / Animação CSSConversandofa-comment-dotsGIF: O clássico balão de "digitando" (três pontinhos aparecendo em sequência . .. ...).Pedindo Socorrofa-triangle-exclamationAnim: Balão vermelho pulsando (efeito heartbeat).Raiva/Fúriafa-face-angry ou fa-veinGIF: O símbolo de "veia saltando" de animes ou uma nuvem de tempestade com raio.Amizade/Amorfa-heartGIF: Coração de pixel art batendo (tum-tum).Medo/Pânicofa-face-flushed ou fa-ghostGIF: Gotas de suor caindo ou o ícone tremendo de frio.Ganânciafa-coins ou fa-eye-dollarGIF: Os olhos do herói viram cifrões ($) e giram.Dormindofa-bedGIF: As letras "Zzz" subindo em tamanhos diferentes.Tédio/Ociosofa-hourglassAnim: Ampulheta virando a cada 5 segundos.3. O Mundo & Ambiente (Atmosfera)Usados no Painel de Status (P3) e no Mapa Mundi (F4) para dar a sensação de clima.ContextoÍcone SugeridoConceito do GIF / Animação CSSDia (Sol)fa-sunAnim: Raios do sol girando lentamente (amarelo dourado).Noite (Lua)fa-moonGIF: Estrelas piscando aleatoriamente no fundo do ícone da lua.Chuvafa-cloud-rainGIF: Chuva de pixel art caindo na diagonal (loop infinito).Tempestadefa-boltGIF: Flash branco tela inteira (opacidade 10%) + raio caindo.Névoa de Guerrafa-eye-slash ou fa-cloudAnim: Nuvens cinzas movendo-se lentamente (efeito parallax css).Florestafa-treeAnim: Árvore balançando levemente (vento).Masmorra/Cavernafa-dungeon ou fa-mountainGIF: Olhos vermelhos brilhando na escuridão da porta da caverna.4. Economia & Recursos (UI Elements)Usados nas telas de Gestão (F2) e Logs de Loot.ContextoÍcone SugeridoConceito do GIF / Animação CSSOuro/Dinheirofa-coinsGIF: Uma moeda dourada girando (estilo Mario/Sonic).Poção de Vidafa-flask (Vermelho)Anim: O líquido dentro do frasco balançando ou borbulhando.Poção de Manafa-flask (Azul)Anim: Brilho etéreo pulsando ao redor do frasco.Armas/Equipfa-hammerAnim: Martelo batendo numa bigorna.Construçãofa-trowel-bricksGIF: Um guindaste ou martelinho trabalhando sozinho.Nível Up (Lvl)fa-arrow-up ou fa-crownGIF: Confetes ou luz divina descendo sobre o ícone.5. O Conselheiro & Narrativa (Personagem)Para dar personalidade à IA no Painel P7.ContextoÍcone SugeridoConceito do GIF / Animação CSSConselheiro (Neutro)fa-user-tie ou Rosto PixelIdle: Ele piscando os olhos ocasionalmente.Conselheiro (Pensando)fa-brainGIF: Ele coçando o queixo ou processando dados.Conselheiro (Alerta)fa-bellAnim: Ele acenando a mão ou batendo na tela ("Toc Toc").Sussurro/Segredofa-ear-listenGIF: Ele colocando a mão na boca para falar baixo.
+
+===
+
+Esta é a camada final para garantir a imersão. Num jogo baseada em texto/terminal, o áudio não é apenas "enfeite", é feedback de interface. O som substitui a falta de animações complexas.Considerando o teu gosto por Rock Clássico e Música Clássica, e a estética "Retro-Futurista" do terminal, a sonoplastia deve seguir um estilo "Dungeon Synth" misturado com Interface Sci-Fi.Aqui está a Biblioteca de Áudio Completa (v1.0).1. Background Music (BGM) - A Trilha Sonora DinâmicaA música deve mudar suavemente (crossfade) quando você troca de Workspace (F1-F4) ou quando o ciclo Dia/Noite vira.ContextoEstilo Musical SugeridoReferência / Vibe[F1] Ops Center (Dia)Orchestral March (Light)Algo rítmico e militar, mas baixo. Cordas em staccato para dar sensação de atividade constante.[F1] Ops Center (Noite)Ambient Dark SynthSintetizadores graves e lentos, misteriosos. Vibe de "vigília noturna".[F1] Ops Center (Combate)Prog Rock Instrumental(O teu gosto): Bateria complexa (estilo Rush), baixo galopante, mas sem guitarra distorcida estridente para não cansar. Foco na tensão.[F2] Tycoon/AdminBaroque Chamber Music(O teu gosto): Cravo (Harpsichord) e Violoncelo. Elegante, matemático, relaxante. Ideal para olhar números.[F3] Library/LoreEthereal / GregorianCoros distantes, muito reverb, harpa suave. Sensação de "lugar sagrado" e antigo.[F4] Mapa MundiEpic Orchestral SwellVentos e Metais (Trompas). Sensação de vastidão e vento.Evento: Boss FightNeoclassical MetalRock clássico com escalas rápidas de violino/guitarra. Alta energia.Evento: Taverna/SocialMedieval FolkAlaúde, flauta e barulho de copos ao fundo.2. Interface & UX (O "Click" do Terminal)O som do teclado e da navegação deve ser extremamente satisfatório (ASMR tátil).AçãoSom (SFX)Descrição TécnicaDigitar (Input)keyboard_mechanical_clackSom de switches mecânicos (Blue ou Brown). Variação leve de pitch a cada tecla para não soar robótico.Enter (Enviar)terminal_success_beepUm "blip" digital agudo e curto (estilo bios post).Trocar Aba (Tab/F-Keys)ui_slide_swishUm som de ar comprimido suave ou "page flip" digital.Erro / Bloqueadoui_access_deniedSom grave e curto ("Bzzzt" ou "Bonk").Mouse Hoverui_hover_tickUm "tique" de relógio quase imperceptível ao passar o mouse sobre itens interativos.Abrir Modal/Menuui_popup_openSom de "janela abrindo" (pop suave).3. Combate & Ação (O "Crunch")Aqui os sons devem ser viscerais para compensar os gráficos simples.Evento VisualSom (SFX)Descrição TécnicaAtaque Físicosword_clash_metalMetal batendo em metal (para bloqueio) ou metal cortando carne (para dano).Ataque Críticocritical_hit_impactSom com muito grave (Bass boost) e um leve eco. Deve soar "pesado".Disparo de Arcobow_thwipO som da corda esticada sendo solta ("Thwip!").Magia (Fogo)fire_whoosh_crackleSom de maçarico ou fogueira explodindo.Magia (Gelo)ice_shatter_glassSom de vidro quebrando ou cristais tilintando.Magia (Cura)holy_chime_shimmerUm som angelical ascendente (arpejo de harpa ou sino).Receber Dano (Herói)hero_grunt_painGemido humano curto ou som de pancada seca.Morte (Inimigo)monster_death_gurgleSom "molhado" ou de algo desmoronando, seguido de silêncio.4. Eventos Sociais & Feedback (O "Juice")Sons que indicam mudança de estado ou recompensas.EventoSom (SFX)Descrição TécnicaGanhar Ourocoin_jingle_pouchSom de muitas moedas caindo num saco de couro. Extremamente satisfatório.Level Upfanfare_trumpet_shortUm acorde maior triunfante (Trompete ou Sintetizador brilhante).Nova Mensagem (Log)notification_popSom de "bolha" estourando ou caneta escrevendo em papel (rápido).Sussurro/Segredowhisper_fxSom de vento sussurrado ininteligível ("psst psst").Conselheiro Falandonpc_mumble_talkEstilo Animal Crossing ou Undertale. Um som curto repetido em pitches diferentes enquanto o texto aparece.Alerta de Perigoalarm_klaxon_distantUm sino de igreja tocando freneticamente ou uma sirene distante.5. Ambiente & Atmosfera (O "Fundo")Esses sons tocam em loop contínuo, mixados abaixo da música.CenárioSom de Fundo (Ambience Loop)Vila (Dia)Pássaros cantando, marteladas distantes (ferreiro), murmúrio de multidão.Vila (Noite)Grilos, corujas, vento uivando levemente, crepitar de tochas.FlorestaVento nas folhas, passos em grama seca, insetos zumbindo.CavernaGoteiras com eco (drip... drip), som cavernoso grave (rumble).ChuvaSom de chuva constante (white noise) e trovões ocasionais.Dica Técnica de Implementação (Web Audio API)Para que isso não vire uma cacofonia insuportável, você precisa implementar um "Audio Manager" no Angular com as seguintes regras:Prioridade de Canais:Canal SFX Crítico: (Crítico, Morte, Level Up) -> Volume 100%. Nunca é cortado.Canal SFX Combate: (Espada, Magia) -> Volume 80%. Se houver muitos sons (ex: 5 heróis batendo), limita a 3 sons simultâneos (o resto é descartado) para não estourar o áudio.Canal Ambience: Volume 20-30%.Canal Music: Volume 40-50%.Ducking (Atenuação):Quando o Conselheiro fala ou um Alerta Crítico toca, o volume da Música deve baixar automaticamente para 20% e depois voltar (fade in/out).Variação de Pitch (Crucial para o Teclado):Para o som de digitação (keyboard_mechanical), não use o mesmo arquivo wav exato toda vez.No código: audio.playbackRate = 0.9 + Math.random() * 0.2; (Isso varia a velocidade/tom levemente entre 0.9x e 1.1x, tornando a digitação orgânica).Onde encontrar esses sons (Gratuito/Royalty Free):Freesound.org: Ótimo para sons ambientes (chuva, floresta) e foley (espadas, passos).Kenny Assets (Interface Sounds): O melhor pacote gratuito para UI (clicks, beeps, switches).Sonatina Symphonic Orchestra (VPL): Samples de instrumentos clássicos gratuitos se quiser gerar os stings de level up via código.OpenGameArt.org: Procure por "RPG Sound Pack" ou "Dungeon Synth Music".Esta camada de áudio, combinada com os ícones animados e o layout de terminal, vai criar uma atmosfera de "Comandante Tático de um RPG de Mesa" inigualável.
+
+===
+
+Sim, faz todo o sentido. Num jogo de simulação indireta, a empatia é o fator mais importante. O jogador precisa se importar se o "Sir Kaelen" morre. Se for apenas uma string de texto, o impacto emocional é baixo. Se for um rosto que o jogador viu evoluir, a perda dói.Para manter a estética de Terminal/Retrô, a minha sugestão é que esses portraits não sejam fotos realistas, mas sim Pixel Art de Alta Definição (Hi-Bit) ou com um filtro de Dithering (Pontilhado) monocromático ou de poucas cores (CGA/EGA Palette), parecendo monitores antigos CRT.Aqui está a especificação técnica para o Sistema de Retratos Dinâmicos (Dynamic Portrait System).1. Estilo Visual e FormatoFormato: Circular (border-radius: 50%).Borda: A cor da borda indica a Classe ou Raridade.Guerreiro: Borda Vermelha Ferro.Mago: Borda Azul Neon.Ladino: Borda Verde Veneno.Monstro/Boss: Borda Roxa ou Espinhada.Estética: Pixel Art (32x32 para ícones pequenos, 128x128 para inspeção).Fundo do Portrait: Deve mudar conforme o local onde o herói está (ex: fundo preto se em masmorra, fundo azul claro se na vila).2. Onde os Portraits aparecem (Cenários)Cenário A: A Lista de Roster (Painel P1)Tamanho: Pequeno (Avatar - 32px ou 40px).Localização: Ao lado esquerdo do nome do herói.Função: Identificação rápida.Mecânica Visual:Desaturado (P&B): Se o herói estiver muito longe ou "Dormindo".Escuro/Cruz: Se o herói morrer.Cenário B: O Inspetor de Detalhes (Painel P4)Tamanho: Grande (Hero - 120px a 150px).Localização: Canto superior esquerdo ou centro do painel P4.Função: Conexão emocional e feedback de estado detalhado.Mecânica (O "Efeito Doom"): Inspirado no rosto do Doomguy clássico.HP 100%: Rosto limpo, olhar confiante.HP 50%: Rosto com hematomas, sujo de terra.HP 10% (Crítico): Rosto ensanguentado, olhar de pânico ou dor extrema.Cenário C: Timeline e Chat (Painéis P5 e P7)Tamanho: Médio (Chat Head - 48px).Localização: Flutuando à esquerda do balão de texto.Função: Saber quem está falando imediatamente.Mecânica de Fala:Enquanto o texto está sendo "digitado" no log, o portrait pode ter uma animação simples de bounce (pulo) ou a boca mexendo (se o pixel art permitir).Cenário D: Encontro de Boss (Pop-up de Evento)Tamanho: Extra Grande (Banner).Localização: Quando um Boss aparece, pode surgir uma notificação no centro da tela com o portrait do monstro.Mecânica: O portrait do Boss deve ter efeitos de "glitch" ou tremer para indicar perigo.3. Mecânicas de Feedback no PortraitO portrait não é uma imagem estática (JPG); é um Componente Angular Vivo.Estado do HeróiEfeito no Portrait (CSS/Overlay)Descrição VisualEnvenenadofilter: sepia(100%) hue-rotate(50deg)O rosto fica esverdeado/doente.Congeladooverlay: ice_texture.pngUma camada de gelo cobre as bordas do círculo.Em Fúria (Rage)box-shadow: 0 0 15px redO círculo emana um brilho vermelho pulsante.Invisível (Ladino)opacity: 0.5O portrait fica semitransparente (fantasma).Level Upanim: shineUm brilho dourado passa diagonalmente pelo rosto.Dano Recebidoanim: shake-xO portrait treme lateralmente violentamente quando toma hit.4. Technical Asset Strategy (Como gerar tantos rostos?)Você é um solopreneur, não pode desenhar 500 rostos.Solução 1: Geração Procedural (Recomendada)Use uma biblioteca open-source de "Pixel Art Avatar Generator".Você monta o rosto via código: base_head + eyes_3 + hair_m_blonde + armor_iron.Existem várias libs JS que geram SVGs ou PNGs on-the-fly baseadas numa "seed" (que pode ser o ID do herói). Assim, o Hero_054 terá sempre a mesma cara, sem você desenhar nada.Solução 2: Pacote de Assets Genéricos + TintBaixe um pacote com 20 rostos base (5 guerreiros, 5 magos, etc).Use CSS filter: hue-rotate() para mudar a cor da roupa/cabelo dinamicamente.Guerreiro do Jogador 1: Armadura Azul.Guerreiro do Jogador 2: Armadura Vermelha.Isso cria variedade visual sem precisar de novos assets.Resumo da UX com PortraitsAo adicionar rostos, o F1 (Ops Center) deixa de ser uma planilha de Excel e vira um Painel de Controle de RPG.Quando o jogador olhar para o P1 e vir o rosto do Sir Kaelen ensanguentado (Mecânica Doom) e com a borda brilhando vermelho (Fúria), ele entende a situação em milissegundos, sem ler nenhum texto. Isso é UX de alto nível.
+
+===
+
+Essa é a mentalidade correta de um Product Manager/Solopreneur. O projeto visual e mecânico está excelente ("O que fazer"), mas agora precisamos validar a viabilidade técnica e operacional ("Como sustentar").Sendo muito franco, analisando a stack (Web/Angular + Deno) vs. o Gênero (Simulação Complexa), existem 5 "Pontos Cegos" críticos que, se ignorados, podem matar o projeto ou torná-lo impossível de manter.Aqui está a Análise de Impacto e Lacunas (Gap Analysis):1. O Problema do "Heartbeat" (Loop de Jogo vs. Event-Driven)A Falha: Aplicações Web (Angular/Deno) são tradicionalmente "Event-Driven" (reagem a um clique). Jogos são "Loop-Driven" (o mundo muda a cada X milissegundos, mesmo sem clique).O Risco: Se você tentar rodar a simulação no Frontend (Browser), cada jogador terá um estado diferente e o backend vira um pesadelo de sincronização. Se rodar 100% no Backend (Deno), como você garante que o servidor aguenta 100 jogadores com loops infinitos de IA?Solução Esquecida: Definição do Tick Rate.Você não precisa de 60 FPS. Para um jogo de estratégia/texto, 1 a 4 Ticks por segundo no servidor é suficiente.Mecânica Faltante: O Backend precisa de um setInterval robusto que processe a lógica de todos os heróis e envie apenas o Delta (o que mudou) via WebSocket, não o estado inteiro (para economizar banda).2. A Armadilha de Custo da LLM (O Conselheiro)A Falha: O GDD diz que o Conselheiro fala via "Linguagem Natural" e interpreta comandos.O Risco: Cada interação com a API da OpenAI/Gemini custa dinheiro. Se o jogador ficar conversando "bobagem" com o NPC ou se o sistema de logs enviar textos enormes para análise a cada minuto, sua conta da API vai explodir antes de você ter lucro.Solução Esquecida: Sistema de Cotas e Hibridismo.Mecânica Faltante: Uma barra de "Mana Social" ou "Pontos de Decreto". Falar com o Conselheiro gasta essa energia. Isso gamifica o custo: o jogador só usa a IA quando realmente precisa.Fallback Determinístico: Comandos simples (/buy potion) não devem passar pela LLM. O seu backend deve ter um parser RegEx simples para capturar comandos padrão e só enviar para a IA o que for complexo/narrativo.3. O "Onboarding" (A Curva de Aprendizado do Terminal)A Falha: Interfaces de terminal são lindas, mas intimidadoras. O jogador vai entrar na tela F1 cheia de textos e números e não vai saber o que fazer.O Risco: Churn (desistência) nos primeiros 5 minutos.Solução Esquecida: O "Boot Sequence" (Tutorial Diegético).Mecânica Faltante: Quando o jogo abre pela primeira vez, não mostre tudo. Simule um "Boot do Sistema Real".> Loading Kernel... OK> Detecting Monarch... FOUND> System Error: No Heroes Found.> Initializing Tutorial Protocol...Libere as janelas (P1, P2...) uma por uma. Ensine o jogador a usar o Tab e os atalhos antes de soltá-lo no caos.4. Gestão de "Tédio" (Pacing)A Falha: Em jogos de controle indireto, às vezes os heróis estão apenas "caminhando" ou "dormindo". O jogador fica olhando para a tela sem ter o que clicar.O Risco: O jogador dá Alt-Tab e esquece o jogo aberto.Solução Esquecida: Minigames de Gestão Ativa.Mecânica Faltante: Algo para fazer durante a calmaria.Exemplo: Um sistema de "Decodificação de Mensagens" no Painel de Espionagem (F4) onde o jogador resolve pequenos puzzles lógicos para ganhar informações sobre o mapa.Ou a capacidade de "Organizar o Inventário da Loja" manualmente para ganhar um bônus de vendas.5. Configurações de Acessibilidade e SistemaA Falha: Um jogo baseado em texto e cores neon pode ser ilegível para daltônicos ou cansativo para leitura prolongada. O áudio constante pode irritar.Solução Esquecida: Menu de Opções [F10] ou [ESC].Controle de Volume: Sliders separados para Música, SFX e Voz do Conselheiro (o som de mumble pode ser irritante).Tamanho da Fonte: Crucial para Web.Velocidade do Texto: Opção para "Texto Instantâneo" vs "Efeito Datilografia".Resumo da Análise de ImpactoAbaixo, listo os componentes técnicos que precisamos adicionar ao roadmap para mitigar esses riscos:ÁreaO que faltou?Impacto (1-5)Solução Técnica SugeridaBackendGame Loop Manager5 (Crítico)Criar um GameLoopService no Deno que roda a cada 500ms, processa a Utility AI e emite eventos via RxJS/Sockets.FrontendInput Parser Híbrido4 (Alto)Regex no front para comandos básicos (/heal) para evitar latência e custo de IA.DesignBoot/Tutorial5 (Crítico)Criar um estado de jogo GAME_STATE.BOOT que bloqueia o acesso às abas F2-F4 até completar o básico.UXSettings Modal3 (Médio)Um modal simples (z-index: 999) para Áudio e Tamanho de Fonte.ProgressoSave/Load System5 (Crítico)O jogo salva a cada tick? A cada minuto? Sugestão: Salvar no Postgres a cada "Dia no Jogo" ou evento crítico.VisualResponsividade3 (Médio)O layout de grid quebra no celular? Sugestão: Bloquear mobile na v1 ou criar um layout empilhado (Stack) específico.
+
+gostei das propostas, sobre o item 2, pode ser essa mana social que recarrega sozinha igual jogos de arpg, isso vai ser só pra evitar jogadores fazer spam no chat, quanto o problema identificado no item 4 eu concordo, mas considero a solução proposta muito ruim, precisamos ser mais critativos, a leitura do log que tem cores, icones e animações gif sobre o que anda acontecendo é bem interessante de ficar vendo, também a parte que o jogador pode escolher conversar diretamente com um herói, conversar com o herói não foi planejado? a conversa seria via correspondência com corvos/passáros e enviam e trazem o bilhete
+
+Você tem total razão. A ideia dos minigames foi uma solução "genérica" de design e foge do tema. A sua sugestão de Correspondência via Corvos/Pássaros é infinitamente superior porque mantém o jogador imerso na simulação e na narrativa, que são os pilares do jogo.
+
+Isso resolve o problema do "tédio" criando uma ansiedade positiva (esperar a resposta) e aprofunda o vínculo com os heróis.
+
+Aqui está a especificação técnica para o Sistema de Correspondência (The Royal Aviary) e como ele se integra à "Mana Social".
+
+1. A Solução do Item 2: "Mana Social" (Influence Points)
+Para evitar spam e custos de API, transformaremos a interação numa mecânica de gestão de recursos.
+
+Nome do Recurso: Influência Real (IP - Influence Points).
+
+Visual: Uma barra azul ou roxa abaixo do Ouro no Painel P3.
+
+Mecânica de Recarga:
+
+Passiva: Regenera X pontos por minuto (igual mana em ARPG).
+
+Ativa: Ganha pontos extras ao realizar feitos (ex: derrotar um Boss recupera 50 IP).
+
+Custos:
+
+Comandos Básicos (/buy, /build): 0 IP (Grátis, processado via Regex).
+
+Conversa com Conselheiro (LLM): 10 IP por interação.
+
+Enviar Carta ao Herói (LLM): 25 IP (É mais caro pois aciona uma "personalidade" específica).
+
+2. A Solução do Item 4: O Sistema de Correspondência
+Não, a conversa direta com heróis não estava planejada no documento original (lá o contato era sempre mediado pelo Conselheiro), mas essa mecânica é perfeita para o estilo "Tabletop".
+
+O Conceito: "Corvos não têm WhatsApp"
+A comunicação é Assíncrona. Você não está num chat ao vivo com o herói. Você envia uma carta e precisa esperar o tempo de viagem do pássaro e o tempo do herói resolver responder.
+
+Fluxo da Mecânica:
+A Escrita (Input):
+
+No Painel P4 (Inspetor), ao selecionar um herói, você tem a opção [C] Enviar Carta.
+
+Isso abre um modal simples de texto.
+
+Você escreve: "Sir Kaelen, pare de ser covarde e ataque o Ogro! O reino depende de você."
+
+O Envio (Animação):
+
+Gasta 25 IP.
+
+Visual: Um ícone de Pássaro (Pixel Art) sai da sua barra de ferramentas e "voa" para dentro da lista de heróis ou para o mapa.
+
+O Trânsito (Delay):
+
+O pássaro leva tempo para chegar (ex: 10 a 30 segundos, dependendo da distância no mapa).
+
+No P1 (Lista), aparece um ícone de "Envelope Fechado" piscando ao lado do herói.
+
+A Reação do Herói (IA de Utilidade):
+
+Quando o pássaro chega, o herói faz um check de prioridade.
+
+Se estiver em Combate Crítico: Ele ignora a carta temporariamente (Status: "Ocupado"). O pássaro fica rodando sobre ele.
+
+Se estiver Livre: Ele para (State: READING_LETTER).
+
+A Resposta (O "Ouro" Narrativo):
+
+A LLM gera uma resposta curta baseada na Personalidade + Status Atual + Sua Mensagem.
+
+O pássaro volta. Uma notificação [!] Nova Carta de Kaelen aparece.
+
+Exemplos de Respostas (Geradas pela IA):
+Cenário: Você chamou Kaelen de covarde.
+
+Kaelen (Se estiver com Vida Cheia): "Covarde? Eu chamo isso de estratégia! Mas já que insiste, Majestade..." (Ganha buff de Coragem temporário).
+
+Kaelen (Se estiver Morrendo): "Falar do trono é fácil! Mande cura, não cartas!" (Perde Lealdade).
+
+3. Refinando a "Experiência de Assistir" (Watchability)
+Já que você rejeitou os minigames (corretamente) e prefere focar na observação do log, precisamos tornar o Painel P5 (Timeline Social) e o P2 (Mapa) extremamente ricos visualmente. O "tédio" desaparece se o jogo for um "aquário" fascinante.
+
+Melhorias Visuais para o "Modo Espectador":
+Logs com "Flavor Text" Variável:
+
+Em vez de apenas: Kaelen atacou Goblin (5 dmg).
+
+O sistema varia: Kaelen desferiu um golpe desajeitado no Goblin (5 dmg). ou Com precisão cirúrgica, Kaelen perfurou o Goblin (5 dmg).
+
+Isso quebra a monotonia da leitura.
+
+Ícones de Estado no Mapa (Popups):
+
+Quando o herói recebe uma carta, aparece um balãozinho 📩 sobre a cabeça dele no mapa ASCII/Grid.
+
+Quando ele está respondendo, aparece uma pena 🪶 escrevendo.
+
+Câmera de Ação Automática (Highlight):
+
+Se o jogador não mexer no teclado por 30 segundos, o jogo entra em "Modo Cinema".
+
+O Painel P4 (Inspetor) começa a alternar automaticamente focando nos heróis que estão em combate ou fazendo algo interessante, mostrando os logs detalhados deles.
+
+Resumo da UX Atualizada (F1 - Ops Center)
+Aqui está como fica o layout F1 com a Barra de Influência e o sistema de Cartas:
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
+| [1] Sir Kaelen 📩   |                                          |                     |
+|     HP: 80% | Lvl 3 |  > VILA REAL                             |  OURO: 1,250        |
+|     Sts: LENDO      |    [N] Conselheiro                       |  MANA: 300          |
+|                     |                                          |  INFL: [|||||.....] |
+| [2] Lila Rogue      |  > FLORESTA SOMBRIA                      |  (50/100 IP)        |
+|     HP: 40% | Lvl 5 |    [H] Sir Kaelen 🪶 (Escrevendo...)     |                     |
+|     Sts: LUTA       |    [H] Lila Rogue                        |  -- NOTIFICAÇÕES -- |
+|                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
+| [3] Vazio           |                                          |      (Ler Agora [R])|
++---------------------+------------------------------------------+---------------------+
+| P4: INSPEÇÃO / CARTA|          P5: TIMELINE SOCIAL (LOGS)      | P6: AÇÕES RÁPIDAS   |
+| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
+| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
+|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
+| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
+| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
+| > Status: Lida      |                                          | (Use teclas)        |
+| > Resposta: A caminho|                                         |                     |
++---------------------+------------------------------------------+---------------------+
+|                        P7: CONSELHEIRO REAL (CHAT)                                   |
+| IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
+|      resposta malcriada pedindo aumento de salário."                                 |
+|                                                                                      |
+| > _                                                                                  |
++--------------------------------------------------------------------------------------+
+Conclusão da Análise
+Mana Social: Implementada. Resolve o custo da API e o spam.
+
+Correspondência: Implementada. Cria um loop de gameplay divertido durante os momentos calmos ("O que será que ele vai responder?").
+
+Tédio: Mitigado pela riqueza visual dos logs e pela expectativa da resposta das cartas.
+
+Agora temos um sistema fechado e coerente. O jogador gerencia o reino, assiste o caos e, ocasionalmente, "manda um zap" (via corvo) para cobrar serviço dos funcionários.
+
+===
+
+então as correspondências apareceriam na janela de timeline social? gostei, podemos deixar dessa forma, mas acho que o jogador pode querer uma janela dedicada a cartas em que ele gerencia o histórico de cartas trocadas entre cada herói, consolheiro etc, poderiamos criar mais um workscape, crie esse workspace adicional, outra coisa, sobre os textos mais ricos 'O sistema varia: Kaelen desferiu um golpe desajeitado no Goblin (5 dmg). ou Com precisão cirúrgica, Kaelen perfurou o Goblin (5 dmg).' gostei, porém se eles se repetirem com frequência o jogador pode se cansar, eu posso pedir para a llm gerar uma quantidade enorme de texto para vários tipos de eventos, salvar no banco de dados e o backend sortear, o que acha? nesse caso eu preicso que você me mostre como seria a estrutura de tabela para o backend pra esse caso específico, preciso saber o prompt que eu pediria para a llm, liste também todos os tipos de contexto que podem existir no jogo e que devem ter textos gerados, os textos devem ser compatíveis com o evento em questão
+
+Essa abordagem de "Batch Generation & Random Pick" (Geração em Lote + Sorteio) é a estratégia perfeita de engenharia para este caso.
+
+Performance: Zero latência de rede durante o combate.
+
+Custo: Você paga a IA uma única vez para gerar 5.000 frases e usa para sempre.
+
+Variedade: Com um banco bem populado e placeholders dinâmicos, o jogador pode jogar por 100 horas sem ver a mesma frase repetida no mesmo contexto.
+
+Vamos estruturar isso em três partes: o novo Workspace F5 (Correio), a Arquitetura de Banco de Dados para os textos e a Engenharia de Prompt para gerar esse conteúdo.
+
+Parte 1: O Novo Workspace [F5]
+[F5] TTY5: THE AVIARY ("Royal Communications")
+Foco: Histórico de Cartas, Gestão de Relacionamento e Arquivo de Mensagens. Metáfora: Um cliente de e-mail retro-futurista misturado com um pombal medieval.
+
+Plaintext
++---------------------+------------------------------------------+---------------------+
+| P1: CAIXA DE CORREIO|        P2: LEITURA DE MENSAGEM           | P3: PERFIL DO ALVO  |
+| > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen (Avatar|
+|  [1] Sir Kaelen (N) | PARA: Vossa Majestade                    |                     |
+|      "Sobre o Ouro" | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
+|      14:02          |                                          | Humor: Irritado     |
+|                     | ASSUNTO: Re: Covardia                    | Lealdade: 45% (Baixa|
+|  [2] Lila Rogue     |                                          |                     |
+|      "Pedido..."    | "Majestade, com todo o respeito, chamar  | Última Carta:       |
+|      Ontem          |  retirada estratégica de 'covardia' é    | Há 2 dias (Ignorada)|
+|                     |  fácil para quem está sentado no trono.  |                     |
+| > ENVIADOS          |  O Ogro tinha vantagem de terreno!"      | Custo Envio:        |
+|  [3] P/ Conselheiro |                                          | 25 IP (Influência)  |
+|                     | [ANEXO: Relatório de Danos.log]          |                     |
+| > RASCUNHOS         |                                          |                     |
+|  (Vazio)            | ---------------------------------------- |                     |
+|                     | > [R] RESPONDER   > [A] ARQUIVAR         |                     |
++---------------------+------------------------------------------+---------------------+
+| P4: LISTA DE CONTATO|          P5: RASCUNHO ATUAL (EDITOR)     | P6: AÇÕES DE ENVIO  |
+| [H] Sir Kaelen      | PARA: Sir Kaelen                         | [Enter] Enviar      |
+| [H] Lila Rogue      |                                          | [S] Salvar Rascunho |
+| [H] Gandalf         | "Entendo seu ponto, Kaelen. Mas preciso  | [D] Descartar       |
+| [N] Conselheiro     |  que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro     |
+| [E] Guilda Mercante |                                          |                     |
+|                     | (Digite sua mensagem aqui...)            |                     |
++---------------------+------------------------------------------+---------------------+
+|                        P7: STATUS DA REDE DE CORVOS                                  |
+| STATUS: 2 Pássaros em voo.                                                           |
+| NOTIF: A resposta de Lila deve chegar em 30 segundos.                                |
+| > /send_                                                                             |
++--------------------------------------------------------------------------------------+
+UX & Interação (F5):
+
+P1 (Inbox): Setas Cima/Baixo navegam. Enter abre a mensagem no P2. (N) indica Não Lida.
+
+P2 (Leitura): Mostra a thread (conversa) anterior em scroll.
+
+P5 (Editor): Área de texto livre.
+
+P6 (Ações): T abre um modal numérico para anexar Ouro à carta (suborno/ajuda).
+
+Parte 2: Arquitetura de Banco de Dados (PostgreSQL)
+Para suportar a variedade e evitar repetições, precisamos de uma tabela robusta que suporte Placeholders (variáveis que o Angular substitui na hora de exibir).
+
+Tabela: flavor_texts
+SQL
+CREATE TABLE flavor_texts (
+    id SERIAL PRIMARY KEY,
+    context_type VARCHAR(50) NOT NULL,  -- Ex: 'COMBAT', 'SOCIAL', 'EXPLORATION'
+    event_trigger VARCHAR(50) NOT NULL, -- Ex: 'ATTACK_HIT', 'ATTACK_MISS', 'KS_TRIGGER'
+    
+    -- Critérios de Seleção (Tags)
+    intensity_level VARCHAR(20),        -- 'LOW' (1-10 dmg), 'MED', 'HIGH', 'CRITICAL'
+    actor_class VARCHAR(20),            -- 'WARRIOR', 'MAGE', 'ANY'
+    weapon_type VARCHAR(20),            -- 'SWORD', 'BOW', 'FIRE_MAGIC', 'ANY'
+    personality_trait VARCHAR(20),      -- 'BRAVE', 'COWARD', 'GREEDY', 'ANY' (Para falas)
+    
+    -- O Texto em si com Placeholders
+    text_template TEXT NOT NULL,        -- Ex: "{attacker} cravou a espada no ombro de {target}!"
+    
+    -- Controle de Variedade
+    rarity_weight INT DEFAULT 1,        -- 1 (Comum), 5 (Raro), 10 (Lendário - aparece pouco)
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Índices para busca rápida em tempo real (embora o ideal seja carregar em memória no boot)
+CREATE INDEX idx_flavor_event ON flavor_texts(event_trigger, actor_class, intensity_level);
+Como funciona no Código (Angular/Deno):
+Quando ocorre um evento de dano (ex: Kaelen bateu 50 no Ogro), o backend faz:
+
+Busca textos onde: event_trigger = 'ATTACK_HIT' AND intensity = 'HIGH' AND actor_class = 'WARRIOR'.
+
+Retorna um array com 20 opções possíveis.
+
+Sorteia uma (usando rarity_weight para ponderar).
+
+O Frontend recebe: "{attacker} quase decapitou {target} com um golpe brutal!".
+
+O Frontend substitui: "Sir Kaelen quase decapitou Ogro da Caverna com um golpe brutal!".
+
+Parte 3: Lista de Contextos (A Matriz de Eventos)
+Aqui estão todos os cenários que você deve pedir para a LLM gerar.
+
+1. Categoria: COMBATE FÍSICO
+ATTACK_MISS:
+
+Genérico: Errou o alvo.
+
+Clumsy (Desajeitado): Tropeçou e errou.
+
+Dodge (Inimigo desviou): O inimigo foi mais rápido.
+
+ATTACK_HIT_LOW (Dano Baixo/Arranhão):
+
+Golpes de raspão, cortes superficiais.
+
+ATTACK_HIT_MED (Dano Médio):
+
+Golpes sólidos, perfurações padrão.
+
+ATTACK_HIT_HIGH (Dano Alto):
+
+Quebra de ossos, cortes profundos, sangue voando.
+
+ATTACK_CRIT (Crítico):
+
+Descrições viscerais, "precisão cirúrgica", "golpe devastador".
+
+WEAPON_SPECIFIC:
+
+Espada: Cortar, perfurar, estocar.
+
+Martelo: Esmagar, triturar, impacto.
+
+Arco: Flecha assobiando, cravando no olho, ricocheteando.
+
+2. Categoria: MAGIA & ELEMENTOS
+MAGIC_FIRE: Queimar, incinerar, cheiro de carne queimada.
+
+MAGIC_ICE: Congelar, estilhaçar, movimentos lentos.
+
+MAGIC_HEAL: Luz divina, tecidos se regenerando, alívio.
+
+MANA_LOW: Tentar lançar feitiço e falhar ("apenas faíscas saíram dos dedos").
+
+3. Categoria: ESTADOS & SAÚDE
+HERO_DEATH:
+
+Dramático: Últimas palavras, cair de joelhos.
+
+Súbito: Cair sem vida instantaneamente.
+
+HERO_FLEE (Fuga):
+
+Correr gritando, retirada tática, jogar a arma no chão.
+
+HERO_STUNNED:
+
+Ver estrelas, cambalear, olhar confuso.
+
+4. Categoria: SOCIAL & INTERAÇÃO (Os mais divertidos)
+KS_TRIGGER (Roubo de Kill):
+
+Agressor: Sorrir maliciosamente, "muito lento!", "obrigado pelo ouro".
+
+Vítima: Gritar de raiva, xingar, jurar vingança.
+
+LOOT_FIND (Achou item):
+
+Ganancioso: "É tudo meu!", esconder o item.
+
+Leal: "Isso vai ajudar o reino."
+
+TRADE_AGREEMENT:
+
+Vender poção para amigo ("Faço um desconto"), extorquir inimigo.
+
+5. Categoria: AMBIENTE
+TRAP_TRIGGER: Pisar em placa de pressão, cair em buraco.
+
+NEW_AREA: Sentir calafrios (caverna), maravilhar-se (floresta).
+
+Parte 4: O Prompt para a LLM (Gerador de SQL)
+Copie e cole este prompt no ChatGPT ou Claude para gerar o SQL pronto para importar.
+
+Prompt:
+
+Atue como um Game Designer e Writer de RPG Dark Fantasy. Eu preciso popular um banco de dados PostgreSQL com "Flavor Texts" (Textos de Ambientação) para um jogo de simulação.
+
+O formato de saída deve ser um Script SQL INSERT INTO.
+
+Use a seguinte estrutura de tabela: INSERT INTO flavor_texts (context_type, event_trigger, intensity_level, actor_class, text_template) VALUES ...
+
+Regras de Escrita:
+
+Use tom variado: alguns épicos, alguns descritivos, alguns com humor negro.
+
+Use OBRIGATORIAMENTE os placeholders {attacker}, {target}, {value} (para dano/cura) e {item} (para loot).
+
+Gere 10 variações para CADA um dos seguintes cenários:
+
+Cenário A: Guerreiro acertando um CRÍTICO (intensity: CRITICAL, class: WARRIOR). Exemplo: "{attacker} girou sua lâmina com fúria e decepou o braço de {target}, causando {value} de dano!"
+
+Cenário B: Mago errando uma magia (intensity: MISS, class: MAGE). Exemplo: "{attacker} pronunciou as palavras erradas e a bola de fogo explodiu em sua própria cara."
+
+Cenário C: Ladino roubando a kill (KS) de outro herói (context: SOCIAL, event: KS_TRIGGER, class: ROGUE). Exemplo: "Quando {target} estava prestes a cair, {attacker} surgiu das sombras e deu o golpe final, rindo enquanto pegava o ouro."
+
+Cenário D: Herói Covarde fugindo da batalha (context: COMBAT, event: FLEE, personality: COWARD).
+
+Gere um total de 40 inserts SQL (10 para cada cenário acima). Mantenha o português do Brasil, estilo RPG Medieval.
+
+Dica de Implementação no Backend
+Para evitar "inchar" o banco com queries repetitivas, eu sugiro uma estratégia de Cache na Inicialização.
+
+Quando o servidor Deno sobe (deno run server.ts), ele faz um SELECT * FROM flavor_texts.
+
+Ele organiza esses textos em um Objeto em Memória (HashMap), agrupados por trigger.
+
+Ex: FlavorCache['COMBAT']['ATTACK_HIT']['WARRIOR'] = [Array com 50 frases]
+
+Durante o loop de jogo, o sorteio é feito em memória RAM (nanosegundos de latência).
+
+O DB só é lido novamente se você adicionar novos textos e reiniciar o servidor.
+
+dado a riqueza que é esse jogo em detalhes, me parece que sua lista de contextos não abrangiu nem 10% dos possíveis logs que o jogo pode ter
+
+Tens toda a razão. Se o objetivo é criar uma "simulação viva" (o Efeito Aquário descrito no GDD), limitar os logs a "A atacou B" é um crime contra o design. O log é a única janela do jogador para a alma dos heróis.
+
+Para cobrir a verdadeira profundidade de Heroes of Majesty, precisamos de uma matriz de contextos que considere Ação + Personalidade + Relacionamento + Estado.
+
+Aqui está a Expansão Massiva da Matriz de Contextos (The 100% Coverage) e a atualização necessária no Banco de Dados para suportar essa complexidade.
+
+1. Atualização na Arquitetura do Banco (PostgreSQL)
+Para lidar com essa especificidade, a tabela flavor_texts precisa de colunas de filtragem mais granulares. Não basta saber que é um "Ataque", precisamos saber se foi um "Ataque de um Covarde contra um Boss".
+
+SQL
+CREATE TABLE flavor_texts (
+    id SERIAL PRIMARY KEY,
+    
+    -- O GATILHO TÉCNICO
+    category VARCHAR(50) NOT NULL,    -- Ex: 'COMBAT', 'SOCIAL', 'ECONOMY', 'META'
+    event_key VARCHAR(50) NOT NULL,   -- Ex: 'ATTACK_CRIT', 'KS_ACCUSATION', 'BUY_FAIL_NO_GOLD'
+    
+    -- FILTROS DE CONTEXTO (Se NULL, aplica-se a qualquer um)
+    actor_class VARCHAR(20),          -- 'WARRIOR', 'MAGE', 'ROGUE', 'MONSTER'
+    target_class VARCHAR(20),         -- Quem recebeu a ação? (Para rivalidades específicas)
+    personality_trait VARCHAR(20),    -- 'BRAVE', 'COWARD', 'GREEDY', 'LOYAL', 'ARROGANT'
+    
+    -- VARIÁVEIS DE AMBIENTE (Opcionais)
+    biome_id VARCHAR(20),             -- 'FOREST', 'DUNGEON', 'VILLAGE'
+    world_state VARCHAR(20),          -- 'DAY', 'NIGHT', 'RAIN'
+    
+    -- O TEXTO (Com Placeholders Ricos)
+    -- Placeholders: {actor}, {target}, {value}, {item}, {location}, {god_name}
+    text_template TEXT NOT NULL,
+    
+    -- PESO DE RARIDADE
+    rarity_weight INT DEFAULT 1       -- 1=Comum, 10=Lendário/Raro
+);
+
+-- Exemplo de Index para performance no Deno
+CREATE INDEX idx_flavor_complex ON flavor_texts(category, event_key, actor_class, personality_trait);
+2. A "Master List" de Contextos (Mapeamento Completo)
+Aqui estão as categorias expandidas. Quando pedires à LLM para gerar, podes copiar estes blocos.
+
+GRUPO A: COMBATE VISCERAL (A Dança da Morte)
+Não apenas dano, mas a reação emocional ao combate.
+
+START_COMBAT_SHOUT: Grito de guerra ao ver inimigo.
+
+Brave: "Pela glória do Majesty!"
+
+Coward: "Ah não, outro? Socorro!"
+
+Greedy: "Aquele colar de dentes parece valioso..."
+
+ATTACK_CRIT_BRUTAL: Dano crítico massivo (>50% HP).
+
+Warrior: Decapitações, esmagamentos.
+
+Mage: Desintegração total.
+
+ATTACK_GLANCING: Dano ridículo (1-2 HP) por armadura alta.
+
+Texto: "A espada resvalou na carapaça dura."
+
+WEAPON_JAM / FUMBLE: Falha crítica (Erro 1 no dado).
+
+Texto: "Tropeçou na própria capa", "A corda do arco arrebentou".
+
+FRIENDLY_FIRE_ACCIDENT: Mago acerta guerreiro com bola de fogo (AOE).
+
+Actor: "Opa! Desculpe!"
+
+Target: "Olha para onde aponta isso, imbecil!"
+
+KILL_CONFIRMED: Golpe final (Last Hit honesto).
+
+ENEMY_FLEE_CHASE: Inimigo foge e Herói decide perseguir.
+
+ENEMY_FLEE_IGNORE: Inimigo foge e Herói deixa ir ("Não vale o esforço").
+
+GRUPO B: DINÂMICA SOCIAL & DRAMA (O "Big Brother" Medieval)
+Onde a simulação realmente brilha.
+
+KS_COMMIT (Kill Steal): O ato de roubar a kill.
+
+Arrogant: "Lento demais, velhote."
+
+Rogue: "Trabalho em equipe, certo?"
+
+KS_REACTION_VICTIM: A reação de quem perdeu o XP/Ouro.
+
+Forgiving (Leal): "Boa finalização!"
+
+Vengeful (Angry): "ISSO ERA MEU! Vais pagar!"
+
+PARTY_INVITE_SEND: Líder convidando para grupo.
+
+PARTY_INVITE_REJECT: Recusa por baixa afinidade.
+
+Texto: "Prefiro lutar sozinho a andar contigo."
+
+PARTY_INVITE_ACCEPT: Aceite.
+
+HEAL_RECEIVED_THANKS: Agradecimento por cura.
+
+HEAL_RECEIVED_ARROGANT: Falta de gratidão.
+
+Texto: "Já não era sem tempo!"
+
+PVP_FLAG_TRIGGER: Atacar outro herói (Ficar "Red").
+
+Texto: "A ganância corrompeu {actor}! Ele voltou-se contra os seus!"
+
+JUSTICE_HUNT: Iniciar caça a um herói "Red" (PK).
+
+Texto: "A justiça será feita. Vou trazer a cabeça de {target}."
+
+GRUPO C: ECONOMIA & GANÂNCIA (O Tycoon)
+A relação do herói com o teu ouro e lojas.
+
+SHOP_ENTER: Entrar na loja.
+
+SHOP_BUY_SUCCESS: Compra realizada.
+
+Greedy: "Dói gastar tanto, mas preciso disto."
+
+SHOP_NO_STOCK: Tentar comprar e não haver item (Crítico para gestão!).
+
+Texto: "Maldito lojista! Onde estão as poções? Vou morrer por culpa disto!"
+
+SHOP_TOO_EXPENSIVE: Ter o item, mas não ter ouro.
+
+Texto: "Olha a vitrine com inveja e conta as moedas..."
+
+GOLD_LOOT_SMALL: Achar poucas moedas.
+
+GOLD_LOOT_JACKPOT: Achar baú grande.
+
+SALARY_RECEIVED: Guarda recebendo pagamento.
+
+Loyal: "Obrigado, Majestade."
+
+Greedy: "É só isto? Arrisco a vida por migalhas."
+
+GRUPO D: EXPLORAÇÃO & AMBIENTE (A Atmosfera)
+Reações ao mundo e ao clima.
+
+BIOME_ENTER_FOREST: Medo de lobos, beleza das árvores.
+
+BIOME_ENTER_DUNGEON: Cheiro de mofo, escuridão.
+
+WEATHER_RAIN_COMPLAINT: Reclamar da chuva (ferrugem na armadura).
+
+WEATHER_NIGHT_FEAR: Medo do escuro (sem tocha).
+
+Coward: "Ouvi alguma coisa! Quero ir para casa!"
+
+SPOT_BOSS: Ver o Boss de longe.
+
+TRAP_DISARM_SUCCESS: Ladino desarmando armadilha.
+
+TRAP_FAIL: Cair no buraco/Explosão.
+
+GRUPO E: INTERAÇÃO COM O MAJESTY (Você)
+Cartas, Decretos e a "Mão Invisível".
+
+DECREE_REACTION_POSITIVE: Você deu Buff global.
+
+Texto: "Sinto o poder do Rei fluindo em mim!"
+
+DECREE_REACTION_NEGATIVE: Impostos ou Debuffs.
+
+BOUNTY_PLACED_REACTION: Ver uma recompensa alta num monstro.
+
+Greedy: "500 de ouro?! Aquele ogro já está morto!"
+
+Coward: "Nem por todo o ouro do reino chego perto daquilo."
+
+LETTER_RECEIVED_READING: Parar para ler carta (Mecânica nova).
+
+LETTER_IGNORED_BUSY: Rasgar a carta ou ignorar.
+
+Texto: "Agora não, estou ocupado a não morrer!"
+
+GRUPO F: ESTADOS MENTAIS (Sussurros/Pensamentos)
+O que aparece no Painel P4 (Inspetor) ou como balão de pensamento.
+
+IDLE_BOREDOM: Tédio na vila.
+
+IDLE_TRAINING: Afiando a espada, lendo grimório.
+
+LOW_HP_PANIC: Pensamentos pré-morte.
+
+LEVEL_UP_EUPHORIA: Sensação de poder.
+
+3. Exemplo Prático de Prompt para a LLM
+Aqui está o prompt refinado para gerar essa riqueza específica. Você deve rodar isso em batches (lotes), pedindo uma categoria por vez para não estourar a memória da LLM.
+
+Prompt para o ChatGPT/Claude (Lote: Social/KS):
+
+Role: Escritor de RPG Dark Fantasy Sarcástico. Task: Gerar linhas de log para um banco de dados SQL. Context: Jogo de simulação onde heróis têm personalidades fortes.
+
+Gere 15 comandos SQL INSERT para a tabela flavor_texts cobrindo o evento 'KS_COMMIT' (Roubo de Kill).
+
+Variáveis Obrigatórias: {actor} (quem roubou), {target} (quem teve a kill roubada), {monster} (o monstro morto).
+
+Distribuição:
+
+5 frases para personalidade ARROGANT (Debochado, superior). Ex: "{actor} limpou as unhas enquanto dava o golpe final no {monster}, piscando para {target}."
+
+5 frases para personalidade ROGUE/PRAGMATIC (Frio, "apenas negócios"). Ex: "Eficiência é tudo. {actor} finalizou o {monster} que {target} demorou tanto para matar."
+
+5 frases para personalidade CLUMSY/ACCIDENTAL (Sem querer). Ex: "{actor} escorregou e sua adaga voou acidentalmente no olho do {monster}, roubando a glória de {target}."
+
+Formato de Saída: Apenas o código SQL.
+
+4. Como o Backend Processa Isso (Lógica de Sorteio)
+No seu backend Deno, a função de log não é apenas print(). Ela é um Gerador de Narrativa.
+
+TypeScript
+// Exemplo de pseudo-código do Backend Deno
+
+function generateCombatLog(attacker: Hero, victim: Monster, damage: number, isCrit: boolean, isKill: boolean) {
+  
+  // 1. Definir o Contexto Base
+  let context = 'COMBAT';
+  let trigger = 'ATTACK_HIT';
+  let intensity = damage > 50 ? 'HIGH' : 'LOW';
+
+  // 2. Refinamento por Eventos Especiais
+  if (isCrit) trigger = 'ATTACK_CRIT';
+  if (isKill) trigger = 'KILL_CONFIRMED';
+  
+  // 3. Detecção de Personalidade para o "Tempero"
+  // Se for um golpe normal, talvez a gente queira destacar a personalidade
+  let personalityFilter = null;
+  if (Math.random() > 0.5) { // 50% de chance de usar a personalidade no log
+     personalityFilter = attacker.traits.dominantTrait; // ex: 'ARROGANT'
+  }
+
+  // 4. Buscar no Cache de Textos (que veio do DB)
+  const templates = FlavorTextCache.find({
+     category: context,
+     event: trigger,
+     actorClass: attacker.class, // 'WARRIOR'
+     personality: personalityFilter // Tenta achar específico, se não tiver, pega genérico
+  });
+
+  // 5. Sortear e Substituir
+  const template = Random.pick(templates);
+  const finalLog = template
+      .replace('{actor}', attacker.name)
+      .replace('{target}', victim.name)
+      .replace('{value}', damage);
+
+  return finalLog;
+}
+Essa estrutura garante que o jogo nunca fique repetitivo e que cada herói pareça único, mesmo que a mecânica por baixo seja apenas números.
+
+agora voltando sobre a gameplay, defina melhor como será os hotkeys e navegação entre janelas, realização de scroll, rápida movimentação entre workspaces etc utilizando apenas teclado, e depois como seria com mouse e teclado
+
+Esta é a camada que define o "Game Feel". Como o jogo roda num browser (Angular), temos de ter cuidado para não colidir com atalhos nativos (como F5 para refresh ou Ctrl+T para nova aba), mas criar uma experiência fluida que faça o jogador sentir-se um hacker ou operador de sistema.
+
+Aqui está a Bíblia de Navegação e Controles (Input Mapping v1.0).
+
+1. Modo "Keyboard King" (A Experiência Pura)
+Filosofia: As mãos nunca saem do teclado. Navegação baseada em Foco e Contexto.
+
+A. Navegação Global (Workspaces)
+Como navegadores costumam sequestrar as teclas F1-F12, recomendo usar Alt como modificador primário para garantir compatibilidade web.
+
+Ação	Atalho Primário	Atalho Alternativo (App Mode)
+Ops Center	Alt + 1	F1
+Tycoon/Admin	Alt + 2	F2
+Library	Alt + 3	F3
+World Map	Alt + 4	F4
+Mail/Aviary	Alt + 5	F5
+Pausar Jogo	Espaço	Pause/Break
+Chat/Comando	/ (Barra)	Enter (se nada focado)
+Menu Opções	Esc	Alt + 0
+B. Navegação entre Painéis (Focus Management)
+O jogador precisa pular do P1 (Lista) para o P2 (Mapa) sem usar o mouse.
+
+Ciclar Foco: Tab (Avança P1 > P2 > P3...) e Shift + Tab (Volta).
+
+Salto Direto (Jump):
+
+Ctrl + 1: Foca Painel 1 (Esquerda/Lista).
+
+Ctrl + 2: Foca Painel 2 (Centro/Main).
+
+Ctrl + 3: Foca Painel 3 (Direita/Status).
+
+Ctrl + 4: Foca Painel 4 (Inferior Esq).
+
+Ctrl + 5: Foca Painel 5 (Inferior Centro).
+
+Ctrl + 6: Foca Painel 6 (Ações).
+
+Visual do Foco: O painel ativo ganha uma borda brilhante (Ex: border: 2px solid neon-green) e um indicador piscante no título.
+
+C. Navegação Interna (Dentro do Painel Focado)
+Uma vez que o painel está focado (Borda Verde), as setas assumem o controle do conteúdo daquele painel.
+
+Listas (P1, P3, P4):
+
+Seta Cima / Baixo: Move o cursor de seleção (> Heroi A).
+
+Enter: "Entra" no item (ex: abre detalhes no P4 ou confirma compra).
+
+Texto Longo / Logs (P2, P5):
+
+Seta Cima / Baixo: Scroll lento (linha a linha).
+
+PageUp / PageDn: Scroll rápido (página).
+
+Home / End: Vai para o topo ou fim (tempo real).
+
+Mapa Grid (F4 - P2):
+
+W A S D ou Setas: Move a retícula de seleção no mapa.
+
+D. Atalhos de Ação Rápida (Context Action)
+Para evitar menus de "múltipla escolha" lentos, usamos teclas diretas. O Painel P6 (Ações) deve mostrar a "Tecla de Atalho" ao lado da ação.
+
+Interagir com Seleção:
+
+Se o cursor está sobre "Sir Kaelen" no P1:
+
+[ I ]: Inspecionar (Carrega no P4).
+
+[ C ]: Escrever Carta (Abre F5 ou Modal).
+
+[ H ]: Curar (Atalho rápido de feitiço).
+
+Gestão de Loja/Admin:
+
+[ B ]: Comprar (Buy).
+
+[ S ]: Vender/Sell.
+
+[ U ]: Upgrade Building.
+
+2. Modo "Hybrid Commander" (Mouse + Teclado)
+Filosofia: Mouse para seleção e exploração, Teclado para comandos e atalhos.
+
+A. Interação com Painéis
+Click-to-Focus: Clicar em qualquer lugar dentro de um painel define o foco nele (ativa a borda verde e permite scroll via teclado).
+
+Scroll:
+
+Wheel: Roda o conteúdo do painel onde o mouse está (mesmo sem foco - hover scroll).
+
+Scrollbar Customizada: Uma barra fina e minimalista (estilo VS Code) que aparece no hover.
+
+B. Context Menu (Clique Direito)
+Como é um jogo Web, podemos substituir o menu de contexto do navegador por um menu do jogo.
+
+Ao clicar com botão direito em um Herói:
+
+Abre um pequeno dropdown flutuante (estilo pixel art):
+
+🩹 Curar (100g)
+
+📜 Ver Dossiê
+
+📨 Enviar Corvo
+
+🚫 Banir do Reino
+
+C. Tooltips Ricas (Hover)
+O mouse permite exploração de informação sem clique.
+
+Hover sobre Item: Mostra stats, preço e lore.
+
+Hover sobre Skill: Mostra custo de mana, cooldown e descrição.
+
+Hover sobre Status (ex: "Envenenado"): Mostra "Perde 5 HP/s por 10s".
+
+3. O "Command Palette" (A Cereja do Bolo)
+Para jogadores avançados que querem se sentir "Deuses do Terminal", implemente uma Paleta de Comandos estilo VS Code ou Sublime Text.
+
+Atalho: Ctrl + K ou Ctrl + Espaço.
+
+O que faz: Abre um input flutuante no centro da tela.
+
+Funcionalidade: Fuzzy Search de qualquer ação do jogo.
+
+O jogador digita: "buy pot" -> O sistema sugere: > Comprar Poção de Vida (50g).
+
+O jogador digita: "kaelen" -> Sugere: > Inspecionar Sir Kaelen, > Enviar Carta p/ Kaelen.
+
+O jogador digita: "vol" -> Sugere: > Config: Volume Master.
+
+Isso elimina a necessidade de decorar atalhos ou navegar em menus profundos.
+
+4. Resumo Visual do Layout de Teclado
+Imagine isso no tutorial do jogo:
+
+Plaintext
+       [Alt+1...5] Trocar Telas (Ops, Admin, Lore...)
+       [Esc] Menu / Cancelar
+       [Space] Pausa Tática
+
+  +---[ TAB ] Ciclar Painéis ---------------------------+
+  |                                                     |
+  |  [ W/A/S/D ]     [ Setas ]        [ Enter ]         |
+  |  Mover Mapa      Navegar Listas   Confirmar/Abrir   |
+  |                                                     |
+  +-----------------------------------------------------+
+
+       [ / ] Abrir Chat do Conselheiro
+       [Ctrl+K] Paleta de Comandos Universal
+5. Considerações Técnicas para Angular
+Focus Trap: Quando um Modal (ex: Escrever Carta) abre, o foco do teclado deve ficar preso no modal. Se o jogador apertar Alt+1 ou Tab, não deve sair do modal até ele dar Esc ou Enviar.
+
+Global Listener: Use @HostListener('window:keydown', ['$event']) no app.component.ts para gerenciar os atalhos globais (Alt+Numbers).
+
+Prevent Default: Para atalhos como Ctrl+S (Salvar Rascunho) ou Alt+setas, você precisará de event.preventDefault() para o navegador não tentar salvar a página ou voltar o histórico.
+
+Com esse esquema, o jogo será extremamente ágil para quem domina, mas acessível para quem só quer clicar e ler.
+
+Esta é a peça final do quebra-cabeça de imersão. Ao adicionar o Background Reativo, transformamos o jogo de uma "tabela de excel gamificada" para uma "Interface de Comando Holográfica" flutuando sobre o mundo real.
+
+Aqui está a Documentação Técnica de Mecânicas Expandidas e Atmosfera (v1.0).
+
+1. Mecânicas de Expansão na Interface Terminal
+1.1. O Módulo de Masmorras (Dungeon Dive)
+No GDD original, a masmorra é um local complexo com salas, armadilhas e chefes. No terminal, não podemos mostrar apenas "Estão na Caverna". Precisamos de "Visão Tática".
+
+Ativação: Automática. Quando você seleciona (no F1) um herói que está dentro de uma Dungeon, o Painel Central (P2) muda de contexto. Deixa de ser a lista de locais e vira o Monitor de Profundidade.
+
+Visual do P2 (Dungeon Mode):
+
+Utiliza um Grafo ASCII gerado proceduralmente pelo Backend.
+
+Mostra o progresso linear ou ramificado.
+
+Plaintext
+| P2: MONITOR TÁTICO - "CRIPTA DOS LAMENTOS" (Nível 3)   |
+| [AMBIENTE] Escuridão Absoluta (Debuff: -50% Hit)       |
+| [STATUS] Boss detectado no Setor 5.                    |
+|                                                        |
+| MAPA DE SETORES:                                       |
+| [Entrada] == [Sala 1] == [Sala 2] --(bloq)-- [Tesouro] |
+|                          ||                            |
+|                       [Sala 3] == [BOSS]               |
+|                          ^^                            |
+|                       [HERÓIS]                         |
+|                                                        |
+| LEGENDA:                                               |
+| == Corredor Seguro   -- Porta Trancada                 |
+| ^^ Combate Ativo     [ ] Sala Limpa                    |
+Interação:
+
+Não é possível controlar o movimento (é indireto), mas você pode usar o P6 (Ações) para enviar suprimentos específicos para a masmorra (ex: "Teleportar Tochas").
+
+1.2. O Módulo de Postos Avançados (Governança)
+O gerenciamento de expansão acontece no Workspace F4 (Mapa Mundi).
+
+Fluxo de Interação:
+
+No F4, mova o cursor até um ícone de Posto [P].
+
+O Painel de Detalhes (P4) se expande, revelando o "Painel de Controle do Governador".
+
+Mecânicas de Interface (P4/P6):
+
+Barra de Lealdade: Visual [||||||....]. Se cair abaixo de 20%, o posto declara independência (vira inimigo).
+
+Botão de Saque (Tax): [T] Coletar Impostos. Transfere o ouro local para o cofre real, mas reduz a Lealdade.
+
+Botão de Investimento: [I] Enviar Ouro. Aumenta a Lealdade e acelera construções locais.
+
+Upgrade Local: O jogador pode ordenar a construção de muros ou torres no posto para aumentar a defesa autônoma contra ataques locais.
+
+1.3. Ciclos e Eventos Globais (O "Weather System")
+O mundo muda drasticamente a cada Ciclo (50 dias).
+
+Indicador Visual (P3 - Status):
+
+Uma barra de progresso global: Ciclo 1: A Era da Luz [========..] (Faltam 5 dias).
+
+A Transição (System Update):
+
+Quando o dia vira (ex: Dia 50 -> 51), o jogo pausa.
+
+Toca um som de alarme alert_klaxon.mp3.
+
+Um Overlay de Terminal (Tela Cheia) aparece com texto de "Patch Notes do Universo":
+
+Plaintext
+> SYSTEM ALERT: INICIANDO CICLO 2 - "A PRAGA"
+> ATUALIZANDO PARÂMETROS BIOLÓGICOS...
+> Monstros ganham atributo: [VENENO]
+> Cura reduzida em: 30%
+> Background: Pântano Tóxico
+> Music: 'Plague_Drone.mp3'
+> PRESSIONE [ENTER] PARA REINICIAR O SISTEMA.
+2. O Background Reativo (Dynamic Atmosphere)
+2.1. O Conceito Visual
+As janelas do terminal (F1, F2...) são "flutuantes" e semitransparentes (Opacity 95% preto). Atrás delas, ocupa a tela inteira (100vw, 100vh) um Video Loop ou Imagem Cinemática que representa o estado atual do mundo.
+
+A Camada de Unificação: Para que o texto do terminal seja legível sobre qualquer imagem, aplicamos um filtro CSS sobre o background:
+
+brightness(0.3) (Escurece a imagem).
+
+blur(4px) (Desfoca levemente para dar profundidade de campo).
+
+Overlay de Scanlines (Linhas de monitor CRT) para integrar a imagem à estética retro.
+
+2.2. Lógica de Reatividade
+O Background muda baseado em uma máquina de estados de prioridade:
+
+Prioridade 1 (Evento Crítico): Boss Fight, Invasão, Morte do Rei.
+
+Prioridade 2 (Localização Focada): Se o jogador está focado num herói na Masmorra, o fundo é Masmorra.
+
+Prioridade 3 (Ciclo/Clima): Se nada especial ocorre, mostra o bioma da Vila + Clima atual.
+
+3. Lista de Assets para Geração por IA (Backgrounds)
+Você precisará pedir à IA (Midjourney/DALL-E 3) ou procurar em bancos de vídeo (Pexels/Shutterstock) por loops cinemáticos.
+
+Estilo Visual Sugerido: Dark Fantasy, Realistic but Moody, Slow Motion, Cinematic Lighting. No text. Loopable.
+
+Categoria A: Biomas & Ciclos (Estado Padrão)
+Esses são os fundos que ficarão ativos 80% do tempo.
+
+Vila Real (Dia / Sol): Vista aérea de uma vila medieval fortificada, bandeiras tremulando suavemente, luz do sol quente.
+
+Vila Real (Noite / Lua): A mesma vila, iluminada apenas por tochas e janelas, lua cheia no céu, fumaça saindo das chaminés.
+
+Vila Real (Chuva): Clima cinzento, chuva caindo diagonalmente, poças d'água refletindo luzes, trovões ocasionais (visual).
+
+Floresta (Dia): Árvores densas, raios de luz atravessando as folhas (God rays), folhas caindo lentamente.
+
+Floresta (Noite/Sombria): Árvores retorcidas, neblina rasteira (fog) movendo-se no chão, olhos brilhando na escuridão.
+
+Pântano (Ciclo da Praga): Água verde estagnada, insetos voando, árvores mortas, atmosfera tóxica e esverdeada.
+
+Montanhas de Neve (Ciclo do Inverno): Nevasca forte (whiteout), montanhas rochosas ao fundo, vento visível arrastando neve.
+
+Categoria B: Masmorras & Exploração (Zoom In)
+Ativados quando o foco está num herói explorando.
+
+Caverna Natural: Estalactites, goteiras caindo em câmera lenta, iluminação fraca azulada ou bioluminescência.
+
+Cripta/Masmorra: Paredes de pedra antiga, tochas na parede tremulando, teias de aranha, atmosfera claustrofóbica.
+
+Ruínas Antigas: Colunas gregas quebradas, vegetação tomando conta, luz do sol poente batendo na pedra.
+
+Categoria C: Eventos Globais & Críticos (Alta Tensão)
+Ativados durante Boss Fights ou Eventos de Narrativa.
+
+Ataque do Dragão (Boss): O céu vermelho ou laranja (fogo), silhueta de um dragão voando ao longe ou chamas subindo pela parte inferior da tela.
+
+Invasão de Horda: Fogueiras de acampamento inimigo no horizonte, bandeiras de guerra inimigas, fumaça preta de destruição.
+
+Lua de Sangue (Evento Mágico): Uma lua gigante e vermelha no céu, nuvens passando rápido, iluminação avermelhada em todo o cenário.
+
+Vitória/Celebração: Fogos de artifício mágicos no céu, confetes ou pétalas caindo, luz dourada radiante.
+
+Game Over (Derrota): A vila em chamas e destruída, chuva de cinzas, tela desaturada (preto e branco).
+
+4. Integração Técnica (Angular + Audio Manager)
+Como conectar a imagem ao som? Criaremos um AtmosphereService.
+
+Estrutura de Dados (Mapping):
+
+TypeScript
+export const ATMOSPHERE_MAP = {
+  'VILLAGE_DAY': {
+    image: 'assets/bg/village_day.mp4', // Vídeo é melhor que GIF
+    music: 'assets/music/town_theme_orchestral.mp3',
+    ambience: 'assets/sfx/birds_wind_loop.mp3'
+  },
+  'DUNGEON_CRYPT': {
+    image: 'assets/bg/crypt_dark.mp4',
+    music: 'assets/music/dungeon_dark_synth.mp3',
+    ambience: 'assets/sfx/water_drips_echo.mp3'
+  },
+  'BOSS_DRAGON': {
+    image: 'assets/bg/fire_sky.mp4',
+    music: 'assets/music/boss_metal_action.mp3',
+    ambience: 'assets/sfx/fire_crackle_loop.mp3'
+  }
+};
+Lógica do Componente de Background:
+
+TypeScript
+// No template HTML do App.Component
+<div class="reactive-background">
+  <video [src]="currentAtmosphere.image" autoplay loop muted></video>
+  <div class="overlay-scanlines"></div>
+  <div class="overlay-darkness"></div> </div>
+
+// No Service
+updateAtmosphere(state: GameState) {
+  let key = 'VILLAGE_DAY'; // Default
+
+  if (state.combat.bossActive) {
+    key = `BOSS_${state.combat.bossType}`;
+  } else if (state.focus.heroLocation === 'DUNGEON') {
+    key = 'DUNGEON_CRYPT';
+  } else if (state.weather === 'RAIN') {
+    key = 'VILLAGE_RAIN';
+  }
+
+  // Crossfade suave de áudio e vídeo
+  this.audioManager.transitionTo(key);
+  this.videoManager.transitionTo(key);
+}
+Esta abordagem cria uma "Sanduíche de Imersão":
+
+Fundo: O mundo real (Vídeo).
+
+Meio: A interface de comando (Terminal Angular).
+
+Frente: O feedback sonoro (Música/SFX).
+
+Isso resolve o problema do "tédio visual" definitivamente. Mesmo que o jogador não esteja digitando nada, ele está vendo a chuva cair na vila e ouvindo os trovões enquanto monitora os logs.
+
+Com certeza. Ter o visual junto da descrição técnica é essencial para que você não precise ficar alternando entre documentos durante o desenvolvimento.
+
+Aqui está a **Documentação Mestra de Interface (vFinal)**, consolidando todas as regras, descrições funcionais e os **Layouts Visuais ASCII** para cada Workspace.
+
+---
+
+# 📂 VISÃO GERAL DO SISTEMA
+
+**Filosofia:** "O Sistema Operacional do Reino".
+**Estética:** Texto Monospaced (Fira Code) + Ícones Pixel Art + Portraits Hi-Bit + Backgrounds Cinemáticos Reativos.
+**Engine Visual:** HTML/CSS (Angular) simulando um TUI (Text User Interface).
+
+---
+
+# ⌨️ CONTROLES GLOBAIS (UX)
+
+| Ação | Teclado (Primário) | Teclado (Alternativo) | Mouse |
+| --- | --- | --- | --- |
+| **Mudar Workspace** | `Alt + [1-5]` | `F1 - F5` | Clicar na Barra de Abas. |
+| **Ciclar Painéis** | `Tab` / `Shift+Tab` | - | Clicar dentro do painel. |
+| **Focar Painel** | `Ctrl + [1-7]` | - | - |
+| **Abrir Chat** | `/` (Barra) | - | Clicar no Input. |
+| **Pausa Tática** | `Espaço` | `Pause/Break` | Clicar no Relógio. |
+| **Menu Sistema** | `Esc` | `Alt + 0` | Botão Engrenagem. |
+
+---
+
+# 🛠️ WORKSPACES DE JOGO (F1 - F5)
+
+## [F1] OPS CENTER ("The War Room")
+
+**Foco:** Monitoramento em Tempo Real, Combate e Gestão Imediata.
+
+### Descrição dos Painéis
+
+* **P1 (Roster):** Lista de heróis com Avatar, HP e Ícone de Status (Lutando, Dormindo). Mostra envelope `📩` se houver carta.
+* **P2 (Monitor Tático):** Mapa Lógico (Lista de Locais) ou Mapa de Dungeon (Grafo ASCII) se o herói estiver em masmorra.
+* **P3 (Status):** Ouro, Mana, **Influência (IP)** e Progresso do Ciclo.
+* **P4 (Inspetor):** Portrait Grande (Doom Style) reativo ao dano. Detalhes profundos da unidade.
+* **P5 (Timeline):** Log de texto rico.
+* **P6 (Ações):** Comandos rápidos (`[A] Curar`, `[C] Carta`).
+* **P7 (Conselheiro):** Chat híbrido (Regex/IA).
+
+### Layout Visual
+
+```text
++---------------------+------------------------------------------+---------------------+
+| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
+| [1] Sir Kaelen 📩   |                                          |                     |
+|     HP: 80% | Lvl 3 |  > VILA REAL                             |  OURO: 1,250        |
+|     Sts: LENDO      |    [N] Conselheiro                       |  MANA: 300          |
+|                     |                                          |  INFL: [|||||.....] |
+| [2] Lila Rogue      |  > FLORESTA SOMBRIA                      |  (50/100 IP)        |
+|     HP: 40% | Lvl 5 |    [H] Sir Kaelen 🪶 (Escrevendo...)     |                     |
+|     Sts: LUTA       |    [H] Lila Rogue                        |  -- NOTIFICAÇÕES -- |
+|                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
+| [3] Vazio           |                                          |      (Ler Agora [R])|
++---------------------+------------------------------------------+---------------------+
+| P4: INSPEÇÃO / CARTA|          P5: TIMELINE SOCIAL (LOGS)      | P6: AÇÕES RÁPIDAS   |
+| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
+| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
+|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
+| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
+| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
+| > Status: Lida      |                                          | (Use teclas)        |
+| > Resposta: A caminho|                                         |                     |
++---------------------+------------------------------------------+---------------------+
+|                        P7: CONSELHEIRO REAL (CHAT)                                   |
+| IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
+|      resposta malcriada pedindo aumento de salário."                                 |
+|                                                                                      |
+| > /_                                                                                 |
++--------------------------------------------------------------------------------------+
+
+```
+
+---
+
+## [F2] ADMIN ("The Tycoon")
+
+**Foco:** Economia, Construção e Árvore de Habilidades.
+
+### Descrição dos Painéis
+
+* **P1 (Infra):** Lista de Edifícios (Guildas, Lojas). Nível, vagas e custo.
+* **P2 (Tech Tree):** Árvore visual de Skills desbloqueáveis.
+* **P3 (Logística):** Estoques de consumíveis e fluxo de caixa (Salários).
+* **P4 (Detalhe):** Custo de manutenção e benefícios do item/prédio selecionado.
+* **P5 (Order Log):** Log filtrado apenas para economia (Vendas, Construções).
+* **P6 (Manutenção):** Ações como `[U] Upgrade`, `[B] Comprar Estoque`.
+* **P7 (Gestão):** IA sugere compras baseadas em risco de escassez.
+
+### Layout Visual
+
+```text
++---------------------+------------------------------------------+---------------------+
+| P1: INFRAESTRUTURA  |        P2: CURADORIA DE SKILLS           | P3: LOGÍSTICA/STOCK |
+| [1] Guilda Guerreiro|                                          |                     |
+|     Lvl: 2 (Max 5)  |  CLASSE: GUERREIRO (Pontos: 5)           |  > MERCADORIAS      |
+|     Vagas: 3/5      |                                          |  [A] Poção Vida (S) |
+|     Custo Up: 500g  |  [Raiz] Ataque Básico (Desbloqueado)     |      Qtd: 12        |
+|                     |   |                                      |      Preço: 50g     |
+| [2] Guilda Mago     |   +-- [1] Golpe Giratório (Custo: 200g)  |      Status: BAIXO! |
+|     Lvl: 1          |   |    |-- Requer: Força Lvl 2           |                     |
+|     Vagas: 1/3      |   |                                      |  [B] Poção Mana (M) |
+|     (Construindo...)|   +-- [2] Grito Provocação (BLOQUEADO)   |      Qtd: 45        |
+|                     |        |-- Requer: Guilda Lvl 3          |      Preço: 80g     |
+| [3] Torre de Vigia  |                                          |                     |
+|     Alcance: +2     |  CLASSE: LADINO                          |  > FINANÇAS         |
+|     Estado: OK      |   +-- [3] Adaga Envenenada (500g)        |  Salários: -20g/min |
+|                     |                                          |  Lucro: +150g/min   |
++---------------------+------------------------------------------+---------------------+
+| P4: DETALHE CONSTRU |          P5: ORDEM DE SERVIÇO (LOGS)     | P6: AÇÕES RÁPIDAS   |
+| Selecionado: [1]    | [ADMIN] Guilda Mago iniciou construção.  | [R] Reparar Tudo    |
+| Guilda Guerreiros   | [ECO]   Venda: Poção Vida (-1) p/ Lila.  | [S] Reabastecer (A) |
+| Buff: +10% XP       | [ECO]   Lucro: +200g (Loot de Ogro).     | [T] Pagar Salários  |
+| Manut: 5g/dia       | [ALERTA] Estoque de Poção Vida CRÍTICO.  | [U] Upgrade Prédio  |
+| "Treina os bravos"  | [ADMIN] Skill "Golpe Giratório" Ativa.   |                     |
+|                     |                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: CONSELHEIRO REAL (MODO GESTÃO)                            |
+| IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um |
+|      ataque agora, os heróis morrerão. Recomendo comprar o lote imediatamente."      |
+|                                                                                      |
+| > /buy A 20_                                                                         |
++--------------------------------------------------------------------------------------+
+
+```
+
+---
+
+## [F3] LIBRARY ("The Archives")
+
+**Foco:** Lore, Bestiário, Estatísticas e Pausa Tática.
+
+### Descrição dos Painéis
+
+* **P1 (Índice):** Navegação de arquivos (Heróis, Monstros, História).
+* **P2 (Leitor):** Área de leitura de texto longo (Markdown) e imagens ASCII.
+* **P3 (Analytics):** Gráficos de performance (Ouro/Hora, Kills).
+* **P4 (Metadados):** Dados técnicos da entidade (ID, Status).
+* **P5 (Histórico):** Log filtrado para "Grandes Feitos".
+* **P6 (Filtros):** Alternar visualização (`[G] Gráficos`, `[T] Texto`).
+* **P7 (Busca):** Input para pesquisar na Lore (`/search`).
+
+### Layout Visual
+
+```text
++---------------------+------------------------------------------+---------------------+
+| P1: ÍNDICE DE DADOS |        P2: LEITOR DE DADOS (READER)      | P3: ESTATÍSTICAS    |
+| > HERÓIS ATIVOS     | DOSSIÊ: SIR KAELEN (Guerreiro)           |  -- OURO / DIA --   |
+|  [1] Sir Kaelen     |                                          |  Dia 43: ####       |
+|  [2] Lila Rogue     | [SUSSURROS RECENTES]                     |  Dia 44: ######     |
+|                     | "Aquele Ogro parecia ter medo de fogo... |  Dia 45: ##         |
+| > MEMORIAL (MORTOS) |  Devia ter comprado uma tocha."          |                     |
+|  [3] Gandalf (Mago) |                                          |  -- KILLS / TIPO -- |
+|                     | [TRAÇOS DE PERSONALIDADE]                |  Ogros: 12 [|||..]  |
+| > BESTIÁRIO         | Coragem: [||||||||..] (Alta)             |  Goblins: 45 [||||]|
+|  [4] Ogro das Cvs.  | Ganância: [||........] (Baixa)           |  Dragões: 0  [.....]|
+|  [5] Dragão Sombra  | Lealdade: "Pelo Rei!"                    |                     |
+|                     |                                          |  -- PARTIDA --      |
+| > HISTÓRICO         | [BIOGRAFIA GERADA]                       |  Tempo: 02:14:00    |
+|  [6] Crônica Atual  | Nascido nas montanhas do norte, Kaelen   |  Score: B+          |
+|                     | jurou proteger os fracos após...         |                     |
++---------------------+------------------------------------------+---------------------+
+| P4: METADADOS       |          P5: REGISTO DO HISTORIADOR      | P6: FILTROS         |
+| ID: Hero_001        | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis      |
+| Status: Vivo        | [Dia 15] Kaelen recusou suborno.         | [M] Ver Monstros    |
+| Kills: 42           | [Dia 20] Adquiriu título "O Bravo".      | [L] Ver Lore        |
+| Mortes: 0           | [Dia 45] Atualmente a dormir na Vila.    | [G] Ver Gráficos    |
+|                     |                                          |                     |
+| "A lenda viva."     |                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: PESQUISA & CONSULTA (MODO ARQUIVO)                        |
+| IA: "Aqui estão os registos mentais de Sir Kaelen. A sua lealdade é inabalável, mas  |
+|      notei que ele tem uma fobia secreta de aranhas baseada na biografia."           |
+|                                                                                      |
+| > /search "fobia"_                                                                   |
++--------------------------------------------------------------------------------------+
+
+```
+
+---
+
+## [F4] WORLD MAP ("The Conquest")
+
+**Foco:** Estratégia Global, Expansão e Postos Avançados.
+
+### Descrição dos Painéis
+
+* **P1 (Domínios):** Lista da Capital e Postos (Vassalos).
+* **P2 (Mapa Satélite):** Grid ASCII do mundo. Navegação por cursor `[ ]`.
+* **P3 (Previsão):** Ciclo, Clima e Eventos Futuros.
+* **P4 (Governança):** Painel contextual. Se cursor no vazio = Detalhe do terreno. Se cursor no Posto = Painel de Controle (Lealdade, Taxas).
+* **P5 (Expedição):** Log de eventos distantes.
+* **P6 (Comandos):** Contextual (`[N] Novo Posto`, `[T] Taxar`, `[I] Investir`).
+* **P7 (Estratégia):** Chat político/diplomático.
+
+### Layout Visual
+
+```text
++---------------------+------------------------------------------+---------------------+
+| P1: DOMÍNIOS REAIS  |        P2: MAPA DE SATÉLITE (ASCII)      | P3: PREVISÃO GLOBAL |
+| > CAPITAL (Sede)    |                                          |                     |
+|   Regente: Você     |   [~] [~] [M] [M] [F] [F] [C]            |  -- CICLO ATUAL --  |
+|   Pop: 12/12        |   [~] [P] [.] [.] [F] [T] [C]            |  Ciclo: 1 de 3      |
+|   Ouro: 100% Taxa   |   [~] [.] [V] [.] [.] [.] [M]            |  Tipo: "Primavera"  |
+|                     |   [~] [.] [.] [R] [R] [.] [M]            |  Monstros: T1 (Fraco|
+| > POSTO NORTE       |   [M] [M] [F] [R] [?] [?] [?]            |                     |
+|   Capitão: Rurik    |   [M] [C] [F] [?] [?] [?] [?]            |  -- TEMPO --        |
+|   Status: AUTÓNOMO  |                                          |  Próx. Evento:      |
+|   Lealdade: 80%     |   Legenda:                               |  "Lua de Sangue"    |
+|   (Vassalo)         |   [V]ila  [.]Campo  [F]loresta           |  Em: 05:00 min      |
+|                     |   [M]ont  [~]Água   [C]averna            |                     |
+| > POSTO LESTE       |   [T]orre [P]osto   [?]Névoa             |  -- AMEAÇAS --      |
+|   (Destruído)       |                                          |  [!] Invasão Norte  |
+|                     |                                          |  [!] Peste na Vila  |
++---------------------+------------------------------------------+---------------------+
+| P4: GOVERNANÇA      |          P5: LOG DE EXPEDIÇÃO            | P6: COMANDOS EXP.   |
+| (Selecionado: Posto)| [GLOBAL] Novo ciclo iniciado: Chuvas.    | [N] Novo Posto      |
+| Capitão: Rurik      | [POSTO]  Rurik solicita reforços (Ouro). | [M] Mover Capital   |
+| Lealdade: 80%       | [EVENTO] Terramoto abriu passagem em C4. | [E] Enviar Espião   |
+| Ouro Local: 500g    | [EXPLOR] Lila descobriu "Ruínas Antigas".| [T] Coletar Taxas   |
+| (Risco de Revolta!) | [ALERTA] Movimento inimigo no setor Norte| [I] Investir Ouro   |
+|                     |                                          | (Use teclas)        |
++---------------------+------------------------------------------+---------------------+
+|                        P7: ESTRATÉGIA GLOBAL (MODO CONQUISTA)                        |
+| IA: "Majestade, o Capitão Rurik está a pedir ouro. Se recusarmos, a lealdade dele    |
+|      cairá. Além disso, a Lua de Sangue aproxima-se. Devemos recuar os batedores?"   |
+|                                                                                      |
+| > /send gold 500 posto_norte_                                                        |
++--------------------------------------------------------------------------------------+
+
+```
+
+---
+
+## [F5] THE AVIARY ("Royal Mail")
+
+**Foco:** Correspondência, Gestão de Relacionamento e Histórico de Cartas.
+
+### Descrição dos Painéis
+
+* **P1 (Caixa Correio):** Pastas (Inbox, Sent, Drafts). Lista de mensagens com ícones de status.
+* **P2 (Leitura):** Visualiza o conteúdo da carta e a thread anterior.
+* **P3 (Perfil Alvo):** Avatar do remetente/destinatário, humor atual e Custo de IP para enviar.
+* **P4 (Contatos):** Lista rápida de Heróis e NPCs para iniciar nova mensagem.
+* **P5 (Editor):** Área de texto livre para rascunho.
+* **P6 (Ações Envio):** `[Enter] Enviar`, `[S] Salvar`, `[T] Anexar Ouro`.
+* **P7 (Status Rede):** Feedback sobre corvos em voo e tempo estimado de resposta.
+
+### Layout Visual
+
+```text
++---------------------+------------------------------------------+---------------------+
+| P1: CAIXA DE CORREIO|        P2: LEITURA DE MENSAGEM           | P3: PERFIL DO ALVO  |
+| > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen (Avatar|
+|  [1] Sir Kaelen (N) | PARA: Vossa Majestade                    |                     |
+|      "Sobre o Ouro" | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
+|      14:02          |                                          | Humor: Irritado     |
+|                     | ASSUNTO: Re: Covardia                    | Lealdade: 45% (Baixa|
+|  [2] Lila Rogue     |                                          |                     |
+|      "Pedido..."    | "Majestade, com todo o respeito, chamar  | Última Carta:       |
+|      Ontem          |  retirada estratégica de 'covardia' é    | Há 2 dias (Ignorada)|
+|                     |  fácil para quem está sentado no trono.  |                     |
+| > ENVIADOS          |  O Ogro tinha vantagem de terreno!"      | Custo Envio:        |
+|  [3] P/ Conselheiro |                                          | 25 IP (Influência)  |
+|                     | [ANEXO: Relatório de Danos.log]          |                     |
+| > RASCUNHOS         |                                          |                     |
+|  (Vazio)            | ---------------------------------------- |                     |
+|                     | > [R] RESPONDER   > [A] ARQUIVAR         |                     |
++---------------------+------------------------------------------+---------------------+
+| P4: LISTA DE CONTATO|          P5: RASCUNHO ATUAL (EDITOR)     | P6: AÇÕES DE ENVIO  |
+| [H] Sir Kaelen      | PARA: Sir Kaelen                         | [Enter] Enviar      |
+| [H] Lila Rogue      |                                          | [S] Salvar Rascunho |
+| [H] Gandalf         | "Entendo seu ponto, Kaelen. Mas preciso  | [D] Descartar       |
+| [N] Conselheiro     |  que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro     |
+| [E] Guilda Mercante |                                          |                     |
+|                     | (Digite sua mensagem aqui...)            |                     |
++---------------------+------------------------------------------+---------------------+
+|                        P7: STATUS DA REDE DE CORVOS                                  |
+| STATUS: 2 Pássaros em voo.                                                           |
+| NOTIF: A resposta de Lila deve chegar em 30 segundos.                                |
+| > /send_                                                                             |
++--------------------------------------------------------------------------------------+
+
+```
