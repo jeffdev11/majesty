@@ -11,7 +11,7 @@ interface Hero {
   // Identificação
   id: string;
   name: string;
-  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE
+  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE, DRUID, ELF
 
   // Atributos Físicos
   stats: {
@@ -104,6 +104,24 @@ personality: {
   mind: random(0.6, 0.9),     // Astuto
   affect: random(0.3, 0.7)    // Imprevisível
 }
+
+// Druida
+personality: {
+  power: random(0.4, 0.7),    // Moderadamente corajoso
+  ethics: random(0.6, 0.9),   // Altruísta
+  resource: random(0.2, 0.5), // Pouco ganancioso
+  mind: random(0.5, 0.8),     // Sábio
+  affect: random(0.6, 0.9)    // Calmo e equilibrado
+}
+
+// Elfo
+personality: {
+  power: random(0.5, 0.8),    // Confiante
+  ethics: random(0.5, 0.8),   // Honrado
+  resource: random(0.3, 0.6), // Moderado
+  mind: random(0.6, 0.9),     // Muito inteligente
+  affect: random(0.7, 1.0)    // Muito estável
+}
 ```
 
 ---
@@ -136,7 +154,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 
 ## 4.4 Classes de Heróis: Vieses e Identidade
 
-### As 4 Classes Principais
+### As 6 Classes Principais
 
 #### 🗡️ Guerreiro (Warrior)
 
@@ -166,6 +184,20 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Viés P.E.R.M.A.:** Resource ↑↑, Ethics ↓
 - **Comportamento:** Rouba kills, saqueia primeiro, foge rápido
 
+#### 🌿 Druida (Druid)
+
+- **Identidade:** Suporte/Metamorfo, cura e transformação
+- **Stats Base:** HP Médio, Mana Médio, Versatilidade Alta
+- **Viés P.E.R.M.A.:** Ethics ↑, Mind ↑
+- **Comportamento:** Cura aliados, se transforma em animais, controle de área
+
+#### 🏹 Elfo (Elf)
+
+- **Identidade:** Híbrido mágico/físico, suporte ágil
+- **Stats Base:** HP Médio-Baixo, Mana Alto, Velocidade Alta
+- **Viés P.E.R.M.A.:** Mind ↑, Affect ↑
+- **Comportamento:** Combate à distância, buffs de grupo, alta mobilidade
+
 ---
 
 ## 4.5 Ciclo de Vida: Morte, Redenção e Necromancia
@@ -175,10 +207,8 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 Quando um herói morre:
 
 1. **Drop de Equipamento:** Todo equipamento cai no chão (pode ser saqueado)
-2. **Entrada no Memorial:** O herói entra na aba "MEMORIAL (MORTOS)" da Library
-3. **Oferta de Redenção:** Após 60 segundos, aparece escolha:
-   - **Aceitar:** Renascer como **Guarda da Cidade** (nível base, sem equipamento)
-   - **Recusar:** Morte permanente
+2. **Entrada no Memorial:** O herói entra temporariamente na aba "MEMORIAL (MORTOS)" da Library
+3. **Redenção Automática:** Após 60 segundos, o herói **automaticamente** renasce como **Guarda da Cidade** (nível base, sem equipamento)
 
 ### O Caminho da Redenção: Guardas da Cidade
 
@@ -224,7 +254,7 @@ Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos
 - Nome: "Sir Kaelen, O Amaldiçoado"
 - Luta **contra** o jogador
 - Mantém skills, mas sem personalidade
-- Se derrotado novamente: Morte **permanente**
+- Se derrotado novamente: **Libertado da corrupção**, volta como Guarda da Cidade após 60 segundos
 
 ---
 
@@ -246,4 +276,3 @@ Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos
 3. **Escolha Dolorosa:** O jogador pode "demitir" um herói (ele sai do reino e nunca volta)
 
 ---
-

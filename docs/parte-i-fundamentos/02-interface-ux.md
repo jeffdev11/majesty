@@ -11,7 +11,7 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 | **[F1]** | **OPS CENTER**     | "The War Room" - Monitoramento em tempo real, combate tático   |
 | **[F2]** | **ADMIN**          | "The Tycoon" - Gestão econômica, árvores de habilidades        |
 | **[F3]** | **LIBRARY**        | "The Archives" - Lore, bestiário, análise psicológica          |
-| **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa ASCII global, postos avançados           |
+| **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa visual com ícones, postos avançados      |
 | **[F5]** | **THE AVIARY**     | "Royal Mail" - Sistema de correspondência via corvos           |
 | **[F6]** | **THE CHRONICLES** | "The Chronicles" - História sendo gerada, narrativa generativa |
 
@@ -426,7 +426,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 **Foco Principal:** Gestão de Recursos, Construção e Curadoria de Habilidades
 
-![F2 ADMIN - The Tycoon](<docs/[F2]%20ADMIN%20(_The%20Tycoon_).png>)
+![F2 ADMIN - The Tycoon](<../anexos/[F2]%20ADMIN%20(_The%20Tycoon_).png>)
 
 ### Descrição dos Painéis
 
@@ -474,8 +474,9 @@ Esse é o momento PERFEITO para atacar o boss!"
 | ⚠️ CONDIÇÕES: Guilda Guerreiros [Em Manutenção] 15min                                 |
 +--------------------------------------------------------------------------------------+
 |                        P7: CONSELHEIRO REAL (MODO GESTÃO)                            |
-| IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um |
-|      ataque agora, os heróis morrerão. Recomendo comprar o lote imediatamente."      |
+| IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um  |
+|      ataque agora, os heróis estarão em ALTO RISCO sem cura disponível. Recomendo     |
+|      comprar o lote imediatamente."                                                    |
 |                                                                                      |
 | > /buy A 20_                                                                         |
 +--------------------------------------------------------------------------------------+
@@ -604,35 +605,37 @@ Heróis defendendo: 3 (Kaelen, Lila, Gandalf)
 
 **Opção 1: Via Menu Numérico (P1)**
 
-1. Pressionar `[N]` (New Building) no P1
-2. Menu modal abre:
+1.  Pressionar `[N]` (New Building) no P1
+2.  Menu modal abre:
 
-```
-+--------------------------------------+
-|   ESCOLHA O QUE CONSTRUIR            |
-+--------------------------------------+
-| [1] Guilda Guerreiros    (300g)      |
-| [2] Guilda Magos         (350g)      |
-| [3] Guilda Ladinos       (280g)      |
-| [4] Guilda Arqueiros     (300g)      |
-| [5] Torre de Vigia       (200g)      |
-| [6] Loja de Poções       (250g)      |
-| [7] Ferreiro             (400g)      |
-| [8] Taverna              (300g)      |
-| [ESC] Cancelar                       |
-+--------------------------------------+
-```
+    ```
+    +--------------------------------------+
+    |   ESCOLHA O QUE CONSTRUIR            |
+    +--------------------------------------+
+    | [1] Guilda Guerreiros    (300g)      |
+    | [2] Guilda Magos         (350g)      |
+    | [3] Guilda Ladinos       (280g)      |
+    | [4] Guilda Arqueiros     (300g)      |
+    | [5] Guilda Druidas       (320g)      |
+    | [6] Guilda Elfos         (330g)      |
+    | [7] Torre de Vigia       (200g)      |
+    | [8] Loja de Poções       (250g)      |
+    | [9] Ferreiro             (400g)      |
+    | [10] Taverna             (300g)      |
+    | [ESC] Cancelar                       |
+    +--------------------------------------+
+    ```
 
-3. Jogador digita número (ex: `1`)
-4. Confirmação:
+3.  Jogador digita número (ex: `1`)
+4.  Confirmação:
 
-```
-Construir Guilda Guerreiros?
-Custo: 300g | Tempo: 60s
-Saldo após: 700g
+    ```
+    Construir Guilda Guerreiros?
+    Custo: 300g | Tempo: 60s
+    Saldo após: 700g
 
-[ENTER] Confirmar | [ESC] Cancelar
-```
+    [ENTER] Confirmar | [ESC] Cancelar
+    ```
 
 **Opção 2: Via Comando (P7)**
 
@@ -881,7 +884,7 @@ Saldo atual: 1,130g
 
 **Foco Principal:** Lore, Psicologia Profunda, Bestiário e Estatísticas (Pausa Tática)
 
-![F3 LIBRARY - The Archives](<docs/[F3]%20LIBRARY%20(_The%20Archives_).png>)
+![F3 LIBRARY - The Archives](<../anexos/[F3]%20LIBRARY%20(_The%20Archives_).png>)
 
 ### Descrição dos Painéis
 
@@ -900,21 +903,21 @@ Saldo atual: 1,130g
 ```
 
 +---------------------+------------------------------------------+---------------------+
-| P1: ÍNDICE DE DADOS | P2: LEITOR DE DADOS (READER) | P3: ESTATÍSTICAS |
-| > HERÓIS ATIVOS | DOSSIÊ: SIR KAELEN (Guerreiro) | -- OURO / DIA -- |
-| [1] Sir Kaelen | | Dia 43: #### |
-| [2] Lila Rogue | [SUSSURROS RECENTES] | Dia 44: ###### |
-| | "Aquele Ogro parecia ter medo de fogo... | Dia 45: ## |
-| > MEMORIAL (MORTOS) | Devia ter comprado uma tocha." | |
-| [3] Gandalf (Mago) | | -- KILLS / TIPO -- |
-| | [TRAÇOS DE PERSONALIDADE] | Ogros: 12 [|||..] |
-| > BESTIÁRIO | Coragem: [||||||||..] (Alta) | Goblins: 45 [||||]|
-| [4] Ogro das Cvs. | Ganância: [||........] (Baixa) | Dragões: 0 [.....]|
-| [5] Dragão Sombra | Lealdade: "Pelo Rei!" | |
-| | | -- PARTIDA -- |
-| > HISTÓRICO | [BIOGRAFIA GERADA] | Tempo: 02:14:00 |
-| [6] Crônica Atual | Nascido nas montanhas do norte, Kaelen | Score: B+ |
-| | jurou proteger os fracos após... | |
+| P1: ÍNDICE DE DADOS |    P2: LEITOR DE DADOS (READER)          | P3: ESTATÍSTICAS    |
+| > HERÓIS ATIVOS     | DOSSIÊ: SIR KAELEN (Guerreiro)           | -- OURO / DIA --    |
+| [1] Sir Kaelen      |                                          | Dia 43: ####        |
+| [2] Lila Rogue      | [SUSSURROS RECENTES]                     | Dia 44: ######      |
+|                     | "Aquele Ogro parecia ter medo de fogo... | Dia 45: ##          |
+| > MEMORIAL (MORTOS) | Devia ter comprado uma tocha."           |                     |
+| [3] Gandalf (Mago)  |                                          | -- KILLS / TIPO --  |
+|                     | [TRAÇOS DE PERSONALIDADE]                | Ogros: 12 [|||..]   |
+| > BESTIÁRIO         | Coragem: [||||||||..] (Alta)             | Goblins: 45 [||||]  |
+| [4] Ogro das Cvs.   | Ganância: [||........] (Baixa)           | Dragões: 0 [.....]  |
+| [5] Dragão Sombra   | Lealdade: "Pelo Rei!"                    |                     |
+|                     |                                          | -- PARTIDA --       |
+| > HISTÓRICO         | [BIOGRAFIA GERADA]                       | Tempo: 02:14:00     |
+| [6] Crônica Atual   | Nascido nas montanhas do norte, Kaelen   | Score: B+           |
+|                     | jurou proteger os fracos após...         |                     |
 +---------------------+------------------------------------------+---------------------+
 | P4: METADADOS | P5: REGISTO DO HISTORIADOR | P6: FILTROS |
 | ID: Hero*001 | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis |
@@ -1000,12 +1003,12 @@ P1: ÍNDICE DE DADOS
 
 **Navegação por Teclado:**
 
-1. **Setas Cima/Baixo:** Navegar entre itens
-2. **Seta Direita:** Expandir categoria fechada
-3. **Seta Esquerda:** Recolher categoria aberta
-4. **Enter:** Selecionar item e carregar no P2
-5. **Backspace:** Voltar para categoria pai
-6. **Home/End:** Ir para primeiro/último item da lista
+1.  **Setas Cima/Baixo:** Navegar entre itens
+2.  **Seta Direita:** Expandir categoria fechada
+3.  **Seta Esquerda:** Recolher categoria aberta
+4.  **Enter:** Selecionar item e carregar no P2
+5.  **Backspace:** Voltar para categoria pai
+6.  **Home/End:** Ir para primeiro/último item da lista
 
 **Atalhos Rápidos:**
 
@@ -1350,7 +1353,7 @@ function checkGrandeFeito(event: GameEvent) {
 
 **Foco Principal:** Macro-estratégia, Expansão Territorial e Eventos Globais
 
-![F4 WORLD MAP - The Conquest](<docs/[F4]%20WORLD%20MAP%20(_The%20Conquest_)%202.png>)
+![F4 WORLD MAP - The Conquest](<../anexos/[F4]%20WORLD%20MAP%20(_The%20Conquest_)%202.png>)
 
 ### Descrição dos Painéis
 
@@ -1369,21 +1372,21 @@ function checkGrandeFeito(event: GameEvent) {
 ```
 
 +---------------------+------------------------------------------+---------------------+
-| P1: DOMÍNIOS REAIS | P2: MAPA DE SATÉLITE (ASCII) | P3: PREVISÃO GLOBAL |
-| > CAPITAL (Sede) | | |
-| Regente: Você | [~] [~] [M] [M] [F] [F] [C] | -- CICLO ATUAL -- |
-| Pop: 12/12 | [~] [P] [.] [.] [F] [T] [C] | Ciclo: 1 de 3 |
-| Ouro: 100% Taxa | [~] [.] [V] [.] [.] [.] [M] | Tipo: "Primavera" |
-| | [~] [.] [.] [R] [R] [.] [M] | Monstros: T1 (Fraco|
-| > POSTO NORTE | [M] [M] [F] [R] [?] [?] [?] | |
-| Capitão: Rurik | [M] [C] [F] [?] [?] [?] [?] | -- TEMPO -- |
-| Status: AUTÓNOMO | | Próx. Evento: |
-| Lealdade: 80% | Legenda: | "Lua de Sangue" |
-| (Vassalo) | [V]ila [.]Campo [F]loresta | Em: 05:00 min |
-| | [M]ont [~]Água [C]averna | |
-| > POSTO LESTE | [T]orre [P]osto [?]Névoa | -- AMEAÇAS -- |
-| (Destruído) | | [!] Invasão Norte |
-| | | [!] Peste na Vila |
+| P1: DOMÍNIOS REAIS  |        P2: MAPA VISUAL (ÍCONES)          | P3: PREVISÃO GLOBAL |
+| > CAPITAL (Sede)    |                                          |                     |
+| Regente: Você       | [~] [~] [M] [M] [F] [F] [C]              | -- CICLO ATUAL --   |
+| Pop: 12/12          | [~] [P] [.] [.] [F] [T] [C]              | Ciclo: 2 de 4       |
+| Ouro: 100% Taxa     | [~] [.] [V] [.] [.] [.] [M]              | Tipo: "Verão"       |
+|                     | [~] [.] [.] [R] [R] [.] [M]              | Monstros: T2 (Médio)|
+| > POSTO NORTE       | [M] [M] [F] [R] [?] [?] [?]              |                     |
+| Capitão: Rurik      | [M] [C] [F] [?] [?] [?] [?]              | -- TEMPO --         |
+| Status: AUTÓNOMO    |                                          | Próx. Evento:       |
+| Lealdade: 80%       | Legenda:                                 | "Lua de Sangue"     |
+| (Vassalo)           | [V]ila [.]Campo [F]loresta               | Em: 05:00 min       |
+|                     | [M]ont [~]Água [C]averna                 |                     |
+| > POSTO LESTE       | [T]orre [P]osto [R]uínas                 | -- AMEAÇAS --       |
+| (Destruído)         | [?]Névoa                                 | [!] Invasão Norte   |
+|                     |                                          | [!] Peste na Vila   |
 +---------------------+------------------------------------------+---------------------+
 | P4: DETALHE DO NÓ | P5: LOG DE EXPEDIÇÃO | P6: COMANDOS EXP. |
 | Coords: X:5 Y:8 | [GLOBAL] Novo ciclo iniciado: Chuvas. | [N] Novo Posto |
@@ -1859,68 +1862,68 @@ P5: LOG DE EXPEDIÇÃO
 
 **Método 1: Menu Numérico (Recomendado)**
 
-1. Jogador seleciona tile vazio no P2 (ex: X:10 Y:5)
-2. Menu contextual aparece automaticamente no P6:
+1.  Jogador seleciona tile vazio no P2 (ex: X:10 Y:5)
+2.  Menu contextual aparece automaticamente no P6:
 
-```
-+--------------------------------------+
-|  AÇÕES DISPONÍVEIS (X:10 Y:5)         |
-+--------------------------------------+
-| [1] Fundar Novo Posto                |
-|     Custo: 1,000g                    |
-|     Requer: 3 heróis                 |
-|                                      |
-| [2] Construir Torre de Vigia         |
-|     Custo: 300g                      |
-|                                      |
-| [3] Marcar como Objetivo             |
-|     Custo: Gratis                    |
-|                                      |
-| [ESC] Cancelar                       |
-+--------------------------------------+
-Digite o número: _
-```
+    ```
+    +--------------------------------------+
+    |  AÇÕES DISPONÍVEIS (X:10 Y:5)         |
+    +--------------------------------------+
+    | [1] Fundar Novo Posto                |
+    |     Custo: 1,000g                    |
+    |     Requer: 3 heróis                 |
+    |                                      |
+    | [2] Construir Torre de Vigia         |
+    |     Custo: 300g                      |
+    |                                      |
+    | [3] Marcar como Objetivo             |
+    |     Custo: Gratis                    |
+    |                                      |
+    | [ESC] Cancelar                       |
+    +--------------------------------------+
+    Digite o número: _
+    ```
 
-3. Jogador digita `1`
-4. Submenu abre:
+3.  Jogador digita `1`
+4.  Submenu abre:
 
-```
-+--------------------------------------+
-|  FUNDAR POSTO AVANÇADO               |
-+--------------------------------------+
-| Localização: X:10 Y:5 (Floresta)     |
-| Custo: 1,000g                        |
-|                                      |
-| Escolha 3 heróis:                   |
-| [1] Sir Kaelen (Lvl 9)               |
-| [2] Lila Rogue (Lvl 7)               |
-| [3] Gandalf (Lvl 6)                  |
-| [4] Elara (Lvl 5)                    |
-| ...                                  |
-|                                      |
-| Digite 3 números separados por vírgula: |
-| Ex: 1,2,3_                           |
-+--------------------------------------+
-```
+    ```
+    +--------------------------------------+
+    |  FUNDAR POSTO AVANÇADO               |
+    +--------------------------------------+
+    | Localização: X:10 Y:5 (Floresta)     |
+    | Custo: 1,000g                        |
+    |                                      |
+    | Escolha 3 heróis:                   |
+    | [1] Sir Kaelen (Lvl 9)               |
+    | [2] Lila Rogue (Lvl 7)               |
+    | [3] Gandalf (Lvl 6)                  |
+    | [4] Elara (Lvl 5)                    |
+    | ...                                  |
+    |                                      |
+    | Digite 3 números separados por vírgula: |
+    | Ex: 1,2,3_                           |
+    +--------------------------------------+
+    ```
 
-5. Jogador digita `1,2,3`
-6. Confirmação final:
+5.  Jogador digita `1,2,3`
+6.  Confirmação final:
 
-```
-+--------------------------------------+
-|  CONFIRMAR FUNDAÇÃO?                  |
-+--------------------------------------+
-| Heróis escolhidos:                   |
-| - Sir Kaelen (Capitão)              |
-| - Lila Rogue                         |
-| - Gandalf                            |
-|                                      |
-| Custo: 1,000g                        |
-| Saldo após: 500g                    |
-|                                      |
-| [ENTER] Confirmar | [ESC] Cancelar   |
-+--------------------------------------+
-```
+    ```
+    +--------------------------------------+
+    |  CONFIRMAR FUNDAÇÃO?                  |
+    +--------------------------------------+
+    | Heróis escolhidos:                   |
+    | - Sir Kaelen (Capitão)              |
+    | - Lila Rogue                         |
+    | - Gandalf                            |
+    |                                      |
+    | Custo: 1,000g                        |
+    | Saldo após: 500g                    |
+    |                                      |
+    | [ENTER] Confirmar | [ESC] Cancelar   |
+    +--------------------------------------+
+    ```
 
 **Método 2: Comando de Texto (Avançado)**
 
@@ -2049,7 +2052,7 @@ Jogador: /send gold 500 posto_norte
 
 **Metáfora:** Um cliente de e-mail retro-futurista misturado com um pombal medieval
 
-![F5 THE AVIARY - Royal Mail](<docs/[F5]%20THE%20AVIARY%20(_Royal%20Mail_).png>)
+![F5 THE AVIARY - Royal Mail](<../anexos/[F5]%20THE%20AVIARY%20(_Royal%20Mail_).png>)
 
 ### Descrição dos Painéis
 
@@ -2068,30 +2071,29 @@ Jogador: /send gold 500 posto_norte
 ```
 
 +---------------------+------------------------------------------+---------------------+
-| P1: CAIXA DE CORREIO| P2: LEITURA DE MENSAGEM | P3: PERFIL DO ALVO |
-| > CAIXA DE ENTRADA | DE: Sir Kaelen (Guerreiro) | [IMG] Kaelen (Avatar|
-| [1] Sir Kaelen (N) | PARA: Vossa Majestade | |
-| "Sobre o Ouro" | DATA: Dia 45 - 14:02 | Status: EM COMBATE |
-| 14:02 | | Humor: Irritado |
-| | ASSUNTO: Re: Covardia | Lealdade: 45% (Baixa|
-| [2] Lila Rogue | | |
-| "Pedido..." | "Majestade, com todo o respeito, chamar | Última Carta: |
-| Ontem | retirada estratégica de 'covardia' é | Há 2 dias (Ignorada)|
-| | fácil para quem está sentado no trono. | |
-| > ENVIADOS | O Ogro tinha vantagem de terreno!" | Custo Envio: |
-| [3] P/ Conselheiro | | 25 IP (Influência) |
-| | [ANEXO: Relatório de Danos.log] | |
-| > RASCUNHOS | | |
-| (Vazio) | ---------------------------------------- | |
-| | > [R] RESPONDER > [A] ARQUIVAR | |
+| P1: CAIXA DE CORREIO|     P2: LEITURA DE MENSAGEM              | P3: PERFIL DO ALVO  |
+| > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen        |
+| [1] Sir Kaelen (N)  | PARA: Vossa Majestade                    | (Avatar)            |
+|     "Sobre o Ouro"  | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
+|     14:02           | ASSUNTO: Re: Covardia                    | Humor: Irritado     |
+|                     |                                          | Lealdade: 45% (Baixa|
+| [2] Lila Rogue      | "Majestade, com todo o respeito, chamar  | Última Carta:       |
+|     "Pedido..."     | retirada estratégica de 'covardia' é     | Há 2 dias (Ignorada)|
+|     Ontem           | fácil para quem está sentado no trono.   |                     |
+|                     | O Ogro tinha vantagem de terreno!"       | Custo Envio:        |
+| > ENVIADOS          |                                          | 25 IP (Influência)  |
+| [3] P/ Conselheiro  | [ANEXO: Relatório de Danos.log]          |                     |
+|                     |                                          |                     |
+| > RASCUNHOS         | ---------------------------------------- |                     |
+| (Vazio)             | > [R] RESPONDER  > [A] ARQUIVAR          |                     |
 +---------------------+------------------------------------------+---------------------+
-| P4: LISTA DE CONTATO| P5: RASCUNHO ATUAL (EDITOR) | P6: AÇÕES DE ENVIO |
-| [H] Sir Kaelen | PARA: Sir Kaelen | [Enter] Enviar |
-| [H] Lila Rogue | | [S] Salvar Rascunho |
-| [H] Gandalf | "Entendo seu ponto, Kaelen. Mas preciso | [D] Descartar |
-| [N] Conselheiro | que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro |
-| [E] Guilda Mercante | | |
-| | (Digite sua mensagem aqui...) | |
+| P4: LISTA CONTATOS  |     P5: RASCUNHO ATUAL (EDITOR)          | P6: AÇÕES DE ENVIO  |
+| [H] Sir Kaelen      | PARA: Sir Kaelen                         | [Enter] Enviar      |
+| [H] Lila Rogue      |                                          | [S] Salvar Rascunho |
+| [H] Gandalf         | "Entendo seu ponto, Kaelen. Mas preciso  | [D] Descartar       |
+| [N] Conselheiro     | que você volte lá. Vou enviar poções."_  | [T] Anexar Ouro     |
+| [E] Guilda Mercante |                                          |                     |
+|                     | (Digite sua mensagem aqui...)            |                     |
 +---------------------+------------------------------------------+---------------------+
 | P7: STATUS DA REDE DE CORVOS |
 | STATUS: 2 Pássaros em voo. |

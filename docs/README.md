@@ -16,7 +16,8 @@ Este diretório contém a documentação oficial divida em partes menores para f
 ### PARTE II: SISTEMAS DE IA
 
 - `03-arquitetura-ia-hibrida.md` - Arquitetura de IA Híbrida
-- `04-herois-agentes-autonomos.md` - Os Heróis: Agentes Autônomos (P.E.R.M.A.)
+- `04-herois-agentes-autonomos.md` - Os Heróis como Agentes Autônomos
+- `04b-sistema-skills-classes.md` - Sistema de Skills (30 por Classe) (P.E.R.M.A.)
 
 ### PARTE III: SISTEMAS SOCIAIS E ECONÔMICOS
 

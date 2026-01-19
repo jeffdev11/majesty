@@ -94,13 +94,13 @@ INSERT INTO flavor_texts VALUES (
 
 ### Matriz Completa de Contextos
 
-| Categoria     | Eventos                                              | Variações                                                 |
-| ------------- | ---------------------------------------------------- | --------------------------------------------------------- |
-| **Combate**   | Attack, Critical Hit, Miss, Kill, Hero Death         | 5 níveis de intensidade × 4 classes × 4 armas = 80 textos |
-| **Social**    | Kill Steal, PvP Start, Friendship Formed, Betrayal   | 3 níveis × 5 personalidades = 15 textos                   |
-| **Loot**      | Common Drop, Rare Drop, Legendary Drop, No Loot      | 4 níveis × 4 classes = 16 textos                          |
-| **Ambiental** | Day/Night Transition, Weather Change, Invasion Alert | 2 níveis × 5 tipos = 10 textos                            |
-| **Econômico** | Purchase, Upgrade, Broke, Treasure Found             | 3 níveis = 12 textos                                      |
+| Categoria     | Eventos                                              | Variações                                                  |
+| ------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
+| **Combate**   | Attack, Critical Hit, Miss, Kill, Hero Death         | 5 níveis de intensidade × 6 classes × 4 armas = 120 textos |
+| **Social**    | Kill Steal, PvP Start, Friendship Formed, Betrayal   | 3 níveis × 5 personalidades = 15 textos                    |
+| **Loot**      | Common Drop, Rare Drop, Legendary Drop, No Loot      | 4 níveis × 6 classes = 24 textos                           |
+| **Ambiental** | Day/Night Transition, Weather Change, Invasion Alert | 2 níveis × 5 tipos = 10 textos                             |
+| **Econômico** | Purchase, Upgrade, Broke, Treasure Found             | 3 níveis = 12 textos                                       |
 
 **Total:** ~150 textos base × variações = **500+ flavor texts únicos**
 

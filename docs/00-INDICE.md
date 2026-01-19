@@ -38,14 +38,13 @@
 4. [Os Heróis: Agentes Autônomos](#4-os-heróis-agentes-autônomos)
    - 4.1 Estrutura de Dados
    - 4.2 Sistema P.E.R.M.A.
-   - 4.3 Estados e Peculiaridades
+   - 4.3 Camadas de Modificação
    - 4.4 Classes de Heróis
-   - 4.5 Ciclo de Vida (Morte/Redenção)
-   - 4.6 Limitação de 12 Heróis
+   - 4.5 Ciclo de Vida (Morte e Redenção)
+   - 4.6 Limitação: 12 Heróis Máximo
+   - 4.7 Sistema de Skills (Árvore Completa)
 
-### PARTE III: SISTEMAS SOCIAIS E ECONÔMICOS
-
-5. [Dinâmica Social](#5-dinâmica-social-o-drama-emergente)
+5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 Formação de Grupos
    - 5.2 Kill Stealing (KS)
    - 5.3 Combate PvP
