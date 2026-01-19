@@ -314,15 +314,320 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 ### Descrição dos Painéis
 
-| Painel | Nome                   | Conteúdo                                                                |
-| ------ | ---------------------- | ----------------------------------------------------------------------- |
-| **P1** | Lista de Heróis        | Roster rápido mostrando HP, nível e status atual (dormindo, lutando)    |
-| **P2** | Mapa Lógico            | Lista de nós (locais) mostrando onde cada entidade está fisicamente     |
-| **P3** | Estado do Reino        | Dashboard financeiro e ambiental (Ouro, Mana, **Influência IP**, Ciclo) |
-| **P4** | Inspetor (Detalhes)    | Metadados do herói ou inimigo selecionado em P1 ou P2                   |
-| **P5** | Timeline Social (Logs) | Feed de eventos em tempo real (combate, diálogos, loot)                 |
-| **P6** | Decretos/Loja          | Menu de ações táticas rápidas (curar, buffs, recrutamento)              |
-| **P7** | Conselheiro Real       | Chat para input de comandos e feedback da IA sobre o combate            |
+| Painel | Nome                          | Conteúdo                                                                |
+| ------ | ----------------------------- | ----------------------------------------------------------------------- |
+| **P1** | Lista de Heróis               | Roster rápido mostrando HP, nível e status atual (dormindo, lutando)    |
+| **P2** | Mapa Lógico                   | Lista de nós (locais) mostrando onde cada entidade está fisicamente     |
+| **P3** | Estado do Reino               | Dashboard financeiro e ambiental (Ouro, Mana, **Influência IP**, Ciclo) |
+| **P4** | Inspetor (Detalhes)           | Metadados do herói ou inimigo selecionado em P1 ou P2                   |
+| **P5** | Timeline Social (Logs)        | Feed de eventos em tempo real (combate, diálogos, loot)                 |
+| **P6** | Decretos/Loja                 | Menu de ações táticas rápidas (curar, buffs, recrutamento)              |
+| **P7** | Conselheiro Real              | Chat para input de comandos e feedback da IA sobre o combate            |
+| **P8** | **Status Temporários Ativos** | **Painel de Buffs/Debuffs/Condições ativas em tempo real**              |
+
+### Layout Visual Completo
+
+```
++---------------------+------------------------------------------+---------------------+
+| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
+| [1] Sir Kaelen 📩   |                                          |                     |
+|     HP: 80% | Lvl 3 |  > VILA REAL (Seguro)                    |  OURO: 1,250        |
+|     Sts: LENDO      |    [N] Conselheiro                       |  MANA: 300          |
+|                     |                                          |  INFL: [|||||.....] |
+| [2] Lila Rogue      |  > FLORESTA SOMBRIA (Combate!)           |  (50/100 IP)        |
+|     HP: 40% | Lvl 5 |    [H] Sir Kaelen 🪶 (Escrevendo...)     |                     |
+|     Sts: LUTA       |    [H] Lila Rogue                        |  -- NOTIFICAÇÕES -- |
+|                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
+| [3] Vazio           |                                          |      (Ler Agora [R])|
+|     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
+|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
++---------------------+------------------------------------------+---------------------+
+| P4: INSPEÇÃO / CARTA|         P5: TIMELINE SOCIAL (LOGS)       | P6: AÇÕES RÁPIDAS   |
+| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
+| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
+|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
+| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
+| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
+| > Status: Lida      |                                          | (Use teclas)        |
+| > Resposta: A caminho|                                         |                     |
++---------------------+------------------------------------------+---------------------+
+|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
+| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10 Moral] 8min             |
+| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
+| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
++--------------------------------------------------------------------------------------+
+|                        P7: CONSELHEIRO REAL (CHAT)                                   |
+| IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
+|      resposta malcriada pedindo aumento de salário."                                 |
+|                                                                                      |
+| > /_                                                                                 |
++--------------------------------------------------------------------------------------+
+```
+
+**Nota:** O P8 foi adicionado como uma **barra horizontal** no rodapé, logo acima do P7, para mostrar TODOS os status temporários ativos no jogo de forma consolidada.
+
+---
+
+### P8 - Status Temporários Ativos (Detalhado)
+
+#### Propósito
+
+Painel dedicado para mostrar **todos os buffs, debuffs e condições especiais** ativas no momento, seja em heróis, monstros ou globais.
+
+#### O Que Mostra
+
+**3 Categorias:**
+
+1. **🔼 BUFFS** (Verde) - Efeitos positivos
+2. **🔽 DEBUFFS** (Vermelho) - Efeitos negativos
+3. **⚠️ CONDIÇÕES** (Amarelo) - Estados especiais neutros
+
+#### Formato de Entrada
+
+```
+[ÍCONE] [TIPO]: [Alvo] [Efeito] [Duração]
+
+Exemplo:
+🔼 BUFFS: Kaelen [⚔️ Fúria +20% ATK] 45s
+```
+
+#### Lista Completa de Status Temporários
+
+**BUFFS (Positivos)**
+
+| Ícone | Nome               | Efeito                   | Duração Típica | Fonte              |
+| ----- | ------------------ | ------------------------ | -------------- | ------------------ |
+| ⚔️    | **Fúria**          | +20-50% Attack           | 30-60s         | Skill de Guerreiro |
+| 🛡️    | **Fortificado**    | +30% Defense             | 60s            | Poção/Buff         |
+| ⚡    | **Acelerado**      | +50% Velocidade          | 30s            | Skill de Mago      |
+| 💪    | **Força Titânica** | +100% Attack             | 15s            | Decreto Real       |
+| ❤️    | **Regeneração**    | +10 HP/s                 | 120s           | Poção de Cura      |
+| 🔥    | **Chama Interior** | +30% Dano Fogo           | 40s            | Buff de Mago       |
+| 🧠    | **Concentração**   | +50% Crit Chance         | 20s            | Habilidade         |
+| 🌟    | **Bênção Divina**  | Invulnerável             | 5s             | Skill Rara         |
+| 👥    | **Grupo Unido**    | +15% Stats (se em grupo) | Passivo        | Social             |
+
+**DEBUFFS (Negativos)**
+
+| Ícone | Nome                | Efeito                 | Duração Típica | Fonte                  |
+| ----- | ------------------- | ---------------------- | -------------- | ---------------------- |
+| ☣️    | **Envenenado**      | -2 a -10 HP/s          | 30-60s         | Ataque de Aranha/Snake |
+| 🔥    | **Queimando**       | -5 HP/s                | 10-20s         | Magia de Fogo          |
+| ❄️    | **Congelado/Lento** | -50% Velocidade        | 15-30s         | Magia de Gelo          |
+| 🩸    | **Sangrando**       | -3 HP/s + deixa rastro | 20-40s         | Corte Profundo         |
+| 😨    | **Amedrontado**     | -30% Attack, foge      | 10-20s         | Grito/Roar             |
+| 🤮    | **Doente**          | -25% todos stats       | 120s           | Pântano/Praga          |
+| 👁️    | **Cego**            | Miss 50% ataques       | 15s            | Flash Bang             |
+| 🧟    | **Amaldiçoado**     | XP -50%                | 300s           | Boss/Magia negra       |
+| 😵    | **Confuso**         | Ataca aliados          | 10s            | Skill de Controle      |
+| 🐌    | **Exausto**         | -75% Stamina regen     | 60s            | Cansaço/Sobrecarga     |
+
+**CONDIÇÕES ESPECIAIS**
+
+| Ícone | Nome                | Efeito                         | Duração      | Fonte        |
+| ----- | ------------------- | ------------------------------ | ------------ | ------------ |
+| ⚡    | **Atordoado**       | Não pode agir                  | 3-8s         | Stun/Bash    |
+| 💤    | **Dormindo**        | Inconsciente (remove com dano) | Até acordar  | Skill Sleep  |
+| 🪨    | **Petrificado**     | Imóvel + Invulnerável          | 10-30s       | Magia/Medusa |
+| 👻    | **Invisível**       | Não pode ser atacado           | 20s          | Skill Ladino |
+| 🔗    | **Preso/Enraizado** | Não pode mover                 | 15s          | Trap/Root    |
+| 🌀    | **Levitando**       | Imune a dano terrestre         | 10s          | Magia        |
+| 🍺    | **Bêbado**          | Stats aleatórios (-20 a +20)   | 180s         | Taverna      |
+| 🚩    | **Marcado (PvP)**   | Pode ser atacado por aliados   | Até resolver | Sistema PvP  |
+| 💀    | **Necromancia**     | Morto mas reanimado            | Até morrer   | Boss Lich    |
+
+#### Layout Detalhado do P8
+
+**Visão Normal:**
+
+```
+P8: STATUS TEMPORÁRIOS ATIVOS
+
+🔼 BUFFS (3 ativos):
+  Kaelen [⚔️ Fúria +20% ATK] 45s | Reino [👥 Banquete +10 Moral] 8m12s
+
+🔽 DEBUFFS (2 ativos):
+  Lila [☣️ Envenenada -2HP/s] 28s | Gandalf [❄️ Lento -50% Vel] 14s
+
+⚠️ CONDIÇÕES (1 ativa):
+  Ogro [🔥 Queimando -5HP/s] 11s
+```
+
+**Visão Expandida (ao clicar em P8):**
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│ STATUS TEMPORÁRIOS ATIVOS - DETALHADO                              │
+├────────────────────────────────────────────────────────────────────┤
+│                                                                    │
+│ 🔼 BUFFS (3)                                                       │
+│ ┌──────────────────────────────────────────────────────────────┐ │
+│ │ [1] ⚔️ Fúria (Kaelen)                                         │ │
+│ │     Efeito: +20% Attack                                      │ │
+│ │     Duração: 45s restantes (de 60s)                          │ │
+│ │     Fonte: Skill "Grito de Guerra"                           │ │
+│ │     Empilha?: Não                                            │ │
+│ │     [X] Remover (custaria 10 IP)                             │ │
+│ └──────────────────────────────────────────────────────────────┘ │
+│ ┌──────────────────────────────────────────────────────────────┐ │
+│ │ [2] 👥 Banquete Real (GLOBAL)                                 │ │
+│ │     Efeito: +10 Moral para todos os heróis                   │ │
+│ │     Duração: 8min 12s restantes                              │ │
+│ │     Fonte: Decreto Real (custo: 30 IP)                       │ │
+│ │     [✓] Ativo em 10 heróis                                   │ │
+│ └──────────────────────────────────────────────────────────────┘ │
+│                                                                    │
+│ 🔽 DEBUFFS (2)                                                     │
+│ ┌──────────────────────────────────────────────────────────────┐ │
+│ │ [3] ☣️ Envenenada (Lila)                                      │ │
+│ │     Efeito: -2 HP/s (já perdeu 40 HP)                        │ │
+│ │     Duração: 28s restantes                                   │ │
+│ │     Fonte: Mordida de Aranha Gigante                         │ │
+│ │     CRÍTICO: HP atual 35% - RISCO DE MORTE!                  │ │
+│ │     [!] Enviar antídoto? (Custo: 50g)                        │ │
+│ └──────────────────────────────────────────────────────────────┘ │
+│ ┌──────────────────────────────────────────────────────────────┐ │
+│ │ [4] ❄️ Lento (Gandalf)                                        │ │
+│ │     Efeito: -50% Velocidade de movimento                     │ │
+│ │     Duração: 14s restantes                                   │ │
+│ │     Fonte: Magia de Gelo (Mago Inimigo)                      │ │
+│ │     Status: Moderado (não crítico)                           │ │
+│ └──────────────────────────────────────────────────────────────┘ │
+│                                                                    │
+│ ⚠️ CONDIÇÕES (1)                                                   │
+│ ┌──────────────────────────────────────────────────────────────┐ │
+│ │ [5] 🔥 Queimando (Ogro - Inimigo)                             │ │
+│ │     Efeito: -5 HP/s                                          │ │
+│ │     Duração: 11s restantes                                   │ │
+│ │     Fonte: Bola de Fogo de Gandalf                           │ │
+│ │     [✓] Contribuindo para a vitória                          │ │
+│ └──────────────────────────────────────────────────────────────┘ │
+│                                                                    │
+│ [ESC] Fechar | [R] Remover Status | [F] Filtrar por tipo          │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+#### Interatividade
+
+**Clique em Status:**
+
+- Abre modal com detalhes completos
+- Opção de remover (se possível e se tiver recursos)
+- Mostra histórico (quando foi aplicado, por quem)
+
+**Filtros:**
+
+- `[B]` - Mostrar só Buffs
+- `[D]` - Mostrar só Debuffs
+- `[C]` - Mostrar só Condições
+- `[H]` - Filtrar por herói específico
+- `[A]` - Mostrar tudo (padrão)
+
+**Cores Dinâmicas:**
+
+```css
+.buff {
+  color: #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+}
+.debuff {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+}
+.condition {
+  color: #ffff00;
+  background: rgba(255, 255, 0, 0.1);
+}
+.critical {
+  animation: pulse 1s infinite;
+} /* Se HP < 20% */
+```
+
+#### Alertas Automáticos
+
+O P8 emite **alertas visuais** quando:
+
+1. **Debuff Crítico:** HP < 30% E debuff de dano continuo ativo
+
+   ```
+   ⚠️ ALERTA: Lila morrendo! Envenenada + HP crítico!
+   ```
+
+2. **Buff Expirando:** Buff importante termina em < 10s
+
+   ```
+   ⏰ Fúria de Kaelen expira em 8 segundos!
+   ```
+
+3. **Condição Permanente:** Status > 5 minutos
+   ```
+   🚩 Amaldiçoado há 6 minutos! Considere cura especial.
+   ```
+
+#### Ações Rápidas do P8
+
+**[R] Remover Status:**
+
+- Abre menu:
+
+  ```
+  Remover qual status?
+  [1-9] Selecione pelo número
+
+  Custo: Varia
+  - Buff próprio: Grátis
+  - Debuff em herói: 50-100g (poção/magia)
+  - Condição: 10-30 IP (intervenção divina)
+  ```
+
+**[A] Aplicar Buff Global:**
+
+- Lista de decretos:
+  ```
+  APLICAR BUFF GLOBAL:
+  [1] Banquete (+10 Moral, 30 IP, 10min)
+  [2] Fúria Coletiva (+15% ATK, 50 IP, 60s)
+  [3] Escudo Divino (+20% DEF, 40 IP, 120s)
+  ```
+
+---
+
+### Exemplos Práticos
+
+**Exemplo 1: Detectando Perigo**
+
+```
+Jogador olha P8:
+🔽 DEBUFFS (3):
+  Lila [☣️ Envenenada] 55s
+  Lila [🩸 Sangrando] 30s
+  Lila [😨 Amedrontada] 15s
+
+P8 pisca VERMELHO (3 debuffs simultâneos!)
+
+Conselheiro (P7):
+"MAJESTADE! Lila está em CRISE! 3 debuffs ativos.
+Recomendo enviar poção AGORA ou ela morre em 40s!"
+```
+
+**Exemplo 2: Buff Stacking (Combos)**
+
+```
+P8 mostra:
+🔼 BUFFS:
+  Kaelen [⚔️ Fúria] 30s
+  Kaelen [💪 Força Tit.] 10s
+  Kaelen [🧠 Concentração] 15s
+
+Conselheiro:
+"Kaelen está com TRIPLO buff! Attack +120%!
+Esse é o momento PERFEITO para atacar o boss!"
+
+[Sistema sugere]:
+"Enviar carta para Kaelen: 'ATAQUE O BOSS AGORA!'"
+```
+
+---
 
 ### Layout Visual Completo
 
@@ -2484,6 +2789,944 @@ A comunicação é **Assíncrona**. Você não está num chat ao vivo com o her�
 
 ---
 
+## 2.8 [F6] THE CHRONICLES - "The Living Book"
+
+**Foco:** Narrativa Emergente em Tempo Real, Geração de História e Exportação para PDF
+
+**Metáfora:** Um livro mágico que se escreve sozinho conforme o reino vive suas aventuras
+
+![Imagem conceitual: Livro antigo com páginas se escrevendo magicamente]
+
+### O Conceito
+
+O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo real**. Diferente do log de eventos (P5 do F1), que é técnico e imediato, as Crônicas são uma **narrativa literária** gerada por IA.
+
+**Características únicas:**
+
+- Atualiza **a cada 5 minutos de jogo real**
+- Gera **parágrafo narrativo** resumindo eventos daquele período
+- Cria **banner visual (imagem IA)** para cada parágrafo
+- **No final da partida:** exporta tudo como **PDF ilustrado**
+
+---
+
+### Descrição dos Painéis
+
+| Painel | Nome                     | Conteúdo                                                    |
+| ------ | ------------------------ | ----------------------------------------------------------- |
+| **P1** | Índice de Capítulos      | Lista cronológica de todos os períodos (5 em 5 min)         |
+| **P2** | Leitor Principal         | Visualização do parágrafo + banner da seção selecionada     |
+| **P3** | Timeline Visual          | Linha do tempo com miniaturas dos banners                   |
+| **P4** | Estatísticas do Capítulo | Dados numéricos do período (kills, ouro, eventos)           |
+| **P5** | Eventos-Chave            | Lista dos 3 eventos mais importantes daquele período        |
+| **P6** | Controles de Exportação  | Opções de PDF, compartilhamento, edição                     |
+| **P7** | Prompt do Cronista       | Sistema de IA que gera a narrativa (visível para depuração) |
+
+---
+
+### Layout Visual Completo
+
+```
++----------------------+--------------------------------------------------+------------------+
+| P1: ÍNDICE CAPÍTULOS |         P2: LEITOR PRINCIPAL                      | P3: TIMELINE     |
+|                      |                                                  |                  |
+| 📖 CRÔNICAS DO REINO | ┌─────────────────────────────────────────────┐  | [Dia 1-5]        |
+|                      | │  CAPÍTULO 1: Os Primeiros Passos            │  | [Banner Mini]    |
+| > Prólogo (D1)       | │  Dias 1-5 | 5 minutos reais                  │  |                  |
+| > Cap 1 (D1-5)   ✓   | └─────────────────────────────────────────────┘  | [Dia 6-10]       |
+| > Cap 2 (D6-10)  ✓   |                                                  | [Banner Mini]    |
+| > Cap 3 (D11-15) ✓   | [BANNER GERADO POR IA]                           |                  |
+| > Cap 4 (D16-20) ⏳   | ╔════════════════════════════════════════════╗  | [Dia 11-15]      |
+|   (Gerando...)       | ║ Imagem: Vila ao amanhecer, 3 heróis saindo ║  | [Banner Mini]    |
+|                      | ║ da taverna, floresta ao fundo, estilo      ║  |                  |
+| > Cap 5 (D21-25) 🔒   | ║ medieval fantasy art                       ║  | ... (40 total)   |
+|   (Aguardando)       | ╚════════════════════════════════════════════╝  |                  |
+|                      |                                                  |                  |
+| Total: 40/200 caps  | O reino despertou sob o sol da primavera. Três   |                  |
+| Tempo: 3h20min      | almas corajosas responderam ao chamado do        |                  |
+|                      | Majesty: Sir Kaelen, um guerreiro de honra       |                  |
+|                      | inabalável; Lila, uma ladina astuta demais para  |                  |
+|                      | seu próprio bem; e Gandalf, cujo cajado brilhava |                  |
+|                      | com promessas arcanas.                           |                  |
+|                      |                                                  |                  |
+|                      | A primeira missão foi humilde: exterminar        |                  |
+|                      | goblins que infestavam a Floresta Sombria. Mas   |                  |
+|                      | mesmo nessa tarefa simples, os deuses viram a    |                  |
+|                      | semente do drama: Lila roubou o último golpe de  |                  |
+|                      | um goblin ferido por Kaelen. O guerreiro jurou   |                  |
+|                      | silenciosamente que não esqueceria.              |                  |
+|                      |                                                  |                  |
+|                      | [Gerado por IA em: 18/01 14:32]                  |                  |
++----------------------+--------------------------------------------------+------------------+
+| P4: ESTATÍSTICAS     |      P5: EVENTOS-CHAVE DO CAPÍTULO               | P6: EXPORTAÇÃO   |
+|                      |                                                  |                  |
+| Período: Dias 1-5    | 🏆 MAIS IMPORTANTE:                              | [📄] Exportar PDF|
+| Tempo real: 5min     | > Primeiro Kill Steal (Lila vs Kaelen)           | [🔗] Compartilhar|
+|                      |   Affinity: +40 → +25                            | [✏️] Editar Texto|
+| Kills: 15            |                                                  | [🎨] Regerar Img |
+| Ouro ganho: +450g    | ⚔️ COMBATE ÉPICO:                                |                  |
+| Heróis ativos: 3     | > Gandalf derrotou 8 goblins com Bola de Fogo    | Status: ✅ Salvo |
+| Mortes: 0            |                                                  |                  |
+| XP total: +1,200     | 💬 MOMENTO SOCIAL:                               |                  |
+|                      | > Kaelen enviou carta hostil para Lila           |                  |
++----------------------+--------------------------------------------------+------------------+
+|                      P7: PROMPT DO CRONISTA (IA)                                          |
+| Sistema: "Resuma os eventos dos últimos 5 minutos em um parágrafo estilo narrativa épica  |
+|          medieval. Tom: Neutro, observador. Foco: Drama social e combate. Limite: 150     |
+|          palavras. Contexto: Dia 1-5, Ciclo Primavera, 3 heróis novos."                    |
+|                                                                                             |
+| IA Cronista: [Gerando...] 🤖                                                               |
++---------------------------------------------------------------------------------------------+
+```
+
+---
+
+### Sistema de Geração a Cada 5 Minutos
+
+#### Fluxo Automático
+
+```typescript
+setInterval(() => {
+  // A cada 5 minutos de jogo real
+  const ultimosPeriodo = getEventosUltimos5Min();
+
+  // 1. Filtrar eventos importantes
+  const eventosChave = filterKeyEvents(ultimosPeriodo);
+
+  // 2. Gerar prompt para LLM
+  const prompt = gerarPromptCronista(eventosChave);
+
+  // 3. Chamar IA para gerar parágrafo
+  const paragrafo = await LLM.generateNarrative(prompt);
+
+  // 4. Chamar IA para gerar banner
+  const promptImagem = gerarPromptImagem(paragrafo, eventosChave);
+  const bannerUrl = await ImageAI.generate(promptImagem);
+
+  // 5. Salvar capítulo
+  saveChapter({
+    numero: currentChapter++,
+    dias: [diaAtual - 4, diaAtual],
+    timestamp: Date.now(),
+    paragrafo: paragrafo,
+    banner: bannerUrl,
+    estatisticas: getStats(ultimosPeriodo),
+    eventosChave: eventosChave.slice(0, 3),
+  });
+
+  // 6. Notificar jogador
+  showNotification("📖 Novo capítulo das Crônicas disponível!");
+}, 300000); // 5 minutos = 300,000ms
+```
+
+---
+
+### Prompt Template para IA Cronista
+
+#### Template Base
+
+```
+Você é o Cronista Real do jogo "Heroes of Majesty".
+Sua tarefa é narrar a história do reino em estilo épico medieval.
+
+CONTEXTO DA PARTIDA:
+- Nome do Reino: {kingdomName}
+- Dia atual: {currentDay} de 200
+- Ciclo: {currentCycle} ({cycleName})
+- Heróis vivos: {heroCount}
+- Moral do reino: {morale}
+
+EVENTOS DOS ÚLTIMOS 5 MINUTOS:
+{eventList}
+
+INSTRUÇÕES:
+1. Escreva 1 parágrafo de 100-150 palavras
+2. Tom: Narrativo, épico, mas neutro (como um historiador)
+3. Foco: Drama social > Combate > Economia
+4. Mencione NOMES dos heróis envolvidos
+5. Use linguagem literária ("Sob o sol carmesim", "jurou vingança")
+6. NÃO use termos de jogo ("XP", "stats", "buff")
+7. Termine com gancho para próximo capítulo (se possível)
+
+FORMATO DE SAÍDA:
+Apenas o parágrafo narrativo, sem títulos ou metadados.
+```
+
+#### Exemplo de Eventos Passados
+
+```json
+{
+  "eventList": [
+    "Kaelen matou 5 Goblins (XP: +500)",
+    "Lila roubou último golpe de Kaelen (Kill Steal)",
+    "Affinity Kaelen ↔ Lila: +40 → +25",
+    "Kaelen enviou carta hostil para Lila",
+    "Gandalf usou Bola de Fogo (8 kills)",
+    "Tesouro: +450 ouro",
+    "Primeiro edifício construído: Guilda Guerreiros"
+  ]
+}
+```
+
+#### Exemplo de Parágrafo Gerado
+
+```
+O reino despertou sob o sol da primavera. Três almas corajosas
+responderam ao chamado do Majesty: Sir Kaelen, um guerreiro de
+honra inabalável; Lila, uma ladina astuta demais para seu próprio
+bem; e Gandalf, cujo cajado brilhava com promessas arcanas.
+
+A primeira missão foi humilde: exterminar goblins que infestavam
+a Floresta Sombria. Mas mesmo nessa tarefa simples, os deuses
+viram a semente do drama: Lila roubou o último golpe de um goblin
+ferido por Kaelen. O guerreiro jurou silenciosamente que não
+esqueceria. Enquanto isso, Gandalf incinerou hordas com seu fogo
+arcano, indiferente às tensões mortais ao seu redor.
+
+As primeiras moedas encheram o tesouro real, e a Guilda dos
+Guerreiros ergueu-se como um monumento à ambição nascente do reino.
+```
+
+---
+
+### Prompt Template para Banner (Imagem IA)
+
+#### Template Stable Diffusion / DALL-E
+
+```
+medieval fantasy illustration, {sceneDescription},
+detailed background with {location},
+{characterDescriptions},
+epic atmosphere, painterly style,
+trending on artstation, 4k quality,
+dramatic lighting, cinematic composition
+
+Negative prompt: modern, anime, cartoon, low quality
+```
+
+#### Exemplo Concreto
+
+**Input:**
+
+- Parágrafo fala de: "3 heróis saindo para matar goblins na floresta"
+- Personagens: Kaelen (guerreiro), Lila (ladina), Gandalf (mago)
+- Local: Vila → Floresta
+
+**Prompt gerado:**
+
+```
+medieval fantasy illustration, three adventurers leaving a small
+village at dawn heading towards a dark forest,
+a noble knight in plate armor (Kaelen),
+a hooded rogue with daggers (Lila),
+an old wizard with glowing staff (Gandalf),
+detailed medieval village background with wooden houses and smoke,
+epic atmosphere, painterly style, trending on artstation,
+4k quality, dramatic lighting, cinematic composition,
+golden hour sunlight
+
+Negative prompt: modern, anime, cartoon, low quality, blurry
+```
+
+**Resultado esperado:**
+
+- Banner 1920x400px (formato largo)
+- Estilo: Fantasy art realista
+- Composição: 3 heróis em primeiro plano, vila ao fundo, floresta no horizonte
+
+---
+
+### Categorização de Capítulos
+
+Os capítulos são agrupados em **Arcos Narrativos** baseados nos ciclos:
+
+#### Arco 1: "A Primavera dos Heróis" (Dias 1-50)
+
+- 10 capítulos (5min cada = 50min real)
+- Tom: Esperançoso, introdutório
+- Eventos típicos: Primeiros combates, formação de amizades, construção inicial
+
+#### Arco 2: "O Verão Vermelho" (Dias 51-100)
+
+- 10 capítulos
+- Tom: Conflitos aumentam, guerras intensas
+- Eventos típicos: Invasões, Kill Steals, primeira morte de herói
+
+#### Arco 3: "O Inverno do Desespero" (Dias 101-150)
+
+- 10 capítulos
+- Tom: Sombrio, tens
+
+o, sobrevivência
+
+- Eventos típicos: Fome, traições, Lua de Sangue
+
+#### Arco 4: "O Apocalipse Final" (Dias 151-200)
+
+- 10 capítulos
+- Tom: Épico, climático, resolução
+- Eventos típicos: Boss final, redenções, vitória ou derrota
+
+**Total:** 40 capítulos para uma partida completa de 200 dias (3h20min de jogo real)
+
+---
+
+### Exportação para PDF
+
+#### Estrutura do PDF Final
+
+```
+┌─────────────────────────────────────────────┐
+│                                             │
+│    CRÔNICAS DO REINO DE {Nome}              │
+│                                             │
+│    Uma História de Heroes of Majesty        │
+│    Partida iniciada em: 18/01/2026          │
+│    Duração: 200 dias (3h 45min)             │
+│                                             │
+└─────────────────────────────────────────────┘
+
+[CAPA com banner mais épico da partida]
+
+---
+
+PRÓLOGO
+
+O Majesty {nome_jogador} ascendeu ao trono no dia
+X de YYY. O reino estava em ruínas, mas a esperança
+ainda pulsava nos corações dos bravos...
+
+---
+
+ARCO I: A PRIMAVERA DOS HERÓIS
+Dias 1-50
+
+---
+
+CAPÍTULO 1: Os Primeiros Passos
+Dias 1-5
+
+[BANNER 1]
+
+{Parágrafo do cap 1}
+
+Estatísticas do Capítulo:
+- Heróis recrutados: 3
+- Kills: 15 Goblins
+- Ouro acumulado: 450g
+- Eventos épicos: Primeiro Kill Steal
+
+---
+
+CAPÍTULO 2: {Título gerado por IA}
+Dias 6-10
+
+[BANNER 2]
+
+{Parágrafo do cap 2}
+
+...
+
+(Repetir para todos os 40 capítulos)
+
+---
+
+EPÍLOGO
+
+{Resumo final gerado por IA sobre como terminou a partida}
+
+O reino de {Nome} {venceu/caiu}. Os heróis que sobreviveram...
+
+---
+
+ESTATÍSTICAS FINAIS
+
+Duração total: X dias (Yh Zmin)
+Heróis recrutados: X
+Heróis vivos ao final: X
+Heróis mortos: X
+Kills totais: X
+Ouro total movimentado: X
+Grandes feitos: X
+
+---
+
+MEMORIAL DOS CAÍDOS
+
+[Lista de todos os heróis que morreram com causa da morte]
+
+---
+
+FIM DA CRÔNICA
+```
+
+#### Botão de Exportação (P6)
+
+```typescript
+async function exportarPDF() {
+  showLoading("Gerando PDF... Isso pode levar 2-3 minutos.");
+
+  // 1. Compilar todos os capítulos
+  const chapters = getAllChapters();
+
+  // 2. Gerar prólogo e epílogo com IA
+  const prologo = await LLM.generatePrologo(gameStats);
+  const epilogo = await LLM.generateEpilogo(gameStats, finalOutcome);
+
+  // 3. Montar documento
+  const pdfDoc = new PDFDocument();
+
+  // Capa
+  pdfDoc.addPage(gerarCapa());
+
+  // Prólogo
+  pdfDoc.addPage(prologo);
+
+  // Capítulos (40 páginas)
+  chapters.forEach((cap) => {
+    pdfDoc.addPage(cap.banner); // Imagem
+    pdfDoc.addText(cap.paragrafo); // Texto
+    pdfDoc.addText(cap.stats); // Estatísticas
+  });
+
+  // Epílogo
+  pdfDoc.addPage(epilogo);
+
+  // Estatísticas finais
+  pdfDoc.addPage(gerarEstatisticas());
+
+  // Memorial
+  pdfDoc.addPage(gerarMemorial());
+
+  // 4. Salvar
+  const filename = `Chronicles_${kingdomName}_${Date.now()}.pdf`;
+  pdfDoc.save(filename);
+
+  showSuccess(`PDF gerado! ${filename} (${pdfDoc.pageCount} páginas)`);
+
+  // 5. Oferecer compartilhamento
+  showShareOptions(filename);
+}
+```
+
+---
+
+### Funcionalidades Extras do F6
+
+#### 1. Edição Manual (P6 - Botão [✏️])
+
+```
+Jogador pode editar parágrafo antes de finalizar:
+
+┌─────────────────────────────────────────┐
+│ EDITAR CAPÍTULO 5                       │
+├─────────────────────────────────────────┤
+│                                         │
+│ [Texto do parágrafo]                    │
+│                                         │
+│ O reino despertou sob o sol...          │
+│ (editável)                              │
+│                                         │
+│ [Salvar] [Cancelar] [Regenerar com IA]  │
+└─────────────────────────────────────────┘
+```
+
+#### 2. Regerar Banner (P6 - Botão [🎨])
+
+```
+Não gostou do banner?
+
+[Opções]:
+1. Regenerar com mesmo prompt
+2. Editar prompt manualmente
+3. Escolher de 3 variações
+
+Custo: 1 crédito de imagem (ou $0.02)
+```
+
+#### 3. Compartilhamento Social (P6 - Botão [🔗])
+
+```
+Compartilhar Crônicas:
+
+[📱] Twitter/X
+    "Acabei de completar minha partida de
+     Heroes of Majesty! Veja as crônicas:"
+    + link para PDF
+
+[💬] Discord
+    Enviar para servidor/canal
+
+[📧] Email
+    Enviar PDF por email
+
+[🌐] Link Público
+    Gerar link temporário (7 dias)
+```
+
+---
+
+### Custo e Otimizações
+
+#### Custo por Partida Completa
+
+**Geração de texto (LLM):**
+
+- 40 capítulos × ~200 tokens cada = 8,000 tokens
+- Custo: ~$0.02 (GPT-4) ou $0.002 (Gemini)
+
+**Geração de imagens (DALL-E / SD):**
+
+- 40 banners × $0.02/imagem = $0.80
+- **OU** Stable Diffusion local = grátis (lento)
+
+**Total por partida:** ~$0.82 (se usar serviços pagos)
+
+#### Otimizações
+
+1. **Cache de imagens:** Reaproveitar para eventos similares
+2. **Geração sob demanda:** Só gerar quando jogador abrir F6
+3. **Batch processing:** Gerar 5 capítulos de vez (mais barato)
+4. **Tier grátis:** Primeiros 10 capítulos grátis, depois paga
+
+---
+
+### Integração com Sistema de Flavor Texts
+
+O F6 **reaproveita** o sistema de flavor texts já existente:
+
+```typescript
+async function gerarCapitulo(eventos) {
+  // Pega flavor texts dos eventos
+  const flavors = eventos.map((e) => getFlavorText(e));
+
+  // Monta contexto rico
+  const contexto = {
+    flavors: flavors,
+    stats: getStats(),
+    mood: calculateMood(),
+  };
+
+  // IA usa flavors como "inspiração"
+  const prompt = `
+    Baseado nestes eventos em linguagem de jogo:
+    ${flavors.join("\n")}
+    
+    Transforme em um parágrafo narrativo épico...
+  `;
+
+  return await LLM.generate(prompt);
+}
+```
+
+---
+
+## 2.9 Padrão de Sintaxe Visual 2.0 - Sistema de Logs
+
+### O Problema da Escaneabilidade
+
+Em jogos baseados em texto, o **log é tudo**. Se o jogador não consegue ler rapidamente os eventos, ele **cansa em 10 minutos**.
+
+**Problema anterior:**
+
+```
+"O Goblin acertou o Kaelen por 20 de dano"
+```
+
+❌ Player precisa ler a frase inteira para achar o número "20"
+
+**Solução:**
+
+```
+[14:32] ⚔️ ATK [Goblin ⚔️ Kaelen] [-20 HP] O golpe acertou exposto.
+```
+
+✅ Player scanner visual: HORA → TIPO → ALVO → DANO → (opcional: ler narrativa)
+
+---
+
+### Anatomia do Novo Log
+
+#### Estrutura Rígida (5 Colunas)
+
+```
+[HORA] [ÍCONE TIPO] [CONTEXTO/ALVOS] [RESULTADO/MATH] NARRATIVA & SKILLS
+
+│      │            │                  │                 │
+│      │            │                  │                 └─ Texto descritivo (opcional)
+│      │            │                  └─ Número/efeito em destaque
+│      │            └─ Quem vs Quem ou Status mudado
+│      └─ Identificador visual (ícone + 4 letras)
+└─ Timestamp simples
+```
+
+#### Exemplo Anotado
+
+```
+[14:32] ⚔️ ATK [Kaelen ⚔️ Goblin] [-45 HP] Golpe certeiro no flanco.
+   │      │       │                 │         │
+   │      │       │                 │         └─ Narrativa
+   │      │       │                 └─ Resultado (vermelho)
+   │      │       └─ Combate (Kaelen atacando Goblin)
+   │      └─ Tipo: Ataque físico
+   └─ Hora do evento
+```
+
+---
+
+### Dicionário de Identificadores
+
+#### Combate e Ações
+
+| Ícone | Código   | Tipo          | Uso                            | Cor             |
+| ----- | -------- | ------------- | ------------------------------ | --------------- |
+| ⚔️    | **ATK**  | Ataque Físico | Golpe normal, arma             | Branco          |
+| ✨    | **CAST** | Magia/Skill   | Conjuração, habilidade         | Azul            |
+| 🛡️    | **DEF**  | Defesa        | Bloqueio, esquiva, absorção    | Verde           |
+| 💀    | **KILL** | Morte         | Unidade morreu                 | Vermelho Escuro |
+| 🩸    | **STAT** | Status Effect | Buff, debuff, condição         | Amarelo         |
+| 🧠    | **MIND** | Psicológico   | Decisão IA, emoção, quirk      | Roxo            |
+| 👣    | **MOVE** | Movimento     | Entrar/sair de área, teleporte | Ciano           |
+| 💰    | **LOOT** | Item/Ouro     | Pegar loot, ganhar gold        | Dourado         |
+| 💬    | **CHAT** | Social        | Diálogo, carta, banter         | Branco          |
+
+#### Sistemas e Mundo
+
+| Ícone | Código    | Tipo            | Uso                               | Cor        |
+| ----- | --------- | --------------- | --------------------------------- | ---------- |
+| 🌅    | **SYS**   | Sistema         | Dia/noite, ciclo, eventos globais | Cinza      |
+| 🏗️    | **BUILD** | Construção      | Edifício construído/destruído     | Marrom     |
+| 📈    | **ECO**   | Economia        | Transação, imposto, salário       | Verde $$$  |
+| ⚠️    | **ALERT** | Alerta          | Perigo, warning crítico           | Laranja    |
+| 📩    | **MAIL**  | Correspondência | Carta enviada/recebida            | Azul claro |
+
+---
+
+### Formatação de Elementos
+
+#### 1. Contexto de Combate
+
+```
+[Atacante ⚔️ Defensor]
+
+Exemplos:
+[Kaelen ⚔️ Goblin]     - Herói vs Monstro
+[Lila ⚔️ Kaelen]       - PvP (herói vs herói)
+[Dragão ⚔️ Torre]      - Monstro vs Estrutura
+```
+
+#### 2. Skills e Habilidades
+
+```
+Ícone + Nome
+
+Exemplos:
+🔥 Bola de Fogo
+🗡️ Estocada Mortal
+❄️ Raio Congelante
+💨 Bomba de Fumaça
+```
+
+#### 3. Resultados Numéricos
+
+```
+[Valor Tipo]
+
+Exemplos:
+[-45 HP]           - Dano (vermelho)
+[+100 XP]          - Ganho (verde)
+[-25 IP]           - Gasto (amarelo)
+[CRÍTICO!]         - Texto especial (vermelho piscante)
+[35 Físico]        - Dano tipado (cinza)
+```
+
+#### 4. Quirks e Traços P.E.R.M.A.
+
+```
+[⚠️ Nome do Traço]
+
+Exemplos:
+[⚠️ Burro]         - Quirk negativo
+[⚠️ Arachnophobia] - Fobia
+[⚠️ Ganância]      - Traço de personalidade
+```
+
+---
+
+### Paleta de Cores
+
+```css
+/* Identificadores */
+.atk {
+  color: #ffffff;
+} /* Branco */
+.cast {
+  color: #00bfff;
+} /* Azul */
+.def {
+  color: #00ff00;
+} /* Verde */
+.kill {
+  color: #8b0000;
+} /* Vermelho escuro */
+.stat {
+  color: #ffd700;
+} /* Dourado */
+.mind {
+  color: #9370db;
+} /* Roxo */
+.move {
+  color: #00ffff;
+} /* Ciano */
+.loot {
+  color: #ffd700;
+} /* Dourado $$$ */
+.chat {
+  color: #d3d3d3;
+} /* Cinza claro */
+
+/* Resultados Numéricos */
+.damage {
+  color: #ff4444;
+  font-weight: bold;
+} /* Vermelho */
+.heal {
+  color: #44ff44;
+  font-weight: bold;
+} /* Verde */
+.gain {
+  color: #44ff44;
+} /* Verde */
+.loss {
+  color: #ffaa00;
+} /* Amarelo */
+.critical {
+  color: #ff0000;
+  font-weight: bold;
+  animation: pulse 0.5s infinite;
+}
+
+/* Contexto */
+.hero {
+  color: #00bfff;
+} /* Azul */
+.monster {
+  color: #ff6b6b;
+} /* Vermelho claro */
+.neutral {
+  color: #cccccc;
+} /* Cinza */
+```
+
+---
+
+### Exemplos Completos por Categoria
+
+#### COMBATE BÁSICO
+
+```
+[14:32] ⚔️ ATK [Kaelen ⚔️ Goblin] [-15 HP] Golpe certeiro.
+[14:33] 🛡️ DEF [Goblin] [5 BLK] Escudo absorveu o impacto.
+[14:34] ⚔️ ATK [Kaelen ⚔️ Goblin] [CRÍTICO! -30 HP] Decapitação!
+[14:35] 💀 KILL [Kaelen] [+50 XP] Goblin morto.
+```
+
+#### MAGIA E SKILLS
+
+```
+[14:40] ✨ CAST [Gandalf ➜ Ogro] [-30 MP] Conjura 🔥 Bola de Fogo.
+[14:41] ⚔️ HIT [Magia ⚔️ Ogro] [45 DMG] Fogo incinerou o alvo.
+[14:42] 🩸 STAT [Ogro] [🔥 Queimando] -5 HP/s por 10s.
+```
+
+#### SOCIAL E PSICOLÓGICO
+
+```
+[15:10] 💬 CHAT [Lila] "Kaelen, divida o ouro!"
+[15:11] 🧠 MIND [Kaelen] [⚠️ Ganância] Ignorou o pedido.
+[15:12] 💰 LOOT [Kaelen] [+200g] Pegou todo o tesouro sozinho.
+[15:13] 🧠 MIND [Lila] [😠 -15 Aff] Relacionamento piorou.
+```
+
+#### KILL STEAL (Exemplo Clássico)
+
+```
+[15:20] ⚔️ ATK [Kaelen ⚔️ Boss] [Iniciou] Kaelen causou 90% dano.
+[15:25] ⚔️ ATK [Boss] [HP: 8%] Quase morto...
+[15:26] ⚔️ ATK [Lila ⚔️ Boss] [-10 HP] Último golpe!
+[15:27] 💀 KILL [Lila] [KS!] Roubou kill de Kaelen!
+[15:28] 🧠 MIND [Kaelen] [😠 -20 Aff] "ERA MEU!"
+[15:29] 🩸 STAT [Kaelen] [🚩 PvP] Marcado como agressor.
+```
+
+#### MOVIMENTO E EXPLORAÇÃO
+
+```
+[16:00] 👣 MOVE [Party] [Floresta] Grupo entrou na zona de perigo.
+[16:05] ⚠️ ALERT [Sistema] Monstros detectados à frente!
+[16:06] 👣 MOVE [Lila] [Stealth] Invisível por 20s.
+```
+
+#### STATUS EFFECTS COMPLEXOS
+
+```
+[16:10] 🩸 STAT [Kaelen] [☣️ Envenenado] -2 HP/s por 30s.
+[16:15] 🩸 STAT [Kaelen] [🩸 Sangrando] -3 HP/s (acumula!).
+[16:20] ⚠️ ALERT [Sistema] Kaelen HP CRÍTICO: 15%!
+[16:22] ✨ CAST [Gandalf ➜ Kaelen] [-40 MP] Lança ❤️ Cura Maior.
+[16:23] 🧠 MIND [Kaelen] [+10 Aff] "Obrigado, amigo!"
+```
+
+#### CONSTRUÇÃO E ECONOMIA
+
+```
+[17:00] 🏗️ BUILD [Vila] [Guilda Guerreiros] -500g, 60s construção.
+[17:01] 📈 ECO [Tesouro] [-500g] Saldo: 1,200g restantes.
+[17:60] 🏗️ BUILD [Sistema] Guilda Guerreiros PRONTA!
+[18:00] 💰 LOOT [Heróis] [+150g/dia] Receita passiva ativa.
+```
+
+#### EVENTOS GLOBAIS
+
+```
+[18:00] 🌅 SYS [Mundo] [Noite] Sol se põe. Penalidade ativa.
+[18:05] 🌅 SYS [Ciclo] [Verão] Tempestade se aproxima (ETA: 5min).
+[18:10] ⚠️ ALERT [Global] 🌪️ TEMPESTADE ATIVA!
+[18:11] 🩸 STAT [Todos] [-30% Vel] Dura 10 minutos.
+```
+
+#### COVARDIA E TRAUMA (Seção 5.8 Exemplo)
+
+```
+[19:00] ⚔️ ATK [5 Ogros ⚔️ Party] Cerco iniciado!
+[19:02] 🧠 MIND [Kaelen] [😨 HP<30%] Audácia caiu.
+[19:03] 👣 FLEE [Kaelen] [Fuga] Largou Lila sozinha!
+[19:05] 💀 KILL [Ogro ⚔️ Lila] Lila morreu abandonada.
+[19:06] 🧠 MIND [Lila] [💀 Último] "Kaelen... covarde..."
+[19:07] 🩸 STAT [Kaelen] [😔 Culpa] Trauma permanente.
+[19:08] 🧠 MIND [Todos] [-10 Aff] Perderam respeito por Kaelen.
+```
+
+---
+
+### Caixa de Efeito Especial
+
+Para eventos MUITO importantes, usar caixa destacada:
+
+```
+[19:10] ⚔️ ATK [Kaelen ⚔️ Aranha] [Iniciou] Combate crítico.
+[19:12] 🧠 MIND [Kaelen] [⚠️ Arachnophobia] GATILHO ATIVADO!
++-----------------------------------------------------------------------+
+| 📉 EFEITO CRÍTICO: Audácia de Kaelen = 0.0 (PÂNICO TOTAL)             |
+| > Kaelen não pode atacar por 30 segundos                              |
+| > Chance de fuga: 95%                                                 |
++-----------------------------------------------------------------------+
+[19:13] 👣 FLEE [Kaelen] [Terror] Largou escudo e fugiu!
+```
+
+---
+
+### Comparação: Antes vs Depois
+
+#### ANTES (Log Antigo)
+
+```
+[12:03] Corvo enviado para Kaelen.
+[12:03] Kaelen parou para ler a carta.
+[12:04] Kaelen: "Vou tentar, senhor!"
+[12:04] Kaelen atacou Ogro. CRÍTICO!
+[12:05] Resposta de Lila chegou.
+```
+
+❌ Problemas:
+
+- Difícil escanear visualmente
+- Sem contexto numérico
+- Não prioriza informação
+
+#### DEPOIS (Log Novo)
+
+```
+[12:03] 📩 MAIL [Majesty ➜ Kaelen] [-25 IP] Corvo enviado.
+[12:03] 👣 MOVE [Kaelen] [Parou] Lendo carta...
+[12:04] 💬 CHAT [Kaelen] "Vou tentar, senhor!"
+[12:04] ⚔️ ATK [Kaelen ⚔️ Ogro] [CRÍTICO! -80 HP] Golpe devastador!
+[12:05] 📩 MAIL [Lila ➜ Majesty] [Resposta] Carta recebida.
+```
+
+✅ Melhorias:
+
+- Scanner rápido por ícones
+- Números destacados
+- Contexto claro (quem → quem)
+
+---
+
+### Regras de Implementação
+
+#### 1. Sempre use a estrutura completa
+
+```typescript
+function logEvent(type, context, result, narrative) {
+  const time = getCurrentTime();
+  const icon = EVENT_ICONS[type];
+  const code = EVENT_CODES[type];
+
+  return `[${time}] ${icon} ${code} ${context} ${result} ${narrative}`;
+}
+
+// Exemplo de uso:
+logEvent("ATK", "[Kaelen ⚔️ Goblin]", "[-20 HP]", "Golpe certeiro.");
+// Output: [14:32] ⚔️ ATK [Kaelen ⚔️ Goblin] [-20 HP] Golpe certeiro.
+```
+
+#### 2. Cores dinâmicas no terminal
+
+```typescript
+const COLORS = {
+  ATK: "\x1b[37m", // Branco
+  CAST: "\x1b[36m", // Ciano
+  DMG: "\x1b[31m", // Vermelho
+  HEAL: "\x1b[32m", // Verde
+  RESET: "\x1b[0m",
+};
+
+console.log(
+  `${COLORS.ATK}⚔️ ATK${COLORS.RESET} [Kaelen ⚔️ Goblin] ${COLORS.DMG}[-20 HP]${COLORS.RESET} Golpe certeiro.`,
+);
+```
+
+#### 3. Narrativa é opcional
+
+```
+Modo conciso (apenas dados):
+[14:32] ⚔️ ATK [Kaelen ⚔️ Goblin] [-20 HP]
+
+Modo narrativo (com texto):
+[14:32] ⚔️ ATK [Kaelen ⚔️ Goblin] [-20 HP] A espada cortou profundo.
+
+Player escolhe qual prefere (opção no menu)
+```
+
+---
+
+### Filtros e Busca
+
+Com o novo padrão, jogador pode filtrar logs facilmente:
+
+```
+Filtrar por:
+- Tipo: Mostrar só ⚔️ ATK
+- Personagem: Mostrar só logs com "Kaelen"
+- Resultado: Mostrar só CRÍTICO
+- Período: Últimos 5 minutos
+
+Exemplo de filtro:
+grep "⚔️ ATK.*Kaelen" log.txt
+```
+
+---
+
 # 3. ARQUITETURA DE IA HÍBRIDA
 
 ## 3.1 Visão Geral: O Cérebro dos Heróis
@@ -3183,6 +4426,314 @@ Elara    +25    +10    +55      -
 
 ---
 
+## 5.8 Outros Gatilhos de Conflito Social
+
+**IMPORTANTE:** Kill Stealing NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
+
+### 1. Kill Steal (KS) - Roubo de Glória
+
+**Já documentado na seção 5.2**, mas reforçando:
+
+**Gatilho:** Herói B mata monstro quando HP < 10% e Herói A causou 80%+ do dano.
+
+**Consequências:**
+
+- Herói A: -15 Affinity com B
+- Herói B: Ganância aumenta temporariamente
+- Chance 30% de PvP se Herói A for agressivo
+
+---
+
+### 2. Covard
+
+ia Causando Morte
+
+**Gatilho:** Herói A foge de combate (Audácia < 0.3) e isso resulta na morte de Herói B que estava lutando ao lado.
+
+**Cálculo de Culpabilidade:**
+
+```typescript
+if (heroB.died && heroA.ranAway && distance(A, B) < 5) {
+  // Herói A é culpado!
+  heroB.lastWords = "A covardia de " + heroA.name + " me matou!";
+  triggerRevenge(heroB, heroA);
+}
+```
+
+**Consequências:**
+
+- Affinity: -30 (GRAVE)
+- Herói que morreu pode virar **Fantasma Vingativo**
+- Outros heróis que presenciaram: -10 Affinity com covarde
+- Reputação global: "Covarde" permanente até redimir
+
+**Exemplo Narrativo:**
+
+```
+[14:32] Kaelen e Lila lutam contra 5 Ogros
+[14:33] Kaelen com HP 25% decide fugir
+[14:34] Lila fica sozinha (2v5 → 1v5)
+[14:35] Lila morre
+
+[Log de Morte]:
+"Lila caiu. Últimas palavras: 'Kaelen... covarde...'"
+
+[Efeito]:
+- Lila vira Fantasma (se sistema de necromancia ativo)
+- Kaelen ganha trauma "Culpa"
+- Affinity Kaelen ↔ todos: -10
+```
+
+---
+
+### 3. Traição por Ganância (Roubo de Loot)
+
+**Gatilho:** Herói A mata boss/elite e Herói B pega o loot antes dele.
+
+**Diferença do KS:** Não rouba o kill, rouba o **ITEM**.
+
+**Cálculo:**
+
+```typescript
+if (boss.killer === heroA && loot.pickedBy === heroB && distance(A, B) < 3) {
+  // Loot Steal detectado!
+  heroA.anger += 20;
+  heroB.greed += 0.1;
+}
+```
+
+**Consequências:**
+
+- Affinity: -20
+- Chance de \*\*Bar
+
+ga\*\* (negociação tensa via cartas)
+
+- Se recusar devolver: PvP quase garantido (80%)
+
+**Exemplo:**
+
+```
+[15:40] Kaelen mata Ogro Rei solo
+[15:41] Loot: "Machado Lend\u00e1rio +50"
+[15:42] Lila (Ganância: 0.8) pega o item
+[15:43] Kaelen: "ISSO ERA MEU!"
+
+[Carta automática de Kaelen]:
+"Lila, devolva MEU machado. Eu matei o boss.
+Você tem 5 minutos ou haverá consequências."
+
+[Opções de Lila]:
+1. Devolver (Affinity -5, conflito evitado)
+2. Oferecer 500g de compensação (Affinity -10)
+3. Recusar (PvP inevitável)
+```
+
+---
+
+### 4. Ciúmes de Poder (Inveja de Níveis)
+
+**Gatilho:** Diferença de nível entre heróis > 5 e um deles tem Inveja (Power > 0.7).
+
+**Psicologia:**
+
+```typescript
+if (heroA.level - heroB.level > 5 && heroB.power > 0.7) {
+  heroB.envy = true;
+  heroB.dialogue = `${heroA.name} não é TÃO especial. 
+                     Eu posso ser melhor!`;
+}
+```
+
+**Consequências:**
+
+- Herói B sabota missões de A (não ajuda propositalmente)
+- Herói B tenta roubar kills de A ativamente
+- Se lealdade baixa (<40%): Traição e deserção possível
+
+**Exemplo:**
+
+```
+Kaelen: Lvl 12 (mais forte)
+Lila: Lvl 6 (Power: 0.9 - muito ambiciosa)
+
+[Sistema detecta inveja]:
+Lila começa a sabotar Kaelen:
+- Não cura ele em combate
+- Rouba seus kills
+- Fala mal dele para outros heróis
+
+[Carta de Lila para Gandalf]:
+"Kaelen se acha o melhor. Mas ele teve SORTE.
+Eu sou mais habilidosa. Um dia vou provar."
+
+[Affinity gradual]:
+Dia 50: Lila ↔ Kaelen = +30
+Dia 55: +20 (começou inveja)
+Dia 60: +5
+Dia 65: -10 (rival declarada)
+```
+
+---
+
+### 5. Conflito de Personalidade P.E.R.M.A.
+
+**Gatilho:** Dois heróis com vetores P.E.R.M.A. **opostos** interagem frequentemente.
+
+**Exemplo de Oposição:**
+
+| Herói        | Ethics       | Resource         | Mind          | Affect       |
+| ------------ | ------------ | ---------------- | ------------- | ------------ |
+| **Paladino** | 0.9 (santo)  | 0.1 (desapegado) | 0.5           | 0.8 (alegre) |
+| **Ladino**   | 0.1 (amoral) | 0.9 (ganancioso) | 0.7 (esperto) | 0.2 (cínico) |
+
+**Cálculo de Incompatibilidade:**
+
+```typescript
+const diff =
+  abs(heroA.ethics - heroB.ethics) +
+  abs(heroA.resource - heroB.resource) +
+  abs(heroA.affect - heroB.affect);
+
+if (diff > 2.0) {
+  // Personalidades incompatíveis!
+  startPersonalityConflict(heroA, heroB);
+}
+```
+
+**Consequências:**
+
+- Affinity começa em -20 (naturalmente não se dão bem)
+- Diálogos constantes de discussão
+- Nunca formam grupo juntos (sistema evita)
+- Se forçados a lutar juntos: -5 Affinity/dia
+
+**Exemplo:**
+
+```
+Sir Kaelen (Ética: 0.9, honrado)
+vs
+Lila Rogue (Ética: 0.1, amoral)
+
+[Diálogo automático - Dia 10]:
+Kaelen: "Lila, roubar dos mortos é DESONROSO!"
+Lila: "Honra não paga contas, paladino."
+
+[Resultado]:
+Affinity permanece negativo a partida inteira.
+Eles só cooperam se FORÇADOS pelo jogador via carta.
+```
+
+---
+
+### 6. Vingança por Morte de Amigo
+
+**Gatilho:** Herói A morre, Herói B tinha Affinity +70+ com A, e B culpa Herói C pela morte.
+
+**Lógica de Culpa:**
+
+```typescript
+if (heroA.died) {
+  const lastAttacker = heroA.lastDamagedBy;
+  const friendsOfA = heroes.filter((h) => h.affinity[heroA.id] > 70);
+
+  friendsOfA.forEach((friend) => {
+    friend.target = lastAttacker; // Marca para vingança
+    friend.mood = "FURIOSO";
+    friend.dialogue = `${lastAttacker.name} MATOU meu amigo! 
+                       Vou vingar ${heroA.name}!`;
+  });
+}
+```
+
+**Consequências:**
+
+- Herói B busca ativamente matar C
+- Ignora outras missões (focus 100% em vingança)
+- Se C é outro herói: PvP inevitável
+- Se C é monstro: Hunt obsessivo até matar
+
+**Exemplo:**
+
+```
+[Dia 42]
+Gandalf (Mago) morre para Ogro Rei "Grog"
+
+Kaelen (Affinity com Gandalf: +85 - melhores amigos)
+
+[Sistema ativa Vingança]:
+Kaelen.target = "Ogro Rei Grog"
+Kaelen.dialogue = "GROG MATOU GANDALF! ELE VAI PAGAR!"
+
+[Comportamento de Kaelen]:
+- Para de aceitar outras missões
+- Vai direto para covil do Ogro Rei
+- Luta até matar Grog ou morrer tentando
+- Se vingar: +50 XP bônus, título "Vingador"
+- Se morrer: Grupo trágico (ambos mortos)
+
+[Carta para o Majesty]:
+"Majestade, não me peça para parar.
+Gandalf era como um irmão.
+Grog vai morrer. Por minha mão ou pelo céu."
+```
+
+---
+
+### Frequência e Balanceamento
+
+Para evitar **fadiga narrativa**, o sistema controla frequência:
+
+| Tipo de Conflito       | Cooldown    | Máximo/Partida        |
+| ---------------------- | ----------- | --------------------- |
+| Kill Steal             | 5 min       | Ilimitado             |
+| Covardia               | 30 min      | 3 eventos             |
+| Roubo de Loot          | 10 min      | 10 eventos            |
+| Ciúmes                 | Passivo     | 1 por par de heróis   |
+| Conflito Personalidade | Passivo     | 1-2 pares             |
+| Vingança               | 1 por morte | Quantas mortes houver |
+
+**Prioridade de Narrativa (IA decide qual contar):**
+
+1. **Vingança** (mais dramático) - sempre mostrado
+2. **Covardia** (raro e grave) - destaque
+3. **Roubo de Loot** (visual, fácil de entender)
+4. **Kill Steal** (comum, mas clássico)
+5. **Ciúmes** (sutil, background)
+6. **Conflito P.E.R.M.A.** (passivo, constante)
+
+---
+
+### Exemplo de Cadeia de Conflitos (Cascata Dramática)
+
+```
+[Dia 50] Kaelen rouba kill de Lila (KS)
+         Affinity: +45 → +30
+
+[Dia 52] Lila rouba loot de Kaelen (vingança)
+         Affinity: +30 → +10
+
+[Dia 55] Kaelen envia carta hostil
+         Affinity: +10 → -5
+
+[Dia 58] Lila e Kaelen lutam PvP (iniciado por Kaelen)
+         Kaelen vence, Lila HP 2%
+
+[Dia 59] Gandalf (amigo de Lila, Affinity +80) vê a luta
+         Gandalf vs Kaelen (Vingança)
+
+[Dia 60] Majesty intervém via carta:
+         "PAREM TODOS! Foco nos monstros!"
+
+[Resultado]:
+- Kaelen se acalma (Lealdade 70%)
+- Lila perdoa parcialmente
+- Gandalf ainda desconfia de Kaelen
+- Affinity final: Kaelen ↔ Lila = -10 (rivais permanentes)
+```
+
+---
+
 # 6. O CONSELHEIRO REAL DE IA
 
 ## 6.1 O NPC Mais Importante do Jogo
@@ -3641,32 +5192,369 @@ motivados. Mas atenção: Gandalf está murmurando sobre
 
 ---
 
-## 7.5 Influence Points (IP): A "Mana Social"
+## 7.5 Influence Points (IP): Sistema Completo de "Mana Social"
 
-### Recapitulação do Sistema
+### O Que São Influence Points?
 
-**IP (Influence Points)** é o recurso que **limita a interação com o Conselheiro** e o **envio de cartas**.
+**IP (Influence Points)** é o recurso que representa **sua influência política e social** no reino. Diferente de ouro (econômico) ou mana (mágico), IP é **capital social**.
 
-#### Mecânica Completa
+**Com IP você pode:**
 
-| Ação                      | Custo IP |
-| ------------------------- | -------- |
-| Comando ao Conselheiro    | -10 IP   |
-| Enviar Carta para Herói   | -25 IP   |
-| Decreto Real              | -30 IP   |
-| Análise Profunda (Dossiê) | -15 IP   |
+- Dar ordens ao Conselheiro
+- Enviar cartas aos heróis
+- Emitir decretos reais
+- Solicitar análises e relatórios
 
-**Regeneração:**
+**Sem IP você:**
 
-- Base: +1 IP a cada 3 segundos (20 IP/min)
-- Com upgrade "Corte Real": +2 IP a cada 3 segundos (40 IP/min)
+- Não consegue se comunicar
+- Perde controle indireto
+- Fica "mudo" no reino
+
+---
+
+### Mecânica Base
+
+#### Valores Iniciais
+
+| Atributo                | Valor                       |
+| ----------------------- | --------------------------- |
+| **IP Máximo**           | 100 IP                      |
+| **IP Inicial**          | 100 IP (começa cheio)       |
+| **Regeneração Base**    | +1 IP a cada 3s (20 IP/min) |
+| **Velocidade de Gasto** | Variável (10-30 IP/ação)    |
+
+#### Tabela Completa de Custos
+
+| Ação                                   | Custo IP | Frequência Esperada |
+| -------------------------------------- | -------- | ------------------- |
+| **Comando Simples ao Conselheiro**     | -10 IP   | Alta (1-2/min)      |
+| **Análise Rápida (Consulta)**          | -15 IP   | Média (1/5min)      |
+| **Enviar Carta para Herói**            | -25 IP   | Média (1/10min)     |
+| **Decreto Real**                       | -30 IP   | Baixa (1/partida)   |
+| **Análise Profunda (Dossiê Completo)** | -40 IP   | Baixa (1/hora)      |
+| **Comando Estratégico Global**         | -50 IP   | Rara (emergências)  |
+
+| \*\*Telepor
+
+tar Herói (Comando Avançado)\*\* | -50 IP | Rara |
+
+**Matemática do Sistema:**
+
+```typescript
+// Com regeneração base (20 IP/min):
+// - 1 carta a cada 75 segundos
+// - 2 comandos simples por minuto
+// - 1 decreto a cada 9 minutos
+
+// Com upgrade Corte Real (40 IP/min):
+// - 1 carta a cada 37.5 segundos
+// - 4 comandos simples por minuto
+// - 1 decreto a cada 4.5 minutos
+```
+
+---
+
+### Sistema de Upgrades
+
+#### 1. Corte Real (Tier 1)
+
+**Custo:** 500 Ouro  
+**Efeito:** Regeneração +100% (1 IP/3s → 2 IP/3s)  
+**Quando comprar:** Ciclo 1 (primeiros 20 dias)
+
+```
+Antes: +20 IP/min
+Depois: +40 IP/min
+```
+
+#### 2. Rede de Espiões (Tier 2)
+
+**Custo:** 1,000 Ouro  
+**Requer:** Corte Real  
+**Efeito:** Cartas custam -5 IP (25 → 20 IP)
+
+#### 3. Conselheiro Eficiente (Tier 3)
+
+**Custo:** 1,500 Ouro  
+**Requer:** Rede de Espiões  
+**Efeito:** Comandos simples custam -5 IP (10 → 5 IP)
+
+#### 4. Majestade Suprema (Tier 4)
+
+**Custo:** 3,000 Ouro  
+**Requer:** Todos anteriores  
+**Efeito:** +50 IP máximo (100 → 150 IP) + Decretos custam -10 IP
+
+**Árvore de Upgrades:**
+
+```
+Corte Real (500g)
+    ↓
+Rede de Espiões (1,000g)
+    ↓
+Conselheiro Eficiente (1,500g)
+    ↓
+Majestade Suprema (3,000g)
+
+Total: 6,000g para maximizar IP
+```
+
+---
+
+### Penalidades e Situações Especiais
+
+#### Penalidades por Baixo Moral Global
+
+Se Moral do Reino < 50%:
+
+| Moral Global | Penalidade IP                        |
+| ------------ | ------------------------------------ |
+| 40-49%       | -10% regeneração                     |
+| 30-39%       | -25% regeneração                     |
+| 20-29%       | -50% regeneração                     |
+| < 20%        | **-75% regeneração + Custo dobrado** |
+
+**Exemplo:**
+
+```
+Moral = 25% (Reino em crise)
+Regeneração: 20 IP/min → 10 IP/min
+Custo de carta: 25 IP → 50 IP
+
+Resultado: Praticamente impossível se comunicar
+```
+
+#### Bônus por Alta Lealdade
+
+Se 80%+ dos heróis têm Lealdade > 70%:
+
+- **+10% regeneração de IP**
+- **Cartas têm -5 IP de custo**
+
+#### Eventos que Afetam IP
+
+| Evento                     | Efeito em IP                  | Duração                               |
+| -------------------------- | ----------------------------- | ------------------------------------- |
+| **Festival da Vila**       | +50% regeneração              | 10 min                                |
+| **Motim**                  | -50% regeneração + Custo +50% | Até resolver                          |
+| **Vitória contra Boss**    | +25 IP imediato               | Instantâneo                           |
+| **Morte de Herói Popular** | -10 IP/min por 5 min          | 5 min                                 |
+| **Traição**                | IP máximo -20 (100→80)        | Permanente até reconquistar confiança |
+
+---
+
+### Estratégias de Gestão de IP
+
+#### Estratégia 1: Conservador (Early Game)
+
+```
+Dias 1-20:
+- Evitar decretos (caros)
+- Focar em comandos simples (10 IP)
+- Cartas apenas para emergências
+- Comprar Corte Real o mais rápido possível
+
+Meta: Nunca baixar de 50 IP (reserva de emergência)
+```
+
+#### Estratégia 2: Comunicativo (Mid Game)
+
+```
+Dias 21-100:
+- 2-3 cartas por dia (heróis chave)
+- Usar Conselheiro ativamente
+- 1 decreto por ciclo
+- Manter 30 IP de reserva sempre
+
+Meta: Balancear comunicação com reserva
+```
+
+#### Estratégia 3: Micro-Manager (Late Game)
+
+```
+Dias 101+:
+- Todos upgrades de IP comprados
+- Comunicação constante
+- Decretos táticos
+- Uso de comandos avançados
+
+Meta: Gastar 80% do IP disponível (alta atividade)
+```
+
+---
+
+### Visualização do IP no HUD
+
+#### Barra de IP (Sempre Visível)
+
+```
+┌─────────────────────────────────────────┐
+│ IP: [████████░░] 75/100                 │
+│     Regen: +40/min | Next: 3s           │
+└─────────────────────────────────────────┘
+
+Estados visuais:
+████████████ (80-100%) Verde   - Saudável
+██████░░░░░░ (50-79%)  Amarelo - Moderado
+███░░░░░░░░░ (20-49%)  Laranja - Baixo
+█░░░░░░░░░░░ (<20%)    Vermelho - CRÍTICO
+```
+
+#### Avisos de IP
+
+**IP < 30:**
+
+```
+⚠️ AVISO: Influence Points baixo!
+Você só pode enviar 1 carta.
+Aguarde regeneração ou economize.
+```
+
+**IP = 0:**
+
+```
+🚫 SEM INFLUENCE!
+Você não pode dar comandos.
+Aguarde 30s para recuperar 10 IP.
+```
+
+---
+
+### Exemplos Práticos
+
+#### Exemplo 1: Emergência com IP Baixo
+
+```
+Situação:
+- IP atual: 15/100
+- Lila com HP 5% (morrendo)
+- Precisa enviar carta URGENTE (25 IP)
+
+Problema: Não tem IP suficiente!
+
+Soluções:
+1. Aguardar 30s (regenera 10 IP = total 25 IP)
+2. Usar comando simples ao Conselheiro (10 IP):
+   "/alert lila retreat" (Conselheiro envia aviso)
+3. APRENDER: Sempre manter reserva de 30 IP!
+```
+
+#### Exemplo 2: Uso Eficiente
+
+```
+Dia 45:
+08:00 - IP: 100/100 (cheio)
+08:05 - Comando: "/status heroes" (-10 IP = 90)
+08:10 - Carta para Kaelen (-25 IP = 65)
+08:15 - Aguarda regeneração (+10 IP = 75)
+08:20 - Comando: "/report economy" (-10 IP = 65)
+08:30 - Aguarda (+20 IP = 85)
+08:35 - Decreto: "Banquete Real" (-30 IP = 55)
+08:45 - Aguarda (+20 IP = 75)
+
+Resultado: Usou 75 IP em 45 min, mas sempre teve reserva
+```
+
+#### Exemplo 3: Spammer Punido
+
+```
+Jogador inexperiente:
+08:00 - IP: 100/100
+08:01 - Envia 4 cartas seguidas (-100 IP = 0)
+08:02 - Quer enviar 5ª carta: IMPOSSÍVEL
+08:03 - "Por que não consigo?!"
+08:04 - Aguarda 1.5 min para recuperar 25 IP
+08:06 - Aprendeu: IP é recurso escasso!
+
+Lição: Spam é punido automaticamente pelo sistema
+```
+
+---
 
 ### Justificativa de Design
 
-1. **Previne Spam:** Sem IP, jogador poderia enviar 100 cartas por minuto
-2. **Gestão de Recursos:** IP se torna recurso tão importante quanto Ouro
-3. **Custo de API:** Cada comando usa LLM (custa dinheiro real), IP justifica o rate limit
-4. **Imersão:** "Sua influência não é ilimitada, Majestade"
+#### 1. Previne Spam
+
+**Sem IP:** Jogador enviaria 100 cartas/min  
+**Com IP:** Máximo ~2-3 cartas/min (com upgrades)
+
+#### 2. Gestão de Recursos
+
+**Decisões:**
+
+- "Uso IP agora ou guardo?"
+- "Vale a pena esse decreto?"
+- "Priorizo carta ou comando?"
+
+IP se torna tão estratégico quanto ouro.
+
+#### 3. Custo de API Real
+
+Cada comando usa LLM:
+
+- Custo por chamada: ~$0.002
+- 100 comandos = $0.20
+- 1000 jogadores = $200/dia
+
+IP limita naturalmente o uso de API.
+
+#### 4. Imersão Narrativa
+
+**Mensagem do jogo:**  
+_"Sua influência não é ilimitada, Majestade. Use-a com sabedoria."_
+
+Mesmo sendo rei, você não pode fazer TUDO o tempo todo.
+
+---
+
+### Fórmulas Técnicas
+
+#### Regeneração com Modificadores
+
+```typescript
+const regenBase = 1; // 1 IP a cada 3s
+const upgradeMultiplier = hasCorteReal ? 2 : 1;
+const moralPenalty = calculateMoralPenalty(moralGlobal);
+const eventBonus = getActiveEventBonus("ip_regen");
+
+const regenFinal = regenBase * upgradeMultiplier * moralPenalty * eventBonus;
+
+// Exemplo:
+// Base: 1, Upgrade: 2x, Moral 80% (1.0), Festival (+50% = 1.5)
+// = 1 * 2 * 1.0 * 1.5 = 3 IP a cada 3s = 60 IP/min!
+```
+
+#### Custo Dinâmico
+
+```typescript
+function calculateIPCost(action: Action): number {
+  let baseCost = ACTION_COSTS[action.type];
+
+  // Upgrades reduzem custo
+  if (hasRedeEspioes && action.type === "SEND_LETTER") {
+    baseCost -= 5;
+  }
+
+  // Moral baixo aumenta custo
+  if (moralGlobal < 20) {
+    baseCost *= 2;
+  }
+
+  return Math.max(1, baseCost); // Mínimo 1 IP
+}
+```
+
+---
+
+### Conquistas Relacionadas a IP
+
+| Conquista                 | Condição                             | Recompensa           |
+| ------------------------- | ------------------------------------ | -------------------- |
+| **"Influente"**           | Chegar a 150 IP máximo               | Título especial      |
+| **"Diplomata"**           | Enviar 100 cartas em uma partida     | +5% regen permanente |
+| **"Econômico"**           | Nunca ficar com IP < 20 por 100 dias | Badge                |
+| **"Spammer Arrependido"** | Ficar em 0 IP 10 vezes               | Badge de vergonha    |
 
 ---
 
@@ -3760,33 +5648,327 @@ Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 
 ---
 
-## 8.2 Os 3 Ciclos de 50 Dias: Progressão Temporal
+## 8.2 Os 4 Ciclos de 50 Dias: Progressão Temporal
 
 ### Estrutura da Partida
 
-Cada partida dura **150 dias** divididos em **3 ciclos** de 50 dias.
+Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 
 ```
 ┌─────────────────────────────────────────────┐
 │ CICLO 1: "Primavera" (Dias 1-50)           │
 │ - Monstros: Tier 1 (Goblins, Lobos)        │
-│ - Clima: Neutro                             │
+│ - Clima: Ameno, chuvas leves                │
 │ - Eventos: Tutoriais, expansão básica      │
+│ - Tom: Esperançoso, construção             │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 2: "Verão Vermelho" (Dias 51-100)    │
 │ - Monstros: Tier 2 (Ogros, Trolls)         │
-│ - Clima: Tempestades, seca                 │
+│ - Clima: Calor extremo, tempestades        │
 │ - Eventos: Invasões massivas, traições     │
+│ - Tom: Conflito intenso, guerras           │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
-│ CICLO 3: "Apocalipse" (Dias 101-150)       │
-│ - Monstros: Tier 3 (Dragões, Demônios)     │
-│ - Clima: Lua de Sangue, terremotos         │
-│ - Evento Final: Castelo Amaldiçoado        │
+│ CICLO 3: "Inverno" (Dias 101-150)          │
+│ - Monstros: Tier 2-3 (Gigantes, Liches)    │
+│ - Clima: Neve, nevasca, gelo               │
+│ - Eventos: Fome, primeira Lua de Sangue    │
+│ - Tom: Sobrevivência, desespero            │
 └─────────────────────────────────────────────┘
+           ↓
+┌─────────────────────────────────────────────┐
+│ CICLO 4: "Apocalipse" (Dias 151-200)       │
+│ - Monstros: Tier 3 (Dragões, Demônios)     │
+│ - Clima: Lua de Sangue, Eclipse            │
+│ - Evento Final: Castelo Amaldiçoado        │
+│ - Tom: Épico, climático, fim dos tempos    │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+### CICLO 1: "PRIMAVERA" (Dias 1-50)
+
+#### Clima e Ambiente
+
+**Paleta de Cores:** Verde, azul claro, amarelo sol
+**Música:** Acústica, esperançosa, cordas leves
+**Descrição:** _"O reino desperta. Flores brotam nas planícies enquanto novos heróis respondem ao chamado."_
+
+#### Características
+
+| Aspecto               | Detalhes                                          |
+| --------------------- | ------------------------------------------------- |
+| **Temperatura**       | Amena (15-25°C)                                   |
+| **Precipitação**      | Chuvas leves (benéficas para fazendas)            |
+| **Duração Dia/Noite** | 12min dia / 8min noite (mais seguro)              |
+| **Visibilidade**      | Alta (névoa de guerra se dissipa 20% mais rápido) |
+
+#### Monstros Tier 1
+
+| Monstro            | HP      | Attack | Comportamento                |
+| ------------------ | ------- | ------ | ---------------------------- |
+| **Goblin**         | 50-100  | 10-15  | Covardes, fogem com HP < 30% |
+| **Lobo**           | 80-120  | 15-20  | Caçam em matilhas de 3-5     |
+| **Aranha Gigante** | 100-150 | 12-18  | Veneno leve, teias           |
+| **Bandido**        | 120-180 | 20-25  | Inteligente, rouba ouro      |
+
+#### Eventos Globais Únicos do Ciclo 1
+
+**Eventos Frequentes:**
+
+- ☀️ **Sol Intenso** (A cada 7 dias): +20% Stamina heróis, +10% farm yield
+- 🌧️ **Chuva de Primavera** (Aleatório): +30% regeneração de recursos naturais
+- 🎭 **Festival da Vila** (Dia 30): +20 Moral global, heróis descansam
+- 💰 **Caravana Mercante** (Dias 15, 35): -30% preços na loja
+
+**Eventos Raros:**
+
+- 🏆 **Torneio de Heróis** (Dia 45): Competição amistosa, +XP para vencedor
+- 🌈 **Arco-Íris Místico** (5% chance): Spawna baú lendário
+
+#### Progressão Esperada
+
+```
+Dia 1-10:   Recrutar 3-5 heróis, construir primeiras guildas
+Dia 11-25:  Expandir para 8 heróis, primeiro posto avançado
+Dia 26-40:  Conflitos sociais começam (KS, rivalidades)
+Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
+```
+
+---
+
+### CICLO 2: "VERÃO VERMELHO" (Dias 51-100)
+
+#### Clima e Ambiente
+
+**Paleta de Cores:** Vermelho, laranja, dourado queimado
+**Música:** Percussiva, intensa, cordas dramáticas
+**Descrição:** _"O sol escarlate queima a terra. Sangue mancha os campos de batalha."_
+
+#### Características
+
+| Aspecto               | Detalhes                              |
+| --------------------- | ------------------------------------- |
+| **Temperatura**       | Calor extremo (30-45°C)               |
+| **Precipitação**      | Seca + tempestades súbitas            |
+| **Duração Dia/Noite** | 10min dia / 10min noite (equilibrado) |
+| **Visibilidade**      | Média (poeira/calor distorce visão)   |
+
+#### Monstros Tier 2
+
+| Monstro               | HP          | Attack  | Comportamento                |
+| --------------------- | ----------- | ------- | ---------------------------- |
+| **Ogro**              | 800-1,200   | 80-150  | Agressivo, destrói edifícios |
+| **Troll**             | 1,000-1,500 | 100-180 | Regenera HP, anti-fogo       |
+| **Harpy**             | 400-600     | 60-90   | Voa, ataque em grupo         |
+| **Elemental de Fogo** | 600-900     | 120-200 | Spawna durante tempestades   |
+
+#### Eventos Globais Únicos do Ciclo 2
+
+**Eventos Frequentes:**
+
+- 🌪️ **Tempestade de Areia** (A cada 5 dias): -50% visibilidade, monstros +30% stats
+- 🔥 **Onda de Calor** (Aleatório): Heróis perdem -2 HP/min se não beberem água
+- ⚔️ **Invasão Ogro** (Dias 60, 85): 15-25 Ogros atacam capital
+- 🌋 **Terremoto** (Dias 70, 95): Abre novas passagens, 5% chance destruir prédio
+
+**Eventos Raros:**
+
+- 💀 **Horda Barbarian** (10% chance): 50 bandidos de elite invadem
+- ☄️ **Chuva de Meteoros** (5% chance): Destrói 1-3 edifícios aleatórios, spawna Elementais
+
+#### Progressão Esperada
+
+```
+Dia 51-60:  Adaptação ao Tier 2, primeiras mortes de herói
+Dia 61-75:  Traições começam, conflitos PvP aumentam
+Dia 76-90:  Batalhas épicas, redenções e vinganças
+Dia 91-100: Boss intermediário, preparação para Inverno
+```
+
+---
+
+### CICLO 3: "INVERNO" (Dias 101-150) **[NOVO]**
+
+#### Clima e Ambiente
+
+**Paleta de Cores:** Branco, azul gélido, cinza
+**Música:** Orquestral sombria, coral grave, silêncios tensos
+**Descrição:** _"O inverno chegou sem perdão. A fome espreita cada lar. A esperança congela."_
+
+#### Características
+
+| Aspecto               | Detalhes                                |
+| --------------------- | --------------------------------------- |
+| **Temperatura**       | Congelante (-10 a 5°C)                  |
+| **Precipitação**      | Neve constante, nevascas                |
+| **Duração Dia/Noite** | 8min dia / 12min noite (noites longas!) |
+| **Visibilidade**      | Baixa (neve reduz visão em 40%)         |
+
+#### Monstros Tier 2-3 (Híbrido)
+
+| Monstro             | HP          | Attack  | Comportamento                     |
+| ------------------- | ----------- | ------- | --------------------------------- |
+| **Lobo de Gelo**    | 1,200-1,800 | 150-220 | Matilhas de 8-12, congelam heróis |
+| **Gigante de Gelo** | 3,000-4,500 | 300-450 | Boss menor, destrói postos        |
+| **Lich**            | 2,000-3,000 | 200-300 | Ressuscita mortos como zumbis     |
+| **Espectro**        | 800-1,200   | 180-250 | Intangível, ataque psíquico       |
+
+#### Efeitos Passivos do Inverno
+
+**FOME:**
+
+- Fazendas produzem -70%
+- Custo de comida +200%
+- Se heróis ficarem 3 dias sem comer: -50% stats
+
+**FRIO:**
+
+- Heróis perdem -1 HP/min ao ar livre
+- Torres consomem lenha para manter aquecidas
+- Moral -10 global
+
+**Solução:** Construir "Fogueiras" (100g cada, área 10m aquecida)
+
+#### Eventos Globais Únicos do Ciclo 3
+
+**Eventos Frequentes:**
+
+- ❄️ **Nevasca** (A cada 3 dias): -75% velocidade todos, visibilidade zero
+- 🧊 **Rio Congelado** (Dia 110): Abre atalhos no mapa, mas perigoso
+- 👻 **Noite dos Mortos** (Dia 120): Heróis mortos reanimam como inimigos
+- 🌙 **Primeira Lua de Sangue** (Dia 125): Todos monstros +100% stats, Boss spawna
+
+**Eventos Raros:**
+
+- 🏔️ **Avalanche** (15% chance): Destrói postos em montanhas
+- 🧛 **Vampiro Desperta** (Dia 140): Boss vampiro que converte heróis
+
+#### Progressão Esperada
+
+```
+Dia 101-115: Choque inicial, fome mata heróis fracos
+Dia 116-130: Adaptação, fogueiras e estoques críticos
+Dia 131-145: Primeira Lua de Sangue, perdas massivas
+Dia 146-150: Sobreviventes se preparam para Apocalipse
+```
+
+---
+
+### CICLO 4: "APOCALIPSE" (Dias 151-200)
+
+#### Clima e Ambiente
+
+**Paleta de Cores:** Vermelho sangue, preto, roxo necrótico
+**Música:** Coral épico, percussão de guerra, trombetas do fim
+**Descrição:** _"O céu sangra. A terra se parte. Os mortos marcham. Este é o fim... ou a redenção?"_
+
+#### Características
+
+| Aspecto               | Detalhes                                     |
+| --------------------- | -------------------------------------------- |
+| **Temperatura**       | Caótico (-20°C a 40°C aleatório)             |
+| **Precipitação**      | Chuva ácida, neve de cinzas                  |
+| **Duração Dia/Noite** | 5min dia / 15min noite (quase sempre noite!) |
+| **Visibilidade**      | Mínima (lua de sangue permanente)            |
+
+#### Monstros Tier 3 (Apocalípticos)
+
+| Monstro                               | HP            | Attack  | Comportamento                        |
+| ------------------------------------- | ------------- | ------- | ------------------------------------ |
+| **Dragão**                            | 10,000-15,000 | 500-800 | Voa, queima tudo, ataca Casa Central |
+| **Demônio**                           | 5,000-8,000   | 400-600 | Teleporta, corrompre heróis          |
+| **Golem de Obsidiana**                | 8,000-12,000  | 600-900 | Invulnerável exceto magia            |
+| **Rei Vilão (Her\u00f3i Ca\u00eddo)** | 20,000        | 1,000   | Boss final, ex-herói traidor         |
+
+#### Efeitos Passivos do Apocalipse
+
+**LUA DE SANGUE PERMANENTE:**
+
+- Monstros +100% HP/Attack (sempre ativo)
+- Heróis -20% Moral (constante)
+- Mortos reanimam automaticamente após 5min
+
+**FENDAS MÁGICAS:**
+
+- Portais spawnam a cada 10min
+- Liberam 10-20 monstros elite
+- Só fecham se destruídos (5,000 HP cada)
+
+**ECLIPSE ALEATÓRIO:**
+
+- Dia vira noite por 5min
+- Mortos-vivos +200% poder **(CRITICAL)**
+
+#### Eventos Globais Únicos do Ciclo 4
+
+**Eventos Garantidos:**
+
+- 💀 **Castelo Amaldiçoado** (Dia 155): Herói morto vira Rei Vilão com exército
+- 🐉 **Ataque do Dragão** (Dia 170): Dragão ataca Casa Central diretamente
+- 🌙 **Lua de Sangue Dupla** (Dia 185): Monstros +200% (dobro do normal)
+- ⚔️ **Batalha Final** (Dia 195-200): Boss final + 3 tenentes + 100 monstros
+
+**Eventos Raros:**
+
+- 🧟 **Praga Zumbi** (20% chance): Todos mortos viram zumbis
+- 🔥 **Ragnarok** (5% chance): Mundo começa a se autodestruir
+
+#### Progressão Esperada
+
+```
+Dia 151-165: Survival mode, cada dia é uma vitória
+Dia 166-180: Redenções heroicas, últimas alianças
+Dia 181-195: Preparação para Boss final
+Dia 196-200: BATALHA FINAL - Vitória ou Derrota total
+```
+
+---
+
+### Comparação dos 4 Ciclos
+
+| Aspecto           | Primavera | Verão    | Inverno   | Apocalipse                   |
+| ----------------- | --------- | -------- | --------- | ---------------------------- |
+| **Tom**           | Esperança | Conflito | Desespero | Épico                        |
+| **Dificuldade**   | ★☆☆☆      | ★★☆☆     | ★★★☆      | ★★★★                         |
+| **Moral Médio**   | 80%       | 60%      | 40%       | 20%                          |
+| **Taxa de Morte** | 10%       | 30%      | 50%       | 80%                          |
+| **Ouro/Dia**      | +500g     | +300g    | +100g     | -200g (gasta mais que ganha) |
+| **Eventos/Dia**   | 0.5       | 1.0      | 1.5       | 3.0                          |
+
+---
+
+### Transição Entre Ciclos
+
+**Ao mudar de ciclo, o jogo avisa:**
+
+```
+┌────────────────────────────────────────────────┐
+│                                                │
+│   🌅 FIM DO CICLO 1: PRIMAVERA                 │
+│                                                │
+│   Dias completados: 50                         │
+│   Heróis vivos: 8/10                           │
+│   Reino prospera!                              │
+│                                                │
+│   ⚠️ ATENÇÃO: O VERÃO VERMELHO SE APROXIMA     │
+│                                                │
+│   Mudanças:                                    │
+│   - Monstros Tier 2 (Ogros, Trolls)           │
+│   - Tempestades frequentes                    │
+│   - Invasões massivas                          │
+│                                                │
+│   Recomendação do Conselheiro:                 │
+│   "Compre upgrades AGORA. Prepare defesas.     │
+│    O pior ainda está por vir."                 │
+│                                                │
+│   [Continuar para Dia 51]                      │
+│                                                │
+└────────────────────────────────────────────────┘
 ```
 
 ---
