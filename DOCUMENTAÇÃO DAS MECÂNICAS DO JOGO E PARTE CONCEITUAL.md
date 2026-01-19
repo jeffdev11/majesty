@@ -6,10 +6,163 @@
 
 ---
 
-## 📑 ÍNDICE
+## 📑 ÍNDICE COMPLETO
+
+### PARTE I: FUNDAMENTOS
 
 1. [Visão Geral e Filosofia do Jogo](#1-visão-geral-e-filosofia-do-jogo)
+   - 1.1 O Monarca Indireto
+   - 1.2 O Efeito Aquário
+   - 1.3 Pilares de Diversão
+   - 1.4 A Nova Direção (RTS → Terminal)
+   - 1.5 Viabilidade Técnica
+
 2. [Interface e Experiência do Usuário (UI/UX)](#2-interface-e-experiência-do-usuário-uiux)
+   - 2.1 Conceito de Workspaces
+   - 2.2 Regras Globais de Interação
+   - 2.3 [F1] OPS CENTER - "The War Room"
+   - 2.4 [F2] ADMIN - "The Tycoon"
+   - 2.5 [F3] LIBRARY - "The Archives"
+   - 2.6 [F4] WORLD MAP - "The Conquest"
+   - 2.7 [F5] THE AVIARY - "Royal Mail"
+
+### PARTE II: SISTEMAS DE IA
+
+3. [Arquitetura de IA Híbrida](#3-arquitetura-de-ia-híbrida)
+   - 3.1 Visão Geral
+   - 3.2 Utility AI
+   - 3.3 Behavior Trees
+   - 3.4 FSM (Máquinas de Estados)
+   - 3.5 NLP (Conselheiro)
+
+4. [Os Heróis: Agentes Autônomos](#4-os-heróis-agentes-autônomos)
+   - 4.1 Estrutura de Dados
+   - 4.2 Sistema P.E.R.M.A.
+   - 4.3 Estados e Peculiaridades
+   - 4.4 Classes de Heróis
+   - 4.5 Ciclo de Vida (Morte/Redenção)
+   - 4.6 Limitação de 12 Heróis
+
+### PARTE III: SISTEMAS SOCIAIS E ECONÔMICOS
+
+5. [Dinâmica Social](#5-dinâmica-social-o-drama-emergente)
+   - 5.1 Formação de Grupos
+   - 5.2 Kill Stealing (KS)
+   - 5.3 Combate PvP
+   - 5.4 Amizades e Lealdade
+   - 5.5 Mercado Ambulante
+   - 5.6 Sistema de Banter
+   - 5.7 Matriz de Relacionamento
+
+6. [O Conselheiro Real de IA](#6-o-conselheiro-real-de-ia)
+   - 6.1 O NPC Mais Importante
+   - 6.2 Chat Interativo via NLP
+   - 6.3 Personalidades do Conselheiro
+   - 6.4 Cronista e Analista
+   - 6.5 Sussurros e Lore
+   - 6.6 Espionagem
+   - 6.7 Influence Points (IP)
+
+7. [Economia e Gestão do Reino](#7-economia-e-gestão-do-reino)
+   - 7.1 Tesouro Real
+   - 7.2 Curadoria de Habilidades
+   - 7.3 Gestão de Estoques
+   - 7.4 Decretos Reais
+   - 7.5 Influence Points
+   - 7.6 Manutenção de Edifícios
+
+### PARTE IV: MUNDO E PROGRESSÃO
+
+8. [Mundo Procedural e Ciclos](#8-mundo-procedural-e-ciclos-temporais)
+   - 8.1 Névoa de Guerra
+   - 8.2 Os 3 Ciclos de 50 Dias
+   - 8.3 Ciclo Dia/Noite
+   - 8.4 Eventos Globais
+   - 8.5 Boss Global
+   - 8.6 Escalonamento Dinâmico
+   - 8.7 Mapas Procedurais
+
+9. [Mecânicas Avançadas de Expansão](#9-mecânicas-avançadas-de-expansão)
+   - 9.1 Postos Avançados
+   - 9.2 Fundando Postos
+   - 9.3 Gestão Autônoma
+   - 9.4 Lealdade do Posto
+   - 9.5 Morte do Capitão
+   - 9.6 Mudança de Capital
+   - 9.7 Traição Individual
+   - 9.8 Colônia Rebelde
+
+10. [Narrativa Emergente e Legado](#10-narrativa-emergente-e-legado)
+    - 10.1 Crônicas do Reino (PDF)
+    - 10.2 Sonhos e Sussurros
+    - 10.3 Títulos Dinâmicos
+    - 10.4 Modo Historiador
+    - 10.5 Ecos do Passado
+    - 10.6 Memorial dos Mortos
+    - 10.7 Achievements Narrativos
+    - 10.8 Compartilhamento Social
+
+### PARTE V: MULTIPLAYER E INIMIGOS
+
+11. [Multiplayer (Visão Futura)](#11-multiplayer-visão-futura)
+    - 11.1 Por Que Foi Desprioritizado
+    - 11.2 Co-op Assíncrono
+    - 11.3 PvP Indireto
+    - 11.4 Leaderboards e Seasons
+    - 11.5 Desafios de Amigos
+
+12. [Sistema de Monstros: IA P.A.I.N.](#12-sistema-de-monstros-ia-pain)
+    - 12.1 Visão Geral
+    - 12.2 Perfis de Monstros
+    - 12.3 Sistema de Nêmesis
+    - 12.4 Facções
+    - 12.5 Patrulhas
+    - 12.6 Ondas de Invasão
+    - 12.7 Bosses Dinâmicos
+    - 12.8 Escalonamento por Ciclo
+    - 12.9 Anti-Padrões
+    - 12.10 Loot Dinâmico
+
+### PARTE VI: COMBATE E APRESENTAÇÃO
+
+13. [Sistema de Combate e Flavor Texts](#13-sistema-de-combate-e-flavor-texts)
+    - 13.1 Mecânica de Combate
+    - 13.2 Flavor Texts
+    - 13.3 Contextos de Eventos
+    - 13.4 Geração de Logs
+    - 13.5 Prompt para LLM
+    - 13.6 Cache e Performance
+
+14. [Estética e "Juice" Visual/Sonoro](#14-estética-e-juice-visualsonoro)
+    - 14.1 Cyber-Fantasy Terminal
+    - 14.2 Portraits Dinâmicos
+    - 14.3 Ícones Vivos
+    - 14.4 Sonoplastia Imersiva
+    - 14.5 Audio Manager
+    - 14.6 Variação de Pitch
+    - 14.7 Efeitos de Partículas
+
+15. [Análise Crítica e Justificativas](#15-análise-crítica-e-justificativas-de-design)
+    - 15.1 Por Que Controle Indireto?
+    - 15.2 Por Que Terminal?
+    - 15.3 Limite de 12 Heróis
+    - 15.4 Progressão Lenta
+    - 15.5 IA Determinística vs Generativa
+    - 15.6 Multiplayer: Por Que Não Agora?
+    - 15.7 Influence Points
+    - 15.8 Crônicas em PDF
+    - 15.9 Features Cortadas
+    - 15.10 Visão Final
+    - 15.11 Métricas de Sucesso
+    - 15.12 Roadmap Pós-Lançamento
+
+### ANEXOS
+
+- [Tabela de Flavor Texts](#132-flavor-texts-o-coração-da-narrativa)
+- [Sistema P.E.R.M.A. Completo](#42-sistema-perma-os-5-vetores-de-personalidade)
+- [Sistema P.A.I.N. Completo](#121-visão-geral-os-inimigos-autônomos)
+- [Comandos do Conselheiro](#62-chat-interativo-via-nlp)
+- [Lista de Eventos Globais](#84-eventos-globais-o-caos-controlado)
 
 ---
 
@@ -232,6 +385,8 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 **Foco Principal:** Gestão de Recursos, Construção e Curadoria de Habilidades
 
+![F2 ADMIN - The Tycoon](<docs/[F2]%20ADMIN%20(_The%20Tycoon_).png>)
+
 ### Descrição dos Painéis
 
 | Painel | Nome                         | Conteúdo                                                                            |
@@ -302,56 +457,434 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 ---
 
+### Casa Central do Majesty: "A Coroa do Reino"
+
+#### Descrição
+
+A **Casa Central** (Crown Keep) é o edifício mais importante do reino. É onde o Majesty reside e governa.
+
+#### Características
+
+| Atributo          | Valor                | Descrição                     |
+| ----------------- | -------------------- | ----------------------------- |
+| **HP**            | 5,000                | O dobro de outras construções |
+| **Defense**       | 100                  | Alta resistência              |
+| **Regeneração**   | 50 HP/dia            | Auto-reparo natural           |
+| **Tipo**          | Edifício Especial    | Único no reino                |
+| **Posição no P1** | [0] (sempre no topo) | Prioridade visual             |
+
+#### Condição de Derrota (GAME OVER)
+
+**Regra Crítica:** Se a Casa Central ativa chegar a HP = 0 → **GAME OVER IMEDIATO**
+
+**Exceção:** Se o jogador já moveu a capital para um Posto Avançado:
+
+- Casa Central antiga vira "Casa Secundária"
+- Destruição dela NÃO causa game over
+- Nova Casa Central está no Posto Avançado
+
+#### Sistema de Proteção Especial
+
+**Imunidades:**
+
+- ✅ **Imune a Eventos Globais** (terremotos, tempestades NÃO causam dano)
+- ✅ **Imune a Fendas Mágicas** (portais não spawnam perto)
+- ❌ **Vulnerável a Invasões de Monstros** (ataques diretos funcionam)
+
+**Buffs Defensivos:**
+
+- Torres adjacentes (raio 5 hexágonos) ganham +50% range
+- Heróis defendendo Casa Central ganham +20% stats
+- Alertas de invasão acontecem 2 minutos antes (vs 30s normal)
+
+#### Estados Visuais (P1)
+
+```
+P1: INFRAESTRUTURA
+
+[0] 👑 Casa Central "Coroa do Reino"
+    HP: ████████░░ (80%)
+    Status: Intacta
+    Proteção: 3 Torres, 5 Heróis
+
+--- ou quando danificada ---
+
+[0] ⚠️ Casa Central "Coroa do Reino"
+    HP: ███░░░░░░░ (30%) [CRÍTICO!]
+    Status: Ruínas Parciais
+    [!] AMEAÇA DE GAME OVER
+```
+
+| HP          | Ícone | Status Visual | Descrição no P4                                |
+| ----------- | ----- | ------------- | ---------------------------------------------- |
+| **100-80%** | 👑    | Intacta       | Bandeiras tremulando, muros dourados           |
+| **79-50%**  | ⚠️    | Danificada    | Rachaduras, bandeira rasgada                   |
+| **49-25%**  | 🔥    | Crítica       | Chamas parciais, torres desabando              |
+| **24-1%**   | 💀    | Ruínas        | Prestes a colapsar, **alarme vermelho global** |
+
+#### Detalhes no P4 (Quando Casa Central Selecionada)
+
+```
+P4: DETALHE DA CONSTRUÇÃO
+Selecionado: [0] Casa Central
+
+[STATUS ATUAL]
+HP: 4,200 / 5,000 (84%)
+Defense: 100
+Regeneração: 50 HP/dia
+
+[FUNÇÕES ATIVAS]
+> Sede do Governo
+> +20% Moral Global
+> -10% Custo de Recrutamento
+> Respawn de Heróis habilitado
+
+[PROTEÇÃO ATUAL]
+Torres adjacentes: 2
+Heróis defendendo: 3 (Kaelen, Lila, Gandalf)
+Último ataque: Há 2 dias (Goblin, repelido)
+
+[AÇÕES DISPONÍVEIS]
+[R] Reparar (50g = +500 HP)
+[F] Fortificar (+1,000 HP max, Custo: 2,000g)
+[E] Evacuar (Mover capital, Custo: 5,000g)
+```
+
+---
+
+### Mecânica de Construção de Edifícios (P1)
+
+#### Como Construir Novos Edifícios
+
+**Opção 1: Via Menu Numérico (P1)**
+
+1. Pressionar `[N]` (New Building) no P1
+2. Menu modal abre:
+
+```
++--------------------------------------+
+|   ESCOLHA O QUE CONSTRUIR            |
++--------------------------------------+
+| [1] Guilda Guerreiros    (300g)      |
+| [2] Guilda Magos         (350g)      |
+| [3] Guilda Ladinos       (280g)      |
+| [4] Guilda Arqueiros     (300g)      |
+| [5] Torre de Vigia       (200g)      |
+| [6] Loja de Poções       (250g)      |
+| [7] Ferreiro             (400g)      |
+| [8] Taverna              (300g)      |
+| [ESC] Cancelar                       |
++--------------------------------------+
+```
+
+3. Jogador digita número (ex: `1`)
+4. Confirmação:
+
+```
+Construir Guilda Guerreiros?
+Custo: 300g | Tempo: 60s
+Saldo após: 700g
+
+[ENTER] Confirmar | [ESC] Cancelar
+```
+
+**Opção 2: Via Comando (P7)**
+
+```
+Jogador: /build warrior_guild
+
+Conselheiro: "Iniciando construção da Guilda Guerreiros.
+Custo: 300g. Tempo estimado: 60 segundos."
+```
+
+#### Estados de Construção (P1)
+
+```
+P1: INFRAESTRUTURA
+
+[1] Guilda Guerreiros
+    Lvl: 2 | Vagas: 3/5
+    Status: ✅ Ativa
+
+[2] Guilda Magos
+    Progresso: [||||||||░░] 80%
+    Status: 🔨 Construindo... (12s restantes)
+
+[3] Torre de Vigia
+    Lvl: 1
+    Status: ⚠️ Danificada (HP: 40%)
+
+[4] Loja de Poções
+    Status: 💀 Destruída
+    [Ver Detalhes: Log de Destruição]
+```
+
+---
+
+### Edifícios Destruídos: Logs e Visual
+
+#### P1 - Listagem de Ruínas
+
+Quando um edifício é destruído, ele **permanece** na lista do P1 mas com visual em **cinza**:
+
+```
+P1: INFRAESTRUTURA
+
+[2] 💀 Guilda Magos [DESTRUÍDA]
+    Último status: Lvl 2, 3 Magos
+    Destruída: Dia 73, 14:35
+    [R] Reconstruir (300g)
+```
+
+#### P4 - Log Completo de Destruição
+
+Ao selecionar edifício destruído:
+
+```
+P4: DETALHE DA CONSTRUÇÃO
+Selecionado: [2] Guilda Magos
+Status: ⚠️ DESTRUÍDA
+
++--------------------------------------+
+|  HISTÓRICO DE DESTRUIÇÃO             |
++--------------------------------------+
+| Dia: 73                              |
+| Hora: 14:35:22                       |
+| Causa: [INVASÃO] Horda de Ogros      |
+| Atacantes: 15 Ogros (Lvl 8-12)       |
+| Dano Total: 800 (de 500 HP)          |
+| Heróis defendendo: 0 (todos longe)   |
+| Tempo de queda: 2 minutos            |
++--------------------------------------+
+
+[ÚLTIMO STATUS ANTES DA DESTRUIÇÃO]
+> Nível: 2
+> Heróis treinados: 3 (Gandalf, Merlin, Zara)
+> Skills ativas: 5
+> Vagas: 2/5
+> Ouro investido total: 850g
+
+[CONSEQUÊNCIAS]
+> Magos perderam acesso a skills avançadas
+> -10% Poder Mágico Global
+> Gandalf ficou "Sem Lar" por 5 minutos
+
+[AÇÕES DISPONÍVEIS]
+[R] Reconstruir (Custo: 300g, Tempo: 2 min)
+[D] Demolir ruínas (Libera espaço, +50g recuperado)
+[V] Ver log detalhado (timeline)
+```
+
+---
+
+### Identificadores de Logs do F2 ADMIN
+
+#### Lista Completa de Tags de Logs (P5)
+
+Todos os eventos econômicos e administrativos usam **identificadores coloridos** para facilitar a leitura no P5 (Ordem de Serviço).
+
+| Identificador  | Cor (Terminal)            | Categoria       | Uso                                 | Exemplo                                          |
+| -------------- | ------------------------- | --------------- | ----------------------------------- | ------------------------------------------------ |
+| **[ADMIN]**    | Ciano (#00FFFF)           | Administração   | Construções, upgrades, demolições   | `[ADMIN] Torre de Vigia construída`              |
+| **[ECO]**      | Verde (#00FF00)           | Economia        | Vendas, compras, transações         | `[ECO] Venda: Poção Vida → Kaelen (+50g)`        |
+| **[ALERTA]**   | Vermelho (#FF0000)        | Avisos Críticos | Problemas urgentes                  | `[ALERTA] Ouro insuficiente para salários!`      |
+| **[SKILL]**    | Amarelo (#FFFF00)         | Habilidades     | Skills desbloqueadas ou ativas      | `[SKILL] "Golpe Giratório" desbloqueado`         |
+| **[MAINT]**    | Laranja (#FFA500)         | Manutenção      | Reparos, salários, manutenções      | `[MAINT] Salários pagos (-100g/dia)`             |
+| **[DESTRUCT]** | Vermelho Escuro (#8B0000) | Destruição      | Edifícios danificados ou destruídos | `[DESTRUCT] Guilda Mago destruída por Ogros`     |
+| **[BUILD]**    | Azul (#0080FF)            | Construção      | Progresso de obras                  | `[BUILD] Guilda Arqueiros 75% concluída`         |
+| **[STOCK]**    | Magenta (#FF00FF)         | Estoque         | Alertas de inventário               | `[STOCK] Poções de Mana reabastecidas (+20)`     |
+| **[DEBT]**     | Vermelho Piscante         | Dívida/Falência | Falta de recursos                   | `[DEBT] Dia 2 sem pagar salários! Risco CRÍTICO` |
+| **[PROFIT]**   | Verde Brilhante           | Lucro/Ganho     | Grandes ganhos                      | `[PROFIT] Boss derrotado: +2,000g em loot`       |
+
+#### Exemplo de Log Real (P5)
+
+```
+P5: ORDEM DE SERVIÇO (LOGS)
+
+[14:02] [ECO]    Venda: Poção Vida (-1 estoque) → Kaelen
+[14:02] [ECO]    Receita: +25g (imposto 50%)
+[14:05] [BUILD]  Guilda Magos: 45% concluída (27s restantes)
+[14:10] [MAINT]  Manutenção diária: Guilda Guerreiros (-5g)
+[14:15] [PROFIT] Loot de Ogro: +200g depositados no tesouro
+[14:20] [SKILL]  "Tempestade de Lâminas" ativa para Guerreiros
+[14:25] [ALERTA] Estoque de Poção Vida CRÍTICO (3/50)
+[14:30] [STOCK]  Compra automática: +20 Poções Vida (-1,000g)
+[14:35] [DESTRUCT] Torre de Vigia Leste sob ataque! (HP: 60%)
+```
+
+---
+
+### P3 - Relatório Financeiro Detalhado
+
+#### Visão Expandida de Logística e Finanças
+
+O **P3** não mostra apenas estoques, mas um **relatório completo** de entradas e saídas de ouro.
+
+#### Layout Completo do P3
+
+```
+P3: LOGÍSTICA & FINANÇAS
+
++========================================+
+|  RESUMO DO DIA (Dia 45)                |
++========================================+
+| Saldo Inicial:      1,000g             |
+| (+) Entradas:        +450g             |
+| (-) Saídas:          -320g             |
+| Saldo Final:        1,130g [+13%]      |
++========================================+
+
+> DETALHAMENTO DE ENTRADAS ▼
++----------------------------------------+
+| Hora  | Fonte              | Valor    |
++----------------------------------------+
+| 14:02 | Imposto: Poção     | +50g     |
+| 14:15 | Loot: Ogro         | +200g    |
+| 14:30 | Imposto: Upgrade   | +80g     |
+| 15:00 | Tributo: Posto N.  | +120g    |
++----------------------------------------+
+| TOTAL ENTRADAS                  +450g  |
++----------------------------------------+
+
+> DETALHAMENTO DE SAÍDAS ▼
++----------------------------------------+
+| Hora  | Destino            | Valor    |
++----------------------------------------+
+| 14:05 | Poções Mana (x3)   | -150g    |
+| 14:20 | Salários: Torres   | -100g    |
+| 14:45 | Manutenção: Guildas| -70g     |
++----------------------------------------+
+| TOTAL SAÍDAS                    -320g  |
++----------------------------------------+
+
+> PROJEÇÃO (Próximas 24h)
++----------------------------------------+
+| Entradas estimadas:        +400g       |
+| Saídas fixas:              -250g       |
+| Saldo projetado:          1,280g       |
++----------------------------------------+
+
+> ESTOQUES CRÍTICOS
++----------------------------------------+
+| [!] Poção Vida: 12/50      BAIXO       |
+| [!] Poção Mana: 8/30       CRÍTICO     |
+| [✓] Armas: 25/40           OK          |
++----------------------------------------+
+```
+
+#### Interatividade do P3
+
+**Ações disponíveis:**
+
+- **Setas Cima/Baixo:** Rolar lista de entradas/saídas
+- **[E]:** Expandir detalhes de entrada específica
+- **[S]:** Expandir detalhes de saída específica
+- **[P]:** Ver projeção de 7 dias (gráfico de tendência)
+- **[A]:** Abrir menu de compra rápida de estoque
+
+**Exemplo de expansão:**
+
+Jogador seleciona entrada "Loot: Ogro" e pressiona `[E]`:
+
+```
+DETALHES DA ENTRADA
++----------------------------------------+
+| Hora: 14:15:33                         |
+| Fonte: Loot de Monstro                 |
+| Tipo: Ogro "Grok, O Brutal"            |
+| Derrotado por: Grupo (Kaelen, Lila)    |
+| Loot total: 400g                       |
+| Dividido: 200g/herói                   |
+| Imposto (50%): 200g → Tesouro          |
+| Items dropados:                        |
+|   - Machado Pesado +15                 |
+|   - Pele de Ogro (x3)                  |
++----------------------------------------+
+```
+
+---
+
+### Menu de Compra Rápida (P3 → P6 Integrado)
+
+Quando jogador pressiona `[C]` (Comprar) no P3:
+
+```
++----------------------------------------+
+|  COMPRA RÁPIDA DE ESTOQUES             |
++----------------------------------------+
+| [1] Poção Vida x10      (500g)         |
+| [2] Poção Mana x10      (800g)         |
+| [3] Poção Vida x30      (1,500g) [-10%]|
+| [4] Poção Mana x30      (2,400g) [-10%]|
+| [5] Kit Completo        (3,000g) [-20%]|
+|     (30 Vida + 20 Mana + 10 Stamina)   |
+| [ESC] Cancelar                         |
++----------------------------------------+
+Saldo atual: 1,130g
+```
+
+**Desconto por volume:**
+
+- 10-29 unidades: -5%
+- 30-49 unidades: -10%
+- 50+ unidades: -20%
+
+---
+
 ## 2.5 [F3] LIBRARY - "The Archives"
 
 **Foco Principal:** Lore, Psicologia Profunda, Bestiário e Estatísticas (Pausa Tática)
 
+![F3 LIBRARY - The Archives](<docs/[F3]%20LIBRARY%20(_The%20Archives_).png>)
+
 ### Descrição dos Painéis
 
-| Painel | Nome                     | Conteúdo                                                       |
-| ------ | ------------------------ | -------------------------------------------------------------- |
-| **P1** | Índice de Dados          | Navegação tipo explorador entre Heróis, Monstros e História    |
-| **P2** | Leitor de Dados (Reader) | Área larga de texto para biografias, sussurros, crônicas       |
-| **P3** | Estatísticas             | Gráficos ASCII ou numéricos (Kills por tipo, Ouro/Hora, Score) |
-| **P4** | Metadados                | Dados técnicos imutáveis da entidade selecionada               |
-| **P5** | Registo do Historiador   | Log histórico filtrado apenas para "Grandes Feitos"            |
-| **P6** | Filtros de Visualização  | Comandos para alterar modo de visualização do P2               |
-| **P7** | Pesquisa & Consulta      | Input para busca semântica ou por palavra-chave                |
+| Painel | Nome                     | Conteúdo                                                            |
+| ------ | ------------------------ | ------------------------------------------------------------------- |
+| **P1** | Índice de Dados          | Navegação tipo explorador entre Heróis, Monstros e História         |
+| **P2** | Leitor de Dados (Reader) | Área larga de texto para biografias, sussurros, crônicas            |
+| **P3** | Estatísticas             | **Gráficos com componentes UI** (barras, pizza, linhas) + números   |
+| **P4** | Metadados                | Dados técnicos imutáveis da entidade selecionada                    |
+| **P5** | Registo do Historiador   | Log histórico filtrado apenas para "Grandes Feitos"                 |
+| **P6** | Filtros de Visualização  | Botões para alternar conteúdo de P2 (Heróis/Monstros/Lore/Gráficos) |
+| **P7** | Pesquisa & Consulta      | Input para busca semântica ou por palavra-chave                     |
 
 ### Layout Visual Completo
 
 ```
+
 +---------------------+------------------------------------------+---------------------+
-| P1: ÍNDICE DE DADOS |        P2: LEITOR DE DADOS (READER)      | P3: ESTATÍSTICAS    |
-| > HERÓIS ATIVOS     | DOSSIÊ: SIR KAELEN (Guerreiro)           |  -- OURO / DIA --   |
-|  [1] Sir Kaelen     |                                          |  Dia 43: ####       |
-|  [2] Lila Rogue     | [SUSSURROS RECENTES]                     |  Dia 44: ######     |
-|                     | "Aquele Ogro parecia ter medo de fogo... |  Dia 45: ##         |
-| > MEMORIAL (MORTOS) |  Devia ter comprado uma tocha."          |                     |
-|  [3] Gandalf (Mago) |                                          |  -- KILLS / TIPO -- |
-|                     | [TRAÇOS DE PERSONALIDADE]                |  Ogros: 12 [|||..]  |
-| > BESTIÁRIO         | Coragem: [||||||||..] (Alta)             |  Goblins: 45 [||||]|
-|  [4] Ogro das Cvs.  | Ganância: [||........] (Baixa)           |  Dragões: 0  [.....]|
-|  [5] Dragão Sombra  | Lealdade: "Pelo Rei!"                    |                     |
-|                     |                                          |  -- PARTIDA --      |
-| > HISTÓRICO         | [BIOGRAFIA GERADA]                       |  Tempo: 02:14:00    |
-|  [6] Crônica Atual  | Nascido nas montanhas do norte, Kaelen   |  Score: B+          |
-|                     | jurou proteger os fracos após...         |                     |
+| P1: ÍNDICE DE DADOS | P2: LEITOR DE DADOS (READER) | P3: ESTATÍSTICAS |
+| > HERÓIS ATIVOS | DOSSIÊ: SIR KAELEN (Guerreiro) | -- OURO / DIA -- |
+| [1] Sir Kaelen | | Dia 43: #### |
+| [2] Lila Rogue | [SUSSURROS RECENTES] | Dia 44: ###### |
+| | "Aquele Ogro parecia ter medo de fogo... | Dia 45: ## |
+| > MEMORIAL (MORTOS) | Devia ter comprado uma tocha." | |
+| [3] Gandalf (Mago) | | -- KILLS / TIPO -- |
+| | [TRAÇOS DE PERSONALIDADE] | Ogros: 12 [|||..] |
+| > BESTIÁRIO | Coragem: [||||||||..] (Alta) | Goblins: 45 [||||]|
+| [4] Ogro das Cvs. | Ganância: [||........] (Baixa) | Dragões: 0 [.....]|
+| [5] Dragão Sombra | Lealdade: "Pelo Rei!" | |
+| | | -- PARTIDA -- |
+| > HISTÓRICO | [BIOGRAFIA GERADA] | Tempo: 02:14:00 |
+| [6] Crônica Atual | Nascido nas montanhas do norte, Kaelen | Score: B+ |
+| | jurou proteger os fracos após... | |
 +---------------------+------------------------------------------+---------------------+
-| P4: METADADOS       |          P5: REGISTO DO HISTORIADOR      | P6: FILTROS         |
-| ID: Hero_001        | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis      |
-| Status: Vivo        | [Dia 15] Kaelen recusou suborno.         | [M] Ver Monstros    |
-| Kills: 42           | [Dia 20] Adquiriu título "O Bravo".      | [L] Ver Lore        |
-| Mortes: 0           | [Dia 45] Atualmente a dormir na Vila.    | [G] Ver Gráficos    |
-|                     |                                          |                     |
-| "A lenda viva."     |                                          | (Use teclas)        |
+| P4: METADADOS | P5: REGISTO DO HISTORIADOR | P6: FILTROS |
+| ID: Hero*001 | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis |
+| Status: Vivo | [Dia 15] Kaelen recusou suborno. | [M] Ver Monstros |
+| Kills: 42 | [Dia 20] Adquiriu título "O Bravo". | [L] Ver Lore |
+| Mortes: 0 | [Dia 45] Atualmente a dormir na Vila. | [G] Ver Gráficos |
+| | | |
+| "A lenda viva." | | (Use teclas) |
 +---------------------+------------------------------------------+---------------------+
-|                        P7: PESQUISA & CONSULTA (MODO ARQUIVO)                        |
-| IA: "Aqui estão os registos mentais de Sir Kaelen. A sua lealdade é inabalável, mas  |
-|      notei que ele tem uma fobia secreta de aranhas baseada na biografia."           |
-|                                                                                      |
-| > /search "fobia"_                                                                   |
+| P7: PESQUISA & CONSULTA (MODO ARQUIVO) |
+| IA: "Aqui estão os registos mentais de Sir Kaelen. A sua lealdade é inabalável, mas |
+| notei que ele tem uma fobia secreta de aranhas baseada na biografia." |
+| |
+| > /search "fobia"* |
 +--------------------------------------------------------------------------------------+
+
 ```
 
 ### Interação e UX (F3)
@@ -376,64 +909,459 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 ---
 
+### P1 - Índice de Dados: Estrutura Completa
+
+#### Árvore de Navegação
+
+O **P1** funciona como um explorador de arquivos hierárquico. Todas as categorias são expandíveis/recolhíveis.
+
+```
+P1: ÍNDICE DE DADOS
+
+▼ HERÓIS ATIVOS (10/12)
+  ├─ [1] 👑 Sir Kaelen (Guerreiro, Lvl 9)
+  ├─ [2] 🗡️ Lila Rogue (Ladina, Lvl 7)
+  ├─ [3] 🔮 Gandalf (Mago, Lvl 6)
+  └─ [+] Ver todos (10)
+
+▼ MEMORIAL DOS CAÍDOS (3)
+  ├─ [M1] 💀 Elara (Arqueira) - Dia 42
+  ├─ [M2] 💀 Thorgrim (Guerreiro) - Dia 31
+  └─ [M3] 💀 Zara (Maga) - Dia 15
+
+▶ BESTIÁRIO (Expandir)
+  └─ (23 espécies catalogadas)
+
+▶ FACÇÕES DE MONSTROS
+  └─ (5 facções ativas)
+
+▶ HISTÓRICO DA PARTIDA
+  ├─ Crônica Atual (Dia 1-87)
+  ├─ Grandes Feitos (45 eventos)
+  └─ Eventos Memoráveis (120)
+
+▶ LORE DO MUNDO
+  ├─ Reinos Antigos
+  ├─ Mitologia
+  └─ Artefatos Lendários
+
+[AÇÕES]
+[E] Expandir Tudo | [C] Recolher Tudo
+[F] Filtrar por... | [S] Ordenar por...
+```
+
+#### Usabilidade do P1
+
+**Navegação por Teclado:**
+
+1. **Setas Cima/Baixo:** Navegar entre itens
+2. **Seta Direita:** Expandir categoria fechada
+3. **Seta Esquerda:** Recolher categoria aberta
+4. **Enter:** Selecionar item e carregar no P2
+5. **Backspace:** Voltar para categoria pai
+6. **Home/End:** Ir para primeiro/último item da lista
+
+**Atalhos Rápidos:**
+
+- **[H]:** Ir direto para "Heróis Ativos"
+- **[M]:** Ir direto para "Memorial"
+- **[B]:** Ir direto para "Bestiário"
+- **[L]:** Ir direto para "Lore"
+
+**Estados Visuais:**
+
+```
+▼ Categoria Expandida (cor: ciano brilhante)
+▶ Categoria Recolhida (cor: cinza)
+> Item Selecionado (fundo: azul escuro)
+  Item Normal (cor: branco)
+💀 Item Morto (cor: vermelho escuro)
+👑 Item Especial (cor: dourado)
+```
+
+---
+
+### P2 - Leitor de Dados & P6 - Filtros (Integração)
+
+#### O Que o P2 Mostra (Baseado no Filtro P6)
+
+O conteúdo do **P2** muda completamente dependendo do **filtro ativo no P6**:
+
+**[H] Ver Heróis** (Padrão)
+
+```
+P2: LEITOR DE DADOS
+
+╔════════════════════════════════════════╗
+║  DOSSIÊ: SIR KAELEN (Guerreiro)        ║
+╚════════════════════════════════════════╝
+
+[SUSSURROS RECENTES]
+💭 "Aquele Ogro parecia ter medo de fogo...
+    Devia ter comprado uma tocha."
+💭 "Lila me salvou hoje. Talvez eu a julguei
+    mal. Ela não é tão egoísta quanto pensei."
+
+[TRAÇOS DE PERSONALIDADE - P.E.R.M.A.]
+⚔️ Coragem (Power):   [████████░░] 0.8 (Alta)
+⚖️ Ética (Ethics):    [██████░░░░] 0.6 (Média)
+💰 Ganância (Resource): [██░░░░░░░░] 0.2 (Baixa)
+🧠 Intelecto (Mind):  [████░░░░░░] 0.4 (Média)
+😊 Humor (Affect):    [██████████] 1.0 (Estoico)
+
+[BIOGRAFIA GERADA POR IA]
+Nascido nas montanhas gélidas do norte, Sir Kaelen
+jurou proteger os fracos após presenciar a destruição
+de sua aldeia por bandidos quando tinha apenas 12 anos.
+Seu pai, um ferreiro, forjou para ele a espada que
+carrega até hoje. Kaelen vê o Majesty como um líder
+justo e fará qualquer sacrifício para defender o reino.
+
+[RELACIONAMENTOS]
+👥 Lila Rogue: +45 (Companheiros)
+👥 Gandalf: +80 (Inseparáveis)
+👥 Elara: +20 (Conhecidos)
+```
+
+**[M] Ver Monstros**
+
+```
+P2: LEITOR DE DADOS
+
+╔════════════════════════════════════════╗
+║  BESTIÁRIO: OGRO DAS CAVERNAS          ║
+╚════════════════════════════════════════╝
+
+[CLASSIFICAÇÃO]
+Tipo: Humanóide Maior
+Tier: 2 (Médio)
+Periculosidade: ⚠️⚠️⚠️ (Alta)
+
+[ESTATÍSTICAS]
+HP: 800-1,200 (varia por nível)
+Ataque: 80-150
+Defense: 40-60
+Velocidade: Lenta (3 hex/turno)
+
+[COMPORTAMENTO - P.A.I.N.]
+🛡️ Preservation: 0.2 (Luta até quase morrer)
+⚔️ Aggression: 0.9 (Extremamente agressivo)
+🧠 Intellect: 0.2 (Tático: Burro)
+🌿 Nature: 0.1 (Solitário)
+
+[PADRÕES DE ATAQUE]
+> Foca no herói mais forte (ignora fracos)
+> Não foge (só com HP < 10%)
+> Destrói edifícios se não há heróis
+> Ruído alto (heróis ouvem de longe)
+
+[FRAQUEZAS]
+🔥 Fogo: +50% dano recebido
+⚡ Raios: +30% dano recebido
+❌ Veneno: Imune
+
+[LOOT COMUM]
+💰 Ouro: 150-300g
+⚔️ Machado Pesado +10 (30% chance)
+🧴 Pele de Ogro x3 (sempre)
+```
+
+**[L] Ver Lore**
+
+```
+P2: LEITOR DE DADOS
+
+╔════════════════════════════════════════╗
+║  LORE: OS REINOS ANTIGOS               ║
+╚════════════════════════════════════════╝
+
+Antes da era dos heróis, cinco reinos governavam
+as terras conhecidas. Cada um guardava um artefato
+de poder inimaginável...
+
+[REINO DO NORTE - "Gelo Eterno"]
+Governante: Rei Thorvald, O Gélido
+Artefato: "Coração do Inverno"
+Destino: Dizimado pela Praga das Sombras (Ano 342)
+
+[REINO DO LESTE - "Aurora Dourada"]
+Governante: Rainha Elyndra, A Radiante
+Artefato: "Coroa do Amanhecer"
+Destino: Traição interna, colapsou em guerra civil
+
+(...mais lore...)
+```
+
+**[G] Ver Gráficos**
+
+```
+P2: LEITOR DE DADOS
+
+╔════════════════════════════════════════╗
+║  ESTATÍSTICAS DA PARTIDA               ║
+╚════════════════════════════════════════╝
+
+[Aqui aparecerão os componentes UI do P3]
+(Ver seção P3 abaixo)
+```
+
+---
+
+### P3 - Estatísticas com Componentes UI
+
+**IMPORTANTE:** Os gráficos **NÃO são ASCII**. Serão **componentes visuais** feitos em Angular.
+
+#### Tipos de Gráficos Disponíveis
+
+**1. Gráfico de Barras (Ouro por Dia)**
+
+```typescript
+// Componente: BarChartComponent
+<bar-chart
+  [data]="goldPerDay"
+  [labels]="['Dia 43', 'Dia 44', 'Dia 45']"
+  [color]="'#FFD700'"
+></bar-chart>
+```
+
+**Visual:**
+
+```
++------------------------------------+
+|  OURO ACUMULADO (Últimos 7 Dias)   |
++------------------------------------+
+Dia 43 ████████░░ 850g
+Dia 44 ██████████ 1,200g
+Dia 45 ████░░░░░░ 450g
+Dia 46 ███████░░░ 920g
+Dia 47 ████████░░ 1,100g
+Dia 48 ██░░░░░░░░ 300g (BAIXO!)
+Dia 49 ███████████ 1,450g
++------------------------------------+
+Média: 896g/dia | Total: 6,270g
+```
+
+**2. Gráfico de Pizza (Kills por Tipo)**
+
+```typescript
+<pie-chart
+  [data]="[
+    {label: 'Goblins', value: 45, color: '#00FF00'},
+    {label: 'Ogros', value: 12, color: '#FF5500'},
+    {label: 'Lobos', value: 23, color: '#888888'}
+  ]"
+></pie-chart>
+```
+
+**3. Gráfico de Linha (Progressão de Poder)**
+
+```typescript
+<line-chart
+  [data]="heroPowerOverTime"
+  [xAxis]="'Dias'"
+  [yAxis]="'Nível Médio'"
+></line-chart>
+```
+
+**4. Barras de Progresso Simples**
+
+```
+Kills Totais
+████████████████░░░░ 245 / 300 (82%)
+
+Edifícios Construídos
+██████████░░░░░░░░░░ 8 / 15 (53%)
+
+Grandes Feitos
+████████░░░░░░░░░░░░ 12 / 30 (40%)
+```
+
+---
+
+### P5 - Grandes Feitos: Lista Completa
+
+#### O Que é um "Grande Feito"?
+
+Eventos **épicos e raros** que merecem destaque no histórico. São filtrados automaticamente para o P5.
+
+#### Categorias de Grandes Feitos
+
+**1. COMBATE ÉPICO**
+
+- Derrotar boss solo
+- Sobreviver com HP < 5%
+- Crítico que mata de um hit
+- Matar 10+ inimigos em 1 minuto
+- Vingança: Matar Nêmesis
+
+**2. SOCIAL DRAMÁTICO**
+
+- Primeira amizade (+80 Affinity)
+- Primeira traição (herói corrupto)
+- PvP que resulta em morte
+- Salvamento heroico (< 10% HP)
+- Formação de grupo lendário (3 heróis +90 Affinity)
+
+**3. ECONÔMICO**
+
+- Primeiro 1,000 ouro acumulado
+- Falência evitada por pouco
+- Loot lendário (valor > 1,000g)
+- Completar tech tree de uma classe
+
+**4. EXPANSÃO**
+
+- Fundar primeiro Posto Avançado
+- Mover capital
+- Perder Posto por traição
+- Reconquistar Posto perdido
+
+**5. EVENTOS GLOBAIS**
+
+- Sobreviver Lua de Sangue
+- Derrotar Boss Global
+- Repelir invasão de 50+ monstros
+- Casa Central com HP < 10% (quase Game Over)
+
+**6. NARRATIVA**
+
+- Primeiro herói morto
+- Primeiro herói redimido (Guarda → Aventureiro)
+- Título lendário adquirido
+- Nêmesis criado
+
+#### Exemplo de Log no P5
+
+```
+P5: REGISTO DO HISTORIADOR (GRANDES FEITOS)
+
+[Dia 5] 🏆 PRIMEIRO SANGUE
+        Sir Kaelen derrotou seu primeiro inimigo solo.
+        (Goblin "Krax, O Fedido")
+
+[Dia 12] 💖 LAÇOS FORTES
+        Kaelen salvou Lila de morte certa.
+        Affinity: -10 → +25 (Primeira amizade)
+
+[Dia 23] 💀 MORTE HEROICA
+        Gandalf caiu defendendo a Casa Central.
+        Último HP do edifício: 8% (salvou o reino)
+
+[Dia 31] ⚔️ VINGANÇA CUMPRIDA
+        Kaelen derrotou "Ogro Matador de Gandalf".
+        XP dobrado. Título: "Vingador de Gandalf"
+
+[Dia 45] 🏰 EXPANSÃO DO REINO
+        Posto Avançado fundado na Floresta Norte.
+        Capitão: Lila Rogue
+
+[Dia 67] 🌙 SOBREVIVÊNCIA
+        Reino resistiu à Lua de Sangue.
+        73 monstros eliminados. 2 heróis caídos.
+
+[Dia 87] 👑 STATUS ATUAL
+        Partida em andamento...
+        Próximo grande feito: Derrotar Rei Vilão
+```
+
+#### Condições Técnicas (Para Implementação)
+
+```typescript
+interface GrandeFeito {
+  id: string;
+  dia: number;
+  categoria:
+    | "COMBATE"
+    | "SOCIAL"
+    | "ECONOMICO"
+    | "EXPANSAO"
+    | "GLOBAL"
+    | "NARRATIVA";
+  titulo: string;
+  descricao: string;
+  icone: string;
+  raridade: "COMUM" | "RARO" | "EPICO" | "LENDARIO";
+  pontosLegado: number; // Para meta-progressão
+}
+
+// Exemplo de trigger
+function checkGrandeFeito(event: GameEvent) {
+  if (event.type === "HERO_KILL" && event.heroHP < 0.05 && event.survived) {
+    createGrandeFeito({
+      categoria: "COMBATE",
+      titulo: "POR UM FIO",
+      descricao: `${event.hero.name} sobreviveu com ${event.heroHP * 100}% HP`,
+      raridade: "EPICO",
+      pontosLegado: 50,
+    });
+  }
+}
+```
+
+---
+
 ## 2.6 [F4] WORLD MAP - "The Conquest"
 
 **Foco Principal:** Macro-estratégia, Expansão Territorial e Eventos Globais
 
+![F4 WORLD MAP - The Conquest](<docs/[F4]%20WORLD%20MAP%20(_The%20Conquest_)%202.png>)
+
 ### Descrição dos Painéis
 
-| Painel | Nome                     | Conteúdo                                                       |
-| ------ | ------------------------ | -------------------------------------------------------------- |
-| **P1** | Domínios Reais           | Lista da Capital e dos Postos Avançados com status de lealdade |
-| **P2** | Mapa de Satélite (ASCII) | Representação em grade do mundo inteiro (biomas em caracteres) |
-| **P3** | Previsão Global          | Ciclos de tempo atuais, previsão de eventos e clima global     |
-| **P4** | Detalhe do Nó/Setor      | Informações detalhadas sobre a célula selecionada no mapa      |
-| **P5** | Log de Expedição         | Logs de eventos que ocorrem longe da capital                   |
-| **P6** | Comandos de Expedição    | Ações de alto nível estratégico (Fundar Posto, Mover Capital)  |
-| **P7** | Estratégia Global        | Chat para decisões políticas e negociações                     |
+| Painel | Nome                  | Conteúdo                                                       |
+| ------ | --------------------- | -------------------------------------------------------------- |
+| **P1** | Domínios Reais        | Lista da Capital e dos Postos Avançados com status de lealdade |
+| **P2** | Mapa Visual (Tiles)   | **Imagens quadradas** representando biomas com ícones visuais  |
+| **P3** | Previsão Global       | Ciclos de tempo atuais, previsão de eventos e clima global     |
+| **P4** | Detalhe do Nó/Setor   | Informações detalhadas sobre a célula selecionada no mapa      |
+| **P5** | Log de Expedição      | Logs de eventos que ocorrem longe da capital                   |
+| **P6** | Comandos de Expedição | Ações de alto nível estratégico (Fundar Posto, Mover Capital)  |
+| **P7** | Estratégia Global     | Sistema de comandos intuitivo (menu numérico) para ações       |
 
 ### Layout Visual Completo
 
 ```
+
 +---------------------+------------------------------------------+---------------------+
-| P1: DOMÍNIOS REAIS  |        P2: MAPA DE SATÉLITE (ASCII)      | P3: PREVISÃO GLOBAL |
-| > CAPITAL (Sede)    |                                          |                     |
-|   Regente: Você     |   [~] [~] [M] [M] [F] [F] [C]            |  -- CICLO ATUAL --  |
-|   Pop: 12/12        |   [~] [P] [.] [.] [F] [T] [C]            |  Ciclo: 1 de 3      |
-|   Ouro: 100% Taxa   |   [~] [.] [V] [.] [.] [.] [M]            |  Tipo: "Primavera"  |
-|                     |   [~] [.] [.] [R] [R] [.] [M]            |  Monstros: T1 (Fraco|
-| > POSTO NORTE       |   [M] [M] [F] [R] [?] [?] [?]            |                     |
-|   Capitão: Rurik    |   [M] [C] [F] [?] [?] [?] [?]            |  -- TEMPO --        |
-|   Status: AUTÓNOMO  |                                          |  Próx. Evento:      |
-|   Lealdade: 80%     |   Legenda:                               |  "Lua de Sangue"    |
-|   (Vassalo)         |   [V]ila  [.]Campo  [F]loresta           |  Em: 05:00 min      |
-|                     |   [M]ont  [~]Água   [C]averna            |                     |
-| > POSTO LESTE       |   [T]orre [P]osto   [?]Névoa             |  -- AMEAÇAS --      |
-|   (Destruído)       |                                          |  [!] Invasão Norte  |
-|                     |                                          |  [!] Peste na Vila  |
+| P1: DOMÍNIOS REAIS | P2: MAPA DE SATÉLITE (ASCII) | P3: PREVISÃO GLOBAL |
+| > CAPITAL (Sede) | | |
+| Regente: Você | [~] [~] [M] [M] [F] [F] [C] | -- CICLO ATUAL -- |
+| Pop: 12/12 | [~] [P] [.] [.] [F] [T] [C] | Ciclo: 1 de 3 |
+| Ouro: 100% Taxa | [~] [.] [V] [.] [.] [.] [M] | Tipo: "Primavera" |
+| | [~] [.] [.] [R] [R] [.] [M] | Monstros: T1 (Fraco|
+| > POSTO NORTE | [M] [M] [F] [R] [?] [?] [?] | |
+| Capitão: Rurik | [M] [C] [F] [?] [?] [?] [?] | -- TEMPO -- |
+| Status: AUTÓNOMO | | Próx. Evento: |
+| Lealdade: 80% | Legenda: | "Lua de Sangue" |
+| (Vassalo) | [V]ila [.]Campo [F]loresta | Em: 05:00 min |
+| | [M]ont [~]Água [C]averna | |
+| > POSTO LESTE | [T]orre [P]osto [?]Névoa | -- AMEAÇAS -- |
+| (Destruído) | | [!] Invasão Norte |
+| | | [!] Peste na Vila |
 +---------------------+------------------------------------------+---------------------+
-| P4: DETALHE DO NÓ   |          P5: LOG DE EXPEDIÇÃO            | P6: COMANDOS EXP.   |
-| Coords: X:5 Y:8     | [GLOBAL] Novo ciclo iniciado: Chuvas.    | [N] Novo Posto      |
-| Bioma: Floresta     | [POSTO]  Rurik solicita reforços (Ouro). | [M] Mover Capital   |
-| Dono: Neutro        | [EVENTO] Terramoto abriu passagem em C4. | [E] Enviar Espião   |
-| Recurso: Madeira    | [EXPLOR] Lila descobriu "Ruínas Antigas".| [D] Diplomacia      |
-|                     | [ALERTA] Movimento inimigo no setor Norte|                     |
-| Ameaça: Alta (ursus)|                                          | (Use teclas)        |
+| P4: DETALHE DO NÓ | P5: LOG DE EXPEDIÇÃO | P6: COMANDOS EXP. |
+| Coords: X:5 Y:8 | [GLOBAL] Novo ciclo iniciado: Chuvas. | [N] Novo Posto |
+| Bioma: Floresta | [POSTO] Rurik solicita reforços (Ouro). | [M] Mover Capital |
+| Dono: Neutro | [EVENTO] Terramoto abriu passagem em C4. | [E] Enviar Espião |
+| Recurso: Madeira | [EXPLOR] Lila descobriu "Ruínas Antigas".| [D] Diplomacia |
+| | [ALERTA] Movimento inimigo no setor Norte| |
+| Ameaça: Alta (ursus)| | (Use teclas) |
 +---------------------+------------------------------------------+---------------------+
-|                        P7: ESTRATÉGIA GLOBAL (MODO CONQUISTA)                        |
-| IA: "Majestade, o Capitão Rurik está a pedir ouro. Se recusarmos, a lealdade dele    |
-|      cairá. Além disso, a Lua de Sangue aproxima-se. Devemos recuar os batedores?"   |
-|                                                                                      |
-| > /send gold 500 posto_norte_                                                        |
+| P7: ESTRATÉGIA GLOBAL (MODO CONQUISTA) |
+| IA: "Majestade, o Capitão Rurik está a pedir ouro. Se recusarmos, a lealdade dele |
+| cairá. Além disso, a Lua de Sangue aproxima-se. Devemos recuar os batedores?" |
+| |
+| > /send gold 500 posto*norte* |
 +--------------------------------------------------------------------------------------+
+
 ```
 
 ### Interação e UX (F4)
 
-#### P2 (Mapa de Satélite)
+#### P2 (Mapa Visual)
 
-- **Teclado:** WASD ou Setas movem um cursor piscante `[ ]` (retícula) pelo grid. O painel P4 atualiza instantaneamente com os dados da célula sob o cursor
-- **Mouse:** Hover sobre uma célula mostra tooltip simples (ex: "Floresta"). Clique "trava" a seleção no P4 e mostra opções de ação possíveis
+- **Teclado:** WASD ou Setas movem um cursor piscante sobre os tiles. O painel P4 atualiza instantaneamente com os dados da célula sob o cursor
+- **Mouse:** Hover sobre um tile mostra tooltip rápido (ex: "Floresta - Madeira"). Clique seleciona e atualiza P4 com detalhes completos
 
 #### P1 (Domínios)
 
@@ -441,10 +1369,631 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 #### P6 (Comandos de Expedição)
 
+- **Menu Numérico Intuitivo:** Ao invés de comandos de texto, usa **menu contextual** baseado na seleção do mapa
 - **Contextual:** As opções mudam baseadas no cursor do mapa (P2)
-  - Se cursor em Espaço Vazio (.): Opção `[N] Novo Posto`
-  - Se cursor em Posto (P): Opção `[D] Diplomacia` ou `[S] Enviar Suprimentos`
-- **Input Modal:** Pressionar a tecla da ação abre um pequeno prompt no centro da tela
+  - Se cursor em Espaço Vazio: Opção `[1] Fundar Novo Posto`
+  - Se cursor em Posto: Opção `[2] Diplomacia` ou `[3] Enviar Suprimentos`
+
+---
+
+### P2 - Mapa Visual com Tiles e Ícones
+
+**IMPORTANTE:** O mapa **NÃO é ASCII**. Será composto de **imagens quadradas** (tiles) representando cada tipo de terreno.
+
+#### Sistema de Tiles
+
+**Cada célula do mapa** é uma imagem 64x64px que representa o bioma:
+
+```typescript
+// Exemplo de estrutura
+interface MapTile {
+  coord: { x: number; y: number };
+  biome: "FLORESTA" | "MONTANHA" | "PLANICIE" | "AGUA" | "CAVERNA";
+  imageUrl: string; // 'assets/tiles/floresta.png'
+  owner: "PLAYER" | "NEUTRAL" | "ENEMY";
+  resource: "MADEIRA" | "PEDRA" | "OURO" | null;
+  poi: PointOfInterest | null; // Ponto de interesse
+}
+```
+
+#### Tiles Disponíveis
+
+| Bioma        | Imagem         | Cor Base      | Ícone Sobreposto |
+| ------------ | -------------- | ------------- | ---------------- |
+| **Floresta** | `floresta.png` | Verde escuro  | 🌲 (madeira)     |
+| **Montanha** | `montanha.png` | Cinza         | ⛰️ (pedra)       |
+| **Planície** | `planicie.png` | Verde claro   | 🌾 (fazenda)     |
+| **Água**     | `agua.png`     | Azul          | 💧               |
+| **Caverna**  | `caverna.png`  | Marrom escuro | ⛏️ (minério)     |
+| **Pântano**  | `pantano.png`  | Verde lama    | 🌿 (ervas)       |
+| **Deserto**  | `deserto.png`  | Amarelo       | 🏜️ (ouro)        |
+| **Névoa**    | `nevoa.png`    | Cinza escuro  | ❓               |
+
+#### Ícones de Pontos de Interesse (POI)
+
+Além do tile base, **ícones são sobrepostos** para indicar estruturas:
+
+```html
+<!-- Exemplo de tile com ícone -->
+<div
+  class="map-tile"
+  [style.background-image]="'url(assets/tiles/floresta.png)'"
+>
+  <img class="poi-icon" src="assets/icons/tower.png" alt="Torre" />
+</div>
+```
+
+| POI                | Ícone            | Descrição                         |
+| ------------------ | ---------------- | --------------------------------- |
+| **Vila (Capital)** | 🏰 `castle.png`  | Casa Central (dourado)            |
+| **Posto Avançado** | 🏕️ `outpost.png` | Posto (prata)                     |
+| **Torre de Vigia** | 🗼 `tower.png`   | Torre (vermelho)                  |
+| **Boss Lair**      | 💀 `skull.png`   | Covil de Boss (vermelho pulsante) |
+| **Ruínas**         | 🏛️ `ruins.png`   | Ruínas antigas (cinza)            |
+| **Monstros**       | 👾 `monster.png` | Grupo de monstros (animado)       |
+| **Heróis**         | ⚔️ `hero.png`    | Heróis explorando (azul)          |
+| **Evento Ativo**   | ⚡ `event.png`   | Evento global (amarelo piscante)  |
+
+#### Exemplo Visual do Mapa
+
+```
+P2: MAPA DO MUNDO (7x7 Grid)
+
++-------------------------------------------+
+| [🌊] [🌊] [⛰️] [⛰️] [🌲] [🌲🗼] [⛏️] |
+| [🌊] [🌲🏕️] [🌾] [🌾] [🌲] [🌲] [⛏️] |
+| [🌊] [🌾] [🏰] [🌾] [🌾] [🌾] [⛰️] | ← Cursor aqui
+| [🌊] [🌾] [🌾] [🏛️] [🏛️] [🌾] [⛰️] |
+| [⛰️] [⛰️] [🌲] [🏛️] [❓] [❓] [❓] |
+| [⛰️] [⛏️] [🌲] [❓] [❓] [❓] [❓] |
+| [🌲] [🌲] [🌲] [❓] [❓] [❓] [❓] |
++-------------------------------------------+
+
+Legenda:
+🏰 = Vila (Capital)
+🏕️ = Posto Avançado
+🗼 = Torre de Vigia
+🏛️ = Ruínas Antigas
+❓ = Névoa de Guerra (inexplorado)
+```
+
+#### Estados Visuais dos Tiles
+
+**1. Normal**
+
+```css
+.map-tile {
+  opacity: 1;
+  filter: brightness(1);
+}
+```
+
+**2. Selecionado (Cursor)**
+
+```css
+.map-tile.selected {
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+  transform: scale(1.1);
+}
+```
+
+**3. Névoa de Guerra**
+
+```css
+.map-tile.fog {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+```
+
+**4. Ameaça Ativa**
+
+```css
+.map-tile.threat {
+  border: 2px solid #ff0000;
+  animation: pulse 1s infinite;
+}
+```
+
+---
+
+### P3 - Previsão Global: Eventos e Clima
+
+#### Layout Expandido
+
+```
+P3: PREVISÃO GLOBAL
+
++--------------------------------------+
+|  CICLO ATUAL (1/3)                   |
++--------------------------------------+
+| Nome: "Primavera"                    |
+| Dias: 1-50 (Dia atual: 23)           |
+| Monstros: Tier 1 (Goblins, Lobos)    |
+| Clima: Neutro                        |
++--------------------------------------+
+
+▼ PRÓXIMOS EVENTOS AGENDADOS
++--------------------------------------+
+| [EM 04:32] 🌙 Lua de Sangue          |
+|            (Evento Global Maior)     |
+|                                      |
+| [EM 12:00] 🌧️ Tempestade              |
+|            (Dura 5 min)              |
+|                                      |
+| [EM 1 DIA] 🌋 Terremoto                |
+|            (Abre novas passagens)    |
++--------------------------------------+
+
+▼ CLIMA ATIVO
++--------------------------------------+
+| Atual: ☀️ Ensolarado                  |
+| Duração: Permanente                  |
+| Efeitos: Normal                      |
++--------------------------------------+
+
+▼ AMEAÇAS ATIVAS
++--------------------------------------+
+| [!] Invasão: Horda Goblin (Norte)    |
+|     ETA: 02:15                       |
+|     Força: 25 Goblins                 |
+|                                      |
+| [!] Boss: Ogro Rei (Caverna X:5 Y:8)|
+|     Status: Patrulhando              |
+|     Risco: EXTREMO                   |
++--------------------------------------+
+```
+
+---
+
+### Lista Completa de Eventos Globais
+
+#### Categorias de Eventos
+
+**1. EVENTOS CLIMÁTICOS**
+
+| Evento             | Frequência     | Duração       | Efeitos                                                   |
+| ------------------ | -------------- | ------------- | --------------------------------------------------------- |
+| **☀️ Sol Intenso** | Aleatório      | 10 min        | +20% Stamina heróis, -10% HP monstros noturnos            |
+| **🌧️ Tempestade**  | A cada 10 dias | 5 min         | Magos +50% poder, Arqueiros -30% acurácia, Torres offline |
+| **❄️ Nevasca**     | Ciclo 3        | 8 min         | -20% velocidade todos, Monstros gelo +50% stats           |
+| **🌪️ Tornado**     | Raro (5%)      | 3 min         | Destrói construções aleatórias (exceto Casa Central)      |
+| **🌫️ Névoa Densa** | Noturno        | Até amanhecer | Visibilidade -70%, Heróis perdem direção                  |
+
+**2. EVENTOS GEOLÓGICOS**
+
+| Evento                 | Frequência     | Duração     | Efeitos                                            |
+| ---------------------- | -------------- | ----------- | -------------------------------------------------- |
+| **🌋 Terremoto**       | A cada 15 dias | Instantâneo | Abre novas passagens, 5% chance destruir prédio    |
+| **🌋 Terremoto Maior** | Raro           | Instantâneo | Muda geografia (novos biomas), 20% destruir prédio |
+| **🌋 Fenda no Chão**   | Após terremoto | Permanente  | Cria barren intransponível no mapa                 |
+| **🌋 Erupção Vulcão**  | Se há vulcão   | 10 min      | Spawna Elementais de Fogo, +50% dano fogo global   |
+
+**3. EVENTOS MÁGICOS**
+
+| Evento                   | Frequência         | Duração | Efeitos                                            |
+| ------------------------ | ------------------ | ------- | -------------------------------------------------- |
+| **🔮 Fenda Mágica**      | 5%/dia (Ciclo 2+)  | 10 min  | Portal spawna 10-20 monstros elite                 |
+| **🌙 Lua de Sangue**     | Dias 100, 125, 150 | 15 min  | Todos monstros +100% HP/Attack, Boss Global spawna |
+| **✨ Chuva de Estrelas** | Raro (3%)          | 5 min   | +50% XP global, Chance loot lendário dobra         |
+| **🕯️ Eclipse**           | Ciclo 3            | 8 min   | Mortos-vivos +200% poder, Sol = Noite              |
+
+**4. EVENTOS DE INVASÃO**
+
+| Evento                       | Frequência         | Duração     | Efeitos                               |
+| ---------------------------- | ------------------ | ----------- | ------------------------------------- |
+| **👾 Horda Goblin**          | A cada 20 dias     | Até repelir | 30-50 Goblins atacam capital          |
+| **👹 Invasão Ogro**          | Ciclo 2            | Até repelir | 15-25 Ogros cerco à vila              |
+| **💉 Praga de Mortos-Vivos** | Após muitas mortes | Permanente  | Heróis mortos reanimam como inimigos  |
+| **🐉 Ataque de Dragão**      | Ciclo 3            | Boss fight  | Dragão ataca diretamente Casa Central |
+
+**5. EVENTOS ECONÔMICOS/SOCIAIS**
+
+| Evento                   | Frequência      | Duração      | Efeitos                                 |
+| ------------------------ | --------------- | ------------ | --------------------------------------- |
+| **💰 Caravana Mercante** | Aleatório       | 5 min        | Desconto -30% em todos os itens da loja |
+| **🎭 Festival da Vila**  | A cada 30 dias  | 10 min       | +20 Moral, Heróis não lutam (descansam) |
+| **⚖️ Motim**             | Se Moral < 30%  | Até resolver | Guardas desertam, Heróis podem trair    |
+| **🎖️ Lenda Nasce**       | Herói 50+ kills | Permanente   | +10% Recrutamento, -20% custo skills    |
+
+**6. EVENTOS DE BOSS**
+
+| Evento                     | Frequência         | Duração      | Efeitos                                  |
+| -------------------------- | ------------------ | ------------ | ---------------------------------------- |
+| **💀 Castelo Amaldiçoado** | Dia 105 (Ciclo 3)  | Até derrotar | Herói caído vira Rei Vilão + exército    |
+| **🐊 Leviatã Desperta**    | Se há água         | Boss fight   | Boss aquático gigante bloqueia navegação |
+| **🧛 Nêmesis Ressurge**    | Após matar Nêmesis | Boss fight   | Nêmesis volta 2x mais forte              |
+
+#### Sistema de Agendamento
+
+```typescript
+interface EventoGlobal {
+  id: string;
+  tipo: "CLIMATICO" | "GEOLOGICO" | "MAGICO" | "INVASAO" | "ECONOMICO" | "BOSS";
+  nome: string;
+  diaInicio: number; // Ou null se aleatório
+  duracao: number; // Em minutos
+  efeitos: Efeito[];
+  cancelavel: boolean;
+  prioridade: 1 | 2 | 3; // 3 = mais importante
+}
+
+// Exemplo de evento agendado
+const luaDeSangue: EventoGlobal = {
+  id: "blood_moon_1",
+  tipo: "MAGICO",
+  nome: "Lua de Sangue",
+  diaInicio: 100,
+  duracao: 15,
+  efeitos: [
+    { tipo: "MONSTER_BUFF", valor: 2.0 }, // +100%
+    { tipo: "SPAWN_BOSS", bossId: "cursed_king" },
+  ],
+  cancelavel: false,
+  prioridade: 3,
+};
+```
+
+---
+
+### P4 - Detalhe do Nó/Setor (Completo)
+
+#### Informações Mostradas ao Selecionar Tile
+
+```
+P4: DETALHE DO NÓ
+Coordenadas: X:5, Y:8
+
++--------------------------------------+
+|  BIOMA: FLORESTA 🌲                 |
++--------------------------------------+
+| Tipo: Terreno natural                |
+| Acessibilidade: Normal (caminhado por heróis) |
+| Exploração: 100% (já visitado)         |
++--------------------------------------+
+
+▼ PROPRIEDADE
++--------------------------------------+
+| Dono: NEUTRO                         |
+| Controle: Ninguém                    |
+| Disputado: Não                       |
++--------------------------------------+
+
+▼ RECURSOS DISPONÍVEIS
++--------------------------------------+
+| Primário: 🌲 Madeira (Abundante)     |
+| Secundário: 🌿 Ervas Medicinais      |
+| Extração: Automática (heróis coletam) |
++--------------------------------------+
+
+▼ AMEAÇAS PRESENTES
++--------------------------------------+
+| [!] 3x Lobos (Lvl 5-7)               |
+|     Status: Patrulhando              |
+|     Risco: MÉDIO                     |
+|                                      |
+| [!] 1x Urso Pálido (Lvl 10 - Elite) |
+|     Status: Dormindo (covil próximo)|
+|     Risco: ALTO                      |
++--------------------------------------+
+
+▼ PONTOS DE INTERESSE
++--------------------------------------+
+| [🏛️] Ruínas Antigas (inexploradas)  |
+|     Loot estimado: Médio-Alto       |
+|     Guardado por: Lobos              |
++--------------------------------------+
+
+▼ HERÓIS NESTA ÁREA
++--------------------------------------+
+| Lila Rogue (Explorando)              |
+| Status: Saudável | HP: 85%          |
+| Ação: Procurando recursos           |
++--------------------------------------+
+
+▼ AÇÕES DISPONÍVEIS
++--------------------------------------+
+| [E]  Enviar heróis para cá (scout) |
+| [C]  Construir Torre de Vigia        |
+| [M]  Marcar como ponto de interesse  |
+| [ESC] Voltar                         |
++--------------------------------------+
+```
+
+#### Tipos de Nós Especiais
+
+**Nó com Boss:**
+
+```
+▼ BOSS DETECTADO!
++--------------------------------------+
+| 💀 OGRO REI "Grok, O Devorador"     |
++--------------------------------------+
+| Nível: 15 (Elite Maior)              |
+| HP: 5,000                            |
+| Attack: 200                          |
+| Guarda: "Baú Lendário"             |
+| Risco: EXTREMO 🔴🔴🔴                |
++--------------------------------------+
+| RECOMPENSA ESTIMADA:                 |
+| 💰 2,000-3,000 Ouro                  |
+| ⚔️ Item Lendário (95% chance)       |
++--------------------------------------+
+```
+
+**Nó com Posto Avançado:**
+
+```
+▼ POSTO AVANÇADO: "Bastilha Norte"
++--------------------------------------+
+| Capitão: Rurik, O Leal              |
+| Heróis: 3/5 (Rurik, Elara, Thorgrim)|
+| Lealdade: 80% (Vassalo)              |
+| Tributo: 20% ouro                    |
++--------------------------------------+
+| PRODUÇÃO DIÁRIA:                      |
+| +150g Ouro                           |
+| +30g Tributo enviado à capital       |
++--------------------------------------+
+| PEDIDOS ATIVOS:                      |
+| [!] Rurik pediu 500g para upgrade    |
+|     Prazo: 2 dias                    |
++--------------------------------------+
+```
+
+---
+
+### P5 - Identificadores de Logs de Expedição
+
+#### Lista Completa de Tags
+
+| Identificador    | Cor                       | Categoria        | Uso                             | Exemplo                                    |
+| ---------------- | ------------------------- | ---------------- | ------------------------------- | ------------------------------------------ |
+| **[GLOBAL]**     | Roxo (#AA00FF)            | Eventos Globais  | Eventos que afetam todo o mundo | `[GLOBAL] Lua de Sangue iniciada!`         |
+| **[POSTO]**      | Azul (#0080FF)            | Postos Avançados | Ações e pedidos de postos       | `[POSTO] Rurik solicita reforços`          |
+| **[EVENTO]**     | Amarelo (#FFFF00)         | Eventos Locais   | Eventos específicos em áreas    | `[EVENTO] Terremoto abriu passagem C4`     |
+| **[EXPLOR]**     | Verde (#00FF00)           | Exploração       | Heróis descobrindo coisas       | `[EXPLOR] Lila descobriu Ruínas Antigas`   |
+| **[ALERTA]**     | Vermelho (#FF0000)        | Alertas          | Ameaças e perigos               | `[ALERTA] Movimento inimigo setor Norte`   |
+| **[COMBATE]**    | Laranja (#FFA500)         | Combate Remoto   | Lutas longe da capital          | `[COMBATE] Kaelen vs 5 Goblins (vitória)`  |
+| **[DIPLOMACIA]** | Ciano (#00FFFF)           | Política         | Negociações e acordos           | `[DIPLOMACIA] Posto Norte agora é Vassalo` |
+| **[MORTE]**      | Vermelho Escuro (#8B0000) | Heroes caídos    | Mortes longe da capital         | `[MORTE] Gandalf morreu em exploração`     |
+| **[BOSS]**       | Magenta (#FF00FF)         | Boss Detectado   | Boss avistado ou derrotado      | `[BOSS] Dragão detectado em X:10 Y:15!`    |
+| **[CONQUISTA]**  | Dourado (#FFD700)         | Vitórias         | Território conquistado          | `[CONQUISTA] Caverna agora é sua!`         |
+
+#### Exemplo de Log Real (P5)
+
+```
+P5: LOG DE EXPEDIÇÃO
+
+[14:02] [EXPLOR]   Lila iniciou reconhecimento X:5 Y:8
+[14:05] [EVENTO]   Chuva de meteoros ativa! (Dura 5 min)
+[14:07] [EXPLOR]   Lila descobriu: Ruínas Antigas
+[14:10] [COMBATE]  Lila vs 3 Lobos Pálidos (em andamento)
+[14:12] [COMBATE]  Lila vitória! (+300 XP, +150g)
+[14:15] [ALERTA]   Boss detectado: Ogro Rei (X:5 Y:8)
+[14:20] [POSTO]    Rurik: "Detectei horda Goblin. Pedindo 500g"
+[14:25] [GLOBAL]   Terremoto! Passagem aberta entre C4-D5
+[14:30] [BOSS]     Heróis iniciaram ataque ao Ogro Rei
+[14:35] [MORTE]    Elara caíu em combate (Ogro Rei)
+[14:40] [BOSS]     Ogro Rei derrotado! Loot: 2,500g + Machado Lendário
+```
+
+---
+
+### P6 - Comandos de Expedição: Lista Completa
+
+#### Todos os Comandos Disponíveis
+
+**COMANDOS BÁSICOS:**
+
+| Tecla/Número     | Comando             | Descrição                       | Requisitos                      |
+| ---------------- | ------------------- | ------------------------------- | ------------------------------- |
+| **[1] ou [N]**   | Novo Posto          | Fundar Posto Avançado           | 3 heróis + 1,000g + tile válido |
+| **[2] ou [M]**   | Mover Capital       | Transferir capital para Posto   | Posto Lealdade 100% + 5 heróis  |
+| **[3] ou [E]**   | Enviar Espião       | Scout invisível para área       | 1 Ladino + 100g                 |
+| **[4] ou [D]**   | Diplomacia          | Negociar com Posto/Facção       | Posto ou facção neutra          |
+| **[5] ou [S]**   | Enviar Suprimentos  | Mandar ouro/itens para Posto    | Posto ativo                     |
+| **[6] ou [A]**   | Atacar Nó           | Enviar heróis para limpar área  | Heróis disponíveis              |
+| **[7] ou [C]**   | Construir Torre     | Torre de Vigia remota           | 300g + tile controlado          |
+| **[8] ou [R]**   | Reclamar Território | Assumir controle de tile neutro | Tile limpo de monstros          |
+| **[9] ou [I]**   | Investigar          | Revelar tile com Névoa          | 50g                             |
+| **[0] ou [ESC]** | Cancelar            | Fechar menu                     | Sempre                          |
+
+**COMANDOS AVANÇADOS:**
+
+| Comando                         | Descrição                           | Custo IP | Requisitos             |
+| ------------------------------- | ----------------------------------- | -------- | ---------------------- |
+| **/teleport_hero [nome] [X,Y]** | Teleportar herói para tile          | 50 IP    | Tile explorado         |
+| **/recall_all**                 | Chamar todos heróis de volta        | 30 IP    | Sempre                 |
+| **/fortify [X,Y]**              | Fortificar tile com defesas         | 500g     | Tile controlado        |
+| **/sabotage [posto]**           | Enviar sabotador para posto inimigo | 1,000g   | Ladino + Posto inimigo |
+
+#### Exemplo de Uso: Fundar Posto
+
+**Método 1: Menu Numérico (Recomendado)**
+
+1. Jogador seleciona tile vazio no P2 (ex: X:10 Y:5)
+2. Menu contextual aparece automaticamente no P6:
+
+```
++--------------------------------------+
+|  AÇÕES DISPONÍVEIS (X:10 Y:5)         |
++--------------------------------------+
+| [1] Fundar Novo Posto                |
+|     Custo: 1,000g                    |
+|     Requer: 3 heróis                 |
+|                                      |
+| [2] Construir Torre de Vigia         |
+|     Custo: 300g                      |
+|                                      |
+| [3] Marcar como Objetivo             |
+|     Custo: Gratis                    |
+|                                      |
+| [ESC] Cancelar                       |
++--------------------------------------+
+Digite o número: _
+```
+
+3. Jogador digita `1`
+4. Submenu abre:
+
+```
++--------------------------------------+
+|  FUNDAR POSTO AVANÇADO               |
++--------------------------------------+
+| Localização: X:10 Y:5 (Floresta)     |
+| Custo: 1,000g                        |
+|                                      |
+| Escolha 3 heróis:                   |
+| [1] Sir Kaelen (Lvl 9)               |
+| [2] Lila Rogue (Lvl 7)               |
+| [3] Gandalf (Lvl 6)                  |
+| [4] Elara (Lvl 5)                    |
+| ...                                  |
+|                                      |
+| Digite 3 números separados por vírgula: |
+| Ex: 1,2,3_                           |
++--------------------------------------+
+```
+
+5. Jogador digita `1,2,3`
+6. Confirmação final:
+
+```
++--------------------------------------+
+|  CONFIRMAR FUNDAÇÃO?                  |
++--------------------------------------+
+| Heróis escolhidos:                   |
+| - Sir Kaelen (Capitão)              |
+| - Lila Rogue                         |
+| - Gandalf                            |
+|                                      |
+| Custo: 1,000g                        |
+| Saldo após: 500g                    |
+|                                      |
+| [ENTER] Confirmar | [ESC] Cancelar   |
++--------------------------------------+
+```
+
+**Método 2: Comando de Texto (Avançado)**
+
+```
+Jogador (P7): /found_outpost X:10 Y:5 heroes:kaelen,lila,gandalf
+
+Conselheiro: "Iniciando fundação do Posto Avançado em X:10 Y:5.
+Custo: 1,000g. Heróis: Kaelen (Capitão), Lila, Gandalf.
+Tempo de construção: 60 segundos."
+```
+
+---
+
+### P7 - Sistema de Comandos Intuitivo
+
+#### Filosofia: Menu Numérico > Comandos de Texto
+
+**Problema com comandos de texto:**
+
+- Exige memorização
+- Sintaxe complexa (`/send gold 500 posto_norte`)
+- Propenso a erros de digitação
+
+**Solução: Menu Contextual**
+
+- Todas as ações disponíveis mostradas visualmente
+- Jogador escolhe número ou tecla de atalho
+- Submenus guiam o processo
+
+#### Exemplo Completo: Enviar Ouro para Posto
+
+**Passo 1:** Jogador seleciona Posto no mapa (P2) ou na lista (P1)
+
+**Passo 2:** Menu aparecer no P7:
+
+```
++--------------------------------------+
+|  POSTO NORTE - AÇÕES                 |
++--------------------------------------+
+| [1] Enviar Ouro                      |
+| [2] Enviar Suprimentos (Poções)      |
+| [3] Enviar Herói (Reforço)          |
+| [4] Diplomacia (Negociar)            |
+| [5] Recall (Trazer de volta)         |
+| [ESC] Cancelar                       |
++--------------------------------------+
+Escolha: _
+```
+
+**Passo 3:** Jogador digita `1`
+
+**Passo 4:** Submenu:
+
+```
++--------------------------------------+
+|  ENVIAR OURO PARA POSTO NORTE        |
++--------------------------------------+
+| Saldo atual: 1,500g                  |
+|                                      |
+| Quanto enviar?                       |
+| [1] 100g   (Mínimo)                  |
+| [2] 500g   (Recomendado)             |
+| [3] 1,000g (Muito)                   |
+| [4] Custom (Digite valor)            |
+| [ESC] Cancelar                       |
++--------------------------------------+
+Escolha: _
+```
+
+**Passo 5:** Jogador escolhe `2` (500g)
+
+**Passo 6:** Confirmação:
+
+```
++--------------------------------------+
+|  CONFIRMAR ENVIO?                    |
++--------------------------------------+
+| Destino: Posto Norte                 |
+| Valor: 500g                          |
+| Saldo após: 1,000g                  |
+|                                      |
+| Efeito esperado:                     |
+| Lealdade: 80% → 90% (+10%)          |
+|                                      |
+| [ENTER] Confirmar | [ESC] Cancelar   |
++--------------------------------------+
+```
+
+**Passo 7:** Jogador pressiona ENTER
+
+**Passo 8:** Feedback:
+
+```
+[P5 LOG]
+[14:35] [POSTO] Ouro enviado: 500g → Posto Norte
+[14:35] [DIPLOMACIA] Lealdade do Posto Norte: 80% → 90%
+
+[P7 Conselheiro]
+"Ouro enviado com sucesso. Capitão Rurik agradece.
+Lealdade aumentou para 90%. Eles estão satisfeitos."
+```
+
+#### Comandos de Texto (Opcional para Experts)
+
+Jogadores avançados ainda podem usar comandos de texto no P7:
+
+```
+Jogador: /send gold 500 posto_norte
+
+(Sistema interpreta e executa diretamente sem menus)
+```
+
+**Autocomplete:**
+
+- Ao digitar `/send`, mostra sugestões
+- Tab completa automaticamente
+- Histórico de comandos (Seta Cima)
+
+---
 
 ---
 
@@ -453,6 +2002,8 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 **Foco:** Histórico de Cartas, Gestão de Relacionamento e Arquivo de Mensagens
 
 **Metáfora:** Um cliente de e-mail retro-futurista misturado com um pombal medieval
+
+![F5 THE AVIARY - Royal Mail](<docs/[F5]%20THE%20AVIARY%20(_Royal%20Mail_).png>)
 
 ### Descrição dos Painéis
 
@@ -469,37 +2020,39 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 ### Layout Visual Completo
 
 ```
+
 +---------------------+------------------------------------------+---------------------+
-| P1: CAIXA DE CORREIO|        P2: LEITURA DE MENSAGEM           | P3: PERFIL DO ALVO  |
-| > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen (Avatar|
-|  [1] Sir Kaelen (N) | PARA: Vossa Majestade                    |                     |
-|      "Sobre o Ouro" | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
-|      14:02          |                                          | Humor: Irritado     |
-|                     | ASSUNTO: Re: Covardia                    | Lealdade: 45% (Baixa|
-|  [2] Lila Rogue     |                                          |                     |
-|      "Pedido..."    | "Majestade, com todo o respeito, chamar  | Última Carta:       |
-|      Ontem          |  retirada estratégica de 'covardia' é    | Há 2 dias (Ignorada)|
-|                     |  fácil para quem está sentado no trono.  |                     |
-| > ENVIADOS          |  O Ogro tinha vantagem de terreno!"      | Custo Envio:        |
-|  [3] P/ Conselheiro |                                          | 25 IP (Influência)  |
-|                     | [ANEXO: Relatório de Danos.log]          |                     |
-| > RASCUNHOS         |                                          |                     |
-|  (Vazio)            | ---------------------------------------- |                     |
-|                     | > [R] RESPONDER   > [A] ARQUIVAR         |                     |
+| P1: CAIXA DE CORREIO| P2: LEITURA DE MENSAGEM | P3: PERFIL DO ALVO |
+| > CAIXA DE ENTRADA | DE: Sir Kaelen (Guerreiro) | [IMG] Kaelen (Avatar|
+| [1] Sir Kaelen (N) | PARA: Vossa Majestade | |
+| "Sobre o Ouro" | DATA: Dia 45 - 14:02 | Status: EM COMBATE |
+| 14:02 | | Humor: Irritado |
+| | ASSUNTO: Re: Covardia | Lealdade: 45% (Baixa|
+| [2] Lila Rogue | | |
+| "Pedido..." | "Majestade, com todo o respeito, chamar | Última Carta: |
+| Ontem | retirada estratégica de 'covardia' é | Há 2 dias (Ignorada)|
+| | fácil para quem está sentado no trono. | |
+| > ENVIADOS | O Ogro tinha vantagem de terreno!" | Custo Envio: |
+| [3] P/ Conselheiro | | 25 IP (Influência) |
+| | [ANEXO: Relatório de Danos.log] | |
+| > RASCUNHOS | | |
+| (Vazio) | ---------------------------------------- | |
+| | > [R] RESPONDER > [A] ARQUIVAR | |
 +---------------------+------------------------------------------+---------------------+
-| P4: LISTA DE CONTATO|          P5: RASCUNHO ATUAL (EDITOR)     | P6: AÇÕES DE ENVIO  |
-| [H] Sir Kaelen      | PARA: Sir Kaelen                         | [Enter] Enviar      |
-| [H] Lila Rogue      |                                          | [S] Salvar Rascunho |
-| [H] Gandalf         | "Entendo seu ponto, Kaelen. Mas preciso  | [D] Descartar       |
-| [N] Conselheiro     |  que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro     |
-| [E] Guilda Mercante |                                          |                     |
-|                     | (Digite sua mensagem aqui...)            |                     |
+| P4: LISTA DE CONTATO| P5: RASCUNHO ATUAL (EDITOR) | P6: AÇÕES DE ENVIO |
+| [H] Sir Kaelen | PARA: Sir Kaelen | [Enter] Enviar |
+| [H] Lila Rogue | | [S] Salvar Rascunho |
+| [H] Gandalf | "Entendo seu ponto, Kaelen. Mas preciso | [D] Descartar |
+| [N] Conselheiro | que você volte lá. Vou enviar poções."_ | [T] Anexar Ouro |
+| [E] Guilda Mercante | | |
+| | (Digite sua mensagem aqui...) | |
 +---------------------+------------------------------------------+---------------------+
-|                        P7: STATUS DA REDE DE CORVOS                                  |
-| STATUS: 2 Pássaros em voo.                                                           |
-| NOTIF: A resposta de Lila deve chegar em 30 segundos.                                |
-| > /send_                                                                             |
+| P7: STATUS DA REDE DE CORVOS |
+| STATUS: 2 Pássaros em voo. |
+| NOTIF: A resposta de Lila deve chegar em 30 segundos. |
+| > /send_ |
 +--------------------------------------------------------------------------------------+
+
 ```
 
 ### UX & Interação (F5)
@@ -520,6 +2073,374 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 #### P6 (Ações)
 
 - **T** abre um modal numérico para anexar Ouro à carta (suborno/ajuda)
+
+---
+
+### P3 - Perfil do Alvo (Detalhado)
+
+#### O Que é Mostrado no P3
+
+Quando o jogador seleciona um herói para enviar uma carta (seja no P4 ou após ler uma mensagem no P2), o **P3** mostra um **perfil completo** daquele herói.
+
+#### Layout Completo do P3
+
+```
+P3: PERFIL DO ALVO
+
++--------------------------------------+
+|  [AVATAR] SIR KAELEN                 |
+|  Guerreiro | Nível 9                 |
++--------------------------------------+
+
+▼ STATUS ATUAL (TEMPO REAL)
++--------------------------------------+
+| Estado: ⚠️ EM COMBATE                 |
+| Localização: Floresta Norte (X:5 Y:8) |
+| HP: 65% (Ferido)                     |
+| Atividade: Lutando vs Ogro Rei       |
+| Última atualização: Há 5 segundos       |
++--------------------------------------+
+
+▼ ESTADO EMOCIONAL
++--------------------------------------+
+| Humor: 😠 IRRITADO                   |
+| Moral: 45/100 (Baixo)                |
+| Lealdade: 65/100 (Média)             |
+|                                      |
+| Razão: "Você o chamou de covarde     |
+|          na última carta"             |
++--------------------------------------+
+
+▼ RELACIONAMENTO COM VOCÊ
++--------------------------------------+
+| Affinity: +45 (Companheiro)          |
+| Confiança: Média                      |
+| Respeito: Alto                       |
+| Medo: Nenhum                         |
+|                                      |
+| Tendência de resposta: 60%           |
+| (Se enviar carta agora)              |
++--------------------------------------+
+
+▼ HISTÓRICO DE CORRESPONDÊNCIA
++--------------------------------------+
+| Total de cartas trocadas: 8          |
+| Enviadas por você: 5                |
+| Recebidas dele: 3                    |
+|                                      |
+| Última carta:                        |
+| Data: Há 2 dias (Dia 43)             |
+| Assunto: "Sobre o Ouro"              |
+| Resposta: Ignorada por ele           |
+| Tom: Neutro                          |
++--------------------------------------+
+
+▼ CONTEXTO DA SITUAÇÃO ATUAL
++--------------------------------------+
+| Kaelen está em maus lençóis:        |
+| > Lutando contra boss sozinho        |
+| > HP crítico (65%)                   |
+| > Sem poções no inventário          |
+|                                      |
+| Se enviar carta AGORA:               |
+| Chance de ele ler: 30% (em combate)  |
+| Melhor esperar? Sim (após combate)  |
++--------------------------------------+
+
+▼ CUSTO DE ENVIO
++--------------------------------------+
+| Influence Points: 25 IP              |
+| Saldo atual: 75/100 IP               |
+| Saldo após envio: 50/100 IP         |
+|                                      |
+| Tempo estimado de entrega: 15s       |
+| Distância: 8 hexágonos da capital    |
++--------------------------------------+
+
+▼ SUGESTÕES DO CONSELHEIRO
++--------------------------------------+
+| 🧠 Conselheiro sugere:               |
+| "Kaelen está irritado com você.      |
+|  Evite críticas diretas. Elogie      |
+|  sua bravura primeiro, depois peça   |
+|  que continue lutando. Considere     |
+|  anexar 100g como gestão de boa fé." |
++--------------------------------------+
+
+[AÇÕES]
+[ENTER] Começar a escrever (P5)
+[ESC] Voltar
+```
+
+#### Breakdown de Cada Seção do P3
+
+**1. AVATAR E IDENTIFICAÇÃO**
+
+- **Avatar:** Imagem pixel art 64x64 do herói (varia por classe)
+- **Nome:** Nome completo do herói
+- **Classe e Nível:** Informação básica
+
+**2. STATUS ATUAL (Tempo Real)**
+
+| Campo                  | Descrição                        | Valores Possíveis                                                                   |
+| ---------------------- | -------------------------------- | ----------------------------------------------------------------------------------- |
+| **Estado**             | O que o herói está fazendo AGORA | ⚔️ EM COMBATE, 🛏️ DESCANSANDO, 🚶 EXPLORANDO, 🛡️ DEFENDENDO, 🛒 COMPRANDO, 💀 MORTO |
+| **Localização**        | Onde ele está no mapa            | Nome do bioma + coordenadas (X, Y)                                                  |
+| **HP**                 | Saúde atual                      | Percentual (cor: verde >70%, amarelo 30-70%, vermelho <30%)                         |
+| **Atividade**          | Descrição do que ele faz         | "Lutando vs Ogro Rei", "Salvando Lila", "Bebendo na taverna"                        |
+| **Última atualização** | Quão recente é essa info         | "Há 5 segundos", "Há 1 minuto" (atualiza em tempo real)                             |
+
+**3. ESTADO EMOCIONAL**
+
+| Campo        | Descrição                    | Valores                                                               |
+| ------------ | ---------------------------- | --------------------------------------------------------------------- |
+| **Humor**    | Emoção atual do herói        | 😄 FELIZ, 😐 NEUTRO, 😠 IRRITADO, 😨 ASSUSTADO, 😔 TRISTE, 😈 FURIOSO |
+| **Moral**    | Motivação geral (0-100)      | Valor numérico + etiqueta (Baixo/Médio/Alto)                          |
+| **Lealdade** | Lealdade ao reino (0-100)    | Valor numérico + cor (verde >70, amarelo 40-70, vermelho <40)         |
+| **Razão**    | Por que ele está nesse humor | Texto explicativo gerado pela IA                                      |
+
+**Exemplos de Razões:**
+
+- "Acabou de matar um boss (orgulhoso)"
+- "Lila roubou seu kill (irritado)"
+- "Você enviou ouro (agradecido)"
+- "Ignorou pedido de ajuda (ressentido)"
+
+**4. RELACIONAMENTO COM VOCÊ**
+
+| Campo                     | Descrição                            | Range                                       |
+| ------------------------- | ------------------------------------ | ------------------------------------------- |
+| **Affinity**              | Gosto pessoal pelo Majesty           | -100 a +100 (Inimigo ↔ Inseparável)         |
+| **Confiança**             | Acredita nas suas decisões           | Nenhuma / Baixa / Média / Alta / Absoluta   |
+| **Respeito**              | Te vê como líder                     | Nenhum / Baixo / Médio / Alto / Reverencial |
+| **Medo**                  | Tem medo de você                     | Nenhum / Leve / Moderado / Terror           |
+| **Tendência de resposta** | Probabilidade de ele LER e RESPONDER | 0-100%                                      |
+
+**Fórmula da Tendência:**
+
+```typescript
+const tendencia =
+  (affinity / 100) * 40 + // 40% baseado em affinity
+  (lealdade / 100) * 30 + // 30% baseado em lealdade
+  (estadoAtual === "LIVRE" ? 30 : 0); // 30% se não ocupado
+
+// Exemplo: Affinity +50, Lealdade 80, em combate
+// = (0.5 * 40) + (0.8 * 30) + 0 = 20 + 24 = 44%
+```
+
+**5. HISTÓRICO DE CORRESPONDÊNCIA**
+
+| Campo                        | Descrição                                |
+| ---------------------------- | ---------------------------------------- |
+| **Total de cartas trocadas** | Contador de toda a conversação           |
+| **Enviadas por você**        | Quantas você mandou                      |
+| **Recebidas dele**           | Quantas ele respondeu (taxa de resposta) |
+| **Última carta**             | Resumo da última interação               |
+| **Assunto**                  | Título ou resumo do conteúdo             |
+| **Resposta**                 | Ele respondeu? Ignorou? Reagiu mal?      |
+| **Tom**                      | Friendly / Neutro / Hostil / Sarcastico  |
+
+**Exemplo de Histórico:**
+
+```
+Carta #1 (Dia 10): Você pediu para atacar Goblins
+  Resposta: "Com prazer, Majestade!" (Feliz)
+
+Carta #2 (Dia 15): Você elogiou a vitória dele
+  Resposta: "Obrigado!" (+10 Lealdade)
+
+Carta #3 (Dia 20): Você o chamou de covarde
+  Resposta: "QUE?! Como ousa!" (-20 Lealdade)
+
+Carta #4 (Dia 43): Pediu desculpas
+  Resposta: [IGNORADA] (ainda irritado)
+```
+
+**6. CONTEXTO DA SITUAÇÃO ATUAL**
+
+Seção dinâmica que muda baseada no que está acontecendo:
+
+**Cenário 1: Herói em Perigo**
+
+```
+▼ CONTEXTO DA SITUAÇÃO ATUAL
++--------------------------------------+
+| Lila está em PERIGO EXTREMO:         |
+| > HP: 12% (CRÍTICO!)                 |
+| > Cercada por 5 Goblins              |
+| > Sem aliados próximos               |
+|                                      |
+| Se enviar carta pedindo para RECUAR:|
+| Chance de obedecer: 85% (medo alto)  |
++--------------------------------------+
+```
+
+**Cenário 2: Herói Feliz**
+
+```
+▼ CONTEXTO DA SITUAÇÃO ATUAL
++--------------------------------------+
+| Kaelen está em ótimo momento:        |
+| > Acabou de derrotar boss sozinho    |
+| > Ganhou item lendário               |
+| > Moral no máximo                    |
+|                                      |
+| Ótima hora para:                    |
+| > Elogiar e aumentar Lealdade        |
+| > Pedir missão difícil                |
++--------------------------------------+
+```
+
+**Cenário 3: Herói Ocupado**
+
+```
+▼ CONTEXTO DA SITUAÇÃO ATUAL
++--------------------------------------+
+| Gandalf está MUITO OCUPADO:          |
+| > Lendo outra carta (de Lila)        |
+| > Fila: 2 cartas não lidas           |
+|                                      |
+| Recomendação:                        |
+| Aguardar 1-2 minutos antes de enviar |
+| outra carta (evite spam)             |
++--------------------------------------+
+```
+
+**7. CUSTO DE ENVIO**
+
+| Campo                         | Descrição                                      |
+| ----------------------------- | ---------------------------------------------- |
+| **Influence Points**          | Custo fixo (sempre 25 IP por carta)            |
+| **Saldo atual**               | Quanto IP você tem agora                       |
+| **Saldo após envio**          | Quanto sobrará                                 |
+| **Tempo estimado de entrega** | Baseado na distância no mapa (1s por hexágono) |
+| **Distância**                 | Hexágonos entre capital e herói                |
+
+**Cálculo de Tempo:**
+
+```typescript
+const distancia = calculateDistance(hero.position, capital.position);
+const tempoEntrega = distancia * 2; // 2 segundos por hexágono
+
+// Exemplo: Herói a 10 hexágonos = 20 segundos de entrega
+```
+
+**8. SUGESTÕES DO CONSELHEIRO**
+
+Baseado na personalidade do Conselheiro (Cético/Otimista/Burocrático) e no contexto:
+
+**Conselheiro Cético:**
+
+```
+🧠 Conselheiro sugere:
+"Francamente, Kaelen está com razão de estar irritado.
+Você realmente o chamou de covarde sem motivo.
+Sugiro um pedido de desculpas SINCERO, não essa
+diplomacia falsa que você costuma usar."
+```
+
+**Conselheiro Otimista:**
+
+```
+🧠 Conselheiro sugere:
+"Majestade, Kaelen é um guerreiro leal! Tenho CERTEZA
+que ele entenderá se você explicar que foi um mal-entendido.
+Ele admira sua liderança! Basta elogiar sua bravura e
+tudo voltará ao normal!"
+```
+
+**Conselheiro Burocrático:**
+
+```
+🧠 Conselheiro sugere:
+"Dados da situação:
+- Lealdade: 65% (abaixo da média de 75%)
+- Humor: Irritado (duração estimada: 1 dia)
+- Recomendação: Anexar 100-200g como compensação.
+- Taxa de sucesso estimada: 73%."
+```
+
+---
+
+### Exemplo Completo: Enviando Carta em Situação Crítica
+
+**Passo 1:** Jogador seleciona Lila no P4 (ela está com HP crítico)
+
+**P3 atualiza:**
+
+```
+P3: PERFIL DO ALVO
+
+[AVATAR] LILA ROGUE (Ladina, Lvl 7)
+
+▼ STATUS ATUAL
+Estado: ⚠️ EM COMBATE CRÍTICO!
+Localização: Caverna Sombria (X:12 Y:3)
+HP: 8% (🔴 MORRENDO!)
+Atividade: Fugindo de 5 Goblins
+
+▼ ESTADO EMOCIONAL
+Humor: 😨 ATERRORIZADA
+Moral: 25/100 (PÂNICO)
+Lealdade: 55/100
+Razão: "Está prestes a morrer sozinha"
+
+▼ RELACIONAMENTO
+Affinity: +30 (Conhecidos)
+Tendência de resposta: 95% (DESESPERADA)
+
+▼ CONTEXTO
+🚨 EMERGÊNCIA!
+Se ela morrer AGORA:
+> Perde herói lvl 7
+> -20 Moral global (era popular)
+> Memorial criado
+
+Ação urgente: Pedir para RECUAR
+Chance dela obedecer: 90% (medo alto)
+
+▼ SUGESTÃO DO CONSELHEIRO
+"MAJESTADE! Lila VAI MORRER! Envie carta
+ORDENANDO retirada IMEDIATA! Anexe 50g para
+poções se ela sobreviver!"
+
+[!] CUSTO: 25 IP | Entrega: 5s (próxima)
+```
+
+**Passo 2:** Jogador começa a escrever no P5:
+
+```
+P5: RASCUNHO
+PARA: Lila Rogue
+
+"Lila, RECUE AGORA! Isso é uma ordem!
+Volte à vila imediatamente!
+
+Anexo: 50g (compre poções)"
+```
+
+**Passo 3:** Jogador pressiona ENTER
+
+**Feedback:**
+
+```
+P7: STATUS DA REDE
+🐦 Corvo partiu! (Custo: -25 IP)
+Tempo estimado: 5 segundos...
+
+[5s depois]
+📩 Carta entregue!
+Lila leu a mensagem.
+
+[P2 - Resposta instantânea]:
+"OBRIGADA! Estou saindo daqui!"
+
+[Log de jogo]:
+Lila iniciou retirada estratégica.
+Lealdade: 55% → 65% (+10, você salvou ela)
+```
+
+---
 
 ### Sistema de Correspondência via Corvos
 
@@ -587,7 +2508,9 @@ A **Utility AI** é o coração do processo decisório dos heróis. Ela pontua t
 ### Fórmula de Pontuação
 
 ```
+
 Score = BaseWeight × Σ(Consideration_i × ResponseCurve_i) × Personality_Modifier
+
 ```
 
 ### Exemplo Prático: "O Herói Deve Atacar o Ogro?"
@@ -614,7 +2537,9 @@ Score = BaseWeight × Σ(Consideration_i × ResponseCurve_i) × Personality_Modi
 **Score Final:**
 
 ```
+
 Score_Atacar = 1.0 × (1.0 + 0.4 + 0.7 + 0.0) × 1.2 = 2.52
+
 ```
 
 **Comparação com outras ações:**
@@ -634,17 +2559,19 @@ Após a Utility AI decidir "O Quê" fazer, uma **Behavior Tree** define "Como" f
 ### Estrutura de uma BT: Atacar Inimigo
 
 ```
+
 → Sequence: ATACAR_INIMIGO
-  ├─ Check: Inimigo Vivo?
-  ├─ Selector: Escolher Arma
-  │  ├─ Espada (se equipada)
-  │  └─ Punhos (fallback)
-  ├─ Action: Mover até Range
-  ├─ Sequence: Combate
-  │  ├─ Action: Atacar
-  │  ├─ Wait: Cooldown (1s)
-  │  └─ Check: Target Morto?
-  └─ Success
+├─ Check: Inimigo Vivo?
+├─ Selector: Escolher Arma
+│ ├─ Espada (se equipada)
+│ └─ Punhos (fallback)
+├─ Action: Mover até Range
+├─ Sequence: Combate
+│ ├─ Action: Atacar
+│ ├─ Wait: Cooldown (1s)
+│ └─ Check: Target Morto?
+└─ Success
+
 ```
 
 ### Tipos de Nós
@@ -666,19 +2593,21 @@ A **FSM (Finite State Machine)** controla o estado de alto nível do herói.
 ### Estados Principais
 
 ```
+
 ┌─────────────┐
 │ AVENTUREIRO │ ◄─── Estado Padrão (Explora, luta, saqueia)
 └──────┬──────┘
-       │
-       ├──► GUARDA DA CIDADE (Após morte, redenção)
-       │
-       ├──► DERROTADO (HP = 0, aguardando respawn)
-       │
-       ├──► READING_LETTER (Lendo carta do jogador)
-       │
-       ├──► TRADING (Negociando com outro herói)
-       │
-       └──► CORRUPTED (Traição ativa)
+│
+├──► GUARDA DA CIDADE (Após morte, redenção)
+│
+├──► DERROTADO (HP = 0, aguardando respawn)
+│
+├──► READING_LETTER (Lendo carta do jogador)
+│
+├──► TRADING (Negociando com outro herói)
+│
+└──► CORRUPTED (Traição ativa)
+
 ```
 
 ### Transições de Estado
@@ -686,9 +2615,11 @@ A **FSM (Finite State Machine)** controla o estado de alto nível do herói.
 **Exemplo:**
 
 ```
+
 AVENTUREIRO → DERROTADO (Quando HP ≤ 0)
 DERROTADO → GUARDA_DA_CIDADE (Após 60s, se aceitar renascer)
 GUARDA_DA_CIDADE → AVENTUREIRO (Após completar 5 missões)
+
 ```
 
 ---
