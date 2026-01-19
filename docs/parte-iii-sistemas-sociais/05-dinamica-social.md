@@ -71,12 +71,12 @@ if (monster.hp <= 0) {
 ### Exemplo de Log
 
 ```
-[12:45] Sir Kaelen iniciou combate contra Ogro.
-[12:46] Lila Rogue atacou Ogro (HP: 5%).
-[12:46] 💀 Ogro foi derrotado por Lila Rogue. [KS!]
-[12:46] 😠 Sir Kaelen: "Aquele era MEU alvo, ladra!"
-[12:46] 🚩 Lila Rogue recebeu Bandeira Vermelha (PvP habilitado).
-[12:47] ⚔️ Sir Kaelen atacou Lila Rogue! [PVP INICIADO]
+[12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [Iniciou] Kaelen começou o combate.
+[12:46] ⚔️ ATK [Lila ⚔️ Ogro] [HP: 5%] Último golpe!
+[12:46] 💀 KILL [Lila]  [KS!] Roubou kill de Kaelen!
+[12:46] � CHAT [Kaelen] [😠 -15 Aff] "Aquele era MEU alvo, ladra!"
+[12:46] 🩸 STAT [Lila] [🚩 PvP] Bandeira Vermelha ativa.
+[12:47] ⚔️ ATK [Kaelen ⚔️ Lila] [PVP INICIADO] Revide imediato!
 ```
 
 ---
@@ -196,18 +196,12 @@ Heróis não dependem apenas do jogador para equipamento. Eles **negociam entre 
 ### Exemplo de Negociação
 
 ```
-[15:30] 💼 Lila Rogue propõe troca:
-        Oferece: Adaga +5 | Quer: Arco +3
-        Para: Elara (Arqueira)
-
-[15:31] 🤔 Elara (Mind: 0.8) avalia: "Adaga vale menos que arco."
-        Contraproposta: Adaga+5 + 50 Ouro
-
-[15:32] 💰 Lila (Resource: 0.9) recusa: "Muito caro!"
-
-[15:33] 🤝 Elara (Affinity: +40 com Lila) aceita por amizade.
-
-[15:34] ✅ Troca concluída. Lila ganhou Arco+3.
+[15:30] 💼 TRADE [Lila ➜ Elara] Oferece: Adaga +5 | Quer: Arco +3
+[15:31] � MIND [Elara] [Mind: 0.8] Avalia: "Adaga vale menos que arco."
+         Contraproposta: Adaga+5 + 50 Ouro
+[15:32] 💰 LOOT [Lila] [Resource: 0.9] Recusa: "Muito caro!"
+[15:33] 🤝 TRADE [Elara] [Aff: +40] Aceita por amizade.
+[15:34] ✔️ TRADE [Lila] [+Arco+3] Troca concluída.
 ```
 
 ### Trades Especiais: "Presentes"
@@ -325,10 +319,10 @@ if (heroB.died && heroA.ranAway && distance(A, B) < 5) {
 **Exemplo Narrativo:**
 
 ```
-[14:32] Kaelen e Lila lutam contra 5 Ogros
-[14:33] Kaelen com HP 25% decide fugir
-[14:34] Lila fica sozinha (2v5 → 1v5)
-[14:35] Lila morre
+[14:32] ⚔️ ATK [Kaelen+Lila ⚔️ 5 Ogros] Combate 2v5 iniciado!
+[14:33] 👣 FLEE [Kaelen] [HP: 25%] Fugiu e deixou Lila sozinha!
+[14:34] ⚔️ ATK [Lila ⚔️ 5 Ogros] [1v5] Cerco mortal!
+[14:35] 💀 KILL [Ogros ⚔️ Lila] [☼️] Lila caiu em batalha.
 
 [Log de Morte]:
 "Lila caiu. Últimas palavras: 'Kaelen... covarde...'"
@@ -369,10 +363,10 @@ ga\*\* (negociação tensa via cartas)
 **Exemplo:**
 
 ```
-[15:40] Kaelen mata Ogro Rei solo
-[15:41] Loot: "Machado Lend\u00e1rio +50"
-[15:42] Lila (Ganância: 0.8) pega o item
-[15:43] Kaelen: "ISSO ERA MEU!"
+[15:40] 💀 KILL [Kaelen] [+Ogro Rei] [+500 XP] Boss morto solo!
+[15:41] 💰 LOOT [Chão] [Machado Lendário +50] Item épico!
+[15:42] 💰 LOOT [Lila] [Roubou!] Pegou antes de Kaelen!
+[15:43] 💬 CHAT [Kaelen] [😡] "ISSO ERA MEU!"
 
 [Carta automática de Kaelen]:
 "Lila, devolva MEU machado. Eu matei o boss.
@@ -588,4 +582,3 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 ```
 
 ---
-

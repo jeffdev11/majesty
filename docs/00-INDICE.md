@@ -75,7 +75,7 @@
 
 8. [Mundo Procedural e Ciclos](#8-mundo-procedural-e-ciclos-temporais)
    - 8.1 Névoa de Guerra
-   - 8.2 Os 3 Ciclos de 50 Dias
+   - 8.2 Os 4 Ciclos de 50 Dias
    - 8.3 Ciclo Dia/Noite
    - 8.4 Eventos Globais
    - 8.5 Boss Global
@@ -191,4 +191,3 @@
 - [Lista de Eventos Globais](#84-eventos-globais-o-caos-controlado)
 
 ---
-

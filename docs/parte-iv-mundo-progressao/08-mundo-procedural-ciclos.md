@@ -411,10 +411,10 @@ Heróis sem **iluminação** sofrem:
 ### Exemplo de Log
 
 ```
-[18:45] 🌙 O sol se pôs. A noite chegou.
-[18:46] Lila Rogue: "Está escuro demais... preciso de luz."
-[18:47] Gandalf usou Bola de Fogo (ilumina 20m por 5 min).
-[18:48] Sir Kaelen retornou à vila (covarde de noite).
+[18:45] 🌅 SYS [Mundo] [Noite] Sol se pôs. Penalidade ativa.
+[18:46] 💬 CHAT [Lila] "É muito escuro... preciso de luz."
+[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina 20m/5min.
+[18:48] 👣 MOVE [Kaelen] [Retornou] Voltou à vila por medo.
 ```
 
 ---
@@ -562,4 +562,3 @@ generateMap(seed) => {
 **Resultado:** Cada jogador terá um layout diferente.
 
 ---
-

@@ -193,7 +193,7 @@ cat docs/parte-vii-narrativa-generativa/16-21-arquitetura-narrativa-generativa.m
 | ------------------------------------------- | ------------------- | -------------------- |
 | `00-INDICE.md`                              | Índice completo     | Adicionar nova seção |
 | `01-visao-geral-filosofia.md`               | Filosofia do jogo   | Mudar conceitos core |
-| `02-interface-ux.md`                        | F1-F5 Workspaces    | Alterar UI/UX        |
+| `02-interface-ux.md`                        | F1-F6 Workspaces    | Alterar UI/UX        |
 | `03-arquitetura-ia-hibrida.md`              | Sistemas de IA      | Mudar lógica de IA   |
 | `04-herois-agentes-autonomos.md`            | P.E.R.M.A., Classes | Editar heróis        |
 | `05-dinamica-social.md`                     | Kill Stealing, PvP  | Sistema social       |

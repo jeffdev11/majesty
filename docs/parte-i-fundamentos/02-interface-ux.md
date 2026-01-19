@@ -4,15 +4,16 @@
 
 Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo agora opera através de **Workspaces (Áreas de Trabalho)** acessíveis via teclado. Não há menus arrastados; há **comando instantâneo**.
 
-### Os 5 Workspaces
+### Os 6 Workspaces
 
-| Tecla    | Nome           | Descrição                                                    |
-| -------- | -------------- | ------------------------------------------------------------ |
-| **[F1]** | **OPS CENTER** | "The War Room" - Monitoramento em tempo real, combate tático |
-| **[F2]** | **ADMIN**      | "The Tycoon" - Gestão econômica, árvores de habilidades      |
-| **[F3]** | **LIBRARY**    | "The Archives" - Lore, bestiário, análise psicológica        |
-| **[F4]** | **WORLD MAP**  | "The Conquest" - Mapa ASCII global, postos avançados         |
-| **[F5]** | **THE AVIARY** | "Royal Mail" - Sistema de correspondência via corvos         |
+| Tecla    | Nome               | Descrição                                                      |
+| -------- | ------------------ | -------------------------------------------------------------- |
+| **[F1]** | **OPS CENTER**     | "The War Room" - Monitoramento em tempo real, combate tático   |
+| **[F2]** | **ADMIN**          | "The Tycoon" - Gestão econômica, árvores de habilidades        |
+| **[F3]** | **LIBRARY**        | "The Archives" - Lore, bestiário, análise psicológica          |
+| **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa ASCII global, postos avançados           |
+| **[F5]** | **THE AVIARY**     | "Royal Mail" - Sistema de correspondência via corvos           |
+| **[F6]** | **THE CHRONICLES** | "The Chronicles" - História sendo gerada, narrativa generativa |
 
 ---
 
@@ -22,7 +23,7 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 | Ação                         | Teclado (Primário)  | Teclado (Alternativo) | Mouse                   |
 | ---------------------------- | ------------------- | --------------------- | ----------------------- |
-| **Mudar Workspace**          | `Alt + [1-5]`       | `F1 - F5`             | Clicar na Barra de Abas |
+| **Mudar Workspace**          | `Alt + [1-6]`       | `F1 - F6`             | Clicar na Barra de Abas |
 | **Ciclar Painéis**           | `Tab` / `Shift+Tab` | -                     | Clicar dentro do painel |
 | **Focar Painel Específico**  | `Ctrl + [1-7]`      | -                     | -                       |
 | **Abrir Chat (Conselheiro)** | `/` (Barra)         | -                     | Clicar no Input         |
@@ -377,14 +378,19 @@ Esse é o momento PERFEITO para atacar o boss!"
 |                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
 +---------------------+------------------------------------------+---------------------+
 | P4: INSPEÇÃO / CARTA|          P5: TIMELINE SOCIAL (LOGS)      | P6: AÇÕES RÁPIDAS   |
-| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
-| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
-|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
-| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
-| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
+| Selecionado: [1]    | [12:03] 📩 MAIL [Majesty ➜ Kaelen] [-25 IP] Corvo enviado. | [A] Curar (100g)    |
+| Sir Kaelen          | [12:03] 👣 MOVE [Kaelen] [Parou] Lendo carta... | [B] Buff Dano (300g)|
+|                     | [12:04] 💬 CHAT [Kaelen] "Vou tentar, senhor!" | [C] Carta (-25 IP)  |
+| [Status da Carta]   | [12:04] ⚔️ ATK [Kaelen ⚔️ Ogro] [CRÍTICO! -80 HP] Golpe devastador! |                     |
+| > Enviada: 12:03    | [12:05] 📩 MAIL [Lila ➜ Majesty] [Resposta] Carta recebida. |                     |
 | > Status: Lida      |                                          | (Use teclas)        |
 | > Resposta: A caminho|                                         |                     |
 +---------------------+------------------------------------------+---------------------+
+|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
+| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10 Moral] 8min             |
+| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
+| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
++--------------------------------------------------------------------------------------+
 |                        P7: CONSELHEIRO REAL (CHAT)                                   |
 | IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
 |      resposta malcriada pedindo aumento de salário."                                 |
@@ -462,6 +468,11 @@ Esse é o momento PERFEITO para atacar o boss!"
 | "Treina os bravos"  | [ADMIN] Skill "Golpe Giratório" Ativa.   |                     |
 |                     |                                          | (Use teclas)        |
 +---------------------+------------------------------------------+---------------------+
+|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
+| 🔼 BUFFS: Reino [Economia Forte +15% Renda] 2h | Todos Heróis [XP Boost +10%] 30min    |
+| 🔽 DEBUFFS: Produção [-20% Velocidade Construção] 1h                                 |
+| ⚠️ CONDIÇÕES: Guilda Guerreiros [Em Manutenção] 15min                                 |
++--------------------------------------------------------------------------------------+
 |                        P7: CONSELHEIRO REAL (MODO GESTÃO)                            |
 | IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um |
 |      ataque agora, os heróis morrerão. Recomendo comprar o lote imediatamente."      |
@@ -736,15 +747,15 @@ Todos os eventos econômicos e administrativos usam **identificadores coloridos*
 ```
 P5: ORDEM DE SERVIÇO (LOGS)
 
-[14:02] [ECO]    Venda: Poção Vida (-1 estoque) → Kaelen
-[14:02] [ECO]    Receita: +25g (imposto 50%)
-[14:05] [BUILD]  Guilda Magos: 45% concluída (27s restantes)
-[14:10] [MAINT]  Manutenção diária: Guilda Guerreiros (-5g)
-[14:15] [PROFIT] Loot de Ogro: +200g depositados no tesouro
-[14:20] [SKILL]  "Tempestade de Lâminas" ativa para Guerreiros
-[14:25] [ALERTA] Estoque de Poção Vida CRÍTICO (3/50)
-[14:30] [STOCK]  Compra automática: +20 Poções Vida (-1,000g)
-[14:35] [DESTRUCT] Torre de Vigia Leste sob ataque! (HP: 60%)
+[14:02] 💰 LOOT [Kaelen] [Poção Vida] Comprou por 50g.
+[14:02] 💰 ECO [Tesouro] [+25g] Imposto 50% arrecadado.
+[14:05] 🏭 BUILD [Guilda Magos] [45%] 27s restantes.
+[14:10] 💰 ECO [Guilda Guerreiros] [-5g] Manutenção diária paga.
+[14:15] 💰 LOOT [Tesouro] [+200g] Loot de Ogro depositado.
+[14:20] ✨ CAST [Sistema] [Tempestade de Lâminas] Skill ativa para Guerreiros.
+[14:25] ⚠️ ALERT [Estoque] [CRÍTICO: 3/50] Poção Vida BAIXO!
+[14:30] 💰 LOOT [Estoque] [+20 Poções] Compra automática -1,000g.
+[14:35] 🏭 BUILD [Torre Vigia Leste] [HP: 60%] Sob ataque!
 ```
 
 ---
@@ -1801,17 +1812,17 @@ Coordenadas: X:5, Y:8
 ```
 P5: LOG DE EXPEDIÇÃO
 
-[14:02] [EXPLOR]   Lila iniciou reconhecimento X:5 Y:8
-[14:05] [EVENTO]   Chuva de meteoros ativa! (Dura 5 min)
-[14:07] [EXPLOR]   Lila descobriu: Ruínas Antigas
-[14:10] [COMBATE]  Lila vs 3 Lobos Pálidos (em andamento)
-[14:12] [COMBATE]  Lila vitória! (+300 XP, +150g)
-[14:15] [ALERTA]   Boss detectado: Ogro Rei (X:5 Y:8)
-[14:20] [POSTO]    Rurik: "Detectei horda Goblin. Pedindo 500g"
-[14:25] [GLOBAL]   Terremoto! Passagem aberta entre C4-D5
-[14:30] [BOSS]     Heróis iniciaram ataque ao Ogro Rei
-[14:35] [MORTE]    Elara caíu em combate (Ogro Rei)
-[14:40] [BOSS]     Ogro Rei derrotado! Loot: 2,500g + Machado Lendário
+[14:02] 👣 MOVE [Lila] [X:5 Y:8] Reconhecimento iniciado.
+[14:05] 🌅 SYS [Global] [☄️ Meteoros] Dura 5min.
+[14:07] 👣 MOVE [Lila] [Ruínas Antigas] Descoberta!
+[14:10] ⚔️ ATK [Lila ⚔️ 3 Lobos Pálidos] [Em andamento] Combate remoto.
+[14:12] 💀 KILL [Lila] [Vitória!] +300 XP, +150g.
+[14:15] ⚠️ ALERT [Global] [💀 Boss] Ogro Rei detectado X:5 Y:8!
+[14:20] 📩 MAIL [Rurik ➜ Majesty] Detectei horda Goblin. Pedindo 500g.
+[14:25] 🌅 SYS [Global] [Terremoto] Passagem C4-D5 aberta.
+[14:30] 💀 KILL [Heróis ⚔️ Ogro Rei] [Iniciado] Ataque ao boss.
+[14:35] 💀 KILL [Ogro Rei ⚔️ Elara] [☼️] Elara caiu em combate.
+[14:40] 💀 KILL [Heróis] [Boss Derrotado!] +2,500g + Machado Lendário.
 ```
 
 ---
@@ -3492,4 +3503,3 @@ grep "⚔️ ATK.*Kaelen" log.txt
 ```
 
 ---
-

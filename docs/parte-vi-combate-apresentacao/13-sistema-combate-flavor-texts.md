@@ -145,10 +145,10 @@ function generateCombatLog(event: CombatEvent): string {
 ### Exemplo de Output
 
 ```
-[12:45] ⚔️ Sir Kaelen desferiu um golpe DEVASTADOR no Ogro! Sangue jorrou!
-[12:46] 💰 Lila roubou o último golpe! Kaelen: "Ei, aquilo era MEU!"
-[12:47] 🚩 Kaelen recebeu Bandeira Vermelha (PvP habilitado).
-[12:48] 💀 Gandalf caiu em batalha. Últimas palavras: "Cuidado com... *ugh*"
+[12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [CRÍTICO! -80 HP] Golpe devastador! Sangue jorrou!
+[12:46] 💀 KILL [Lila] [KS!] Roubou kill! Kaelen: "Ei, aquilo era MEU!"
+[12:47] 🩸 STAT [Kaelen] [🚩 PvP] Bandeira Vermelha ativa.
+[12:48] 💀 KILL [Monstro ⚔️ Gandalf] [☼️] Últimas palavras: "Cuidado com... *ugh*"
 ```
 
 ---
@@ -216,4 +216,3 @@ function getFlavorText(context: string, trigger: string): string {
 ```
 
 ---
-

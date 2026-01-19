@@ -21,7 +21,7 @@ _Filosofia do jogo e interface do usuário_
 | Arquivo                                                                          | Título                  | Linhas | Tópicos                                             |
 | -------------------------------------------------------------------------------- | ----------------------- | ------ | --------------------------------------------------- |
 | [01-visao-geral-filosofia.md](./parte-i-fundamentos/01-visao-geral-filosofia.md) | Visão Geral e Filosofia | 106    | Monarca Indireto, Efeito Aquário, Stack Tecnológica |
-| [02-interface-ux.md](./parte-i-fundamentos/02-interface-ux.md)                   | Interface e UX          | 3,495  | F1-F5 Workspaces, Controles, Painéis                |
+| [02-interface-ux.md](./parte-i-fundamentos/02-interface-ux.md)                   | Interface e UX          | 3,495  | F1-F6 Workspaces, Controles, Painéis                |
 
 ---
 

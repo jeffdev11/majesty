@@ -16,7 +16,7 @@ Esta documentação define **todas as mecânicas funcionais** de **Heroes of Maj
 ## Tópicos Documentados
 
 1. ✅ Visão Geral e Filosofia
-2. ✅ Interface UI/UX (5 Workspaces + F6 Chronicles)
+2. ✅ Interface UI/UX (6 Workspaces: F1-F6 Chronicles)
 3. ✅ Arquitetura de IA Híbrida
 4. ✅ Os Heróis (P.E.R.M.A.)
 5. ✅ Dinâmica Social
