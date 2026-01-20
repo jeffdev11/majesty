@@ -20,7 +20,7 @@
 2. [Interface e Experiência do Usuário (UI/UX)](#2-interface-e-experiência-do-usuário-uiux)
    - 2.1 Conceito de Workspaces
    - 2.2 Regras Globais de Interação
-   - 2.3 [F1] OPS CENTER - "The War Room"
+   - 2.3 [F1] COMMAND CENTER - "The War Room" (Logs Regionais Dinâmicos)
    - 2.4 [F2] ADMIN - "The Tycoon"
    - 2.5 [F3] LIBRARY - "The Armanaves"
    - 2.6 [F4] WORLD MAP - "The Conquest"
