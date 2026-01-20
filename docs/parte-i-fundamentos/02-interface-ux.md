@@ -618,10 +618,14 @@ Heróis defendendo: 3 (Kaelen, Lila, Gandalf)
     | [4] Guilda Arqueiros     (300g)      |
     | [5] Guilda Druidas       (320g)      |
     | [6] Guilda Elfos         (330g)      |
-    | [7] Torre de Vigia       (200g)      |
-    | [8] Loja de Poções       (250g)      |
-    | [9] Ferreiro             (400g)      |
-    | [10] Taverna             (300g)      |
+    | [7] Guilda Paladinos     (400g)      |
+    | [8] Guilda Necromantes   (420g)      |
+    | [9] Guilda Bardos        (350g)      |
+    | [10] Guilda Monges       (320g)      |
+    | [11] Torre de Vigia      (200g)      |
+    | [12] Loja de Poções      (250g)      |
+    | [13] Ferreiro            (400g)      |
+    | [14] Taverna             (300g)      |
     | [ESC] Cancelar                       |
     +--------------------------------------+
     ```

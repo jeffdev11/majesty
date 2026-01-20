@@ -8277,7 +8277,7 @@ Como **solopreneur**:
 
 **Decisão intencional:**
 
-- Partidas duram ~15 horas (150 dias × 6 min/dia)
+- Partidas duram ~1h20min a 2h (4 ciclos × 20 min cada)
 - Progressão gradual de poder
 - Economia de escassez (ouro é raro)
 
@@ -8489,7 +8489,6 @@ IP funciona como **mana** em ARPGs:
 - Season 1
 
 ---
-
 # PARTE VII: ARQUITETURA DE NARRATIVA GENERATIVA (GenAI)
 
 ## 16. O MOTOR DE NARRATIVA "INFINITE TALES"
@@ -9085,7 +9084,7 @@ Esta documentação define **todas as mecânicas funcionais** de **Heroes of Maj
 - **Plataforma:** Desktop (Angular + Tauri + Deno)
 - **Público:** Fãs de Rimworld, Dwarf Fortress, Majesty, Crusader Kings
 - **Diferencial:** Controle indireto + IA complexa + Narrativa generativa local + Crônicas documentadas
-- **Tempo de Partida:** ~15 horas (150 dias de jogo)
+- **Tempo de Partida:** ~1h20min a 2h (4 ciclos de 20 min, extensível no último ciclo)
 - **Rejogabilidade:** Alta (mapas procedurais, eventos dinâmicos, narrativa infinita)
 
 ---

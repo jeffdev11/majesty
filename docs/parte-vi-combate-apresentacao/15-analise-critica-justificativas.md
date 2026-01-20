@@ -70,7 +70,7 @@ Como **solopreneur**:
 
 **Decisão intencional:**
 
-- Partidas duram ~15 horas (150 dias × 6 min/dia)
+- Partidas duram ~1h20min a 2h (4 ciclos × 20 min cada)
 - Progressão gradual de poder
 - Economia de escassez (ouro é raro)
 
@@ -282,4 +282,3 @@ IP funciona como **mana** em ARPGs:
 - Season 1
 
 ---
-

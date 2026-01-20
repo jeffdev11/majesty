@@ -7,7 +7,7 @@ Cada classe possui **30 skills únicas**:
 - **15 Ativas**: Habilidades que o herói usa ativamente em combate
 - **15 Passivas**: Buffs permanentes que modificam stats ou comportamento
 
-**Total de 6 Classes Jogáveis:**
+**Total de 10 Classes Jogáveis:**
 
 1. 🗡️ **Guerreiro** (Warrior) - Tank de linha de frente
 2. 🔮 **Mago** (Mage) - DPS mágico de longo alcance
@@ -15,6 +15,10 @@ Cada classe possui **30 skills únicas**:
 4. 🗝️ **Ladino** (Rogue) - Assassino furtivo
 5. 🌿 **Druida** (Druid) - Suporte/Metamorfo
 6. 🏹 **Elfo** (Elf) - Híbrido mágico/físico
+7. 🛡️ **Paladino** (Paladin) - Tank/Healer sagrado
+8. 💀 **Necromante** (Necromancer) - Invocador de mortos
+9. 🎵 **Bardo** (Bard) - Suporte musical
+10. 👊 **Monge** (Monk) - DPS corpo-a-corpo sem armas
 
 O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos através de:
 
@@ -139,7 +143,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | #   | Nome                     | Efeito                                             | Requer                      |
 | --- | ------------------------ | -------------------------------------------------- | --------------------------- |
 | 1   | **Olho de Águia**        | +20% alcance de visão e ataque                     | Nível 1                     |
-| 2   | **Pés Ligeiros**         | +15% velocidade de movimento                       | Olho de Águia               |
+| 2   | **Pés Ligeiros**         | +15% Speed                       | Olho de Águia               |
 | 3   | **Precisão Mortal**      | +10% chance de crítico                             | Tiro Preciso                |
 | 4   | **Mestre Arqueiro**      | +15% dano com arcos                                | Nível 2                     |
 | 5   | **Evasão**               | +15% chance de esquivar ataques corpo-a-corpo      | Recuo Rápido                |
@@ -149,7 +153,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 9   | **Emboscada**            | Primeiro ataque de combate +100% dano              | Camuflagem                  |
 | 10  | **Aljava Grande**        | +50% capacidade de flechas                         | Nível 5                     |
 | 11  | **Veneno Aprimorado**    | DoTs duram +50% mais tempo                         | Flecha Venenosa             |
-| 12  | **Reflexos Felinos**     | +25% velocidade de ataque                          | Evasão                      |
+| 12  | **Reflexos Felinos**     | +25% Taxa de Ataque                          | Evasão                      |
 | 13  | **Caçador Nato**         | +30% dano contra criaturas selvagens               | Invocar Lobo                |
 | 14  | **Crítico Devastador**   | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
 | 15  | **Lenda Viva**           | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
@@ -191,7 +195,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 7   | **Esquiva Mortal**      | +20% chance de esquivar                                | Finta                |
 | 8   | **Imunidade a Veneno**  | Imune a todos venenos                                  | Veneno Letal         |
 | 9   | **Golpe Crítico**       | +25% chance de crítico                                 | Ataque pelas Costas  |
-| 10  | **Acrobata**            | +30% velocidade de movimento                           | Esquiva Mortal       |
+| 10  | **Acrobata**            | +30% Speed                           | Esquiva Mortal       |
 | 11  | **Preparação**          | Reduz todos cooldowns em 30% ao entrar em combate      | Dedos Ágeis          |
 | 12  | **Sangue Frio**         | +40% dano contra alvos com HP cheio                    | Golpe Crítico        |
 | 13  | **Assassino Nato**      | +50% dano contra alvos solitários                      | Furtividade          |
@@ -252,7 +256,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | --- | ------------------------- | -------- | -------- | ---------------------------------------------------------------------- | ------------------------- |
 | 1   | **Flecha Arcana**         | 15 Mana  | 5s       | Flecha mágica, 70 dano + penetra defesa                                | Nível 1                   |
 | 2   | **Passo Élfico**          | 20 Mana  | 15s      | Teleporta 12m, próximos 3 ataques +30% dano                            | Nível 1                   |
-| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% velocidade por 12s                        | Nível 2                   |
+| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% Speed por 12s                        | Nível 2                   |
 | 4   | **Chuva Estelar**         | 50 Mana  | 35s      | 10 projéteis mágicos, 35 dano cada, rastreiam alvos                    | Flecha Arcana             |
 | 5   | **Círculo de Proteção**   | 40 Mana  | 30s      | Zona 8m, aliados ganham +40% Defense por 10s                           | Benção da Lua             |
 | 6   | **Lâmina Mística**        | 25 Mana  | 20s      | Espada de energia por 15s, +80% Attack mágico                          | Nível 3                   |
@@ -270,7 +274,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 | #   | Nome                     | Efeito                                                 | Requer                 |
 | --- | ------------------------ | ------------------------------------------------------ | ---------------------- |
-| 1   | **Graça Élfica**         | +25% velocidade de movimento                           | Nível 1                |
+| 1   | **Graça Élfica**         | +25% Speed                           | Nível 1                |
 | 2   | **Visão Mística**        | Detecta inimigos invisíveis e escondidos               | Nível 1                |
 | 3   | **Longevidade**          | +20% HP máximo, imune a doenças                        | Nível 2                |
 | 4   | **Afinidade Arcana**     | +20% dano mágico                                       | Flecha Arcana          |
@@ -349,5 +353,182 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 - Dia 51-100: 20-25 skills desbloqueadas
 - Dia 101-150: 25-28 skills desbloqueadas
 - Dia 151-200: Chance de desbloquear todas 30 (partida perfeita)
+
+---
+# Skills das Novas Classes
+
+## 🛡️ PALE DINO (Paladin) - 30 Skills
+
+### ⚔️ Skills Ativas (15)
+
+| #   | Nome                   | Custo       | Cooldown | Descrição                                                | Requer                |
+| --- | ---------------------- | ----------- | -------- | -------------------------------------------------------- | --------------------- |
+| 1   | **Golpe Sagrado**      | 15 Devoção  | 6s       | Ataque sagrado, 70 dano + 30 HP de cura própria          | Nível 1               |
+| 2   | **Aura de Proteção**   | 20 Devoção  | Passiva  | Aliados em 12m ganham +15% Defense permanente            | Nível 1               |
+| 3   | **Cura Divina**        | 30 Devoção  | 12s      | Cura aliado em 200 HP                                    | Golpe Sagrado         |
+| 4   | **Escudo da Fé**       | 25 Devoção  | 20s      | Absorve 250 dano por 10s                                 | Nível 2               |
+| 5   | **Martelo da Justiça** | 35 Devoção  | 25s      | Arremessa martelo, 100 dano + atordoa 3s                 | Golpe Sagrado         |
+| 6   | **Sacrifício Divino**  | 40 Devoção  | 30s      | Transfere 50% do dano de aliado para si por 15s          | Cura Divina           |
+| 7   | **Julgamento**         | 45 Devoção  | 35s      | Marca inimigo maligno, +60% dano contra ele              | Nível 4               |
+| 8   | **Ressurreição**       | 80 Devoção  | 180s     | Revive aliado com 70% HP (melhor que Druida)             | Cura Divina           |
+| 9   | **Consagrar Terreno**  | 50 Devoção  | 40s      | Zona 10m, inimigos malignos -30% Attack por 20s          | Nível 5               |
+| 10  | **Escudo Refletor**    | 55 Devoção  | 45s      | Próximos 5 ataques são refletidos 100%                   | Escudo da Fé          |
+| 11  | **Ira Divina**         | 60 Devoção  | 50s      | +100% Attack por 15s, ganha Devoção ao atacar            | Martelo da Justiça    |
+| 12  | **Benção em Massa**    | 70 Devoção  | 60s      | Todos aliados em 15m ganham +30% stats por 20s           | Aura de Proteção      |
+| 13  | **Voto de Vingança**   | 65 Devoção  | 55s      | Se aliado morrer próximo, ganha +150% Attack por 30s     | Julgamento            |
+| 14  | **Santuário**          | 75 Devoção  | 90s      | Cria zona 12m invulnerável por 8s                        | Consagrar Terreno     |
+| 15  | **Avatar da Luz**      | 150 Devoção | 200s     | Forma angelical, cura 10% HP/s aliados, +200% stats, 30s | Ressurreição + Lvl 12 |
+
+### 🛡️ Skills Passivas (15)
+
+| #   | Nome                        | Efeito                                           | Requer                 |
+| --- | --------------------------- | ------------------------------------------------ | ---------------------- |
+| 1   | **Fé Inabalável**           | +15% HP máximo, +10% Defense                     | Nível 1                |
+| 2   | **Ganho de Devoção**        | Ganha 10 Devoção ao ser atingido                 | Nível 1                |
+| 3   | **Mártir**                  | +20% Defense quando HP < 30%                     | Fé Inabalável          |
+| 4   | **Protetor Nato**           | Aliados próximos recebem -15% dano               | Aura de Proteção       |
+| 5   | **Regeneração Sagrada**     | Cura 2% HP máximo a cada 10s                     | Cura Divina            |
+| 6   | **Justiça Inabalável**      | Imune a medo e corrupção                         | Nível 3                |
+| 7   | **Vingador**                | +30% dano contra mortos-vivos e demônios         | Julgamento             |
+| 8   | **Benção Permanente**       | Inicia combate com +20% todos stats por 30s      | Benção em Massa        |
+| 9   | **Ressurreição Automática** | Ao morrer, revive com 30% HP (1x/partida)        | Ressurreição           |
+| 10  | **Escudo de Aliados**       | Pode bloquear ataques destinados a aliados (5m)  | Protetor Nato          |
+| 11  | **Aura Expandida**          | Alcance de auras +50% (18m em vez de 12m)        | Protetor Nato          |
+| 12  | **Devotado**                | Curas gastam -20% Devoção                        | Regeneração Sagrada    |
+| 13  | **Bastião**                 | +50% Defense quando não se move por 3s           | Fé Inabalável          |
+| 14  | **Purificação**             | Remove todos debuffs de si mesmo a cada 30s      | Justiça Inabalável     |
+| 15  | **Santo Guerreiro**         | +40% stats, imune a críticos, aliados +25% moral | Avatar da Luz + Lvl 11 |
+
+---
+
+## 💀 NECROMANTE (Necromancer) - 30 Skills
+
+### 🌑 Skills Ativas (15)
+
+| #   | Nome                     | Custo        | Cooldown | Descrição                                                            | Requer                   |
+| --- | ------------------------ | ------------ | -------- | -------------------------------------------------------------------- | ------------------------ |
+| 1   | **Bola Sombria**         | 20 Mana      | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                       | Nível 1                  |
+| 2   | **Reanimar Cadáver**     | 30 Essência  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                           | Nível 1                  |
+| 3   | **Drenar Vida**          | 25 Mana      | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                               | Bola Sombria             |
+| 4   | **Invocar Zumbi**        | 50 Essência  | 30s      | Invoca Zumbi resistente (dura 90s)                                   | Reanimar Cadáver         |
+| 5   | **Maldição de Fraqueza** | 30 Mana      | 20s      | Alvo perde -40% Attack por 15s                                       | Nível 3                  |
+| 6   | **Explosão Cadavérica**  | 40 Mana      | 25s      | Detona cadáver, 150 dano em 8m                                       | Reanimar Cadáver         |
+| 7   | **Escudo Ósseo**         | 35 Mana      | 30s      | Absorve 200 dano, dura até quebrar                                   | Nível 4                  |
+| 8   | **Peste**                | 45 Mana      | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos              | Drenar Vida              |
+| 9   | **Invocar Espectro**     | 70 Essência  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)                     | Invocar Zumbi            |
+| 10  | **Toque da Morte**       | 50 Mana      | 35s      | Instakill inimigo não-elite com HP < 20%                             | Drenar Vida              |
+| 11  | **Exército dos Mortos**  | 100 Essência | 120s     | Invoca 5 esqueletos simultaneamente (duram 45s)                      | Invocar Espectro         |
+| 12  | **Pacto Sombrio**        | 60 Mana      | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s                     | Nível 7                  |
+| 13  | **Necrose**              | 55 Mana      | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável       | Peste                    |
+| 14  | **Lich Form**            | 80 Mana      | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s           | Pacto Sombrio            |
+| 15  | **Apocalipse Sombrio**   | 200 Essência | 180s     | Reanimação em massa, todos cadáveres em 30m viram servos permanentes | Exército Mortos + Lvl 12 |
+
+### 💀 Skills Passivas (15)
+
+| #   | Nome                       | Efeito                                                | Requer                      |
+| --- | -------------------------- | ----------------------------------------------------- | --------------------------- |
+| 1   | **Colheita Sombria**       | Ganha 25 Essência Sombria ao matar inimigo            | Nível 1                     |
+| 2   | **Mana das Sombras**       | +25% Mana máximo                                      | Nível 1                     |
+| 3   | **Servos Aprimorados**     | Invocações têm +50% HP e Attack                       | Reanimar Cadáver            |
+| 4   | **Maestria Necrótica**     | +20% dano necrótico                                   | Bola Sombria                |
+| 5   | **Drenagem Vital**         | Spells de dano curam 15% do dano causado              | Drenar Vida                 |
+| 6   | **Resistência Morta-Viva** | +30% resistência a necrótico e veneno                 | Nível 3                     |
+| 7   | **Explosões em Cadeia**    | Explosão Cadavérica pode detonar outros cadáveres     | Explosão Cadavérica         |
+| 8   | **Longevidade de Servos**  | Invocações duram +50% tempo                           | Servos Aprimorados          |
+| 9   | **Essência Infinita**      | Regenera 5 Essência/s                                 | Colheita Sombria            |
+| 10  | **Aura Necrótica**         | Inimigos próximos (8m) perdem 2% HP máximo/s          | Maestria Necrótica          |
+| 11  | **Pacto Eterno**           | Ao usar Pacto Sombrio, não perde HP mas servos morrem | Pacto Sombrio               |
+| 12  | **Comandante dos Mortos**  | Pode ter até 8 servos simultâneos (padrão 3)          | Exército dos Mortos         |
+| 13  | **Imortal**                | Ao morrer, vira Lich por 20s, pode continuar lutando  | Lich Form                   |
+| 14  | **Sinergia Sombria**       | Cada servo vivo aumenta dano mágico em +10%           | Comandante dos Mortos       |
+| 15  | **Senhor das Trevas**      | +100% Essência, servos se tornam permanentes          | Apocalipse Sombrio + Lvl 11 |
+
+---
+
+## 🎵 BARDO (Bard) - 30 Skills
+
+### 🎶 Skills Ativas (15)
+
+| #   | Nome                      | Custo          | Cooldown  | Descrição                                               | Requer                 |
+| --- | ------------------------- | -------------- | --------- | ------------------------------------------------------- | ---------------------- |
+| 1   | **Melodia de Ataque**     | 15 Inspiração  | Canalizar | Canta, aliados 15m ganham +20% Attack                   | Nível 1                |
+| 2   | **Acorde Dissonante**     | 20 Mana        | 8s        | Nota musical, 60 dano + confunde por 2s                 | Nível 1                |
+| 3   | **Canção de Cura**        | 25 Inspiração  | Canalizar | Canta, aliados 15m curam 10 HP/s                        | Melodia de Ataque      |
+| 4   | **Grito de Guerra**       | 30 Inspiração  | 30s       | Todos aliados ganham +30% Speed por 15s            | Nível 2                |
+| 5   | **Faca Lançada**          | 20 Mana        | 5s        | Arremessa faca, 50 dano, 3 cargas                       | Acorde Dissonante      |
+| 6   | **Hino de Resistência**   | 35 Inspiração  | Canalizar | Canta, aliados 15m ganham +30% Defense                  | Canção de Cura         |
+| 7   | **Solo Devastador**       | 40 Mana        | 35s       | Toca solo, 15m AoE, 120 dano + atordoa 3s               | Acorde Dissonante      |
+| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s       | Aliados ganham +50% Taxa de Ataque por 20s        | Grito de Guerra        |
+| 9   | **Balada da Regeneração** | 50 Inspiração  | Canalizar | Canta, aliados 15m regeneram 3% HP máximo/s             | Hino de Resistência    |
+| 10  | **Canto de Sirene**       | 45 Mana        | 45s       | Encanta inimigos em 12m, eles param de atacar por 6s    | Solo Devastador        |
+| 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s       | Todos aliados ganham +40% todos stats por 25s           | Balada da Regeneração  |
+| 12  | **Contra-Melodia**        | 50 Mana        | 50s       | Cancela buffs inimigos em 20m                           | Canto de Sirene        |
+| 13  | **Épico Heróico**         | 70 Inspiração  | 90s       | Um aliado escolhido fica invulnerável por 10s           | Sinfonia de Grupo      |
+| 14  | **Onda Sônica**           | 80 Mana        | 55s       | Cone 25m, 200 dano + knock-back 10m                     | Solo Devastador        |
+| 15  | **Requiem**               | 150 Inspiração | 180s      | Canção suprema, aliados +100% stats, inimigos -50%, 30s | Épico Heróico + Lvl 12 |
+
+### 🎵 Skills Passivas (15)
+
+| #   | Nome                      | Efeito                                                      | Requer              |
+| --- | ------------------------- | ----------------------------------------------------------- | ------------------- |
+| 1   | **Ganho de Inspiração**   | Ganha 20 Inspiração ao ver aliado matar inimigo             | Nível 1             |
+| 2   | **Carismático**           | +30% Affinity natural com todos heróis                      | Nível 1             |
+| 3   | **Alcance Musical**       | Canções afetam +5m de raio (20m em vez de 15m)              | Melodia de Ataque   |
+| 4   | **Multitarefa**           | Pode canalizar canções e atacar simultaneamente             | Canção de Cura      |
+| 5   | **Maestria Sonic a**      | +15% dano de habilidades sonoras                            | Acorde Dissonante   |
+| 6   | **Performer Nato**        | Canções custam -20% Inspiração                              | Ganho de Inspiração |
+| 7   | **Velocidade de Canto**   | Canções começam a fazer efeito 50% mais rápido              | Multitarefa         |
+| 8   | **Inspiração Automática** | Regenera 10 Inspiraç ão/s quando em grupo                   | Ganho de Inspiração |
+| 9   | **Ressonância**           | Canções persistem por 5s após parar de cantar               | Alcance Musical     |
+| 10  | **Moral Elevado**         | Aliados próximos nunca fogem                                | Carismático         |
+| 11  | **Virtuoso**              | Pode ter 2 canções ativas simultaneamente                   | Ressonância         |
+| 12  | **Aura de Carisma**       | Grupo forma 3x mais rápido                                  | Moral Elevado       |
+| 13  | **Coro**                  | Cada aliado próximo aumenta efeito de canções em +15%       | Virtuoso            |
+| 14  | **Imortalidade Musical**  | Se morrer durante canção, canção continua por 30s           | Nível 9             |
+| 15  | **Lenda Viva**            | Presença proporciona +50% XP para aliados, +100% Inspiração | Requiem + Lvl 11    |
+
+---
+
+## 👊 MONGE (Monk) - 30 Skills
+
+### 🥋 Skills Ativas (15)
+
+| #   | Nome                     | Custo   | Cooldown | Descrição                                                      | Requer                  |
+| --- | ------------------------ | ------- | -------- | -------------------------------------------------------------- | ----------------------- |
+| 1   | **Golpe de Palma**       | 10 Chi  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
+| 2   | **Chute Giratório**      | 15 Chi  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
+| 3   | **Dash do Vento**        | 20 Chi  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
+| 4   | **Soco do Dragão**       | 25 Chi  | 15s      | 3 socos rápidos em 1s, 40 dano cada, gera 3 combos             | Chute Giratório         |
+| 5   | **Meditação**            | 0 Chi   | 30s      | Regenera 50 Chi em 5s, imóvel                                  | Nível 3                 |
+| 6   | **Rajada de Mil Punhos** | 30 Chi  | 20s      | Ataque frenético, 10 socos, 25 dano cada                       | Soco do Dragão          |
+| 7   | **Toque Paralisante**    | 35 Chi  | 25s      | Paralisa inimigo por 5s                                        | Nível 4                 |
+| 8   | **Ciclone**              | 40 Chi  | 30s      | Gira rapidamente, 12 chutes, 35 dano cada                      | Chute Giratório         |
+| 9   | **Aura de Chi**          | 45 Chi  | 35s      | +50% Taxa de Ataque por 20s, consome 5 combos            | Rajada de Mil Punhos    |
+| 10  | **Teletransporte**       | 50 Chi  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
+| 11  | **Punho da Fúria**       | 60 Chi  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
+| 12  | **Transcendência**       | 70 Chi  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
+| 13  | **Explosão de Chi**      | 80 Chi  | 50s      | Libera Chi, 15m AoE, 180 dano + knock-back                     | Aura de Chi             |
+| 14  | **Forma do Dragão**      | 90 Chi  | 120s     | Transforma em dragão espiritual, +150% Attack, voa, 25s        | Punho da Fúria          |
+| 15  | **Iluminação**           | 150 Chi | 180s     | Estado supremo, velocidade 3x, dano 3x, esquiva 100%, 20s      | Transcendência + Lvl 12 |
+
+### 🧘 Skills Passivas (15)
+
+| #   | Nome                         | Efeito                                          | Requer                   |
+| --- | ---------------------------- | ----------------------------------------------- | ------------------------ |
+| 1   | **Regeneração de Chi**       | Regenera 5 Chi/s                                | Nível 1                  |
+| 2   | **Mestre em Artes Marciais** | +20% dano corpo-a-corpo                         | Nível 1                  |
+| 3   | **Sistema de Combos**        | Cada ataque gera 1 combo, máximo 10 combos      | Golpe de Palma           |
+| 4   | **Dano de Combo**            | +5% dano por combo ativo                        | Sistema de Combos        |
+| 5   | **Reflexos Sobre-Humanos**   | +25% Speed                    | Dash do Vento            |
+| 6   | **Esquiva de Mestre**        | +20% chance de esquivar                         | Reflexos Sobre-Humanos   |
+| 7   | **Contra-Ataque Perfeito**   | 30% chance de contra-atacar ao esquivar         | Esquiva de Mestre        |
+| 8   | **Meditação Passiva**        | Regenera 2% HP máximo/s quando fora de combate  | Meditação                |
+| 9   | **Chi Infinito**             | Chi máximo +50                                  | Regeneração de Chi       |
+| 10  | **Disciplina de Ferro**      | Imune a atordoamentos quando tem 5+ combos      | Sistema de Combos        |
+| 11  | **Golpes Críticos**          | +30% chance de crítico                          | Mestre em Artes Marciais |
+| 12  | **Velocidade da Luz**        | +40% Taxa de Ataque                       | Reflexos Sobre-Humanos   |
+| 13  | **Sem Armas, Sem Problemas** | Sem arma equipada, +50% todos stats             | Mestre em Artes Marciais |
+| 14  | **Espírito do Dragão**       | Ao atingir 10 combos, próximo ataque +300% dano | Dano de Combo            |
+| 15  | **Mestre Iluminado**         | Quando em Iluminação, combos nunca resetam      | Iluminação + Lvl 11      |
 
 ---
