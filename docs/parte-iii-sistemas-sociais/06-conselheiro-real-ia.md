@@ -140,7 +140,7 @@ Conselheiro: "Majestade, grandes perdas, mas que
 Jogador: /summary today
 
 Conselheiro: "RELATÓRIO DIÁRIO - DIA 45
-- Heróis ativos: 10/12
+- Heróis ativos: 4/5
 - Ouro ganho: +850 (invasão repelida)
 - Kills: Goblins x15, Ogros x3
 - Status: 2 heróis feridos (HP <50%)
@@ -299,4 +299,3 @@ INFL: [|||||.....] (50/100 IP) ← Barra visual
 ```
 
 ---
-

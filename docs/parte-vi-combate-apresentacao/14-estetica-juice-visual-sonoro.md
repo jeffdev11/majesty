@@ -134,7 +134,7 @@ icons/
 | **Tab (mudar painel)** | `tab_switch.wav`    | "Whoosh" eletrônico sutil           |
 | **Comando enviado**    | `command_send.wav`  | Beep retro-futurista                |
 | **Erro**               | `error_beep.wav`    | Buzz grave (400Hz)                  |
-| **Sucesso**            | `success_chime.wav` | Ding cristalino (1200Hz)            |
+| **Sucesso**            | `success_maname.wav` | Ding cristalino (1200Hz)            |
 
 ---
 
@@ -157,7 +157,7 @@ icons/
 | **Carta chegou**    | `mail_arrive.wav`      | Corvo grasnando + papel    |
 | **KS detectado**    | `tension_sting.wav`    | Nota dissonante (suspense) |
 | **PvP iniciado**    | `duel_bell.wav`        | Sino de duelo              |
-| **Amizade formada** | `friendship_chime.wav` | Acorde alegre              |
+| **Amizade formada** | `friendship_maname.wav` | Acorde alegre              |
 | **Traição**         | `betrayal_theme.wav`   | Música dramática (3s)      |
 
 ---

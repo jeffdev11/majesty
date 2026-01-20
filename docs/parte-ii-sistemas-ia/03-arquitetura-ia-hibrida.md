@@ -102,7 +102,7 @@ Após a Utility AI decidir "O Quê" fazer, uma **Behavior Tree** define "Como" f
 
 ## 3.4 FSM: Gerenciamento de Estados Macro
 
-A **FSM (Finite State Machine)** controla o estado de alto nível do herói.
+A **FSM (Finite State Mamanane)** controla o estado de alto nível do herói.
 
 ### Estados Principais
 

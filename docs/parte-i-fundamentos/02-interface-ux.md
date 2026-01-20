@@ -10,7 +10,7 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 | -------- | ------------------ | -------------------------------------------------------------- |
 | **[F1]** | **OPS CENTER**     | "The War Room" - Monitoramento em tempo real, combate tático   |
 | **[F2]** | **ADMIN**          | "The Tycoon" - Gestão econômica, árvores de habilidades        |
-| **[F3]** | **LIBRARY**        | "The Archives" - Lore, bestiário, análise psicológica          |
+| **[F3]** | **LIBRARY**        | "The Armanaves" - Lore, bestiário, análise psicológica          |
 | **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa visual com ícones, postos avançados      |
 | **[F5]** | **THE AVIARY**     | "Royal Mail" - Sistema de correspondência via corvos           |
 | **[F6]** | **THE CHRONICLES** | "The Chronicles" - História sendo gerada, narrativa generativa |
@@ -39,63 +39,156 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 ---
 
-## 2.3 [F1] OPS CENTER - "The War Room"
+## 2.3 [F1] COMMAND CENTER - "The War Room"
 
-**Foco Principal:** Monitoramento em Tempo Real (O "Aquário") e Combate Tático
+**Foco Principal:** Centro de Comando com Mapas Duplos + Monitoramento em Tempo Real
 
 ### Descrição dos Painéis
 
-| Painel | Nome                          | Conteúdo                                                                |
-| ------ | ----------------------------- | ----------------------------------------------------------------------- |
-| **P1** | Lista de Heróis               | Roster rápido mostrando HP, nível e status atual (dormindo, lutando)    |
-| **P2** | Mapa Lógico                   | Lista de nós (locais) mostrando onde cada entidade está fisicamente     |
-| **P3** | Estado do Reino               | Dashboard financeiro e ambiental (Ouro, Mana, **Influência IP**, Ciclo) |
-| **P4** | Inspetor (Detalhes)           | Metadados do herói ou inimigo selecionado em P1 ou P2                   |
-| **P5** | Timeline Social (Logs)        | Feed de eventos em tempo real (combate, diálogos, loot)                 |
-| **P6** | Decretos/Loja                 | Menu de ações táticas rápidas (curar, buffs, recrutamento)              |
-| **P7** | Conselheiro Real              | Chat para input de comandos e feedback da IA sobre o combate            |
-| **P8** | **Status Temporários Ativos** | **Painel de Buffs/Debuffs/Condições ativas em tempo real**              |
+| Painel | Nome                              | Conteúdo                                                         |
+| ------ | --------------------------------- | ---------------------------------------------------------------- |
+| **P1** | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
+| **P2** | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
+| **P3** | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
+| **P4** | **Log Geral**                     | Eventos administrativos, econômicos                              |
+| **P5** | **Log de Combate**                | Batalhas em tempo real, timeline de ações                        |
+| **P6** | **Log de Construção**             | Builds, upgrades, ordem de serviço                               |
+| **P7** | ❌ **REMOVIDO**                   | Conselheiro migrou para modal suspenso (Ctrl+C ou botão 🎩)      |
+| **P8** | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
 
 ### Layout Visual Completo
 
 ```
-+---------------------+------------------------------------------+---------------------+
-| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
-| [1] Sir Kaelen 📩   |                                          |                     |
-|     HP: 80% | Lvl 3 |  > VILA REAL (Seguro)                    |  OURO: 1,250        |
-|     Sts: LENDO      |    [N] Conselheiro                       |  MANA: 300          |
-|                     |                                          |  INFL: [|||||.....] |
-| [2] Lila Rogue      |  > FLORESTA SOMBRIA (Combate!)           |  (50/100 IP)        |
-|     HP: 40% | Lvl 5 |    [H] Sir Kaelen 🪶 (Escrevendo...)     |                     |
-|     Sts: LUTA       |    [H] Lila Rogue                        |  -- NOTIFICAÇÕES -- |
-|                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
-| [3] Vazio           |                                          |      (Ler Agora [R])|
-|     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
-|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
-+---------------------+------------------------------------------+---------------------+
-| P4: INSPEÇÃO / CARTA|         P5: TIMELINE SOCIAL (LOGS)       | P6: AÇÕES RÁPIDAS   |
-| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
-| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
-|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
-| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
-| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
-| > Status: Lida      |                                          | (Use teclas)        |
-| > Resposta: A caminho|                                         |                     |
-+---------------------+------------------------------------------+---------------------+
-|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10 Moral] 8min             |
-| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
-| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
-+--------------------------------------------------------------------------------------+
-|                        P7: CONSELHEIRO REAL (CHAT)                                   |
-| IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
-|      resposta malcriada pedindo aumento de salário."                                 |
-|                                                                                      |
-| > /_                                                                                 |
-+--------------------------------------------------------------------------------------+
+┌───────────────────────────────────────────────────────────────────────────┐
+│ P3: STATS DO REINO                                                        │
+│ 💰 Ouro: 1,250g | 😊 Moral: 75% | 📅 Dia: 25/200 | 🌙 Ciclo: 1 (Primavera)│
+├──────────────────────────────────────┬────────────────────────────────────┤
+│   P1: MAPA VISUAL (Grid 10×10)       │ P2: MAPA LÓGICO (Textual)          │
+│                                      │                                    │
+│  [ ][ ][ ][🏰][🌲][🌲][ ][ ][ ][ ] │ 🏰 VILA REAL (Capital)             │
+│  [ ][🌲][🌲][🌲][🌲][🌲][🌲][ ][ ][ ] │  ├─ Sir Kaelen (Guerreiro Lvl 8)  │
+│  [🏔️][🌲][🌲][⚔️][🌲][🌲][🌲][🌲][ ][ ] │  │   HP: ████████░░ 100%          │
+│  [🏔️][🏔️][🌲][🌲][🌲][ ][ ][🌊][🌊][ ] │  │   Status: IDLE                 │
+│  [ ][🏔️][🌲][🌲][ ][ ][🌊][🌊][🌊][ ] │  ├─ Aria (Maga Lvl 7)            │
+│  [ ][ ][🌲][🌲][👥][ ][ ][🌊][ ][ ] │  │   HP: ████████░░ 85%           │
+│  [ ][ ][ ][🏛️][ ][ ][ ][ ][ ][ ] │  └─ 2× Guarda da Cidade          │
+│  [ ][ ][ ][ ][ ][💀][ ][ ][ ][ ] │                                    │
+│  [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] │ ⚔️ COMBATE: Floresta Sombria [3,3]│
+│  [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] │  ├─ Lila (Ladina Lvl 9)            │
+│                                      │  │   HP: ██████░░░░ 65% FIGHTING  │
+│  Legenda:                            │  │   Timeline: age em 1.2s       │
+│  🏰=Vila 🌲=Floresta 🏔️=Montanha    │  └─ vs Ogro (Elite)              │
+│  🌊=Pântano ⚔️=Combate 👥=Grupo      │      HP: ████░░░░░░ 40%          │
+│  🏛️=POI 💀=Boss                     │                                    │
+│                                      │ 🏛️ RUÍNAS ANTIGAS [3,6]           │
+│                                      │  └─ [Não explorado]              │
+│                                      │                                    │
+│                                      │ 💀 COVIL DO DRAGÃO [5,7]          │
+│                                      │  └─ Dragão Ancião (Boss)         │
+│                                      │      HP: ████████████ 100%       │
+├──────────────┬──────────────┬────────┴────────────────────────────────────┤
+│ P4: LOG      │ P5: LOG      │ P6: LOG CONSTRUÇÃO                         │
+│ GERAL        │ COMBATE      │                                            │
+│              │              │                                            │
+│ [14:32] 💰   │ [14:35] ⚔️   │ [14:30] 🏗️ Guilda Magos construída        │
+│ Recebeu taxa │ Lila ataca   │   (300g, 60s) - CONCLUÍDO                 │
+│ (20g)        │ Ogro (85!)   │ [14:32] 🔨 Taverna Lvl 1→2 iniciado       │
+│              │ [14:36] ⚔️   │   (150g, 90s) - 45s restantes             │
+│ [14:33] 📧   │ Ogro contra- │ [14:35] ⚙️ Todas construções reparadas    │
+│ Carta de Lila│ ataca (42)   │   (-50g) - CONCLUÍDO                      │
+│ recebida     │ [14:37] ⏱️   │ [14:40] 🏛️ Escola Estoica em construção   │
+│              │ Lila age em  │   (800g, 120s) - 80s restantes            │
+│ [14:35] 👥   │ 0.8s         │                                            │
+│ Kaelen subiu │              │                                            │
+│ para Lvl 9   │              │    │
+└──────────────┴──────────────┴──────────────────────────────────────┬─────┤
+                                                                      │ P8  │
+🎩 Conselheiro (Ctrl+C para abrir)                                    │STAT │
+┌─────────────────────────────────────────────────────────────────────┤TEMP │
+│ P8: 🔀 STATUS TEMPORÁRIOS ATIVOS                                    │     │
+├─────────────────────────────────────────────────────────────────────┤     │
+│ 🔼 BUFFS ATIVOS:                                                    │     │
+│  ├─ Sir Kaelen [⚡ Fúria Berserker +50% ATK] ⏱️ 12s restantes       │     │
+│  ├─ Aria [🛡️ Escudo Mágico 150 absorção] ⏱️ 5s restantes           │     │
+│  └─ Reino [🍖 Banquete +10 Moral global] ⏱️ 4min restantes          │     │
+│                                                                     │     │
+│ 🔽 DEBUFFS ATIVOS:                                                  │     │
+│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 28s restantes                    │     │
+│  ├─ Gandalf [❄️ Congelado -50% Speed] ⏱️ 8s restantes              │     │
+│  └─ Aria [🔥 Queimando -3HP/s] ⏱️ 15s restantes                     │     │
+│                                                                     │     │
+│ ⚠️ CONDIÇÕES ESPECIAIS:                                             │     │
+│  ├─ Elara [😵 Atordoada - não age] ⏱️ 3s restantes                  │     │
+│  ├─ Ogro [😱 Amedrontado -30% ATK] ⏱️ 20s restantes                │     │
+│  ├─ Lila [🐺 Lobo Alfa +40% solo] ⏱️ Permanente (trait extremo)    │     │
+│  └─ Kaelen [🍺 DRUNK +0.3 Proactivity] ⏱️ 3min restantes            │     │
+└─────────────────────────────────────────────────────────────────────┴─────┘
 ```
 
-**Nota:** O P8 foi adicionado como uma **barra horizontal** no rodapé, logo acima do P7, para mostrar TODOS os status temporários ativos no jogo de forma consolidada.
+### Detalhamento do P8: Status Temporários
+
+**Formato de Entrada:**
+
+```
+[Emoji Estado] [Nome do Estado] [Efeito] ⏱️ [Tempo Restante]
+```
+
+**Categorias:**
+
+1. **🔼 BUFFS** (Efeitos Positivos):
+   - Aumentam stats
+   - Concedem habilidades temporárias
+   - Proteções/escudos
+   - Origem: Skills, itens, Bardo, Paladino, etc
+
+2. **🔽 DEBUFFS** (Efeitos Negativos):
+   - Reduzem stats
+   - Dano contínuo (DoT)
+   - Penalida des
+   - Origem: Venenos, magias inimigas, etc
+
+3. **⚠️ CONDIÇÕES ESPECIAIS**:
+   - Controle de multidão (Stun, Freeze, Fear)
+   - Estados extremos P.E.C.M.A. (Lobo Alfa, Guarda Leal, etc)
+   - Estados emocionais (DRUNK, SCARED, INSPIRED)
+   - Podem ser permanentes ou temporários
+
+**Exemplos de Status:**
+
+```
+BUFFS:
+⚡ Fúria Berserker +50% ATK (Guerreiro skill)
+🛡️ Escudo Mágico 150 absorção (Mago skill)
+🎵 Melodia de Ataque +20% ATK (Bardo canalização)
+🙏 Benção em Massa +30% todos stats (Paladino)
+✨ Inspirado +0.1 todos P.E.C.M.A. (evento)
+⚡ Grito de Guerra +30% Speed (Bardo)
+
+DEBUFFS:
+☣️ Envenenado -X HP/s (Flecha/Lâmina venenosa)
+❄️ Congelado -50% Speed (Magia de gelo)
+🔥 Queimando -X HP/s (Magia de fogo)
+⚫ Maldição de Fraqueza -40% ATK (Necromante)
+🌑 Peste (contágio) -5 HP/s (Necromante)
+😰 Exaustão -30% Speed (usar skills demais)
+
+CONDIÇÕES:
+😵 Atordoado - Zero ações (Stun)
+🧊 Congelado - Zero ações (Freeze)
+😵‍💫 Confuso - 50% atacar aliado
+😱 Amedrontado - -30% ATK, pode fugir
+🤐 Silenciado - Não usa skills mágicas
+🐌 Lento - Reduz Speed
+🐺 Lobo Alfa - Trait extremo (Cooperation ≤0.1)
+🛡️ Guarda Leal - Trait extremo (Proactivity ≤0.1)
+🍺 DRUNK - Modifica P.E.C.M.A. temporariamente
+```
+
+**Interação com Timeline:**
+
+- Buffs/Debuffs de Speed modificam posição na fila de ação
+- Condições de Controle (Stun/Freeze) param progresso na timeline
+- Estados P.E.C.M.A. afetam tomada de decisão da IA
 
 ---
 
@@ -496,7 +589,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 #### P3 (Logística)
 
-- **Compra Rápida:** Ao selecionar um item (ex: Poção [A]) e pressionar Enter (ou clicar), o foco vai para o P7 (Input) pré-preenchido com `/buy A [quantidade]`
+- **Compra Rápida:** Ao selecionar um item (ex: Poção [A]) e pressionar Enter (ou clicar), o foco vai para o P7 (Input) pré-preenmanado com `/buy A [quantidade]`
 
 #### P6 (Ações Rápidas)
 
@@ -884,11 +977,11 @@ Saldo atual: 1,130g
 
 ---
 
-## 2.5 [F3] LIBRARY - "The Archives"
+## 2.5 [F3] LIBRARY - "The Armanaves"
 
 **Foco Principal:** Lore, Psicologia Profunda, Bestiário e Estatísticas (Pausa Tática)
 
-![F3 LIBRARY - The Archives](<../anexos/[F3]%20LIBRARY%20(_The%20Archives_).png>)
+![F3 LIBRARY - The Armanaves](<../anexos/[F3]%20LIBRARY%20(_The%20Armanaves_).png>)
 
 ### Descrição dos Painéis
 

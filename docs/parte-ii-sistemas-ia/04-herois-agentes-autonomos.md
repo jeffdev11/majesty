@@ -101,7 +101,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor    | Título                  | Buffs                                                                                                                                     | Debuffs                                                                                |
 | -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente (0s delay)<br>+15% vigilância (detecta inimigos +2s antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
-| **≥0.9** | ⚡ **Desbravador Nato** | +30% velocidade de movimento<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                           | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                           | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
 
 #### **E - Ethics Extrema**
 
@@ -758,7 +758,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Viés P.E.C.M.A.:** Mind ↑, Affect ↑↑, Cooperation →
 - **Comportamento:** Disciplinado, calmo em combate, medita frequentemente
 - **Mecânica Única:** **Combo System** - Ataques encadeados aumentam dano
-- **Recurso Especial:** **Chi** (regenera com o tempo, gasta em habilidades)
+- **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
 
 ---
 
@@ -820,9 +820,9 @@ Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos
 
 ---
 
-## 4.6 Limitação Estratégica: Máximo de 12 Heróis
+## 4.6 Limitação Estratégica: Máximo de 5 Heróis
 
-**Regra de Ouro:** O jogador pode ter no máximo **12 heróis ativos** simultaneamente.
+**Regra de Ouro:** O jogador pode ter no máximo **5 heróis ativos** simultaneamente.
 
 ### Justificativa de Design
 

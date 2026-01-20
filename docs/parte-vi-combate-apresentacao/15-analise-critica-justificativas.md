@@ -43,24 +43,27 @@ Como **solopreneur**:
 
 ---
 
-## 15.3 Limite de 12 Heróis: Por Quê?
+## 15.3 Limite de 5 Heróis: Por Quê?
 
 ### Justificativa de Design
 
 **Contra-argumentos antecipados:**
 
-- "Por que não 50 heróis? Mais é melhor!"
+- "Por que não 20 heróis? Mais é melhor!"
 
 **Nossa resposta:**
 
-1. **Valor Individual:** Com 12, cada morte **importa**. Com 50, heróis são descartáveis
-2. **Conexão Emocional:** Jogador decora nomes, personalidades e histórias
-3. **Performance:** 12 heróis com IA complexa > 50 heróis com IA burra
-4. **Balanceamento:** Mais fácil equilibrar economia e dificuldade
+1. **Gerenciamento de Texto:** Com 5, os logs permanecem legíveis. Com 20, seria spam
+2. **Valor Individual:** Perder 1 de 5 heróis = **20% do poder militar**. Cada morte é catastrófica
+3. **Conexão Emocional:** Jogador decora nomes, personalidades e histórias de TODOS os 5
+4. **Performance:** 5 heróis com IA P.E.C.M.A. complexa > 20 heróis com IA simples
+5. **Balanceamento:** Muito mais fácil equilibrar economia e dificuldade
 
 ### Comparação: XCOM
 
 **XCOM** limita squad a 4-6 soldados por missão. Resultado: Cada soldado é **insubstituível**.
+
+**Heroes of Majesty** segue a mesma filosofia: Poucos, mas muito profundos.
 
 ---
 

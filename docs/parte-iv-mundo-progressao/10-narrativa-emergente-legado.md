@@ -255,7 +255,7 @@ No **[F3] LIBRARY → MEMORIAL**, há uma lista de **todos os heróis mortos** d
 
 ---
 
-## 10.7 Achievements Narrativos (Conquistas)
+## 10.7 Amanaevements Narrativos (Conquistas)
 
 ### Conquistas Baseadas em História, Não Grind
 

@@ -22,7 +22,7 @@
    - 2.2 Regras Globais de Interação
    - 2.3 [F1] OPS CENTER - "The War Room"
    - 2.4 [F2] ADMIN - "The Tycoon"
-   - 2.5 [F3] LIBRARY - "The Archives"
+   - 2.5 [F3] LIBRARY - "The Armanaves"
    - 2.6 [F4] WORLD MAP - "The Conquest"
    - 2.7 [F5] THE AVIARY - "Royal Mail"
 
@@ -41,7 +41,7 @@
    - 4.3 Camadas de Modificação
    - 4.4 Classes de Heróis
    - 4.5 Ciclo de Vida (Morte e Redenção)
-   - 4.6 Limitação: 12 Heróis Máximo
+   - 4.6 Limitação: 5 Heróis Máximo
    - 4.7 Sistema de Skills (Árvore Completa)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
@@ -98,7 +98,7 @@
     - 10.4 Modo Historiador
     - 10.5 Ecos do Passado
     - 10.6 Memorial dos Mortos
-    - 10.7 Achievements Narrativos
+    - 10.7 Amanaevements Narrativos
     - 10.8 Compartilhamento Social
 
 ### PARTE V: MULTIPLAYER E INIMIGOS
@@ -144,7 +144,7 @@
 15. [Análise Crítica e Justificativas](#15-análise-crítica-e-justificativas-de-design)
     - 15.1 Por Que Controle Indireto?
     - 15.2 Por Que Terminal?
-    - 15.3 Limite de 12 Heróis
+    - 15.3 Limite de 5 Heróis
     - 15.4 Progressão Lenta
     - 15.5 IA Determinística vs Generativa
     - 15.6 Multiplayer: Por Que Não Agora?
@@ -307,7 +307,7 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 | -------- | ------------------ | -------------------------------------------------------------- |
 | **[F1]** | **OPS CENTER**     | "The War Room" - Monitoramento em tempo real, combate tático   |
 | **[F2]** | **ADMIN**          | "The Tycoon" - Gestão econômica, árvores de habilidades        |
-| **[F3]** | **LIBRARY**        | "The Archives" - Lore, bestiário, análise psicológica          |
+| **[F3]** | **LIBRARY**        | "The Armanaves" - Lore, bestiário, análise psicológica          |
 | **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa visual com ícones, postos avançados      |
 | **[F5]** | **THE AVIARY**     | "Royal Mail" - Sistema de correspondência via corvos           |
 | **[F6]** | **THE CHRONICLES** | "The Chronicles" - História sendo gerada, narrativa generativa |
@@ -336,63 +336,156 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 
 ---
 
-## 2.3 [F1] OPS CENTER - "The War Room"
+## 2.3 [F1] COMMAND CENTER - "The War Room"
 
-**Foco Principal:** Monitoramento em Tempo Real (O "Aquário") e Combate Tático
+**Foco Principal:** Centro de Comando com Mapas Duplos + Monitoramento em Tempo Real
 
 ### Descrição dos Painéis
 
-| Painel | Nome                          | Conteúdo                                                                |
-| ------ | ----------------------------- | ----------------------------------------------------------------------- |
-| **P1** | Lista de Heróis               | Roster rápido mostrando HP, nível e status atual (dormindo, lutando)    |
-| **P2** | Mapa Lógico                   | Lista de nós (locais) mostrando onde cada entidade está fisicamente     |
-| **P3** | Estado do Reino               | Dashboard financeiro e ambiental (Ouro, Mana, **Influência IP**, Ciclo) |
-| **P4** | Inspetor (Detalhes)           | Metadados do herói ou inimigo selecionado em P1 ou P2                   |
-| **P5** | Timeline Social (Logs)        | Feed de eventos em tempo real (combate, diálogos, loot)                 |
-| **P6** | Decretos/Loja                 | Menu de ações táticas rápidas (curar, buffs, recrutamento)              |
-| **P7** | Conselheiro Real              | Chat para input de comandos e feedback da IA sobre o combate            |
-| **P8** | **Status Temporários Ativos** | **Painel de Buffs/Debuffs/Condições ativas em tempo real**              |
+| Painel | Nome                              | Conteúdo                                                         |
+| ------ | --------------------------------- | ---------------------------------------------------------------- |
+| **P1** | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
+| **P2** | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
+| **P3** | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
+| **P4** | **Log Geral**                     | Eventos administrativos, econômicos                              |
+| **P5** | **Log de Combate**                | Batalhas em tempo real, timeline de ações                        |
+| **P6** | **Log de Construção**             | Builds, upgrades, ordem de serviço                               |
+| **P7** | ❌ **REMOVIDO**                   | Conselheiro migrou para modal suspenso (Ctrl+C ou botão 🎩)      |
+| **P8** | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
 
 ### Layout Visual Completo
 
 ```
-+---------------------+------------------------------------------+---------------------+
-| P1: LISTA DE HERÓIS |          P2: O MAPA LÓGICO               | P3: ESTADO DO REINO |
-| [1] Sir Kaelen 📩   |                                          |                     |
-|     HP: 80% | Lvl 3 |  > VILA REAL (Seguro)                    |  OURO: 1,250        |
-|     Sts: LENDO      |    [N] Conselheiro                       |  MANA: 300          |
-|                     |                                          |  INFL: [|||||.....] |
-| [2] Lila Rogue      |  > FLORESTA SOMBRIA (Combate!)           |  (50/100 IP)        |
-|     HP: 40% | Lvl 5 |    [H] Sir Kaelen 🪶 (Escrevendo...)     |                     |
-|     Sts: LUTA       |    [H] Lila Rogue                        |  -- NOTIFICAÇÕES -- |
-|                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
-| [3] Vazio           |                                          |      (Ler Agora [R])|
-|     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
-|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
-+---------------------+------------------------------------------+---------------------+
-| P4: INSPEÇÃO / CARTA|         P5: TIMELINE SOCIAL (LOGS)       | P6: AÇÕES RÁPIDAS   |
-| Selecionado: [1]    | [12:03] 🐦 Corvo enviado para Kaelen.    | [A] Curar (100g)    |
-| Sir Kaelen          | [12:03] Kaelen parou para ler a carta.   | [B] Buff Dano (300g)|
-|                     | [12:04] Kaelen: "Vou tentar, senhor!"    | [C] Carta (-25 IP)  |
-| [Status da Carta]   | [12:04] Kaelen atacou Ogro (CRÍTICO!)    |                     |
-| > Enviada: 12:03    | [12:05] 📩 Resposta de Lila chegou.      |                     |
-| > Status: Lida      |                                          | (Use teclas)        |
-| > Resposta: A caminho|                                         |                     |
-+---------------------+------------------------------------------+---------------------+
-|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10 Moral] 8min             |
-| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
-| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
-+--------------------------------------------------------------------------------------+
-|                        P7: CONSELHEIRO REAL (CHAT)                                   |
-| IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
-|      resposta malcriada pedindo aumento de salário."                                 |
-|                                                                                      |
-| > /_                                                                                 |
-+--------------------------------------------------------------------------------------+
+┌───────────────────────────────────────────────────────────────────────────┐
+│ P3: STATS DO REINO                                                        │
+│ 💰 Ouro: 1,250g | 😊 Moral: 75% | 📅 Dia: 25/200 | 🌙 Ciclo: 1 (Primavera)│
+├──────────────────────────────────────┬────────────────────────────────────┤
+│   P1: MAPA VISUAL (Grid 10×10)       │ P2: MAPA LÓGICO (Textual)          │
+│                                      │                                    │
+│  [ ][ ][ ][🏰][🌲][🌲][ ][ ][ ][ ] │ 🏰 VILA REAL (Capital)             │
+│  [ ][🌲][🌲][🌲][🌲][🌲][🌲][ ][ ][ ] │  ├─ Sir Kaelen (Guerreiro Lvl 8)  │
+│  [🏔️][🌲][🌲][⚔️][🌲][🌲][🌲][🌲][ ][ ] │  │   HP: ████████░░ 100%          │
+│  [🏔️][🏔️][🌲][🌲][🌲][ ][ ][🌊][🌊][ ] │  │   Status: IDLE                 │
+│  [ ][🏔️][🌲][🌲][ ][ ][🌊][🌊][🌊][ ] │  ├─ Aria (Maga Lvl 7)            │
+│  [ ][ ][🌲][🌲][👥][ ][ ][🌊][ ][ ] │  │   HP: ████████░░ 85%           │
+│  [ ][ ][ ][🏛️][ ][ ][ ][ ][ ][ ] │  └─ 2× Guarda da Cidade          │
+│  [ ][ ][ ][ ][ ][💀][ ][ ][ ][ ] │                                    │
+│  [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] │ ⚔️ COMBATE: Floresta Sombria [3,3]│
+│  [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] │  ├─ Lila (Ladina Lvl 9)            │
+│                                      │  │   HP: ██████░░░░ 65% FIGHTING  │
+│  Legenda:                            │  │   Timeline: age em 1.2s       │
+│  🏰=Vila 🌲=Floresta 🏔️=Montanha    │  └─ vs Ogro (Elite)              │
+│  🌊=Pântano ⚔️=Combate 👥=Grupo      │      HP: ████░░░░░░ 40%          │
+│  🏛️=POI 💀=Boss                     │                                    │
+│                                      │ 🏛️ RUÍNAS ANTIGAS [3,6]           │
+│                                      │  └─ [Não explorado]              │
+│                                      │                                    │
+│                                      │ 💀 COVIL DO DRAGÃO [5,7]          │
+│                                      │  └─ Dragão Ancião (Boss)         │
+│                                      │      HP: ████████████ 100%       │
+├──────────────┬──────────────┬────────┴────────────────────────────────────┤
+│ P4: LOG      │ P5: LOG      │ P6: LOG CONSTRUÇÃO                         │
+│ GERAL        │ COMBATE      │                                            │
+│              │              │                                            │
+│ [14:32] 💰   │ [14:35] ⚔️   │ [14:30] 🏗️ Guilda Magos construída        │
+│ Recebeu taxa │ Lila ataca   │   (300g, 60s) - CONCLUÍDO                 │
+│ (20g)        │ Ogro (85!)   │ [14:32] 🔨 Taverna Lvl 1→2 iniciado       │
+│              │ [14:36] ⚔️   │   (150g, 90s) - 45s restantes             │
+│ [14:33] 📧   │ Ogro contra- │ [14:35] ⚙️ Todas construções reparadas    │
+│ Carta de Lila│ ataca (42)   │   (-50g) - CONCLUÍDO                      │
+│ recebida     │ [14:37] ⏱️   │ [14:40] 🏛️ Escola Estoica em construção   │
+│              │ Lila age em  │   (800g, 120s) - 80s restantes            │
+│ [14:35] 👥   │ 0.8s         │                                            │
+│ Kaelen subiu │              │                                            │
+│ para Lvl 9   │              │    │
+└──────────────┴──────────────┴──────────────────────────────────────┬─────┤
+                                                                      │ P8  │
+🎩 Conselheiro (Ctrl+C para abrir)                                    │STAT │
+┌─────────────────────────────────────────────────────────────────────┤TEMP │
+│ P8: 🔀 STATUS TEMPORÁRIOS ATIVOS                                    │     │
+├─────────────────────────────────────────────────────────────────────┤     │
+│ 🔼 BUFFS ATIVOS:                                                    │     │
+│  ├─ Sir Kaelen [⚡ Fúria Berserker +50% ATK] ⏱️ 12s restantes       │     │
+│  ├─ Aria [🛡️ Escudo Mágico 150 absorção] ⏱️ 5s restantes           │     │
+│  └─ Reino [🍖 Banquete +10 Moral global] ⏱️ 4min restantes          │     │
+│                                                                     │     │
+│ 🔽 DEBUFFS ATIVOS:                                                  │     │
+│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 28s restantes                    │     │
+│  ├─ Gandalf [❄️ Congelado -50% Speed] ⏱️ 8s restantes              │     │
+│  └─ Aria [🔥 Queimando -3HP/s] ⏱️ 15s restantes                     │     │
+│                                                                     │     │
+│ ⚠️ CONDIÇÕES ESPECIAIS:                                             │     │
+│  ├─ Elara [😵 Atordoada - não age] ⏱️ 3s restantes                  │     │
+│  ├─ Ogro [😱 Amedrontado -30% ATK] ⏱️ 20s restantes                │     │
+│  ├─ Lila [🐺 Lobo Alfa +40% solo] ⏱️ Permanente (trait extremo)    │     │
+│  └─ Kaelen [🍺 DRUNK +0.3 Proactivity] ⏱️ 3min restantes            │     │
+└─────────────────────────────────────────────────────────────────────┴─────┘
 ```
 
-**Nota:** O P8 foi adicionado como uma **barra horizontal** no rodapé, logo acima do P7, para mostrar TODOS os status temporários ativos no jogo de forma consolidada.
+### Detalhamento do P8: Status Temporários
+
+**Formato de Entrada:**
+
+```
+[Emoji Estado] [Nome do Estado] [Efeito] ⏱️ [Tempo Restante]
+```
+
+**Categorias:**
+
+1. **🔼 BUFFS** (Efeitos Positivos):
+   - Aumentam stats
+   - Concedem habilidades temporárias
+   - Proteções/escudos
+   - Origem: Skills, itens, Bardo, Paladino, etc
+
+2. **🔽 DEBUFFS** (Efeitos Negativos):
+   - Reduzem stats
+   - Dano contínuo (DoT)
+   - Penalida des
+   - Origem: Venenos, magias inimigas, etc
+
+3. **⚠️ CONDIÇÕES ESPECIAIS**:
+   - Controle de multidão (Stun, Freeze, Fear)
+   - Estados extremos P.E.C.M.A. (Lobo Alfa, Guarda Leal, etc)
+   - Estados emocionais (DRUNK, SCARED, INSPIRED)
+   - Podem ser permanentes ou temporários
+
+**Exemplos de Status:**
+
+```
+BUFFS:
+⚡ Fúria Berserker +50% ATK (Guerreiro skill)
+🛡️ Escudo Mágico 150 absorção (Mago skill)
+🎵 Melodia de Ataque +20% ATK (Bardo canalização)
+🙏 Benção em Massa +30% todos stats (Paladino)
+✨ Inspirado +0.1 todos P.E.C.M.A. (evento)
+⚡ Grito de Guerra +30% Speed (Bardo)
+
+DEBUFFS:
+☣️ Envenenado -X HP/s (Flecha/Lâmina venenosa)
+❄️ Congelado -50% Speed (Magia de gelo)
+🔥 Queimando -X HP/s (Magia de fogo)
+⚫ Maldição de Fraqueza -40% ATK (Necromante)
+🌑 Peste (contágio) -5 HP/s (Necromante)
+😰 Exaustão -30% Speed (usar skills demais)
+
+CONDIÇÕES:
+😵 Atordoado - Zero ações (Stun)
+🧊 Congelado - Zero ações (Freeze)
+😵‍💫 Confuso - 50% atacar aliado
+😱 Amedrontado - -30% ATK, pode fugir
+🤐 Silenciado - Não usa skills mágicas
+🐌 Lento - Reduz Speed
+🐺 Lobo Alfa - Trait extremo (Cooperation ≤0.1)
+🛡️ Guarda Leal - Trait extremo (Proactivity ≤0.1)
+🍺 DRUNK - Modifica P.E.C.M.A. temporariamente
+```
+
+**Interação com Timeline:**
+
+- Buffs/Debuffs de Speed modificam posição na fila de ação
+- Condições de Controle (Stun/Freeze) param progresso na timeline
+- Estados P.E.C.M.A. afetam tomada de decisão da IA
 
 ---
 
@@ -793,7 +886,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 #### P3 (Logística)
 
-- **Compra Rápida:** Ao selecionar um item (ex: Poção [A]) e pressionar Enter (ou clicar), o foco vai para o P7 (Input) pré-preenchido com `/buy A [quantidade]`
+- **Compra Rápida:** Ao selecionar um item (ex: Poção [A]) e pressionar Enter (ou clicar), o foco vai para o P7 (Input) pré-preenmanado com `/buy A [quantidade]`
 
 #### P6 (Ações Rápidas)
 
@@ -915,10 +1008,14 @@ Heróis defendendo: 3 (Kaelen, Lila, Gandalf)
     | [4] Guilda Arqueiros     (300g)      |
     | [5] Guilda Druidas       (320g)      |
     | [6] Guilda Elfos         (330g)      |
-    | [7] Torre de Vigia       (200g)      |
-    | [8] Loja de Poções       (250g)      |
-    | [9] Ferreiro             (400g)      |
-    | [10] Taverna             (300g)      |
+    | [7] Guilda Paladinos     (400g)      |
+    | [8] Guilda Necromantes   (420g)      |
+    | [9] Guilda Bardos        (350g)      |
+    | [10] Guilda Monges       (320g)      |
+    | [11] Torre de Vigia      (200g)      |
+    | [12] Loja de Poções      (250g)      |
+    | [13] Ferreiro            (400g)      |
+    | [14] Taverna             (300g)      |
     | [ESC] Cancelar                       |
     +--------------------------------------+
     ```
@@ -1177,11 +1274,11 @@ Saldo atual: 1,130g
 
 ---
 
-## 2.5 [F3] LIBRARY - "The Archives"
+## 2.5 [F3] LIBRARY - "The Armanaves"
 
 **Foco Principal:** Lore, Psicologia Profunda, Bestiário e Estatísticas (Pausa Tática)
 
-![F3 LIBRARY - The Archives](<../anexos/[F3]%20LIBRARY%20(_The%20Archives_).png>)
+![F3 LIBRARY - The Armanaves](<../anexos/[F3]%20LIBRARY%20(_The%20Armanaves_).png>)
 
 ### Descrição dos Painéis
 
@@ -3906,7 +4003,7 @@ Após a Utility AI decidir "O Quê" fazer, uma **Behavior Tree** define "Como" f
 
 ## 3.4 FSM: Gerenciamento de Estados Macro
 
-A **FSM (Finite State Machine)** controla o estado de alto nível do herói.
+A **FSM (Finite State Mamanane)** controla o estado de alto nível do herói.
 
 ### Estados Principais
 
@@ -3978,7 +4075,7 @@ Cada classe possui **30 skills únicas**:
 - **15 Ativas**: Habilidades que o herói usa ativamente em combate
 - **15 Passivas**: Buffs permanentes que modificam stats ou comportamento
 
-**Total de 6 Classes Jogáveis:**
+**Total de 10 Classes Jogáveis:**
 
 1. 🗡️ **Guerreiro** (Warrior) - Tank de linha de frente
 2. 🔮 **Mago** (Mage) - DPS mágico de longo alcance
@@ -3986,6 +4083,10 @@ Cada classe possui **30 skills únicas**:
 4. 🗝️ **Ladino** (Rogue) - Assassino furtivo
 5. 🌿 **Druida** (Druid) - Suporte/Metamorfo
 6. 🏹 **Elfo** (Elf) - Híbrido mágico/físico
+7. 🛡️ **Paladino** (Paladin) - Tank/Healer sagrado
+8. 💀 **Necromante** (Necromancer) - Invocador de mortos
+9. 🎵 **Bardo** (Bard) - Suporte musical
+10. 👊 **Monge** (Monk) - DPS corpo-a-corpo sem armas
 
 O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos através de:
 
@@ -4110,7 +4211,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | #   | Nome                     | Efeito                                             | Requer                      |
 | --- | ------------------------ | -------------------------------------------------- | --------------------------- |
 | 1   | **Olho de Águia**        | +20% alcance de visão e ataque                     | Nível 1                     |
-| 2   | **Pés Ligeiros**         | +15% velocidade de movimento                       | Olho de Águia               |
+| 2   | **Pés Ligeiros**         | +15% Speed                       | Olho de Águia               |
 | 3   | **Precisão Mortal**      | +10% chance de crítico                             | Tiro Preciso                |
 | 4   | **Mestre Arqueiro**      | +15% dano com arcos                                | Nível 2                     |
 | 5   | **Evasão**               | +15% chance de esquivar ataques corpo-a-corpo      | Recuo Rápido                |
@@ -4120,7 +4221,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 9   | **Emboscada**            | Primeiro ataque de combate +100% dano              | Camuflagem                  |
 | 10  | **Aljava Grande**        | +50% capacidade de flechas                         | Nível 5                     |
 | 11  | **Veneno Aprimorado**    | DoTs duram +50% mais tempo                         | Flecha Venenosa             |
-| 12  | **Reflexos Felinos**     | +25% velocidade de ataque                          | Evasão                      |
+| 12  | **Reflexos Felinos**     | +25% Velocidade de Ação                          | Evasão                      |
 | 13  | **Caçador Nato**         | +30% dano contra criaturas selvagens               | Invocar Lobo                |
 | 14  | **Crítico Devastador**   | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
 | 15  | **Lenda Viva**           | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
@@ -4162,7 +4263,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 7   | **Esquiva Mortal**      | +20% chance de esquivar                                | Finta                |
 | 8   | **Imunidade a Veneno**  | Imune a todos venenos                                  | Veneno Letal         |
 | 9   | **Golpe Crítico**       | +25% chance de crítico                                 | Ataque pelas Costas  |
-| 10  | **Acrobata**            | +30% velocidade de movimento                           | Esquiva Mortal       |
+| 10  | **Acrobata**            | +30% Speed                           | Esquiva Mortal       |
 | 11  | **Preparação**          | Reduz todos cooldowns em 30% ao entrar em combate      | Dedos Ágeis          |
 | 12  | **Sangue Frio**         | +40% dano contra alvos com HP cheio                    | Golpe Crítico        |
 | 13  | **Assassino Nato**      | +50% dano contra alvos solitários                      | Furtividade          |
@@ -4223,7 +4324,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | --- | ------------------------- | -------- | -------- | ---------------------------------------------------------------------- | ------------------------- |
 | 1   | **Flecha Arcana**         | 15 Mana  | 5s       | Flecha mágica, 70 dano + penetra defesa                                | Nível 1                   |
 | 2   | **Passo Élfico**          | 20 Mana  | 15s      | Teleporta 12m, próximos 3 ataques +30% dano                            | Nível 1                   |
-| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% velocidade por 12s                        | Nível 2                   |
+| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% Speed por 12s                        | Nível 2                   |
 | 4   | **Chuva Estelar**         | 50 Mana  | 35s      | 10 projéteis mágicos, 35 dano cada, rastreiam alvos                    | Flecha Arcana             |
 | 5   | **Círculo de Proteção**   | 40 Mana  | 30s      | Zona 8m, aliados ganham +40% Defense por 10s                           | Benção da Lua             |
 | 6   | **Lâmina Mística**        | 25 Mana  | 20s      | Espada de energia por 15s, +80% Attack mágico                          | Nível 3                   |
@@ -4241,7 +4342,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 | #   | Nome                     | Efeito                                                 | Requer                 |
 | --- | ------------------------ | ------------------------------------------------------ | ---------------------- |
-| 1   | **Graça Élfica**         | +25% velocidade de movimento                           | Nível 1                |
+| 1   | **Graça Élfica**         | +25% Speed                           | Nível 1                |
 | 2   | **Visão Mística**        | Detecta inimigos invisíveis e escondidos               | Nível 1                |
 | 3   | **Longevidade**          | +20% HP máximo, imune a doenças                        | Nível 2                |
 | 4   | **Afinidade Arcana**     | +20% dano mágico                                       | Flecha Arcana          |
@@ -4322,6 +4423,183 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 - Dia 151-200: Chance de desbloquear todas 30 (partida perfeita)
 
 ---
+# Skills das Novas Classes
+
+## 🛡️ PALE DINO (Paladin) - 30 Skills
+
+### ⚔️ Skills Ativas (15)
+
+| #   | Nome                   | Custo       | Cooldown | Descrição                                                | Requer                |
+| --- | ---------------------- | ----------- | -------- | -------------------------------------------------------- | --------------------- |
+| 1   | **Golpe Sagrado**      | 15 Devoção  | 6s       | Ataque sagrado, 70 dano + 30 HP de cura própria          | Nível 1               |
+| 2   | **Aura de Proteção**   | 20 Devoção  | Passiva  | Aliados em 12m ganham +15% Defense permanente            | Nível 1               |
+| 3   | **Cura Divina**        | 30 Devoção  | 12s      | Cura aliado em 200 HP                                    | Golpe Sagrado         |
+| 4   | **Escudo da Fé**       | 25 Devoção  | 20s      | Absorve 250 dano por 10s                                 | Nível 2               |
+| 5   | **Martelo da Justiça** | 35 Devoção  | 25s      | Arremessa martelo, 100 dano + atordoa 3s                 | Golpe Sagrado         |
+| 6   | **Sacrifício Divino**  | 40 Devoção  | 30s      | Transfere 50% do dano de aliado para si por 15s          | Cura Divina           |
+| 7   | **Julgamento**         | 45 Devoção  | 35s      | Marca inimigo maligno, +60% dano contra ele              | Nível 4               |
+| 8   | **Ressurreição**       | 80 Devoção  | 180s     | Revive aliado com 70% HP (melhor que Druida)             | Cura Divina           |
+| 9   | **Consagrar Terreno**  | 50 Devoção  | 40s      | Zona 10m, inimigos malignos -30% Attack por 20s          | Nível 5               |
+| 10  | **Escudo Refletor**    | 55 Devoção  | 45s      | Próximos 5 ataques são refletidos 100%                   | Escudo da Fé          |
+| 11  | **Ira Divina**         | 60 Devoção  | 50s      | +100% Attack por 15s, ganha Devoção ao atacar            | Martelo da Justiça    |
+| 12  | **Benção em Massa**    | 70 Devoção  | 60s      | Todos aliados em 15m ganham +30% stats por 20s           | Aura de Proteção      |
+| 13  | **Voto de Vingança**   | 65 Devoção  | 55s      | Se aliado morrer próximo, ganha +150% Attack por 30s     | Julgamento            |
+| 14  | **Santuário**          | 75 Devoção  | 90s      | Cria zona 12m invulnerável por 8s                        | Consagrar Terreno     |
+| 15  | **Avatar da Luz**      | 150 Devoção | 200s     | Forma angelical, cura 10% HP/s aliados, +200% stats, 30s | Ressurreição + Lvl 12 |
+
+### 🛡️ Skills Passivas (15)
+
+| #   | Nome                        | Efeito                                           | Requer                 |
+| --- | --------------------------- | ------------------------------------------------ | ---------------------- |
+| 1   | **Fé Inabalável**           | +15% HP máximo, +10% Defense                     | Nível 1                |
+| 2   | **Ganho de Devoção**        | Ganha 10 Devoção ao ser atingido                 | Nível 1                |
+| 3   | **Mártir**                  | +20% Defense quando HP < 30%                     | Fé Inabalável          |
+| 4   | **Protetor Nato**           | Aliados próximos recebem -15% dano               | Aura de Proteção       |
+| 5   | **Regeneração Sagrada**     | Cura 2% HP máximo a cada 10s                     | Cura Divina            |
+| 6   | **Justiça Inabalável**      | Imune a medo e corrupção                         | Nível 3                |
+| 7   | **Vingador**                | +30% dano contra mortos-vivos e demônios         | Julgamento             |
+| 8   | **Benção Permanente**       | Inicia combate com +20% todos stats por 30s      | Benção em Massa        |
+| 9   | **Ressurreição Automática** | Ao morrer, revive com 30% HP (1x/partida)        | Ressurreição           |
+| 10  | **Escudo de Aliados**       | Pode bloquear ataques destinados a aliados (5m)  | Protetor Nato          |
+| 11  | **Aura Expandida**          | Alcance de auras +50% (18m em vez de 12m)        | Protetor Nato          |
+| 12  | **Devotado**                | Curas gastam -20% Devoção                        | Regeneração Sagrada    |
+| 13  | **Bastião**                 | +50% Defense quando não se move por 3s           | Fé Inabalável          |
+| 14  | **Purificação**             | Remove todos debuffs de si mesmo a cada 30s      | Justiça Inabalável     |
+| 15  | **Santo Guerreiro**         | +40% stats, imune a críticos, aliados +25% moral | Avatar da Luz + Lvl 11 |
+
+---
+
+## 💀 NECROMANTE (Necromancer) - 30 Skills
+
+### 🌑 Skills Ativas (15)
+
+| #   | Nome                     | Custo        | Cooldown | Descrição                                                            | Requer                   |
+| --- | ------------------------ | ------------ | -------- | -------------------------------------------------------------------- | ------------------------ |
+| 1   | **Bola Sombria**         | 20 Mana      | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                       | Nível 1                  |
+| 2   | **Reanimar Cadáver**     | 30 Essência  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                           | Nível 1                  |
+| 3   | **Drenar Vida**          | 25 Mana      | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                               | Bola Sombria             |
+| 4   | **Invocar Zumbi**        | 50 Essência  | 30s      | Invoca Zumbi resistente (dura 90s)                                   | Reanimar Cadáver         |
+| 5   | **Maldição de Fraqueza** | 30 Mana      | 20s      | Alvo perde -40% Attack por 15s                                       | Nível 3                  |
+| 6   | **Explosão Cadavérica**  | 40 Mana      | 25s      | Detona cadáver, 150 dano em 8m                                       | Reanimar Cadáver         |
+| 7   | **Escudo Ósseo**         | 35 Mana      | 30s      | Absorve 200 dano, dura até quebrar                                   | Nível 4                  |
+| 8   | **Peste**                | 45 Mana      | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos              | Drenar Vida              |
+| 9   | **Invocar Espectro**     | 70 Essência  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)                     | Invocar Zumbi            |
+| 10  | **Toque da Morte**       | 50 Mana      | 35s      | Instakill inimigo não-elite com HP < 20%                             | Drenar Vida              |
+| 11  | **Exército dos Mortos**  | 100 Essência | 120s     | Invoca 5 esqueletos simultaneamente (duram 45s)                      | Invocar Espectro         |
+| 12  | **Pacto Sombrio**        | 60 Mana      | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s                     | Nível 7                  |
+| 13  | **Necrose**              | 55 Mana      | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável       | Peste                    |
+| 14  | **Lich Form**            | 80 Mana      | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s           | Pacto Sombrio            |
+| 15  | **Apocalipse Sombrio**   | 200 Essência | 180s     | Reanimação em massa, todos cadáveres em 30m viram servos permanentes | Exército Mortos + Lvl 12 |
+
+### 💀 Skills Passivas (15)
+
+| #   | Nome                       | Efeito                                                | Requer                      |
+| --- | -------------------------- | ----------------------------------------------------- | --------------------------- |
+| 1   | **Colheita Sombria**       | Ganha 25 Essência Sombria ao matar inimigo            | Nível 1                     |
+| 2   | **Mana das Sombras**       | +25% Mana máximo                                      | Nível 1                     |
+| 3   | **Servos Aprimorados**     | Invocações têm +50% HP e Attack                       | Reanimar Cadáver            |
+| 4   | **Maestria Necrótica**     | +20% dano necrótico                                   | Bola Sombria                |
+| 5   | **Drenagem Vital**         | Spells de dano curam 15% do dano causado              | Drenar Vida                 |
+| 6   | **Resistência Morta-Viva** | +30% resistência a necrótico e veneno                 | Nível 3                     |
+| 7   | **Explosões em Cadeia**    | Explosão Cadavérica pode detonar outros cadáveres     | Explosão Cadavérica         |
+| 8   | **Longevidade de Servos**  | Invocações duram +50% tempo                           | Servos Aprimorados          |
+| 9   | **Essência Infinita**      | Regenera 5 Essência/s                                 | Colheita Sombria            |
+| 10  | **Aura Necrótica**         | Inimigos próximos (8m) perdem 2% HP máximo/s          | Maestria Necrótica          |
+| 11  | **Pacto Eterno**           | Ao usar Pacto Sombrio, não perde HP mas servos morrem | Pacto Sombrio               |
+| 12  | **Comandante dos Mortos**  | Pode ter até 8 servos simultâneos (padrão 3)          | Exército dos Mortos         |
+| 13  | **Imortal**                | Ao morrer, vira Lich por 20s, pode continuar lutando  | Lich Form                   |
+| 14  | **Sinergia Sombria**       | Cada servo vivo aumenta dano mágico em +10%           | Comandante dos Mortos       |
+| 15  | **Senhor das Trevas**      | +100% Essência, servos se tornam permanentes          | Apocalipse Sombrio + Lvl 11 |
+
+---
+
+## 🎵 BARDO (Bard) - 30 Skills
+
+### 🎶 Skills Ativas (15)
+
+| #   | Nome                      | Custo          | Cooldown  | Descrição                                               | Requer                 |
+| --- | ------------------------- | -------------- | --------- | ------------------------------------------------------- | ---------------------- |
+| 1   | **Melodia de Ataque**     | 15 Inspiração  | Canalizar | Canta, aliados 15m ganham +20% Attack                   | Nível 1                |
+| 2   | **Acorde Dissonante**     | 20 Mana        | 8s        | Nota musical, 60 dano + confunde por 2s                 | Nível 1                |
+| 3   | **Canção de Cura**        | 25 Inspiração  | Canalizar | Canta, aliados 15m curam 10 HP/s                        | Melodia de Ataque      |
+| 4   | **Grito de Guerra**       | 30 Inspiração  | 30s       | Todos aliados ganham +30% Speed por 15s            | Nível 2                |
+| 5   | **Faca Lançada**          | 20 Mana        | 5s        | Arremessa faca, 50 dano, 3 cargas                       | Acorde Dissonante      |
+| 6   | **Hino de Resistência**   | 35 Inspiração  | Canalizar | Canta, aliados 15m ganham +30% Defense                  | Canção de Cura         |
+| 7   | **Solo Devastador**       | 40 Mana        | 35s       | Toca solo, 15m AoE, 120 dano + atordoa 3s               | Acorde Dissonante      |
+| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s       | Aliados ganham +50% Velocidade de Ação por 20s        | Grito de Guerra        |
+| 9   | **Balada da Regeneração** | 50 Inspiração  | Canalizar | Canta, aliados 15m regeneram 3% HP máximo/s             | Hino de Resistência    |
+| 10  | **Canto de Sirene**       | 45 Mana        | 45s       | Encanta inimigos em 12m, eles param de atacar por 6s    | Solo Devastador        |
+| 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s       | Todos aliados ganham +40% todos stats por 25s           | Balada da Regeneração  |
+| 12  | **Contra-Melodia**        | 50 Mana        | 50s       | Cancela buffs inimigos em 20m                           | Canto de Sirene        |
+| 13  | **Épico Heróico**         | 70 Inspiração  | 90s       | Um aliado escolhido fica invulnerável por 10s           | Sinfonia de Grupo      |
+| 14  | **Onda Sônica**           | 80 Mana        | 55s       | Cone 25m, 200 dano + knock-back 10m                     | Solo Devastador        |
+| 15  | **Requiem**               | 150 Inspiração | 180s      | Canção suprema, aliados +100% stats, inimigos -50%, 30s | Épico Heróico + Lvl 12 |
+
+### 🎵 Skills Passivas (15)
+
+| #   | Nome                      | Efeito                                                      | Requer              |
+| --- | ------------------------- | ----------------------------------------------------------- | ------------------- |
+| 1   | **Ganho de Inspiração**   | Ganha 20 Inspiração ao ver aliado matar inimigo             | Nível 1             |
+| 2   | **Carismático**           | +30% Affinity natural com todos heróis                      | Nível 1             |
+| 3   | **Alcance Musical**       | Canções afetam +5m de raio (20m em vez de 15m)              | Melodia de Ataque   |
+| 4   | **Multitarefa**           | Pode canalizar canções e atacar simultaneamente             | Canção de Cura      |
+| 5   | **Maestria Sonic a**      | +15% dano de habilidades sonoras                            | Acorde Dissonante   |
+| 6   | **Performer Nato**        | Canções custam -20% Inspiração                              | Ganho de Inspiração |
+| 7   | **Velocidade de Canto**   | Canções começam a fazer efeito 50% mais rápido              | Multitarefa         |
+| 8   | **Inspiração Automática** | Regenera 10 Inspiraç ão/s quando em grupo                   | Ganho de Inspiração |
+| 9   | **Ressonância**           | Canções persistem por 5s após parar de cantar               | Alcance Musical     |
+| 10  | **Moral Elevado**         | Aliados próximos nunca fogem                                | Carismático         |
+| 11  | **Virtuoso**              | Pode ter 2 canções ativas simultaneamente                   | Ressonância         |
+| 12  | **Aura de Carisma**       | Grupo forma 3x mais rápido                                  | Moral Elevado       |
+| 13  | **Coro**                  | Cada aliado próximo aumenta efeito de canções em +15%       | Virtuoso            |
+| 14  | **Imortalidade Musical**  | Se morrer durante canção, canção continua por 30s           | Nível 9             |
+| 15  | **Lenda Viva**            | Presença proporciona +50% XP para aliados, +100% Inspiração | Requiem + Lvl 11    |
+
+---
+
+## 👊 MONGE (Monk) - 30 Skills
+
+### 🥋 Skills Ativas (15)
+
+| #   | Nome                     | Custo   | Cooldown | Descrição                                                      | Requer                  |
+| --- | ------------------------ | ------- | -------- | -------------------------------------------------------------- | ----------------------- |
+| 1   | **Golpe de Palma**       | 10 Mana  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
+| 2   | **Chute Giratório**      | 15 Mana  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
+| 3   | **Dash do Vento**        | 20 Mana  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
+| 4   | **Soco do Dragão**       | 25 Mana  | 15s      | 3 socos rápidos em 1s, 40 dano cada, gera 3 combos             | Chute Giratório         |
+| 5   | **Meditação**            | 0 Mana   | 30s      | Regenera 50 Mana em 5s, imóvel                                  | Nível 3                 |
+| 6   | **Rajada de Mil Punhos** | 30 Mana  | 20s      | Ataque frenético, 10 socos, 25 dano cada                       | Soco do Dragão          |
+| 7   | **Toque Paralisante**    | 35 Mana  | 25s      | Paralisa inimigo por 5s                                        | Nível 4                 |
+| 8   | **Ciclone**              | 40 Mana  | 30s      | Gira rapidamente, 12 chutes, 35 dano cada                      | Chute Giratório         |
+| 9   | **Aura de Mana**          | 45 Mana  | 35s      | +50% Velocidade de Ação por 20s, consome 5 combos            | Rajada de Mil Punhos    |
+| 10  | **Teletransporte**       | 50 Mana  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
+| 11  | **Punho da Fúria**       | 60 Mana  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
+| 12  | **Transcendência**       | 70 Mana  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
+| 13  | **Explosão de Mana**      | 80 Mana  | 50s      | Libera Mana, 15m AoE, 180 dano + knock-back                     | Aura de Mana             |
+| 14  | **Forma do Dragão**      | 90 Mana  | 120s     | Transforma em dragão espiritual, +150% Attack, voa, 25s        | Punho da Fúria          |
+| 15  | **Iluminação**           | 150 Mana | 180s     | Estado supremo, velocidade 3x, dano 3x, esquiva 100%, 20s      | Transcendência + Lvl 12 |
+
+### 🧘 Skills Passivas (15)
+
+| #   | Nome                         | Efeito                                          | Requer                   |
+| --- | ---------------------------- | ----------------------------------------------- | ------------------------ |
+| 1   | **Regeneração de Mana**       | Regenera 5 Mana/s                                | Nível 1                  |
+| 2   | **Mestre em Artes Marciais** | +20% dano corpo-a-corpo                         | Nível 1                  |
+| 3   | **Sistema de Combos**        | Cada ataque gera 1 combo, máximo 10 combos      | Golpe de Palma           |
+| 4   | **Dano de Combo**            | +5% dano por combo ativo                        | Sistema de Combos        |
+| 5   | **Reflexos Sobre-Humanos**   | +25% Speed                    | Dash do Vento            |
+| 6   | **Esquiva de Mestre**        | +20% chance de esquivar                         | Reflexos Sobre-Humanos   |
+| 7   | **Contra-Ataque Perfeito**   | 30% chance de contra-atacar ao esquivar         | Esquiva de Mestre        |
+| 8   | **Meditação Passiva**        | Regenera 2% HP máximo/s quando fora de combate  | Meditação                |
+| 9   | **Mana Infinito**             | Mana máximo +50                                  | Regeneração de Mana       |
+| 10  | **Disciplina de Ferro**      | Imune a atordoamentos quando tem 5+ combos      | Sistema de Combos        |
+| 11  | **Golpes Críticos**          | +30% chance de crítico                          | Mestre em Artes Marciais |
+| 12  | **Velocidade da Luz**        | +40% Velocidade de Ação                       | Reflexos Sobre-Humanos   |
+| 13  | **Sem Armas, Sem Problemas** | Sem arma equipada, +50% todos stats             | Mestre em Artes Marciais |
+| 14  | **Espírito do Dragão**       | Ao atingir 10 combos, próximo ataque +300% dano | Dano de Combo            |
+| 15  | **Mestre Iluminado**         | Quando em Iluminação, combos nunca resetam      | Iluminação + Lvl 11      |
+
+---
 # 4. OS HERÓIS: AGENTES AUTÔNOMOS
 
 ## 4.1 Estrutura de Dados de um Herói
@@ -4335,7 +4613,7 @@ interface Hero {
   // Identificação
   id: string;
   name: string;
-  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE, DRUID, ELF
+  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE, DRUID, ELF, PALADIN, NECROMANCER, BARD, MONK
 
   // Atributos Físicos
   stats: {
@@ -4348,7 +4626,7 @@ interface Hero {
     speed: number;
   };
 
-  // Personalidade (P.E.R.M.A.)
+  // Personalidade (P.E.C.M.A.)
   personality: {
     power: number; // Audácia (0.0 - 1.0)
     ethics: number; // Ética (0.0 - 1.0)
@@ -4392,61 +4670,587 @@ interface Hero {
 
 ---
 
-## 4.2 Sistema P.E.R.M.A.: Os 5 Vetores de Personalidade
+## 4.2 Sistema P.E.C.M.A.: Os 5 Vetores de Personalidade
 
-O sistema **P.E.R.M.A.** define a essência psicológica de cada herói através de 5 vetores flutuantes (0.0 a 1.0).
+O sistema **P.E.C.M.A.** define a essência psicológica de cada herói através de 5 vetores flutuantes (0.0 a 1.0).
 
-### Tabela de Referência
+**Acrônimo:**
 
-| Vetor | Nome                    | 0.0 (Baixo)                                        | 1.0 (Alto)                                         | Impacto no Gameplay                        |
-| ----- | ----------------------- | -------------------------------------------------- | -------------------------------------------------- | ------------------------------------------ |
-| **P** | **Power (Audácia)**     | **Covarde:** Foge com 80% HP. Evita Elites.        | **Temerário:** Luta até 0% HP. Ataca Boss sozinho. | Define `FleeThreshold` e peso do risco     |
-| **E** | **Ethics (Ética)**      | **Oportunista:** Rouba Kills (KS), ignora aliados. | **Paladino:** Cura aliados, divide loot, obedece.  | Define interação social e obediência       |
-| **R** | **Resource (Ganância)** | **Altruísta:** Ignora ouro durante combate.        | **Kleptomaníaco:** Para de lutar para pegar loot.  | Define prioridade LOOT vs COMBAT           |
-| **M** | **Mind (Intelecto)**    | **Instintivo:** Ataca alvo mais próximo.           | **Tático:** Foca Healers/Magos, usa itens.         | Define seleção de alvo e uso de inventário |
-| **A** | **Affect (Humor)**      | **Instável:** Humor volátil, quebra sob pressão.   | **Estoico:** Mantém calma, ignora insultos.        | Define volatilidade dos outros vetores     |
+- **P** - Proactivity (Proatividade)
+- **E** - Ethics (Ética)
+- **C** - Cooperation (Cooperação)
+- **M** - Mind (Intelecto)
+- **A** - Affect (Temperamento)
 
-### Geração Procedural
+### Tabela de Referência P.E.C.M.A.
 
-Cada herói nasce com vetores aleatórios, mas com **vieses de classe**:
+| Vetor | Nome                           | 0.0 (Baixo)                                           | 1.0 (Alto)                                                           | Impacto no Gameplay                             |
+| ----- | ------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| **P** | **Proactivity (Proatividade)** | **Reativo:** Espera ordens, patrulha próximo da vila. | **Proativo:** Busca monstros ativamente, explora sozinho.            | Define iniciativa e raio de ação autônoma       |
+| **E** | **Ethics (Ética)**             | **Pragmático:** Fim justifica meios, rouba, trai.     | **Honrado:** Segue código de conduta, leal, justo.                   | Define comportamento moral e social             |
+| **C** | **Cooperation (Cooperação)**   | **Lobo Solitário:** Prefere agir sozinho, não ajuda.  | **Espírito de Equipe:** Forma grupos, compartilha, ajuda.            | Define trabalho em equipe vs individualismo     |
+| **M** | **Mind (Intelecto)**           | **Impulsivo:** Ataca primeiro alvo, não usa itens.    | **Estratégico:** Prioriza alvos, usa itens, recua quando necessário. | Define tomada de decisão tática                 |
+| **A** | **Affect (Temperamento)**      | **Volátil:** Humor muda facilmente, imprevisível.     | **Estável:** Mantém calma, consistente, confiável.                   | Define volatilidade emocional e previsibilidade |
+
+---
+
+### Buffs/Debuffs de Valores Extremos
+
+Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer vetor, ganha buffs ou debuffs permanentes:
+
+#### **P - Proactivity Extrema**
+
+| Valor    | Título                  | Buffs                                                                                                                                     | Debuffs                                                                                |
+| -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente (0s delay)<br>+15% vigilância (detecta inimigos +2s antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                           | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+
+#### **E - Ethics Extrema**
+
+| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                    |
+| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo        |
+| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Nunca rouba kills (perde XP)<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
+
+#### **C - Cooperation Extrema**
+
+| Valor    | Título               | Buffs                                                                                                           | Debuffs                                                                                          |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **≤0.1** | 🐺 **Lobo Alfa**     | +40% stats quando lutando sozinho<br>Não sofre penalidade por estar sozinho<br>+20% velocidade quando sem grupo | -50% XP quando em grupo<br>Nunca compartilha recursos<br>Affinity máxima com qualquer herói: +30 |
+| **≥0.9** | 🤝 **Líder Natural** | +25% stats para aliados próximos (10m)<br>Grupos formam 2x mais rápido<br>Compartilha buffs com o time          | -30% stats quando sozinho<br>Recusa lutar sem grupo (foge)<br>Dá itens valiosos para aliados     |
+
+#### **M - Mind Extremo**
+
+| Valor    | Título                 | Buffs                                                                                             | Debuffs                                                                                               |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **≤0.1** | 💢 **Fúria Cega**      | +40% Attack<br>Imune a medo<br>Nunca foge (luta até morte)                                        | Sempre ataca o mais próximo<br>Nunca usa itens/poções<br>Cai em todas as armadilhas                   |
+| **≥0.9** | 🧠 **Mente Brilhante** | +35% XP ganho<br>Aprende skills 2x mais rápido<br>Calcula vitória 100% certo (foge se odds < 40%) | Demora 2x mais para tomar decisões<br>Pode "overthink" e perder oportunidades<br>-10% Attack (hesita) |
+
+#### **A - Affect Extremo**
+
+| Valor    | Título            | Buffs                                                                                                    | Debuffs                                                                                          |
+| -------- | ----------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **≤0.1** | 🌪️ **Caos Vivo**  | Stats aleatórios a cada combate (±40%)<br>Pode ter momentos de genialidade<br>Imprevisível para inimigos | Affinity muda aleatoriamente (±20/dia)<br>Pode atacar aliados se provocado<br>Impossível confiar |
+| **≥0.9** | 🗿 **Inabalável** | Imune a todos estados emocionais<br>100% consistente e confiável<br>+20% Defense (calma sob pressão)     | Sem bônus de motivação<br>Não reage a mortes de aliados<br>-15% moral do grupo (parece frio)     |
+
+### Detalhamento dos Vetores com Exemplos
+
+#### **P - Proactivity (Proatividade): 0.0 a 1.0**
+
+**O que representa:** O quanto o herói busca ativamente desafios vs aguarda instruções.
+
+**Comportamentos por faixa:**
+
+| Valor       | Comportamento        | Exemplo Prático                                                     |
+| ----------- | -------------------- | ------------------------------------------------------------------- |
+| **0.0-0.2** | Extremamente reativo | Só sai da vila se receber carta direta. Patrulha em raio de 50m.    |
+| **0.3-0.4** | Cauteloso            | Explora apenas áreas seguras (já reveladas). Evita névoa de guerra. |
+| **0.5-0.6** | Equilibrado          | Explora quando não há ameaças próximas. Balanceia segurança e ação. |
+| **0.7-0.8** | Aventureiro          | Busca ativamente monstros. Entra em névoa de guerra.                |
+| **0.9-1.0** | Temerário            | Vai direto para bosses sozinho. Ignora avisos de perigo.            |
+
+**Exemplos em gameplay:**
+
+- **Baixa (0.2):** Herói fica na vila esperando monstros virem até ele. Jogador precisa enviar cartas para fazê-lo explorar.
+- **Alta (0.9):** Herói descobre boss sozinho, inicia combate sem backup, pode morrer mas ganha muita informação.
+
+**Interação com cartas:**
+
+- Proatividade baixa: Obedece cartas instantaneamente
+- Proatividade alta: Pode ignorar cartas se encontrar "oportunidade melhor"
+
+---
+
+#### **E - Ethics (Ética): 0.0 a 1.0**
+
+**O que representa:** Código moral do herói. O quanto valoriza honra, lealdade e justiça.
+
+**Comportamentos por faixa:**
+
+| Valor       | Arquétipo        | Comportamentos                                            |
+| ----------- | ---------------- | --------------------------------------------------------- |
+| **0.0-0.2** | **Maquiavélico** | Trai aliados por ouro. Aceita subornos. Abandona feridos. |
+| **0.3-0.4** | **Pragmático**   | Rouba kills se conveniente. Mente se necessário.          |
+| **0.5-0.6** | **Neutro**       | Segue regras quando observado. Ajuda se não custar muito. |
+| **0.7-0.8** | **Honrado**      | Divide loot igualmente. Cumpre promessas. Leal ao reino.  |
+| **0.9-1.0** | **Paladino**     | Sacrifica-se por aliados. Recusa subornos. Nunca mente.   |
+
+**Exemplos Detalhados em Gameplay:**
+
+**Situação 1: Kill Stealing**
+
+- Ethics 0.2: Rouba kill ativamente, sem remorso
+- Ethics 0.5: Rouba se ninguém estiver olhando
+- Ethics 0.8: Deixa o kill para quem iniciou o combate
+
+**Situação 2: Aliado Caído (HP < 20%)**
+
+- Ethics 0.2: Foge e salva-se, deixa aliado morrer
+- Ethics 0.5: Ajuda se não houver muito risco
+- Ethics 0.8: Usa poção em aliado mesmo se for a última
+
+**Situação 3: Corrupção (NPC oferece 500g para trair)**
+
+- Ethics 0.2: Aceita imediatamente
+- Ethics 0.5: Considera seriamente, pode aceitar
+- Ethics 0.8: Recusa e reporta ao Majesty
+
+**Situação 4: Loot Lendário**
+
+- Ethics 0.2: Pega tudo, não compartilha
+- Ethics 0.5: Divide com quem ajudou
+- Ethics 0.8: Oferece ao aliado que precisa mais
+
+**Situação 5: Ordem vs Moral**
+
+- Ethics 0.2: Obedece qualquer ordem sem questionar
+- Ethics 0.5: Questiona ordens claramente erradas
+- Ethics 0.8: Desobedece ordens imorais, aceita punição
+
+---
+
+#### **R - Cooperation (Cooperação): 0.0 a 1.0**
+
+**O que representa:** Preferência por trabalho em equipe vs ação solo.
+
+**Comportamentos por faixa:**
+
+| Valor       | Arquétipo          | Comportamentos                                                 |
+| ----------- | ------------------ | -------------------------------------------------------------- |
+| **0.0-0.2** | **Lobo Solitário** | Nunca forma grupos. Recusa ajuda. Trabalha sozinho.            |
+| **0.3-0.4** | **Independente**   | Forma grupo raramente. Prefere solo mas aceita companhia.      |
+| **0.5-0.6** | **Flexível**       | Forma grupo se vantajoso. Balanceia solo e equipe.             |
+| **0.7-0.8** | **Sociável**       | Prefere grupos. Compartilha recursos. Ajuda ativamente.        |
+| **0.9-1.0** | **Altruísta**      | Sempre busca formar grupos. Sacrifica ganho pessoal pelo time. |
+
+**Exemplos em Gameplay:**
+
+**Formação de Grupos:**
+
+- Cooperation 0.2: Recusa formar grupo, mesmo com alta Affinity
+- Cooperation 0.5: Forma grupo com 2-3 heróis de confiança
+- Cooperation 0.9: Forma grupos grandes, convida todos
+
+**Compartilhamento de Recursos:**
+
+- Cooperation 0.2: Usa todas poções em si mesmo
+- Cooperation 0.5: Compartilha se sobrar
+- Cooperation 0.9: Dá poção para aliado mesmo se precisar
+
+**Combate em Grupo:**
+
+- Cooperation 0.2: Luta próximo mas não coordena
+- Cooperation 0.5: Foca mesmo alvo que o grupo
+- Cooperation 0.9: Protege aliados fracos, tanking para o time
+
+**Salvamento (Aliado morrendo):**
+
+- Cooperation 0.2: Ignora, continua lutando
+- Cooperation 0.5: Salva se for amigo próximo
+- Cooperation 0.9: Interrompe tudo para salvar qualquer aliado
+
+**XP e Loot em Grupo:**
+
+- Cooperation 0.2: Tenta pegar tudo, maximiza ganho pessoal
+- Cooperation 0.5: Divide igualmente
+- Cooperation 0.9: Dá prioridade aos mais fracos
+
+---
+
+#### **M - Mind (Intelecto): 0.0 a 1.0**
+
+**O que representa:** Capacidade tática, estratégia e uso de recursos.
+
+**Comportamentos por faixa:**
+
+| Valor       | Arquétipo               | Comportamentos                                                   |
+| ----------- | ----------------------- | ---------------------------------------------------------------- |
+| **0.0-0.2** | **Berserker**           | Ataca primeiro que vê. Nunca foge. Não usa itens.                |
+| **0.3-0.4** | **Impulsivo**           | Decisões rápidas. Pouca análise. Uso básico de itens.            |
+| **0.5-0.6** | **Competente**          | Avalia ameaças. Foge quando HP baixo. Usa itens principais.      |
+| **0.7-0.8** | **Tático**              | Prioriza alvos. Usa terreno. Otimiza uso de recursos.            |
+| **0.9-1.0** | **Mestre Estrategista** | Planeja 3 passos à frente. Explora fraquezas. Máxima eficiência. |
+
+**Exemplos em Gameplay:**
+
+**Seleção de Alvo:**
+
+- Mind 0.2: Ataca o mais próximo sempre
+- Mind 0.5: Prioriza alvos mais fracos
+- Mind 0.9: Foca healers/magos primeiro, ignora tanks
+
+**Uso de Itens/Poções:**
+
+- Mind 0.2: Nunca usa ou usa aleatoriamente
+- Mind 0.5: Usa poção quando HP < 30%
+- Mind 0.9: Usa poção preventivamente antes de boss, otimiza cooldowns
+
+**Decisão de Fuga:**
+
+- Mind 0.2: Nunca foge (morre sempre que perder)
+- Mind 0.5: Foge quando HP < 20%
+- Mind 0.9: Foge quando calcula que não pode vencer (mesmo com HP alto)
+
+**Análise de Ameaças:**
+
+- Mind 0.2: Ataca qualquer coisa
+- Mind 0.5: Evita inimigos muito superiores
+- Mind 0.9: Calcula odds, evita lutas desfavoráveis, atrai para emboscadas
+
+**Exploração:**
+
+- Mind 0.2: Caminha aleatoriamente
+- Mind 0.5: Explora sistematicamente
+- Mind 0.9: Mapeia eficientemente, evita backtracking
+
+---
+
+#### **A - Affect (Temperamento): 0.0 a 1.0**
+
+**O que representa:** Estabilidade emocional. Volatilidade vs consistência.
+
+**Comportamentos por faixa:**
+
+| Valor       | Arquétipo       | Comportamentos                                     |
+| ----------- | --------------- | -------------------------------------------------- |
+| **0.0-0.2** | **Caótico**     | Humor muda a cada evento. Totalmente imprevisível. |
+| **0.3-0.4** | **Volátil**     | Reage fortemente a eventos. Influenciável.         |
+| **0.5-0.6** | **Normal**      | Reações proporcionais. Recupera-se com tempo.      |
+| **0.7-0.8** | **Equilibrado** | Difícil abalar. Mantém foco sob pressão.           |
+| **0.9-1.0** | **Estoico**     | Imperturbável. Zero volatilidade. Máquina.         |
+
+**Exemplos em Gameplay:**
+
+**Reação a Morte de Aliado:**
+
+- Affect 0.2: Entra em pânico, foge ou ataca furiosamente boss (alterna)
+- Affect 0.5: Fica triste (-10% stats por 5min)
+- Affect 0.9: Continua focado, sem mudança de comportamento
+
+**Reação a Loot Lendário:**
+
+- Affect 0.2: Fica eufórico, stats temporários aleatórios
+- Affect 0.5: Fica feliz (+5% stats por 2min)
+- Affect 0.9: Sem reação especial
+
+**Reação a Insultos (de outros heróis):**
+
+- Affect 0.2: Pode iniciar PvP imediatamente
+- Affect 0.5: Affinity diminui, mas sem violência
+- Affect 0.9: Ignora completamente
+
+**Efeito de Estados (DRUNK, SCARED, etc):**
+
+- Affect 0.2: Estados duram +100% e têm efeito dobrado
+- Affect 0.5: Duração normal
+- Affect 0.9: Estados duram -50% e efeito reduzido
+
+**Consistência de Comportamento:**
+
+- Affect 0.2: Hoje ajuda aliados, amanhã os abandona (mood swings)
+- Affect 0.5: Comportamento previsível na maioria das vezes
+- Affect 0.9: 100% consistente, pode-se sempre contar com ele
+
+---
+
+### Traits Pré-Estabelecidas por Classe
+
+Cada classe tem **tendências** (não valores fixos, mas ranges estreitos) que definem sua identidade:
+
+#### 🗡️ **Guerreiro**
 
 ```typescript
-// Guerreiro
 personality: {
-  power: random(0.6, 1.0),    // Naturalmente corajoso
-  ethics: random(0.4, 0.8),   // Neutro
-  resource: random(0.2, 0.5), // Pouco ganancioso
-  mind: random(0.3, 0.6),     // Força bruta
-  affect: random(0.5, 0.8)    // Estável
-}
-
-// Ladino
-personality: {
-  power: random(0.3, 0.6),    // Cauteloso
-  ethics: random(0.1, 0.4),   // Deslealdade
-  resource: random(0.7, 1.0), // MUITO ganancioso
-  mind: random(0.6, 0.9),     // Astuto
-  affect: random(0.3, 0.7)    // Imprevisível
-}
-
-// Druida
-personality: {
-  power: random(0.4, 0.7),    // Moderadamente corajoso
-  ethics: random(0.6, 0.9),   // Altruísta
-  resource: random(0.2, 0.5), // Pouco ganancioso
-  mind: random(0.5, 0.8),     // Sábio
-  affect: random(0.6, 0.9)    // Calmo e equilibrado
-}
-
-// Elfo
-personality: {
-  power: random(0.5, 0.8),    // Confiante
-  ethics: random(0.5, 0.8),   // Honrado
-  resource: random(0.3, 0.6), // Moderado
-  mind: random(0.6, 0.9),     // Muito inteligente
-  affect: random(0.7, 1.0)    // Muito estável
+  proactivity: random(0.6, 0.9),   // Busca ativamente combate
+  ethics: random(0.5, 0.8),        // Tende a ser honrado
+  cooperation: random(0.6, 0.9),   // Espírito de equipe alto
+  mind: random(0.3, 0.6),          // Força bruta > estratégia
+  affect: random(0.6, 0.9)         // Estável sob pressão
 }
 ```
+
+**Personalidade típica:** Proativo, honrado, trabalha bem em equipe, direto nas decisões, emocionalmente estável.
+
+---
+
+#### 🔮 **Mago**
+
+```typescript
+personality: {
+  proactivity: random(0.3, 0.6),   // Mais cauteloso
+  ethics: random(0.4, 0.7),        // Neutro a honrado
+  cooperation: random(0.4, 0.7),   // Pode ser solitário
+  mind: random(0.7, 1.0),          // Extremamente inteligente
+  affect: random(0.5, 0.8)         // Relativamente estável
+}
+```
+
+**Personalidade típica:** Cauteloso, pensa antes de agir, pode ser solitário, extremamente tático, emocionalmente controlado.
+
+---
+
+#### 🏹 **Arqueiro**
+
+```typescript
+personality: {
+  proactivity: random(0.5, 0.8),   // Explorador nato
+  ethics: random(0.5, 0.8),        // Tende a ser honrado
+  cooperation: random(0.3, 0.6),   // Independente
+  mind: random(0.6, 0.9),          // Muito inteligente
+  affect: random(0.6, 0.9)         // Bastante estável
+}
+```
+
+**Personalidade típica:** Explorador, honrado, independente mas não anti-social, inteligente, calmo.
+
+---
+
+#### 🗝️ **Ladino**
+
+```typescript
+personality: {
+  proactivity: random(0.7, 1.0),   // Muito proativo
+  ethics: random(0.1, 0.4),        // Baixa ética
+  cooperation: random(0.2, 0.5),   // Lobo solitário
+  mind: random(0.6, 0.9),          // Astuto
+  affect: random(0.3, 0.7)         // Volátil
+}
+```
+
+**Personalidade típica:** Extremamente proativo, sem escrúpulos, trabalha sozinho, muito astuto, temperamento volátil.
+
+---
+
+#### 🌿 **Druida**
+
+```typescript
+personality: {
+  proactivity: random(0.4, 0.7),   // Moderado
+  ethics: random(0.7, 1.0),        // Muito ético
+  cooperation: random(0.7, 1.0),   // Espírito de equipe altíssimo
+  mind: random(0.5, 0.8),          // Sábio
+  affect: random(0.7, 1.0)         // Muito estável (conexão com natureza)
+}
+```
+
+**Personalidade típica:** Equilibrado, altamente ético, altruísta, sábio, emocionalmente estável.
+
+---
+
+#### 🏹 **Elfo**
+
+```typescript
+personality: {
+  proactivity: random(0.5, 0.8),   // Explorador
+  ethics: random(0.6, 0.9),        // Honrado
+  cooperation: random(0.5, 0.8),   // Trabalha bem em grupo
+  mind: random(0.7, 1.0),          // Muito inteligente
+  affect: random(0.7, 1.0)         // Extremamente estável (longevidade)
+}
+```
+
+**Personalidade típica:** Explorador, honrado, sociável, extremamente inteligente, inabalável emocionalmente.
+
+---
+
+#### 🛡️ **Paladino**
+
+```typescript
+personality: {
+  proactivity: random(0.6, 0.8),   // Proativo mas não temerário
+  ethics: random(0.8, 1.0),        // EXTREMAMENTE ético
+  cooperation: random(0.7, 1.0),   // Altruísta
+  mind: random(0.4, 0.7),          // Moderado
+  affect: random(0.7, 0.9)         // Estável (fé inabalável)
+}
+```
+
+**Personalidade típica:** Extremamente honrado, autossacrificante, protetor, fé inabalável, inspira aliados.
+
+---
+
+#### 💀 **Necromante**
+
+```typescript
+personality: {
+  proactivity: random(0.5, 0.8),   // Explora para encontrar cadáveres
+  ethics: random(0.1, 0.3),        // MUITO baixa (usa mortos)
+  cooperation: random(0.2, 0.5),   // Lobo solitário
+  mind: random(0.7, 1.0),          // Extremamente inteligente
+  affect: random(0.4, 0.7)         // Moderado a estável
+}
+```
+
+**Personalidade típica:** Pragmático, sombrio, solitário, extremamente inteligente, sem escrúpulos morais.
+
+---
+
+#### 🎵 **Bardo**
+
+```typescript
+personality: {
+  proactivity: random(0.4, 0.7),   // Moderado
+  ethics: random(0.6, 0.9),        // Honrado
+  cooperation: random(0.8, 1.0),   // EXTREMAMENTE cooperativo
+  mind: random(0.5, 0.8),          // Inteligente
+  affect: random(0.7, 1.0)         // Muito estável (otimista)
+}
+```
+
+**Personalidade típica:** Extremamente social, otimista, carismático, forma grupos grandes, inspira através de música.
+
+---
+
+#### 👊 **Monge**
+
+```typescript
+personality: {
+  proactivity: random(0.5, 0.8),   // Equil ibrado
+  ethics: random(0.6, 0.9),        // Honrado (código de honra)
+  cooperation: random(0.4, 0.7),   // Neutro (independente mas não anti-social)
+  mind: random(0.6, 0.9),          // Muito inteligente (disciplina)
+  affect: random(0.8, 1.0)         // EXTREMAMENTE estável (meditação)
+}
+```
+
+**Personalidade típica:** Disciplinado, calmo, medita frequentemente, segue código de honra, mestre em autocontrole.
+
+---
+
+### Escola Estoica: Treinamento de Personalidade
+
+**Novo Edifício:** 🏛️ **Escola Estoica**
+
+A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis através de treinamento filosófico.
+
+#### Custo de Construção
+
+| Nível       | Custo | Tempo de Construção | Benefício                                            |
+| ----------- | ----- | ------------------- | ---------------------------------------------------- |
+| **Nível 1** | 800g  | 120s                | Permite treinar 1 trait por vez                      |
+| **Nível 2** | 1500g | 180s                | Permite treinar 2 traits simultaneamente             |
+| **Nível 3** | 2500g | 240s                | Permite treinar 3 traits + -20% custo de treinamento |
+
+#### Sistema de Treinamento
+
+**Como funciona:**
+
+1. Majesty seleciona um herói
+2. Escolhe qual trait melhorar (P, E, C, M ou A)
+3. Paga o custo em ouro
+4. Herói entra em "Treinamento" por um período
+5. Trait aumenta +0.05 a +0.15 (aleatório, baseado no nível do herói)
+
+**Tabela de Custos:**
+
+| Trait Atual               | Custo Base | Tempo | Aumento       |
+| ------------------------- | ---------- | ----- | ------------- |
+| **0.0-0.3** (Muito Baixo) | 200g       | 60s   | +0.10 a +0.15 |
+| **0.4-0.6** (Médio)       | 400g       | 90s   | +0.08 a +0.12 |
+| **0.7-0.8** (Alto)        | 800g       | 120s  | +0.05 a +0.10 |
+| **0.9+** (Extremo)        | **1500g**  | 180s  | +0.02 a +0.05 |
+
+**Modificadores de Custo:**
+
+- **Herói Nível Alto:** +50g por nível acima de 5
+- **Trait Oposta à Classe:** +100% custo (ex: treinar Mind alto em Guerreiro)
+- **Trait Natural da Classe:** -30% custo (ex: treinar Cooperation em Guerreiro)
+- **Escola Nível 3:** -20% em todos os custos
+
+#### Exemplos Práticos
+
+**Exemplo 1: Ladino Ético**
+
+- Herói: Lila (Ladino Level 6)
+- Trait Atual: Ethics 0.2 (Sem Escrúpulos)
+- Objetivo: Aumentar para evitar traições
+- Custo: 200g (base) + 50g (nível 6) + 200g (oposta à classe) = **450g**
+- Tempo: 60s
+- Resultado: Ethics 0.2 → 0.33 (+0.13)
+
+**Exemplo 2: Guerreiro Tático**
+
+- Herói: Kaelen (Guerreiro Level 8)
+- Trait Atual: Mind 0.4 (Impulsivo)
+- Objetivo: Torná-lo mais estratégico
+- Custo: 400g (base) + 150g (nível 8) + 400g (oposta à classe) = **950g**
+- Tempo: 90s
+- Resultado: Mind 0.4 → 0.51 (+0.11)
+
+**Exemplo 3: Druida Líder**
+
+- Herói: Yara (Druida Level 5)
+- Trait Atual: Cooperation 0.7 (Sociável)
+- Objetivo: Torná-la Líder Natural (≥0.9)
+- Custo: 800g (base) - 240g (natural da classe, -30%) = **560g**
+- Tempo: 120s
+- Resultado: Cooperation 0.7 → 0.78 (+0.08)
+- **Precisa de mais 2 treinamentos para atingir 0.9**
+
+#### Limitações e Regras
+
+**Regras importantes:**
+
+1. **Sem Diminuir Traits:** Só é possível aumentar, nunca diminuir
+2. **Cooldown por Herói:** Cada herói só pode treinar 1x a cada 5 minutos
+3. **Máximo por Trait:** Não pode ultrapassar 1.0
+4. **Herói Indisponível:** Durante treinamento, herói não pode sair da vila
+5. **Cancelamento:** Se cancelado, perde 50% do ouro pago
+
+**Estratégias:**
+
+- **Min-Maxing:** Treinar traits já altas para atingir valores extremos (buffs)
+- **Balanceamento:** Corrigir fraquezas de heróis problemáticos
+- **Especialização:** Levar traits baixas ao extremo (debuffs podem valer a pena)
+
+#### Interface no F2 (ADMIN)
+
+**Novo painel na Escola Estoica:**
+
+```
++-----------------------------------------------------------+
+|        🏛️ ESCOLA ESTOICA - TREINAMENTO FILOSÓFICO         |
++-----------------------------------------------------------+
+| HERÓI: Sir Kaelen (Guerreiro Lvl 8)                      |
+|                                                           |
+| [P] Proactivity:   [████████░░] 0.82  | Treinar (700g)   |
+| [E] Ethics:        [██████░░░░] 0.65  | Treinar (450g)   |
+| [C] Cooperation:   [████████░░] 0.78  | Treinar (600g)   |
+| [M] Mind:          [████░░░░░░] 0.41  | Treinar (950g) ⚠️|
+| [A] Affect:        [███████░░░] 0.71  | Treinar (550g)   |
+|                                                           |
+| ⚠️ = Trait oposta à classe (custo dobrado)                |
+| 💰 SALDO: 1,200g                                          |
++-----------------------------------------------------------+
+| [TAB] Trocar Herói | [ENTER] Confirmar | [ESC] Cancelar  |
++-----------------------------------------------------------+
+```
+
+#### Log de Exemplo
+
+```
+[10:23] 🏛️ TRAIN [Escola Estoica] Sir Kaelen iniciou treinamento de Mind.
+[10:23] 💰 ECO [Escola] -950g (Treinamento de Mind)
+[12:53] 🏛️ TRAIN [Escola Estoica] Sir Kaelen completou treinamento!
+[12:53] 📈 GROWTH [Kaelen] Mind 0.41 → 0.52 (+0.11)
+```
+
+#### Impacto Estratégico
+
+**Quando usar a Escola Estoica:**
+
+✅ **Heróis problemáticos:** Ladino com Ethics 0.1 está traindo? Treine até 0.4
+✅ **Especialização:** Quer um "Líder Natural"? Treine Cooperation até ≥0.9
+✅ **Corrigir RNG:** Herói nasceu com Mind 0.2? Invista para torná-lo útil
+✅ **Endgame:** Com ouro sobrando, crie heróis "perfeitos"
+
+❌ **Quando NÃO usar:**
+
+- Início do jogo (ouro é escasso)
+- Heróis que vão morrer em breve
+- Traits já próximas do ideal
+
+**Trade-off:** Ouro gasto em treinamento = ouro não gasto em equipamento/skills
 
 ---
 
@@ -4456,13 +5260,13 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 
 ### Estados Temporários (Buffs/Debuffs Psicológicos)
 
-| Estado            | Duração   | Efeito                                     |
-| ----------------- | --------- | ------------------------------------------ |
-| **DRUNK**         | 5 min     | Power +0.3, Mind -0.5 (Corajoso mas burro) |
-| **HUNGRY**        | Até comer | Resource +0.2, Speed -10%                  |
-| **INSPIRED**      | 2 min     | Todos vetores +0.1                         |
-| **SCARED**        | 1 min     | Power -0.4, Flee Threshold +30%            |
-| **GREEDY_FRENZY** | 30s       | Resource +0.5 (Vê loot lendário)           |
+| Estado            | Duração   | Efeito                                                |
+| ----------------- | --------- | ----------------------------------------------------- |
+| **DRUNK**         | 5 min     | Proactivity +0.3, Mind -0.5 (Corajoso mas burro)      |
+| **HUNGRY**        | Até comer | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
+| **INSPIRED**      | 2 min     | Todos vetores +0.1                                    |
+| **SCARED**        | 1 min     | Proactivity -0.4, Flee Threshold +30%                 |
+| **GREEDY_FRENZY** | 30s       | Cooperation -0.5 (Vê loot lendário, ignora aliados)   |
 
 ### Peculiaridades (Overrides Binários)
 
@@ -4484,43 +5288,79 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 
 - **Identidade:** Tanque de linha de frente
 - **Stats Base:** HP Alto, Ataque Médio, Defesa Alta
-- **Viés P.E.R.M.A.:** Power ↑, Resource ↓
-- **Comportamento:** Ataca primeiro, protege aliados fracos
+- **Viés P.E.C.M.A.:** Proactivity ↑, Cooperation ↑, Mind ↓
+- **Comportamento:** Busca combate ativamente, trabalha em equipe, decisões diretas
 
 #### 🔮 Mago (Mage)
 
 - **Identidade:** DPS de longo alcance, controle de área
 - **Stats Base:** HP Baixo, Mana Alto, Ataque Mágico Alto
-- **Viés P.E.R.M.A.:** Mind ↑, Power ↓
-- **Comportamento:** Mantém distância, foca múltiplos alvos
+- **Viés P.E.C.M.A.:** Mind ↑↑, Proactivity ↓
+- **Comportamento:** Extremamente tático, cauteloso, pode ser solitário
 
 #### 🏹 Arqueiro (Archer)
 
 - **Identidade:** DPS consistente, mobilidade
 - **Stats Base:** HP Médio, Velocidade Alta, Ataque Físico Médio
-- **Viés P.E.R.M.A.:** Mind ↑, Affect ↑
-- **Comportamento:** Kiting, foca alvos fracos
+- **Viés P.E.C.M.A.:** Mind ↑, Affect ↑, Cooperation ↓
+- **Comportamento:** Inteligente, explorador, independente mas estável
 
 #### 🗝️ Ladino (Rogue)
 
 - **Identidade:** Burst damage, saque, evasão
 - **Stats Base:** HP Baixo, Velocidade Muito Alta, Crit Alto
-- **Viés P.E.R.M.A.:** Resource ↑↑, Ethics ↓
-- **Comportamento:** Rouba kills, saqueia primeiro, foge rápido
+- **Viés P.E.C.M.A.:** Proactivity ↑↑, Ethics ↓, Cooperation ↓, Affect ↓
+- **Comportamento:** Muito proativo, sem escrúpulos, lobo solitário, volátil
 
 #### 🌿 Druida (Druid)
 
 - **Identidade:** Suporte/Metamorfo, cura e transformação
 - **Stats Base:** HP Médio, Mana Médio, Versatilidade Alta
-- **Viés P.E.R.M.A.:** Ethics ↑, Mind ↑
-- **Comportamento:** Cura aliados, se transforma em animais, controle de área
+- **Viés P.E.C.M.A.:** Ethics ↑↑, Cooperation ↑↑, Affect ↑
+- **Comportamento:** Altamente ético, altruísta, extremamente estável
 
 #### 🏹 Elfo (Elf)
 
 - **Identidade:** Híbrido mágico/físico, suporte ágil
 - **Stats Base:** HP Médio-Baixo, Mana Alto, Velocidade Alta
-- **Viés P.E.R.M.A.:** Mind ↑, Affect ↑
-- **Comportamento:** Combate à distância, buffs de grupo, alta mobilidade
+- **Viés P.E.C.M.A.:** Mind ↑↑, Affect ↑↑
+- **Comportamento:** Extremamente inteligente e emocionalmente estável
+
+#### 🛡️ Paladino (Paladin)
+
+- **Identidade:** Tank/Healer sagrado, defensor dos fracos
+- **Stats Base:** HP Muito Alto, Mana Médio, Defesa Muito Alta
+- **Viés P.E.C.M.A.:** Ethics ↑↑↑, Cooperation ↑↑, Proactivity ↑
+- **Comportamento:** Extremamente honrado, protege aliados, autossacrifica-se
+- **Mecânica Única:** **Aura Sagrada** - Buffa aliados em 12m (+15% Defense)
+- **Recurso Especial:** **Devoção** (acumula ao proteger aliados, gasta em heals)
+
+#### 💀 Necromante (Necromancer)
+
+- **Identidade:** Invocador de mortos-vivos, DPS sombrio
+- **Stats Base:** HP Baixo, Mana Muito Alto, Invocações
+- **Viés P.E.C.M.A.:** Mind ↑↑, Ethics ↓↓, Cooperation ↓
+- **Comportamento:** Solitário, pragmático, usa cadáveres como recursos
+- **Mecânica Única:** **Reanimar Mortos** - Transforma cadáveres em servos
+- **Recurso Especial:** **Essência Sombria** (ganha ao matar, gasta em invocações)
+
+#### 🎵 Bardo (Bard)
+
+- **Identidade:** Suporte musical, buffa aliados com canções
+- **Stats Base:** HP Médio, Mana Médio, Velocidade Média
+- **Viés P.E.C.M.A.:** Cooperation ↑↑↑, Affect ↑↑, Ethics ↑
+- **Comportamento:** Altamente social, forma grupos grandes, sempre otimista
+- **Mecânica Única:** **Canções** - Buffs em área que persistem enquanto canta
+- **Recurso Especial:** **Inspiração** (ganha ao assistir kills de aliados)
+
+#### 👊 Monge (Monk)
+
+- **Identidade:** DPS corpo-a-corpo sem armas, mobilidade extrema
+- **Stats Base:** HP Médio, Velocidade Muito Alta, Critical Alto
+- **Viés P.E.C.M.A.:** Mind ↑, Affect ↑↑, Cooperation →
+- **Comportamento:** Disciplinado, calmo em combate, medita frequentemente
+- **Mecânica Única:** **Combo System** - Ataques encadeados aumentam dano
+- **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
 
 ---
 
@@ -4582,9 +5422,9 @@ Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos
 
 ---
 
-## 4.6 Limitação Estratégica: Máximo de 12 Heróis
+## 4.6 Limitação Estratégica: Máximo de 5 Heróis
 
-**Regra de Ouro:** O jogador pode ter no máximo **12 heróis ativos** simultaneamente.
+**Regra de Ouro:** O jogador pode ter no máximo **5 heróis ativos** simultaneamente.
 
 ### Justificativa de Design
 
@@ -5326,7 +6166,7 @@ Conselheiro: "Majestade, grandes perdas, mas que
 Jogador: /summary today
 
 Conselheiro: "RELATÓRIO DIÁRIO - DIA 45
-- Heróis ativos: 10/12
+- Heróis ativos: 4/5
 - Ouro ganho: +850 (invasão repelida)
 - Kills: Goblins x15, Ogros x3
 - Status: 2 heróis feridos (HP <50%)
@@ -5485,7 +6325,6 @@ INFL: [|||||.....] (50/100 IP) ← Barra visual
 ```
 
 ---
-
 # 7. ECONOMIA E GESTÃO DO REINO
 
 ## 7.1 Tesouro Real: A Fonte de Ouro
@@ -7141,7 +7980,7 @@ No **[F3] LIBRARY → MEMORIAL**, há uma lista de **todos os heróis mortos** d
 
 ---
 
-## 10.7 Achievements Narrativos (Conquistas)
+## 10.7 Amanaevements Narrativos (Conquistas)
 
 ### Conquistas Baseadas em História, Não Grind
 
@@ -7676,6 +8515,401 @@ Risk: 3.3x
 
 ---
 
+# SISTEMA DE COMBATE: TIMELINE E FILA DE AÇÃO
+
+## Visão Geral
+
+Heroes of Majesty utiliza um **Sistema de Fila de Ação Temporal (ATB - Active Time Battle)** similar a jogos como Final Fantasy, Grandia e jogos táticos modernos. Todos os combatentes (heróis e monstros) compartilham uma **timeline única** onde a posição determina quando ageão.
+
+---
+
+## Como Funciona a Timeline
+
+### Conceito Base
+
+```
+TIMELINE (Fila de Ação):
+┌────────────────────────────────────────────────────────────┐
+│  PRONTO                     ESPERANDO                       │
+│  [Herói A]──[Monstro 1]──[Herói B]──[Monstro 2]──[Herói C] │
+└────────────────────────────────────────────────────────────┘
+     ↑ Ação agora         ↑ ~2s         ↑ ~4s         ↑ ~6s
+```
+
+- Combatentes movem-se **da direita para a esquerda**
+- Quando chegam na **posição mais à esquerda**, podem agir
+- Após agir, **voltam para o final da fila** (direita)
+- Velocidade determina **quão rápido se movem** na timeline
+
+---
+
+## Stats que Afetam a Timeline
+
+### 1. Speed (Velocidade Base)
+
+**Stat Principal:** Determina a velocidade de progressão na timeline.
+
+```typescript
+interface CombatStats {
+  speed: number; // 1-200 (média: 100)
+}
+
+// Exemplos por classe:
+Guerreiro: speed = 80; // Lento (armadura pesada)
+Mago: speed = 90; // Lento-médio
+Arqueiro: speed = 120; // Rápido
+Ladino: speed = 150; // Muito rápido
+Druida: speed = 100; // Médio
+Elfo: speed = 130; // Rápido
+Paladino: speed = 75; // Muito lento (armadura)
+Necromante: speed = 95; // Lento-médio
+Bardo: speed = 110; // Médio-rápido
+Monge: speed = 160; // EXTREMAMENTE rápido
+```
+
+### 2. Fórmula de Progressão na Timeline
+
+```typescript
+// Quantos milissegundos até próxima ação
+timeToNextAction = baseTime / (speed / 100)
+
+// Exemplo:
+baseTime = 3000ms (3 segundos padrão)
+
+Guerreiro (speed 80): 3000 / 0.8 = 3750ms (~3.8s por ação)
+Monge (speed 160): 3000 / 1.6 = 1875ms (~1.9s por ação)
+```
+
+**Resultado:** Monge age ~2x mais rápido que Guerreiro!
+
+---
+
+## Buffs de "Velocidade"
+
+### Antes (Problemático para jogo de texto):
+
+```
+❌ +30% Velocidade de Ação
+❌ +15% Velocidade de Ação
+```
+
+### Agora (Funciona com Timeline):
+
+```
+✅ +30% Speed (age 30% mais rápido na fila)
+✅ +15% Iniciativa (próxima ação vem 15% mais cedo)
+✅ +50% Taxa de Ação (age 50% mais vezes)
+```
+
+---
+
+## Sistema de Iniciativa vs Speed
+
+### Iniciativa (Início de Combate)
+
+Determina a **posição inicial** na timeline quando combate começa:
+
+```typescript
+iniciativaRoll = random(1, 20) + (speed / 10) + bonusIniciativa
+
+// Exemplo:
+Guerreiro: random(1,20) + 8 + 0 = 9-28
+Monge: random(1,20) + 16 + 5 = 22-41
+
+Ordem inicial: Monge age primeiro 90% das vezes
+```
+
+### Speed (Durante Combate)
+
+Determina **frequência de ações** após a primeira:
+
+```
+Turno 1:
+[Monge] ─ [Ladino] ─ [Arqueiro] ─ [Mago] ─ [Guerreiro]
+   ↓         ↓          ↓          ↓          ↓
+  Age      Age       Age        Age        Age
+
+Após todos agirem, retornam à fila baseado em Speed:
+
+Turno 2:
+[Monge] ─ [Ladino] ─ [Arqueiro] ─ [Monge*] ─ [Mago] ─ [Guerreiro]
+                                    ↑
+                        Monge age 2x antes do Guerreiro agir 1x!
+```
+
+---
+
+## Modificadores de Speed
+
+### Buffs que Aumentam Frequência de Ação
+
+| Efeito                      | Antes (Errado)            | Agora (Correto)           | Impacto                        |
+| --------------------------- | ------------------------- | ------------------------- | ------------------------------ |
+| **Grito de Guerra (Bardo)** | "+30% velocidade"         | "+30% Speed por 15s"      | Age 30% mais rápido            |
+| **Inspirar Aliados**        | "+50% Velocidade de Ação" | "+50% Velocidade de Ação" | Metade do cooldown entre ações |
+| **Aura de Mana (Monge)**    | "+50% Velocidade de Ação" | "+50% Velocidade de Ação" | Age quase 2x mais              |
+| **Iluminação (Monge)**      | "velocidade 3x"           | "Speed ×3"                | Age 3x antes de inimigos       |
+
+### Debuffs que Reduzem Frequência
+
+| Efeito                       | Descrição        | Impacto                          |
+| ---------------------------- | ---------------- | -------------------------------- |
+| **Lentidão (Magia de Gelo)** | -50% Speed       | Age metade da frequência         |
+| **Exaustão**                 | -30% Speed       | Penalidade por usar skills muito |
+| **Atordoamento**             | Speed = 0 por Xs | Pula turnos                      |
+
+---
+
+## Ações Instantâneas vs Canalizadas
+
+### Ações Instantâneas (Maioria)
+
+```
+[Herói] age → Executa skill → Volta para fila
+Tempo na posição "Pronto": 0.5s
+```
+
+### Ações Canalizadas (Bardos, alguns Magos)
+
+```
+[Herói] canaliza → Permanece na posição "Pronto" → Continua canalizando
+Tempo na posição "Pronto": Até cancelar ou terminar
+
+Exemplo: Bardo cantando "Melodia de Ataque"
+- Entra na posição "Pronto"
+- Começa a cantar
+- FICA na posição "Pronto" canalizando
+- Outros heróis/monstros continuam agindo
+- Se sofrer dano ou cancelar: volta para a fila
+```
+
+---
+
+## Interrupções e Controle de Multidão
+
+### Atordoamento (Stun)
+
+```
+[Herói atordoado por 3s]
+┌─────────────────────────┐
+│ X ─ X ─ X ─ [Herói]     │ ← Não progride na timeline
+└─────────────────────────┘
+Após 3s reais, volta a progredir normalmente
+```
+
+### Congelamento (Freeze)
+
+```
+Similar a Atordoamento, mas com tema visual de gelo
+```
+
+### Confusão (Confusion)
+
+```
+[Herói confuso]
+- Progride normalmente na timeline
+- Quando chega em "Pronto": 50% chance de atacar aliado
+```
+
+---
+
+## Efeitos de "Velocidade de Ação" Convertidos
+
+### Lista de Conversões
+
+| Skill Original                     | Efeito Antigo             | Efeito Novo             |
+| ---------------------------------- | ------------------------- | ----------------------- |
+| **Pés Ligeiros (Arqueiro)**        | "+15% Velocidade de Ação" | "+15% Speed permanente" |
+| **Reflexos Sobre-Humanos (Monge)** | "+25% Velocidade de Ação" | "+25% Speed permanente" |
+| **Graça Élfica (Elfo)**            | "+25% Velocidade de Ação" | "+25% Speed permanente" |
+| **Acrobata (Ladino)**              | "+30% Velocidade de Ação" | "+30% Speed permanente" |
+| **Grito de Guerra (Bardo)**        | "+30% velocidade"         | "+30% Speed por 15s"    |
+
+### Outras Conversões Necessárias
+
+| Efeito Problemático | Conversão                                  | Razão              |
+| ------------------- | ------------------------------------------ | ------------------ |
+| "Pulo para trás 8m" | "Recua 1 posição na grid de combate"       | Grid abstrato      |
+| "Teleporta 15m"     | "Move para qualquer posição na grid"       | Grid abstrato      |
+| "Atravessa paredes" | "Ignora posicionamento"                    | Sem mapas 3D       |
+| "Voa"               | "+50% Evasão contra ataques corpo-a-corpo" | Benefício mecânico |
+
+---
+
+## Grid de Combate Abstrato
+
+### Posições Relativas
+
+```
+RETAGUARDA  ←──────────→  LINHA DE FRENTE
+[Mago] [Arqueiro] [Guerreiro] [Monstro] [Monstro Boss]
+  ↑        ↑          ↑          ↑            ↑
+Posição 5  Pos 4     Pos 3     Pos 2        Pos 1
+
+Regras:
+- Ataques corpo-a-corpo: Só atingem posições adjacentes
+- Ataques à distância: Atingem qualquer posição
+- Skills de "Velocidade de Ação": Mudam posição na grid
+```
+
+### Exemplo Prático
+
+```
+Inicial:
+[Mago(5)] [Bardo(4)] [Guerreiro(3)] | [Ogro(2)] [Boss(1)]
+
+Ogro usa "Investida" no Mago:
+[Mago(5)] [Bardo(4)] [Guerreiro(3)] [Ogro(2)] | [Boss(1)]
+                                       ↓
+[Ogro(5)] ← Teleportou para posição do Mago
+
+Mago usa "Teletransporte":
+[Ogro(5)] [Bardo(4)] [Guerreiro(3)] [Mago(2)] | [Boss(1)]
+                      ↑                  ↑
+              Guerreiro protege    Mago escapou
+```
+
+---
+
+## Interface Visual da Timeline
+
+### No Terminal
+
+```
+═══════════════════ COMBAT TIMELINE ════════════════════
+│PRONTO│     1.5s     │     3.0s     │     4.5s     │
+├──────┼──────────────┼──────────────┼──────────────┤
+│ LILA │   Sir Kaelen │      Ogro    │    Goblin    │
+│(ACT!)│   [████░░]   │   [██████░]  │  [████████]  │
+└──────┴──────────────┴──────────────┴──────────────┘
+    ↑         ↑              ↑              ↑
+  Agindo   0.8s até     1.6s até      2.4s até
+          próxima ação  próxima ação  próxima ação
+
+> Lila (Ladino) escolhe ação:
+  [1] Apunhalar (10 Stamina)
+  [2] Bomba de Fumaça (20 Stamina)
+  [3] Envenenar Lâmina (25 Stamina)
+```
+
+### Após Ação
+
+```
+═══════════════════ COMBAT TIMELINE ════════════════════
+│PRONTO│     1.0s     │     2.0s     │     3.0s     │
+├──────┼──────────────┼──────────────┼──────────────┤
+│KAELEN│      Ogro    │    Goblin    │     Lila     │
+│(ACT!)│   [████░░]   │  [████████]  │  [████████]  │
+└──────┴──────────────┴──────────────┴──────────────┘
+
+> Lila usou "Apunhalar"!
+  Ogro sofreu 85 dano (crítico pelas costas!)
+  Lila volta para a fila (Speed 150 = retorno em ~2s)
+```
+
+---
+
+## Balanceamento
+
+### Design Goals:
+
+1. **Speed Importa:** Classes rápidas agem 1.5-2x mais que lentas
+2. **Buffs Potentes:** Buffs de Speed são EXTREMAMENTE valiosos
+3. **Tank Trade-off:** Guerreiros/Paladinos tanquem MUITO mas agem menos
+4. **DPS Rápidos:** Monges/Ladinos fazem múltiplas ações rápidas
+5. **Suportes Estratégicos:** Bardos aceleram o team inteiro
+
+### Fórmula de DPS Efetivo:
+
+```
+DPS Real = (Dano Base × Speed) / 100
+
+Guerreiro: 100 dano × 80 speed = 80 DPS efetivo
+Monge: 60 dano × 160 speed = 96 DPS efetivo
+
+Resultado: Monge com menor dano base supera Guerreiro em DPS!
+```
+
+---
+
+## Exemplos de Combate Real
+
+### Turno por Turno:
+
+```
+Combate: 3 Heróis vs 2 Monstros
+
+Heróis:
+- Kaelen (Guerreiro, Speed 80)
+- Aria (Maga, Speed 90)
+- Lila (Ladina, Speed 150)
+
+Monstros:
+- Ogro (Speed 70)
+- Goblin Arqueiro (Speed 120)
+
+═══ INICIATIVA ═══
+Rolls:
+Lila: 18 + 15 = 33
+Goblin: 14 + 12 = 26
+Aria: 11 + 9 = 20
+Kaelen: 9 + 8 = 17
+Ogro: 6 + 7 = 13
+
+Ordem inicial: Lila → Goblin → Aria → Kaelen → Ogro
+
+═══ TURNO 1 ═══
+0.0s: Lila age → Apunhala Goblin (75 dano)
+2.0s: Goblin age → Atira em Aria (40 dano)
+3.3s: Aria age → Bola de Fogo no Ogro (80 dano)
+3.8s: Kaelen age → Golpe Poderoso no Ogro (120 dano)
+4.3s: Ogro age → Machado em Kaelen (60 dano)
+
+═══ TURNO 2 ═══
+4.3s: Lila age novamente! → Envenena lâmina
+6.3s: Goblin age → Atira em Lila (30 dano, esquivou!)
+6.6s: Aria age → Raio Congelante no Ogro (60 dano, congelado!)
+7.6s: Kaelen age → Ataca Goblin (90 dano, MORTO!)
+8.3s: Lila age pela 3ª vez! → Apunhala Ogro (85 dano + veneno)
+8.6s: Ogro ainda congelado, pula turno
+10.9s: Aria age → Termina Ogro (50 dano)
+
+VITÓRIA!
+```
+
+---
+
+## Implementação Técnica
+
+```typescript
+class CombatTimeline {
+  combatants: Combatant[] = [];
+
+  tick(deltaTime: number) {
+    for (let c of this.combatants) {
+      if (c.stunned) continue;
+
+      c.timeToAction -= deltaTime * (c.speed / 100);
+
+      if (c.timeToAction <= 0) {
+        this.executeAction(c);
+        c.timeToAction = BASE_ACTION_TIME; // 3000ms
+      }
+    }
+  }
+
+  applySpeedBuff(target: Combatant, percent: number, duration: number) {
+    target.speed *= 1 + percent;
+    setTimeout(() => {
+      target.speed /= 1 + percent;
+    }, duration);
+  }
+}
+```
+
+---
+
+**Esse sistema transforma "velocidade" de um conceito abstrato em mecânica funcional e balanceada!** ⚡
 # 13. SISTEMA DE COMBATE E FLAVOR TEXTS
 
 ## 13.1 Mecânica de Combate: Simplificada mas Profunda
@@ -8030,7 +9264,7 @@ icons/
 | **Tab (mudar painel)** | `tab_switch.wav`    | "Whoosh" eletrônico sutil           |
 | **Comando enviado**    | `command_send.wav`  | Beep retro-futurista                |
 | **Erro**               | `error_beep.wav`    | Buzz grave (400Hz)                  |
-| **Sucesso**            | `success_chime.wav` | Ding cristalino (1200Hz)            |
+| **Sucesso**            | `success_maname.wav` | Ding cristalino (1200Hz)            |
 
 ---
 
@@ -8053,7 +9287,7 @@ icons/
 | **Carta chegou**    | `mail_arrive.wav`      | Corvo grasnando + papel    |
 | **KS detectado**    | `tension_sting.wav`    | Nota dissonante (suspense) |
 | **PvP iniciado**    | `duel_bell.wav`        | Sino de duelo              |
-| **Amizade formada** | `friendship_chime.wav` | Acorde alegre              |
+| **Amizade formada** | `friendship_maname.wav` | Acorde alegre              |
 | **Traição**         | `betrayal_theme.wav`   | Música dramática (3s)      |
 
 ---
@@ -8250,24 +9484,27 @@ Como **solopreneur**:
 
 ---
 
-## 15.3 Limite de 12 Heróis: Por Quê?
+## 15.3 Limite de 5 Heróis: Por Quê?
 
 ### Justificativa de Design
 
 **Contra-argumentos antecipados:**
 
-- "Por que não 50 heróis? Mais é melhor!"
+- "Por que não 20 heróis? Mais é melhor!"
 
 **Nossa resposta:**
 
-1. **Valor Individual:** Com 12, cada morte **importa**. Com 50, heróis são descartáveis
-2. **Conexão Emocional:** Jogador decora nomes, personalidades e histórias
-3. **Performance:** 12 heróis com IA complexa > 50 heróis com IA burra
-4. **Balanceamento:** Mais fácil equilibrar economia e dificuldade
+1. **Gerenciamento de Texto:** Com 5, os logs permanecem legíveis. Com 20, seria spam
+2. **Valor Individual:** Perder 1 de 5 heróis = **20% do poder militar**. Cada morte é catastrófica
+3. **Conexão Emocional:** Jogador decora nomes, personalidades e histórias de TODOS os 5
+4. **Performance:** 5 heróis com IA P.E.C.M.A. complexa > 20 heróis com IA simples
+5. **Balanceamento:** Muito mais fácil equilibrar economia e dificuldade
 
 ### Comparação: XCOM
 
 **XCOM** limita squad a 4-6 soldados por missão. Resultado: Cada soldado é **insubstituível**.
+
+**Heroes of Majesty** segue a mesma filosofia: Poucos, mas muito profundos.
 
 ---
 

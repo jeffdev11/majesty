@@ -72,8 +72,8 @@ Monge (speed 160): 3000 / 1.6 = 1875ms (~1.9s por ação)
 ### Antes (Problemático para jogo de texto):
 
 ```
-❌ +30% velocidade de movimento
-❌ +15% velocidade de movimento
+❌ +30% Velocidade de Ação
+❌ +15% Velocidade de Ação
 ```
 
 ### Agora (Funciona com Timeline):
@@ -126,12 +126,12 @@ Turno 2:
 
 ### Buffs que Aumentam Frequência de Ação
 
-| Efeito                      | Antes (Errado)              | Agora (Correto)       | Impacto                        |
-| --------------------------- | --------------------------- | --------------------- | ------------------------------ |
-| **Grito de Guerra (Bardo)** | "+30% velocidade"           | "+30% Speed por 15s"  | Age 30% mais rápido            |
-| **Inspirar Aliados**        | "+50% velocidade de ataque" | "+50% Taxa de Ataque" | Metade do cooldown entre ações |
-| **Aura de Chi (Monge)**     | "+50% velocidade de ataque" | "+50% Taxa de Ataque" | Age quase 2x mais              |
-| **Iluminação (Monge)**      | "velocidade 3x"             | "Speed ×3"            | Age 3x antes de inimigos       |
+| Efeito                      | Antes (Errado)            | Agora (Correto)           | Impacto                        |
+| --------------------------- | ------------------------- | ------------------------- | ------------------------------ |
+| **Grito de Guerra (Bardo)** | "+30% velocidade"         | "+30% Speed por 15s"      | Age 30% mais rápido            |
+| **Inspirar Aliados**        | "+50% Velocidade de Ação" | "+50% Velocidade de Ação" | Metade do cooldown entre ações |
+| **Aura de Mana (Monge)**    | "+50% Velocidade de Ação" | "+50% Velocidade de Ação" | Age quase 2x mais              |
+| **Iluminação (Monge)**      | "velocidade 3x"           | "Speed ×3"                | Age 3x antes de inimigos       |
 
 ### Debuffs que Reduzem Frequência
 
@@ -196,17 +196,17 @@ Similar a Atordoamento, mas com tema visual de gelo
 
 ---
 
-## Efeitos de "Velocidade de Movimento" Convertidos
+## Efeitos de "Velocidade de Ação" Convertidos
 
 ### Lista de Conversões
 
-| Skill Original                     | Efeito Antigo                  | Efeito Novo             |
-| ---------------------------------- | ------------------------------ | ----------------------- |
-| **Pés Ligeiros (Arqueiro)**        | "+15% velocidade de movimento" | "+15% Speed permanente" |
-| **Reflexos Sobre-Humanos (Monge)** | "+25% velocidade de movimento" | "+25% Speed permanente" |
-| **Graça Élfica (Elfo)**            | "+25% velocidade de movimento" | "+25% Speed permanente" |
-| **Acrobata (Ladino)**              | "+30% velocidade de movimento" | "+30% Speed permanente" |
-| **Grito de Guerra (Bardo)**        | "+30% velocidade"              | "+30% Speed por 15s"    |
+| Skill Original                     | Efeito Antigo             | Efeito Novo             |
+| ---------------------------------- | ------------------------- | ----------------------- |
+| **Pés Ligeiros (Arqueiro)**        | "+15% Velocidade de Ação" | "+15% Speed permanente" |
+| **Reflexos Sobre-Humanos (Monge)** | "+25% Velocidade de Ação" | "+25% Speed permanente" |
+| **Graça Élfica (Elfo)**            | "+25% Velocidade de Ação" | "+25% Speed permanente" |
+| **Acrobata (Ladino)**              | "+30% Velocidade de Ação" | "+30% Speed permanente" |
+| **Grito de Guerra (Bardo)**        | "+30% velocidade"         | "+30% Speed por 15s"    |
 
 ### Outras Conversões Necessárias
 
@@ -232,7 +232,7 @@ Posição 5  Pos 4     Pos 3     Pos 2        Pos 1
 Regras:
 - Ataques corpo-a-corpo: Só atingem posições adjacentes
 - Ataques à distância: Atingem qualquer posição
-- Skills de "movimento": Mudam posição na grid
+- Skills de "Velocidade de Ação": Mudam posição na grid
 ```
 
 ### Exemplo Prático

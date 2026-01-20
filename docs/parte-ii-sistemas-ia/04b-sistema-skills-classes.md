@@ -153,7 +153,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 9   | **Emboscada**            | Primeiro ataque de combate +100% dano              | Camuflagem                  |
 | 10  | **Aljava Grande**        | +50% capacidade de flechas                         | Nível 5                     |
 | 11  | **Veneno Aprimorado**    | DoTs duram +50% mais tempo                         | Flecha Venenosa             |
-| 12  | **Reflexos Felinos**     | +25% Taxa de Ataque                          | Evasão                      |
+| 12  | **Reflexos Felinos**     | +25% Velocidade de Ação                          | Evasão                      |
 | 13  | **Caçador Nato**         | +30% dano contra criaturas selvagens               | Invocar Lobo                |
 | 14  | **Crítico Devastador**   | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
 | 15  | **Lenda Viva**           | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
@@ -458,7 +458,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 5   | **Faca Lançada**          | 20 Mana        | 5s        | Arremessa faca, 50 dano, 3 cargas                       | Acorde Dissonante      |
 | 6   | **Hino de Resistência**   | 35 Inspiração  | Canalizar | Canta, aliados 15m ganham +30% Defense                  | Canção de Cura         |
 | 7   | **Solo Devastador**       | 40 Mana        | 35s       | Toca solo, 15m AoE, 120 dano + atordoa 3s               | Acorde Dissonante      |
-| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s       | Aliados ganham +50% Taxa de Ataque por 20s        | Grito de Guerra        |
+| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s       | Aliados ganham +50% Velocidade de Ação por 20s        | Grito de Guerra        |
 | 9   | **Balada da Regeneração** | 50 Inspiração  | Canalizar | Canta, aliados 15m regeneram 3% HP máximo/s             | Hino de Resistência    |
 | 10  | **Canto de Sirene**       | 45 Mana        | 45s       | Encanta inimigos em 12m, eles param de atacar por 6s    | Solo Devastador        |
 | 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s       | Todos aliados ganham +40% todos stats por 25s           | Balada da Regeneração  |
@@ -495,27 +495,27 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 | #   | Nome                     | Custo   | Cooldown | Descrição                                                      | Requer                  |
 | --- | ------------------------ | ------- | -------- | -------------------------------------------------------------- | ----------------------- |
-| 1   | **Golpe de Palma**       | 10 Chi  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
-| 2   | **Chute Giratório**      | 15 Chi  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
-| 3   | **Dash do Vento**        | 20 Chi  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
-| 4   | **Soco do Dragão**       | 25 Chi  | 15s      | 3 socos rápidos em 1s, 40 dano cada, gera 3 combos             | Chute Giratório         |
-| 5   | **Meditação**            | 0 Chi   | 30s      | Regenera 50 Chi em 5s, imóvel                                  | Nível 3                 |
-| 6   | **Rajada de Mil Punhos** | 30 Chi  | 20s      | Ataque frenético, 10 socos, 25 dano cada                       | Soco do Dragão          |
-| 7   | **Toque Paralisante**    | 35 Chi  | 25s      | Paralisa inimigo por 5s                                        | Nível 4                 |
-| 8   | **Ciclone**              | 40 Chi  | 30s      | Gira rapidamente, 12 chutes, 35 dano cada                      | Chute Giratório         |
-| 9   | **Aura de Chi**          | 45 Chi  | 35s      | +50% Taxa de Ataque por 20s, consome 5 combos            | Rajada de Mil Punhos    |
-| 10  | **Teletransporte**       | 50 Chi  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
-| 11  | **Punho da Fúria**       | 60 Chi  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
-| 12  | **Transcendência**       | 70 Chi  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
-| 13  | **Explosão de Chi**      | 80 Chi  | 50s      | Libera Chi, 15m AoE, 180 dano + knock-back                     | Aura de Chi             |
-| 14  | **Forma do Dragão**      | 90 Chi  | 120s     | Transforma em dragão espiritual, +150% Attack, voa, 25s        | Punho da Fúria          |
-| 15  | **Iluminação**           | 150 Chi | 180s     | Estado supremo, velocidade 3x, dano 3x, esquiva 100%, 20s      | Transcendência + Lvl 12 |
+| 1   | **Golpe de Palma**       | 10 Mana  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
+| 2   | **Chute Giratório**      | 15 Mana  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
+| 3   | **Dash do Vento**        | 20 Mana  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
+| 4   | **Soco do Dragão**       | 25 Mana  | 15s      | 3 socos rápidos em 1s, 40 dano cada, gera 3 combos             | Chute Giratório         |
+| 5   | **Meditação**            | 0 Mana   | 30s      | Regenera 50 Mana em 5s, imóvel                                  | Nível 3                 |
+| 6   | **Rajada de Mil Punhos** | 30 Mana  | 20s      | Ataque frenético, 10 socos, 25 dano cada                       | Soco do Dragão          |
+| 7   | **Toque Paralisante**    | 35 Mana  | 25s      | Paralisa inimigo por 5s                                        | Nível 4                 |
+| 8   | **Ciclone**              | 40 Mana  | 30s      | Gira rapidamente, 12 chutes, 35 dano cada                      | Chute Giratório         |
+| 9   | **Aura de Mana**          | 45 Mana  | 35s      | +50% Velocidade de Ação por 20s, consome 5 combos            | Rajada de Mil Punhos    |
+| 10  | **Teletransporte**       | 50 Mana  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
+| 11  | **Punho da Fúria**       | 60 Mana  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
+| 12  | **Transcendência**       | 70 Mana  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
+| 13  | **Explosão de Mana**      | 80 Mana  | 50s      | Libera Mana, 15m AoE, 180 dano + knock-back                     | Aura de Mana             |
+| 14  | **Forma do Dragão**      | 90 Mana  | 120s     | Transforma em dragão espiritual, +150% Attack, voa, 25s        | Punho da Fúria          |
+| 15  | **Iluminação**           | 150 Mana | 180s     | Estado supremo, velocidade 3x, dano 3x, esquiva 100%, 20s      | Transcendência + Lvl 12 |
 
 ### 🧘 Skills Passivas (15)
 
 | #   | Nome                         | Efeito                                          | Requer                   |
 | --- | ---------------------------- | ----------------------------------------------- | ------------------------ |
-| 1   | **Regeneração de Chi**       | Regenera 5 Chi/s                                | Nível 1                  |
+| 1   | **Regeneração de Mana**       | Regenera 5 Mana/s                                | Nível 1                  |
 | 2   | **Mestre em Artes Marciais** | +20% dano corpo-a-corpo                         | Nível 1                  |
 | 3   | **Sistema de Combos**        | Cada ataque gera 1 combo, máximo 10 combos      | Golpe de Palma           |
 | 4   | **Dano de Combo**            | +5% dano por combo ativo                        | Sistema de Combos        |
@@ -523,10 +523,10 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 6   | **Esquiva de Mestre**        | +20% chance de esquivar                         | Reflexos Sobre-Humanos   |
 | 7   | **Contra-Ataque Perfeito**   | 30% chance de contra-atacar ao esquivar         | Esquiva de Mestre        |
 | 8   | **Meditação Passiva**        | Regenera 2% HP máximo/s quando fora de combate  | Meditação                |
-| 9   | **Chi Infinito**             | Chi máximo +50                                  | Regeneração de Chi       |
+| 9   | **Mana Infinito**             | Mana máximo +50                                  | Regeneração de Mana       |
 | 10  | **Disciplina de Ferro**      | Imune a atordoamentos quando tem 5+ combos      | Sistema de Combos        |
 | 11  | **Golpes Críticos**          | +30% chance de crítico                          | Mestre em Artes Marciais |
-| 12  | **Velocidade da Luz**        | +40% Taxa de Ataque                       | Reflexos Sobre-Humanos   |
+| 12  | **Velocidade da Luz**        | +40% Velocidade de Ação                       | Reflexos Sobre-Humanos   |
 | 13  | **Sem Armas, Sem Problemas** | Sem arma equipada, +50% todos stats             | Mestre em Artes Marciais |
 | 14  | **Espírito do Dragão**       | Ao atingir 10 combos, próximo ataque +300% dano | Dano de Combo            |
 | 15  | **Mestre Iluminado**         | Quando em Iluminação, combos nunca resetam      | Iluminação + Lvl 11      |

@@ -22,7 +22,7 @@
    - 2.2 Regras Globais de Interação
    - 2.3 [F1] OPS CENTER - "The War Room"
    - 2.4 [F2] ADMIN - "The Tycoon"
-   - 2.5 [F3] LIBRARY - "The Archives"
+   - 2.5 [F3] LIBRARY - "The Armanaves"
    - 2.6 [F4] WORLD MAP - "The Conquest"
    - 2.7 [F5] THE AVIARY - "Royal Mail"
 
@@ -41,7 +41,7 @@
    - 4.3 Camadas de Modificação
    - 4.4 Classes de Heróis
    - 4.5 Ciclo de Vida (Morte e Redenção)
-   - 4.6 Limitação: 12 Heróis Máximo
+   - 4.6 Limitação: 5 Heróis Máximo
    - 4.7 Sistema de Skills (Árvore Completa)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
@@ -98,7 +98,7 @@
     - 10.4 Modo Historiador
     - 10.5 Ecos do Passado
     - 10.6 Memorial dos Mortos
-    - 10.7 Achievements Narrativos
+    - 10.7 Amanaevements Narrativos
     - 10.8 Compartilhamento Social
 
 ### PARTE V: MULTIPLAYER E INIMIGOS
@@ -144,7 +144,7 @@
 15. [Análise Crítica e Justificativas](#15-análise-crítica-e-justificativas-de-design)
     - 15.1 Por Que Controle Indireto?
     - 15.2 Por Que Terminal?
-    - 15.3 Limite de 12 Heróis
+    - 15.3 Limite de 5 Heróis
     - 15.4 Progressão Lenta
     - 15.5 IA Determinística vs Generativa
     - 15.6 Multiplayer: Por Que Não Agora?
