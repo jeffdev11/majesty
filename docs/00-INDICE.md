@@ -37,7 +37,7 @@
 
 4. [Os Heróis: Agentes Autônomos](#4-os-heróis-agentes-autônomos)
    - 4.1 Estrutura de Dados
-   - 4.2 Sistema P.E.R.M.A.
+   - 4.2 Sistema P.E.C.M.A.
    - 4.3 Camadas de Modificação
    - 4.4 Classes de Heróis
    - 4.5 Ciclo de Vida (Morte e Redenção)
@@ -184,7 +184,7 @@
 ### ANEXOS
 
 - [Tabela de Flavor Texts](#132-flavor-texts-o-coração-da-narrativa)
-- [Sistema P.E.R.M.A. Completo](#42-sistema-perma-os-5-vetores-de-personalidade)
+- [Sistema P.E.C.M.A. Completo](#42-sistema-perma-os-5-vetores-de-personalidade)
 - [Sistema P.A.I.N. Completo](#121-visão-geral-os-inimigos-autônomos)
 - [Comandos do Conselheiro](#62-chat-interativo-via-nlp)
 - [Lista de Eventos Globais](#84-eventos-globais-o-caos-controlado)

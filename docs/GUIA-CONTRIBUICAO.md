@@ -195,7 +195,7 @@ cat docs/parte-vii-narrativa-generativa/16-21-arquitetura-narrativa-generativa.m
 | `01-visao-geral-filosofia.md`               | Filosofia do jogo   | Mudar conceitos core |
 | `02-interface-ux.md`                        | F1-F6 Workspaces    | Alterar UI/UX        |
 | `03-arquitetura-ia-hibrida.md`              | Sistemas de IA      | Mudar lógica de IA   |
-| `04-herois-agentes-autonomos.md`            | P.E.R.M.A., Classes | Editar heróis        |
+| `04-herois-agentes-autonomos.md`            | P.E.C.M.A., Classes | Editar heróis        |
 | `05-dinamica-social.md`                     | Kill Stealing, PvP  | Sistema social       |
 | `06-conselheiro-real-ia.md`                 | Chat NLP            | Conselheiro          |
 | `07-economia-gestao-reino.md`               | Ouro, IP, Decretos  | Economia             |

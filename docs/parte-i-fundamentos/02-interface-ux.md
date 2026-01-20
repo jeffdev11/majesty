@@ -10,7 +10,7 @@ Inspirado em ferramentas de produtividade como **tmux** e sistemas Linux, o jogo
 | -------- | ------------------ | -------------------------------------------------------------- |
 | **[F1]** | **OPS CENTER**     | "The War Room" - Monitoramento em tempo real, combate tático   |
 | **[F2]** | **ADMIN**          | "The Tycoon" - Gestão econômica, árvores de habilidades        |
-| **[F3]** | **LIBRARY**        | "The Armanaves" - Lore, bestiário, análise psicológica          |
+| **[F3]** | **LIBRARY**        | "The Armanaves" - Lore, bestiário, análise psicológica         |
 | **[F4]** | **WORLD MAP**      | "The Conquest" - Mapa visual com ícones, postos avançados      |
 | **[F5]** | **THE AVIARY**     | "Royal Mail" - Sistema de correspondência via corvos           |
 | **[F6]** | **THE CHRONICLES** | "The Chronicles" - História sendo gerada, narrativa generativa |
@@ -515,64 +515,57 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 ---
 
-## 2.4 [F2] ADMIN - "The Tycoon"
+## 2.4 [F2] MANAGEMENT - "The Tycoon"
 
-**Foco Principal:** Gestão de Recursos, Construção e Curadoria de Habilidades
-
-![F2 ADMIN - The Tycoon](<../anexos/[F2]%20ADMIN%20(_The%20Tycoon_).png>)
+**Foco Principal:** Gestão Administrativa, Econômica e Treinamento de Heróis
 
 ### Descrição dos Painéis
 
-| Painel | Nome                         | Conteúdo                                                                            |
-| ------ | ---------------------------- | ----------------------------------------------------------------------------------- |
-| **P1** | Infraestrutura               | Lista das guildas e edifícios com nível atual, vagas disponíveis e custo de upgrade |
-| **P2** | Árvore de Skills (Tech Tree) | Visualização hierárquica das habilidades que podem ser compradas/liberadas          |
-| **P3** | Logística e Stocks           | Monitoramento de estoques (poções, armas) e fluxo financeiro                        |
-| **P4** | Detalhe da Construção        | Informações sobre custos, manutenção diária e buffs passivos                        |
-| **P5** | Ordem de Serviço (Logs)      | Logs filtrados focados em economia (vendas, construções, alertas)                   |
-| **P6** | Ações de Manutenção          | Atalhos para reabastecer estoques, reparar prédios e pagar salários                 |
-| **P7** | Conselheiro Real (Gestão)    | Contexto focado em sugerir compras e avisar sobre riscos                            |
+| Painel | Nome                        | Conteúdo                                                            |
+| ------ | --------------------------- | ------------------------------------------------------------------- |
+| **P1** | **Build Menu**              | Lista de construções e guildas disponíveis para compra/upgrade      |
+| **P2** | **Escola Estoica**          | Interface de treinamento para modificação de traits P.E.C.M.A.      |
+| **P3** | **Stock & Inventário**      | Controle de poções, armas, armaduras e recursos básicos             |
+| **P4** | **Detalhes Econômicos**     | Relatório de Fluxo de Caixa (Receitas vs Despesas)                  |
+| **P5** | **Orçamento**               | Alocação de recursos por categoria (Manutenção, Salários, Obras)    |
+| **P6** | **Preview de Edifício**     | Detalhes técnicos, buffs e requisitos do edifício selecionado em P1 |
+| **P7** | **Ações Rápidas (Admin)**   | Comandos globais: Reparar Tudo, Reabastecer Stock, Pagar Salários   |
+| **P8** | **Log de Ordem de Serviço** | Histórico de construções, upgrades e manutenções concluídas         |
 
 ### Layout Visual Completo
 
 ```
-+---------------------+------------------------------------------+---------------------+
-| P1: INFRAESTRUTURA  |        P2: CURADORIA DE SKILLS           | P3: LOGÍSTICA/STOCK |
-| [1] Guilda Guerreiro|                                          |                     |
-|     Lvl: 2 (Max 5)  |  CLASSE: GUERREIRO (Pontos: 5)           |  > MERCADORIAS      |
-|     Vagas: 3/5      |                                          |  [A] Poção Vida (S) |
-|     Custo Up: 500g  |  [Raiz] Ataque Básico (Desbloqueado)     |      Qtd: 12        |
-|                     |   |                                      |      Preço: 50g     |
-| [2] Guilda Mago     |   +-- [1] Golpe Giratório (Custo: 200g)  |      Status: BAIXO! |
-|     Lvl: 1          |   |    |-- Requer: Força Lvl 2           |                     |
-|     Vagas: 1/3      |   |                                      |  [B] Poção Mana (M) |
-|     (Construindo...)|   +-- [2] Grito Provocação (BLOQUEADO)   |      Qtd: 45        |
-|                     |        |-- Requer: Guilda Lvl 3          |      Preço: 80g     |
-| [3] Torre de Vigia  |                                          |                     |
-|     Alcance: +2     |  CLASSE: LADINO                          |  > FINANÇAS         |
-|     Estado: OK      |   +-- [3] Adaga Envenenada (500g)        |  Salários: -20g/min |
-|                     |                                          |  Lucro: +150g/min   |
-+---------------------+------------------------------------------+---------------------+
-| P4: DETALHE CONSTRU |          P5: ORDEM DE SERVIÇO (LOGS)     | P6: AÇÕES RÁPIDAS   |
-| Selecionado: [1]    | [ADMIN] Guilda Mago iniciou construção.  | [R] Reparar Tudo    |
-| Guilda Guerreiros   | [ECO]   Venda: Poção Vida (-1) p/ Lila.  | [S] Reabastecer (A) |
-| Buff: +10% XP       | [ECO]   Lucro: +200g (Loot de Ogro).     | [T] Pagar Salários  |
-| Manut: 5g/dia       | [ALERTA] Estoque de Poção Vida CRÍTICO.  | [U] Upgrade Prédio  |
-| "Treina os bravos"  | [ADMIN] Skill "Golpe Giratório" Ativa.   |                     |
-|                     |                                          | (Use teclas)        |
-+---------------------+------------------------------------------+---------------------+
-|                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Reino [Economia Forte +15% Renda] 2h | Todos Heróis [XP Boost +10%] 30min    |
-| 🔽 DEBUFFS: Produção [-20% Velocidade Construção] 1h                                 |
-| ⚠️ CONDIÇÕES: Guilda Guerreiros [Em Manutenção] 15min                                 |
-+--------------------------------------------------------------------------------------+
-|                        P7: CONSELHEIRO REAL (MODO GESTÃO)                            |
-| IA: "Meu Senhor, estamos perigosamente sem poções de vida no stock [A]. Se houver um  |
-|      ataque agora, os heróis estarão em ALTO RISCO sem cura disponível. Recomendo     |
-|      comprar o lote imediatamente."                                                    |
-|                                                                                      |
-| > /buy A 20_                                                                         |
-+--------------------------------------------------------------------------------------+
+┌───────────────────────────────────────────────────────────────────────────┐
+│ P1: BUILD MENU                 │ P2: ESCOLA ESTOICA                       │
+│ [1] Guilda Guerreiros (Lvl 2)  │ Herói Selecionado: Sir Kaelen (Lvl 8)    │
+│ [2] Guilda Magos (Lvl 1)       │ Trait Atual: Mind (0.4)                  │
+│ [3] Guilda Paladinos (Bloq.)   │ Objetivo: Elevar para 0.55               │
+│ [4] Torre de Vigia (Lvl 3)     │ Custo Estimado: 950g | Tempo: 180s       │
+│ [5] Escola Estoica (Lvl 1)     │ [T] Iniciar Treinamento                  │
+│ [6] Mercado (Lvl 2)            │ [ESC] Cancelar Seleção                   │
+├────────────────────────────────┼──────────────────────────────────────────┤
+│ P3: STOCK & INVENTÁRIO         │ P4: ECONOMIA (Resumo Diário)             │
+│ Poções HP: [████░░░░░░] 45/100 │ Receita: +450g (Taxas: 120g, Loot: 330g) │
+│ Poções MP: [███░░░░░░░] 32/100 │ Despesa: -320g (Manut: 220g, Salários:100g)│
+│ Espadas:   [████████░░] 12/15  │ Lucro Líquido: +130g                     │
+│ Armaduras: [██████░░░░] 8/15   │ Projeção Próx. Dia: +145g                │
+├────────────────────────────────┼──────────────────────────────────────────┤
+│ P5: ORÇAMENTO                  │ P6: PREVIEW EDIFÍCIO                     │
+│ [A] Obras: 500g (Pendente)     │ [Escola Estoica - Lvl 1]                 │
+│ [B] Manutenção: 150g (OK)      │ Permite treinar 1 herói por vez.         │
+│ [C] Salários: 100g (ATRASO!)   │ Aumenta traits P.E.C.M.A. através de     │
+│ [D] Emergência: 50g            │ disciplina e estudo.                     │
+├────────────────────────────────┴──────────────────────────────────────────┤
+│ P7: ⚡ AÇÕES RÁPIDAS (ADMINISTRATIVAS)                                    │
+│ [R] Reparar Tudo (50g) | [S] Reabastecer Stock (400g)                     │
+│ [P] Pagar Salários (100g) | [U] Upgrade Prédio (Selecionado em P1)        │
+├───────────────────────────────────────────────────────────────────────────┤
+│ P8: 🏗️ LOG DE ORDEM DE SERVIÇO                                           │
+│ [14:30] 🏗️ Guilda Magos concluída (300g, 60s)                            │
+│ [14:32] 🔨 Taverna Lvl 2 em construção (45s restantes)                   │
+│ [14:35] ⚙️ Manutenção de rotina em torres concluída (-30g)               │
+│ [14:40] 🏛️ Escola Estoica iniciou treinamento: Sir Kaelen                │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Interação e UX (F2)
@@ -1148,7 +1141,7 @@ P2: LEITOR DE DADOS
 💭 "Lila me salvou hoje. Talvez eu a julguei
     mal. Ela não é tão egoísta quanto pensei."
 
-[TRAÇOS DE PERSONALIDADE - P.E.R.M.A.]
+[TRAÇOS DE PERSONALIDADE - P.E.C.M.A.]
 ⚔️ Coragem (Power):   [████████░░] 0.8 (Alta)
 ⚖️ Ética (Ethics):    [██████░░░░] 0.6 (Média)
 💰 Ganância (Resource): [██░░░░░░░░] 0.2 (Baixa)
@@ -3280,7 +3273,7 @@ Exemplos:
 [35 Físico]        - Dano tipado (cinza)
 ```
 
-#### 4. Quirks e Traços P.E.R.M.A.
+#### 4. Quirks e Traços P.E.C.M.A.
 
 ```
 [⚠️ Nome do Traço]

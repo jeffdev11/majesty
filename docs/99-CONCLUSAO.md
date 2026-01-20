@@ -18,7 +18,7 @@ Esta documentação define **todas as mecânicas funcionais** de **Heroes of Maj
 1. ✅ Visão Geral e Filosofia
 2. ✅ Interface UI/UX (6 Workspaces: F1-F6 Chronicles)
 3. ✅ Arquitetura de IA Híbrida
-4. ✅ Os Heróis (P.E.R.M.A.)
+4. ✅ Os Heróis (P.E.C.M.A.)
 5. ✅ Dinâmica Social
 6. ✅ Conselheiro Real
 7. ✅ Economia e Gestão
@@ -52,5 +52,5 @@ Esta documentação define **todas as mecânicas funcionais** de **Heroes of Maj
 
 **_Fim da Documentação Oficial_**
 
-_Última atualização: 19 de Janeiro de 2026_
+_Última atualização: 20 de Janeiro de 2026_
 _Versão 2.0 - Arquitetura Generativa Implementada_

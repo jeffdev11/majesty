@@ -425,9 +425,9 @@ Dia 65: -10 (rival declarada)
 
 ---
 
-### 5. Conflito de Personalidade P.E.R.M.A.
+### 5. Conflito de Personalidade P.E.C.M.A.
 
-**Gatilho:** Dois heróis com vetores P.E.R.M.A. **opostos** interagem frequentemente.
+**Gatilho:** Dois heróis com vetores P.E.C.M.A. **opostos** interagem frequentemente.
 
 **Exemplo de Oposição:**
 
@@ -549,7 +549,7 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 3. **Roubo de Loot** (visual, fácil de entender)
 4. **Kill Steal** (comum, mas clássico)
 5. **Ciúmes** (sutil, background)
-6. **Conflito P.E.R.M.A.** (passivo, constante)
+6. **Conflito P.E.C.M.A.** (passivo, constante)
 
 ---
 

@@ -101,7 +101,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor    | Título                  | Buffs                                                                                                                                     | Debuffs                                                                                |
 | -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente (0s delay)<br>+15% vigilância (detecta inimigos +2s antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
-| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                           | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                                | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
 
 #### **E - Ethics Extrema**
 
@@ -759,6 +759,36 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Comportamento:** Disciplinado, calmo em combate, medita frequentemente
 - **Mecânica Única:** **Combo System** - Ataques encadeados aumentam dano
 - **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
+
+---
+
+### 🤝 Sinergia de Classe: O Poder do Grupo Especializado
+
+Para incentivar diferentes composições de reino e recompensar o investimento em heróis da mesma classe, o Majesty recebe bônus passivos globais baseados na **Sinergia**.
+
+#### Como Funciona
+
+- **Cálculo:** (Quantidade de heróis da classe - 1) = Nível do Buff.
+- **Progressão:**
+  - 2 heróis da mesma classe: **Nível 1 (1x efeito)**
+  - 3 heróis da mesma classe: **Nível 2 (2x efeito)**
+  - 4 heróis da mesma classe: **Nível 3 (3x efeito)**
+  - 5 heróis da mesma classe: **Nível 4 (4x efeito)** -> _Potencial máximo._
+
+#### Tabela de Sinergias (Buffs por Classe)
+
+| Classe         | Nome da Sinergia          | Efeito por Nível (Acumulativo)                   | Foco Estratégico        |
+| :------------- | :------------------------ | :----------------------------------------------- | :---------------------- |
+| **Guerreiro**  | **Vanguardas de Ferro**   | +15% Physical Defense                            | Tanking Supremo         |
+| **Mago**       | **Conclave Arcano**       | +15% Magic Damage                                | Canhão de Vidro         |
+| **Ladino**     | **Sindicato das Sombras** | +10% Chance de Crítico e +10% Ouro de Loot       | Riqueza e Letalidade    |
+| **Arqueiro**   | **Chuva de Mil Flechas**  | +10% Velocidade de Ação                          | Metralhadora de Flechas |
+| **Druida**     | **Círculo de Gaia**       | +5 HP/s Regeneração Passiva                      | Sustentabilidade        |
+| **Elfo**       | **Nobreza Élfica**        | +10% Mana Max e +10% Resistência Mágica          | Resistência Mística     |
+| **Paladino**   | **Exército Luminoso**     | +20% Cura Recebida (todos heróis)                | Imortalidade em Grupo   |
+| **Necromante** | **Legião Maldita**        | +20% HP e Attack para as Invocações              | Zerg de Mortos-Vivos    |
+| **Bardo**      | **Orquestra Real**        | +20% Geração de Inspiração e +10 Affinity Global | Harmonia e Motivação    |
+| **Monge**      | **Caminho da Unidade**    | +15% Chance de Esquiva                           | Agilidade Intangível    |
 
 ---
 

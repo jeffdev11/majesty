@@ -293,7 +293,7 @@ Dia 146-150: Sobreviventes se preparam para Apocalipse
 
 #### Efeitos Passivos do Apocalipse
 
-**LUA DE SANGUE PERMANENTE:**
+**LUA DE SANGUE PECMANENTE:**
 
 - Monstros +100% HP/Attack (sempre ativo)
 - Heróis -20% Moral (constante)

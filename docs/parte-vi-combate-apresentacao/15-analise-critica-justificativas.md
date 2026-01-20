@@ -226,7 +226,7 @@ IP funciona como **mana** em ARPGs:
 
 #### 2. **IA Híbrida com Personalidade**
 
-- Utility AI + P.E.R.M.A.
+- Utility AI + P.E.C.M.A.
 - Heróis com psicologia profunda
 - Monstros com sistema P.A.I.N.
 

@@ -1,7 +1,7 @@
 # 📚 Índice Rápido - Heroes of Majesty: Console Edition
 
 > **Documentação Modular Organizada**
-> Última atualização: 19 de Janeiro de 2026
+> Última atualização: 20 de Janeiro de 2026
 
 ---
 
@@ -32,7 +32,7 @@ _Arquitetura de inteligência artificial_
 | Arquivo                                                                                 | Título                    | Linhas | Tópicos                                    |
 | --------------------------------------------------------------------------------------- | ------------------------- | ------ | ------------------------------------------ |
 | [03-arquitetura-ia-hibrida.md](./parte-ii-sistemas-ia/03-arquitetura-ia-hibrida.md)     | Arquitetura de IA Híbrida | 167    | Utility AI, Behavior Trees, FSM, NLP       |
-| [04-herois-agentes-autonomos.md](./parte-ii-sistemas-ia/04-herois-agentes-autonomos.md) | Heróis: Agentes Autônomos | 249    | Sistema P.E.R.M.A., Classes, Ciclo de Vida |
+| [04-herois-agentes-autonomos.md](./parte-ii-sistemas-ia/04-herois-agentes-autonomos.md) | Heróis: Agentes Autônomos | 249    | Sistema P.E.C.M.A., Classes, Ciclo de Vida |
 
 ---
 
