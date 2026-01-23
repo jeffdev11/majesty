@@ -553,4 +553,3 @@ Mas eles estão FURIOSOS. -10 Moral global."
 ```
 
 ---
-

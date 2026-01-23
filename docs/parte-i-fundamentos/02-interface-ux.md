@@ -54,22 +54,24 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 
 ### Descrição dos Painéis Fixos
 
-| Painel | Nome                              | Conteúdo                                                         |
-| ------ | --------------------------------- | ---------------------------------------------------------------- |
-| **P1** | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
-| **P2** | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
-| **P3** | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
-| **P8** | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
+| Painel     | Nome                              | Conteúdo                                                         |
+| ---------- | --------------------------------- | ---------------------------------------------------------------- |
+| **P1**     | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
+| **P2**     | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
+| **LR_VIS** | **Cena Dinâmica (Visual)**        | **(Novo)** Janela gráfica acoplada ao topo do Log Regional.      |
+| **P3**     | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
+| **P8**     | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
 
 ### Painéis Dinâmicos de Log (LR = Log Regional)
 
-| Painel  | Nome (Dinâmico)        | Comportamento                                                     |
-| ------- | ---------------------- | ----------------------------------------------------------------- |
-| **LR1** | **Log: [Nome Região]** | Criado quando ≥1 herói entra na região. Scroll de eventos locais. |
-| **LR2** | **Log: [Nome Região]** | Segunda região ativa (se houver).                                 |
-| **LR3** | **Log: [Nome Região]** | Terceira região ativa (se houver).                                |
-| **LR4** | **Log: [Nome Região]** | Quarta região ativa (se houver).                                  |
-| **LR5** | **Log: [Nome Região]** | Quinta região ativa (máximo com 5 heróis em locais diferentes).   |
+| Painel   | Nome (Dinâmico)           | Comportamento                                                     |
+| -------- | ------------------------- | ----------------------------------------------------------------- |
+| **LR1**  | **Log: [Nome Região]**    | Criado quando ≥1 herói entra na região. Scroll de eventos locais. |
+| **LR1v** | **Visual: [Nome Região]** | Janela gráfica temporária acima do log (Eventos Ricos).           |
+| **LR2**  | **Log: [Nome Região]**    | Segunda região ativa (se houver).                                 |
+| **LR3**  | **Log: [Nome Região]**    | Terceira região ativa (se houver).                                |
+| **LR4**  | **Log: [Nome Região]**    | Quarta região ativa (se houver).                                  |
+| **LR5**  | **Log: [Nome Região]**    | Quinta região ativa (máximo com 5 heróis em locais diferentes).   |
 
 ### Regras de Layout Dinâmico
 
@@ -95,6 +97,10 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 │                                      │  └─ Kenji (Monge Lvl 5)            │
 ├──────────────────────────────────────┴────────────────────────────────────┤
 │ LR1: 📍 FLORESTA SOMBRIA (5 heróis)                               [SCROLL]│
+├───────────────────────────────────────────────────────────────────────────┤
+│ [VISUAL SCENE WINDOW]                                                     │
+│ [ 🧙‍♂️Kaelen ]  (⚡ Combo Line)  [ 🧝‍♀️Lila ]   VS   [ 👹Ogro ]              │
+│    "Agora, Lila!"                                                         │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ [14:32] ⚔️ [Sir Kaelen] ataca Ogro (85 dano)                              │
 │ [14:33] ⚔️ [Lila] usa [Apunhalar Crítico] → Ogro (142 dano!) CRÍTICO      │
@@ -193,6 +199,60 @@ Mesmo com logs separados, o sistema mostra **banners de alerta** no topo da tela
 ```
 
 Pressionar `[PULAR]` ou `Tab` foca a câmera e os controles naquela região.
+
+### Visualização de Cena Dinâmica (Eventos Ricos)
+
+Para eventos de maior importância (narrativa emergente, encontros com bosses, diálogos cruciais), o sistema acopla à **Janela de Log** uma **Área de Animação Visual**.
+
+**Conceito:**
+Diferente dos logs textuais (que são rápidos e informativos), esta janela oferece uma representação visual "teatral" da cena. Ela **não** substitui o log como fonte primária de informação, mas funciona como um "highlight" visual para imersão.
+
+**Funcionamento:**
+A LLM envia um payload JSON específico quando detecta um momento digno de representação visual (ex: "Encontro Sombrio nas Ruínas"). O frontend renderiza uma cena estática com animações sutis (hover, balões de fala, brilhos).
+
+**Características da Janela:**
+
+1.  **Cenário (Background):** Imagem ambiental correspondente ao bioma.
+2.  **Slots de Personagens:**
+    - **Side-View:** Time Esquerdo (Heróis) vs Time Direito (Inimigos).
+    - **Destaque (Highlight):** O personagem agindo no momento "salta" para frente e brilha.
+    - **Inativos:** Personagens aguardando ficam mais escuros e menores ao fundo.
+3.  **Balões de Diálogo:** Pop-ups dinâmicos estilo HQ. O posicionamento se ajusta para não cobrir a arte (topo para inativos, laterais para ativos).
+4.  **Estado de Morte:** Se um personagem morre na timeline, ele recebe um filtro grayscale e um "X" vermelho sobre o retrato.
+
+**Estrutura do Payload (JSON):**
+
+O sistema de animação é controlado por um objeto JSON contendo o estado inicial e uma `timeline` de eventos.
+
+```json
+{
+  "title": "Título da Cena (ex: Emboscada na Floresta)",
+  "centerIcon": true, // Exibe ícone de espadas cruzadas no centro
+  "leftTeam": [
+    // Lista de IDs e configs iniciais
+    { "id": "c1", "color": "#0088ff" }
+  ],
+  "rightTeam": [{ "id": "m1", "color": "#aa0000", "flip": false }],
+  "timeline": [
+    // Sequência de Ações
+    {
+      "delay": 1000, // Pausa antes de executar
+      "side": "left", // Qual time age
+      "id": "c1", // Quem age
+      "talkingTo": "m1", // Alvo (faz o ator virar/flipar para o alvo)
+      "update": {
+        "text": "Sua tirania acaba hoje!", // Gera balão de fala
+        "highlight": true, // Traz para frente e ilumina
+        "keepPrevious": false, // Se false, limpa falas anteriores
+        "dead": false // Se true, marca como morto (X vermelho)
+      }
+    }
+  ]
+}
+```
+
+**Comportamento da Timeline:**
+O cliente processa a lista `timeline` sequencialmente. Cada passo atualiza o estado visual dos "bonecos" (posição, brilho, texto). Isso permite que a LLM "dirija" uma pequena cutscene de batalha ou diálogo dramático sem precisar renderizar gráficos 3D pesados.
 
 ### Detalhamento do P8: Status Temporários
 
@@ -537,7 +597,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 |                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
 | [3] Vazio           |                                          |      (Ler Agora [R])|
 |     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
-|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
+|                     |    [?] Névoa de Guerra                   |                     |
 +---------------------+------------------------------------------+---------------------+
 | P4: INSPEÇÃO / CARTA|          P5: TIMELINE SOCIAL (LOGS)      | P6: AÇÕES RÁPIDAS   |
 | Selecionado: [1]    | [12:03] 📩 MAIL [Majesty ➜ Kaelen] [-25 IP] Corvo enviado. | [A] Curar (100g)    |
@@ -3492,9 +3552,9 @@ Exemplos:
 [15:20] ⚔️ ATK [Kaelen ⚔️ Boss] [Iniciou] Kaelen causou 90% dano.
 [15:25] ⚔️ ATK [Boss] [HP: 8%] Quase morto...
 [15:26] ⚔️ ATK [Lila ⚔️ Boss] [-10 HP] Último golpe!
-[15:27] 💀 KILL [Lila] [KS!] Roubou kill de Kaelen!
-[15:28] 🧠 MIND [Kaelen] [😠 -20 Aff] "ERA MEU!"
-[15:29] 🩸 STAT [Kaelen] [🚩 PvP] Marcado como agressor.
+[15:27] 💀 KILL [Lila] [Last Hit] Finalizou o alvo com estilo!
+[15:28] 💰 LOOT [Boss] Dropou [Espada Lendária]!
+[15:29] 🤝 PARTY [Kaelen] "Bela finalização, Lila!"
 ```
 
 #### MOVIMENTO E EXPLORAÇÃO

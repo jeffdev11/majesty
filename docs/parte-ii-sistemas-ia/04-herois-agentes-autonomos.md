@@ -105,10 +105,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **E - Ethics Extrema**
 
-| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                    |
-| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo        |
-| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Nunca rouba kills (perde XP)<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
+| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                |
+| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo    |
+| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Sempre protege inocentes<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
 
 #### **C - Cooperation Extrema**
 
@@ -168,18 +168,18 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor       | Arquétipo        | Comportamentos                                            |
 | ----------- | ---------------- | --------------------------------------------------------- |
 | **0.0-0.2** | **Maquiavélico** | Trai aliados por ouro. Aceita subornos. Abandona feridos. |
-| **0.3-0.4** | **Pragmático**   | Rouba kills se conveniente. Mente se necessário.          |
+| **0.3-0.4** | **Pragmático**   | Prioriza sobrevivência. Mente se necessário.              |
 | **0.5-0.6** | **Neutro**       | Segue regras quando observado. Ajuda se não custar muito. |
 | **0.7-0.8** | **Honrado**      | Divide loot igualmente. Cumpre promessas. Leal ao reino.  |
 | **0.9-1.0** | **Paladino**     | Sacrifica-se por aliados. Recusa subornos. Nunca mente.   |
 
 **Exemplos Detalhados em Gameplay:**
 
-**Situação 1: Kill Stealing**
+**Situação 1: Perigo Iminente (Boss)**
 
-- Ethics 0.2: Rouba kill ativamente, sem remorso
-- Ethics 0.5: Rouba se ninguém estiver olhando
-- Ethics 0.8: Deixa o kill para quem iniciou o combate
+- Ethics 0.2: Usa aliados como escudo humano
+- Ethics 0.5: Luta com cautela
+- Ethics 0.8: Toma a frente para proteger o grupo
 
 **Situação 2: Aliado Caído (HP < 20%)**
 

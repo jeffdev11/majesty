@@ -45,7 +45,7 @@ A diversão do jogo não vem da execução motora rápida, mas sim da **satisfa�
 
 2. **Narrativa Emergente**
    - Histórias épicas, cômicas ou dramáticas surgem naturalmente das interações sociais
-   - Kill Stealing (KS), rivalidades por títulos e resgates heroicos entre amigos
+   - Rivalidades por títulos, romances emergentes e resgates heroicos entre amigos
    - Cada partida gera sua própria saga única
 
 3. **Legado Tangível**

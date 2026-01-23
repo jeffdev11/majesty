@@ -33,54 +33,6 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 ---
 
-## 5.2 Kill Stealing (KS): O Gatilho do Drama
-
-**Kill Stealing** é quando um herói rouba o último golpe de um combate iniciado por outro.
-
-### Mecânica Técnica
-
-```typescript
-if (monster.hp <= 0) {
-  const killer = monster.lastAttacker;
-  const initiator = monster.firstAttacker;
-
-  if (killer.id !== initiator.id) {
-    // KS DETECTADO!
-    handleKillSteal(killer, initiator, monster);
-  }
-}
-```
-
-### Consequências do KS
-
-#### Para o Ladrão (Killer)
-
-- Ganha **100% do XP e Loot**
-- Recebe tag `pvp_flag` (Bandeira Vermelha) por 60 segundos
-- Perde **-15 Affinity** com a vítima
-- Se Ethics < 0.5: Sem remorso (comportamento esperado)
-- Se Ethics > 0.7: Ganha estado `GUILTY` (-10% stats por 2 min)
-
-#### Para a Vítima (Initiator)
-
-- Perde **todo o XP e Loot**
-- Ganha memória de raiva: `STOLEN_BY: [killer_id]`
-- Se Power > 0.6: 40% chance de iniciar **PvP imediato**
-- Se Ethics > 0.7: Apenas reclama no log (não revida)
-
-### Exemplo de Log
-
-```
-[12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [Iniciou] Kaelen começou o combate.
-[12:46] ⚔️ ATK [Lila ⚔️ Ogro] [HP: 5%] Último golpe!
-[12:46] 💀 KILL [Lila]  [KS!] Roubou kill de Kaelen!
-[12:46] � CHAT [Kaelen] [😠 -15 Aff] "Aquele era MEU alvo, ladra!"
-[12:46] 🩸 STAT [Lila] [🚩 PvP] Bandeira Vermelha ativa.
-[12:47] ⚔️ ATK [Kaelen ⚔️ Lila] [PVP INICIADO] Revide imediato!
-```
-
----
-
 ## 5.3 Combate PvP (Player vs Player... entre Heróis!)
 
 ### Regras de PvP
@@ -88,9 +40,8 @@ if (monster.hp <= 0) {
 **Condições para Iniciar:**
 
 1. Herói atacante tem `pvp_flag` OU
-2. Vítima roubou kill recentemente OU
-3. Affinity < -50 (ódio profundo) OU
-4. Quirk `VENGEFUL` ativo
+2. Affinity < -50 (ódio profundo) OU
+3. Quirk `VENGEFUL` ativo
 
 **Mecânica:**
 
@@ -140,24 +91,30 @@ Cada par de heróis tem um **Affinity Score** que varia de **-100 a +100**.
 
 #### Como Aumentar Afinidade (+)
 
-| Ação                                   | Ganho |
-| -------------------------------------- | ----- |
-| Lutar juntos contra boss               | +10   |
-| Salvar de morte certa                  | +25   |
-| Doar item valioso                      | +15   |
-| Compartilhar loot igualmente           | +5    |
-| Aceitar resposta de carta com gratidão | +8    |
-| Vingar morte                           | +30   |
+| Ação                                   | Ganho  |
+| -------------------------------------- | ------ |
+| Lutar juntos contra boss               | +10    |
+| Salvar de morte certa                  | +25    |
+| Doar item valioso                      | +15    |
+| Compartilhar loot igualmente           | +5     |
+| Aceitar resposta de carta com gratidão | +8     |
+| Vingar morte                           | +30    |
+| **Curar sem ser solicitado**           | **+5** |
+| **Elogiar em público (Log)**           | **+3** |
+| **Combo de Habilidade (Sync)**         | **+8** |
 
 #### Como Diminuir Afinidade (-)
 
-| Ação                              | Perda             |
-| --------------------------------- | ----------------- |
-| Kill Stealing (KS)                | -15               |
-| Deixar morrer quando podia salvar | -20               |
-| Roubar item do chão               | -10               |
-| Matar em PvP                      | -100 (permanente) |
-| Ignorar pedido de ajuda           | -8                |
+| Ação | Perda |
+| ---- | ----- |
+
+| Deixar morrer quando podia salvar | -20 |
+| Roubar item do chão | -10 |
+| Matar em PvP | -100 (permanente) |
+| Ignorar pedido de ajuda | -8 |
+| **Friendly Fire (Dano em área)** | **-5** |
+| **Recusar Buff/Cura** | **-5** |
+| **Discutir em Chat (Banter)** | **-2** |
 
 ### Títulos de Amizade
 
@@ -172,6 +129,44 @@ Quando Affinity atinge certos marcos:
 | **-19 a -1**   | Desconfiança | Evitam cooperar                                    |
 | **-49 a -20**  | Rivais       | Competem por kills e loot                          |
 | **-100 a -50** | Inimigos     | PvP garantido se cruzarem caminhos                 |
+
+### 5.4.1 Consequências de Gameplay (Console & UX)
+
+A afinidade não é apenas um número no banco de dados; ela altera drasticamente como o jogo é **visualizado e jogado** no console.
+
+#### ✅ Alta Afinidade (Sinergia)
+
+Quando dois heróis são "Amigos Leais" ou "Inseparáveis":
+
+1.  **Ataques Sincronizados (Dual Techs):**
+    - **Visual:** Uma linha de energia (verde/dourada) conecta os retratos dos heróis no [F1].
+    - **Mecânica:** Desbloqueiam combos automáticos. Ex: O Guerreiro lança o inimigo para cima, o Arqueiro atira no ar.
+    - **Log:** `⚔️ [COMBO] Kaelen & Lila executaram "Tempestade de Lâminas"!`
+
+2.  **Proteção de Tanque (Bodyblock):**
+    - Se um Mago (HP Baixo) vai receber dano letal, o Paladino Amigo pula na frente automaticamente.
+    - **Feedback Visual:** Escudo vibrante aparece brevemente sobre o protegido.
+
+3.  **Compartilhamento de Inventário:**
+    - Se um herói está sem poções, o amigo joga uma das suas (animação de arremesso).
+
+#### ❌ Baixa Afinidade (Rivalidade)
+
+Quando dois heróis são "Rivais" ou "Inimigos":
+
+1.  **Bloqueio de Movimento (Bodyblock Hostil):**
+    - Heróis se recusam a dar passagem em corredores estreitos, empurrando um ao outro.
+    - **Log:** `💢 [Lila] empurrou [Kaelen]: "Sai da frente, lata velha!"`
+
+2.  **Negligência de Cura:**
+    - Healers podem "fingir que não viram" o rival com HP baixo, priorizando outros ou a si mesmos.
+    - **Feedback UX:** O healer mostra um ícone de 🙈 sobre a cabeça.
+
+3.  **Friendly Fire "Acidental":**
+    - Mago lança bola de fogo "perto demais" do Guerreiro rival.
+    - **Dano:** Pequeno, mas causa interrupção (stagger).
+
+---
 
 ---
 
@@ -224,19 +219,14 @@ Heróis **conversam entre si** baseado em eventos e personalidade.
 
 ```typescript
 const banterTemplate = {
-  trigger: "KILL_STEAL",
+  trigger: "LOOT_STEAL",
   speaker: "VICTIM",
-  template: "{VICTIM_NAME}: Aquele {MONSTER} era MEU, {THIEF_NAME}!",
+  template: "{VICTIM_NAME}: Aquele {ITEM} era MEU, {THIEF_NAME}!",
   personality_filter: { ethics: ">0.5" },
 };
 ```
 
 ### Exemplos de Banter
-
-#### Após KS
-
-- **Vítima (Ethics Alto):** _"Kaelen, isso não foi honrado!"_
-- **Ladrão (Ethics Baixo):** _"O rápido come, parceiro. 😏"_
 
 #### Formação de Grupo
 
@@ -279,23 +269,7 @@ Elara    +25    +10    +55      -
 
 **IMPORTANTE:** Kill Stealing NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
 
-### 1. Kill Steal (KS) - Roubo de Glória
-
-**Já documentado na seção 5.2**, mas reforçando:
-
-**Gatilho:** Herói B mata monstro quando HP < 10% e Herói A causou 80%+ do dano.
-
-**Consequências:**
-
-- Herói A: -15 Affinity com B
-- Herói B: Ganância aumenta temporariamente
-- Chance 30% de PvP se Herói A for agressivo
-
----
-
-### 2. Covard
-
-ia Causando Morte
+### 1. Covardia Causando Morte
 
 **Gatilho:** Herói A foge de combate (Audácia < 0.3) e isso resulta na morte de Herói B que estava lutando ao lado.
 
@@ -335,11 +309,9 @@ if (heroB.died && heroA.ranAway && distance(A, B) < 5) {
 
 ---
 
-### 3. Traição por Ganância (Roubo de Loot)
+### 2. Traição por Ganância (Roubo de Loot)
 
 **Gatilho:** Herói A mata boss/elite e Herói B pega o loot antes dele.
-
-**Diferença do KS:** Não rouba o kill, rouba o **ITEM**.
 
 **Cálculo:**
 
@@ -380,7 +352,7 @@ Você tem 5 minutos ou haverá consequências."
 
 ---
 
-### 4. Ciúmes de Poder (Inveja de Níveis)
+### 3. Ciúmes de Poder (Inveja de Níveis)
 
 **Gatilho:** Diferença de nível entre heróis > 5 e um deles tem Inveja (Power > 0.7).
 
@@ -425,7 +397,7 @@ Dia 65: -10 (rival declarada)
 
 ---
 
-### 5. Conflito de Personalidade P.E.C.M.A.
+### 4. Conflito de Personalidade P.E.C.M.A.
 
 **Gatilho:** Dois heróis com vetores P.E.C.M.A. **opostos** interagem frequentemente.
 
@@ -475,7 +447,7 @@ Eles só cooperam se FORÇADOS pelo jogador via carta.
 
 ---
 
-### 6. Vingança por Morte de Amigo
+### 5. Vingança por Morte de Amigo
 
 **Gatilho:** Herói A morre, Herói B tinha Affinity +70+ com A, e B culpa Herói C pela morte.
 
@@ -535,7 +507,6 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 
 | Tipo de Conflito       | Cooldown    | Máximo/Partida        |
 | ---------------------- | ----------- | --------------------- |
-| Kill Steal             | 5 min       | Ilimitado             |
 | Covardia               | 30 min      | 3 eventos             |
 | Roubo de Loot          | 10 min      | 10 eventos            |
 | Ciúmes                 | Passivo     | 1 por par de heróis   |
@@ -547,18 +518,14 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 1. **Vingança** (mais dramático) - sempre mostrado
 2. **Covardia** (raro e grave) - destaque
 3. **Roubo de Loot** (visual, fácil de entender)
-4. **Kill Steal** (comum, mas clássico)
-5. **Ciúmes** (sutil, background)
-6. **Conflito P.E.C.M.A.** (passivo, constante)
+4. **Ciúmes** (sutil, background)
+5. **Conflito P.E.C.M.A.** (passivo, constante)
 
 ---
 
 ### Exemplo de Cadeia de Conflitos (Cascata Dramática)
 
 ```
-[Dia 50] Kaelen rouba kill de Lila (KS)
-         Affinity: +45 → +30
-
 [Dia 52] Lila rouba loot de Kaelen (vingança)
          Affinity: +30 → +10
 

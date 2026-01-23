@@ -128,12 +128,12 @@ icons/
 
 #### 2. SFX de UI (Interface)
 
-| Ação                   | Som                 | Descrição                           |
-| ---------------------- | ------------------- | ----------------------------------- |
-| **Tecla pressionada**  | `key_press.wav`     | Clique mecânico (teclado Cherry MX) |
-| **Tab (mudar painel)** | `tab_switch.wav`    | "Whoosh" eletrônico sutil           |
-| **Comando enviado**    | `command_send.wav`  | Beep retro-futurista                |
-| **Erro**               | `error_beep.wav`    | Buzz grave (400Hz)                  |
+| Ação                   | Som                  | Descrição                           |
+| ---------------------- | -------------------- | ----------------------------------- |
+| **Tecla pressionada**  | `key_press.wav`      | Clique mecânico (teclado Cherry MX) |
+| **Tab (mudar painel)** | `tab_switch.wav`     | "Whoosh" eletrônico sutil           |
+| **Comando enviado**    | `command_send.wav`   | Beep retro-futurista                |
+| **Erro**               | `error_beep.wav`     | Buzz grave (400Hz)                  |
 | **Sucesso**            | `success_maname.wav` | Ding cristalino (1200Hz)            |
 
 ---
@@ -152,13 +152,13 @@ icons/
 
 #### 4. SFX Sociais
 
-| Evento              | Som                    | Mood                       |
-| ------------------- | ---------------------- | -------------------------- |
-| **Carta chegou**    | `mail_arrive.wav`      | Corvo grasnando + papel    |
-| **KS detectado**    | `tension_sting.wav`    | Nota dissonante (suspense) |
-| **PvP iniciado**    | `duel_bell.wav`        | Sino de duelo              |
-| **Amizade formada** | `friendship_maname.wav` | Acorde alegre              |
-| **Traição**         | `betrayal_theme.wav`   | Música dramática (3s)      |
+| Evento              | Som                     | Mood                    |
+| ------------------- | ----------------------- | ----------------------- |
+| **Carta chegou**    | `mail_arrive.wav`       | Corvo grasnando + papel |
+| **Boss fight**      | `boss_theme_layer.mp3`  | Percussão intensa       |
+| **PvP iniciado**    | `duel_bell.wav`         | Sino de duelo           |
+| **Amizade formada** | `friendship_maname.wav` | Acorde alegre           |
+| **Traição**         | `betrayal_theme.wav`    | Música dramática (3s)   |
 
 ---
 
@@ -308,4 +308,3 @@ function spawnParticles(x: number, y: number, count: number) {
 ```
 
 ---
-

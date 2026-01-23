@@ -141,7 +141,7 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 ```
 Dia 1-10:   Recrutar 3-5 heróis, construir primeiras guildas
 Dia 11-25:  Expandir para 8 heróis, primeiro posto avançado
-Dia 26-40:  Conflitos sociais começam (KS, rivalidades)
+Dia 26-40:  Conflitos sociais começam (rivalidades, disputas de loot)
 Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
 ```
 

@@ -46,7 +46,7 @@
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 Formação de Grupos
-   - 5.2 Kill Stealing (KS)
+
    - 5.3 Combate PvP
    - 5.4 Amizades e Lealdade
    - 5.5 Mercado Ambulante
@@ -237,7 +237,7 @@ A diversão do jogo não vem da execução motora rápida, mas sim da **satisfa�
 
 2. **Narrativa Emergente**
    - Histórias épicas, cômicas ou dramáticas surgem naturalmente das interações sociais
-   - Kill Stealing (KS), rivalidades por títulos e resgates heroicos entre amigos
+   - Rivalidades por títulos, romances emergentes e resgates heroicos entre amigos
    - Cada partida gera sua própria saga única
 
 3. **Legado Tangível**
@@ -351,22 +351,24 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 
 ### Descrição dos Painéis Fixos
 
-| Painel | Nome                              | Conteúdo                                                         |
-| ------ | --------------------------------- | ---------------------------------------------------------------- |
-| **P1** | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
-| **P2** | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
-| **P3** | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
-| **P8** | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
+| Painel     | Nome                              | Conteúdo                                                         |
+| ---------- | --------------------------------- | ---------------------------------------------------------------- |
+| **P1**     | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
+| **P2**     | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
+| **LR_VIS** | **Cena Dinâmica (Visual)**        | **(Novo)** Janela gráfica acoplada ao topo do Log Regional.      |
+| **P3**     | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
+| **P8**     | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
 
 ### Painéis Dinâmicos de Log (LR = Log Regional)
 
-| Painel  | Nome (Dinâmico)        | Comportamento                                                     |
-| ------- | ---------------------- | ----------------------------------------------------------------- |
-| **LR1** | **Log: [Nome Região]** | Criado quando ≥1 herói entra na região. Scroll de eventos locais. |
-| **LR2** | **Log: [Nome Região]** | Segunda região ativa (se houver).                                 |
-| **LR3** | **Log: [Nome Região]** | Terceira região ativa (se houver).                                |
-| **LR4** | **Log: [Nome Região]** | Quarta região ativa (se houver).                                  |
-| **LR5** | **Log: [Nome Região]** | Quinta região ativa (máximo com 5 heróis em locais diferentes).   |
+| Painel   | Nome (Dinâmico)           | Comportamento                                                     |
+| -------- | ------------------------- | ----------------------------------------------------------------- |
+| **LR1**  | **Log: [Nome Região]**    | Criado quando ≥1 herói entra na região. Scroll de eventos locais. |
+| **LR1v** | **Visual: [Nome Região]** | Janela gráfica temporária acima do log (Eventos Ricos).           |
+| **LR2**  | **Log: [Nome Região]**    | Segunda região ativa (se houver).                                 |
+| **LR3**  | **Log: [Nome Região]**    | Terceira região ativa (se houver).                                |
+| **LR4**  | **Log: [Nome Região]**    | Quarta região ativa (se houver).                                  |
+| **LR5**  | **Log: [Nome Região]**    | Quinta região ativa (máximo com 5 heróis em locais diferentes).   |
 
 ### Regras de Layout Dinâmico
 
@@ -392,6 +394,10 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 │                                      │  └─ Kenji (Monge Lvl 5)            │
 ├──────────────────────────────────────┴────────────────────────────────────┤
 │ LR1: 📍 FLORESTA SOMBRIA (5 heróis)                               [SCROLL]│
+├───────────────────────────────────────────────────────────────────────────┤
+│ [VISUAL SCENE WINDOW]                                                     │
+│ [ 🧙‍♂️Kaelen ]  (⚡ Combo Line)  [ 🧝‍♀️Lila ]   VS   [ 👹Ogro ]              │
+│    "Agora, Lila!"                                                         │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ [14:32] ⚔️ [Sir Kaelen] ataca Ogro (85 dano)                              │
 │ [14:33] ⚔️ [Lila] usa [Apunhalar Crítico] → Ogro (142 dano!) CRÍTICO      │
@@ -490,6 +496,60 @@ Mesmo com logs separados, o sistema mostra **banners de alerta** no topo da tela
 ```
 
 Pressionar `[PULAR]` ou `Tab` foca a câmera e os controles naquela região.
+
+### Visualização de Cena Dinâmica (Eventos Ricos)
+
+Para eventos de maior importância (narrativa emergente, encontros com bosses, diálogos cruciais), o sistema acopla à **Janela de Log** uma **Área de Animação Visual**.
+
+**Conceito:**
+Diferente dos logs textuais (que são rápidos e informativos), esta janela oferece uma representação visual "teatral" da cena. Ela **não** substitui o log como fonte primária de informação, mas funciona como um "highlight" visual para imersão.
+
+**Funcionamento:**
+A LLM envia um payload JSON específico quando detecta um momento digno de representação visual (ex: "Encontro Sombrio nas Ruínas"). O frontend renderiza uma cena estática com animações sutis (hover, balões de fala, brilhos).
+
+**Características da Janela:**
+
+1.  **Cenário (Background):** Imagem ambiental correspondente ao bioma.
+2.  **Slots de Personagens:**
+    - **Side-View:** Time Esquerdo (Heróis) vs Time Direito (Inimigos).
+    - **Destaque (Highlight):** O personagem agindo no momento "salta" para frente e brilha.
+    - **Inativos:** Personagens aguardando ficam mais escuros e menores ao fundo.
+3.  **Balões de Diálogo:** Pop-ups dinâmicos estilo HQ. O posicionamento se ajusta para não cobrir a arte (topo para inativos, laterais para ativos).
+4.  **Estado de Morte:** Se um personagem morre na timeline, ele recebe um filtro grayscale e um "X" vermelho sobre o retrato.
+
+**Estrutura do Payload (JSON):**
+
+O sistema de animação é controlado por um objeto JSON contendo o estado inicial e uma `timeline` de eventos.
+
+```json
+{
+  "title": "Título da Cena (ex: Emboscada na Floresta)",
+  "centerIcon": true, // Exibe ícone de espadas cruzadas no centro
+  "leftTeam": [
+    // Lista de IDs e configs iniciais
+    { "id": "c1", "color": "#0088ff" }
+  ],
+  "rightTeam": [{ "id": "m1", "color": "#aa0000", "flip": false }],
+  "timeline": [
+    // Sequência de Ações
+    {
+      "delay": 1000, // Pausa antes de executar
+      "side": "left", // Qual time age
+      "id": "c1", // Quem age
+      "talkingTo": "m1", // Alvo (faz o ator virar/flipar para o alvo)
+      "update": {
+        "text": "Sua tirania acaba hoje!", // Gera balão de fala
+        "highlight": true, // Traz para frente e ilumina
+        "keepPrevious": false, // Se false, limpa falas anteriores
+        "dead": false // Se true, marca como morto (X vermelho)
+      }
+    }
+  ]
+}
+```
+
+**Comportamento da Timeline:**
+O cliente processa a lista `timeline` sequencialmente. Cada passo atualiza o estado visual dos "bonecos" (posição, brilho, texto). Isso permite que a LLM "dirija" uma pequena cutscene de batalha ou diálogo dramático sem precisar renderizar gráficos 3D pesados.
 
 ### Detalhamento do P8: Status Temporários
 
@@ -834,7 +894,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 |                     |    [M] Ogro (HP: 10%)                    |  [!] Carta de Lila  |
 | [3] Vazio           |                                          |      (Ler Agora [R])|
 |     (Recrutar +)    |  > CAVERNA (Desconhecido)                |  [!] Estoque Baixo  |
-|                     |    [?] Névoa de Guerra                   |  [!] KS Detectado   |
+|                     |    [?] Névoa de Guerra                   |                     |
 +---------------------+------------------------------------------+---------------------+
 | P4: INSPEÇÃO / CARTA|          P5: TIMELINE SOCIAL (LOGS)      | P6: AÇÕES RÁPIDAS   |
 | Selecionado: [1]    | [12:03] 📩 MAIL [Majesty ➜ Kaelen] [-25 IP] Corvo enviado. | [A] Curar (100g)    |
@@ -3789,9 +3849,9 @@ Exemplos:
 [15:20] ⚔️ ATK [Kaelen ⚔️ Boss] [Iniciou] Kaelen causou 90% dano.
 [15:25] ⚔️ ATK [Boss] [HP: 8%] Quase morto...
 [15:26] ⚔️ ATK [Lila ⚔️ Boss] [-10 HP] Último golpe!
-[15:27] 💀 KILL [Lila] [KS!] Roubou kill de Kaelen!
-[15:28] 🧠 MIND [Kaelen] [😠 -20 Aff] "ERA MEU!"
-[15:29] 🩸 STAT [Kaelen] [🚩 PvP] Marcado como agressor.
+[15:27] 💀 KILL [Lila] [Last Hit] Finalizou o alvo com estilo!
+[15:28] 💰 LOOT [Boss] Dropou [Espada Lendária]!
+[15:29] 🤝 PARTY [Kaelen] "Bela finalização, Lila!"
 ```
 
 #### MOVIMENTO E EXPLORAÇÃO
@@ -4162,23 +4222,23 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome                | Custo       | Cooldown | Descrição                                      | Requer            |
-| --- | ------------------- | ----------- | -------- | ---------------------------------------------- | ----------------- |
-| 1   | **Golpe Poderoso**  | 10 Stamina  | 5s       | +50% dano no próximo ataque                    | Nível 1           |
-| 2   | **Grito de Guerra** | 20 Stamina  | 30s      | +20% Attack para aliados próximos por 10s      | Golpe Poderoso    |
-| 3   | **Investida**       | 15 Stamina  | 15s      | Carga rápida até o inimigo, atordoa 2s         | Nível 3           |
-| 4   | **Girar Lâmina**    | 25 Stamina  | 20s      | Ataque em área 360°, atinge até 5 inimigos     | Investida         |
-| 5   | **Quebra-Armadura** | 30 Stamina  | 25s      | Ignora 50% da defesa do alvo                   | Nível 5           |
-| 6   | **Estocada Mortal** | 35 Stamina  | 30s      | Golpe crítico garantido, +100% dano            | Quebra-Armadura   |
-| 7   | **Provocação**      | 20 Stamina  | 20s      | Força inimigos próximos a atacarem o guerreiro | Grito de Guerra   |
-| 8   | **Segundo Fôlego**  | 50 Stamina  | 60s      | Recupera 30% HP instantaneamente               | Nível 7           |
-| 9   | **Fúria Berserker** | 40 Stamina  | 45s      | +50% Attack, -30% Defense por 15s              | Estocada Mortal   |
-| 10  | **Terremoto**       | 60 Stamina  | 60s      | Golpeia o chão, atordoa todos em 10m por 3s    | Girar Lâmina      |
-| 11  | **Escudo Vivo**     | 30 Stamina  | 40s      | Bloqueia próximo ataque completamente          | Nível 9           |
-| 12  | **Vingança**        | 35 Stamina  | 30s      | Próximo ataque causa dano = HP perdido         | Fúria Berserker   |
-| 13  | **Executar**        | 25 Stamina  | 35s      | Mata instantaneamente inimigo com HP < 15%     | Nível 10          |
-| 14  | **Muralha de Aço**  | 70 Stamina  | 90s      | Imune a dano por 5s, não pode se mover         | Escudo Vivo       |
-| 15  | **Ira dos Deuses**  | 100 Stamina | 120s     | +200% Attack por 10s, mata = +5s duração       | Executar + Lvl 12 |
+| #   | Nome                 | Custo    | Cooldown | Descrição                                        | Requer                  |
+| --- | -------------------- | -------- | -------- | ------------------------------------------------ | ----------------------- |
+| 1   | **Golpe Poderoso**   | 10 Mana  | 5s       | +50% dano no próximo ataque                      | Nível 1                 |
+| 2   | **Grito de Guerra**  | 20 Mana  | 30s      | +20% Attack para aliados próximos por 10s        | Golpe Poderoso          |
+| 3   | **Investida**        | 15 Mana  | 15s      | Carga rápida até o inimigo, atordoa 2s           | Nível 3                 |
+| 4   | **Girar Lâmina**     | 25 Mana  | 20s      | Ataque em área 360°, atinge até 5 inimigos       | Investida               |
+| 5   | **Quebra-Armadura**  | 30 Mana  | 25s      | Ignora 50% da defesa do alvo                     | Nível 5                 |
+| 6   | **Estocada Mortal**  | 35 Mana  | 30s      | Golpe crítico garantido, +100% dano              | Quebra-Armadura         |
+| 7   | **Provocação**       | 20 Mana  | 20s      | Força inimigos próximos a atacarem o guerreiro   | Grito de Guerra         |
+| 8   | **Segundo Fôlego**   | 50 Mana  | 60s      | Recupera 30% HP instantaneamente                 | Nível 7                 |
+| 9   | **Fúria Berserker**  | 40 Mana  | 45s      | +50% Attack, -30% Defense por 15s                | Estocada Mortal         |
+| 10  | **Terremoto**        | 60 Mana  | 60s      | Golpeia o chão, atordoa todos em 10m por 3s      | Girar Lâmina            |
+| 11  | **Escudo Vivo**      | 30 Mana  | 40s      | Bloqueia próximo ataque completamente            | Nível 9                 |
+| 12  | **Vingança**         | 35 Mana  | 30s      | Próximo ataque causa dano = HP perdido           | Fúria Berserker         |
+| 13  | **Executar**         | 25 Mana  | 35s      | Mata instantaneamente inimigo com HP < 15%       | Nível 10                |
+| 14  | **Muralha de Aço**   | 70 Mana  | 90s      | Imune a dano por 5s, não pode se mover           | Escudo Vivo             |
+| 15  | **Avatar da Guerra** | 100 Mana | 120s     | Cresce de tamanho, +200% Attack, ataques em área | Executar + Wyvern Scale |
 
 ### 🛡️ Skills Passivas (15)
 
@@ -4206,23 +4266,23 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                    | Custo    | Cooldown | Descrição                                    | Requer                   |
-| --- | ----------------------- | -------- | -------- | -------------------------------------------- | ------------------------ |
-| 1   | **Bola de Fogo**        | 20 Mana  | 8s       | Projétil de fogo, 80 dano mágico             | Nível 1                  |
-| 2   | **Raio Congelante**     | 25 Mana  | 10s      | Congela alvo por 3s, 60 dano                 | Bola de Fogo             |
-| 3   | **Escudo Mágico**       | 30 Mana  | 20s      | Absorve 150 de dano por 8s                   | Nível 2                  |
-| 4   | **Chuva de Meteoros**   | 60 Mana  | 40s      | 6 meteoros em área, 50 dano cada             | Bola de Fogo             |
-| 5   | **Teletransporte**      | 40 Mana  | 25s      | Teleporta 15m instantaneamente               | Nível 4                  |
-| 6   | **Prisão de Gelo**      | 50 Mana  | 35s      | Congela inimigos em 8m por 5s                | Raio Congelante          |
-| 7   | **Relâmpago em Cadeia** | 45 Mana  | 30s      | Atinge até 4 alvos, 90 dano cada             | Nível 5                  |
-| 8   | **Barreira Arcana**     | 35 Mana  | 30s      | Aliados próximos ganham +50% Defense por 10s | Escudo Mágico            |
-| 9   | **Tempestade de Fogo**  | 80 Mana  | 50s      | Área de 12m queima por 10s, 15 dano/s        | Chuva de Meteoros        |
-| 10  | **Congelar Tempo**      | 70 Mana  | 60s      | Reduz velocidade de inimigos em 70% por 8s   | Prisão de Gelo           |
-| 11  | **Explosão Arcana**     | 55 Mana  | 35s      | AoE de 10m, 120 dano + knock-back            | Nível 7                  |
-| 12  | **Invocar Elemental**   | 100 Mana | 120s     | Invoca elemental de fogo que luta por 30s    | Tempestade de Fogo       |
-| 13  | **Raio da Destruição**  | 90 Mana  | 45s      | Feixe contínuo, 200 dano total, canalizar 4s | Relâmpago em Cadeia      |
-| 14  | **Portal Mágico**       | 60 Mana  | 90s      | Cria portal de retorno à vila (dura 10s)     | Teletransporte           |
-| 15  | **Apocalipse Arcano**   | 150 Mana | 180s     | Explosão massiva 20m, 500 dano total         | Raio Destruição + Lvl 12 |
+| #   | Nome                    | Custo    | Cooldown | Descrição                                      | Requer                   |
+| --- | ----------------------- | -------- | -------- | ---------------------------------------------- | ------------------------ |
+| 1   | **Bola de Fogo**        | 20 Mana  | 8s       | Projétil de fogo, 80 dano mágico               | Nível 1                  |
+| 2   | **Raio Congelante**     | 25 Mana  | 10s      | Congela alvo por 3s, 60 dano                   | Bola de Fogo             |
+| 3   | **Escudo Mágico**       | 30 Mana  | 20s      | Absorve 150 de dano por 8s                     | Nível 2                  |
+| 4   | **Chuva de Meteoros**   | 60 Mana  | 40s      | 6 meteoros em área, 50 dano cada               | Bola de Fogo             |
+| 5   | **Teletransporte**      | 40 Mana  | 25s      | Teleporta 15m instantaneamente                 | Nível 4                  |
+| 6   | **Prisão de Gelo**      | 50 Mana  | 35s      | Congela inimigos em 8m por 5s                  | Raio Congelante          |
+| 7   | **Relâmpago em Cadeia** | 45 Mana  | 30s      | Atinge até 4 alvos, 90 dano cada               | Nível 5                  |
+| 8   | **Barreira Arcana**     | 35 Mana  | 30s      | Aliados próximos ganham +50% Defense por 10s   | Escudo Mágico            |
+| 9   | **Tempestade de Fogo**  | 80 Mana  | 50s      | Área de 12m queima por 10s, 15 dano/s          | Chuva de Meteoros        |
+| 10  | **Congelar Tempo**      | 70 Mana  | 60s      | Reduz velocidade de inimigos em 70% por 8s     | Prisão de Gelo           |
+| 11  | **Explosão Arcana**     | 55 Mana  | 35s      | AoE de 10m, 120 dano + knock-back              | Nível 7                  |
+| 12  | **Invocar Elemental**   | 100 Mana | 90s      | Invoca elemental de fogo que luta por 3 turnos | Tempestade de Fogo       |
+| 13  | **Raio da Destruição**  | 90 Mana  | 45s      | Feixe contínuo, 200 dano total (Alto Delay)    | Relâmpago em Cadeia      |
+| 14  | **Buraco Negro**        | 60 Mana  | 90s      | Puxa até 5 inimigos p/ centro, 100 dano        | Teletransporte           |
+| 15  | **Apocalipse Arcano**   | 150 Mana | 180s     | Explosão 20m, 500 dano, atinge todos inimigos  | Raio Destruição + Lvl 12 |
 
 ### 🧙 Skills Passivas (15)
 
@@ -4250,43 +4310,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### 🎯 Skills Ativas (15)
 
-| #   | Nome                     | Custo       | Cooldown | Descrição                                          | Requer               |
-| --- | ------------------------ | ----------- | -------- | -------------------------------------------------- | -------------------- |
-| 1   | **Tiro Preciso**         | 10 Stamina  | 3s       | +30% precisão, 60 dano                             | Nível 1              |
-| 2   | **Flecha Explosiva**     | 25 Stamina  | 15s      | AoE 5m, 80 dano total                              | Tiro Preciso         |
-| 3   | **Recuo Rápido**         | 15 Stamina  | 12s      | Pulo para trás 8m, próximos 3 tiros +20% dano      | Nível 2              |
-| 4   | **Chuva de Flechas**     | 40 Stamina  | 30s      | 12 flechas em área 10m, 25 dano cada               | Flecha Explosiva     |
-| 5   | **Tiro Perfurante**      | 20 Stamina  | 10s      | Atravessa alvos, atinge até 3 inimigos             | Nível 3              |
-| 6   | **Marca do Caçador**     | 30 Stamina  | 25s      | Marca alvo, +50% dano nele por 15s                 | Tiro Preciso         |
-| 7   | **Flecha Venenosa**      | 35 Stamina  | 20s      | Envenena alvo, 5 dano/s por 10s                    | Nível 4              |
-| 8   | **Salto do Falcão**      | 25 Stamina  | 18s      | Pula para cima, slow-motion por 2s, 3 tiros grátis | Recuo Rápido         |
-| 9   | **Armadilha Explosiva**  | 40 Stamina  | 35s      | Coloca armadilha, 150 dano + atordoa 3s            | Nível 5              |
-| 10  | **Tiro Mortal**          | 50 Stamina  | 40s      | Crítico garantido, +200% dano, headshot instakill  | Marca do Caçador     |
-| 11  | **Invocar Lobo**         | 60 Stamina  | 90s      | Invoca lobo que luta por 40s                       | Nível 7              |
-| 12  | **Flecha Gélida**        | 45 Stamina  | 30s      | Congela alvo por 4s, 70 dano                       | Flecha Venenosa      |
-| 13  | **Rajada Mortal**        | 70 Stamina  | 50s      | Dispara 8 flechas em 2s, 40 dano cada              | Tiro Perfurante      |
-| 14  | **Camuflagem**           | 40 Stamina  | 60s      | Invisível por 10s ou até atacar                    | Nível 9              |
-| 15  | **Flecha do Apocalipse** | 100 Stamina | 120s     | Flecha gigante, 600 dano, stuns área 15m           | Tiro Mortal + Lvl 12 |
+| #   | Nome                    | Custo    | Cooldown | Descrição                                          | Requer            |
+| --- | ----------------------- | -------- | -------- | -------------------------------------------------- | ----------------- |
+| 1   | **Tiro Preciso**        | 10 Mana  | 3s       | +30% precisão, 60 dano                             | Nível 1           |
+| 2   | **Flecha Explosiva**    | 25 Mana  | 15s      | AoE 5m, 80 dano total                              | Tiro Preciso      |
+| 3   | **Recuo Tático**        | 15 Mana  | 12s      | Salta para longe e dispara flecha retardadora      | Nível 2           |
+| 4   | **Chuva de Flechas**    | 40 Mana  | 30s      | 12 flechas em área 10m, 25 dano cada               | Flecha Explosiva  |
+| 5   | **Tiro Perfurante**     | 20 Mana  | 10s      | Atravessa alvos, atinge até 3 inimigos             | Nível 3           |
+| 6   | **Marca do Caçador**    | 30 Mana  | 25s      | Marca alvo, +50% dano nele por 15s                 | Tiro Preciso      |
+| 7   | **Flecha Venenosa**     | 35 Mana  | 20s      | Envenena alvo, 5 dano/s por 10s                    | Nível 4           |
+| 8   | **Tiro Rápido**         | 25 Mana  | 18s      | Dispara 3 flechas instantâneas no alvo             | Recuo Tático      |
+| 9   | **Armadilha Explosiva** | 40 Mana  | 35s      | Coloca armadilha, 150 dano + atordoa 3s            | Nível 5           |
+| 10  | **Headshot**            | 50 Mana  | 40s      | Crítico garantido, +200% dano, headshot instakill  | Marca do Caçador  |
+| 11  | **Invocar Lobo**        | 60 Mana  | 90s      | Invoca lobo que luta por 40s                       | Nível 7           |
+| 12  | **Flecha Gélida**       | 45 Mana  | 30s      | Congela alvo por 4s, 70 dano                       | Flecha Venenosa   |
+| 13  | **Metralhadora Elfica** | 70 Mana  | 50s      | Dispara rajada rápida (atinge alvo 5 vezes)        | Tiro Perfurante   |
+| 14  | **Passo Sombrio**       | 40 Mana  | 60s      | Fica invisível e reposiciona para flanco           | Nível 9           |
+| 15  | **Flecha do Juízo**     | 100 Mana | 120s     | Flecha gigante, 600 dano, stuns área (até 3 alvos) | Headshot + Lvl 12 |
 
 ### 🦅 Skills Passivas (15)
 
-| #   | Nome                     | Efeito                                             | Requer                      |
-| --- | ------------------------ | -------------------------------------------------- | --------------------------- |
-| 1   | **Olho de Águia**        | +20% alcance de visão e ataque                     | Nível 1                     |
-| 2   | **Pés Ligeiros**         | +15% Speed                       | Olho de Águia               |
-| 3   | **Precisão Mortal**      | +10% chance de crítico                             | Tiro Preciso                |
-| 4   | **Mestre Arqueiro**      | +15% dano com arcos                                | Nível 2                     |
-| 5   | **Evasão**               | +15% chance de esquivar ataques corpo-a-corpo      | Recuo Rápido                |
-| 6   | **Flechas Recuperáveis** | 30% chance de recuperar flechas de inimigos mortos | Mestre Arqueiro             |
-| 7   | **Postura de Atirador**  | +20% dano se parado por 3s+                        | Precisão Mortal             |
-| 8   | **Alvo Fraco**           | +25% dano contra inimigos abaixo de 50% HP         | Marca do Caçador            |
-| 9   | **Emboscada**            | Primeiro ataque de combate +100% dano              | Camuflagem                  |
-| 10  | **Aljava Grande**        | +50% capacidade de flechas                         | Nível 5                     |
-| 11  | **Veneno Aprimorado**    | DoTs duram +50% mais tempo                         | Flecha Venenosa             |
-| 12  | **Reflexos Felinos**     | +25% Velocidade de Ação                          | Evasão                      |
-| 13  | **Caçador Nato**         | +30% dano contra criaturas selvagens               | Invocar Lobo                |
-| 14  | **Crítico Devastador**   | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
-| 15  | **Lenda Viva**           | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
+| #   | Nome                    | Efeito                                             | Requer                      |
+| --- | ----------------------- | -------------------------------------------------- | --------------------------- |
+| 1   | **Olho de Águia**       | +20% alcance de visão e ataque                     | Nível 1                     |
+| 2   | **Pés Ligeiros**        | +15% Speed                                         | Olho de Águia               |
+| 3   | **Precisão Mortal**     | +10% chance de crítico                             | Tiro Preciso                |
+| 4   | **Mestre Arqueiro**     | +15% dano com arcos                                | Nível 2                     |
+| 5   | **Evasão**              | +15% chance de esquivar ataques corpo-a-corpo      | Recuo Rápido                |
+| 6   | **Tiro em Movimento**   | Pode atacar e mover no mesmo turno (menor alcance) | Mestre Arqueiro             |
+| 7   | **Postura de Atirador** | +20% dano se não mover no turno                    | Precisão Mortal             |
+| 8   | **Alvo Fraco**          | +25% dano contra inimigos abaixo de 50% HP         | Marca do Caçador            |
+| 9   | **Emboscada**           | Primeiro ataque de combate +100% dano              | Camuflagem                  |
+| 10  | **Mira Estável**        | +10% Precisão, ignora cobertura leve               | Nível 5                     |
+| 11  | **Veneno Aprimorado**   | DoTs duram +1 turno                                | Flecha Venenosa             |
+| 12  | **Reflexos Felinos**    | +25% Velocidade de Ação (Turno chega mais rápido)  | Evasão                      |
+| 13  | **Caçador Nato**        | +30% dano contra criaturas selvagens               | Invocar Lobo                |
+| 14  | **Crítico Devastador**  | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
+| 15  | **Lenda Viva**          | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
 
 ---
 
@@ -4294,23 +4354,23 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### 🔪 Skills Ativas (15)
 
-| #   | Nome                   | Custo       | Cooldown | Descrição                                               | Requer                   |
-| --- | ---------------------- | ----------- | -------- | ------------------------------------------------------- | ------------------------ |
-| 1   | **Apunhalar**          | 10 Stamina  | 4s       | Ataque rápido pelas costas, +50% dano                   | Nível 1                  |
-| 2   | **Bomba de Fumaça**    | 20 Stamina  | 20s      | Cria nuvem, invisível por 4s                            | Apunhalar                |
-| 3   | **Roubar**             | 15 Stamina  | 15s      | Rouba item ou 50g do alvo                               | Nível 2                  |
-| 4   | **Envenenar Lâmina**   | 25 Stamina  | 25s      | Próximos 5 ataques aplicam veneno (3 dano/s por 8s)     | Apunhalar                |
-| 5   | **Sombra Mortal**      | 30 Stamina  | 30s      | Teleporta atrás do alvo, +100% dano crítico             | Bomba de Fumaça          |
-| 6   | **Lâminas Giratórias** | 40 Stamina  | 35s      | Gira rapidamente, 8 ataques em 2s                       | Nível 4                  |
-| 7   | **Paralisar**          | 35 Stamina  | 40s      | Atordoa alvo por 5s                                     | Sombra Mortal            |
-| 8   | **Finta**              | 20 Stamina  | 15s      | Esquiva garantida do próximo ataque                     | Nível 3                  |
-| 9   | **Golpe Oportunista**  | 45 Stamina  | 30s      | Se alvo estiver atordoado/congelado, +300% dano         | Paralisar                |
-| 10  | **Clonar**             | 60 Stamina  | 60s      | Cria clone que dura 15s e causa 50% dano                | Bomba de Fumaça          |
-| 11  | **Hemorragia**         | 50 Stamina  | 35s      | Causa sangramento severo, 10 dano/s por 10s             | Envenenar Lâmina         |
-| 12  | **Ataque Surpresa**    | 55 Stamina  | 45s      | Invisível + teleporta atrás, instakill inimigo < 30% HP | Sombra Mortal            |
-| 13  | **Chuva de Adagas**    | 70 Stamina  | 50s      | 20 adagas em cone, 20 dano cada                         | Lâminas Giratórias       |
-| 14  | **Mestre das Sombras** | 40 Stamina  | 60s      | Invisível por 20s, +50% velocidade                      | Clonar                   |
-| 15  | **Assassinato**        | 100 Stamina | 120s     | Instakill qualquer alvo não-boss                        | Ataque Surpresa + Lvl 12 |
+| #   | Nome                       | Custo    | Cooldown | Descrição                                               | Requer             |
+| --- | -------------------------- | -------- | -------- | ------------------------------------------------------- | ------------------ |
+| 1   | **Apunhalar**              | 10 Mana  | 4s       | Ataque rápido pelas costas, +50% dano                   | Nível 1            |
+| 2   | **Bomba de Fumaça**        | 20 Mana  | 20s      | Cria nuvem, invisível por 4s                            | Apunhalar          |
+| 3   | **Cortar Tendão**          | 15 Mana  | 15s      | Causa dano leve e reduz Speed do alvo em 30%            | Nível 2            |
+| 4   | **Envenenar Lâmina**       | 25 Mana  | 25s      | Próximos 5 ataques aplicam veneno (Dano por turno)      | Apunhalar          |
+| 5   | **Sombra Mortal**          | 30 Mana  | 30s      | Teleporta atrás do alvo, +100% dano crítico             | Bomba de Fumaça    |
+| 6   | **Lâminas Giratórias**     | 40 Mana  | 35s      | Gira rapidamente, 8 ataques em 2s                       | Nível 4            |
+| 7   | **Paralisar (Golpe Sujo)** | 35 Mana  | 40s      | Atordoa alvo por 5s                                     | Sombra Mortal      |
+| 8   | **Esquiva Sombria**        | 20 Mana  | 15s      | Esquiva garantida do próximo ataque e recupera mana     | Nível 3            |
+| 9   | **Golpe Oportunista**      | 45 Mana  | 30s      | Se alvo estiver atordoado/congelado, +300% dano         | Paralisar          |
+| 10  | **Ilusão Sombria**         | 60 Mana  | 60s      | Cria clone que dura 15s e causa 50% dano                | Bomba de Fumaça    |
+| 11  | **Hemorragia**             | 50 Mana  | 35s      | Causa sangramento severo, 10 dano/s por 10s             | Envenenar Lâmina   |
+| 12  | **Execução Furtiva**       | 55 Mana  | 45s      | Invisível + teleporta atrás, instakill inimigo < 30% HP | Sombra Mortal      |
+| 13  | **Chuva de Adagas**        | 70 Mana  | 50s      | 20 adagas em cone, 20 dano cada                         | Lâminas Giratórias |
+| 14  | **Mestre das Sombras**     | 40 Mana  | 60s      | Invisível por 20s, +50% velocidade                      | Ilusão Sombria     |
+| 15  | **Dança da Morte**         | 100 Mana | 120s     | Teleporta entre 5 inimigos, causando dano crítico fatal | Execução + Lvl 12  |
 
 ### 🌑 Skills Passivas (15)
 
@@ -4320,12 +4380,12 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 2   | **Dedos Ágeis**         | -20% tempo de cooldown em skills                       | Furtividade          |
 | 3   | **Ataque pelas Costas** | +50% dano se atacar por trás                           | Apunhalar            |
 | 4   | **Mestre em Adagas**    | +20% dano com adagas                                   | Nível 2              |
-| 5   | **Ganância**            | +20% ouro de loots                                     | Roubar               |
+| 5   | **Pilhagem**            | Chance maior de encontrar itens raros                  | Cortar Tendão        |
 | 6   | **Veneno Letal**        | DoTs de veneno causam +40% dano                        | Envenenar Lâmina     |
 | 7   | **Esquiva Mortal**      | +20% chance de esquivar                                | Finta                |
 | 8   | **Imunidade a Veneno**  | Imune a todos venenos                                  | Veneno Letal         |
 | 9   | **Golpe Crítico**       | +25% chance de crítico                                 | Ataque pelas Costas  |
-| 10  | **Acrobata**            | +30% Speed                           | Esquiva Mortal       |
+| 10  | **Acrobata**            | +30% Speed                                             | Esquiva Mortal       |
 | 11  | **Preparação**          | Reduz todos cooldowns em 30% ao entrar em combate      | Dedos Ágeis          |
 | 12  | **Sangue Frio**         | +40% dano contra alvos com HP cheio                    | Golpe Crítico        |
 | 13  | **Assassino Nato**      | +50% dano contra alvos solitários                      | Furtividade          |
@@ -4346,8 +4406,8 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 4   | **Espinhos Venenosos**      | 25 Mana  | 18s      | Cria barreira de espinhos, 60 dano + 3 dano/s por 8s  | Raízes Enredantes     |
 | 5   | **Invocar Lobo Espiritual** | 50 Mana  | 60s      | Invoca lobo espiritual que luta por 30s               | Nível 3               |
 | 6   | **Regeneração em Área**     | 45 Mana  | 35s      | Cura todos aliados em 12m, 80 HP + 5 HP/s por 10s     | Cura da Natureza      |
-| 7   | **Fúria da Natureza**       | 55 Mana  | 40s      | Invoca tempestade, 8m AoE, 100 dano total + lentidão  | Nível 4               |
-| 8   | **Forma de Coruja**         | 30 Mana  | 30s      | Voa por 15s, +100% velocidade, invisível a distância  | Nível 5               |
+| 7   | **Fúria da Natureza**       | 55 Mana  | 40s      | Tempestade 8m, atinge 3-5 inimigos, dano + lentidão   | Nível 4               |
+| 8   | **Forma de Treante**        | 30 Mana  | 30s      | Vira árvore, +200% Defesa, imune a Knockback, Lento   | Nível 5               |
 | 9   | **Presas Selvagens**        | 35 Mana  | 25s      | Transforma mãos em garras, 5 ataques rápidos, 40 cada | Forma de Urso         |
 | 10  | **Renascimento**            | 80 Mana  | 120s     | Revive herói morto com 50% HP (aliado ou próprio)     | Regeneração em Área   |
 | 11  | **Enxame de Insetos**       | 60 Mana  | 50s      | Nuvem 10m, cega inimigos, 8 dano/s por 12s            | Espinhos Venenosos    |
@@ -4373,7 +4433,7 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 | 11  | **Fúria Primordial**      | Em forma animal, +40% Attack                           | Instintos Selvagens      |
 | 12  | **Simbiose**              | Heals em aliados curam o druida por 30% do valor       | Vínculo Natural          |
 | 13  | **Raízes Profundas**      | Imune a knock-back e empurrões                         | Pele de Casca            |
-| 14  | **Mestre Metamorfo**      | Pode trocar entre formas sem cooldown                  | Metamorfo                |
+| 14  | **Mestre Metamorfo**      | Pode trocar entre formas sem cooldown (1x turno)       | Metamorfo                |
 | 15  | **Um com a Natureza**     | +50% todos stats em lua cheia, revive 1x/combate       | Avatar Natureza + Lvl 11 |
 
 ---
@@ -4382,29 +4442,29 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                      | Custo    | Cooldown | Descrição                                                              | Requer                    |
-| --- | ------------------------- | -------- | -------- | ---------------------------------------------------------------------- | ------------------------- |
-| 1   | **Flecha Arcana**         | 15 Mana  | 5s       | Flecha mágica, 70 dano + penetra defesa                                | Nível 1                   |
-| 2   | **Passo Élfico**          | 20 Mana  | 15s      | Teleporta 12m, próximos 3 ataques +30% dano                            | Nível 1                   |
-| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% Speed por 12s                        | Nível 2                   |
-| 4   | **Chuva Estelar**         | 50 Mana  | 35s      | 10 projéteis mágicos, 35 dano cada, rastreiam alvos                    | Flecha Arcana             |
-| 5   | **Círculo de Proteção**   | 40 Mana  | 30s      | Zona 8m, aliados ganham +40% Defense por 10s                           | Benção da Lua             |
-| 6   | **Lâmina Mística**        | 25 Mana  | 20s      | Espada de energia por 15s, +80% Attack mágico                          | Nível 3                   |
-| 7   | **Vínculo Espiritual**    | 45 Mana  | 40s      | Liga com aliado, compartilha 30% dano/cura por 20s                     | Círculo de Proteção       |
-| 8   | **Rajada Arcana**         | 35 Mana  | 18s      | 6 flechas instantâneas, 40 dano cada                                   | Chuva Estelar             |
-| 9   | **Santuário Élfico**      | 60 Mana  | 60s      | Cria zona 10m, cura 10 HP/s, +25% resistência mágica                   | Círculo de Proteção       |
-| 10  | **Forma Etérea**          | 50 Mana  | 50s      | Intangível por 6s, atravessa inimigos e paredes                        | Passo Élfico              |
-| 11  | **Prisma Celestial**      | 70 Mana  | 45s      | Raio que divide em 5, 100 dano cada                                    | Chuva Estelar             |
-| 12  | **Ressonância Mágica**    | 55 Mana  | 40s      | Próximas 3 skills custam 0 Mana                                        | Nível 7                   |
-| 13  | **Tempestade de Lâminas** | 65 Mana  | 50s      | 15 lâminas mágicas giram, 30 dano cada                                 | Lâmina Mística            |
-| 14  | **Ascensão**              | 80 Mana  | 90s      | Levita por 20s, +100% velocidade cast, não pode ser alvo corpo-a-corpo | Forma Etérea              |
-| 15  | **Eclipse Total**         | 150 Mana | 180s     | Escurece área 25m, inimigos cegos, aliados +100% dano, 15s             | Prisma Celestial + Lvl 12 |
+| #   | Nome                      | Custo    | Cooldown | Descrição                                                    | Requer                    |
+| --- | ------------------------- | -------- | -------- | ------------------------------------------------------------ | ------------------------- |
+| 1   | **Flecha Arcana**         | 15 Mana  | 5s       | Flecha mágica, 70 dano + penetra defesa                      | Nível 1                   |
+| 2   | **Passo Élfico**          | 20 Mana  | 15s      | Teleporta 12m, próximos 3 ataques +30% dano                  | Nível 1                   |
+| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% Speed por 12s                   | Nível 2                   |
+| 4   | **Chuva Estelar**         | 50 Mana  | 35s      | 10 projéteis mágicos, 35 dano cada, rastreiam alvos          | Flecha Arcana             |
+| 5   | **Círculo de Proteção**   | 40 Mana  | 30s      | Zona 8m, aliados ganham +40% Defense por 10s                 | Benção da Lua             |
+| 6   | **Lâmina Mística**        | 25 Mana  | 20s      | Espada de energia por 15s, +80% Attack mágico                | Nível 3                   |
+| 7   | **Vínculo Espiritual**    | 45 Mana  | 40s      | Liga com aliado, compartilha 30% dano/cura por 20s           | Círculo de Proteção       |
+| 8   | **Rajada Arcana**         | 35 Mana  | 18s      | 6 flechas instantâneas, 40 dano cada                         | Chuva Estelar             |
+| 9   | **Santuário Élfico**      | 60 Mana  | 60s      | Cria zona 10m, cura 10 HP/s, +25% resistência mágica         | Círculo de Proteção       |
+| 10  | **Forma Etérea**          | 50 Mana  | 50s      | Intangível a dano físico, atravessa unidades (não paredes)   | Passo Élfico              |
+| 11  | **Prisma Celestial**      | 70 Mana  | 45s      | Raio que divide em 5, 100 dano cada                          | Chuva Estelar             |
+| 12  | **Ressonância Mágica**    | 55 Mana  | 40s      | Próximas 3 skills custam 0 Mana                              | Nível 7                   |
+| 13  | **Tempestade de Lâminas** | 65 Mana  | 50s      | Lâminas giram, atinge até 4 inimigos adjacentes              | Lâmina Mística            |
+| 14  | **Ascensão**              | 80 Mana  | 90s      | Levita (imune corpo-a-corpo), Skills Instantâneas (3 turnos) | Forma Etérea              |
+| 15  | **Eclipse Total**         | 150 Mana | 180s     | Escurece área 25m, cega todos inimigos por 3 turnos          | Prisma Celestial + Lvl 12 |
 
 ### 🌟 Skills Passivas (15)
 
 | #   | Nome                     | Efeito                                                 | Requer                 |
 | --- | ------------------------ | ------------------------------------------------------ | ---------------------- |
-| 1   | **Graça Élfica**         | +25% Speed                           | Nível 1                |
+| 1   | **Graça Élfica**         | +25% Speed                                             | Nível 1                |
 | 2   | **Visão Mística**        | Detecta inimigos invisíveis e escondidos               | Nível 1                |
 | 3   | **Longevidade**          | +20% HP máximo, imune a doenças                        | Nível 2                |
 | 4   | **Afinidade Arcana**     | +20% dano mágico                                       | Flecha Arcana          |
@@ -4485,29 +4545,30 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 - Dia 151-200: Chance de desbloquear todas 30 (partida perfeita)
 
 ---
+
 # Skills das Novas Classes
 
 ## 🛡️ PALE DINO (Paladin) - 30 Skills
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome                   | Custo       | Cooldown | Descrição                                                | Requer                |
-| --- | ---------------------- | ----------- | -------- | -------------------------------------------------------- | --------------------- |
-| 1   | **Golpe Sagrado**      | 15 Devoção  | 6s       | Ataque sagrado, 70 dano + 30 HP de cura própria          | Nível 1               |
-| 2   | **Aura de Proteção**   | 20 Devoção  | Passiva  | Aliados em 12m ganham +15% Defense permanente            | Nível 1               |
-| 3   | **Cura Divina**        | 30 Devoção  | 12s      | Cura aliado em 200 HP                                    | Golpe Sagrado         |
-| 4   | **Escudo da Fé**       | 25 Devoção  | 20s      | Absorve 250 dano por 10s                                 | Nível 2               |
-| 5   | **Martelo da Justiça** | 35 Devoção  | 25s      | Arremessa martelo, 100 dano + atordoa 3s                 | Golpe Sagrado         |
-| 6   | **Sacrifício Divino**  | 40 Devoção  | 30s      | Transfere 50% do dano de aliado para si por 15s          | Cura Divina           |
-| 7   | **Julgamento**         | 45 Devoção  | 35s      | Marca inimigo maligno, +60% dano contra ele              | Nível 4               |
-| 8   | **Ressurreição**       | 80 Devoção  | 180s     | Revive aliado com 70% HP (melhor que Druida)             | Cura Divina           |
-| 9   | **Consagrar Terreno**  | 50 Devoção  | 40s      | Zona 10m, inimigos malignos -30% Attack por 20s          | Nível 5               |
-| 10  | **Escudo Refletor**    | 55 Devoção  | 45s      | Próximos 5 ataques são refletidos 100%                   | Escudo da Fé          |
-| 11  | **Ira Divina**         | 60 Devoção  | 50s      | +100% Attack por 15s, ganha Devoção ao atacar            | Martelo da Justiça    |
-| 12  | **Benção em Massa**    | 70 Devoção  | 60s      | Todos aliados em 15m ganham +30% stats por 20s           | Aura de Proteção      |
-| 13  | **Voto de Vingança**   | 65 Devoção  | 55s      | Se aliado morrer próximo, ganha +150% Attack por 30s     | Julgamento            |
-| 14  | **Santuário**          | 75 Devoção  | 90s      | Cria zona 12m invulnerável por 8s                        | Consagrar Terreno     |
-| 15  | **Avatar da Luz**      | 150 Devoção | 200s     | Forma angelical, cura 10% HP/s aliados, +200% stats, 30s | Ressurreição + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Descrição                                           | Requer                |
+| --- | ---------------------- | -------- | -------- | --------------------------------------------------- | --------------------- |
+| 1   | **Golpe Sagrado**      | 15 Mana  | 6s       | Ataque sagrado, 70 dano + 30 HP de cura própria     | Nível 1               |
+| 2   | **Aura de Proteção**   | 20 Mana  | Passiva  | Aliados em 12m ganham +15% Defense permanente       | Nível 1               |
+| 3   | **Cura Divina**        | 30 Mana  | 12s      | Cura aliado em 200 HP                               | Golpe Sagrado         |
+| 4   | **Escudo da Fé**       | 25 Mana  | 20s      | Absorve 250 dano por 10s                            | Nível 2               |
+| 5   | **Martelo da Justiça** | 35 Mana  | 25s      | Arremessa martelo, 100 dano + atordoa 3s            | Golpe Sagrado         |
+| 6   | **Sacrifício Divino**  | 40 Mana  | 30s      | Transfere 50% do dano de aliado para si por 15s     | Cura Divina           |
+| 7   | **Julgamento**         | 45 Mana  | 35s      | Marca inimigo maligno, +60% dano contra ele         | Nível 4               |
+| 8   | **Ressurreição**       | 80 Mana  | 150s     | Revive aliado com 70% HP (melhor que Druida)        | Cura Divina           |
+| 9   | **Consagrar Terreno**  | 50 Mana  | 40s      | Zona 10m, inimigos malignos -30% Attack por 20s     | Nível 5               |
+| 10  | **Escudo Refletor**    | 55 Mana  | 45s      | Próximos 5 ataques são refletidos 100%              | Escudo da Fé          |
+| 11  | **Ira Divina**         | 60 Mana  | 50s      | +100% Attack por 15s, ganha Mana ao atacar          | Martelo da Justiça    |
+| 12  | **Benção em Massa**    | 70 Mana  | 60s      | Todos aliados em 15m ganham +30% stats (3 turnos)   | Aura de Proteção      |
+| 13  | **Voto de Vingança**   | 65 Mana  | 55s      | Se aliado morrer próximo, ganha +150% Attack        | Julgamento            |
+| 14  | **Santuário**          | 75 Mana  | 90s      | Cria zona 12m, aliados recebem -80% Dano (2 turnos) | Consagrar Terreno     |
+| 15  | **Avatar da Luz**      | 150 Mana | 200s     | Forma angelical, cura em área/turno, +200% stats    | Ressurreição + Lvl 12 |
 
 ### 🛡️ Skills Passivas (15)
 
@@ -4535,23 +4596,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🌑 Skills Ativas (15)
 
-| #   | Nome                     | Custo        | Cooldown | Descrição                                                            | Requer                   |
-| --- | ------------------------ | ------------ | -------- | -------------------------------------------------------------------- | ------------------------ |
-| 1   | **Bola Sombria**         | 20 Mana      | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                       | Nível 1                  |
-| 2   | **Reanimar Cadáver**     | 30 Essência  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                           | Nível 1                  |
-| 3   | **Drenar Vida**          | 25 Mana      | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                               | Bola Sombria             |
-| 4   | **Invocar Zumbi**        | 50 Essência  | 30s      | Invoca Zumbi resistente (dura 90s)                                   | Reanimar Cadáver         |
-| 5   | **Maldição de Fraqueza** | 30 Mana      | 20s      | Alvo perde -40% Attack por 15s                                       | Nível 3                  |
-| 6   | **Explosão Cadavérica**  | 40 Mana      | 25s      | Detona cadáver, 150 dano em 8m                                       | Reanimar Cadáver         |
-| 7   | **Escudo Ósseo**         | 35 Mana      | 30s      | Absorve 200 dano, dura até quebrar                                   | Nível 4                  |
-| 8   | **Peste**                | 45 Mana      | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos              | Drenar Vida              |
-| 9   | **Invocar Espectro**     | 70 Essência  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)                     | Invocar Zumbi            |
-| 10  | **Toque da Morte**       | 50 Mana      | 35s      | Instakill inimigo não-elite com HP < 20%                             | Drenar Vida              |
-| 11  | **Exército dos Mortos**  | 100 Essência | 120s     | Invoca 5 esqueletos simultaneamente (duram 45s)                      | Invocar Espectro         |
-| 12  | **Pacto Sombrio**        | 60 Mana      | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s                     | Nível 7                  |
-| 13  | **Necrose**              | 55 Mana      | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável       | Peste                    |
-| 14  | **Lich Form**            | 80 Mana      | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s           | Pacto Sombrio            |
-| 15  | **Apocalipse Sombrio**   | 200 Essência | 180s     | Reanimação em massa, todos cadáveres em 30m viram servos permanentes | Exército Mortos + Lvl 12 |
+| #   | Nome                     | Custo        | Cooldown | Descrição                                                      | Requer                   |
+| --- | ------------------------ | ------------ | -------- | -------------------------------------------------------------- | ------------------------ |
+| 1   | **Bola Sombria**         | 20 Mana      | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                 | Nível 1                  |
+| 2   | **Reanimar Cadáver**     | 30 Essência  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
+| 3   | **Drenar Vida**          | 25 Mana      | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
+| 4   | **Invocar Zumbi**        | 50 Essência  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
+| 5   | **Maldição de Fraqueza** | 30 Mana      | 20s      | Alvo perde -40% Attack por 15s                                 | Nível 3                  |
+| 6   | **Explosão Cadavérica**  | 40 Mana      | 25s      | Detona cadáver, 150 dano em 8m                                 | Reanimar Cadáver         |
+| 7   | **Escudo Ósseo**         | 35 Mana      | 30s      | Absorve 200 dano, dura até quebrar                             | Nível 4                  |
+| 8   | **Peste**                | 45 Mana      | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos        | Drenar Vida              |
+| 9   | **Invocar Espectro**     | 70 Essência  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)               | Invocar Zumbi            |
+| 10  | **Toque da Morte**       | 50 Mana      | 35s      | Instakill inimigo não-elite com HP < 20%                       | Drenar Vida              |
+| 11  | **Exército dos Mortos**  | 100 Essência | 120s     | Invoca 5 esqueletos simultaneamente (duram 45s)                | Invocar Espectro         |
+| 12  | **Pacto Sombrio**        | 60 Mana      | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s               | Nível 7                  |
+| 13  | **Necrose**              | 55 Mana      | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável | Peste                    |
+| 14  | **Lich Form**            | 80 Mana      | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s     | Pacto Sombrio            |
+| 15  | **Apocalipse Sombrio**   | 200 Essência | 180s     | Reanima todos cadáveres (Max 5) como servos permanentes        | Exército Mortos + Lvl 12 |
 
 ### 💀 Skills Passivas (15)
 
@@ -4571,7 +4632,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 12  | **Comandante dos Mortos**  | Pode ter até 8 servos simultâneos (padrão 3)          | Exército dos Mortos         |
 | 13  | **Imortal**                | Ao morrer, vira Lich por 20s, pode continuar lutando  | Lich Form                   |
 | 14  | **Sinergia Sombria**       | Cada servo vivo aumenta dano mágico em +10%           | Comandante dos Mortos       |
-| 15  | **Senhor das Trevas**      | +100% Essência, servos se tornam permanentes          | Apocalipse Sombrio + Lvl 11 |
+| 15  | **Senhor das Trevas**      | +100% Essência, Limite de Servos aument p/ 5          | Apocalipse Sombrio + Lvl 11 |
 
 ---
 
@@ -4579,23 +4640,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🎶 Skills Ativas (15)
 
-| #   | Nome                      | Custo          | Cooldown  | Descrição                                               | Requer                 |
-| --- | ------------------------- | -------------- | --------- | ------------------------------------------------------- | ---------------------- |
-| 1   | **Melodia de Ataque**     | 15 Inspiração  | Canalizar | Canta, aliados 15m ganham +20% Attack                   | Nível 1                |
-| 2   | **Acorde Dissonante**     | 20 Mana        | 8s        | Nota musical, 60 dano + confunde por 2s                 | Nível 1                |
-| 3   | **Canção de Cura**        | 25 Inspiração  | Canalizar | Canta, aliados 15m curam 10 HP/s                        | Melodia de Ataque      |
-| 4   | **Grito de Guerra**       | 30 Inspiração  | 30s       | Todos aliados ganham +30% Speed por 15s            | Nível 2                |
-| 5   | **Faca Lançada**          | 20 Mana        | 5s        | Arremessa faca, 50 dano, 3 cargas                       | Acorde Dissonante      |
-| 6   | **Hino de Resistência**   | 35 Inspiração  | Canalizar | Canta, aliados 15m ganham +30% Defense                  | Canção de Cura         |
-| 7   | **Solo Devastador**       | 40 Mana        | 35s       | Toca solo, 15m AoE, 120 dano + atordoa 3s               | Acorde Dissonante      |
-| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s       | Aliados ganham +50% Velocidade de Ação por 20s        | Grito de Guerra        |
-| 9   | **Balada da Regeneração** | 50 Inspiração  | Canalizar | Canta, aliados 15m regeneram 3% HP máximo/s             | Hino de Resistência    |
-| 10  | **Canto de Sirene**       | 45 Mana        | 45s       | Encanta inimigos em 12m, eles param de atacar por 6s    | Solo Devastador        |
-| 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s       | Todos aliados ganham +40% todos stats por 25s           | Balada da Regeneração  |
-| 12  | **Contra-Melodia**        | 50 Mana        | 50s       | Cancela buffs inimigos em 20m                           | Canto de Sirene        |
-| 13  | **Épico Heróico**         | 70 Inspiração  | 90s       | Um aliado escolhido fica invulnerável por 10s           | Sinfonia de Grupo      |
-| 14  | **Onda Sônica**           | 80 Mana        | 55s       | Cone 25m, 200 dano + knock-back 10m                     | Solo Devastador        |
-| 15  | **Requiem**               | 150 Inspiração | 180s      | Canção suprema, aliados +100% stats, inimigos -50%, 30s | Épico Heróico + Lvl 12 |
+| #   | Nome                      | Custo          | Cooldown   | Descrição                                            | Requer                 |
+| --- | ------------------------- | -------------- | ---------- | ---------------------------------------------------- | ---------------------- |
+| 1   | **Melodia de Ataque**     | 15 Inspiração  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1                |
+| 2   | **Acorde Dissonante**     | 20 Mana        | 8s         | Nota musical, 60 dano + confunde por 1 turno         | Nível 1                |
+| 3   | **Canção de Cura**        | 25 Inspiração  | Sustentada | Canta, aliados 15m curam HP a cada turno             | Melodia de Ataque      |
+| 4   | **Grito de Guerra**       | 30 Inspiração  | 30s        | Todos aliados ganham +30% Speed por 3 turnos         | Nível 2                |
+| 5   | **Faca Lançada**          | 20 Mana        | 5s         | Arremessa faca, 50 dano, 3 cargas                    | Acorde Dissonante      |
+| 6   | **Hino de Resistência**   | 35 Inspiração  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Canção de Cura         |
+| 7   | **Solo Devastador**       | 40 Mana        | 35s        | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Acorde Dissonante      |
+| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s        | Aliados ganham Turno Extra Imediato (1x combate)     | Grito de Guerra        |
+| 9   | **Balada da Regeneração** | 50 Inspiração  | Sustentada | Canta, aliados 15m regeneram HP a cada turno         | Hino de Resistência    |
+| 10  | **Canto de Sirene**       | 45 Mana        | 45s        | Encanta inimigos 12m (3 alvos), perdem próximo turno | Solo Devastador        |
+| 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s        | Todos aliados ganham +40% stats (3 turnos)           | Balada da Regeneração  |
+| 12  | **Contra-Melodia**        | 50 Mana        | 50s        | Cancela buffs inimigos em 20m                        | Canto de Sirene        |
+| 13  | **Épico Heróico**         | 70 Inspiração  | 90s        | Aliado ignora dano de 2 ataques recebidos            | Sinfonia de Grupo      |
+| 14  | **Onda Sônica**           | 80 Mana        | 55s        | Cone 25m, 200 dano + knock-back 10m                  | Solo Devastador        |
+| 15  | **Requiem**               | 150 Inspiração | 180s       | Inimigos -50% stats, Aliados +100% (3 turnos)        | Épico Heróico + Lvl 12 |
 
 ### 🎵 Skills Passivas (15)
 
@@ -4604,7 +4665,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 1   | **Ganho de Inspiração**   | Ganha 20 Inspiração ao ver aliado matar inimigo             | Nível 1             |
 | 2   | **Carismático**           | +30% Affinity natural com todos heróis                      | Nível 1             |
 | 3   | **Alcance Musical**       | Canções afetam +5m de raio (20m em vez de 15m)              | Melodia de Ataque   |
-| 4   | **Multitarefa**           | Pode canalizar canções e atacar simultaneamente             | Canção de Cura      |
+| 4   | **Multitarefa**           | Pode manter canção e atacar (com penalidade de dano)        | Canção de Cura      |
 | 5   | **Maestria Sonic a**      | +15% dano de habilidades sonoras                            | Acorde Dissonante   |
 | 6   | **Performer Nato**        | Canções custam -20% Inspiração                              | Ganho de Inspiração |
 | 7   | **Velocidade de Canto**   | Canções começam a fazer efeito 50% mais rápido              | Multitarefa         |
@@ -4623,43 +4684,94 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🥋 Skills Ativas (15)
 
-| #   | Nome                     | Custo   | Cooldown | Descrição                                                      | Requer                  |
-| --- | ------------------------ | ------- | -------- | -------------------------------------------------------------- | ----------------------- |
+| #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                  |
+| --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ----------------------- |
 | 1   | **Golpe de Palma**       | 10 Mana  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
 | 2   | **Chute Giratório**      | 15 Mana  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
 | 3   | **Dash do Vento**        | 20 Mana  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
-| 4   | **Soco do Dragão**       | 25 Mana  | 15s      | 3 socos rápidos em 1s, 40 dano cada, gera 3 combos             | Chute Giratório         |
-| 5   | **Meditação**            | 0 Mana   | 30s      | Regenera 50 Mana em 5s, imóvel                                  | Nível 3                 |
-| 6   | **Rajada de Mil Punhos** | 30 Mana  | 20s      | Ataque frenético, 10 socos, 25 dano cada                       | Soco do Dragão          |
-| 7   | **Toque Paralisante**    | 35 Mana  | 25s      | Paralisa inimigo por 5s                                        | Nível 4                 |
-| 8   | **Ciclone**              | 40 Mana  | 30s      | Gira rapidamente, 12 chutes, 35 dano cada                      | Chute Giratório         |
-| 9   | **Aura de Mana**          | 45 Mana  | 35s      | +50% Velocidade de Ação por 20s, consome 5 combos            | Rajada de Mil Punhos    |
+| 4   | **Soco do Dragão**       | 25 Mana  | 15s      | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos      | Chute Giratório         |
+| 5   | **Meditação**            | 0 Mana   | 30s      | Regenera 50 Mana, gasta turno                                  | Nível 3                 |
+| 6   | **Rajada de Mil Punhos** | 30 Mana  | 20s      | Ataque frenético em alvo único, 10 hits                        | Soco do Dragão          |
+| 7   | **Toque Paralisante**    | 35 Mana  | 25s      | Paralisa inimigo por 1 turno                                   | Nível 4                 |
+| 8   | **Ciclone**              | 40 Mana  | 30s      | Gira rapidamente, atinge todos adjacentes (max 5)              | Chute Giratório         |
+| 9   | **Aura de Mana**         | 45 Mana  | 35s      | +50% Velocidade de Ação por 20s, consome 5 combos              | Rajada de Mil Punhos    |
 | 10  | **Teletransporte**       | 50 Mana  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
 | 11  | **Punho da Fúria**       | 60 Mana  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
 | 12  | **Transcendência**       | 70 Mana  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
-| 13  | **Explosão de Mana**      | 80 Mana  | 50s      | Libera Mana, 15m AoE, 180 dano + knock-back                     | Aura de Mana             |
-| 14  | **Forma do Dragão**      | 90 Mana  | 120s     | Transforma em dragão espiritual, +150% Attack, voa, 25s        | Punho da Fúria          |
-| 15  | **Iluminação**           | 150 Mana | 180s     | Estado supremo, velocidade 3x, dano 3x, esquiva 100%, 20s      | Transcendência + Lvl 12 |
+| 13  | **Explosão de Mana**     | 80 Mana  | 50s      | Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back        | Aura de Mana            |
+| 14  | **Forma do Dragão**      | 90 Mana  | 120s     | Espírito, +150% Attack, ignora terreno, 3 turnos               | Punho da Fúria          |
+| 15  | **Iluminação**           | 150 Mana | 180s     | Velocidade 2x, +50% Esquiva, Combos infinitos (3 turnos)       | Transcendência + Lvl 12 |
 
 ### 🧘 Skills Passivas (15)
 
 | #   | Nome                         | Efeito                                          | Requer                   |
 | --- | ---------------------------- | ----------------------------------------------- | ------------------------ |
-| 1   | **Regeneração de Mana**       | Regenera 5 Mana/s                                | Nível 1                  |
+| 1   | **Regeneração de Mana**      | Regenera 5 Mana/s                               | Nível 1                  |
 | 2   | **Mestre em Artes Marciais** | +20% dano corpo-a-corpo                         | Nível 1                  |
 | 3   | **Sistema de Combos**        | Cada ataque gera 1 combo, máximo 10 combos      | Golpe de Palma           |
 | 4   | **Dano de Combo**            | +5% dano por combo ativo                        | Sistema de Combos        |
-| 5   | **Reflexos Sobre-Humanos**   | +25% Speed                    | Dash do Vento            |
+| 5   | **Reflexos Sobre-Humanos**   | +25% Speed                                      | Dash do Vento            |
 | 6   | **Esquiva de Mestre**        | +20% chance de esquivar                         | Reflexos Sobre-Humanos   |
 | 7   | **Contra-Ataque Perfeito**   | 30% chance de contra-atacar ao esquivar         | Esquiva de Mestre        |
 | 8   | **Meditação Passiva**        | Regenera 2% HP máximo/s quando fora de combate  | Meditação                |
-| 9   | **Mana Infinito**             | Mana máximo +50                                  | Regeneração de Mana       |
+| 9   | **Mana Infinito**            | Mana máximo +50                                 | Regeneração de Mana      |
 | 10  | **Disciplina de Ferro**      | Imune a atordoamentos quando tem 5+ combos      | Sistema de Combos        |
 | 11  | **Golpes Críticos**          | +30% chance de crítico                          | Mestre em Artes Marciais |
-| 12  | **Velocidade da Luz**        | +40% Velocidade de Ação                       | Reflexos Sobre-Humanos   |
+| 12  | **Velocidade da Luz**        | +40% Velocidade de Ação                         | Reflexos Sobre-Humanos   |
 | 13  | **Sem Armas, Sem Problemas** | Sem arma equipada, +50% todos stats             | Mestre em Artes Marciais |
 | 14  | **Espírito do Dragão**       | Ao atingir 10 combos, próximo ataque +300% dano | Dano de Combo            |
 | 15  | **Mestre Iluminado**         | Quando em Iluminação, combos nunca resetam      | Iluminação + Lvl 11      |
+
+---
+
+### 4.8. Combos de Afinidade (DUAL TECHS & SYNERGY)
+
+Diferente de skills normais, **Combos de Afinidade** (baseados em Chrono Trigger) não consomem recursos e são ativados automaticamente quando dois heróis com **Alta Afinidade (+60)** atacam o mesmo alvo ou estão próximos. Eles proporcionam espetáculo visual (Console UX) e recompensam a socialização.
+
+**Nota Importante:** Embora não consumam Mana, Combos possuem **Alto Delay** (tempo de preparação e recuperação maior), deixando os heróis vulneráveis se errarem ou se o inimigo não morrer.
+
+#### ⚔️ Combos de Guerreiro (Iniciador)
+
+| Parceiro     | Nome do Combo            | Efeito Visual & Mecânico                                                                         |
+| :----------- | :----------------------- | :----------------------------------------------------------------------------------------------- |
+| **Mago**     | **Espada Flamejante**    | Mago encanta espada do Guerreiro. Dano Físico + Mágico explozivo em área cônica.                 |
+| **Ladino**   | **Distração Brutal**     | Ladino joga bomba de fumaça, Guerreiro executa ataque surpresa crítico (Insta-Stun).             |
+| **Arqueiro** | **Lançamento Humano**    | Guerreiro "arremessa" Arqueiro para o alto. Arqueiro chove flechas de cima (Dano em Área total). |
+| **Paladino** | **Falange Impenetrável** | Ambos erguem escudos. Criam barreira que reflete 100% projéteis por 5s.                          |
+
+#### 🔮 Combos de Mago (Iniciador)
+
+| Parceiro       | Nome do Combo              | Efeito Visual & Mecânico                                                                 |
+| :------------- | :------------------------- | :--------------------------------------------------------------------------------------- |
+| **Ladino**     | **Sombra Elementar**       | Mago congela o tempo, Ladino desfere 20 cortes em 1 segundo. Dano massivo single-target. |
+| **Druida**     | **Tempestade de Espinhos** | Mago lança ciclone de fogo, Druida adiciona espinhos. Tornado de fogo físico/mágico.     |
+| **Necromante** | **Paradoxo Vital**         | Drenam vida de todos inimigos e curam todo o grupo instantaneamente (Inversão de Fluxo). |
+| **Elfo**       | **Convergência Arcana**    | Dois raios de energia se fundem em um feixe prismático (Dano Puro que ignora defesa).    |
+
+#### 🏹 Combos de Arqueiro (Iniciador)
+
+| Parceiro  | Nome do Combo         | Efeito Visual & Mecânico                                                                      |
+| :-------- | :-------------------- | :-------------------------------------------------------------------------------------------- |
+| **Elfo**  | **Chuva de Estrelas** | Arqueiro dispara para o céu, Elfo encanta flechas. Caem como meteoros teleguiados.            |
+| **Monge** | **Acupuntura Aérea**  | Monge chuta inimigo para o ar, Arqueiro o "prega" na parede com uma flecha gigante (Stun 5s). |
+| **Bardo** | **Ritmo da Caçada**   | Bardo toca acelerado, Arqueiro entra em modo "Metralhadora" (Dobro de Speed por 10s).         |
+
+#### 🛡️ Combos de Suporte/Outros
+
+| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                      |
+| :------------- | :------------- | :--------------------- | :------------------------------------------------------------------------------------------ |
+| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).            |
+| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).         |
+| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.            |
+| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino rouba itens de TODOS os bolsos simultaneamente. |
+| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.     |
+
+**Regras de Ativação:**
+
+1.  Cooldown interno de 60s por par.
+2.  Requer ambos heróis vivos, próximos e sem status negativos (Stun/Silence).
+3.  Combos possuem **Alto Delay** (Animação longa e pós-cast delay).
+4.  Gera log diferenciado: `⚔️ [COMBO] Kaelen & Lila executaram "Distração Brutal"! (850 Dano)`
 
 ---
 # 4. OS HERÓIS: AGENTES AUTÔNOMOS
@@ -4769,10 +4881,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **E - Ethics Extrema**
 
-| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                    |
-| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo        |
-| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Nunca rouba kills (perde XP)<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
+| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                |
+| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo    |
+| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Sempre protege inocentes<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
 
 #### **C - Cooperation Extrema**
 
@@ -4832,18 +4944,18 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor       | Arquétipo        | Comportamentos                                            |
 | ----------- | ---------------- | --------------------------------------------------------- |
 | **0.0-0.2** | **Maquiavélico** | Trai aliados por ouro. Aceita subornos. Abandona feridos. |
-| **0.3-0.4** | **Pragmático**   | Rouba kills se conveniente. Mente se necessário.          |
+| **0.3-0.4** | **Pragmático**   | Prioriza sobrevivência. Mente se necessário.              |
 | **0.5-0.6** | **Neutro**       | Segue regras quando observado. Ajuda se não custar muito. |
 | **0.7-0.8** | **Honrado**      | Divide loot igualmente. Cumpre promessas. Leal ao reino.  |
 | **0.9-1.0** | **Paladino**     | Sacrifica-se por aliados. Recusa subornos. Nunca mente.   |
 
 **Exemplos Detalhados em Gameplay:**
 
-**Situação 1: Kill Stealing**
+**Situação 1: Perigo Iminente (Boss)**
 
-- Ethics 0.2: Rouba kill ativamente, sem remorso
-- Ethics 0.5: Rouba se ninguém estiver olhando
-- Ethics 0.8: Deixa o kill para quem iniciou o combate
+- Ethics 0.2: Usa aliados como escudo humano
+- Ethics 0.5: Luta com cautela
+- Ethics 0.8: Toma a frente para proteger o grupo
 
 **Situação 2: Aliado Caído (HP < 20%)**
 
@@ -5567,54 +5679,6 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 ---
 
-## 5.2 Kill Stealing (KS): O Gatilho do Drama
-
-**Kill Stealing** é quando um herói rouba o último golpe de um combate iniciado por outro.
-
-### Mecânica Técnica
-
-```typescript
-if (monster.hp <= 0) {
-  const killer = monster.lastAttacker;
-  const initiator = monster.firstAttacker;
-
-  if (killer.id !== initiator.id) {
-    // KS DETECTADO!
-    handleKillSteal(killer, initiator, monster);
-  }
-}
-```
-
-### Consequências do KS
-
-#### Para o Ladrão (Killer)
-
-- Ganha **100% do XP e Loot**
-- Recebe tag `pvp_flag` (Bandeira Vermelha) por 60 segundos
-- Perde **-15 Affinity** com a vítima
-- Se Ethics < 0.5: Sem remorso (comportamento esperado)
-- Se Ethics > 0.7: Ganha estado `GUILTY` (-10% stats por 2 min)
-
-#### Para a Vítima (Initiator)
-
-- Perde **todo o XP e Loot**
-- Ganha memória de raiva: `STOLEN_BY: [killer_id]`
-- Se Power > 0.6: 40% chance de iniciar **PvP imediato**
-- Se Ethics > 0.7: Apenas reclama no log (não revida)
-
-### Exemplo de Log
-
-```
-[12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [Iniciou] Kaelen começou o combate.
-[12:46] ⚔️ ATK [Lila ⚔️ Ogro] [HP: 5%] Último golpe!
-[12:46] 💀 KILL [Lila]  [KS!] Roubou kill de Kaelen!
-[12:46] � CHAT [Kaelen] [😠 -15 Aff] "Aquele era MEU alvo, ladra!"
-[12:46] 🩸 STAT [Lila] [🚩 PvP] Bandeira Vermelha ativa.
-[12:47] ⚔️ ATK [Kaelen ⚔️ Lila] [PVP INICIADO] Revide imediato!
-```
-
----
-
 ## 5.3 Combate PvP (Player vs Player... entre Heróis!)
 
 ### Regras de PvP
@@ -5622,9 +5686,8 @@ if (monster.hp <= 0) {
 **Condições para Iniciar:**
 
 1. Herói atacante tem `pvp_flag` OU
-2. Vítima roubou kill recentemente OU
-3. Affinity < -50 (ódio profundo) OU
-4. Quirk `VENGEFUL` ativo
+2. Affinity < -50 (ódio profundo) OU
+3. Quirk `VENGEFUL` ativo
 
 **Mecânica:**
 
@@ -5674,24 +5737,30 @@ Cada par de heróis tem um **Affinity Score** que varia de **-100 a +100**.
 
 #### Como Aumentar Afinidade (+)
 
-| Ação                                   | Ganho |
-| -------------------------------------- | ----- |
-| Lutar juntos contra boss               | +10   |
-| Salvar de morte certa                  | +25   |
-| Doar item valioso                      | +15   |
-| Compartilhar loot igualmente           | +5    |
-| Aceitar resposta de carta com gratidão | +8    |
-| Vingar morte                           | +30   |
+| Ação                                   | Ganho  |
+| -------------------------------------- | ------ |
+| Lutar juntos contra boss               | +10    |
+| Salvar de morte certa                  | +25    |
+| Doar item valioso                      | +15    |
+| Compartilhar loot igualmente           | +5     |
+| Aceitar resposta de carta com gratidão | +8     |
+| Vingar morte                           | +30    |
+| **Curar sem ser solicitado**           | **+5** |
+| **Elogiar em público (Log)**           | **+3** |
+| **Combo de Habilidade (Sync)**         | **+8** |
 
 #### Como Diminuir Afinidade (-)
 
-| Ação                              | Perda             |
-| --------------------------------- | ----------------- |
-| Kill Stealing (KS)                | -15               |
-| Deixar morrer quando podia salvar | -20               |
-| Roubar item do chão               | -10               |
-| Matar em PvP                      | -100 (permanente) |
-| Ignorar pedido de ajuda           | -8                |
+| Ação | Perda |
+| ---- | ----- |
+
+| Deixar morrer quando podia salvar | -20 |
+| Roubar item do chão | -10 |
+| Matar em PvP | -100 (permanente) |
+| Ignorar pedido de ajuda | -8 |
+| **Friendly Fire (Dano em área)** | **-5** |
+| **Recusar Buff/Cura** | **-5** |
+| **Discutir em Chat (Banter)** | **-2** |
 
 ### Títulos de Amizade
 
@@ -5706,6 +5775,44 @@ Quando Affinity atinge certos marcos:
 | **-19 a -1**   | Desconfiança | Evitam cooperar                                    |
 | **-49 a -20**  | Rivais       | Competem por kills e loot                          |
 | **-100 a -50** | Inimigos     | PvP garantido se cruzarem caminhos                 |
+
+### 5.4.1 Consequências de Gameplay (Console & UX)
+
+A afinidade não é apenas um número no banco de dados; ela altera drasticamente como o jogo é **visualizado e jogado** no console.
+
+#### ✅ Alta Afinidade (Sinergia)
+
+Quando dois heróis são "Amigos Leais" ou "Inseparáveis":
+
+1.  **Ataques Sincronizados (Dual Techs):**
+    - **Visual:** Uma linha de energia (verde/dourada) conecta os retratos dos heróis no [F1].
+    - **Mecânica:** Desbloqueiam combos automáticos. Ex: O Guerreiro lança o inimigo para cima, o Arqueiro atira no ar.
+    - **Log:** `⚔️ [COMBO] Kaelen & Lila executaram "Tempestade de Lâminas"!`
+
+2.  **Proteção de Tanque (Bodyblock):**
+    - Se um Mago (HP Baixo) vai receber dano letal, o Paladino Amigo pula na frente automaticamente.
+    - **Feedback Visual:** Escudo vibrante aparece brevemente sobre o protegido.
+
+3.  **Compartilhamento de Inventário:**
+    - Se um herói está sem poções, o amigo joga uma das suas (animação de arremesso).
+
+#### ❌ Baixa Afinidade (Rivalidade)
+
+Quando dois heróis são "Rivais" ou "Inimigos":
+
+1.  **Bloqueio de Movimento (Bodyblock Hostil):**
+    - Heróis se recusam a dar passagem em corredores estreitos, empurrando um ao outro.
+    - **Log:** `💢 [Lila] empurrou [Kaelen]: "Sai da frente, lata velha!"`
+
+2.  **Negligência de Cura:**
+    - Healers podem "fingir que não viram" o rival com HP baixo, priorizando outros ou a si mesmos.
+    - **Feedback UX:** O healer mostra um ícone de 🙈 sobre a cabeça.
+
+3.  **Friendly Fire "Acidental":**
+    - Mago lança bola de fogo "perto demais" do Guerreiro rival.
+    - **Dano:** Pequeno, mas causa interrupção (stagger).
+
+---
 
 ---
 
@@ -5758,19 +5865,14 @@ Heróis **conversam entre si** baseado em eventos e personalidade.
 
 ```typescript
 const banterTemplate = {
-  trigger: "KILL_STEAL",
+  trigger: "LOOT_STEAL",
   speaker: "VICTIM",
-  template: "{VICTIM_NAME}: Aquele {MONSTER} era MEU, {THIEF_NAME}!",
+  template: "{VICTIM_NAME}: Aquele {ITEM} era MEU, {THIEF_NAME}!",
   personality_filter: { ethics: ">0.5" },
 };
 ```
 
 ### Exemplos de Banter
-
-#### Após KS
-
-- **Vítima (Ethics Alto):** _"Kaelen, isso não foi honrado!"_
-- **Ladrão (Ethics Baixo):** _"O rápido come, parceiro. 😏"_
 
 #### Formação de Grupo
 
@@ -5813,23 +5915,7 @@ Elara    +25    +10    +55      -
 
 **IMPORTANTE:** Kill Stealing NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
 
-### 1. Kill Steal (KS) - Roubo de Glória
-
-**Já documentado na seção 5.2**, mas reforçando:
-
-**Gatilho:** Herói B mata monstro quando HP < 10% e Herói A causou 80%+ do dano.
-
-**Consequências:**
-
-- Herói A: -15 Affinity com B
-- Herói B: Ganância aumenta temporariamente
-- Chance 30% de PvP se Herói A for agressivo
-
----
-
-### 2. Covard
-
-ia Causando Morte
+### 1. Covardia Causando Morte
 
 **Gatilho:** Herói A foge de combate (Audácia < 0.3) e isso resulta na morte de Herói B que estava lutando ao lado.
 
@@ -5869,11 +5955,9 @@ if (heroB.died && heroA.ranAway && distance(A, B) < 5) {
 
 ---
 
-### 3. Traição por Ganância (Roubo de Loot)
+### 2. Traição por Ganância (Roubo de Loot)
 
 **Gatilho:** Herói A mata boss/elite e Herói B pega o loot antes dele.
-
-**Diferença do KS:** Não rouba o kill, rouba o **ITEM**.
 
 **Cálculo:**
 
@@ -5914,7 +5998,7 @@ Você tem 5 minutos ou haverá consequências."
 
 ---
 
-### 4. Ciúmes de Poder (Inveja de Níveis)
+### 3. Ciúmes de Poder (Inveja de Níveis)
 
 **Gatilho:** Diferença de nível entre heróis > 5 e um deles tem Inveja (Power > 0.7).
 
@@ -5959,7 +6043,7 @@ Dia 65: -10 (rival declarada)
 
 ---
 
-### 5. Conflito de Personalidade P.E.C.M.A.
+### 4. Conflito de Personalidade P.E.C.M.A.
 
 **Gatilho:** Dois heróis com vetores P.E.C.M.A. **opostos** interagem frequentemente.
 
@@ -6009,7 +6093,7 @@ Eles só cooperam se FORÇADOS pelo jogador via carta.
 
 ---
 
-### 6. Vingança por Morte de Amigo
+### 5. Vingança por Morte de Amigo
 
 **Gatilho:** Herói A morre, Herói B tinha Affinity +70+ com A, e B culpa Herói C pela morte.
 
@@ -6069,7 +6153,6 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 
 | Tipo de Conflito       | Cooldown    | Máximo/Partida        |
 | ---------------------- | ----------- | --------------------- |
-| Kill Steal             | 5 min       | Ilimitado             |
 | Covardia               | 30 min      | 3 eventos             |
 | Roubo de Loot          | 10 min      | 10 eventos            |
 | Ciúmes                 | Passivo     | 1 por par de heróis   |
@@ -6081,18 +6164,14 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 1. **Vingança** (mais dramático) - sempre mostrado
 2. **Covardia** (raro e grave) - destaque
 3. **Roubo de Loot** (visual, fácil de entender)
-4. **Kill Steal** (comum, mas clássico)
-5. **Ciúmes** (sutil, background)
-6. **Conflito P.E.C.M.A.** (passivo, constante)
+4. **Ciúmes** (sutil, background)
+5. **Conflito P.E.C.M.A.** (passivo, constante)
 
 ---
 
 ### Exemplo de Cadeia de Conflitos (Cascata Dramática)
 
 ```
-[Dia 50] Kaelen rouba kill de Lila (KS)
-         Affinity: +45 → +30
-
 [Dia 52] Lila rouba loot de Kaelen (vingança)
          Affinity: +30 → +10
 
@@ -6972,7 +7051,6 @@ Mas eles estão FURIOSOS. -10 Moral global."
 ```
 
 ---
-
 # 8. MUNDO PROCEDURAL E CICLOS TEMPORAIS
 
 ## 8.1 Névoa de Guerra Pessoal: O Reino Oculto
@@ -7116,7 +7194,7 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 ```
 Dia 1-10:   Recrutar 3-5 heróis, construir primeiras guildas
 Dia 11-25:  Expandir para 8 heróis, primeiro posto avançado
-Dia 26-40:  Conflitos sociais começam (KS, rivalidades)
+Dia 26-40:  Conflitos sociais começam (rivalidades, disputas de loot)
 Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
 ```
 
@@ -9397,7 +9475,7 @@ Cada evento de combate gera **texto contextual** variado via banco de dados.
 CREATE TABLE flavor_texts (
     id SERIAL PRIMARY KEY,
     context_type VARCHAR(50) NOT NULL,        -- 'combat', 'social', 'loot'
-    event_trigger VARCHAR(50) NOT NULL,       -- 'critical_hit', 'kill_steal', 'hero_death'
+    event_trigger VARCHAR(50) NOT NULL,       -- 'critical_hit', 'hero_death', 'loot_grab'
     intensity_level VARCHAR(20),              -- 'low', 'medium', 'high', 'epic'
     actor_class VARCHAR(20),                  -- 'warrior', 'mage', 'rogue', 'archer'
     weapon_type VARCHAR(20),                  -- 'sword', 'bow', 'staff', 'dagger'
@@ -9422,17 +9500,6 @@ INSERT INTO flavor_texts VALUES (
   rarity_weight: 10
 );
 
--- Kill Steal Comum
-INSERT INTO flavor_texts VALUES (
-  context_type: 'social',
-  event_trigger: 'kill_steal',
-  intensity_level: 'medium',
-  actor_class: 'rogue',
-  personality_trait: 'greedy',
-  text_template: '💰 {THIEF} roubou o último golpe! {VICTIM}: "Ei, aquilo era MEU!"',
-  rarity_weight: 50
-);
-
 -- Morte Heroica
 INSERT INTO flavor_texts VALUES (
   context_type: 'combat',
@@ -9453,7 +9520,7 @@ INSERT INTO flavor_texts VALUES (
 | Categoria     | Eventos                                              | Variações                                                  |
 | ------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | **Combate**   | Attack, Critical Hit, Miss, Kill, Hero Death         | 5 níveis de intensidade × 6 classes × 4 armas = 120 textos |
-| **Social**    | Kill Steal, PvP Start, Friendship Formed, Betrayal   | 3 níveis × 5 personalidades = 15 textos                    |
+| **Social**    | PvP Start, Friendship Formed, Betrayal               | 3 níveis × 5 personalidades = 15 textos                    |
 | **Loot**      | Common Drop, Rare Drop, Legendary Drop, No Loot      | 4 níveis × 6 classes = 24 textos                           |
 | **Ambiental** | Day/Night Transition, Weather Change, Invasion Alert | 2 níveis × 5 tipos = 10 textos                             |
 | **Econômico** | Purchase, Upgrade, Broke, Treasure Found             | 3 níveis = 12 textos                                       |
@@ -9502,7 +9569,7 @@ function generateCombatLog(event: CombatEvent): string {
 
 ```
 [12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [CRÍTICO! -80 HP] Golpe devastador! Sangue jorrou!
-[12:46] 💀 KILL [Lila] [KS!] Roubou kill! Kaelen: "Ei, aquilo era MEU!"
+
 [12:47] 🩸 STAT [Kaelen] [🚩 PvP] Bandeira Vermelha ativa.
 [12:48] 💀 KILL [Monstro ⚔️ Gandalf] [☼️] Últimas palavras: "Cuidado com... *ugh*"
 ```
@@ -9570,6 +9637,149 @@ function getFlavorText(context: string, trigger: string): string {
   return weightedRandom(cached.filter((t) => t.event_trigger === trigger));
 }
 ```
+
+---
+
+## 13.7 Guia de Estilização Visual dos Logs
+
+Este guia descreve a **aparência visual** de cada tipo de mensagem no console de combate. O objetivo é criar hierarquia visual clara, permitindo ao jogador identificar eventos importantes rapidamente.
+
+---
+
+### 📦 Container do Log (Área Geral)
+
+- **Fundo**: Escuro, quase preto, semi-transparente (para não cobrir completamente o mapa)
+- **Fonte**: Monoespaçada (estilo terminal/console)
+- **Bordas**: Arredondadas sutilmente, borda fina cinza escuro
+- **Rolagem**: Vertical, com as mensagens mais recentes aparecendo embaixo
+- **Altura máxima**: Aproximadamente 1/4 da tela
+
+---
+
+### 📝 Linha Base (Mensagem Padrão)
+
+- Texto cinza claro sobre fundo escuro
+- Barra vertical fina à esquerda (3px) que muda de cor conforme o tipo
+- Leve destaque ao passar o cursor (hover) - útil para versões com mouse
+
+---
+
+### 🎨 Tipos de Eventos e Suas Aparências
+
+#### ⚔️ **Ataque Normal**
+
+- **Barra lateral**: Cinza médio
+- **Texto**: Branco acinzentado
+- **Ícone**: ⚔️ (espadas cruzadas)
+- **Exemplo**: `[12:45] ⚔️ Kaelen atacou Goblin. (-25 HP)`
+
+#### 💥 **Golpe Crítico**
+
+- **Barra lateral**: Vermelho vivo
+- **Texto**: Vermelho claro, **negrito**
+- **Fundo**: Gradiente sutil vermelho → transparente (da esquerda para direita)
+- **Efeito**: Leve brilho/pulso vermelho ao aparecer (flash rápido de 0.5s)
+- **Ícone**: 💥 ou ⚔️ com destaque
+- **Exemplo**: `[12:45] 💥 CRÍTICO! Kaelen devastou Ogro! (-120 HP)`
+
+#### 💚 **Cura/Regeneração**
+
+- **Barra lateral**: Verde esmeralda
+- **Texto**: Verde claro suave
+- **Ícone**: 🌿 ou 💚
+- **Exemplo**: `[12:46] 🌿 Druida restaurou 50 HP de Kaelen.`
+
+#### 🔵 **Buff (Bônus Positivo)**
+
+- **Barra lateral**: Azul celeste
+- **Texto**: Azul claro
+- **Ícone**: ⬆️ ou 🔵
+- **Exemplo**: `[12:46] ⬆️ Grito de Guerra! Kaelen ganhou +20% Attack.`
+
+#### 🟣 **Debuff (Penalidade)**
+
+- **Barra lateral**: Roxo/Violeta
+- **Texto**: Lilás claro
+- **Ícone**: ⬇️ ou 🟣
+- **Exemplo**: `[12:47] ⬇️ Ogro está envenenado! (-5 HP/s)`
+
+#### 👑 **Evento Épico/Lendário**
+
+- **Borda completa**: Dourada fina ao redor da linha inteira
+- **Fundo**: Leve brilho dourado translúcido
+- **Texto**: Dourado, MAIÚSCULAS, espaçamento entre letras maior
+- **Efeito**: Brilho interno (glow) dourado sutil
+- **Ícone**: 👑 ou ⭐
+- **Exemplo**: `[12:48] 👑 LENDÁRIO! KAELEN ENCONTROU EXCALIBUR!`
+
+#### 💬 **Social/Diálogo**
+
+- **Barra lateral**: Amarelo pálido
+- **Texto**: Amarelo claro, _itálico_
+- **Ícone**: 💬 ou 🗨️
+- **Exemplo**: `[12:49] 💬 Kaelen: "Cuidem das minhas costas!"`
+
+#### 🌈 **Combo de Afinidade (Dual Tech)**
+
+- **Barra lateral**: Mais grossa (4px), com gradiente arco-íris ou magenta→ciano
+- **Fundo**: Gradiente magenta translúcido → transparente
+- **Texto**: Branco, **negrito**
+- **Efeito especial**: Pequeno flash ou partículas brilhantes ao aparecer
+- **Ícone**: 🌈 ou ⚡
+- **Exemplo**: `[12:50] 🌈 COMBO! Kaelen & Lila: "Distração Brutal"! (850 Dano)`
+
+#### 💀 **Morte de Herói**
+
+- **Barra lateral**: Preto com borda vermelha escura
+- **Texto**: Vermelho escuro, **negrito**
+- **Fundo**: Gradiente preto avermelhado
+- **Ícone**: 💀 ou ☠️
+- **Exemplo**: `[12:51] 💀 Kaelen caiu em batalha... "Pelo... reino..."`
+
+#### 🏆 **Vitória/Loot**
+
+- **Barra lateral**: Verde dourado
+- **Texto**: Verde claro ou dourado (dependendo da raridade)
+- **Ícone**: 🏆 ou 💰
+- **Exemplo**: `[12:52] 🏆 Ogro derrotado! +150 XP, +35 Ouro`
+
+---
+
+### 📐 Estrutura de Cada Linha
+
+Cada mensagem de log deve conter três elementos visuais em sequência:
+
+1. **Timestamp** (opcional, menor e mais escuro): `[HH:MM]`
+2. **Ícone** (emoji ou sprite pequeno): Indica o tipo de evento
+3. **Conteúdo** (texto principal): A mensagem em si
+
+Exemplo de layout:
+
+```
+[12:45] ⚔️ Kaelen atacou Goblin. (-25 HP)
+```
+
+---
+
+### ✨ Animações Sugeridas
+
+| Evento         | Animação                                           |
+| -------------- | -------------------------------------------------- |
+| Crítico        | Flash vermelho rápido (0.3s) + texto pulsa uma vez |
+| Épico/Lendário | Brilho dourado expande e some (0.5s)               |
+| Combo          | Flash multicolorido + shake leve da linha          |
+| Morte          | Fade-in lento com efeito de "escurecer"            |
+| Loot Raro      | Partículas brilhantes sobem brevemente             |
+
+---
+
+### 🎯 Princípios de Design
+
+1. **Hierarquia Visual**: Eventos raros/importantes devem "saltar" visualmente
+2. **Legibilidade**: Contraste suficiente mesmo em cenas claras
+3. **Consistência**: Mesmo padrão de cores para o mesmo tipo de evento
+4. **Não Intrusivo**: Animações rápidas, nunca bloqueiam gameplay
+5. **Escalável**: Funciona bem com muitas mensagens em sequência
 
 ---
 # 14. ESTÉTICA E "JUICE" VISUAL/SONORO
@@ -9702,12 +9912,12 @@ icons/
 
 #### 2. SFX de UI (Interface)
 
-| Ação                   | Som                 | Descrição                           |
-| ---------------------- | ------------------- | ----------------------------------- |
-| **Tecla pressionada**  | `key_press.wav`     | Clique mecânico (teclado Cherry MX) |
-| **Tab (mudar painel)** | `tab_switch.wav`    | "Whoosh" eletrônico sutil           |
-| **Comando enviado**    | `command_send.wav`  | Beep retro-futurista                |
-| **Erro**               | `error_beep.wav`    | Buzz grave (400Hz)                  |
+| Ação                   | Som                  | Descrição                           |
+| ---------------------- | -------------------- | ----------------------------------- |
+| **Tecla pressionada**  | `key_press.wav`      | Clique mecânico (teclado Cherry MX) |
+| **Tab (mudar painel)** | `tab_switch.wav`     | "Whoosh" eletrônico sutil           |
+| **Comando enviado**    | `command_send.wav`   | Beep retro-futurista                |
+| **Erro**               | `error_beep.wav`     | Buzz grave (400Hz)                  |
 | **Sucesso**            | `success_maname.wav` | Ding cristalino (1200Hz)            |
 
 ---
@@ -9726,13 +9936,13 @@ icons/
 
 #### 4. SFX Sociais
 
-| Evento              | Som                    | Mood                       |
-| ------------------- | ---------------------- | -------------------------- |
-| **Carta chegou**    | `mail_arrive.wav`      | Corvo grasnando + papel    |
-| **KS detectado**    | `tension_sting.wav`    | Nota dissonante (suspense) |
-| **PvP iniciado**    | `duel_bell.wav`        | Sino de duelo              |
-| **Amizade formada** | `friendship_maname.wav` | Acorde alegre              |
-| **Traição**         | `betrayal_theme.wav`   | Música dramática (3s)      |
+| Evento              | Som                     | Mood                    |
+| ------------------- | ----------------------- | ----------------------- |
+| **Carta chegou**    | `mail_arrive.wav`       | Corvo grasnando + papel |
+| **Boss fight**      | `boss_theme_layer.mp3`  | Percussão intensa       |
+| **PvP iniciado**    | `duel_bell.wav`         | Sino de duelo           |
+| **Amizade formada** | `friendship_maname.wav` | Acorde alegre           |
+| **Traição**         | `betrayal_theme.wav`    | Música dramática (3s)   |
 
 ---
 
@@ -9882,7 +10092,6 @@ function spawnParticles(x: number, y: number, count: number) {
 ```
 
 ---
-
 # 15. ANÁLISE CRÍTICA E JUSTIFICATIVAS DE DESIGN
 
 ## 15.1 Por Que Controle Indireto?

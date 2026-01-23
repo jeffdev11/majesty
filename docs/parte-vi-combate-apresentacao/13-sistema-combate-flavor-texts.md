@@ -41,7 +41,7 @@ Cada evento de combate gera **texto contextual** variado via banco de dados.
 CREATE TABLE flavor_texts (
     id SERIAL PRIMARY KEY,
     context_type VARCHAR(50) NOT NULL,        -- 'combat', 'social', 'loot'
-    event_trigger VARCHAR(50) NOT NULL,       -- 'critical_hit', 'kill_steal', 'hero_death'
+    event_trigger VARCHAR(50) NOT NULL,       -- 'critical_hit', 'hero_death', 'loot_grab'
     intensity_level VARCHAR(20),              -- 'low', 'medium', 'high', 'epic'
     actor_class VARCHAR(20),                  -- 'warrior', 'mage', 'rogue', 'archer'
     weapon_type VARCHAR(20),                  -- 'sword', 'bow', 'staff', 'dagger'
@@ -66,17 +66,6 @@ INSERT INTO flavor_texts VALUES (
   rarity_weight: 10
 );
 
--- Kill Steal Comum
-INSERT INTO flavor_texts VALUES (
-  context_type: 'social',
-  event_trigger: 'kill_steal',
-  intensity_level: 'medium',
-  actor_class: 'rogue',
-  personality_trait: 'greedy',
-  text_template: '💰 {THIEF} roubou o último golpe! {VICTIM}: "Ei, aquilo era MEU!"',
-  rarity_weight: 50
-);
-
 -- Morte Heroica
 INSERT INTO flavor_texts VALUES (
   context_type: 'combat',
@@ -97,7 +86,7 @@ INSERT INTO flavor_texts VALUES (
 | Categoria     | Eventos                                              | Variações                                                  |
 | ------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | **Combate**   | Attack, Critical Hit, Miss, Kill, Hero Death         | 5 níveis de intensidade × 6 classes × 4 armas = 120 textos |
-| **Social**    | Kill Steal, PvP Start, Friendship Formed, Betrayal   | 3 níveis × 5 personalidades = 15 textos                    |
+| **Social**    | PvP Start, Friendship Formed, Betrayal               | 3 níveis × 5 personalidades = 15 textos                    |
 | **Loot**      | Common Drop, Rare Drop, Legendary Drop, No Loot      | 4 níveis × 6 classes = 24 textos                           |
 | **Ambiental** | Day/Night Transition, Weather Change, Invasion Alert | 2 níveis × 5 tipos = 10 textos                             |
 | **Econômico** | Purchase, Upgrade, Broke, Treasure Found             | 3 níveis = 12 textos                                       |
@@ -146,7 +135,7 @@ function generateCombatLog(event: CombatEvent): string {
 
 ```
 [12:45] ⚔️ ATK [Kaelen ⚔️ Ogro] [CRÍTICO! -80 HP] Golpe devastador! Sangue jorrou!
-[12:46] 💀 KILL [Lila] [KS!] Roubou kill! Kaelen: "Ei, aquilo era MEU!"
+
 [12:47] 🩸 STAT [Kaelen] [🚩 PvP] Bandeira Vermelha ativa.
 [12:48] 💀 KILL [Monstro ⚔️ Gandalf] [☼️] Últimas palavras: "Cuidado com... *ugh*"
 ```
@@ -214,5 +203,148 @@ function getFlavorText(context: string, trigger: string): string {
   return weightedRandom(cached.filter((t) => t.event_trigger === trigger));
 }
 ```
+
+---
+
+## 13.7 Guia de Estilização Visual dos Logs
+
+Este guia descreve a **aparência visual** de cada tipo de mensagem no console de combate. O objetivo é criar hierarquia visual clara, permitindo ao jogador identificar eventos importantes rapidamente.
+
+---
+
+### 📦 Container do Log (Área Geral)
+
+- **Fundo**: Escuro, quase preto, semi-transparente (para não cobrir completamente o mapa)
+- **Fonte**: Monoespaçada (estilo terminal/console)
+- **Bordas**: Arredondadas sutilmente, borda fina cinza escuro
+- **Rolagem**: Vertical, com as mensagens mais recentes aparecendo embaixo
+- **Altura máxima**: Aproximadamente 1/4 da tela
+
+---
+
+### 📝 Linha Base (Mensagem Padrão)
+
+- Texto cinza claro sobre fundo escuro
+- Barra vertical fina à esquerda (3px) que muda de cor conforme o tipo
+- Leve destaque ao passar o cursor (hover) - útil para versões com mouse
+
+---
+
+### 🎨 Tipos de Eventos e Suas Aparências
+
+#### ⚔️ **Ataque Normal**
+
+- **Barra lateral**: Cinza médio
+- **Texto**: Branco acinzentado
+- **Ícone**: ⚔️ (espadas cruzadas)
+- **Exemplo**: `[12:45] ⚔️ Kaelen atacou Goblin. (-25 HP)`
+
+#### 💥 **Golpe Crítico**
+
+- **Barra lateral**: Vermelho vivo
+- **Texto**: Vermelho claro, **negrito**
+- **Fundo**: Gradiente sutil vermelho → transparente (da esquerda para direita)
+- **Efeito**: Leve brilho/pulso vermelho ao aparecer (flash rápido de 0.5s)
+- **Ícone**: 💥 ou ⚔️ com destaque
+- **Exemplo**: `[12:45] 💥 CRÍTICO! Kaelen devastou Ogro! (-120 HP)`
+
+#### 💚 **Cura/Regeneração**
+
+- **Barra lateral**: Verde esmeralda
+- **Texto**: Verde claro suave
+- **Ícone**: 🌿 ou 💚
+- **Exemplo**: `[12:46] 🌿 Druida restaurou 50 HP de Kaelen.`
+
+#### 🔵 **Buff (Bônus Positivo)**
+
+- **Barra lateral**: Azul celeste
+- **Texto**: Azul claro
+- **Ícone**: ⬆️ ou 🔵
+- **Exemplo**: `[12:46] ⬆️ Grito de Guerra! Kaelen ganhou +20% Attack.`
+
+#### 🟣 **Debuff (Penalidade)**
+
+- **Barra lateral**: Roxo/Violeta
+- **Texto**: Lilás claro
+- **Ícone**: ⬇️ ou 🟣
+- **Exemplo**: `[12:47] ⬇️ Ogro está envenenado! (-5 HP/s)`
+
+#### 👑 **Evento Épico/Lendário**
+
+- **Borda completa**: Dourada fina ao redor da linha inteira
+- **Fundo**: Leve brilho dourado translúcido
+- **Texto**: Dourado, MAIÚSCULAS, espaçamento entre letras maior
+- **Efeito**: Brilho interno (glow) dourado sutil
+- **Ícone**: 👑 ou ⭐
+- **Exemplo**: `[12:48] 👑 LENDÁRIO! KAELEN ENCONTROU EXCALIBUR!`
+
+#### 💬 **Social/Diálogo**
+
+- **Barra lateral**: Amarelo pálido
+- **Texto**: Amarelo claro, _itálico_
+- **Ícone**: 💬 ou 🗨️
+- **Exemplo**: `[12:49] 💬 Kaelen: "Cuidem das minhas costas!"`
+
+#### 🌈 **Combo de Afinidade (Dual Tech)**
+
+- **Barra lateral**: Mais grossa (4px), com gradiente arco-íris ou magenta→ciano
+- **Fundo**: Gradiente magenta translúcido → transparente
+- **Texto**: Branco, **negrito**
+- **Efeito especial**: Pequeno flash ou partículas brilhantes ao aparecer
+- **Ícone**: 🌈 ou ⚡
+- **Exemplo**: `[12:50] 🌈 COMBO! Kaelen & Lila: "Distração Brutal"! (850 Dano)`
+
+#### 💀 **Morte de Herói**
+
+- **Barra lateral**: Preto com borda vermelha escura
+- **Texto**: Vermelho escuro, **negrito**
+- **Fundo**: Gradiente preto avermelhado
+- **Ícone**: 💀 ou ☠️
+- **Exemplo**: `[12:51] 💀 Kaelen caiu em batalha... "Pelo... reino..."`
+
+#### 🏆 **Vitória/Loot**
+
+- **Barra lateral**: Verde dourado
+- **Texto**: Verde claro ou dourado (dependendo da raridade)
+- **Ícone**: 🏆 ou 💰
+- **Exemplo**: `[12:52] 🏆 Ogro derrotado! +150 XP, +35 Ouro`
+
+---
+
+### 📐 Estrutura de Cada Linha
+
+Cada mensagem de log deve conter três elementos visuais em sequência:
+
+1. **Timestamp** (opcional, menor e mais escuro): `[HH:MM]`
+2. **Ícone** (emoji ou sprite pequeno): Indica o tipo de evento
+3. **Conteúdo** (texto principal): A mensagem em si
+
+Exemplo de layout:
+
+```
+[12:45] ⚔️ Kaelen atacou Goblin. (-25 HP)
+```
+
+---
+
+### ✨ Animações Sugeridas
+
+| Evento         | Animação                                           |
+| -------------- | -------------------------------------------------- |
+| Crítico        | Flash vermelho rápido (0.3s) + texto pulsa uma vez |
+| Épico/Lendário | Brilho dourado expande e some (0.5s)               |
+| Combo          | Flash multicolorido + shake leve da linha          |
+| Morte          | Fade-in lento com efeito de "escurecer"            |
+| Loot Raro      | Partículas brilhantes sobem brevemente             |
+
+---
+
+### 🎯 Princípios de Design
+
+1. **Hierarquia Visual**: Eventos raros/importantes devem "saltar" visualmente
+2. **Legibilidade**: Contraste suficiente mesmo em cenas claras
+3. **Consistência**: Mesmo padrão de cores para o mesmo tipo de evento
+4. **Não Intrusivo**: Animações rápidas, nunca bloqueiam gameplay
+5. **Escalável**: Funciona bem com muitas mensagens em sequência
 
 ---

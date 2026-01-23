@@ -46,7 +46,7 @@
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 Formação de Grupos
-   - 5.2 Kill Stealing (KS)
+
    - 5.3 Combate PvP
    - 5.4 Amizades e Lealdade
    - 5.5 Mercado Ambulante
