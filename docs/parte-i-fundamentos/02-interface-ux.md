@@ -86,7 +86,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
 │ P3: STATS DO REINO                                                        │
-│ 💰 Ouro: 1,250g | 😊 Moral: 75% | 📅 Dia: 25 | 🌙 Ciclo: 1 (Primavera)    │
+│ 💰 Ouro: 1,250g | 😊 Moral: 75% | 📅 Dia: 2 | 🌙 Ciclo: 1 (Primavera)     │
 ├──────────────────────────────────────┬────────────────────────────────────┤
 │   P1: MAPA VISUAL (Grid 10×10)       │ P2: MAPA LÓGICO (Textual)          │
 │  [🏰][🌲][🌲][⚔️][ ][ ][ ][ ][ ][ ] │ ⚔️ FLORESTA SOMBRIA [3,3]          │
@@ -123,7 +123,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
 │ P3: STATS DO REINO                                                        │
-│ 💰 1,250g | 😊 75% | 📅 Dia 25 | 🌙 Ciclo 1                               │
+│ 💰 1,250g | 😊 75% | 📅 Dia 2 | 🌙 Ciclo 1                                │
 ├────────────────────────────┬──────────────────────────────────────────────┤
 │ P1: MAPA (Compacto)        │ P2: MAPA LÓGICO                              │
 │ [🏰][🌲][⚔️][ ][ ]        │ ⚔️ FLORESTA: 3 heróis                        │
@@ -147,7 +147,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│ P3: 💰 1,250g | 😊 75% | 📅 25 | 🌙 C1                                    │
+│ P3: 💰 1,250g | 😊 75% | 📅 2 | 🌙 C1                                     │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P1+P2: MAPA COMPACTO (Mini)                                               │
 │ [🏰][🌲:K][⚔️:L][🏔️:A][ ] │ K=Kaelen L=Lila A=Aria E=Elara J=Kenji      │
@@ -178,10 +178,10 @@ Quando um herói **sai** de uma região e depois **retorna**, o log daquela regi
 ```
 LR1: 📍 FLORESTA SOMBRIA (Lila retornou)
 ────────────────────────────────────────
-│ ═══════════ Dia 24 - 10:30 ═══════════
+│ ═══════════ Dia 1 - 10:30 ═══════════
 │ [10:30] 💀 Lila matou 3 Lobos
 │ [10:35] 🚶 Lila saiu para Vila
-│ ═══════════ Dia 25 - 14:00 ═══════════
+│ ═══════════ Dia 2 - 14:00 ═══════════
 │ [14:00] 🚪 Lila retornou à Floresta
 │ [14:01] ⚔️ Lila encontra Ogro Elite
 │ [14:02] ⚔️ Lila ataca (95 dano)
@@ -900,7 +900,7 @@ P1: INFRAESTRUTURA
 
 [2] 💀 Guilda Magos [DESTRUÍDA]
     Último status: Lvl 2, 3 Magos
-    Destruída: Dia 73, 14:35
+    Destruída: Dia 7, 14:35
     [R] Reconstruir (300g)
 ```
 
@@ -916,7 +916,7 @@ Status: ⚠️ DESTRUÍDA
 +--------------------------------------+
 |  HISTÓRICO DE DESTRUIÇÃO             |
 +--------------------------------------+
-| Dia: 73                              |
+| Dia: 7                               |
 | Hora: 14:35:22                       |
 | Causa: [INVASÃO] Horda de Ogros      |
 | Atacantes: 15 Ogros (Lvl 8-12)       |
@@ -994,7 +994,7 @@ O **P3** não mostra apenas estoques, mas um **relatório completo** de entradas
 P3: LOGÍSTICA & FINANÇAS
 
 +========================================+
-|  RESUMO DO DIA (Dia 45)                |
+|  RESUMO DO DIA (Dia 4)                 |
 +========================================+
 | Saldo Inicial:      1,000g             |
 | (+) Entradas:        +450g             |
@@ -1124,9 +1124,9 @@ Saldo atual: 1,130g
 +---------------------+------------------------------------------+---------------------+
 | P1: ÍNDICE DE DADOS |    P2: LEITOR DE DADOS (READER)          | P3: ESTATÍSTICAS    |
 | > HERÓIS ATIVOS     | DOSSIÊ: SIR KAELEN (Guerreiro)           | -- OURO / DIA --    |
-| [1] Sir Kaelen      |                                          | Dia 43: ####        |
-| [2] Lila Rogue      | [SUSSURROS RECENTES]                     | Dia 44: ######      |
-|                     | "Aquele Ogro parecia ter medo de fogo... | Dia 45: ##          |
+| [1] Sir Kaelen      |                                          | Dia 2: ####         |
+| [2] Lila Rogue      | [SUSSURROS RECENTES]                     | Dia 3: ######       |
+|                     | "Aquele Ogro parecia ter medo de fogo... | Dia 4: ##           |
 | > MEMORIAL (MORTOS) | Devia ter comprado uma tocha."           |                     |
 | [3] Gandalf (Mago)  |                                          | -- KILLS / TIPO --  |
 |                     | [TRAÇOS DE PERSONALIDADE]                | Ogros: 12 [|||..]   |
@@ -1139,10 +1139,10 @@ Saldo atual: 1,130g
 |                     | jurou proteger os fracos após...         |                     |
 +---------------------+------------------------------------------+---------------------+
 | P4: METADADOS | P5: REGISTO DO HISTORIADOR | P6: FILTROS |
-| ID: Hero*001 | [Dia 12] Kaelen salvou Lila na floresta. | [H] Ver Heróis |
-| Status: Vivo | [Dia 15] Kaelen recusou suborno. | [M] Ver Monstros |
-| Kills: 42 | [Dia 20] Adquiriu título "O Bravo". | [L] Ver Lore |
-| Mortes: 0 | [Dia 45] Atualmente a dormir na Vila. | [G] Ver Gráficos |
+| ID: Hero*001 | [Dia 1] Kaelen salvou Lila na floresta. | [H] Ver Heróis |
+| Status: Vivo | [Dia 2] Kaelen recusou suborno. | [M] Ver Monstros |
+| Kills: 42 | [Dia 3] Adquiriu título "O Bravo". | [L] Ver Lore |
+| Mortes: 0 | [Dia 4] Atualmente a dormir na Vila. | [G] Ver Gráficos |
 | | | |
 | "A lenda viva." | | (Use teclas) |
 +---------------------+------------------------------------------+---------------------+
@@ -1193,9 +1193,9 @@ P1: ÍNDICE DE DADOS
   └─ [+] Ver todos (10)
 
 ▼ MEMORIAL DOS CAÍDOS (3)
-  ├─ [M1] 💀 Elara (Arqueira) - Dia 42
-  ├─ [M2] 💀 Thorgrim (Guerreiro) - Dia 31
-  └─ [M3] 💀 Zara (Maga) - Dia 15
+  ├─ [M1] 💀 Elara (Arqueira) - Dia 4
+  ├─ [M2] 💀 Thorgrim (Guerreiro) - Dia 3
+  └─ [M3] 💀 Zara (Maga) - Dia 2
 
 ▶ BESTIÁRIO (Expandir)
   └─ (23 espécies catalogadas)
@@ -1204,7 +1204,7 @@ P1: ÍNDICE DE DADOS
   └─ (5 facções ativas)
 
 ▶ HISTÓRICO DA PARTIDA
-  ├─ Crônica Atual (Dia 1-87)
+  ├─ Crônica Atual (Dia 1-4)
   ├─ Grandes Feitos (45 eventos)
   └─ Eventos Memoráveis (120)
 
@@ -1387,7 +1387,7 @@ P2: LEITOR DE DADOS
 // Componente: BarChartComponent
 <bar-chart
   [data]="goldPerDay"
-  [labels]="['Dia 43', 'Dia 44', 'Dia 45']"
+  [labels]="['Dia 2', 'Dia 3', 'Dia 4']"
   [color]="'#FFD700'"
 ></bar-chart>
 ```
@@ -1398,13 +1398,13 @@ P2: LEITOR DE DADOS
 +------------------------------------+
 |  OURO ACUMULADO (Últimos 7 Dias)   |
 +------------------------------------+
-Dia 43 ████████░░ 850g
-Dia 44 ██████████ 1,200g
-Dia 45 ████░░░░░░ 450g
-Dia 46 ███████░░░ 920g
-Dia 47 ████████░░ 1,100g
-Dia 48 ██░░░░░░░░ 300g (BAIXO!)
-Dia 49 ███████████ 1,450g
+Dia 2  ████████░░ 850g
+Dia 3  ██████████ 1,200g
+Dia 4  ████░░░░░░ 450g
+Dia 5  ███████░░░ 920g
+Dia 6  ████████░░ 1,100g
+Dia 7  ██░░░░░░░░ 300g (BAIXO!)
+Dia 8  ███████████ 1,450g
 +------------------------------------+
 Média: 896g/dia | Total: 6,270g
 ```
@@ -1503,31 +1503,31 @@ Eventos **épicos e raros** que merecem destaque no histórico. São filtrados a
 ```
 P5: REGISTO DO HISTORIADOR (GRANDES FEITOS)
 
-[Dia 5] 🏆 PRIMEIRO SANGUE
+[Dia 1] 🏆 PRIMEIRO SANGUE
         Sir Kaelen derrotou seu primeiro inimigo solo.
         (Goblin "Krax, O Fedido")
 
-[Dia 12] 💖 LAÇOS FORTES
+[Dia 2] 💖 LAÇOS FORTES
         Kaelen salvou Lila de morte certa.
         Affinity: -10 → +25 (Primeira amizade)
 
-[Dia 23] 💀 MORTE HEROICA
+[Dia 3] 💀 MORTE HEROICA
         Gandalf caiu defendendo a Casa Central.
         Último HP do edifício: 8% (salvou o reino)
 
-[Dia 31] ⚔️ VINGANÇA CUMPRIDA
+[Dia 4] ⚔️ VINGANÇA CUMPRIDA
         Kaelen derrotou "Ogro Matador de Gandalf".
         XP dobrado. Título: "Vingador de Gandalf"
 
-[Dia 45] 🏰 EXPANSÃO DO REINO
+[Dia 5] 🏰 EXPANSÃO DO REINO
         Posto Avançado fundado na Floresta Norte.
         Capitão: Lila Rogue
 
-[Dia 67] 🌙 SOBREVIVÊNCIA
+[Dia 6] 🌙 SOBREVIVÊNCIA
         Reino resistiu à Lua de Sangue.
         73 monstros eliminados. 2 heróis caídos.
 
-[Dia 87] 👑 STATUS ATUAL
+[Dia 7] 👑 STATUS ATUAL
         Partida em andamento...
         Próximo grande feito: Derrotar Rei Vilão
 ```
@@ -1869,7 +1869,7 @@ P3: PREVISÃO GLOBAL
 
 | Evento                     | Frequência         | Duração      | Efeitos                                  |
 | -------------------------- | ------------------ | ------------ | ---------------------------------------- |
-| **💀 Castelo Amaldiçoado** | Dia 105 (Ciclo 3)  | Até derrotar | Herói caído vira Rei Vilão + exército    |
+| **💀 Castelo Amaldiçoado** | Dia 5 (Ciclo 3)    | Até derrotar | Herói caído vira Rei Vilão + exército    |
 | **🐊 Leviatã Desperta**    | Se há água         | Boss fight   | Boss aquático gigante bloqueia navegação |
 | **🧛 Nêmesis Ressurge**    | Após matar Nêmesis | Boss fight   | Nêmesis volta 2x mais forte              |
 
@@ -2293,7 +2293,7 @@ Jogador: /send gold 500 posto_norte
 | P1: CAIXA DE CORREIO|     P2: LEITURA DE MENSAGEM              | P3: PERFIL DO ALVO  |
 | > CAIXA DE ENTRADA  | DE: Sir Kaelen (Guerreiro)               | [IMG] Kaelen        |
 | [1] Sir Kaelen (N)  | PARA: Vossa Majestade                    | (Avatar)            |
-|     "Sobre o Ouro"  | DATA: Dia 45 - 14:02                     | Status: EM COMBATE  |
+|     "Sobre o Ouro"  | DATA: Dia 4 - 14:02                      | Status: EM COMBATE  |
 |     14:02           | ASSUNTO: Re: Covardia                    | Humor: Irritado     |
 |                     |                                          | Lealdade: 45% (Baixa|
 | [2] Lila Rogue      | "Majestade, com todo o respeito, chamar  | Última Carta:       |
@@ -2396,7 +2396,7 @@ P3: PERFIL DO ALVO
 | Recebidas dele: 3                    |
 |                                      |
 | Última carta:                        |
-| Data: Há 2 dias (Dia 43)             |
+| Data: Há 2 dias (Dia 2)              |
 | Assunto: "Sobre o Ouro"              |
 | Resposta: Ignorada por ele           |
 | Tom: Neutro                          |
@@ -2510,16 +2510,16 @@ const tendencia =
 **Exemplo de Histórico:**
 
 ```
-Carta #1 (Dia 10): Você pediu para atacar Goblins
+Carta #1 (Dia 1): Você pediu para atacar Goblins
   Resposta: "Com prazer, Majestade!" (Feliz)
 
-Carta #2 (Dia 15): Você elogiou a vitória dele
+Carta #2 (Dia 2): Você elogiou a vitória dele
   Resposta: "Obrigado!" (+10 Lealdade)
 
-Carta #3 (Dia 20): Você o chamou de covarde
+Carta #3 (Dia 3): Você o chamou de covarde
   Resposta: "QUE?! Como ousa!" (-20 Lealdade)
 
-Carta #4 (Dia 43): Pediu desculpas
+Carta #4 (Dia 4): Pediu desculpas
   Resposta: [IGNORADA] (ainda irritado)
 ```
 
@@ -2792,20 +2792,20 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 +----------------------+--------------------------------------------------+------------------+
 | P1: ÍNDICE CAPÍTULOS |         P2: LEITOR PRINCIPAL                      | P3: TIMELINE     |
 |                      |                                                  |                  |
-| 📖 CRÔNICAS DO REINO | ┌─────────────────────────────────────────────┐  | [Dia 1-5]        |
+| 📖 CRÔNICAS DO REINO | ┌─────────────────────────────────────────────┐  | [Dia 1-2]        |
 |                      | │  CAPÍTULO 1: Os Primeiros Passos            │  | [Banner Mini]    |
-| > Prólogo (D1)       | │  Dias 1-5 | 5 minutos reais                  │  |                  |
-| > Cap 1 (D1-5)   ✓   | └─────────────────────────────────────────────┘  | [Dia 6-10]       |
-| > Cap 2 (D6-10)  ✓   |                                                  | [Banner Mini]    |
-| > Cap 3 (D11-15) ✓   | [BANNER GERADO POR IA]                           |                  |
-| > Cap 4 (D16-20) ⏳   | ╔════════════════════════════════════════════╗  | [Dia 11-15]      |
+| > Prólogo (D1)       | │  Dias 1-2 | 5 minutos reais                  │  |                  |
+| > Cap 1 (D1-2)   ✓   | └─────────────────────────────────────────────┘  | [Dia 3-4]        |
+| > Cap 2 (D3-4)   ✓   |                                                  | [Banner Mini]    |
+| > Cap 3 (D5-6)   ✓   | [BANNER GERADO POR IA]                           |                  |
+| > Cap 4 (D7-8)   ⏳   | ╔════════════════════════════════════════════╗  | [Dia 5-6]        |
 |   (Gerando...)       | ║ Imagem: Vila ao amanhecer, 3 heróis saindo ║  | [Banner Mini]    |
 |                      | ║ da taverna, floresta ao fundo, estilo      ║  |                  |
-| > Cap 5 (D21-25) 🔒   | ║ medieval fantasy art                       ║  | ... (40 total)   |
+| > Cap 5 (D9+)    🔒   | ║ medieval fantasy art                       ║  | ... (40 total)   |
 |   (Aguardando)       | ╚════════════════════════════════════════════╝  |                  |
 |                      |                                                  |                  |
-| Total: 40/200 caps  | O reino despertou sob o sol da primavera. Três   |                  |
-| Tempo: 3h20min      | almas corajosas responderam ao chamado do        |                  |
+| Total: 40 caps       | O reino despertou sob o sol da primavera. Três   |                  |
+| Tempo: 2h00min       | almas corajosas responderam ao chamado do        |                  |
 |                      | Majesty: Sir Kaelen, um guerreiro de honra       |                  |
 |                      | inabalável; Lila, uma ladina astuta demais para  |                  |
 |                      | seu próprio bem; e Gandalf, cujo cajado brilhava |                  |
@@ -2822,7 +2822,7 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 +----------------------+--------------------------------------------------+------------------+
 | P4: ESTATÍSTICAS     |      P5: EVENTOS-CHAVE DO CAPÍTULO               | P6: EXPORTAÇÃO   |
 |                      |                                                  |                  |
-| Período: Dias 1-5    | 🏆 MAIS IMPORTANTE:                              | [📄] Exportar PDF|
+| Período: Dias 1-2    | 🏆 MAIS IMPORTANTE:                              | [📄] Exportar PDF|
 | Tempo real: 5min     | > Primeiro Kill Steal (Lila vs Kaelen)           | [🔗] Compartilhar|
 |                      |   Affinity: +40 → +25                            | [✏️] Editar Texto|
 | Kills: 15            |                                                  | [🎨] Regerar Img |
@@ -2835,7 +2835,7 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 |                      P7: PROMPT DO CRONISTA (IA)                                          |
 | Sistema: "Resuma os eventos dos últimos 5 minutos em um parágrafo estilo narrativa épica  |
 |          medieval. Tom: Neutro, observador. Foco: Drama social e combate. Limite: 150     |
-|          palavras. Contexto: Dia 1-5, Ciclo Primavera, 3 heróis novos."                    |
+|          palavras. Contexto: Dia 1-2, Ciclo Primavera, 3 heróis novos."                    |
 |                                                                                             |
 | IA Cronista: [Gerando...] 🤖                                                               |
 +---------------------------------------------------------------------------------------------+
@@ -3002,34 +3002,31 @@ Negative prompt: modern, anime, cartoon, low quality, blurry
 
 Os capítulos são agrupados em **Arcos Narrativos** baseados nos ciclos:
 
-#### Arco 1: "A Primavera dos Heróis" (Dias 1-50)
+#### Arco 1: "A Primavera dos Heróis" (Dias 1-2)
 
 - 10 capítulos (5min cada = 50min real)
 - Tom: Esperançoso, introdutório
 - Eventos típicos: Primeiros combates, formação de amizades, construção inicial
 
-#### Arco 2: "O Verão Vermelho" (Dias 51-100)
+#### Arco 2: "O Verão Vermelho" (Dias 3-4)
 
 - 10 capítulos
 - Tom: Conflitos aumentam, guerras intensas
 - Eventos típicos: Invasões, Kill Steals, primeira morte de herói
 
-#### Arco 3: "O Inverno do Desespero" (Dias 101-150)
+#### Arco 3: "O Inverno do Desespero" (Dias 5-6)
 
 - 10 capítulos
-- Tom: Sombrio, tens
-
-o, sobrevivência
-
+- Tom: Sombrio, tenso, sobrevivência
 - Eventos típicos: Fome, traições, Lua de Sangue
 
-#### Arco 4: "O Apocalipse Final" (Dias 151-200)
+#### Arco 4: "O Apocalipse Final" (Dias 7-8+)
 
-- 10 capítulos
+- 10 capítulos (ou mais, indefinido)
 - Tom: Épico, climático, resolução
 - Eventos típicos: Boss final, redenções, vitória ou derrota
 
-**Total:** 40 capítulos para uma partida completa de 200 dias (3h20min de jogo real)
+**Total:** ~40 capítulos para uma partida completa de 8 dias (2h de jogo real)
 
 ---
 
@@ -3044,7 +3041,7 @@ o, sobrevivência
 │                                             │
 │    Uma História de Heroes of Majesty        │
 │    Partida iniciada em: 18/01/2026          │
-│    Duração: 200 dias (3h 45min)             │
+│    Duração: 8 dias (2h 00min)               │
 │                                             │
 └─────────────────────────────────────────────┘
 
@@ -3061,12 +3058,12 @@ ainda pulsava nos corações dos bravos...
 ---
 
 ARCO I: A PRIMAVERA DOS HERÓIS
-Dias 1-50
+Dias 1-2
 
 ---
 
 CAPÍTULO 1: Os Primeiros Passos
-Dias 1-5
+Dias 1-2
 
 [BANNER 1]
 
@@ -3081,7 +3078,7 @@ Estatísticas do Capítulo:
 ---
 
 CAPÍTULO 2: {Título gerado por IA}
-Dias 6-10
+Dias 3-4
 
 [BANNER 2]
 

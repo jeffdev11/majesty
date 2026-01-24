@@ -28,7 +28,7 @@ O mundo de Heroes of Majesty funciona como um **organismo pulsante** onde o temp
 - **Fluxo Contínuo:** O jogo roda em tempo real assistível, onde cada evento gera uma cadeia de causa e efeito imediata
 - **Reatividade Orgânica:** Se um herói derrota um monstro perto de uma vila, a segurança aumenta e outros heróis mudam suas rotas de patrulha
 - **Cérebro Autônomo:** Cada entidade é regida por uma Máquina de Estados Finitos (FSM), garantindo que estejam sempre focadas em uma tarefa lógica (explorar, atacar, fugir, descansar) sem necessidade de input manual
-- **Ciclos Temporais:** A progressão é marcada por 4 ciclos de 50 dias, onde biomas, estações e a dificuldade dos monstros são drasticamente alterados
+- **Ciclos Temporais:** A progressão é marcada por 4 ciclos de 2 dias, onde biomas, estações e a dificuldade dos monstros são drasticamente alterados
 
 ---
 

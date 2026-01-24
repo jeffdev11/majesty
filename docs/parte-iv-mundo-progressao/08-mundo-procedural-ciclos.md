@@ -54,15 +54,15 @@ Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 
 ---
 
-## 8.2 Os 4 Ciclos de 50 Dias: Progressão Temporal
+## 8.2 Os 4 Ciclos de 2 Dias: Progressão Temporal
 
 ### Estrutura da Partida
 
-Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
+Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 minutos** (Total: 2 horas).
 
 ```
 ┌─────────────────────────────────────────────┐
-│ CICLO 1: "Primavera" (Dias 1-50)           │
+│ CICLO 1: "Primavera" (Dias 1-2)            │
 │ - Monstros: Tier 1 (Goblins, Lobos)        │
 │ - Clima: Ameno, chuvas leves                │
 │ - Eventos: Tutoriais, expansão básica      │
@@ -70,7 +70,7 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
-│ CICLO 2: "Verão Vermelho" (Dias 51-100)    │
+│ CICLO 2: "Verão Vermelho" (Dias 3-4)       │
 │ - Monstros: Tier 2 (Ogros, Trolls)         │
 │ - Clima: Calor extremo, tempestades        │
 │ - Eventos: Invasões massivas, traições     │
@@ -78,7 +78,7 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
-│ CICLO 3: "Inverno" (Dias 101-150)          │
+│ CICLO 3: "Inverno" (Dias 5-6)              │
 │ - Monstros: Tier 2-3 (Gigantes, Liches)    │
 │ - Clima: Neve, nevasca, gelo               │
 │ - Eventos: Fome, primeira Lua de Sangue    │
@@ -86,17 +86,18 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
-│ CICLO 4: "Apocalipse" (Dias 151-200)       │
+│ CICLO 4: "Apocalipse" (Dias 7-8+)          │
 │ - Monstros: Tier 3 (Dragões, Demônios)     │
 │ - Clima: Lua de Sangue, Eclipse            │
 │ - Evento Final: Castelo Amaldiçoado        │
 │ - Tom: Épico, climático, fim dos tempos    │
+│ - Duração: Indefinida (até vitória/derrota)│
 └─────────────────────────────────────────────┘
 ```
 
 ---
 
-### CICLO 1: "PRIMAVERA" (Dias 1-50)
+### CICLO 1: "PRIMAVERA" (Dias 1-2)
 
 #### Clima e Ambiente
 
@@ -128,26 +129,24 @@ Cada partida dura **200 dias** divididos em **4 ciclos** de 50 dias cada.
 
 - ☀️ **Sol Intenso** (A cada 7 dias): +20% Stamina heróis, +10% farm yield
 - 🌧️ **Chuva de Primavera** (Aleatório): +30% regeneração de recursos naturais
-- 🎭 **Festival da Vila** (Dia 30): +20 Moral global, heróis descansam
-- 💰 **Caravana Mercante** (Dias 15, 35): -30% preços na loja
+- 🎭 **Festival da Vila** (Dia 1): +20 Moral global, heróis descansam
+- 💰 **Caravana Mercante** (Dia 2): -30% preços na loja
 
 **Eventos Raros:**
 
-- 🏆 **Torneio de Heróis** (Dia 45): Competição amistosa, +XP para vencedor
+- 🏆 **Torneio de Heróis** (Dia 2 - Tarde): Competição amistosa, +XP para vencedor
 - 🌈 **Arco-Íris Místico** (5% chance): Spawna baú lendário
 
 #### Progressão Esperada
 
 ```
-Dia 1-10:   Recrutar 3-5 heróis, construir primeiras guildas
-Dia 11-25:  Expandir para 8 heróis, primeiro posto avançado
-Dia 26-40:  Conflitos sociais começam (rivalidades, disputas de loot)
-Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
+Dia 1:      Recrutar 3-5 heróis, construir primeiras guildas. Festival da Vila.
+Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para Ciclo 2.
 ```
 
 ---
 
-### CICLO 2: "VERÃO VERMELHO" (Dias 51-100)
+### CICLO 2: "VERÃO VERMELHO" (Dias 3-4)
 
 #### Clima e Ambiente
 
@@ -179,8 +178,8 @@ Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
 
 - 🌪️ **Tempestade de Areia** (A cada 5 dias): -50% visibilidade, monstros +30% stats
 - 🔥 **Onda de Calor** (Aleatório): Heróis perdem -2 HP/min se não beberem água
-- ⚔️ **Invasão Ogro** (Dias 60, 85): 15-25 Ogros atacam capital
-- 🌋 **Terremoto** (Dias 70, 95): Abre novas passagens, 5% chance destruir prédio
+- ⚔️ **Invasão Ogro** (Dia 3): 15-25 Ogros atacam capital
+- 🌋 **Terremoto** (Dia 4): Abre novas passagens, 5% chance destruir prédio
 
 **Eventos Raros:**
 
@@ -190,15 +189,13 @@ Dia 41-50:  Preparação para Ciclo 2, upgrades essenciais
 #### Progressão Esperada
 
 ```
-Dia 51-60:  Adaptação ao Tier 2, primeiras mortes de herói
-Dia 61-75:  Traições começam, conflitos PvP aumentam
-Dia 76-90:  Batalhas épicas, redenções e vinganças
-Dia 91-100: Boss intermediário, preparação para Inverno
+Dia 3:      Adaptação ao Tier 2, primeiras mortes de herói. Defesa contra Invasão Ogro.
+Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inverno.
 ```
 
 ---
 
-### CICLO 3: "INVERNO" (Dias 101-150) **[NOVO]**
+### CICLO 3: "INVERNO" (Dias 5-6)
 
 #### Clima e Ambiente
 
@@ -245,33 +242,36 @@ Dia 91-100: Boss intermediário, preparação para Inverno
 **Eventos Frequentes:**
 
 - ❄️ **Nevasca** (A cada 3 dias): -75% velocidade todos, visibilidade zero
-- 🧊 **Rio Congelado** (Dia 110): Abre atalhos no mapa, mas perigoso
-- 👻 **Noite dos Mortos** (Dia 120): Heróis mortos reanimam como inimigos
-- 🌙 **Primeira Lua de Sangue** (Dia 125): Todos monstros +100% stats, Boss spawna
+- 🧊 **Rio Congelado** (Dia 5): Abre atalhos no mapa, mas perigoso
+- 👻 **Noite dos Mortos** (Dia 6): Heróis mortos reanimam como inimigos
+- 🌙 **Primeira Lua de Sangue** (Dia 6 - Noite): Todos monstros +100% stats, Boss spawna
 
 **Eventos Raros:**
 
 - 🏔️ **Avalanche** (15% chance): Destrói postos em montanhas
-- 🧛 **Vampiro Desperta** (Dia 140): Boss vampiro que converte heróis
+- 🧛 **Vampiro Desperta** (Dia 5): Boss vampiro que converte heróis
 
 #### Progressão Esperada
 
 ```
-Dia 101-115: Choque inicial, fome mata heróis fracos
-Dia 116-130: Adaptação, fogueiras e estoques críticos
-Dia 131-145: Primeira Lua de Sangue, perdas massivas
-Dia 146-150: Sobreviventes se preparam para Apocalipse
+Dia 5:      Choque inicial, fome mata heróis fracos. Adaptação com fogueiras.
+Dia 6:      Primeira Lua de Sangue, perdas massivas. Sobreviventes se preparam para Apocalipse.
 ```
 
 ---
 
-### CICLO 4: "APOCALIPSE" (Dias 151-200)
+### CICLO 4: "APOCALIPSE" (Dias 7-8+)
 
 #### Clima e Ambiente
 
 **Paleta de Cores:** Vermelho sangue, preto, roxo necrótico
 **Música:** Coral épico, percussão de guerra, trombetas do fim
 **Descrição:** _"O céu sangra. A terra se parte. Os mortos marcham. Este é o fim... ou a redenção?"_
+
+#### Duração Indefinida
+
+O Ciclo 4 inicia no Dia 7 e **não tem fim pré-determinado**. O jogo entra em modo "Morte Súbita".
+Os eventos aleatórios **PARAM**. O Boss Global assume o controle da narrativa. O jogador tem o tempo que precisar (ou conseguir sobreviver) para derrotar o Rei Vilão.
 
 #### Características
 
@@ -312,12 +312,12 @@ Dia 146-150: Sobreviventes se preparam para Apocalipse
 
 #### Eventos Globais Únicos do Ciclo 4
 
-**Eventos Garantidos:**
+**Eventos Garantidos (Timeline do Fim):**
 
-- 💀 **Castelo Amaldiçoado** (Dia 155): Herói morto vira Rei Vilão com exército
-- 🐉 **Ataque do Dragão** (Dia 170): Dragão ataca Casa Central diretamente
-- 🌙 **Lua de Sangue Dupla** (Dia 185): Monstros +200% (dobro do normal)
-- ⚔️ **Batalha Final** (Dia 195-200): Boss final + 3 tenentes + 100 monstros
+- 💀 **Castelo Amaldiçoado** (Dia 7): Herói morto vira Rei Vilão com exército
+- 🐉 **Ataque do Dragão** (Dia 8): Dragão ataca Casa Central diretamente
+- 🌙 **Lua de Sangue Dupla** (Dia 8+): Monstros +200% (dobro do normal)
+- ⚔️ **Batalha Final** (Indefinido): Boss final + 3 tenentes + 100 monstros
 
 **Eventos Raros:**
 
@@ -327,10 +327,8 @@ Dia 146-150: Sobreviventes se preparam para Apocalipse
 #### Progressão Esperada
 
 ```
-Dia 151-165: Survival mode, cada dia é uma vitória
-Dia 166-180: Redenções heroicas, últimas alianças
-Dia 181-195: Preparação para Boss final
-Dia 196-200: BATALHA FINAL - Vitória ou Derrota total
+Dia 7:      Survival mode, cada hora é uma vitória. O Boss Global se revela.
+Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória ou Derrota total.
 ```
 
 ---
@@ -357,7 +355,7 @@ Dia 196-200: BATALHA FINAL - Vitória ou Derrota total
 │                                                │
 │   🌅 FIM DO CICLO 1: PRIMAVERA                 │
 │                                                │
-│   Dias completados: 50                         │
+│   Dias completados: 2                          │
 │   Heróis vivos: 8/10                           │
 │   Reino prospera!                              │
 │                                                │
@@ -372,7 +370,7 @@ Dia 196-200: BATALHA FINAL - Vitória ou Derrota total
 │   "Compre upgrades AGORA. Prepare defesas.     │
 │    O pior ainda está por vir."                 │
 │                                                │
-│   [Continuar para Dia 51]                      │
+│   [Continuar para Dia 3]                       │
 │                                                │
 └────────────────────────────────────────────────┘
 ```
@@ -383,10 +381,10 @@ Dia 196-200: BATALHA FINAL - Vitória ou Derrota total
 
 ### Mecânica
 
-O mundo tem um **ciclo de 20 minutos** (tempo real):
+O mundo tem um **ciclo de 15 minutos** (tempo real):
 
-- **10 minutos:** Dia (seguro)
-- **10 minutos:** Noite (perigoso)
+- **8 minutos:** Dia (seguro)
+- **7 minutos:** Noite (perigoso)
 
 ### Mudanças Noturnas
 
@@ -425,7 +423,7 @@ Heróis sem **iluminação** sofrem:
 
 #### 1. Terremotos
 
-- **Frequência:** 1 a cada 15 dias
+- **Frequência:** 1 por Ciclo
 - **Efeito:** Abre novas passagens no mapa (ex: caverna bloqueada é revelada)
 - **Risco:** 5% chance de destruir edifício aleatório
 
@@ -445,7 +443,7 @@ Heróis sem **iluminação** sofrem:
 
 #### 4. Lua de Sangue
 
-- **Frequência:** Dia 100, Dia 125, Dia 150
+- **Frequência:** Dia 4, Dia 6, Dia 8
 - **Efeito:**
   - Todos monstros ganham +100% HP/Attack
   - Heróis têm -10 Moral
@@ -458,12 +456,12 @@ Heróis sem **iluminação** sofrem:
 
 ### O Castelo Amaldiçoado
 
-No **Ciclo 3** (dia 101+), um evento único acontece:
+No **Ciclo 3** (dia 5+), um evento único acontece:
 
 **Evento:** `THE_CURSED_CASTLE`
 
 ```
-[Dia 105 - 14:30]
+[Dia 5 - 14:30]
 [ALERTA CRÍTICO] Um castelo sombrio se materializou
 no horizonte. Um herói caído foi corrompido e se
 autoproclamou "Rei Vilão". Ele comanda um exército
@@ -476,7 +474,7 @@ Exército: 50 Esqueletos, 10 Necromantes
 
 ### Mecânica do Boss Final
 
-**Objetivo:** Derrotar o Rei Vilão antes do **Dia 150** (fim da partida).
+**Objetivo:** Derrotar o Rei Vilão antes do **Dia 8** (fim da partida).
 
 **Desafio:**
 
@@ -487,7 +485,7 @@ Exército: 50 Esqueletos, 10 Necromantes
 **Vitória:**
 
 ```
-[Dia 148 - 20:15]
+[Dia 7 - 20:15]
 💀 Gandalf, O Corrompido foi derrotado!
 Heróis sobreviventes: 7/12
 Reino Salvo. Partida Concluída.

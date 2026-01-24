@@ -288,9 +288,10 @@ const bossTemplate = {
 
 | Ciclo                | Tier | Monstros Comuns                 | Boss Típico  |
 | -------------------- | ---- | ------------------------------- | ------------ |
-| **1 (Dias 1-50)**    | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe   |
-| **2 (Dias 51-100)**  | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem |
-| **3 (Dias 101-150)** | T3   | Dragões, Demônios, Liches       | Rei Vilão    |
+| **1 (Dias 1-2)**     | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe   |
+| **2 (Dias 3-4)**     | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem |
+| **3 (Dias 5-6)**     | T3   | Dragões, Demônios, Liches       | Rei Vilão    |
+| **4 (Dias 7-8+)**    | T4   | *Apocalipse* (Hordas sem fim)   | **Global Boss**|
 
 ### Modificadores de Stats
 

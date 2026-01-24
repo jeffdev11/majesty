@@ -198,7 +198,7 @@ IP funciona como **mana** em ARPGs:
 
 #### 3. Temporadas/Clima Detalhado
 
-**Por quê cortamos:** Ciclos de 50 dias já cobrem progressão temporal. Clima seria redundante.
+**Por quê cortamos:** Ciclos de 2 dias já cobrem progressão temporal. Clima seria redundante.
 
 #### 4. Pets de Heróis
 

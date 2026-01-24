@@ -81,7 +81,7 @@ Objetivos em conflito:
 
 | Categoria      | Métrica                              |
 | -------------- | ------------------------------------ |
-| **Ouro Total** | Quem acumulou mais ouro em 150 dias  |
+| **Ouro Total** | Quem acumulou mais ouro em 8 dias    |
 | **Survivor**   | Quem completou com mais heróis vivos |
 | **Speedrun**   | Quem derrotou Rei Vilão mais rápido  |
 | **Pacifista**  | Menor número de mortes de heróis     |
