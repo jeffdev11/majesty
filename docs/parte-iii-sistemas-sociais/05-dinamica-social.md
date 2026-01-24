@@ -369,7 +369,6 @@ if (heroA.level - heroB.level > 5 && heroB.power > 0.7) {
 **Consequências:**
 
 - Herói B sabota missões de A (não ajuda propositalmente)
-- Herói B tenta roubar kills de A ativamente
 - Se lealdade baixa (<40%): Traição e deserção possível
 
 **Exemplo:**

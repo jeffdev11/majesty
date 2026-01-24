@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heroes of Majesty - Console Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Petrona:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-color: #0d0d16;
+        --panel-bg: rgba(20, 20, 35, 0.7);
+        --border-color: rgba(100, 110, 160, 0.3);
+        --border-gold: rgba(212, 175, 55, 0.4);
+        --text-main: #e0e6ed;
+        --text-dim: #94a3b8;
+        --accent-cyan: #4cc9f0;
+        --accent-green: #4ade80;
+        --accent-red: #f87171;
+        --accent-gold: #fbbf24;
+        --accent-purple: #c084fc;
+        --magic-glow: 0 0 15px rgba(76, 201, 240, 0.2);
+        --font-ui: "Outfit", sans-serif;
+        --font-serif: "Petrona", serif;
+        --font-mono: "Fira Code", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-gold) transparent;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at center, #1a1a2e 0%, #0d0d16 100%);
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: var(--font-ui);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        font-size: 15px;
+      }
+
+      /* --- MAGIC OVERLAY --- */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/stardust.png");
+        opacity: 0.1;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      /* --- HEADER / TABS --- */
+      header {
+        display: flex;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid var(--border-gold);
+        padding: 0 20px;
+        height: 60px;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .tab-btn {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        font-family: var(--font-ui);
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 0 20px;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+
+      .tab-btn::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background: var(--accent-gold);
+        transition: all 0.3s;
+        transform: translateX(-50%);
+        box-shadow: 0 0 10px var(--accent-gold);
+      }
+
+      .tab-btn:hover {
+        color: var(--text-main);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .tab-btn.active {
+        color: var(--accent-gold);
+      }
+
+      .tab-btn.active::after {
+        width: 80%;
+      }
+
+      .game-clock {
+        margin-left: auto;
+        color: var(--accent-gold);
+        font-weight: 600;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 8px 20px;
+        border-radius: 30px;
+        border: 1px solid var(--border-gold);
+        box-shadow: var(--magic-glow);
+      }
+
+      /* --- MAIN AREA --- */
+      main {
+        flex: 1;
+        display: flex;
+        position: relative;
+        padding: 15px;
+        gap: 15px;
+      }
+
+      .screen {
+        display: none;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .screen.active {
+        display: flex;
+      }
+
+      /* --- PANELS --- */
+      .panel {
+        background: var(--panel-bg);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 15px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        transition: border-color 0.3s;
+      }
+
+      .panel:hover {
+        border-color: rgba(212, 175, 55, 0.3);
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border-gold),
+          transparent
+        );
+      }
+
+      .panel-header {
+        font-size: 13px;
+        color: var(--accent-gold);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .panel-content {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      /* --- TYPOGRAPHY --- */
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-ui);
+        color: var(--accent-gold);
+        margin: 0 0 10px 0;
+        letter-spacing: 0.5px;
+      }
+
+      /* --- F1 LAYOUT --- */
+      #f1-screen .grid-container {
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 80px 1fr 240px;
+        grid-template-areas:
+          "stats stats stats"
+          "map logical status"
+          "logs logs status";
+      }
+
+      #f1-p3 { grid-area: stats; }
+      #f1-p1 { grid-area: map; }
+      #f1-p2 { grid-area: logical; }
+      #f1-lr1 { grid-area: logs; }
+      #f1-p8 { grid-area: status; }
+
+      /* --- F2 LAYOUT (Admin) --- */
+      #f2-screen .grid-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 250px 200px 150px 60px 1fr;
+        grid-template-areas:
+          "build escola"
+          "stock econ"
+          "budget preview"
+          "actions actions"
+          "logs logs";
+      }
+      #f2-p1 { grid-area: build; }
+      #f2-p2 { grid-area: escola; }
+      #f2-p3 { grid-area: stock; }
+      #f2-p4 { grid-area: econ; }
+      #f2-p5 { grid-area: budget; }
+      #f2-p6 { grid-area: preview; }
+      #f2-p7 { grid-area: actions; }
+      #f2-p8 { grid-area: logs; }
+
+      /* --- F3 LAYOUT (Library) --- */
+      #f3-screen .grid-container {
+        grid-template-columns: 250px 1fr 300px;
+        grid-template-rows: 1fr 150px 60px;
+        grid-template-areas:
+          "index reader stats"
+          "meta history filters"
+          "search search search";
+      }
+      #f3-p1 { grid-area: index; }
+      #f3-p2 { grid-area: reader; }
+      #f3-p3 { grid-area: stats; }
+      #f3-p4 { grid-area: meta; }
+      #f3-p5 { grid-area: history; }
+      #f3-p6 { grid-area: filters; }
+      #f3-p7 { grid-area: search; }
+
+      /* --- F4 LAYOUT (Map) --- */
+      #f4-screen .grid-container {
+        grid-template-columns: 250px 1fr 250px;
+        grid-template-rows: 1fr 200px 80px;
+        grid-template-areas:
+          "domains map forecast"
+          "node log commands"
+          "strategy strategy strategy";
+      }
+      #f4-p1 { grid-area: domains; }
+      #f4-p2 { grid-area: map; }
+      #f4-p3 { grid-area: forecast; }
+      #f4-p4 { grid-area: node; }
+      #f4-p5 { grid-area: log; }
+      #f4-p6 { grid-area: commands; }
+      #f4-p7 { grid-area: strategy; }
+
+      /* --- F5 LAYOUT (Mail) --- */
+      #f5-screen .grid-container {
+        grid-template-columns: 250px 1fr 250px;
+        grid-template-rows: 1fr 200px 80px;
+        grid-template-areas:
+          "inbox reader profile"
+          "contacts editor actions"
+          "status status status";
+      }
+      #f5-p1 { grid-area: inbox; }
+      #f5-p2 { grid-area: reader; }
+      #f5-p3 { grid-area: profile; }
+      #f5-p4 { grid-area: contacts; }
+      #f5-p5 { grid-area: editor; }
+      #f5-p6 { grid-area: actions; }
+      #f5-p7 { grid-area: status; }
+
+      /* --- F6 LAYOUT (Chronicles) --- */
+      #f6-screen .grid-container {
+        grid-template-columns: 250px 1fr 250px;
+        grid-template-rows: 1fr 150px 80px;
+        grid-template-areas:
+          "index reader timeline"
+          "stats events export"
+          "prompt prompt prompt";
+      }
+      #f6-p1 { grid-area: index; }
+      #f6-p2 { grid-area: reader; }
+      #f6-p3 { grid-area: timeline; }
+      #f6-p4 { grid-area: stats; }
+      #f6-p5 { grid-area: events; }
+      #f6-p6 { grid-area: export; }
+      #f6-p7 { grid-area: prompt; }
+
+      /* --- COMMON COMPONENTS --- */
+      .log-entry {
+        margin-bottom: 8px;
+        border-left: 3px solid transparent;
+        padding: 4px 12px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 0 8px 8px 0;
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+      .log-time {
+        color: var(--text-dim);
+        margin-right: 8px;
+        font-weight: 500;
+        font-size: 11px;
+      }
+
+      .log-entry.combat {
+        border-left-color: var(--accent-red);
+        background: linear-gradient(
+          90deg,
+          rgba(248, 113, 113, 0.1),
+          transparent
+        );
+      }
+      .log-entry.social {
+        border-left-color: var(--accent-gold);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 15px;
+      }
+      .log-entry.system {
+        border-left-color: var(--accent-cyan);
+        color: #c0e0f0;
+      }
+      .log-entry.heal {
+        border-left-color: var(--accent-green);
+        background: linear-gradient(
+          90deg,
+          rgba(74, 222, 128, 0.1),
+          transparent
+        );
+      }
+
+      .ascii-map {
+        font-size: 22px;
+        color: var(--text-dim);
+        letter-spacing: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      .status-bar {
+        background: rgba(0, 0, 0, 0.5);
+        height: 8px;
+        width: 100%;
+        margin-top: 6px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+      .status-fill {
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .hp-fill {
+        background: linear-gradient(90deg, #ef4444, #f87171);
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+      }
+      .mp-fill {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+      }
+
+      .list-item {
+        padding: 12px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .list-item:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: var(--border-gold);
+        transform: translateX(5px);
+      }
+      .list-item.active {
+        border-color: var(--accent-gold);
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), transparent);
+        box-shadow: inset 4px 0 0 var(--accent-gold);
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: var(--accent-gold);
+        border: 1px solid var(--border-gold);
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family: var(--font-ui);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.2s;
+      }
+      .btn:hover {
+        background: var(--accent-gold);
+        color: #1a1a2e;
+        box-shadow: 0 0 15px var(--accent-gold);
+      }
+
+      input[type="text"] {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border-color);
+        color: var(--accent-cyan);
+        font-family: inherit;
+        padding: 12px 20px;
+        border-radius: 30px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      input[type="text"]:focus {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 10px rgba(76, 201, 240, 0.3);
+      }
+
+      /* --- VISUAL SCENE --- */
+      .visual-scene {
+        height: 100px;
+        background: url("https://www.transparenttextures.com/patterns/dark-leather.png"),
+          radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 40px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-gold);
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+      }
+      .sprite {
+        font-size: 42px;
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
+        position: relative;
+        transition: all 0.3s;
+      }
+      .sprite:hover {
+        transform: scale(1.2);
+      }
+      .damage-pop {
+        position: absolute;
+        color: var(--accent-red);
+        font-size: 16px;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: 800;
+        text-shadow: 0 0 5px #000;
+        animation: float-up 1s ease-out forwards;
+      }
+      @keyframes float-up {
+        0% {
+          transform: translate(-50%, 0);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -30px);
+          opacity: 0;
+        }
+      }
+
+      /* --- F6 CHRONICLES SPECIFIC --- */
+      #f6-screen p {
+        font-family: var(--font-serif);
+        font-size: 17px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: #d1d5db;
+      }
+      #f6-screen strong {
+        color: var(--accent-gold);
+        font-family: var(--font-ui);
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div
+        style="margin-right: 20px; color: var(--accent-gold); font-weight: 900; filter: drop-shadow(0 0 5px var(--accent-gold)); letter-spacing: 2px;"
+      >
+        <span style="font-size: 24px;">👑</span> HEROES OF MAJESTY
+      </div>
+      <button class="tab-btn active" onclick="switchTab('f1')">[F1] OPS</button>
+      <button class="tab-btn" onclick="switchTab('f2')">[F2] ADMIN</button>
+      <button class="tab-btn" onclick="switchTab('f3')">[F3] LIBRARY</button>
+      <button class="tab-btn" onclick="switchTab('f4')">[F4] MAP</button>
+      <button class="tab-btn" onclick="switchTab('f5')">[F5] MAIL</button>
+      <button class="tab-btn" onclick="switchTab('f6')">[F6] CHRONIC</button>
+      <div class="game-clock">
+        <span style="color:var(--text-dim)">📅</span> DIA 45 | <span style="color:var(--text-dim)">⏳</span> 14:35 | PRIMAVERA | <span style="color:var(--accent-gold)">💰</span> 1,250g | <span style="color:var(--accent-green)">😊</span> 75%
+      </div>
+    </header>
+
+    <main>
+      <!-- F1 SCREEN -->
+      <div id="f1-screen" class="screen active">
+        <div class="grid-container">
+          <div id="f1-p3" class="panel">
+            <div style="display: flex; gap: 25px; align-items: center; justify-content: center; width: 100%;">
+              <div style="text-align: center;">
+                <div style="color: var(--text-dim); font-size: 11px; margin-bottom: 2px;">REINO</div>
+                <div style="color: var(--accent-gold); font-weight: 800;"><span style="font-size: 20px;">🏰</span> LVL 4</div>
+              </div>
+              <div style="height: 30px; width: 1px; background: var(--border-color);"></div>
+              <div style="text-align: center;">
+                <div style="color: var(--text-dim); font-size: 11px; margin-bottom: 2px;">TRIBUTO</div>
+                <div style="color: var(--accent-cyan); font-weight: 800;"><span style="font-size: 20px;">⚖️</span> 10%</div>
+              </div>
+              <div style="height: 30px; width: 1px; background: var(--border-color);"></div>
+              <div style="text-align: center;">
+                <div style="color: var(--text-dim); font-size: 11px; margin-bottom: 2px;">STATUS</div>
+                <div style="color: var(--accent-green); font-weight: 800;"><span style="font-size: 20px;">🛡️</span> SEGURO</div>
+              </div>
+              <div style="height: 30px; width: 1px; background: var(--border-color);"></div>
+              <div style="text-align: center;">
+                <div style="color: var(--text-dim); font-size: 11px; margin-bottom: 2px;">INFLUÊNCIA</div>
+                <div style="color: var(--accent-purple); font-weight: 800;"><span style="font-size: 20px;">⚡</span> 50/100</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="f1-p1" class="panel">
+            <div class="panel-header">P1: MAPA TÁTICO (GRID 10x10)</div>
+            <div style="display: grid; grid-template-columns: repeat(10, 30px); gap: 2px; justify-content: center; margin-top:10px;">
+               <!-- 10x10 Grid Mockup (Sample) -->
+               <!-- Line 1 -->
+               <div class="tile empty">.</div><div class="tile empty">.</div><div class="tile struct">T</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile mt">M</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div>
+               <!-- Line 2 -->
+               <div class="tile empty">.</div><div class="tile forest">F</div><div class="tile forest">F</div><div class="tile forest">F</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile mt">M</div><div class="tile mt">M</div><div class="tile empty">.</div><div class="tile empty">.</div>
+               <!-- Line 3 -->
+               <div class="tile empty">.</div><div class="tile forest">F</div><div class="tile capital">C</div><div class="tile forest">F</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div>
+               <!-- Lines 4-10 (Simplified for mockup) -->
+               <div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div>
+               <div class="tile empty">.</div><div class="tile empty">.</div><div class="tile hero">H</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile enemy">E</div><div class="tile empty">.</div><div class="tile empty">.</div><div class="tile empty">.</div>
+               
+               <!-- Filler rows -->
+               <div style="grid-column: span 10; text-align:center; color:#444; font-size:10px;">... (Rest of Grid) ...</div>
+            </div>
+            <!-- Add some inline styles for tiles for F1 specifically if needed, or rely on global -->
+            <style>
+               #f1-p1 .tile { width:30px; height:30px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; font-size:12px; }
+               #f1-p1 .tile.forest { color:var(--accent-green); }
+               #f1-p1 .tile.mt { color:#888; }
+               #f1-p1 .tile.capital { border:1px solid var(--accent-gold); color:var(--accent-gold); }
+               #f1-p1 .tile.hero { background:var(--accent-cyan); color:#000; }
+               #f1-p1 .tile.enemy { background:var(--accent-red); color:#fff; }
+               #f1-p1 .tile.struct { color:var(--accent-purple); }
+            </style>
+            <div
+              style="margin-top: 10px; font-size: 12px; color: var(--text-dim)"
+            >
+              Legenda: 🏰Vila ⚔️Combate 💀Boss 🌲Floresta 🌊Água
+            </div>
+          </div>
+
+          <div id="f1-p2" class="panel">
+            <div class="panel-header">P2: MAPA LÓGICO</div>
+            <div class="panel-content">
+              <div class="list-item active">
+                <strong>⚔️ FLORESTA SOMBRIA [3,3]</strong><br />
+                <small
+                  >├─ Sir Kaelen (HP 80%)
+                  <span class="blinking" style="color: var(--accent-red)"
+                    >EM COMBATE</span
+                  ></small
+                ><br />
+                <small>├─ Lila Rogue (HP 40%)</small><br />
+                <small>└─ VS 💀 Ogro Rei</small>
+              </div>
+              <div class="list-item">
+                <strong>🏰 VILA REAL [0,0]</strong><br />
+                <small>├─ Gandalf (Lendo)</small><br />
+                <small>└─ Elara (Comprando)</small>
+              </div>
+            </div>
+          </div>
+
+          <div id="f1-p8" class="panel">
+            <div class="panel-header">P8: STATUS ATIVOS</div>
+            <div class="panel-content">
+              <div style="color: var(--accent-green); margin-bottom: 5px">
+                🔼 <strong>Fúria</strong> (Kaelen)<br />+20% ATK [42s]
+              </div>
+              <div style="color: var(--accent-red); margin-bottom: 5px">
+                🔽 <strong>Veneno</strong> (Lila)<br />-2 HP/s [15s]
+              </div>
+              <div style="color: var(--accent-gold); margin-bottom: 5px">
+                ⚠️ <strong>Queimando</strong> (Ogro)<br />-5 HP/s [8s]
+              </div>
+            </div>
+          </div>
+
+          <div id="f1-lr1" class="panel">
+            <div class="panel-header">
+              LR1: REGISTRO DE COMBATE - FLORESTA SOMBRIA
+            </div>
+
+            <!-- Visual Scene Mockup -->
+            <div class="visual-scene">
+              <div class="sprite" style="transform: scaleX(-1)">🧙‍♂️</div>
+              <div class="sprite" style="transform: scaleX(-1)">
+                🧝‍♀️
+                <div class="damage-pop">-2</div>
+              </div>
+              <div style="color: #666">VS</div>
+              <div class="sprite">
+                👹
+                <div class="damage-pop" style="color: gold; font-size: 20px">
+                  -142!
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-content" id="log-content">
+              <div class="log-entry combat">
+                <span class="log-time">[14:32]</span> ⚔️ [Sir Kaelen] ataca Ogro
+                Rei (85 dano).
+              </div>
+              <div class="log-entry combat">
+                <span class="log-time">[14:33]</span> ⚔️ [Lila] usa
+                <strong>*Apunhalar Crítico*</strong> → Ogro (142 dano!)
+                <span style="color: gold">CRÍTICO</span>
+              </div>
+              <div class="log-entry system">
+                <span class="log-time">[14:33]</span> ⚠️ Ogro Rei está FURIOSO
+                (+50% Dano).
+              </div>
+              <div class="log-entry combat">
+                <span class="log-time">[14:34]</span> ⚔️ Ogro Rei ataca Lila
+                (Esquiva! -0 dano).
+              </div>
+              <div class="log-entry social">
+                <span class="log-time">[14:35]</span> 💬 [Kaelen]: "Lila,
+                cuidado com o flanco!"
+              </div>
+              <div class="log-entry social">
+                <span class="log-time">[14:35]</span> 💬 [Lila]: "Cuide do seu
+                nariz, lata velha!"
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 5px;
+                border-top: 1px solid #333;
+                padding-top: 5px;
+                display: flex;
+              "
+            >
+              <input
+                type="text"
+                placeholder="/say [msg] ou /cast [spell]"
+                style="flex: 1"
+              />
+              <button class="btn">ENVIAR CORVO (/)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F2 SCREEN -->
+      <div id="f2-screen" class="screen">
+        <div class="grid-container">
+          <div id="f2-p1" class="panel">
+            <div class="panel-header">P1: BUILD MENU</div>
+            <div class="list-item">1. Guilda Guerreiros [LVL 2]</div>
+            <div class="list-item active">
+              2. Guilda Magos [LVL 1] (UPGRADE)
+            </div>
+            <div class="list-item">3. Torre de Vigia [LVL 3]</div>
+            <div class="list-item">4. Mercado [LVL 2]</div>
+            <div class="list-item" style="color: gray">
+              5. Guilda Necromantes (Bloq)
+            </div>
+          </div>
+
+          <div id="f2-p2" class="panel">
+            <div class="panel-header">P2: ESCOLA ESTOICA</div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+              <div style="font-size: 30px">🧙‍♂️</div>
+              <div>
+                <h3 style="margin:0">GANDALF (Lvl 6)</h3>
+                <small>Trait: INTELECTO (0.4)</small>
+              </div>
+            </div>
+            <div class="status-bar" style="margin: 10px 0;">
+              <div class="status-fill mp-fill" style="width: 70%"></div>
+            </div>
+            <button class="btn" style="width: 100%;">TREINAR (300g)</button>
+          </div>
+
+          <div id="f2-p3" class="panel">
+            <div class="panel-header">P3: STOCK</div>
+            <div class="list-item">
+              Poção Vida <span style="float: right; color: var(--accent-red)">12/50</span>
+              <div class="status-bar"><div class="status-fill hp-fill" style="width: 24%"></div></div>
+            </div>
+            <div class="list-item">
+              Poção Mana <span style="float: right; color: var(--accent-cyan)">32/50</span>
+              <div class="status-bar"><div class="status-fill mp-fill" style="width: 64%"></div></div>
+            </div>
+          </div>
+
+          <div id="f2-p4" class="panel">
+            <div class="panel-header">P4: ECONOMIA</div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span>RECEITA:</span> <span style="color:var(--accent-green)">+450g</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span>DESPESA:</span> <span style="color:var(--accent-red)">-320g</span>
+            </div>
+            <hr style="border-color: #333">
+            <div style="display:flex; justify-content:space-between; font-weight:bold;">
+              <span>LUCRO:</span> <span style="color:var(--accent-gold)">+130g</span>
+            </div>
+          </div>
+
+          <div id="f2-p5" class="panel">
+            <div class="panel-header">P5: ORÇAMENTO</div>
+            <div class="list-item">[A] Obras: 500g (Pendente)</div>
+            <div class="list-item">[B] Manutenção: 150g (OK)</div>
+            <div class="list-item">[C] Salários: 100g (ATRASO!)</div>
+          </div>
+
+          <div id="f2-p6" class="panel">
+            <div class="panel-header">P6: PREVIEW</div>
+            <h3 style="color:var(--accent-cyan)">Guilda Magos</h3>
+            <p>Permite treinar magos e pesquisar feitiços de área. Custo Upgrade: 500g.</p>
+          </div>
+
+          <div id="f2-p7" class="panel" style="display: flex; gap: 10px; align-items: center;">
+            <span style="color: var(--accent-gold); font-weight:bold;">⚡ AÇÕES:</span>
+            <button class="btn">[R] REPARAR</button>
+            <button class="btn">[S] REABASTECER</button>
+            <button class="btn">[P] PAGAR SALÁRIOS</button>
+          </div>
+
+          <div id="f2-p8" class="panel">
+            <div class="panel-header">P8: LOG DE SERVIÇO</div>
+            <div style="font-family: monospace; font-size: 12px; color: #ccc;">
+              <div>[14:30] 🏗️ Guilda Magos concluída (300g, 60s)</div>
+              <div>[14:32] 🔨 Taverna Lvl 2 em construção (45s restantes)</div>
+              <div>[14:35] ⚙️ Manutenção de rotina em torres concluída (-30g)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F3 SCREEN -->
+      <div id="f3-screen" class="screen">
+        <div class="grid-container">
+          <div id="f3-p1" class="panel">
+            <div class="panel-header">P1: ÍNDICE</div>
+            <div class="list-item active">▼ HERÓIS (4)</div>
+            <div class="list-item" style="padding-left:15px; color:var(--accent-cyan)">[1] Sir Kaelen</div>
+            <div class="list-item" style="padding-left:15px;">[2] Lila Rogue</div>
+            <div class="list-item">▶ MEMORIAL (3)</div>
+            <div class="list-item">▶ BESTIÁRIO (23)</div>
+            <div class="list-item">▶ HISTÓRICO</div>
+          </div>
+
+          <div id="f3-p2" class="panel">
+            <div class="panel-header">P2: LEITOR DE DADOS</div>
+            <h2 style="border-bottom: 1px solid var(--accent-cyan); padding-bottom: 5px;">DOSSIÊ: SIR KAELEN</h2>
+            <p><strong>Nível:</strong> 9 | <strong>Classe:</strong> Guerreiro</p>
+            <p>Nascido nas montanhas gélidas do norte, jurou proteger os fracos após a destruição de sua aldeia.</p>
+            
+            <h3 style="color: var(--accent-purple)">P.E.C.M.A.</h3>
+            <div>⚔️ Coragem: [████████░░] 0.8 (Alta)</div>
+            <div>⚖️ Ética: [██████░░░░] 0.6 (Média)</div>
+            <div>💰 Ganância: [██░░░░░░░░] 0.2 (Baixa)</div>
+
+            <h3 style="color: var(--accent-gold)">SUSSURROS</h3>
+            <p style="font-style: italic; color: var(--text-dim)">"Lila me salvou hoje. Talvez eu a tenha julgado mal..."</p>
+          </div>
+
+          <div id="f3-p3" class="panel">
+            <div class="panel-header">P3: STATS</div>
+            <div>KILLS: <strong>42</strong></div>
+            <div style="margin-top: 5px">Ogros: 12 [|||..]</div>
+            <div style="margin-top: 5px">Goblins: 30 [|||||]</div>
+            <hr style="border-color:#333; margin:10px 0;">
+            <div>RELAÇÕES:</div>
+            <div style="color: var(--accent-green)">Lila: +45 (Amigo)</div>
+            <div style="color: var(--text-dim)">Gandalf: +10 (Neutro)</div>
+          </div>
+
+          <div id="f3-p4" class="panel">
+             <div class="panel-header">P4: METADADOS</div>
+             <div>ID: Hero_001</div>
+             <div>Status: Vivo</div>
+             <div>Tempo Jogo: 42h</div>
+          </div>
+
+          <div id="f3-p5" class="panel">
+            <div class="panel-header">P5: HISTORIADOR</div>
+            <small>[Dia 12] Salvou Lila</small><br>
+            <small>[Dia 20] Título "O Bravo"</small>
+          </div>
+
+          <div id="f3-p6" class="panel">
+             <div class="panel-header">P6: FILTROS</div>
+             <button class="btn" style="width:100%; margin-bottom:5px;">[H] HERÓIS</button>
+             <button class="btn" style="width:100%;">[M] MONSTROS</button>
+          </div>
+
+          <div id="f3-p7" class="panel" style="display: flex; gap: 10px; align-items:center;">
+            <input type="text" placeholder="Pesquisar na Lore... (/search)" style="flex: 1" />
+            <button class="btn">BUSCAR</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- F4 SCREEN -->
+      <div id="f4-screen" class="screen">
+        <div class="grid-container">
+          <div id="f4-p1" class="panel">
+            <div class="panel-header">P1: DOMÍNIOS</div>
+            <div class="list-item active">🏰 CAPITAL (Sede)</div>
+            <div class="list-item">🏕️ POSTO NORTE (80%)</div>
+            <div class="list-item" style="opacity:0.5; text-decoration:line-through">🏕️ POSTO LESTE (Off)</div>
+          </div>
+
+          <div id="f4-p2" class="panel" style="display: flex; align-items: center; justify-content: center; background: #000; position:relative;">
+             <!-- Map Tiles (7x7) -->
+             <div style="display: grid; grid-template-columns: repeat(7, 40px); gap: 2px;">
+                <!-- Row 1 -->
+                <div style="width:40px; height:40px; background:#004488; display:flex; align-items:center; justify-content:center">🌊</div>
+                <div style="width:40px; height:40px; background:#004488; display:flex; align-items:center; justify-content:center">🌊</div>
+                <div style="width:40px; height:40px; background:#444; display:flex; align-items:center; justify-content:center">⛰️</div>
+                <div style="width:40px; height:40px; background:#444; display:flex; align-items:center; justify-content:center">⛰️</div>
+                <div style="width:40px; height:40px; background:#225522; display:flex; align-items:center; justify-content:center">🌲</div>
+                <div style="width:40px; height:40px; background:#225522; display:flex; align-items:center; justify-content:center">🌲</div>
+                <div style="width:40px; height:40px; background:#222; display:flex; align-items:center; justify-content:center">⛏️</div>
+                
+                <!-- Row 2 -->
+                <div style="width:40px; height:40px; background:#004488; display:flex; align-items:center; justify-content:center">🌊</div>
+                <div style="width:40px; height:40px; background:#225522; display:flex; align-items:center; justify-content:center">🌲</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#225522; display:flex; align-items:center; justify-content:center">🌲</div>
+                <div style="width:40px; height:40px; background:#225522; display:flex; align-items:center; justify-content:center">🌲</div>
+                <div style="width:40px; height:40px; background:#222; display:flex; align-items:center; justify-content:center">⛏️</div>
+
+                <!-- Row 3 (Center) -->
+                <div style="width:40px; height:40px; background:#004488; display:flex; align-items:center; justify-content:center">🌊</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center; border:2px solid cyan">🏰</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#444; display:flex; align-items:center; justify-content:center">⛰️</div>
+
+                <!-- Row 4 -->
+                <div style="width:40px; height:40px; background:#004488; display:flex; align-items:center; justify-content:center">🌊</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#333; display:flex; align-items:center; justify-content:center">🏛️</div>
+                <div style="width:40px; height:40px; background:#333; display:flex; align-items:center; justify-content:center">🏛️</div>
+                <div style="width:40px; height:40px; background:#556622; display:flex; align-items:center; justify-content:center">🌾</div>
+                <div style="width:40px; height:40px; background:#444; display:flex; align-items:center; justify-content:center">⛰️</div>
+             </div>
+             <small style="position:absolute; bottom:5px; right:5px; color:var(--accent-gold);">CURSOR: [3,2]</small>
+          </div>
+
+          <div id="f4-p3" class="panel">
+            <div class="panel-header">P3: PREVISÃO</div>
+            <div style="text-align: center;">
+               <div style="font-size:30px; color:var(--accent-gold);">☀️</div>
+               <div>VERÃO (C2)</div>
+               <small style="color:var(--text-dim)">Próx: Lua de Sangue (5m)</small>
+            </div>
+            <hr style="border-color:#333; margin:10px 0;">
+            <div style="color:var(--accent-red)">[!] Invasão Norte</div>
+          </div>
+
+          <div id="f4-p4" class="panel">
+            <div class="panel-header">P4: DETALHE DO NÓ</div>
+            <div>COORD: X:3 Y:2</div>
+            <div>BIOMA: Planície 🌾</div>
+            <div>DONO: Player</div>
+            <hr style="border-color:#333; margin:5px 0;">
+            <div>Threat: Nenhuma</div>
+            <div style="color:var(--accent-cyan)">HERÓIS: Gandalf, Elara</div>
+          </div>
+
+          <div id="f4-p5" class="panel">
+            <div class="panel-header">P5: LOG EXPEDIÇÃO</div>
+            <small style="display:block; color:var(--accent-purple)">[GLOBAL] Novo ciclo iniciado.</small>
+            <small style="display:block; color:var(--accent-red)">[ALERTA] Movimento inimigo Norte.</small>
+            <small style="display:block; color:var(--accent-green)">[EXPLOR] Lila achou Ruínas.</small>
+          </div>
+
+          <div id="f4-p6" class="panel">
+             <div class="panel-header">P6: COMANDOS</div>
+             <button class="btn" style="width:100%; margin-bottom:5px;">[1] NOVO POSTO</button>
+             <button class="btn" style="width:100%;">[2] MOVER CAPITAL</button>
+          </div>
+
+          <div id="f4-p7" class="panel">
+            <div class="panel-header">P7: ESTRATÉGIA GLOBAL</div>
+            <div style="font-family: monospace; color:#ccc;">
+              IA: "Majestade, Rurik pede ouro no Posto Norte. Lua de Sangue aproxima-se."
+            </div>
+            <div style="display:flex; margin-top:5px; border-top:1px solid #333; padding-top:5px;">
+               <span style="color:var(--accent-gold); margin-right:5px;">></span>
+               <input type="text" placeholder="/send gold 500 posto_norte" style="flex:1; background:transparent; border:none; color:white; outline:none;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F5 SCREEN -->
+      <div id="f5-screen" class="screen">
+        <div class="grid-container">
+          <div id="f5-p1" class="panel">
+            <div class="panel-header">P1: CAIXA DE CORREIO</div>
+            <div class="list-item active"><span style="color:var(--accent-cyan)">[N]</span> Kaelen <small>(14:02)</small></div>
+            <div class="list-item">Lila Rogue <small>(Ontem)</small></div>
+            <div class="list-item">Conselheiro <small>(Antiga)</small></div>
+            <div class="list-item" style="margin-top:20px; color:#666">Rascunhos (0)</div>
+            <div class="list-item" style="color:#666">Enviados (12)</div>
+          </div>
+
+          <div id="f5-p2" class="panel">
+            <div class="panel-header">P2: LEITURA</div>
+            <div style="border-bottom:1px solid #333; padding-bottom:5px; margin-bottom:10px;">
+              <strong>DE:</strong> Sir Kaelen<br>
+              <strong>ASSUNTO:</strong> Re: Covardia
+            </div>
+            <p>"Majestade, com todo o respeito, chamar retirada de 'covardia' é fácil do trono. O Ogro tinha vantagem!"</p>
+            <div style="margin-top:15px; border:1px dashed #333; padding:5px;">📎 Relatório_Danos.log</div>
+          </div>
+
+          <div id="f5-p3" class="panel">
+             <div class="panel-header">P3: PERFIL ALVO</div>
+             <div style="text-align:center;">
+               <div style="font-size:30px">😤</div>
+               <strong>KAELEN</strong><br>
+               <small>Guerreiro Lvl 9</small>
+             </div>
+             <hr style="border-color:#333; margin:5px 0;">
+             <div>HUMOR: <span style="color:var(--accent-red)">IRRITADO</span></div>
+             <div>LEALDADE: <span style="color:var(--accent-red)">45%</span></div>
+             <div>AFFINITY: +45</div>
+             <br>
+             <div>STATUS: <span style="color:var(--accent-gold)">EM COMBATE</span></div>
+          </div>
+
+          <div id="f5-p4" class="panel">
+            <div class="panel-header">P4: CONTATOS</div>
+            <div class="list-item">[H] Sir Kaelen</div>
+            <div class="list-item">[H] Lila Rogue</div>
+            <div class="list-item">[H] Gandalf</div>
+            <div class="list-item">[N] Conselheiro</div>
+          </div>
+
+          <div id="f5-p5" class="panel">
+            <div class="panel-header">P5: EDITOR</div>
+            <div style="color:#666;">Para: Sir Kaelen</div>
+            <textarea style="width:100%; height:120px; background:rgba(0,0,0,0.3); color:#fff; border:none; resize:none; font-family:var(--font-mono);">Entendo seu ponto. Mas preciso que volte lá. Vou enviar poções.</textarea>
+          </div>
+
+          <div id="f5-p6" class="panel">
+            <div class="panel-header">P6: AÇÕES</div>
+            <button class="btn" style="width:100%; margin-bottom:5px;">[ENTER] ENVIAR</button>
+            <button class="btn" style="width:100%; margin-bottom:5px;">[S] SALVAR</button>
+            <button class="btn" style="width:100%;">[T] ANEXAR OURO</button>
+          </div>
+
+          <div id="f5-p7" class="panel" style="display:flex; align-items:center;">
+             <div style="flex:1">
+               <strong>STATUS REDE:</strong> 2 Pássaros em voo.<br>
+               <span style="color:var(--accent-cyan)">Tempo estimado: 30s</span>
+             </div>
+            <div style="font-size:24px;">🐦</div>
+          </div>
+        </div>
+      </div>
+        <!-- F6 SCREEN -->
+      <div id="f6-screen" class="screen">
+        <div class="grid-container">
+          <div id="f6-p1" class="panel">
+            <div class="panel-header">P1: ÍNDICE</div>
+            <div class="list-item">Prólogo (D1)</div>
+            <div class="list-item">Cap 1 (D1-5) ✓</div>
+            <div class="list-item">Cap 2 (D6-10) ✓</div>
+            <div class="list-item active">Cap 3 (D11-15) ✓</div>
+            <div class="list-item" style="color:#666">Cap 4 (Gerando...)</div>
+          </div>
+
+          <div id="f6-p2" class="panel">
+            <div class="panel-header">P2: CRÔNICA DO REINO</div>
+            <div style="text-align:center; margin-bottom:10px;">
+               <div style="background:#222; height:100px; display:flex; align-items:center; justify-content:center; border:1px solid #444; color:#666;">
+                 [BANNER IA: Vila ao amanhecer]
+               </div>
+               <h3 style="color:var(--accent-gold); margin:5px 0;">CAPÍTULO 3: A Tensão Crescente</h3>
+               <small>Dias 11-15</small>
+            </div>
+            <p>"O reino despertou sob o sol da primavera. Sir Kaelen e Lila, apesar das desavenças, uniram forças contra a horda Goblin na orla da floresta..."</p>
+            <p>"Gandalf, por sua vez, permaneceu na torre estudando os augúrios da Lua de Sangue."</p>
+            <div style="text-align:right; font-size:10px; color:#666;">Gerado em 18/01 14:32</div>
+          </div>
+
+          <div id="f6-p3" class="panel">
+            <div class="panel-header">P3: TIMELINE</div>
+            <div class="list-item small">[D1-5] Início</div>
+            <div class="list-item small">[D6-10] Batalha</div>
+            <div class="list-item small active">[D11-15] Tensão</div>
+            <div class="list-item small disabled">[D16-20] ???</div>
+          </div>
+
+          <div id="f6-p4" class="panel">
+            <div class="panel-header">P4: ESTATÍSTICAS</div>
+            <div>Kills: 15</div>
+            <div>Ouro: +450g</div>
+            <div>XP: +1200</div>
+          </div>
+
+          <div id="f6-p5" class="panel">
+             <div class="panel-header">P5: EVENTOS-CHAVE</div>
+             <div style="color:var(--accent-gold)">🏆 Kill Steal (Lila)</div>
+             <div style="color:var(--accent-red)">⚔️ Combate Épico</div>
+             <div style="color:var(--accent-cyan)">💬 Carta Hostil</div>
+          </div>
+          
+          <div id="f6-p6" class="panel">
+            <div class="panel-header">P6: EXPORTAÇÃO</div>
+            <button class="btn" style="width:100%; margin-bottom:5px;">[📄] EXPORTAR PDF</button>
+            <button class="btn" style="width:100%;">[🔗] COMPARTILHAR</button>
+          </div>
+
+          <div id="f6-p7" class="panel">
+            <div class="panel-header">P7: PROMPT CRONISTA (IA)</div>
+            <div style="font-family:monospace; font-size:11px; color:#aaa;">
+               System: "Resuma eventos dos últimos 5 min. Tom: Épico. Foco: Drama Kaelen vs Lila."<br>
+               <span style="color:var(--accent-green)">IA Cronista: [Gerando...] 🤖</span>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
+
+    <script>
+      function switchTab(tabId) {
+        // Hide all screens
+        document
+          .querySelectorAll(".screen")
+          .forEach((el) => el.classList.remove("active"));
+        // Show target
+        document.getElementById(tabId + "-screen").classList.add("active");
+
+        // Update header buttons
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((el) => el.classList.remove("active"));
+        event.target.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

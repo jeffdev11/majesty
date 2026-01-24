@@ -6015,7 +6015,6 @@ if (heroA.level - heroB.level > 5 && heroB.power > 0.7) {
 **Consequências:**
 
 - Herói B sabota missões de A (não ajuda propositalmente)
-- Herói B tenta roubar kills de A ativamente
 - Se lealdade baixa (<40%): Traição e deserção possível
 
 **Exemplo:**
@@ -8016,14 +8015,13 @@ P5: TIMELINE SOCIAL
 
 Heróis ganham **títulos** baseados em feitos:
 
-| Título                 | Condição                  | Efeito                         |
-| ---------------------- | ------------------------- | ------------------------------ |
-| **"O Bravo"**          | Derrotar 3 elites sozinho | +5% Attack                     |
-| **"Matador de Ogros"** | Matar 20 Ogros            | +20% dano vs Ogros             |
-| **"O Covarde"**        | Fugir 10x de combates     | -10 Moral, +10% Speed          |
-| **"Ladrão de Kills"**  | Roubar 15+ kills          | Outros heróis têm -10 Affinity |
-| **"Salvador"**         | Salvar 5 aliados da morte | +15 Affinity com todos         |
-| **"O Corrompido"**     | Trair o reino             | Torna-se boss                  |
+| Título                 | Condição                  | Efeito                 |
+| ---------------------- | ------------------------- | ---------------------- |
+| **"O Bravo"**          | Derrotar 3 elites sozinho | +5% Attack             |
+| **"Matador de Ogros"** | Matar 20 Ogros            | +20% dano vs Ogros     |
+| **"O Covarde"**        | Fugir 10x de combates     | -10 Moral, +10% Speed  |
+| **"Salvador"**         | Salvar 5 aliados da morte | +15 Affinity com todos |
+| **"O Corrompido"**     | Trair o reino             | Torna-se boss          |
 
 ### Visualização no Roster
 
@@ -8185,7 +8183,6 @@ Amigos podem ler e ver estatísticas (sem spoilers)."
 ```
 
 ---
-
 # 11. MULTIPLAYER (VISÃO FUTURA)
 
 > **NOTA:** Multiplayer **não é foco da versão 1.0**. Esta seção documenta ideias para versões futuras.

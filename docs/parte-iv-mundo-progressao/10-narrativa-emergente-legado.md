@@ -121,14 +121,13 @@ P5: TIMELINE SOCIAL
 
 Heróis ganham **títulos** baseados em feitos:
 
-| Título                 | Condição                  | Efeito                         |
-| ---------------------- | ------------------------- | ------------------------------ |
-| **"O Bravo"**          | Derrotar 3 elites sozinho | +5% Attack                     |
-| **"Matador de Ogros"** | Matar 20 Ogros            | +20% dano vs Ogros             |
-| **"O Covarde"**        | Fugir 10x de combates     | -10 Moral, +10% Speed          |
-| **"Ladrão de Kills"**  | Roubar 15+ kills          | Outros heróis têm -10 Affinity |
-| **"Salvador"**         | Salvar 5 aliados da morte | +15 Affinity com todos         |
-| **"O Corrompido"**     | Trair o reino             | Torna-se boss                  |
+| Título                 | Condição                  | Efeito                 |
+| ---------------------- | ------------------------- | ---------------------- |
+| **"O Bravo"**          | Derrotar 3 elites sozinho | +5% Attack             |
+| **"Matador de Ogros"** | Matar 20 Ogros            | +20% dano vs Ogros     |
+| **"O Covarde"**        | Fugir 10x de combates     | -10 Moral, +10% Speed  |
+| **"Salvador"**         | Salvar 5 aliados da morte | +15 Affinity com todos |
+| **"O Corrompido"**     | Trair o reino             | Torna-se boss          |
 
 ### Visualização no Roster
 
@@ -290,4 +289,3 @@ Amigos podem ler e ver estatísticas (sem spoilers)."
 ```
 
 ---
-
