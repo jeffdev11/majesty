@@ -135,8 +135,8 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 
 | Nome                  | Custo | Buff                                            | Risco                                   |
 | --------------------- | ----- | ----------------------------------------------- | --------------------------------------- |
-| **Banquete Real**     | 300g  | +Moral (+10% stats), sem deserções por 15 min   | Pode atrair ladrões (invasão Goblin)    |
-| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança) | -5 Moral global (reclamam)              |
+| **Banquete Real**     | 300g  | +10% all stats, sem deserções por 15 min        | Pode atrair ladrões (invasão Goblin)    |
+| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança) | -10 Affect global (reclamam)            |
 | **Bênção Divina**     | 800g  | +50% Regeneração de HP/Mana por 5 min           | Pode atrair mortos-vivos (sentem magia) |
 | **Dia de Folga**      | 0g    | Heróis param de lutar por 5 min (descansam)     | Perde oportunidades de loot             |
 
@@ -263,29 +263,6 @@ Total: 6,000g para maximizar IP
 ```
 
 ---
-
-### Penalidades e Situações Especiais
-
-#### Penalidades por Baixo Moral Global
-
-Se Moral do Reino < 50%:
-
-| Moral Global | Penalidade IP                        |
-| ------------ | ------------------------------------ |
-| 40-49%       | -10% regeneração                     |
-| 30-39%       | -25% regeneração                     |
-| 20-29%       | -50% regeneração                     |
-| < 20%        | **-75% regeneração + Custo dobrado** |
-
-**Exemplo:**
-
-```
-Moral = 25% (Reino em crise)
-Regeneração: 20 IP/min → 10 IP/min
-Custo de carta: 25 IP → 50 IP
-
-Resultado: Praticamente impossível se comunicar
-```
 
 #### Bônus por Alta Lealdade
 
@@ -477,14 +454,13 @@ Mesmo sendo rei, você não pode fazer TUDO o tempo todo.
 ```typescript
 const regenBase = 1; // 1 IP a cada 3s
 const upgradeMultiplier = hasCorteReal ? 2 : 1;
-const moralPenalty = calculateMoralPenalty(moralGlobal);
 const eventBonus = getActiveEventBonus("ip_regen");
 
-const regenFinal = regenBase * upgradeMultiplier * moralPenalty * eventBonus;
+const regenFinal = regenBase * upgradeMultiplier * eventBonus;
 
 // Exemplo:
-// Base: 1, Upgrade: 2x, Moral 80% (1.0), Festival (+50% = 1.5)
-// = 1 * 2 * 1.0 * 1.5 = 3 IP a cada 3s = 60 IP/min!
+// Base: 1, Upgrade: 2x, Festival (+50% = 1.5)
+// = 1 * 2 * 1.5 = 3 IP a cada 3s = 60 IP/min!
 ```
 
 #### Custo Dinâmico
@@ -496,11 +472,6 @@ function calculateIPCost(action: Action): number {
   // Upgrades reduzem custo
   if (hasRedeEspioes && action.type === "SEND_LETTER") {
     baseCost -= 5;
-  }
-
-  // Moral baixo aumenta custo
-  if (moralGlobal < 20) {
-    baseCost *= 2;
   }
 
   return Math.max(1, baseCost); // Mínimo 1 IP
@@ -549,7 +520,7 @@ Jogador: /emergency_tax
 
 Conselheiro: "Taxa de emergência cobrada! Heróis
 doaram 30% do ouro individual. Arrecadado: 400g.
-Mas eles estão FURIOSOS. -10 Moral global."
+Mas eles estão FURIOSOS. -20 Lealdade (Ethics) temporária."
 ```
 
 ---

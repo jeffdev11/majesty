@@ -58,20 +58,20 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 | ---------- | --------------------------------- | ---------------------------------------------------------------- |
 | **P1**     | **Mapa Visual (Grid)**            | Grade 10×10 com ícones representando áreas do mundo              |
 | **P2**     | **Mapa Lógico (Textual)**         | Lista de POIs mostrando heróis, monstros e status detalhado      |
-| **LR_VIS** | **Cena Dinâmica (Visual)**        | **(Novo)** Janela gráfica acoplada ao topo do Log Regional.      |
-| **P3**     | **Stats do Reino**                | Dashboard: Ouro, Moral, Dia, Ciclo, Recursos                     |
+| **LR_VIS** | **Cena Dinâmica (Visual)**        | **(Novo)** Bloco gráfico inserido diretamente no fluxo do log.   |
+| **P3**     | **Stats do Reino**                | Dashboard: Ouro, Dia, Ciclo, Recursos                            |
 | **P8**     | **Status Temporários (Vertical)** | Lista de buffs/debuffs/condições ativas de TODOS heróis/monstros |
 
 ### Painéis Dinâmicos de Log (LR = Log Regional)
 
-| Painel   | Nome (Dinâmico)           | Comportamento                                                     |
-| -------- | ------------------------- | ----------------------------------------------------------------- |
-| **LR1**  | **Log: [Nome Região]**    | Criado quando ≥1 herói entra na região. Scroll de eventos locais. |
-| **LR1v** | **Visual: [Nome Região]** | Janela gráfica temporária acima do log (Eventos Ricos).           |
-| **LR2**  | **Log: [Nome Região]**    | Segunda região ativa (se houver).                                 |
-| **LR3**  | **Log: [Nome Região]**    | Terceira região ativa (se houver).                                |
-| **LR4**  | **Log: [Nome Região]**    | Quarta região ativa (se houver).                                  |
-| **LR5**  | **Log: [Nome Região]**    | Quinta região ativa (máximo com 5 heróis em locais diferentes).   |
+| Painel   | Nome (Dinâmico)           | Comportamento                                                       |
+| -------- | ------------------------- | ------------------------------------------------------------------- |
+| **LR1**  | **Log: [Nome Região]**    | Criado quando ≥1 herói entra na região. Scroll de eventos locais.   |
+| **LR1v** | **Visual: [Nome Região]** | Bloco visual renderizado entre as mensagens de log (Eventos Ricos). |
+| **LR2**  | **Log: [Nome Região]**    | Segunda região ativa (se houver).                                   |
+| **LR3**  | **Log: [Nome Região]**    | Terceira região ativa (se houver).                                  |
+| **LR4**  | **Log: [Nome Região]**    | Quarta região ativa (se houver).                                    |
+| **LR5**  | **Log: [Nome Região]**    | Quinta região ativa (máximo com 5 heróis em locais diferentes).     |
 
 ### Regras de Layout Dinâmico
 
@@ -86,7 +86,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
 │ P3: STATS DO REINO                                                        │
-│ 💰 Ouro: 1,250g | 😊 Moral: 75% | 📅 Dia: 2 | 🌙 Ciclo: 1 (Primavera)     │
+│ 💰 Ouro: 1,250g | 📅 Dia: 2 | 🌙 Ciclo: 1 (Primavera)                       │
 ├──────────────────────────────────────┬────────────────────────────────────┤
 │   P1: MAPA VISUAL (Grid 10×10)       │ P2: MAPA LÓGICO (Textual)          │
 │  [🏰][🌲][🌲][⚔️][ ][ ][ ][ ][ ][ ] │ ⚔️ FLORESTA SOMBRIA [3,3]          │
@@ -98,10 +98,13 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 ├──────────────────────────────────────┴────────────────────────────────────┤
 │ LR1: 📍 FLORESTA SOMBRIA (5 heróis)                               [SCROLL]│
 ├───────────────────────────────────────────────────────────────────────────┤
-│ [VISUAL SCENE WINDOW]                                                     │
-│ [ 🧙‍♂️Kaelen ]  (⚡ Combo Line)  [ 🧝‍♀️Lila ]   VS   [ 👹Ogro ]              │
-│    "Agora, Lila!"                                                         │
-├───────────────────────────────────────────────────────────────────────────┤
+│ [14:30] ⚠️ Encontro Iniciado: Emboscada na Floresta                       │
+│ ┌───────────────────────────────────────────────────────────────────────┐ │
+│ │ [VISUAL SCENE: EMBOSCADA]                                   [REPLAY]  │ │
+│ │                                                                       │ │
+│ │ [ 🧙‍♂️Kaelen ]  (⚡ Combo Line)  [ 🧝‍♀️Lila ]   VS   [ 👹Ogro ]           │ │
+│ │    "Agora, Lila!"                                                     │ │
+│ └───────────────────────────────────────────────────────────────────────┘ │
 │ [14:32] ⚔️ [Sir Kaelen] ataca Ogro (85 dano)                              │
 │ [14:33] ⚔️ [Lila] usa [Apunhalar Crítico] → Ogro (142 dano!) CRÍTICO      │
 │ [14:34] 🩹 [Elara] usa [Cura Sagrada] → Kaelen (+45 HP)                   │
@@ -123,7 +126,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
 │ P3: STATS DO REINO                                                        │
-│ 💰 1,250g | 😊 75% | 📅 Dia 2 | 🌙 Ciclo 1                                │
+│ 💰 1,250g | 📅 Dia 2 | 🌙 Ciclo 1                                         │
 ├────────────────────────────┬──────────────────────────────────────────────┤
 │ P1: MAPA (Compacto)        │ P2: MAPA LÓGICO                              │
 │ [🏰][🌲][⚔️][ ][ ]        │ ⚔️ FLORESTA: 3 heróis                        │
@@ -147,7 +150,7 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│ P3: 💰 1,250g | 😊 75% | 📅 2 | 🌙 C1                                     │
+│ P3: 💰 1,250g | 📅 2 | 🌙 C1                                              │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P1+P2: MAPA COMPACTO (Mini)                                               │
 │ [🏰][🌲:K][⚔️:L][🏔️:A][ ] │ K=Kaelen L=Lila A=Aria E=Elara J=Kenji      │
@@ -202,13 +205,17 @@ Pressionar `[PULAR]` ou `Tab` foca a câmera e os controles naquela região.
 
 ### Visualização de Cena Dinâmica (Eventos Ricos)
 
-Para eventos de maior importância (narrativa emergente, encontros com bosses, diálogos cruciais), o sistema acopla à **Janela de Log** uma **Área de Animação Visual**.
+Para eventos de maior importância (narrativa emergente, encontros com bosses, diálogos cruciais), o sistema gera um **Bloco de Animação Visual** inserido diretamente na sequência do log.
 
 **Conceito:**
-Diferente dos logs textuais (que são rápidos e informativos), esta janela oferece uma representação visual "teatral" da cena. Ela **não** substitui o log como fonte primária de informação, mas funciona como um "highlight" visual para imersão.
+A cena dinâmica não é uma janela separada, mas sim **parte do histórico**. Ela aparece cronologicamente entre as mensagens de texto. Isso garante que:
+
+1.  **Contexto:** O jogador sabe exatamente a que eventos a animação se refere (está "sandwichada" pelos logs relevantes).
+2.  **Histórico:** Como é um item do log, o jogador pode rolar para cima e ver animações passadas.
+3.  **Replay:** Cada bloco de cena possui um botão `[REPLAY]` que permite assistir à sequência novamente a qualquer momento.
 
 **Funcionamento:**
-A LLM envia um payload JSON específico quando detecta um momento digno de representação visual (ex: "Encontro Sombrio nas Ruínas"). O frontend renderiza uma cena estática com animações sutis (hover, balões de fala, brilhos).
+A LLM envia um payload JSON específico. O frontend renderiza este payload como um "Card Interativo" dentro da lista de logs (`<li>` ou equivalente). Ao invés de desaparecer quando a cena acaba, ela permanece lá como um registro visual do evento.
 
 **Características da Janela:**
 
@@ -397,7 +404,7 @@ Exemplo:
 P8: STATUS TEMPORÁRIOS ATIVOS
 
 🔼 BUFFS (3 ativos):
-  Kaelen [⚔️ Fúria +20% ATK] 45s | Reino [👥 Banquete +10 Moral] 8m12s
+  Kaelen [⚔️ Fúria +20% ATK] 45s | Reino [👥 Banquete] 8m12s
 
 🔽 DEBUFFS (2 ativos):
   Lila [☣️ Envenenada -2HP/s] 28s | Gandalf [❄️ Lento -50% Vel] 14s
@@ -424,7 +431,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ └──────────────────────────────────────────────────────────────┘ │
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [2] 👥 Banquete Real (GLOBAL)                                 │ │
-│ │     Efeito: +10 Moral para todos os heróis                   │ │
+│ │     Efeito: +10% Stats para todos os heróis                  │ │
 │ │     Duração: 8min 12s restantes                              │ │
 │ │     Fonte: Decreto Real (custo: 30 IP)                       │ │
 │ │     [✓] Ativo em 10 heróis                                   │ │
@@ -538,7 +545,7 @@ O P8 emite **alertas visuais** quando:
 - Lista de decretos:
   ```
   APLICAR BUFF GLOBAL:
-  [1] Banquete (+10 Moral, 30 IP, 10min)
+  [1] Banquete (30 IP, 10min)
   [2] Fúria Coletiva (+15% ATK, 50 IP, 60s)
   [3] Escudo Divino (+20% DEF, 40 IP, 120s)
   ```
@@ -609,7 +616,7 @@ Esse é o momento PERFEITO para atacar o boss!"
 | > Resposta: A caminho|                                         |                     |
 +---------------------+------------------------------------------+---------------------+
 |                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10 Moral] 8min             |
+| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10% Stats] 8min            |
 | 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
 | ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
 +--------------------------------------------------------------------------------------+
@@ -797,8 +804,6 @@ Regeneração: 50 HP/dia
 
 [FUNÇÕES ATIVAS]
 > Sede do Governo
-> +20% Moral Global
-> -10% Custo de Recrutamento
 > Respawn de Heróis habilitado
 
 [PROTEÇÃO ATUAL]

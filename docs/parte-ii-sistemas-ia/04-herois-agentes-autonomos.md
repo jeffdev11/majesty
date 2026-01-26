@@ -105,10 +105,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **E - Ethics Extrema**
 
-| Valor    | Título                | Buffs                                                                                             | Debuffs                                                                                                |
-| -------- | --------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas              | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Moral do reino -5 enquanto vivo    |
-| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Moral do reino +10 enquanto vivo<br>Imune a corrupção/subornos | Sempre protege inocentes<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
+| Valor    | Título                | Buffs                                                                                                | Debuffs                                                                                                |
+| -------- | --------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas                 | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Preços de lojas +10% (má fama)     |
+| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Vendedores oferecem 10% de desconto<br>Imune a corrupção/subornos | Sempre protege inocentes<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
 
 #### **C - Cooperation Extrema**
 
