@@ -72,7 +72,7 @@ A proposta original focava em ver bonequinhos andando na tela. Percebemos que is
 
 ### A Nova Estética: Cyber-Fantasy Terminal
 
-Imagine que você não está flutuando sobre o castelo, mas **sentado na sala de guerra**, operando um sistema mágico de monitoramento via texto, logs e mapas ASCII.
+Imagine que você não está flutuando sobre o castelo, mas **sentado na sala de guerra**, operando um sistema mágico de monitoramento via texto, logs e mapas táticos.
 
 - **Você é o Operador**
 - **O Reino é o Sistema**

@@ -26,7 +26,7 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 - Sir Kaelen (Ethics: 0.7) derrota um Ogro
 - Lila Rogue (Ethics: 0.3) observa de longe
-- Kaelen não rouba o loot → Lila ganha +5 Affinity
+- Kaelen protege Lila de um ataque surpresa → Lila ganha +5 Affinity
 - Após 3 interações positivas: Affinity = +30
 - **Resultado:** Lila propõe formar grupo
 - Kaelen aceita (Ethics alto = cooperativo)
@@ -96,7 +96,7 @@ Cada par de heróis tem um **Affinity Score** que varia de **-100 a +100**.
 | Lutar juntos contra boss               | +10    |
 | Salvar de morte certa                  | +25    |
 | Doar item valioso                      | +15    |
-| Compartilhar loot igualmente           | +5     |
+| Proteger de dano letal                 | +10    |
 | Aceitar resposta de carta com gratidão | +8     |
 | Vingar morte                           | +30    |
 | **Curar sem ser solicitado**           | **+5** |
@@ -109,7 +109,7 @@ Cada par de heróis tem um **Affinity Score** que varia de **-100 a +100**.
 | ---- | ----- |
 
 | Deixar morrer quando podia salvar | -20 |
-| Roubar item do chão | -10 |
+
 | Matar em PvP | -100 (permanente) |
 | Ignorar pedido de ajuda | -8 |
 | **Friendly Fire (Dano em área)** | **-5** |
@@ -219,9 +219,9 @@ Heróis **conversam entre si** baseado em eventos e personalidade.
 
 ```typescript
 const banterTemplate = {
-  trigger: "LOOT_STEAL",
+  trigger: "FRIENDLY_FIRE",
   speaker: "VICTIM",
-  template: "{VICTIM_NAME}: Aquele {ITEM} era MEU, {THIEF_NAME}!",
+  template: "{VICTIM_NAME}: Cuidado onde mira essa magia, {ATTACKER_NAME}!",
   personality_filter: { ethics: ">0.5" },
 };
 ```
@@ -231,7 +231,7 @@ const banterTemplate = {
 #### Formação de Grupo
 
 - **Líder:** _"Lila, vamos caçar juntos?"_
-- **Aceita:** _"Só se você não roubar meu loot, Kaelen!"_
+- **Aceita:** _"Só se você não recuar, Kaelen!"_
 
 #### Morte de Aliado
 
@@ -309,48 +309,35 @@ if (heroB.died && heroA.ranAway && distance(A, B) < 5) {
 
 ---
 
-### 2. Traição por Ganância (Roubo de Loot)
+### 2. Negligência Tática (Erro Crítico)
 
-**Gatilho:** Herói A mata boss/elite e Herói B pega o loot antes dele.
+**Gatilho:** Herói falha em sua função primária (Tank perde aggro, Healer não cura) causando dano grave a um aliado.
 
-**Cálculo:**
+**Lógica de Culpa:**
 
 ```typescript
-if (boss.killer === heroA && loot.pickedBy === heroB && distance(A, B) < 3) {
-  // Loot Steal detectado!
-  heroA.anger += 20;
-  heroB.greed += 0.1;
+if (ally.hp < 20% && healer.hasMana && !healer.cooldown && !healer.healed) {
+  ally.anger += 15;
+  ally.dialogue = "EU PRECISAVA DE CURA, " + healer.name + "!";
 }
 ```
 
 **Consequências:**
 
-- Affinity: -20
-- Chance de \*\*Bar
-
-ga\*\* (negociação tensa via cartas)
-
-- Se recusar devolver: PvP quase garantido (80%)
+- Affinity: -15
+- Discussão no chat (Banter)
+- Vítima pode recusar ajudar o negligente no futuro
 
 **Exemplo:**
 
 ```
-[15:40] 💀 KILL [Kaelen] [+Ogro Rei] [+500 XP] Boss morto solo!
-[15:41] 💰 LOOT [Chão] [Machado Lendário +50] Item épico!
-[15:42] 💰 LOOT [Lila] [Roubou!] Pegou antes de Kaelen!
-[15:43] 💬 CHAT [Kaelen] [😡] "ISSO ERA MEU!"
-
-[Carta automática de Kaelen]:
-"Lila, devolva MEU machado. Eu matei o boss.
-Você tem 5 minutos ou haverá consequências."
-
-[Opções de Lila]:
-1. Devolver (Affinity -5, conflito evitado)
-2. Oferecer 500g de compensação (Affinity -10)
-3. Recusar (PvP inevitável)
+[16:20] ⚠️ CRISIS [Kaelen] HP: 15% (Tanking Boss)
+[16:20] 💤 IDLE [Elara] (Healer) Mana: 100% | Status: Parada
+[16:21] 💀 HIT [Boss -> Kaelen] 120 Dano (Kaelen Caiu!)
+[16:22] 💬 CHAT [Kaelen] "Elara?? Eu estava morrendo!"
+[16:23] 💬 CHAT [Elara] "Estava economizando mana para a fase 2..."
+[16:24] 🩸 RELAÇÃO [Kaelen <-> Elara] -20 (Negligência)
 ```
-
----
 
 ### 3. Ciúmes de Poder (Inveja de Níveis)
 
@@ -507,7 +494,7 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 | Tipo de Conflito       | Cooldown    | Máximo/Partida        |
 | ---------------------- | ----------- | --------------------- |
 | Covardia               | 30 min      | 3 eventos             |
-| Roubo de Loot          | 10 min      | 10 eventos            |
+| Negligência Tática     | 20 min      | 5 eventos             |
 | Ciúmes                 | Passivo     | 1 por par de heróis   |
 | Conflito Personalidade | Passivo     | 1-2 pares             |
 | Vingança               | 1 por morte | Quantas mortes houver |
@@ -516,16 +503,16 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 
 1. **Vingança** (mais dramático) - sempre mostrado
 2. **Covardia** (raro e grave) - destaque
-3. **Roubo de Loot** (visual, fácil de entender)
-4. **Ciúmes** (sutil, background)
-5. **Conflito P.E.C.M.A.** (passivo, constante)
+
+3. **Ciúmes** (sutil, background)
+4. **Conflito P.E.C.M.A.** (passivo, constante)
 
 ---
 
 ### Exemplo de Cadeia de Conflitos (Cascata Dramática)
 
 ```
-[Dia 52] Lila rouba loot de Kaelen (vingança)
+[Dia 52] Lila insulta Kaelen (conflito de personalidade)
          Affinity: +30 → +10
 
 [Dia 55] Kaelen envia carta hostil

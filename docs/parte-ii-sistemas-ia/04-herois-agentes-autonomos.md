@@ -44,7 +44,7 @@ interface Hero {
   memories: Memory[];
 
   // Inventário
-  inventory: Item[];
+  inventory: Item[]; // Loot instanciado (privado)
   equipment: {
     weapon: Weapon;
     armor: Armor;
@@ -82,13 +82,13 @@ O sistema **P.E.C.M.A.** define a essência psicológica de cada herói através
 
 ### Tabela de Referência P.E.C.M.A.
 
-| Vetor | Nome                           | 0.0 (Baixo)                                           | 1.0 (Alto)                                                           | Impacto no Gameplay                             |
-| ----- | ------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
-| **P** | **Proactivity (Proatividade)** | **Reativo:** Espera ordens, patrulha próximo da vila. | **Proativo:** Busca monstros ativamente, explora sozinho.            | Define iniciativa e raio de ação autônoma       |
-| **E** | **Ethics (Ética)**             | **Pragmático:** Fim justifica meios, rouba, trai.     | **Honrado:** Segue código de conduta, leal, justo.                   | Define comportamento moral e social             |
-| **C** | **Cooperation (Cooperação)**   | **Lobo Solitário:** Prefere agir sozinho, não ajuda.  | **Espírito de Equipe:** Forma grupos, compartilha, ajuda.            | Define trabalho em equipe vs individualismo     |
-| **M** | **Mind (Intelecto)**           | **Impulsivo:** Ataca primeiro alvo, não usa itens.    | **Estratégico:** Prioriza alvos, usa itens, recua quando necessário. | Define tomada de decisão tática                 |
-| **A** | **Affect (Temperamento)**      | **Volátil:** Humor muda facilmente, imprevisível.     | **Estável:** Mantém calma, consistente, confiável.                   | Define volatilidade emocional e previsibilidade |
+| Vetor | Nome                           | 0.0 (Baixo)                                              | 1.0 (Alto)                                                           | Impacto no Gameplay                             |
+| ----- | ------------------------------ | -------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| **P** | **Proactivity (Proatividade)** | **Reativo:** Espera ordens, patrulha próximo da vila.    | **Proativo:** Busca monstros ativamente, explora sozinho.            | Define iniciativa e raio de ação autônoma       |
+| **E** | **Ethics (Ética)**             | **Pragmático:** Fim justifica meios, trai se necessário. | **Honrado:** Segue código de conduta, leal, justo.                   | Define comportamento moral e social             |
+| **C** | **Cooperation (Cooperação)**   | **Lobo Solitário:** Prefere agir sozinho, não ajuda.     | **Espírito de Equipe:** Forma grupos, compartilha, ajuda.            | Define trabalho em equipe vs individualismo     |
+| **M** | **Mind (Intelecto)**           | **Impulsivo:** Ataca primeiro alvo, não usa itens.       | **Estratégico:** Prioriza alvos, usa itens, recua quando necessário. | Define tomada de decisão tática                 |
+| **A** | **Affect (Temperamento)**      | **Volátil:** Humor muda facilmente, imprevisível.        | **Estável:** Mantém calma, consistente, confiável.                   | Define volatilidade emocional e previsibilidade |
 
 ---
 
@@ -105,10 +105,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **E - Ethics Extrema**
 
-| Valor    | Título                | Buffs                                                                                                | Debuffs                                                                                                |
-| -------- | --------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Pode roubar de aliados<br>+20% dano quando ataca pelas costas                 | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Preços de lojas +10% (má fama)     |
-| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Vendedores oferecem 10% de desconto<br>Imune a corrupção/subornos | Sempre protege inocentes<br>Divide todo loot (ganha 60% em vez de 100%)<br>Pode recusar ordens imorais |
+| Valor    | Título                | Buffs                                                                                                      | Debuffs                                                                                            |
+| -------- | --------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **≤0.1** | 😈 **Sem Escrúpulos** | +30% ouro de saques<br>Vende itens por preços abusivos para aliados<br>+20% dano quando ataca pelas costas | Affinity natural com todos: -20<br>50% chance de trair por 1000g<br>Preços de lojas +10% (má fama) |
+| **≥0.9** | 😇 **Alma Pura**      | +20% Affinity natural com todos<br>Vendedores oferecem 10% de desconto<br>Imune a corrupção/subornos       | Sempre protege inocentes<br>Prioriza curar aliados antes de si<br>Pode recusar ordens imorais      |
 
 #### **C - Cooperation Extrema**
 
@@ -193,11 +193,11 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 - Ethics 0.5: Considera seriamente, pode aceitar
 - Ethics 0.8: Recusa e reporta ao Majesty
 
-**Situação 4: Loot Lendário**
+**Situação 4: Consumível Raro (Última Poção)**
 
-- Ethics 0.2: Pega tudo, não compartilha
-- Ethics 0.5: Divide com quem ajudou
-- Ethics 0.8: Oferece ao aliado que precisa mais
+- Ethics 0.2: Usa em si mesmo (se HP < 80%)
+- Ethics 0.5: Guarda para emergência crítica
+- Ethics 0.8: Usa em aliado ferido (mesmo se precisar)
 
 **Situação 5: Ordem vs Moral**
 
@@ -247,11 +247,11 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 - Cooperation 0.5: Salva se for amigo próximo
 - Cooperation 0.9: Interrompe tudo para salvar qualquer aliado
 
-**XP e Loot em Grupo:**
+**XP e Buffs em Grupo:**
 
-- Cooperation 0.2: Tenta pegar tudo, maximiza ganho pessoal
-- Cooperation 0.5: Divide igualmente
-- Cooperation 0.9: Dá prioridade aos mais fracos
+- Cooperation 0.2: Maximiza ganho pessoal (mata last hit)
+- Cooperation 0.5: Foca no objetivo comum
+- Cooperation 0.9: Garante que aliados mais fracos ganhem XP
 
 ---
 
@@ -325,11 +325,11 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 - Affect 0.5: Fica triste (-10% stats por 5min)
 - Affect 0.9: Continua focado, sem mudança de comportamento
 
-**Reação a Loot Lendário:**
+**Reação a Crítico (Sorte):**
 
-- Affect 0.2: Fica eufórico, stats temporários aleatórios
-- Affect 0.5: Fica feliz (+5% stats por 2min)
-- Affect 0.9: Sem reação especial
+- Affect 0.2: Fica eufórico, gasta cooldowns sem pensar
+- Affect 0.5: Fica animado (+5% stats por 30s)
+- Affect 0.9: Mantém o ritmo, guarda skills para o momento certo
 
 **Reação a Insultos (de outros heróis):**
 
@@ -664,7 +664,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 | **HUNGRY**        | Até comer | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
 | **INSPIRED**      | 2 min     | Todos vetores +0.1                                    |
 | **SCARED**        | 1 min     | Proactivity -0.4, Flee Threshold +30%                 |
-| **GREEDY_FRENZY** | 30s       | Cooperation -0.5 (Vê loot lendário, ignora aliados)   |
+| **GREEDY_FRENZY** | 30s       | Cooperation -0.5 (Ignora segurança para pegar ouro)   |
 
 ### Peculiaridades (Overrides Binários)
 
@@ -674,7 +674,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 | **GAMBLER**       | Encontra Cassino | Pode gastar todo ouro em apostas        |
 | **HATE_UNDEAD**   | Vê morto-vivo    | Attack Priority +1000, ignora HP baixo  |
 | **PYROMANCER**    | Contra Ogro      | +50% dano com fogo                      |
-| **KLEPTOMANIAC**  | Vê baú           | MUST loot, mesmo durante combate        |
+| **KLEPTOMANIAC**  | Vê baú           | MUST abrir baú, mesmo durante combate   |
 
 ---
 
@@ -792,61 +792,48 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.5 Ciclo de Vida: Morte, Redenção e Necromancia
+## 4.5 Ciclo de Vida: Morte, Trabalho e Redenção
 
-### A Morte Não é o Fim
+### A Morte Temporária
 
 Quando um herói morre:
 
-1. **Drop de Equipamento:** Todo equipamento cai no chão (pode ser saqueado)
-2. **Entrada no Memorial:** O herói entra temporariamente na aba "MEMORIAL (MORTOS)" da Library
-3. **Redenção Automática:** Após 60 segundos, o herói **automaticamente** renasce como **Guarda da Cidade** (nível base, sem equipamento)
+1.  **Perda:** O herói perde parte do ouro e eficiência dos equipamentos (durabilidade).
+2.  **Recuperação:** O herói é resgatado para a Vila.
+3.  **Trabalho Forçado:** Para pagar seus custos de resgate e cura, o herói precisa trabalhar na cidade por um tempo.
 
-### O Caminho da Redenção: Guardas da Cidade
+### Trabalho na Cidade (Narrativa)
 
-**Estado:** `GUARDA_DA_CIDADE`
+Enquanto se recupera, o herói assume um **trabalho temporário** baseado em sua classe. Isso é mostrado no status do herói, adicionando sabor ao mundo. O herói fica **indisponível** para combate durante este período.
 
-**Características:**
+| Classe         | Local de Trabalho (Narrativo) | Descrição do Status                     |
+| -------------- | ----------------------------- | --------------------------------------- |
+| **Guerreiro**  | Quartel de Treinamento        | "Treinando recrutas para ganhar ouro"   |
+| **Mago**       | Biblioteca Arcana             | "Transcrevendo pergaminhos antigos"     |
+| **Arqueiro**   | Torre de Vigia                | "Vigilância noturna nos muros"          |
+| **Ladino**     | Mercado Sombrio               | "Cobrando 'taxas de proteção' no feudo" |
+| **Druida**     | Jardins Reais                 | "Cultivando ervas medicinais"           |
+| **Elfo**       | Embaixada Élfica              | "Traduzindo textos antigos"             |
+| **Paladino**   | Templo Sagrado                | "Realizando serviços comunitários"      |
+| **Necromante** | Mausoléu                      | "Estudando anatomia (legalmente)"       |
+| **Bardo**      | Taverna do Javali             | "Tocando alaúde por gorjetas"           |
+| **Monge**      | Moinho de Trigo               | "Carregando sacos de farinha (treino)"  |
 
-- Equipamento básico (espada de ferro, sem armadura)
-- Nível resetado para 1
-- Personalidade **preservada**
-- Novo objetivo: Completar 5 "Missões de Redenção"
+**Duração:** 2 a 5 minutos (dependendo do nível). Após esse tempo, ele retorna à ativa.
 
-**Missões de Redenção:**
+### Guardas da Cidade (Mercenários)
 
-- Defender a vila de invasão
-- Escoltar mercador
-- Patrulhar perímetro
-- Salvar herói caído
-- Derrotar chefe de facção
+O Majesty pode contratar **Guardas da Cidade** (Soldados) para reforçar a defesa.
 
-**Ao completar 5 missões:** Estado volta para `AVENTUREIRO` com level 3 e equipamento médio.
+- **Não são Heróis:** São NPCs genéricos sem personalidade P.E.C.M.A. profunda.
+- **Limite:** Máximo de 5 guardas ativos.
+- **Função:** Patrulham **apenas** dentro dos muros da vila. Não exploram, não evoluem, não matam bosses.
+- **Custo:** Salário diário em ouro.
+- **Uso:** Ajudam a defender contra invasões quando os heróis estão longe ou indisponíveis (trabalhando).
 
-### Trauma e Memória
+### Necromancia
 
-Heróis que morreram ganham uma memória permanente:
-
-```typescript
-{
-  type: "DEATH",
-  killer: "Ogro das Cavernas",
-  location: "Floresta Sombria",
-  emotionalImpact: -20, // Afeta relacionamentos com outros heróis
-  phobia: "FEAR_OF_OGRES" // 20% chance de quirk
-}
-```
-
-### Necromancia: O Lado Sombrio
-
-Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos como:
-
-**Heróis Corrompidos:**
-
-- Nome: "Sir Kaelen, O Amaldiçoado"
-- Luta **contra** o jogador
-- Mantém skills, mas sem personalidade
-- Se derrotado novamente: **Libertado da corrupção**, volta como Guarda da Cidade após 60 segundos
+Se um **Necromancer Boss** aparecer, ele pode corromper heróis mortos antes de serem resgatados, criando versões malignas temporárias. Se derrotados, os heróis são resgatados e vão para o trabalho na cidade.
 
 ---
 
@@ -863,8 +850,8 @@ Se um **Necromancer Boss** aparecer no Ciclo 3, ele pode reanimar heróis mortos
 
 ### O Que Acontece Quando Atinge o Limite?
 
-1. **Recrutamento Bloqueado:** Não é possível atrair novos heróis
-2. **Exceção:** Se um herói morrer, uma vaga abre
-3. **Escolha Dolorosa:** O jogador pode "demitir" um herói (ele sai do reino e nunca volta)
+1. **Recrutamento Bloqueado:** Não é possível atrair novos heróis.
+2. **Sem Vagas por Morte:** A morte de um herói NÃO abre vaga (ele entra em recuperação).
+3. **Demissão:** Para contratar um novo tipo de herói, o jogador deve explicitamente "Demitir" (banir) um herói existente.
 
 ---

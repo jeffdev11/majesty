@@ -39,7 +39,7 @@ Como **solopreneur**:
 
 ### Inspiração: Dwarf Fortress
 
-**Dwarf Fortress** provou que gráficos ASCII podem criar jogos **incrivelmente profundos** com comunidades apaixonadas.
+**Dwarf Fortress** provou que interfaces textuais podem criar jogos **incrivelmente profundos** com comunidades apaixonadas.
 
 ---
 
@@ -73,7 +73,7 @@ Como **solopreneur**:
 
 **Decisão intencional:**
 
-- Partidas duram ~1h20min a 2h (4 ciclos × 20 min cada)
+- Partidas duram 2h ou mais (4 ciclos × 30 min cada)
 - Progressão gradual de poder
 - Economia de escassez (ouro é raro)
 
@@ -240,7 +240,7 @@ IP funciona como **mana** em ARPGs:
 - Portraits Doom-style
 - Sonoplastia cinematográfica
 
-**Prova que ASCII pode ser bonito.**
+**Prova que interfaces textuais podem ser bonitas.**
 
 ---
 

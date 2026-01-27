@@ -58,7 +58,7 @@ Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 
 ### Estrutura da Partida
 
-Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 minutos** (Total: 2 horas).
+Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 minutos** (Total: 2 horas ou mais).
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -111,7 +111,7 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 | --------------------- | ------------------------------------------------- |
 | **Temperatura**       | Amena (15-25°C)                                   |
 | **Precipitação**      | Chuvas leves (benéficas para fazendas)            |
-| **Duração Dia/Noite** | 12min dia / 8min noite (mais seguro)              |
+| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)                    |
 | **Visibilidade**      | Alta (névoa de guerra se dissipa 20% mais rápido) |
 
 #### Monstros Tier 1
@@ -156,12 +156,12 @@ Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para
 
 #### Características
 
-| Aspecto               | Detalhes                              |
-| --------------------- | ------------------------------------- |
-| **Temperatura**       | Calor extremo (30-45°C)               |
-| **Precipitação**      | Seca + tempestades súbitas            |
-| **Duração Dia/Noite** | 10min dia / 10min noite (equilibrado) |
-| **Visibilidade**      | Média (poeira/calor distorce visão)   |
+| Aspecto               | Detalhes                            |
+| --------------------- | ----------------------------------- |
+| **Temperatura**       | Calor extremo (30-45°C)             |
+| **Precipitação**      | Seca + tempestades súbitas          |
+| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)      |
+| **Visibilidade**      | Média (poeira/calor distorce visão) |
 
 #### Monstros Tier 2
 
@@ -205,12 +205,12 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 #### Características
 
-| Aspecto               | Detalhes                                |
-| --------------------- | --------------------------------------- |
-| **Temperatura**       | Congelante (-10 a 5°C)                  |
-| **Precipitação**      | Neve constante, nevascas                |
-| **Duração Dia/Noite** | 8min dia / 12min noite (noites longas!) |
-| **Visibilidade**      | Baixa (neve reduz visão em 40%)         |
+| Aspecto               | Detalhes                        |
+| --------------------- | ------------------------------- |
+| **Temperatura**       | Congelante (-10 a 5°C)          |
+| **Precipitação**      | Neve constante, nevascas        |
+| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)  |
+| **Visibilidade**      | Baixa (neve reduz visão em 40%) |
 
 #### Monstros Tier 2-3 (Híbrido)
 
@@ -275,12 +275,12 @@ Os eventos aleatórios **PARAM**. O Boss Global assume o controle da narrativa. 
 
 #### Características
 
-| Aspecto               | Detalhes                                     |
-| --------------------- | -------------------------------------------- |
-| **Temperatura**       | Caótico (-20°C a 40°C aleatório)             |
-| **Precipitação**      | Chuva ácida, neve de cinzas                  |
-| **Duração Dia/Noite** | 5min dia / 15min noite (quase sempre noite!) |
-| **Visibilidade**      | Mínima (lua de sangue permanente)            |
+| Aspecto               | Detalhes                          |
+| --------------------- | --------------------------------- |
+| **Temperatura**       | Caótico (-20°C a 40°C aleatório)  |
+| **Precipitação**      | Chuva ácida, neve de cinzas       |
+| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)    |
+| **Visibilidade**      | Mínima (lua de sangue permanente) |
 
 #### Monstros Tier 3 (Apocalípticos)
 

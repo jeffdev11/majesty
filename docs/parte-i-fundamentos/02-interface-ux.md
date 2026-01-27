@@ -111,8 +111,8 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 │ [14:35] ⏱️ TIMELINE: Kenji age em 0.5s | Ogro age em 2.1s                 │
 │ [14:36] 👊 [Kenji] [COMBO x3] → Ogro (60+80+120 = 260 dano)               │
 │ [14:37] 💀 Ogro DERROTADO! Loot: 45g, Poção de Mana                       │
-│ [14:38] 💬 [Lila]: "Esse era meu! Dividam o ouro direito."                │
-│ [14:39] 🩸 RELAÇÃO [Kaelen ↔ Lila] -5 (Conflito por loot)                 │
+│ [14:38] 💬 [Kaelen]: "Bela luta, Lila! Aquele crítico foi incrível."      │
+│ [14:39] ❤️ RELAÇÃO [Kaelen ↔ Lila] +5 (Elogio em combate)                 │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P8: 🔀 STATUS TEMPORÁRIOS ATIVOS                                          │
 │  ├─ Sir Kaelen [⚡ Fúria +50% ATK] ⏱️ 12s                                 │
@@ -738,7 +738,7 @@ A **Casa Central** (Crown Keep) é o edifício mais importante do reino. É onde
 | ----------------- | -------------------- | ----------------------------- |
 | **HP**            | 5,000                | O dobro de outras construções |
 | **Defense**       | 100                  | Alta resistência              |
-| **Regeneração**   | 50 HP/dia            | Auto-reparo natural           |
+| **Regeneração**   | 250 HP/dia           | Auto-reparo natural           |
 | **Tipo**          | Edifício Especial    | Único no reino                |
 | **Posição no P1** | [0] (sempre no topo) | Prioridade visual             |
 
@@ -1382,7 +1382,7 @@ P2: LEITOR DE DADOS
 
 ### P3 - Estatísticas com Componentes UI
 
-**IMPORTANTE:** Os gráficos **NÃO são ASCII**. Serão **componentes visuais** feitos em Angular.
+**IMPORTANTE:** Os gráficos serão **componentes visuais** feitos em Angular.
 
 #### Tipos de Gráficos Disponíveis
 
@@ -1651,7 +1651,7 @@ function checkGrandeFeito(event: GameEvent) {
 
 ### P2 - Mapa Visual com Tiles e Ícones
 
-**IMPORTANTE:** O mapa **NÃO é ASCII**. Será composto de **imagens quadradas** (tiles) representando cada tipo de terreno.
+**IMPORTANTE:** O mapa será composto de **imagens quadradas** (tiles) representando cada tipo de terreno.
 
 #### Sistema de Tiles
 
