@@ -121,7 +121,7 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 | **Goblin**         | 50-100  | 10-15  | Covardes, fogem com HP < 30% |
 | **Lobo**           | 80-120  | 15-20  | Caçam em matilhas de 3-5     |
 | **Aranha Gigante** | 100-150 | 12-18  | Veneno leve, teias           |
-| **Bandido**        | 120-180 | 20-25  | Inteligente, rouba ouro      |
+| **Bandido**        | 120-180 | 20-25  | Inteligente, saqueia ouro    |
 
 #### Eventos Globais Únicos do Ciclo 1
 

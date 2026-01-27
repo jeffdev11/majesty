@@ -169,43 +169,44 @@ Quando dois heróis são "Rivais" ou "Inimigos":
 
 ---
 
-## 5.5 Mercado Ambulante (Hero Trading)
+## 5.2 Disputa de Glória (Quem finalizou?)
 
-Heróis não dependem apenas do jogador para equipamento. Eles **negociam entre si**.
+Embora o XP seja compartilhado em grupos, apenas quem desfere o **Golpe Final (Last Hit)** ganha o bônus de **Glória** e incrementa o contador de Kills.
 
-### Mecânica de Troca
+### Conflito Narrativo
 
-**Iniciador:** Herói com item duplicado ou inferior
-**Alvo:** Herói com item complementar
+Heróis orgulhosos (Power > 0.7) podem ficar ofendidos se um aliado "tomar a glória" de um inimigo que eles enfraqueceram.
 
-**Fluxo:**
-
-1. Iniciador propõe troca via log social
-2. Alvo avalia baseado em:
-   - **Affinity:** Amigos aceitam trades injustas
-   - **Resource (Ganância):** Ladinos exigem ouro extra
-   - **Mind (Intelecto):** Heróis inteligentes avaliam valor real
-3. Aceitação ou Contraproposta
-
-### Exemplo de Negociação
+**Exemplo de Log:**
 
 ```
-[15:30] 💼 TRADE [Lila ➜ Elara] Oferece: Adaga +5 | Quer: Arco +3
-[15:31] � MIND [Elara] [Mind: 0.8] Avalia: "Adaga vale menos que arco."
-         Contraproposta: Adaga+5 + 50 Ouro
-[15:32] 💰 LOOT [Lila] [Resource: 0.9] Recusa: "Muito caro!"
-[15:33] 🤝 TRADE [Elara] [Aff: +40] Aceita por amizade.
-[15:34] ✔️ TRADE [Lila] [+Arco+3] Troca concluída.
+[14:30] ⚔️ Kaelen deixou Ogro com 5% HP.
+[14:31] 🏹 Lila disparou flecha final! (Last Hit)
+[14:32] 💢 Kaelen: "Essa foi MINHA vitória, ladina!"
+[14:33] 📉 Affinity: Kaelen ↔ Lila (-5)
 ```
 
-### Trades Especiais: "Presentes"
+> **Nota:** Isso NÃO é roubo de recursos (o loot é gerado para quem matou, mas pode ser compartilhado se forem amigos). É puramente uma disputa de ego.
 
-Se Affinity > +60, heróis podem **doar** itens sem esperar retorno:
+---
+
+## 5.5 Saque de Heróis Caídos (Sem Roubo)
+
+Heróis nunca roubam itens de aliados vivos. Porém, se um herói morrer:
+
+1. **Drop:** Todos os itens inventariados caem no chão (Loot Bag).
+2. **Recuperação:** Qualquer herói próximo pode pegar a bolsa.
+3. **Decisão Ética:**
+   - **Ético (Ethics > 0.6):** Guarda os itens para devolver ao dono quando ele renascer.
+   - **Pragmático (Ethics < 0.4):** Usa os itens se forem melhores que os seus.
+   - **Ganancioso (Resource > 0.8):** Vende os itens no mercado para lucro próprio.
+
+**Exemplo:**
 
 ```
-[10:15] 🎁 Sir Kaelen doou Poção de Vida para Gandalf.
-        Razão: "Você salvou minha vida ontem."
-        Affinity: +65 → +70
+[10:15] 💀 Gandalf caiu em combate. Dropou: "Cajado das Cinzas".
+[10:16] ✋ Sir Kaelen recolheu o Cajado.
+[10:17] 💬 Kaelen: "Vou guardar isso para você, velho amigo."
 ```
 
 ---
@@ -366,7 +367,7 @@ Lila: Lvl 6 (Power: 0.9 - muito ambiciosa)
 [Sistema detecta inveja]:
 Lila começa a sabotar Kaelen:
 - Não cura ele em combate
-- Rouba seus kills
+- Compete por kills
 - Fala mal dele para outros heróis
 
 [Carta de Lila para Gandalf]:
@@ -422,7 +423,7 @@ vs
 Lila Rogue (Ética: 0.1, amoral)
 
 [Diálogo automático - Dia 10]:
-Kaelen: "Lila, roubar dos mortos é DESONROSO!"
+Kaelen: "Lila, saquear os mortos é DESONROSO!"
 Lila: "Honra não paga contas, paladino."
 
 [Resultado]:

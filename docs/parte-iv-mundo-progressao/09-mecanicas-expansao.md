@@ -242,13 +242,13 @@ Alvo: Guilda de Ladinos (vingança)
 🚩 REBELIÃO DETECTADA!
 
 Kaelen, Lila e Gandalf formaram uma facção rebelde!
-Eles roubaram 500 Ouro e 20 poções.
+Eles saquearam 500 Ouro e 20 poções.
 Localização: Fundaram "Vila dos Exilados" (X:15, Y:15)
 
 [Nova ameaça no mapa]
 Vila dos Exilados:
 - População: 3 heróis traidores
-- Comportamento: Atacam caravanas, roubam recursos
+- Comportamento: Atacam caravanas, saqueiam recursos
 - Objetivo: Destruir sua capital
 ```
 
@@ -292,7 +292,7 @@ Em _Heroes of Majesty_, **não existe** sistema de evolução de classe (ex: Gue
 
 O jogador pode substituir heróis veteranos por novatos de outras classes, mas deve pesar o **Trade-off**:
 
-- **Manter Veterano Problemático:** Um ladino nível 20 que rouba demais? Poderoso em combate, mas um risco social.
+- **Manter Veterano Problemático:** Um ladino nível 20 que causa conflitos? Poderoso em combate, mas um risco social.
 - **Recrutar Novato Ideal:** Um paladino nível 1. Comportamento perfeito, mas inútil em combate de alto nível até evoluir.
 - **Decisão:** Vale a pena "carregar" um novato para substituir uma maçã podre?
 

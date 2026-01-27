@@ -31,7 +31,7 @@ Ouro acumulado: 2,400
 Mortes: 1 (Gandalf, Dia 23, morto por Ogro)
 
 [EVENTO MEMORÁVEL]
-Dia 18: Lila roubou o kill de Kaelen.
+Dia 18: Lila tomou a glória de Kaelen (Kill Steal).
 Iniciou-se a rivalidade que duraria 80 dias.
 
 ───────────────────────────────────────────

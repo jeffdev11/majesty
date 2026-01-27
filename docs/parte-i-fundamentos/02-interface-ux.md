@@ -2485,7 +2485,7 @@ P3: PERFIL DO ALVO
 **Exemplos de Razões:**
 
 - "Acabou de matar um boss (orgulhoso)"
-- "Lila roubou seu kill (irritado)"
+- "Lila tomou seu kill (irritado)"
 - "Você enviou ouro (agradecido)"
 - "Ignorou pedido de ajuda (ressentido)"
 
@@ -2830,7 +2830,7 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 |                      | A primeira missão foi humilde: exterminar        |                  |
 |                      | goblins que infestavam a Floresta Sombria. Mas   |                  |
 |                      | mesmo nessa tarefa simples, os deuses viram a    |                  |
-|                      | semente do drama: Lila roubou o último golpe de  |                  |
+|                      | semente do drama: Lila tomou o último golpe de   |                  |
 |                      | um goblin ferido por Kaelen. O guerreiro jurou   |                  |
 |                      | silenciosamente que não esqueceria.              |                  |
 |                      |                                                  |                  |
@@ -2936,7 +2936,7 @@ Apenas o parágrafo narrativo, sem títulos ou metadados.
 {
   "eventList": [
     "Kaelen matou 5 Goblins (XP: +500)",
-    "Lila roubou último golpe de Kaelen (Kill Steal)",
+    "Lila tomou último golpe de Kaelen (Kill Steal)",
     "Affinity Kaelen ↔ Lila: +40 → +25",
     "Kaelen enviou carta hostil para Lila",
     "Gandalf usou Bola de Fogo (8 kills)",
@@ -2956,7 +2956,7 @@ bem; e Gandalf, cujo cajado brilhava com promessas arcanas.
 
 A primeira missão foi humilde: exterminar goblins que infestavam
 a Floresta Sombria. Mas mesmo nessa tarefa simples, os deuses
-viram a semente do drama: Lila roubou o último golpe de um goblin
+viram a semente do drama: Lila tomou o último golpe de um goblin
 ferido por Kaelen. O guerreiro jurou silenciosamente que não
 esqueceria. Enquanto isso, Gandalf incinerou hordas com seu fogo
 arcano, indiferente às tensões mortais ao seu redor.

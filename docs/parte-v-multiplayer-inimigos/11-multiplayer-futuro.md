@@ -70,7 +70,7 @@ Objetivos em conflito:
 **Em vez disso:**
 
 - Heróis podem **sabotar** construções do oponente
-- Roubar recursos de caravanas
+- Saquear recursos de caravanas
 - Contratar mercenários para atacar indiretamente
 
 ---

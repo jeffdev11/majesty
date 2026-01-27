@@ -73,7 +73,7 @@ O **Conselheiro Real** não é apenas um chatbot. Ele é:
 Jogador: /why is Lila angry?
 
 Conselheiro: "Majestade, Lila Rogue está irritada porque
-Sir Kaelen roubou o último golpe dela contra um Ogro há
+Sir Kaelen tomou o último golpe dela contra um Ogro há
 15 minutos. Ela perdeu 200 XP e um item raro. Baseado
 na personalidade dela (Ganância: Alta), sugiro oferecer
 compensação em ouro ou ela pode iniciar PvP."
@@ -161,7 +161,7 @@ O Conselheiro gera automaticamente:
 "Majestade, o dia foi produtivo. Sir Kaelen subiu
 de nível após derrotar 5 Ogros. Lila e Gandalf
 formaram um novo grupo. Observo tensão crescente
-entre Kaelen e Lila devido ao incidente de roubo
+entre Kaelen e Lila devido ao incidente de disputa
 de kill. Recomendo intervenção diplomática."
 ```
 

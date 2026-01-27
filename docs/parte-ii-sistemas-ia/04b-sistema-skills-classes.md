@@ -408,7 +408,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 | #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                   |
 | --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ------------------------ |
-| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                 | Nível 1                  |
+| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, drena 20 HP                 | Nível 1                  |
 | 2   | **Reanimar Cadáver**     | 30 Mana  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
 | 3   | **Drenar Vida**          | 25 Mana  | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
 | 4   | **Invocar Zumbi**        | 50 Mana  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
@@ -568,13 +568,13 @@ Diferente de skills normais, **Combos de Afinidade** (baseados em Chrono Trigger
 
 #### 🛡️ Combos de Suporte/Outros
 
-| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                      |
-| :------------- | :------------- | :--------------------- | :------------------------------------------------------------------------------------------ |
-| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).            |
-| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).         |
-| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.            |
-| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino rouba itens de TODOS os bolsos simultaneamente. |
-| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.     |
+| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                        |
+| :------------- | :------------- | :--------------------- | :-------------------------------------------------------------------------------------------- |
+| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).              |
+| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).           |
+| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.              |
+| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino saqueia itens de TODOS os bolsos simultaneamente. |
+| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.       |
 
 **Regras de Ativação:**
 
