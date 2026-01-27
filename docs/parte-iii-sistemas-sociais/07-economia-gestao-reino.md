@@ -428,15 +428,10 @@ Lição: Spam é punido automaticamente pelo sistema
 
 IP se torna tão estratégico quanto ouro.
 
-#### 3. Custo de API Real
+#### 3. Custo Computacional e Imersão
 
-Cada comando usa LLM:
-
-- Custo por chamada: ~$0.002
-- 100 comandos = $0.20
-- 1000 jogadores = $200/dia
-
-IP limita naturalmente o uso de API.
+Embora a IA rode localmente (custo zero de API), o processamento de LLM consome recursos da GPU/CPU.
+IP limita naturalmente o uso frequente da IA, garantindo performance estável e reforçando a imersão de que "sua influência não é infinita".
 
 #### 4. Imersão Narrativa
 

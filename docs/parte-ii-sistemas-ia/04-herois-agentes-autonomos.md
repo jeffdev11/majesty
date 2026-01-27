@@ -772,6 +772,10 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 - **Progressão:**
   - 2 heróis da mesma classe: **Nível 1 (1x efeito)**
   - 3 heróis da mesma classe: **Nível 2 (2x efeito)**
+- **Cálculo:** (Quantidade de heróis da classe - 1) = Nível do Buff.
+- **Progressão:**
+  - 2 heróis da mesma classe: **Nível 1 (1x efeito)**
+  - 3 heróis da mesma classe: **Nível 2 (2x efeito)**
   - 4 heróis da mesma classe: **Nível 3 (3x efeito)**
   - 5 heróis da mesma classe: **Nível 4 (4x efeito)** -> _Potencial máximo._
 
@@ -831,17 +835,12 @@ Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de 
 
 ## 4.6 Ciclo de Vida: Morte, Trabalho e Redenção
 
-### A Morte Temporária
+### Morte e Retorno
 
-Quando um herói morre:
+Quando um herói "morre", ele é resgatado, perde o ouro e entra em um estado de recuperação (60s).
+Após recuperar a consciência, se estiver sem ouro, ele realiza trabalhos na cidade (toca música, ajuda na forja) para comprar equipamento básico antes de voltar a se aventurar.
 
-1.  **Perda:** O herói perde parte do ouro e eficiência dos equipamentos (durabilidade).
-2.  **Recuperação:** O herói é resgatado para a Vila.
-3.  **Trabalho Forçado:** Para pagar seus custos de resgate e cura, o herói precisa trabalhar na cidade por um tempo.
-
-### Trabalho na Cidade (Narrativa)
-
-Enquanto se recupera, o herói assume um **trabalho temporário** baseado em sua classe. Isso é mostrado no status do herói, adicionando sabor ao mundo. O herói fica **indisponível** para combate durante este período.
+Este ciclo garante que heróis nunca fiquem "presos" sem ter como jogar.
 
 | Classe         | Local de Trabalho (Narrativo) | Descrição do Status                     |
 | -------------- | ----------------------------- | --------------------------------------- |

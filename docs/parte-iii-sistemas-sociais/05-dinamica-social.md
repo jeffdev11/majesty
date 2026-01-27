@@ -59,9 +59,8 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 #### 2. Morte
 
-- Perdedor morre (entra no sistema de Redenção)
+- Perdedor morre (entra em recuperação de 60s)
 - Ganhador ganha título: `"Matador de [Nome]"`
-- **Todo o reino perde -5 Moral** (trauma coletivo)
 - Affinity com todos aliados da vítima: -30
 
 #### 3. Intervenção de Terceiros
