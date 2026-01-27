@@ -15,14 +15,16 @@
 4. Jogador usa esse ouro para upgrades e recrutar heróis
 ```
 
-### Taxa de Imposto
+| Tipo de Transação          | Lucro para o Tesouro   |
+| -------------------------- | ---------------------- |
+| Compra de Poção            | 50% do valor (Markup)  |
+| Compra de Equipamento      | 40% do valor (Markup)  |
+| Upgrade de Arma (Ferreiro) | 30% do valor (Serviço) |
+| Healing na Taverna         | 60% do valor (Serviço) |
 
-| Tipo de Transação          | Taxa para o Tesouro |
-| -------------------------- | ------------------- |
-| Compra de Poção            | 50% do valor        |
-| Compra de Equipamento      | 40% do valor        |
-| Upgrade de Arma (Ferreiro) | 30% do valor        |
-| Healing na Taverna         | 60% do valor        |
+**Nota sobre a Cadeia de Suprimentos:**
+O Tesouro Real atua como um varejista. O Rei compra estoques (poções, lingotes) de fornecedores externos (wholesalers) por um preço de custo (X) e os heróis compram das lojas do reino por um preço de varejo (Y). O lucro do reino é a margem `Y - X`.
+_Exemplo:_ Rei paga 25g por poção para estocar. Herói paga 50g para comprar. Lucro líquido: 25g.
 
 ### Visualização no HUD
 

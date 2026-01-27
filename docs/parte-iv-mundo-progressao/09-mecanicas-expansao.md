@@ -275,3 +275,33 @@ mas evita guerra civil."
 - Atacam periodicamente (mini-boss)
 
 ---
+
+---
+
+## 9.9 Notas sobre Classes e Evolução
+
+### Sem Multiclasse ou Evolução de Classe
+
+Em _Heroes of Majesty_, **não existe** sistema de evolução de classe (ex: Guerreiro NÃO vira Paladino).
+
+- Cada classe é uma disciplina única e vitalícia.
+- **Guerreiro** e **Paladino** são classes distintas com papéis diferentes.
+- Para ter um Paladino, você deve recrutar um Paladino nível 1.
+
+### Troca Estratégica de Heróis
+
+O jogador pode substituir heróis veteranos por novatos de outras classes, mas deve pesar o **Trade-off**:
+
+- **Manter Veterano Problemático:** Um ladino nível 20 que rouba demais? Poderoso em combate, mas um risco social.
+- **Recrutar Novato Ideal:** Um paladino nível 1. Comportamento perfeito, mas inútil em combate de alto nível até evoluir.
+- **Decisão:** Vale a pena "carregar" um novato para substituir uma maçã podre?
+
+---
+
+## 9.10 Habitação e Bases
+
+O limite de 5 heróis é rígido. Onde eles dormem?
+
+- **Cabanas Narrativas:** Heróis montam suas próprias tendas ou cabanas ao redor da Vila. O jogador **não** precisa construir casas.
+- **Edifícios Funcionais Só:** O jogador constrói apenas Guildas, Lojas e Defesas.
+- **Game Over:** A derrota ocorre apenas se a **Casa Central (Trono)** for destruída, não as cabanas dos heróis.

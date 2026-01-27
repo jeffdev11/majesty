@@ -111,7 +111,9 @@ Não é para quem quer **instant gratification**. É para fãs de:
 **Nossa solução:**
 
 - **Utility AI:** Para decisões de gameplay (atacar, fugir, saquear)
-- **LLM:** Para textos narrativos (cartas, sussurros, crônicas)
+- **Utility AI:** Para decisões de gameplay (atacar, fugir, saquear)
+- **Algoritmos Determinísticos:** Para logs de combate repetitivos (ataques, danos, miss) e descrições técnicas.
+- **LLM:** Exclusivamente para **narrativa de alto valor** (cartas, sussurros, crônicas, e Banter social entre heróis), evitando gargalos de performance em tempo real.
 
 ---
 
@@ -146,7 +148,7 @@ Se o jogo tiver **10,000+ jogadores ativos**, multiplayer é justificado. Se tiv
 
 - Jogador enviaria 100 cartas por minuto
 - Spam no Conselheiro
-- Custo de API explode ($1000/mês)
+- Sobrecarga de processamento local (GPU)
 
 **Com IP:**
 

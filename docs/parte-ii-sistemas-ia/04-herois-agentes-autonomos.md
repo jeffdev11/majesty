@@ -827,9 +827,10 @@ Isso permite que eles iniciem caçadas imediatamente sem depender de investiment
 
 Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de monstros, equipamento quebrado), ele pode optar por **Trabalhar na Cidade**.
 
-- **Mecânica:** O herói se dirige a um edifício (Taverna, Ferreiro, Fazenda) e realiza trabalhos manuais.
-- **Rendimento:** Baixo (ex: 5g a 10g por hora), mas seguro.
-- **Utilidade:** Garante que nenhum herói fique "soft-locked" por falta de dinheiro para comprar equipamentos básicos.
+- **Mecânica:** O herói realiza trabalhos manuais (Taverna, Ferreiro).
+- **Rendimento:** Ganha **100 Ouro a cada 30 segundos** (ritmo acelerado para gameplay).
+- **Limite:** Ao atingir **500 Ouro**, o herói é **forçado a sair** do trabalho e voltar à aventura.
+- **Escolha:** O herói pode sair antes dos 500g se calcular que já tem o suficiente para suprimentos.
 
 ---
 
