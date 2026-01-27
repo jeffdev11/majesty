@@ -38,7 +38,7 @@ A diversão do jogo não vem da execução motora rápida, mas sim da **satisfa�
 
 ### Os Três Pilares
 
-1. **Imprevisibilidade (O Tempero da IA)**
+1. **Imprevisibilidade**
    - Traços de personalidade como ganância, coragem e ética fazem com que os heróis tomem decisões inesperadas
    - Um ladino pode ignorar um combate para saquear um baú
    - Um guerreiro covarde pode fugir cedo demais
