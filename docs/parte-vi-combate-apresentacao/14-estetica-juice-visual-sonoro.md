@@ -1,34 +1,36 @@
 # 14. ESTÉTICA E "JUICE" VISUAL/SONORO
 
-## 14.1 A Filosofia do "Cyber-Fantasy Terminal"
+## 14.1 A Filosofia do "Terminal Mágico de Fantasia"
 
 ### Identidade Visual
 
-O jogo **não tenta** parecer um terminal DOS antigo. Em vez disso, é um **terminal mágico futurista** com elementos de fantasia.
+O jogo **não tenta** parecer um terminal DOS antigo. Em vez disso, é um **terminal mágico fantásia medieval RPG** com elementos de fantasia.
 
 **Paleta de Cores:**
 
 ```css
 :root {
-  --primary-bg: #0a0e1a; /* Azul escuro profundo */
-  --terminal-green: #00ff41; /* Verde neon (texto padrão) */
-  --warning-amber: #ffaa00; /* Laranja/âmbar (alertas) */
-  --critical-red: #ff0055; /* Rosa neon (perigo) */
-  --magic-purple: #aa00ff; /* Roxo mágico (eventos raros) */
-  --border-glow: #00ffff; /* Ciano (bordas ativas) */
+  --primary-bg: #0d0c0b; /* Ébano profano (fundo) */
+  --text-parchment: #e2d1b4; /* Pergaminho antigo (texto geral) */
+  --royal-gold: #e6b422; /* Ouro real (títulos e destaque) */
+  --mana-blue: #4da6ff; /* Azul arcano (magia e mana) */
+  --blood-red: #a30000; /* Sangue de Dragão (perigo e dano) */
+  --emerald-green: #2ecc71; /* Verde esmeralda (cura e natureza) */
+  --border-iron: #3d3d3d; /* Ferro batido (bordas e divisórias) */
+  --shadow-purple: #8e44ad; /* Púrpura do Vazio (eventos sombrios) */
 }
 ```
 
 **Tipografia:**
 
 ```css
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=JetBrains+Mono&display=swap");
 
 body {
-  font-family: "Fira Code", "Courier New", monospace;
+  font-family: "JetBrains Mono", "Crimson Pro", monospace;
   font-size: 14px;
   line-height: 1.6;
-  text-shadow: 0 0 5px currentColor; /* Glow sutil */
+  text-shadow: 0 0 3px rgba(226, 209, 180, 0.3); /* Brilho de pergaminho */
 }
 ```
 

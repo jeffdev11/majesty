@@ -70,7 +70,7 @@ A proposta original focava em ver bonequinhos andando na tela. Percebemos que is
 - **O cérebro dos heróis**
 - **A narrativa emergente**
 
-### A Nova Estética: Cyber-Fantasy Terminal
+### A Nova Estética: Terminal Mágico de Fantasia Medieval
 
 Imagine que você não está flutuando sobre o castelo, mas **sentado na sala de guerra**, operando um sistema mágico de monitoramento via texto, logs e mapas táticos.
 

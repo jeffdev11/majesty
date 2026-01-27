@@ -52,9 +52,9 @@ interface Hero {
   };
 
   // Progressão
-  level: number;
+  level: number; // Teto Máximo: Lvl 10 (Max Cap)
   xp: number;
-  unlockedSkills: Skill[];
+  unlockedSkills: Skill[]; // Skills são liberadas até o Lvl 10
 
   // Background Procedural
   background: {

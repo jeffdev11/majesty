@@ -145,7 +145,7 @@
 
 14. [Estética e "Juice" Visual/Sonoro](#14-estética-e-juice-visualsonoro)
 
-- 14.1 [Cyber-Fantasy Terminal](#141-a-filosofia-do-cyber-fantasy-terminal)
+- 14.1 [Terminal Mágico de Fantasia](#141-a-filosofia-do-terminal-mágico-de-fantasia)
 - 14.2 [Portraits Dinâmicos](#142-portraits-dinâmicos-doom-style)
 - 14.3 [Ícones Vivos](#143-ícones-vivos-micro-animações)
 - 14.4 [Sonoplastia Imersiva](#144-sonoplastia-imersiva-o-mundo-sonoro)
@@ -280,7 +280,7 @@ A proposta original focava em ver bonequinhos andando na tela. Percebemos que is
 - **O cérebro dos heróis**
 - **A narrativa emergente**
 
-### A Nova Estética: Cyber-Fantasy Terminal
+### A Nova Estética: Terminal Mágico de Fantasia Medieval
 
 Imagine que você não está flutuando sobre o castelo, mas **sentado na sala de guerra**, operando um sistema mágico de monitoramento via texto, logs e mapas táticos.
 
@@ -986,7 +986,8 @@ Esse é o momento PERFEITO para atacar o boss!"
 | Painel | Nome                        | Conteúdo                                                            |
 | ------ | --------------------------- | ------------------------------------------------------------------- |
 | **P1** | **Build Menu**              | Lista de construções e guildas disponíveis para compra/upgrade      |
-| **P2** | **Escola Estoica**          | Interface de treinamento para modificação de traits P.E.C.M.A.      |
+| **P2** | **Árvore de Skills**        | Pesquisa e desbloqueio de novas habilidades com Ouro                |
+| **P9** | **Escola Estoica**          | Interface de treinamento para modificação de traits P.E.C.M.A.      |
 | **P3** | **Stock & Inventário**      | Controle de poções, armas, armaduras e recursos básicos             |
 | **P4** | **Detalhes Econômicos**     | Relatório de Fluxo de Caixa (Receitas vs Despesas)                  |
 | **P5** | **Orçamento**               | Alocação de recursos por categoria (Manutenção, Salários, Obras)    |
@@ -998,13 +999,13 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│ P1: BUILD MENU                 │ P2: ESCOLA ESTOICA                       │
-│ [1] Guilda Guerreiros (Lvl 2)  │ Herói Selecionado: Sir Kaelen (Lvl 8)    │
-│ [2] Guilda Magos (Lvl 1)       │ Trait Atual: Mind (0.4)                  │
-│ [3] Guilda Paladinos (Bloq.)   │ Objetivo: Elevar para 0.55               │
-│ [4] Torre de Vigia (Lvl 3)     │ Custo Estimado: 950g | Tempo: 180s       │
-│ [5] Escola Estoica (Lvl 1)     │ [T] Iniciar Treinamento                  │
-│ [6] Mercado (Lvl 2)            │ [ESC] Cancelar Seleção                   │
+│ P1: BUILD MENU                 │ P2: ÁRVORE DE SKILLS (Requer Ouro)       │
+│ [1] Guilda Guerreiros (Lvl 2)  │ [T1] Power Strike (200g) [✓]             │
+│ [2] Guilda Magos (Lvl 1)       │  └── [T2] Battle Cry (400g) [ ]          │
+│ [3] Guilda Paladinos (Bloq.)   │ [T1] Fireball (200g) [✓]                 │
+│ [4] Torre de Vigia (Lvl 3)     │  └── [T2] Frost Bolt (400g) [ ]          │
+│ [5] Escola Estoica (Lvl 1)     │ [Clique para Pesquisar]                   │
+│ [6] Mercado (Lvl 2)            │ [G] Mudar Classe (Tab)                   │
 ├────────────────────────────────┼──────────────────────────────────────────┤
 │ P3: STOCK & INVENTÁRIO         │ P4: ECONOMIA (Resumo Diário)             │
 │ Poções HP: [████░░░░░░] 45/100 │ Receita: +450g (Taxas: 120g, Loot: 330g) │
@@ -4241,11 +4242,7 @@ Cada classe possui **30 skills únicas**:
 9. 🎵 **Bardo** (Bard) - Suporte musical
 10. 👊 **Monge** (Monk) - DPS corpo-a-corpo sem armas
 
-O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos através de:
-
-- Construir/melhorar Guildas
-- Completar missões especiais
-- Atingir marcos de progressão
+O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. Diferente de RPGs tradicionais, os heróis não escolhem o que aprender; o Majesty compra a "licença" da skill para a guilda, e todos os heróis aptos (nível e pré-requisitos) passam a utilizá-la.
 
 ---
 
@@ -4253,43 +4250,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome                 | Custo    | Cooldown | Descrição                                        | Requer                  |
-| --- | -------------------- | -------- | -------- | ------------------------------------------------ | ----------------------- |
-| 1   | **Golpe Poderoso**   | 10 Mana  | 5s       | +50% dano no próximo ataque                      | Nível 1                 |
-| 2   | **Grito de Guerra**  | 20 Mana  | 30s      | +20% Attack para aliados próximos por 10s        | Golpe Poderoso          |
-| 3   | **Investida**        | 15 Mana  | 15s      | Carga rápida até o inimigo, atordoa 2s           | Nível 3                 |
-| 4   | **Girar Lâmina**     | 25 Mana  | 20s      | Ataque em área 360°, atinge até 5 inimigos       | Investida               |
-| 5   | **Quebra-Armadura**  | 30 Mana  | 25s      | Ignora 50% da defesa do alvo                     | Nível 5                 |
-| 6   | **Estocada Mortal**  | 35 Mana  | 30s      | Golpe crítico garantido, +100% dano              | Quebra-Armadura         |
-| 7   | **Provocação**       | 20 Mana  | 20s      | Força inimigos próximos a atacarem o guerreiro   | Grito de Guerra         |
-| 8   | **Segundo Fôlego**   | 50 Mana  | 60s      | Recupera 30% HP instantaneamente                 | Nível 7                 |
-| 9   | **Fúria Berserker**  | 40 Mana  | 45s      | +50% Attack, -30% Defense por 15s                | Estocada Mortal         |
-| 10  | **Terremoto**        | 60 Mana  | 60s      | Golpeia o chão, atordoa todos em 10m por 3s      | Girar Lâmina            |
-| 11  | **Escudo Vivo**      | 30 Mana  | 40s      | Bloqueia próximo ataque completamente            | Nível 9                 |
-| 12  | **Vingança**         | 35 Mana  | 30s      | Próximo ataque causa dano = HP perdido           | Fúria Berserker         |
-| 13  | **Executar**         | 25 Mana  | 35s      | Mata instantaneamente inimigo com HP < 15%       | Nível 10                |
-| 14  | **Muralha de Aço**   | 70 Mana  | 90s      | Imune a dano por 5s, não pode se mover           | Escudo Vivo             |
-| 15  | **Avatar da Guerra** | 100 Mana | 120s     | Cresce de tamanho, +200% Attack, ataques em área | Executar + Wyvern Scale |
+| #   | Nome               | Custo    | Cooldown | Descrição                                        | Requer                 |
+| --- | ------------------ | -------- | -------- | ------------------------------------------------ | ---------------------- |
+| 1   | **Power Strike**   | 10 Mana  | 1 Turno  | +50% dano no próximo ataque                      | Nível 1                |
+| 2   | **Battle Cry**     | 20 Mana  | 4 Turnos | +20% Attack para aliados próximos por 2 Turnos   | Power Strike           |
+| 3   | **Charge**         | 15 Mana  | 2 Turnos | Carga rápida até o inimigo, atordoa 1 Turno      | Nível 3                |
+| 4   | **Blade Spin**     | 25 Mana  | 3 Turnos | Ataque em área 360°, atinge até 5 inimigos       | Charge                 |
+| 5   | **Armor Sunder**   | 30 Mana  | 3 Turnos | Ignora 50% da defesa do alvo                     | Nível 5                |
+| 6   | **Mortal Thrust**  | 35 Mana  | 4 Turnos | Golpe crítico garantido, +100% dano              | Armor Sunder           |
+| 7   | **Taunt**          | 20 Mana  | 3 Turnos | Força inimigos próximos a atacarem o guerreiro   | Battle Cry             |
+| 8   | **Second Wind**    | 50 Mana  | 6 Turnos | Recupera 30% HP instantaneamente                 | Nível 7                |
+| 9   | **Berserker Rage** | 40 Mana  | 5 Turnos | +50% Attack, -30% Defense por 3 Turnos           | Mortal Thrust          |
+| 10  | **Earthshaker**    | 60 Mana  | 6 Turnos | Golpeia o chão, atordoa todos em 10m por 1 Turno | Blade Spin             |
+| 11  | **Shield Block**   | 30 Mana  | 5 Turnos | Bloqueia próximo ataque completamente            | Nível 9                |
+| 12  | **Vengeance**      | 35 Mana  | 4 Turnos | Próximo ataque causa dano = HP perdido           | Berserker Rage         |
+| 13  | **Execute**        | 25 Mana  | 4 Turnos | Mata instantaneamente inimigo com HP < 15%       | Nível 10               |
+| 14  | **Iron Bulwark**   | 70 Mana  | 8 Turnos | Imune a dano por 1 Turno, não pode se mover      | Shield Block           |
+| 15  | **Avatar of War**  | 100 Mana | 1x comb. | Cresce de tamanho, +200% Attack, ataques em área | Execute + Wyvern Scale |
 
 ### 🛡️ Skills Passivas (15)
 
-| #   | Nome                       | Efeito                                                  | Requer                  |
-| --- | -------------------------- | ------------------------------------------------------- | ----------------------- |
-| 1   | **Pele de Ferro**          | +10% Defense permanente                                 | Nível 1                 |
-| 2   | **Vitalidade**             | +15% HP máximo                                          | Pele de Ferro           |
-| 3   | **Ameaça Aumentada**       | Inimigos priorizam atacar este herói                    | Provocação              |
-| 4   | **Resistência à Dor**      | Ignora 20% do dano de DoT (sangramento, veneno)         | Vitalidade              |
-| 5   | **Força Brutal**           | +15% Attack permanente                                  | Nível 4                 |
-| 6   | **Regeneração em Combate** | Recupera 1% HP a cada 5s em combate                     | Segundo Fôlego          |
-| 7   | **Imparável**              | Reduz duração de atordoamentos em 50%                   | Nível 6                 |
-| 8   | **Contra-Ataque**          | 15% chance de revidar quando bloqueado                  | Escudo Vivo             |
-| 9   | **Sede de Sangue**         | +5% Attack para cada inimigo morto (máx 50%)            | Fúria Berserker         |
-| 10  | **Colosso**                | +20% HP máximo, -10% velocidade                         | Vitalidade              |
-| 11  | **Armadura Pesada**        | +25% Defense, imune a knock-back                        | Pele de Ferro           |
-| 12  | **Último Suspiro**         | Ao chegar a 1 HP, fica invulnerável por 3s (1x/combate) | Nível 8                 |
-| 13  | **Aura de Proteção**       | Aliados próximos ganham +10% Defense                    | Ameaçar Aumentada       |
-| 14  | **Mestre em Armas**        | +20% dano com espadas e machados                        | Força Brutal            |
-| 15  | **Titã de Batalha**        | +30% todos stats quando HP < 30%                        | Último Suspiro + Lvl 11 |
+| #   | Nome                  | Efeito                                                    | Requer              |
+| --- | --------------------- | --------------------------------------------------------- | ------------------- |
+| 1   | **Iron Skin**         | +10% Defense permanente                                   | Nível 1             |
+| 2   | **Vitality**          | +15% HP máximo                                            | Iron Skin           |
+| 3   | **Menacing Presence** | Inimigos priorizam atacar este herói                      | Taunt               |
+| 4   | **Durable**           | Ignora 20% do dano de DoT (sangramento, veneno)           | Vitality            |
+| 5   | **Brutal Strength**   | +15% Attack permanente                                    | Nível 4             |
+| 6   | **Combat Regen**      | Recupera 3% HP a cada turno em combate                    | Second Wind         |
+| 7   | **Unstoppable**       | Reduz duração de atordoamentos em 50%                     | Nível 6             |
+| 8   | **Counter-Strike**    | 15% chance de revidar quando bloqueado                    | Shield Block        |
+| 9   | **Bloodlust**         | +5% Attack para cada inimigo morto (máx 50%)              | Berserker Rage      |
+| 10  | **Juggernaut**        | +20% HP máximo, -10% velocidade                           | Vitality            |
+| 11  | **Plate Mastery**     | +25% Defense, imune a knock-back                          | Iron Skin           |
+| 12  | **Last Stand**        | Ao chegar a 1 HP, fica invulnerável por 1 Turno (1x/comb) | Nível 8             |
+| 13  | **Guardian Aura**     | Aliados próximos ganham +10% Defense                      | Menacing Presence   |
+| 14  | **Weapon Master**     | +20% dano com espadas e machados                          | Brutal Strength     |
+| 15  | **Battle Titan**      | +30% todos stats quando HP < 30%                          | Last Stand + Lvl 11 |
 
 ---
 
@@ -4297,43 +4294,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                    | Custo    | Cooldown | Descrição                                      | Requer                   |
-| --- | ----------------------- | -------- | -------- | ---------------------------------------------- | ------------------------ |
-| 1   | **Bola de Fogo**        | 20 Mana  | 8s       | Projétil de fogo, 80 dano mágico               | Nível 1                  |
-| 2   | **Raio Congelante**     | 25 Mana  | 10s      | Congela alvo por 3s, 60 dano                   | Bola de Fogo             |
-| 3   | **Escudo Mágico**       | 30 Mana  | 20s      | Absorve 150 de dano por 8s                     | Nível 2                  |
-| 4   | **Chuva de Meteoros**   | 60 Mana  | 40s      | 6 meteoros em área, 50 dano cada               | Bola de Fogo             |
-| 5   | **Teletransporte**      | 40 Mana  | 25s      | Teleporta 15m instantaneamente                 | Nível 4                  |
-| 6   | **Prisão de Gelo**      | 50 Mana  | 35s      | Congela inimigos em 8m por 5s                  | Raio Congelante          |
-| 7   | **Relâmpago em Cadeia** | 45 Mana  | 30s      | Atinge até 4 alvos, 90 dano cada               | Nível 5                  |
-| 8   | **Barreira Arcana**     | 35 Mana  | 30s      | Aliados próximos ganham +50% Defense por 10s   | Escudo Mágico            |
-| 9   | **Tempestade de Fogo**  | 80 Mana  | 50s      | Área de 12m queima por 10s, 15 dano/s          | Chuva de Meteoros        |
-| 10  | **Congelar Tempo**      | 70 Mana  | 60s      | Reduz velocidade de inimigos em 70% por 8s     | Prisão de Gelo           |
-| 11  | **Explosão Arcana**     | 55 Mana  | 35s      | AoE de 10m, 120 dano + knock-back              | Nível 7                  |
-| 12  | **Invocar Elemental**   | 100 Mana | 90s      | Invoca elemental de fogo que luta por 3 turnos | Tempestade de Fogo       |
-| 13  | **Raio da Destruição**  | 90 Mana  | 45s      | Feixe contínuo, 200 dano total (Alto Delay)    | Relâmpago em Cadeia      |
-| 14  | **Buraco Negro**        | 60 Mana  | 90s      | Puxa até 5 inimigos p/ centro, 100 dano        | Teletransporte           |
-| 15  | **Apocalipse Arcano**   | 150 Mana | 180s     | Explosão 20m, 500 dano, atinge todos inimigos  | Raio Destruição + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Descrição                                           | Requer                    |
+| --- | --------------------- | -------- | -------- | --------------------------------------------------- | ------------------------- |
+| 1   | **Fireball**          | 20 Mana  | 1 Turno  | Projétil de fogo, 80 dano mágico                    | Nível 1                   |
+| 2   | **Frost Bolt**        | 25 Mana  | 2 Turnos | Congela alvo por 1 Turno, 60 dano                   | Fireball                  |
+| 3   | **Mana Shield**       | 30 Mana  | 3 Turnos | Absorve 150 de dano por 2 Turnos                    | Nível 2                   |
+| 4   | **Meteor Shower**     | 60 Mana  | 5 Turnos | 6 meteoros em área, 50 dano cada                    | Fireball                  |
+| 5   | **Teleport**          | 40 Mana  | 3 Turnos | Teleporta 15m instantaneamente                      | Nível 4                   |
+| 6   | **Frost Nova**        | 50 Mana  | 4 Turnos | Congela inimigos em 8m por 1 Turno                  | Frost Bolt                |
+| 7   | **Chain Lightning**   | 45 Mana  | 4 Turnos | Atinge até 4 alvos, 90 dano cada                    | Nível 5                   |
+| 8   | **Arcane Barrier**    | 35 Mana  | 4 Turnos | Aliados próximos ganham +50% Defense por 2 Turnos   | Mana Shield               |
+| 9   | **Firestorm**         | 80 Mana  | 6 Turnos | Área de 12m queima por 3 Turnos, 15 dano/turno      | Meteor Shower             |
+| 10  | **Time Stop**         | 70 Mana  | 7 Turnos | Reduz velocidade de inimigos em 70% por 2 Turnos    | Frost Nova                |
+| 11  | **Arcane Explosion**  | 55 Mana  | 4 Turnos | AoE de 10m, 120 dano + knock-back                   | Nível 7                   |
+| 12  | **Summon Elemental**  | 100 Mana | 8 Turnos | Invoca elemental de fogo que luta por 3 Turnos      | Firestorm                 |
+| 13  | **Obliteration Ray**  | 90 Mana  | 5 Turnos | Feixe contínuo, 200 dano total (Alto Delay)         | Chain Lightning           |
+| 14  | **Event Horizon**     | 60 Mana  | 8 Turnos | 100 dano área, aplica Condensado (-30% Esquiva AoE) | Teleport                  |
+| 15  | **Arcane Apocalypse** | 150 Mana | 1x comb. | Explosão 20m, 500 dano, atinge todos inimigos       | Obliteration Ray + Lvl 12 |
 
 ### 🧙 Skills Passivas (15)
 
-| #   | Nome                   | Efeito                                          | Requer              |
-| --- | ---------------------- | ----------------------------------------------- | ------------------- |
-| 1   | **Mente Brilhante**    | +20% Mana máximo                                | Nível 1             |
-| 2   | **Regeneração Arcana** | +5 Mana/s fora de combate                       | Mente Brilhante     |
-| 3   | **Pele Arcana**        | Converte 10% Mana em escudo mágico              | Escudo Mágico       |
-| 4   | **Maestria Elemental** | +15% dano mágico                                | Nível 3             |
-| 5   | **Foco Mental**        | -10% custo de Mana em todas skills              | Regeneração Arcana  |
-| 6   | **Afinidade com Fogo** | +25% dano de fogo, imune a queimadura           | Bola de Fogo        |
-| 7   | **Afinidade com Gelo** | +25% dano de gelo, reduz 50% lentidão           | Raio Congelante     |
-| 8   | **Canalização Rápida** | -20% tempo de cast                              | Nível 5             |
-| 9   | **Escudo Reflexivo**   | Reflete 20% do dano mágico recebido             | Pele Arcana         |
-| 10  | **Mana Infinita**      | Regenera 2% Mana máximo a cada kill             | Foco Mental         |
-| 11  | **Crítico Arcano**     | 15% chance de crítico mágico (+100% dano)       | Maestria Elemental  |
-| 12  | **Presença Mágica**    | Aliados próximos ganham +10% resistência mágica | Nível 7             |
-| 13  | **Absorção de Mana**   | Restaura 5% Mana ao matar inimigo               | Mana Infinita       |
-| 14  | **Sobrecarga**         | Skills custam +50% Mana mas causam +40% dano    | Crítico Arcano      |
-| 15  | **Arquimago**          | +50% Mana máximo, +30% dano mágico              | Sobrecarga + Lvl 11 |
+| #   | Nome                  | Efeito                                          | Requer            |
+| --- | --------------------- | ----------------------------------------------- | ----------------- |
+| 1   | **Arcane Intellect**  | +20% Mana máximo                                | Nível 1           |
+| 2   | **Mana Flow**         | +10 Mana/turno fora de combate                  | Arcane Intellect  |
+| 3   | **Mana Shielding**    | Converte 10% Mana em escudo mágico              | Mana Shield       |
+| 4   | **Elemental Mastery** | +15% dano mágico                                | Nível 3           |
+| 5   | **Focused Mind**      | -10% custo de Mana em todas skills              | Mana Flow         |
+| 6   | **Pyromania**         | +25% dano de fogo, imune a queimadura           | Fireball          |
+| 7   | **Cryomancy**         | +25% dano de gelo, reduz 50% lentidão           | Frost Bolt        |
+| 8   | **Quick Cast**        | -20% tempo de cast                              | Nível 5           |
+| 9   | **Spell Reflection**  | Reflete 20% do dano mágico recebido             | Mana Shielding    |
+| 10  | **Endless Mana**      | Regenera 2% Mana máximo a cada kill             | Focused Mind      |
+| 11  | **Arcane Crit**       | 15% chance de crítico mágico (+100% dano)       | Elemental Mastery |
+| 12  | **Arcane Presence**   | Aliados próximos ganham +10% resistência mágica | Nível 7           |
+| 13  | **Mana Siphon**       | Restaura 5% Mana ao matar inimigo               | Endless Mana      |
+| 14  | **Overload**          | Skills custam +50% Mana mas causam +40% dano    | Arcane Crit       |
+| 15  | **Archmage**          | +50% Mana máximo, +30% dano mágico              | Overload + Lvl 11 |
 
 ---
 
@@ -4341,43 +4338,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### 🎯 Skills Ativas (15)
 
-| #   | Nome                    | Custo    | Cooldown | Descrição                                          | Requer            |
-| --- | ----------------------- | -------- | -------- | -------------------------------------------------- | ----------------- |
-| 1   | **Tiro Preciso**        | 10 Mana  | 3s       | +30% precisão, 60 dano                             | Nível 1           |
-| 2   | **Flecha Explosiva**    | 25 Mana  | 15s      | AoE 5m, 80 dano total                              | Tiro Preciso      |
-| 3   | **Recuo Tático**        | 15 Mana  | 12s      | Salta para longe e dispara flecha retardadora      | Nível 2           |
-| 4   | **Chuva de Flechas**    | 40 Mana  | 30s      | 12 flechas em área 10m, 25 dano cada               | Flecha Explosiva  |
-| 5   | **Tiro Perfurante**     | 20 Mana  | 10s      | Atravessa alvos, atinge até 3 inimigos             | Nível 3           |
-| 6   | **Marca do Caçador**    | 30 Mana  | 25s      | Marca alvo, +50% dano nele por 15s                 | Tiro Preciso      |
-| 7   | **Flecha Venenosa**     | 35 Mana  | 20s      | Envenena alvo, 5 dano/s por 10s                    | Nível 4           |
-| 8   | **Tiro Rápido**         | 25 Mana  | 18s      | Dispara 3 flechas instantâneas no alvo             | Recuo Tático      |
-| 9   | **Armadilha Explosiva** | 40 Mana  | 35s      | Coloca armadilha, 150 dano + atordoa 3s            | Nível 5           |
-| 10  | **Headshot**            | 50 Mana  | 40s      | Crítico garantido, +200% dano, headshot instakill  | Marca do Caçador  |
-| 11  | **Invocar Lobo**        | 60 Mana  | 90s      | Invoca lobo que luta por 40s                       | Nível 7           |
-| 12  | **Flecha Gélida**       | 45 Mana  | 30s      | Congela alvo por 4s, 70 dano                       | Flecha Venenosa   |
-| 13  | **Metralhadora Elfica** | 70 Mana  | 50s      | Dispara rajada rápida (atinge alvo 5 vezes)        | Tiro Perfurante   |
-| 14  | **Passo Sombrio**       | 40 Mana  | 60s      | Fica invisível e reposiciona para flanco           | Nível 9           |
-| 15  | **Flecha do Juízo**     | 100 Mana | 120s     | Flecha gigante, 600 dano, stuns área (até 3 alvos) | Headshot + Lvl 12 |
+| #   | Nome                 | Custo    | Cooldown | Descrição                                          | Requer            |
+| --- | -------------------- | -------- | -------- | -------------------------------------------------- | ----------------- |
+| 1   | **Aimed Shot**       | 10 Mana  | 1 Turno  | +30% precisão, 60 dano                             | Nível 1           |
+| 2   | **Explosive Arrow**  | 25 Mana  | 2 Turnos | AoE 5m, 80 dano total                              | Aimed Shot        |
+| 3   | **Tactical Retreat** | 15 Mana  | 2 Turnos | Salta para longe e dispara flecha retardadora      | Nível 2           |
+| 4   | **Rain of Arrows**   | 40 Mana  | 4 Turnos | 12 flechas em área 10m, 25 dano cada               | Explosive Arrow   |
+| 5   | **Piercing Shot**    | 20 Mana  | 1 Turno  | Atravessa alvos, atinge até 3 inimigos             | Nível 3           |
+| 6   | **Hunter's Mark**    | 30 Mana  | 3 Turnos | Marca alvo, +50% dano nele por 3 Turnos            | Aimed Shot        |
+| 7   | **Poison Arrow**     | 35 Mana  | 3 Turnos | Envenena alvo, 10 dano/turno por 3 Turnos          | Nível 4           |
+| 8   | **Rapid Fire**       | 25 Mana  | 2 Turnos | Dispara 3 flechas instantâneas no alvo             | Tactical Retreat  |
+| 9   | **Explosive Trap**   | 40 Mana  | 4 Turnos | Coloca armadilha, 150 dano + atordoa 1 Turno       | Nível 5           |
+| 10  | **Headshot**         | 50 Mana  | 5 Turnos | Crítico garantido, +200% dano, headshot instakill  | Hunter's Mark     |
+| 11  | **Summon Wolf**      | 60 Mana  | 8 Turnos | Invoca lobo que luta por 5 Turnos                  | Nível 7           |
+| 12  | **Frost Arrow**      | 45 Mana  | 4 Turnos | Congela alvo por 1 Turno, 70 dano                  | Poison Arrow      |
+| 13  | **Elven Volley**     | 70 Mana  | 5 Turnos | Dispara rajada rápida (atinge alvo 5 vezes)        | Piercing Shot     |
+| 14  | **Shadow Step**      | 40 Mana  | 6 Turnos | Fica 'Evasivo' (+50% Esquiva) e ignora Defense     | Nível 9           |
+| 15  | **Doom Arrow**       | 100 Mana | 1x comb. | Flecha gigante, 600 dano, stuns área (até 3 alvos) | Headshot + Lvl 12 |
 
 ### 🦅 Skills Passivas (15)
 
-| #   | Nome                    | Efeito                                             | Requer                      |
-| --- | ----------------------- | -------------------------------------------------- | --------------------------- |
-| 1   | **Olho de Águia**       | +20% alcance de visão e ataque                     | Nível 1                     |
-| 2   | **Pés Ligeiros**        | +15% Speed                                         | Olho de Águia               |
-| 3   | **Precisão Mortal**     | +10% chance de crítico                             | Tiro Preciso                |
-| 4   | **Mestre Arqueiro**     | +15% dano com arcos                                | Nível 2                     |
-| 5   | **Evasão**              | +15% chance de esquivar ataques corpo-a-corpo      | Recuo Rápido                |
-| 6   | **Tiro em Movimento**   | Pode atacar e mover no mesmo turno (menor alcance) | Mestre Arqueiro             |
-| 7   | **Postura de Atirador** | +20% dano se não mover no turno                    | Precisão Mortal             |
-| 8   | **Alvo Fraco**          | +25% dano contra inimigos abaixo de 50% HP         | Marca do Caçador            |
-| 9   | **Emboscada**           | Primeiro ataque de combate +100% dano              | Camuflagem                  |
-| 10  | **Mira Estável**        | +10% Precisão, ignora cobertura leve               | Nível 5                     |
-| 11  | **Veneno Aprimorado**   | DoTs duram +1 turno                                | Flecha Venenosa             |
-| 12  | **Reflexos Felinos**    | +25% Velocidade de Ação (Turno chega mais rápido)  | Evasão                      |
-| 13  | **Caçador Nato**        | +30% dano contra criaturas selvagens               | Invocar Lobo                |
-| 14  | **Crítico Devastador**  | Críticos causam +150% dano em vez de +100%         | Precisão Mortal             |
-| 15  | **Lenda Viva**          | +40% todos stats durante o dia                     | Crítico Devastador + Lvl 11 |
+| #   | Nome                    | Efeito                                             | Requer                    |
+| --- | ----------------------- | -------------------------------------------------- | ------------------------- |
+| 1   | **Eagle Eye**           | +15% Precisão e +10% Chance de Crítico             | Nível 1                   |
+| 2   | **Fleet Foot**          | +15% Speed                                         | Eagle Eye                 |
+| 3   | **Mortal Precision**    | +10% chance de crítico                             | Aimed Shot                |
+| 4   | **Archer Mastery**      | +15% dano com arcos                                | Nível 2                   |
+| 5   | **Evasion**             | +15% chance de esquivar ataques corpo-a-corpo      | Tactical Retreat          |
+| 6   | **Skirmishing**         | Pode atacar e mover no mesmo turno (menor alcance) | Archer Mastery            |
+| 7   | **Sharpshooter Stance** | +20% dano se não mover no turno                    | Mortal Precision          |
+| 8   | **Exploit Weakness**    | +25% dano contra inimigos abaixo de 50% HP         | Hunter's Mark             |
+| 9   | **Ambush**              | Primeiro ataque de combate +100% dano              | Nível 4                   |
+| 10  | **Steady Aim**          | +10% Precisão, ignora 25% da esquiva do alvo       | Nível 5                   |
+| 11  | **Toxic Mastery**       | DoTs duram +1 turno                                | Poison Arrow              |
+| 12  | **Feline Reflexes**     | +25% Velocidade de Ação (Turno chega mais rápido)  | Evasion                   |
+| 13  | **Natural Hunter**      | +30% dano contra criaturas selvagens               | Summon Wolf               |
+| 14  | **Devastating Crit**    | Críticos causam +150% dano em vez de +100%         | Mortal Precision          |
+| 15  | **Living Legend**       | +40% todos stats durante o dia                     | Devastating Crit + Lvl 11 |
 
 ---
 
@@ -4385,43 +4382,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### 🔪 Skills Ativas (15)
 
-| #   | Nome                       | Custo    | Cooldown | Descrição                                               | Requer             |
-| --- | -------------------------- | -------- | -------- | ------------------------------------------------------- | ------------------ |
-| 1   | **Apunhalar**              | 10 Mana  | 4s       | Ataque rápido pelas costas, +50% dano                   | Nível 1            |
-| 2   | **Bomba de Fumaça**        | 20 Mana  | 20s      | Cria nuvem, invisível por 4s                            | Apunhalar          |
-| 3   | **Cortar Tendão**          | 15 Mana  | 15s      | Causa dano leve e reduz Speed do alvo em 30%            | Nível 2            |
-| 4   | **Envenenar Lâmina**       | 25 Mana  | 25s      | Próximos 5 ataques aplicam veneno (Dano por turno)      | Apunhalar          |
-| 5   | **Sombra Mortal**          | 30 Mana  | 30s      | Teleporta atrás do alvo, +100% dano crítico             | Bomba de Fumaça    |
-| 6   | **Lâminas Giratórias**     | 40 Mana  | 35s      | Gira rapidamente, 8 ataques em 2s                       | Nível 4            |
-| 7   | **Paralisar (Golpe Sujo)** | 35 Mana  | 40s      | Atordoa alvo por 5s                                     | Sombra Mortal      |
-| 8   | **Esquiva Sombria**        | 20 Mana  | 15s      | Esquiva garantida do próximo ataque e recupera mana     | Nível 3            |
-| 9   | **Golpe Oportunista**      | 45 Mana  | 30s      | Se alvo estiver atordoado/congelado, +300% dano         | Paralisar          |
-| 10  | **Ilusão Sombria**         | 60 Mana  | 60s      | Cria clone que dura 15s e causa 50% dano                | Bomba de Fumaça    |
-| 11  | **Hemorragia**             | 50 Mana  | 35s      | Causa sangramento severo, 10 dano/s por 10s             | Envenenar Lâmina   |
-| 12  | **Execução Furtiva**       | 55 Mana  | 45s      | Invisível + teleporta atrás, instakill inimigo < 30% HP | Sombra Mortal      |
-| 13  | **Chuva de Adagas**        | 70 Mana  | 50s      | 20 adagas em cone, 20 dano cada                         | Lâminas Giratórias |
-| 14  | **Mestre das Sombras**     | 40 Mana  | 60s      | Invisível por 20s, +50% velocidade                      | Ilusão Sombria     |
-| 15  | **Dança da Morte**         | 100 Mana | 120s     | Teleporta entre 5 inimigos, causando dano crítico fatal | Execução + Lvl 12  |
+| #   | Nome                   | Custo    | Cooldown | Descrição                                               | Requer                   |
+| --- | ---------------------- | -------- | -------- | ------------------------------------------------------- | ------------------------ |
+| 1   | **Backstab**           | 10 Mana  | 1 Turno  | Ataque rápido pelas costas, +50% dano                   | Nível 1                  |
+| 2   | **Smoke Bomb**         | 20 Mana  | 3 Turnos | Cria nuvem, invisível por 1 Turno                       | Backstab                 |
+| 3   | **Hamstring**          | 15 Mana  | 2 Turnos | Causa dano leve e reduz Speed do alvo em 30%            | Nível 2                  |
+| 4   | **Envenom**            | 25 Mana  | 3 Turnos | Próximos 5 ataques aplicam veneno (Dano por turno)      | Backstab                 |
+| 5   | **Death Shadow**       | 30 Mana  | 4 Turnos | Força Back Attack (mesmo de frente), +100% dano crit    | Smoke Bomb               |
+| 6   | **Blade Flurry**       | 40 Mana  | 4 Turnos | Gira rapidamente, 8 ataques em 1 Turno                  | Nível 4                  |
+| 7   | **Cheap Shot**         | 35 Mana  | 5 Turnos | Atordoa alvo por 1 Turno                                | Death Shadow             |
+| 8   | **Shadow Dodge**       | 20 Mana  | 2 Turnos | Esquiva garantida do próximo ataque e recupera mana     | Nível 3                  |
+| 9   | **Opportunist Strike** | 45 Mana  | 4 Turnos | Se alvo estiver atordoado/congelado, +300% dano         | Cheap Shot               |
+| 10  | **Mirror Image**       | 60 Mana  | 6 Turnos | Cria clone que dura 3 Turnos e causa 50% dano           | Smoke Bomb               |
+| 11  | **Hemorrhage**         | 50 Mana  | 4 Turnos | Causa sangramento severo, 15 dano/turno por 3 Turnos    | Envenom                  |
+| 12  | **Stealth Execute**    | 55 Mana  | 5 Turnos | Força Back Attack furtivo, instakill if HP < 30%        | Death Shadow             |
+| 13  | **Fan of Knives**      | 70 Mana  | 5 Turnos | 20 adagas em cone, 20 dano cada                         | Blade Flurry             |
+| 14  | **Master of Shadows**  | 40 Mana  | 6 Turnos | Invisível por 4 Turnos, +50% velocidade                 | Mirror Image             |
+| 15  | **Blade Dance**        | 100 Mana | 1x comb. | Teleporta entre 5 inimigos, causando dano crítico fatal | Stealth Execute + Lvl 12 |
 
 ### 🌑 Skills Passivas (15)
 
-| #   | Nome                    | Efeito                                                 | Requer               |
-| --- | ----------------------- | ------------------------------------------------------ | -------------------- |
-| 1   | **Furtividade**         | -30% chance de ser detectado                           | Nível 1              |
-| 2   | **Dedos Ágeis**         | -20% tempo de cooldown em skills                       | Furtividade          |
-| 3   | **Ataque pelas Costas** | +50% dano se atacar por trás                           | Apunhalar            |
-| 4   | **Mestre em Adagas**    | +20% dano com adagas                                   | Nível 2              |
-| 5   | **Pilhagem**            | Chance maior de encontrar itens raros                  | Cortar Tendão        |
-| 6   | **Veneno Letal**        | DoTs de veneno causam +40% dano                        | Envenenar Lâmina     |
-| 7   | **Esquiva Mortal**      | +20% chance de esquivar                                | Finta                |
-| 8   | **Imunidade a Veneno**  | Imune a todos venenos                                  | Veneno Letal         |
-| 9   | **Golpe Crítico**       | +25% chance de crítico                                 | Ataque pelas Costas  |
-| 10  | **Acrobata**            | +30% Speed                                             | Esquiva Mortal       |
-| 11  | **Preparação**          | Reduz todos cooldowns em 30% ao entrar em combate      | Dedos Ágeis          |
-| 12  | **Sangue Frio**         | +40% dano contra alvos com HP cheio                    | Golpe Crítico        |
-| 13  | **Assassino Nato**      | +50% dano contra alvos solitários                      | Furtividade          |
-| 14  | **Sombra Viva**         | Regenera 3% HP/s quando invisível                      | Mestre das Sombras   |
-| 15  | **Morte Silenciosa**    | Kills não alertam inimigos próximos, +60% dano crítico | Assassinato + Lvl 11 |
+| #   | Nome                 | Efeito                                                 | Requer                   |
+| --- | -------------------- | ------------------------------------------------------ | ------------------------ |
+| 1   | **Stealth**          | -30% chance de ser alvo de ataques (Aggro Baixo)       | Nível 1                  |
+| 2   | **Quick Fingers**    | -20% tempo de cooldown em skills                       | Stealth                  |
+| 3   | **Back Attack**      | +50% dano se atacar por trás                           | Backstab                 |
+| 4   | **Dagger Mastery**   | +20% dano com adagas                                   | Nível 2                  |
+| 5   | **Plunder**          | Chance maior de encontrar itens raros                  | Hamstring                |
+| 6   | **Lethal Poison**    | DoTs de veneno causam +40% dano                        | Envenom                  |
+| 7   | **Deadly Dodge**     | +20% chance de esquivar                                | Nível 4                  |
+| 8   | **Poison Immunity**  | Imune a todos venenos                                  | Lethal Poison            |
+| 9   | **Critical Strike**  | +25% chance de crítico                                 | Back Attack              |
+| 10  | **Acrobat**          | +30% Speed                                             | Deadly Dodge             |
+| 11  | **Preparation**      | Reduz todos cooldowns em 30% ao entrar em combate      | Quick Fingers            |
+| 12  | **Cold Blood**       | +40% dano contra alvos com HP cheio                    | Critical Strike          |
+| 13  | **Natural Assassin** | +50% dano contra alvos solitários                      | Stealth                  |
+| 14  | **Living Shadow**    | Regenera 6% HP/turno quando invisível                  | Master of Shadows        |
+| 15  | **Silent Death**     | +60% dano crítico, ao matar fica invisível por 1 turno | Stealth Execute + Lvl 11 |
 
 ---
 
@@ -4429,43 +4426,43 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### 🍃 Skills Ativas (15)
 
-| #   | Nome                        | Custo    | Cooldown | Descrição                                             | Requer                |
-| --- | --------------------------- | -------- | -------- | ----------------------------------------------------- | --------------------- |
-| 1   | **Raízes Enredantes**       | 20 Mana  | 12s      | Prende inimigo por 4s, 40 dano                        | Nível 1               |
-| 2   | **Cura da Natureza**        | 30 Mana  | 15s      | Cura alvo em 150 HP                                   | Nível 1               |
-| 3   | **Forma de Urso**           | 40 Mana  | 45s      | Transforma em urso por 20s, +100% HP, +50% Attack     | Nível 2               |
-| 4   | **Espinhos Venenosos**      | 25 Mana  | 18s      | Cria barreira de espinhos, 60 dano + 3 dano/s por 8s  | Raízes Enredantes     |
-| 5   | **Invocar Lobo Espiritual** | 50 Mana  | 60s      | Invoca lobo espiritual que luta por 30s               | Nível 3               |
-| 6   | **Regeneração em Área**     | 45 Mana  | 35s      | Cura todos aliados em 12m, 80 HP + 5 HP/s por 10s     | Cura da Natureza      |
-| 7   | **Fúria da Natureza**       | 55 Mana  | 40s      | Tempestade 8m, atinge 3-5 inimigos, dano + lentidão   | Nível 4               |
-| 8   | **Forma de Treante**        | 30 Mana  | 30s      | Vira árvore, +200% Defesa, imune a Knockback, Lento   | Nível 5               |
-| 9   | **Presas Selvagens**        | 35 Mana  | 25s      | Transforma mãos em garras, 5 ataques rápidos, 40 cada | Forma de Urso         |
-| 10  | **Renascimento**            | 80 Mana  | 120s     | Revive herói morto com 50% HP (aliado ou próprio)     | Regeneração em Área   |
-| 11  | **Enxame de Insetos**       | 60 Mana  | 50s      | Nuvem 10m, cega inimigos, 8 dano/s por 12s            | Espinhos Venenosos    |
-| 12  | **Forma de Pantera**        | 45 Mana  | 40s      | +80% velocidade, +50% dano crítico por 15s            | Forma de Coruja       |
-| 13  | **Terremoto Natural**       | 70 Mana  | 55s      | Fissura 15m, atordoa 4s, 150 dano                     | Fúria da Natureza     |
-| 14  | **Comunhão com Gaia**       | 50 Mana  | 90s      | Imune a controle de grupo por 20s, +30% todos stats   | Nível 8               |
-| 15  | **Avatar da Natureza**      | 120 Mana | 150s     | Forma definitiva, +200% HP/Attack, cura 5%/s, 25s     | Renascimento + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Descrição                                                   | Requer           |
+| --- | ---------------------- | -------- | -------- | ----------------------------------------------------------- | ---------------- |
+| 1   | **Entangling Roots**   | 20 Mana  | 2 Turnos | Prende inimigo por 1 Turno, 40 dano                         | Nível 1          |
+| 2   | **Nature's Heal**      | 30 Mana  | 2 Turnos | Cura alvo em 150 HP                                         | Nível 1          |
+| 3   | **Bear Form**          | 40 Mana  | 4 Turnos | Transforma em urso por 3 Turnos, +100% HP, +50% Attack      | Nível 2          |
+| 4   | **Toxic Briar**        | 25 Mana  | 3 Turnos | Cria barreira de espinhos, 80 dano + 10 dano/t por 3 Turnos | Entangling Roots |
+| 5   | **Summon Spirit Wolf** | 50 Mana  | 6 Turnos | Invoca lobo espiritual que luta por 4 Turnos                | Nível 3          |
+| 6   | **Tranquility**        | 45 Mana  | 4 Turnos | Cura todos aliados em 12m, 80 HP + 10 HP/t por 3 Turnos     | Nature's Heal    |
+| 7   | **Nature's Fury**      | 55 Mana  | 5 Turnos | Tempestade 8m, atinge 3-5 inimigos, dano + lentidão         | Nível 4          |
+| 8   | **Treant Form**        | 30 Mana  | 4 Turnos | Vira árvore, +200% Defesa, imune a Knockback, Lento         | Nível 5          |
+| 9   | **Feral Claws**        | 35 Mana  | 3 Turnos | Transforma mãos em garras, 5 ataques rápidos, 40 cada       | Bear Form        |
+| 10  | **Rebirth**            | 80 Mana  | 1x comb. | Revive herói morto com 50% HP (aliado ou próprio)           | Tranquility      |
+| 11  | **Insect Swarm**       | 60 Mana  | 5 Turnos | Nuvem 10m, cega inimigos, 15 dano/t por 3 Turnos            | Toxic Briar      |
+| 12  | **Panther Form**       | 45 Mana  | 5 Turnos | +80% velocidade, +50% dano crítico por 3 Turnos             | Nível 6          |
+| 13  | **Earth's Tremor**     | 70 Mana  | 6 Turnos | Fissura 15m, atordoa 1 Turno, 150 dano                      | Nature's Fury    |
+| 14  | **Gaia's Communion**   | 50 Mana  | 8 Turnos | Imune a controle de grupo por 4 Turnos, +30% todos stats    | Nível 8          |
+| 15  | **Avatar of Nature**   | 120 Mana | 1x comb. | Forma definitiva, +200% HP/Attack, cura 10%/t, 4 Turnos     | Rebirth + Lvl 12 |
 
 ### 🌳 Skills Passivas (15)
 
-| #   | Nome                      | Efeito                                                 | Requer                   |
-| --- | ------------------------- | ------------------------------------------------------ | ------------------------ |
-| 1   | **Guardião da Floresta**  | +15% stats em terreno de floresta                      | Nível 1                  |
-| 2   | **Vínculo Natural**       | Heals sobre-curam viram escudo temporário (máx 20% HP) | Cura da Natureza         |
-| 3   | **Pele de Casca**         | +12% Defense, imune a sangramento                      | Nível 2                  |
-| 4   | **Instintos Selvagens**   | +20% chance de esquivar quando HP < 50%                | Forma de Urso            |
-| 5   | **Comunhão Animal**       | Animais neutros ajudam em combate                      | Invocar Lobo             |
-| 6   | **Regeneração Acelerada** | +3 HP/s fora de combate, +1 HP/s em combate            | Nível 3                  |
-| 7   | **Resistência ElementaI** | +30% resistência a fogo, gelo e veneno                 | Pele de Casca            |
-| 8   | **Sabedoria Anciã**       | +25% Mana máximo                                       | Nível 4                  |
-| 9   | **Metamorfo**             | Formas animais duram +50% tempo                        | Forma de Pantera         |
-| 10  | **Espírito da Floresta**  | Aliados próximos regeneram +2 HP/s                     | Regeneração Acelerada    |
-| 11  | **Fúria Primordial**      | Em forma animal, +40% Attack                           | Instintos Selvagens      |
-| 12  | **Simbiose**              | Heals em aliados curam o druida por 30% do valor       | Vínculo Natural          |
-| 13  | **Raízes Profundas**      | Imune a knock-back e empurrões                         | Pele de Casca            |
-| 14  | **Mestre Metamorfo**      | Pode trocar entre formas sem cooldown (1x turno)       | Metamorfo                |
-| 15  | **Um com a Natureza**     | +50% todos stats em lua cheia, revive 1x/combate       | Avatar Natureza + Lvl 11 |
+| #   | Nome                     | Efeito                                                 | Requer                    |
+| --- | ------------------------ | ------------------------------------------------------ | ------------------------- |
+| 1   | **Forest Guardian**      | +15% stats em terreno de floresta                      | Nível 1                   |
+| 2   | **Nature's Bond**        | Heals sobre-curam viram escudo temporário (máx 20% HP) | Nature's Heal             |
+| 3   | **Barkskin**             | +12% Defense, imune a sangramento                      | Nível 2                   |
+| 4   | **Wild Instincts**       | +20% chance de esquivar quando HP < 50%                | Bear Form                 |
+| 5   | **Beast Tongue**         | Todos os pets invocados ganham +20% HP e dano          | Summon Spirit Wolf        |
+| 6   | **Accelerated Regen**    | +10 HP/t fora de combate, +5 HP/t em combate           | Nível 3                   |
+| 7   | **Elemental Resistance** | +30% resistência a fogo, gelo e veneno                 | Barkskin                  |
+| 8   | **Ancient Wisdom**       | +25% Mana máximo                                       | Nível 4                   |
+| 9   | **Shapeshifter**         | Formas animais duram +50% tempo                        | Panther Form              |
+| 10  | **Forest Spirit**        | Aliados próximos regeneram +5 HP/turno                 | Accelerated Regen         |
+| 11  | **Primordial Fury**      | Em forma animal, +40% Attack                           | Wild Instincts            |
+| 12  | **Symbiosis**            | Heals em aliados curam o druida por 30% do valor       | Nature's Bond             |
+| 13  | **Deep Roots**           | Imune a knock-back e empurrões                         | Barkskin                  |
+| 14  | **Master Shapeshifter**  | Pode trocar entre formas sem cooldown (1x turno)       | Shapeshifter              |
+| 15  | **One with Nature**      | +50% todos stats em lua cheia, revive 1x/combate       | Avatar of Nature + Lvl 11 |
 
 ---
 
@@ -4473,66 +4470,63 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                      | Custo    | Cooldown | Descrição                                                    | Requer                    |
-| --- | ------------------------- | -------- | -------- | ------------------------------------------------------------ | ------------------------- |
-| 1   | **Flecha Arcana**         | 15 Mana  | 5s       | Flecha mágica, 70 dano + penetra defesa                      | Nível 1                   |
-| 2   | **Passo Élfico**          | 20 Mana  | 15s      | Teleporta 12m, próximos 3 ataques +30% dano                  | Nível 1                   |
-| 3   | **Benção da Lua**         | 30 Mana  | 25s      | Aliados próximos ganham +20% Speed por 12s                   | Nível 2                   |
-| 4   | **Chuva Estelar**         | 50 Mana  | 35s      | 10 projéteis mágicos, 35 dano cada, rastreiam alvos          | Flecha Arcana             |
-| 5   | **Círculo de Proteção**   | 40 Mana  | 30s      | Zona 8m, aliados ganham +40% Defense por 10s                 | Benção da Lua             |
-| 6   | **Lâmina Mística**        | 25 Mana  | 20s      | Espada de energia por 15s, +80% Attack mágico                | Nível 3                   |
-| 7   | **Vínculo Espiritual**    | 45 Mana  | 40s      | Liga com aliado, compartilha 30% dano/cura por 20s           | Círculo de Proteção       |
-| 8   | **Rajada Arcana**         | 35 Mana  | 18s      | 6 flechas instantâneas, 40 dano cada                         | Chuva Estelar             |
-| 9   | **Santuário Élfico**      | 60 Mana  | 60s      | Cria zona 10m, cura 10 HP/s, +25% resistência mágica         | Círculo de Proteção       |
-| 10  | **Forma Etérea**          | 50 Mana  | 50s      | Intangível a dano físico, atravessa unidades (não paredes)   | Passo Élfico              |
-| 11  | **Prisma Celestial**      | 70 Mana  | 45s      | Raio que divide em 5, 100 dano cada                          | Chuva Estelar             |
-| 12  | **Ressonância Mágica**    | 55 Mana  | 40s      | Próximas 3 skills custam 0 Mana                              | Nível 7                   |
-| 13  | **Tempestade de Lâminas** | 65 Mana  | 50s      | Lâminas giram, atinge até 4 inimigos adjacentes              | Lâmina Mística            |
-| 14  | **Ascensão**              | 80 Mana  | 90s      | Levita (imune corpo-a-corpo), Skills Instantâneas (3 turnos) | Forma Etérea              |
-| 15  | **Eclipse Total**         | 150 Mana | 180s     | Escurece área 25m, cega todos inimigos por 3 turnos          | Prisma Celestial + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Descrição                                                    | Requer                   |
+| --- | ---------------------- | -------- | -------- | ------------------------------------------------------------ | ------------------------ |
+| 1   | **Arcane Arrow**       | 15 Mana  | 1 Turno  | Flecha mágica, 70 dano + penetra defesa                      | Nível 1                  |
+| 2   | **Elven Step**         | 20 Mana  | 2 Turnos | Teleporta 12m, próximos 3 ataques +30% dano                  | Nível 1                  |
+| 3   | **Moonlight Blessing** | 30 Mana  | 3 Turnos | Aliados próximos ganham +20% Speed por 2 Turnos              | Nível 2                  |
+| 4   | **Starfall**           | 50 Mana  | 4 Turnos | 10 projéteis mágicos, 35 dano cada, rastreiam alvos          | Arcane Arrow             |
+| 5   | **Protection Circle**  | 40 Mana  | 4 Turnos | Zona 8m, aliados ganham +40% Defense por 2 Turnos            | Moonlight Blessing       |
+| 6   | **Mystic Blade**       | 25 Mana  | 3 Turnos | Espada de energia por 3 Turnos, +80% Attack médico           | Nível 3                  |
+| 7   | **Spirit Bond**        | 45 Mana  | 5 Turnos | Liga com aliado, compartilha 30% dano/cura por 4 Turnos      | Protection Circle        |
+| 8   | **Arcane Barrage**     | 35 Mana  | 2 Turnos | 6 flechas instantâneas, 40 dano cada                         | Starfall                 |
+| 9   | **Elven Sanctuary**    | 60 Mana  | 6 Turnos | Cria zona 10m, cura 20 HP/turno, +25% resistência mágica     | Protection Circle        |
+| 10  | **Ethereal Form**      | 50 Mana  | 5 Turnos | Imune a dano físico, ganha turno extra se esquivar           | Elven Step               |
+| 11  | **Celestial Prism**    | 70 Mana  | 5 Turnos | Raio que divide em 5, 100 dano cada                          | Starfall                 |
+| 12  | **Arcane Resonance**   | 55 Mana  | 5 Turnos | Próximas 3 skills custam 0 Mana                              | Nível 7                  |
+| 13  | **Blade Storm**        | 65 Mana  | 5 Turnos | Lâminas giram, atinge até 4 inimigos adjacentes              | Mystic Blade             |
+| 14  | **Ascension**          | 80 Mana  | 8 Turnos | Levita (imune corpo-a-corpo), Skills Instantâneas (3 Turnos) | Ethereal Form            |
+| 15  | **Total Eclipse**      | 150 Mana | 1x comb. | Escurece área 25m, cega todos inimigos por 3 Turnos          | Celestial Prism + Lvl 12 |
 
 ### 🌟 Skills Passivas (15)
 
 | #   | Nome                     | Efeito                                                 | Requer                 |
 | --- | ------------------------ | ------------------------------------------------------ | ---------------------- |
-| 1   | **Graça Élfica**         | +25% Speed                                             | Nível 1                |
-| 2   | **Visão Mística**        | Detecta inimigos invisíveis e escondidos               | Nível 1                |
-| 3   | **Longevidade**          | +20% HP máximo, imune a doenças                        | Nível 2                |
-| 4   | **Afinidade Arcana**     | +20% dano mágico                                       | Flecha Arcana          |
-| 5   | **Esquiva Sobrenatural** | +18% chance de esquivar                                | Graça Élfica           |
-| 6   | **Sabedoria Ancestral**  | +30% Mana máximo, -10% custo skills                    | Nível 3                |
-| 7   | **Precisão Élfica**      | +15% chance de crítico, críticos ignoram 20% defesa    | Rajada Arcana          |
-| 8   | **Proteção Lunar**       | Durante a noite, +15% todos stats                      | Benção da Lua          |
-| 9   | **Harmonia Mágica**      | Regenera 3% Mana máximo a cada skill usada             | Sabedoria Ancestral    |
-| 10  | **Passo Silencioso**     | Não faz barulho, inimigos demoram +3s para detectar    | Esquiva Sobrenatural   |
-| 11  | **Resiliência Arcana**   | +35% resistência mágica                                | Longevidade            |
-| 12  | **Vínculo de Almas**     | Quando aliado morre próximo, ganha +50% dano por 30s   | Vínculo Espiritual     |
-| 13  | **Mestre Arcano**        | Cooldowns de skills -15%                               | Harmonia Mágica        |
-| 14  | **Imortalidade Élfica**  | Ao morrer, revive com 1 HP (1x/10min)                  | Longevidade            |
-| 15  | **Transcendência**       | +60% Mana, +40% dano mágico, habilidades custam metade | Eclipse Total + Lvl 11 |
+| 1   | **Elven Grace**          | +25% Speed                                             | Nível 1                |
+| 2   | **Mystic Vision**        | Detecta inimigos invisíveis e escondidos               | Nível 1                |
+| 3   | **Longevity**            | +20% HP máximo, imune a doenças                        | Nível 2                |
+| 4   | **Arcane Affinity**      | +20% dano mágico                                       | Arcane Arrow           |
+| 5   | **Supernatural Evasion** | +18% chance de esquivar                                | Elven Grace            |
+| 6   | **Ancestral Wisdom**     | +30% Mana máximo, -10% custo skills                    | Nível 3                |
+| 7   | **Elven Precision**      | +15% chance de crítico, críticos ignoram 20% defesa    | Arcane Barrage         |
+| 8   | **Lunar Protection**     | Durante a noite, +15% todos stats                      | Moonlight Blessing     |
+| 9   | **Magic Harmony**        | Regenera 3% Mana máximo a cada skill usada             | Ancestral Wisdom       |
+| 10  | **Shadow Cloak**         | +15% Esquiva contra magias e projéteis                 | Supernatural Evasion   |
+| 11  | **Arcane Resilience**    | +35% resistência mágica                                | Longevity              |
+| 12  | **Soul Link**            | Quando aliado morre próximo, ganha +50% dano por 30s   | Spirit Bond            |
+| 13  | **Arcane Master**        | Cooldowns de skills -15%                               | Magic Harmony          |
+| 14  | **Elven Immortality**    | Ao morrer, revive with 1 HP (1x/10min)                 | Longevity              |
+| 15  | **Transcendence**        | +60% Mana, +40% dano mágico, habilidades custam metade | Total Eclipse + Lvl 11 |
 
 ---
 
-## Sistema de Desbloqueio
+## Sistema de Desbloqueio e Custos
 
-### Como Funcionam os Pontos de Skill
+### Investimento em Pesquisa (Ouro)
 
-**Fontes de Pontos de Skill:**
+O Majesty não "compra" a skill para um herói, mas sim **pesquisa** a habilidade na guilda correspondente. Uma vez pesquisada, qualquer herói daquela classe que atenda aos requisitos de nível pode usá-la.
 
-1. **Construção de Guildas:**
-   - Guilda Nível 1: 3 pontos
-   - Guilda Nível 2: 5 pontos
-   - Guilda Nível 3: 8 pontos
-   - Guilda Nível 4: 12 pontos
-   - Guilda Nível 5: 20 pontos
+**Tabela de Custos por Tier:**
 
-2. **Progressão de Heróis:**
-   - 1 ponto a cada 2 níveis (heróis individuais)
+| Categoria                  | Nível Requerido | Custo em Ouro | Exemplo                         |
+| :------------------------- | :-------------- | :------------ | :------------------------------ |
+| **Tier 1 (Básica)**        | Nível 1         | 200g          | Fireball, Power Strike          |
+| **Tier 2 (Intermediária)** | Nível 3+        | 400g          | Frost Bolt, Battle Cry          |
+| **Tier 3 (Avançada)**      | Nível 5+        | 800g          | Meteor Shower, Taunt            |
+| **Tier 4 (Elite)**         | Nível 8+        | 1.500g        | Teleport, Iron Skin             |
+| **Tier 5 (Ultimate)**      | Nível 12+       | 5.000g        | Arcane Apocalypse, Battle Titan |
 
-3. **Missões Especiais:**
-   - Derrotar Boss: 5 pontos
-   - Sobreviver Lua de Sangue: 10 pontos
-   - Completar Ciclo: 15 pontos
+**Nota:** Skills Passivas seguem os mesmos custos de seus respectivos Tiers de pré-requisito.
 
 ### Árvore de Dependências
 
@@ -4540,23 +4534,23 @@ O Majesty pode **desbloquear** essas skills gastando **Pontos de Skill** obtidos
 Skills seguem hierarquia:
 - Básicas (Nível 1) → Intermediárias → Avançadas → Ultimate
 
-Exemplo (Guerreiro):
-Golpe Poderoso (Lvl 1)
+Exemplo (Warrior):
+Power Strike (Lvl 1)
     ↓
-Grito de Guerra (Lvl 2)
+Battle Cry (Lvl 2)
     ↓
-Provocação (Lvl 4)
+Taunt (Lvl 4)
     ↓
-Ameaça Aumentada (Passiva, Lvl 6)
+Menacing Presence (Passiva, Lvl 6)
 ```
 
 ### Interface no F2 (ADMIN)
 
 No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty pode:
 
-- Ver quais skills estão disponíveis
-- Desbloquear novas skills gastando pontos
-- Ver pré-requisitos e custos
+- Ver quais skills estão disponíveis para pesquisa
+- Desbloquear novas skills gastando **Ouro**
+- Ver pré-requisitos e custos de manutenção da guilda
 
 ---
 
@@ -4583,43 +4577,43 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome                   | Custo    | Cooldown | Descrição                                           | Requer                |
-| --- | ---------------------- | -------- | -------- | --------------------------------------------------- | --------------------- |
-| 1   | **Golpe Sagrado**      | 15 Mana  | 6s       | Ataque sagrado, 70 dano + 30 HP de cura própria     | Nível 1               |
-| 2   | **Aura de Proteção**   | 20 Mana  | Passiva  | Aliados em 12m ganham +15% Defense permanente       | Nível 1               |
-| 3   | **Cura Divina**        | 30 Mana  | 12s      | Cura aliado em 200 HP                               | Golpe Sagrado         |
-| 4   | **Escudo da Fé**       | 25 Mana  | 20s      | Absorve 250 dano por 10s                            | Nível 2               |
-| 5   | **Martelo da Justiça** | 35 Mana  | 25s      | Arremessa martelo, 100 dano + atordoa 3s            | Golpe Sagrado         |
-| 6   | **Sacrifício Divino**  | 40 Mana  | 30s      | Transfere 50% do dano de aliado para si por 15s     | Cura Divina           |
-| 7   | **Julgamento**         | 45 Mana  | 35s      | Marca inimigo maligno, +60% dano contra ele         | Nível 4               |
-| 8   | **Ressurreição**       | 80 Mana  | 150s     | Revive aliado com 70% HP (melhor que Druida)        | Cura Divina           |
-| 9   | **Consagrar Terreno**  | 50 Mana  | 40s      | Zona 10m, inimigos malignos -30% Attack por 20s     | Nível 5               |
-| 10  | **Escudo Refletor**    | 55 Mana  | 45s      | Próximos 5 ataques são refletidos 100%              | Escudo da Fé          |
-| 11  | **Ira Divina**         | 60 Mana  | 50s      | +100% Attack por 15s, ganha Mana ao atacar          | Martelo da Justiça    |
-| 12  | **Benção em Massa**    | 70 Mana  | 60s      | Todos aliados em 15m ganham +30% stats (3 turnos)   | Aura de Proteção      |
-| 13  | **Voto de Vingança**   | 65 Mana  | 55s      | Se aliado morrer próximo, ganha +150% Attack        | Julgamento            |
-| 14  | **Santuário**          | 75 Mana  | 90s      | Cria zona 12m, aliados recebem -80% Dano (2 turnos) | Consagrar Terreno     |
-| 15  | **Avatar da Luz**      | 150 Mana | 200s     | Forma angelical, cura em área/turno, +200% stats    | Ressurreição + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Descrição                                            | Requer                |
+| --- | --------------------- | -------- | -------- | ---------------------------------------------------- | --------------------- |
+| 1   | **Holy Strike**       | 15 Mana  | 1 Turno  | Ataque sagrado, 70 dano + 30 HP de cura própria      | Nível 1               |
+| 2   | **Devotion Aura**     | 20 Mana  | Passiva  | Aliados em 12m ganham +15% Defense permanente        | Nível 1               |
+| 3   | **Holy Light**        | 30 Mana  | 2 Turnos | Cura aliado em 200 HP                                | Holy Strike           |
+| 4   | **Shield of Faith**   | 25 Mana  | 3 Turnos | Absorve 250 dano por 2 Turnos                        | Nível 2               |
+| 5   | **Hammer of Justice** | 35 Mana  | 3 Turnos | Arremessa martelo, 100 dano + atordoa 1 Turno        | Holy Strike           |
+| 6   | **Divine Sacrifice**  | 40 Mana  | 4 Turnos | Transfere 50% do dano de aliado para si por 3 Turnos | Holy Light            |
+| 7   | **Judgment**          | 45 Mana  | 4 Turnos | Marca inimigo maligno, +60% dano contra ele          | Nível 4               |
+| 8   | **Resurrection**      | 80 Mana  | 1x comb. | Revive aliado com 70% HP (melhor que Druida)         | Holy Light            |
+| 9   | **Consecration**      | 50 Mana  | 5 Turnos | Zona 10m, inimigos malignos -30% Attack por 4 Turnos | Nível 5               |
+| 10  | **Mirror Shield**     | 55 Mana  | 5 Turnos | Próximos 5 ataques são refletidos 100%               | Shield of Faith       |
+| 11  | **Divine Wrath**      | 60 Mana  | 5 Turnos | +100% Attack por 3 Turnos, ganha Mana ao atacar      | Hammer of Justice     |
+| 12  | **Grand Blessing**    | 70 Mana  | 6 Turnos | Todos aliados em 15m ganham +30% stats (3 Turnos)    | Devotion Aura         |
+| 13  | **Vow of Vengeance**  | 65 Mana  | 6 Turnos | Se aliado morrer próximo, ganha +150% Attack         | Judgment              |
+| 14  | **Sanctuary**         | 75 Mana  | 8 Turnos | Cria zona 12m, aliados recebem -80% Dano (1 Turno)   | Consecration          |
+| 15  | **Avatar of Light**   | 150 Mana | 1x comb. | Forma angelical, cura em área/turno, +200% stats     | Resurrection + Lvl 12 |
 
 ### 🛡️ Skills Passivas (15)
 
-| #   | Nome                        | Efeito                                           | Requer                 |
-| --- | --------------------------- | ------------------------------------------------ | ---------------------- |
-| 1   | **Fé Inabalável**           | +15% HP máximo, +10% Defense                     | Nível 1                |
-| 2   | **Ganho de Devoção**        | Ganha 10 Mana ao ser atingido                    | Nível 1                |
-| 3   | **Mártir**                  | +20% Defense quando HP < 30%                     | Fé Inabalável          |
-| 4   | **Protetor Nato**           | Aliados próximos recebem -15% dano               | Aura de Proteção       |
-| 5   | **Regeneração Sagrada**     | Cura 2% HP máximo a cada 10s                     | Cura Divina            |
-| 6   | **Justiça Inabalável**      | Imune a medo e corrupção                         | Nível 3                |
-| 7   | **Vingador**                | +30% dano contra mortos-vivos e demônios         | Julgamento             |
-| 8   | **Benção Permanente**       | Inicia combate com +20% todos stats por 30s      | Benção em Massa        |
-| 9   | **Ressurreição Automática** | Ao morrer, revive com 30% HP (1x/partida)        | Ressurreição           |
-| 10  | **Escudo de Aliados**       | Pode bloquear ataques destinados a aliados (5m)  | Protetor Nato          |
-| 11  | **Aura Expandida**          | Alcance de auras +50% (18m em vez de 12m)        | Protetor Nato          |
-| 12  | **Devotado**                | Curas custam -20% Mana                           | Regeneração Sagrada    |
-| 13  | **Bastião**                 | +50% Defense quando não se move por 3s           | Fé Inabalável          |
-| 14  | **Purificação**             | Remove todos debuffs de si mesmo a cada 30s      | Justiça Inabalável     |
-| 15  | **Santo Guerreiro**         | +40% stats, imune a críticos, aliados +25% moral | Avatar da Luz + Lvl 11 |
+| #   | Nome                   | Efeito                                           | Requer                   |
+| --- | ---------------------- | ------------------------------------------------ | ------------------------ |
+| 1   | **Unwavering Faith**   | +15% HP máximo, +10% Defense                     | Nível 1                  |
+| 2   | **Devotion Gain**      | Ganha 10 Mana ao ser atingido                    | Nível 1                  |
+| 3   | **Martyr**             | +20% Defense quando HP < 30%                     | Unwavering Faith         |
+| 4   | **Natural Protector**  | Aliados próximos recebem -15% dano               | Devotion Aura            |
+| 5   | **Holy Regen**         | Cura 5% HP máximo a cada turno                   | Holy Light               |
+| 6   | **Unshakable Justice** | Imune a medo e corrupção                         | Nível 3                  |
+| 7   | **Avenger**            | +30% dano contra mortos-vivos e demônios         | Judgment                 |
+| 8   | **Eternal Blessing**   | Inicia combate com +20% todos stats por 3 Turnos | Grand Blessing           |
+| 9   | **Divine Rebirth**     | Ao morrer, revive com 30% HP (1x/partida)        | Resurrection             |
+| 10  | **Guardian Shield**    | Pode bloquear ataques destinados a aliados (5m)  | Natural Protector        |
+| 11  | **Expanded Aura**      | Alcance de auras +50% (18m em vez de 12m)        | Natural Protector        |
+| 12  | **Devoted**            | Curas custam -20% Mana                           | Holy Regen               |
+| 13  | **Bastion**            | +50% Defense quando não se move por 3s           | Unwavering Faith         |
+| 14  | **Purification**       | Remove todos debuffs de si mesmo a cada 4 Turnos | Unshakable Justice       |
+| 15  | **Holy Warrior**       | +40% stats, imune a críticos, aliados +25% moral | Avatar of Light + Lvl 11 |
 
 ---
 
@@ -4627,43 +4621,43 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🌑 Skills Ativas (15)
 
-| #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                   |
-| --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ------------------------ |
-| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, drena 20 HP                 | Nível 1                  |
-| 2   | **Reanimar Cadáver**     | 30 Mana  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
-| 3   | **Drenar Vida**          | 25 Mana  | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
-| 4   | **Invocar Zumbi**        | 50 Mana  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
-| 5   | **Maldição de Fraqueza** | 30 Mana  | 20s      | Alvo perde -40% Attack por 15s                                 | Nível 3                  |
-| 6   | **Explosão Cadavérica**  | 40 Mana  | 25s      | Detona cadáver, 150 dano em 8m                                 | Reanimar Cadáver         |
-| 7   | **Escudo Ósseo**         | 35 Mana  | 30s      | Absorve 200 dano, dura até quebrar                             | Nível 4                  |
-| 8   | **Peste**                | 45 Mana  | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos        | Drenar Vida              |
-| 9   | **Invocar Espectro**     | 70 Mana  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)               | Invocar Zumbi            |
-| 10  | **Toque da Morte**       | 50 Mana  | 35s      | Instakill inimigo não-elite com HP < 20%                       | Drenar Vida              |
-| 11  | **Exército dos Mortos**  | 100 Mana | 120s     | Invoca 3 esqueletos simultaneamente (duram 45s)                | Invocar Espectro         |
-| 12  | **Pacto Sombrio**        | 60 Mana  | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s               | Nível 7                  |
-| 13  | **Necrose**              | 55 Mana  | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável | Peste                    |
-| 14  | **Lich Form**            | 80 Mana  | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s     | Pacto Sombrio            |
-| 15  | **Apocalipse Sombrio**   | 200 Mana | 180s     | Reanima todos cadáveres (Max 3) como servos permanentes        | Exército Mortos + Lvl 12 |
+| #   | Nome                 | Custo    | Cooldown | Descrição                                            | Requer                    |
+| --- | -------------------- | -------- | -------- | ---------------------------------------------------- | ------------------------- |
+| 1   | **Shadow Bolt**      | 20 Mana  | 1 Turno  | Projétil sombrio, 75 dano necrótico, drena 20 HP     | Nível 1                   |
+| 2   | **Raise Skeleton**   | 30 Mana  | 1 Turno  | Transforma cadáver em Esqueleto (dura 8 Turnos)      | Nível 1                   |
+| 3   | **Drain Life**       | 25 Mana  | 2 Turnos | Canaliza 1 Turno, drena 40 HP/t do alvo              | Shadow Bolt               |
+| 4   | **Summon Zombie**    | 50 Mana  | 4 Turnos | Invoca Zumbi resistente (dura 10 Turnos)             | Raise Skeleton            |
+| 5   | **Curse of Frailty** | 30 Mana  | 3 Turnos | Alvo perde -40% Attack por 3 Turnos                  | Nível 3                   |
+| 6   | **Corpse Explosion** | 40 Mana  | 3 Turnos | Detona cadáver, 150 dano em 8m                       | Raise Skeleton            |
+| 7   | **Bone Shield**      | 35 Mana  | 4 Turnos | Absorve 200 dano, dura até quebrar                   | Nível 4                   |
+| 8   | **Pestilence**       | 45 Mana  | 5 Turnos | Zona 10m, 10 dano/t necrótico, se espalha            | Drain Life                |
+| 9   | **Summon Wraith**    | 70 Mana  | 6 Turnos | Invoca fantasma que ignora Defense física (6 Turnos) | Summon Zombie             |
+| 10  | **Death's Touch**    | 50 Mana  | 4 Turnos | Instakill inimigo não-elite com HP < 20%             | Drain Life                |
+| 11  | **Army of the Dead** | 100 Mana | 1x comb. | Invoca 3 esqueletos simultaneamente (6 Turnos)       | Summon Wraith             |
+| 12  | **Dark Pact**        | 60 Mana  | 5 Turnos | Sacrifica 30% HP, ganha +80% dano mágico (4 Turnos)  | Nível 7                   |
+| 13  | **Necrosis**         | 55 Mana  | 5 Turnos | DoT massivo, 80 dano/t por 3 Turnos, gera cadáver    | Pestilence                |
+| 14  | **Lich Form**        | 80 Mana  | 8 Turnos | Transforma em Lich, imune a físico, +100% dano (4t)  | Dark Pact                 |
+| 15  | **Dark Apocalypse**  | 200 Mana | 1x comb. | Reanima todos cadáveres (Max 3) permanentes          | Army of the Dead + Lvl 12 |
 
 ### 💀 Skills Passivas (15)
 
-| #   | Nome                       | Efeito                                                | Requer                      |
-| --- | -------------------------- | ----------------------------------------------------- | --------------------------- |
-| 1   | **Colheita Sombria**       | Ganha 25 Mana ao matar inimigo                        | Nível 1                     |
-| 2   | **Mana das Sombras**       | +25% Mana máximo                                      | Nível 1                     |
-| 3   | **Servos Aprimorados**     | Invocações têm +50% HP e Attack                       | Reanimar Cadáver            |
-| 4   | **Maestria Necrótica**     | +20% dano necrótico                                   | Bola Sombria                |
-| 5   | **Drenagem Vital**         | Spells de dano curam 15% do dano causado              | Drenar Vida                 |
-| 6   | **Resistência Morta-Viva** | +30% resistência a necrótico e veneno                 | Nível 3                     |
-| 7   | **Explosões em Cadeia**    | Explosão Cadavérica pode detonar outros cadáveres     | Explosão Cadavérica         |
-| 8   | **Longevidade de Servos**  | Invocações duram +50% tempo                           | Servos Aprimorados          |
-| 9   | **Essência Infinita**      | Regenera 5 Mana/s                                     | Colheita Sombria            |
-| 10  | **Aura Necrótica**         | Inimigos próximos (8m) perdem 2% HP máximo/s          | Maestria Necrótica          |
-| 11  | **Pacto Eterno**           | Ao usar Pacto Sombrio, não perde HP mas servos morrem | Pacto Sombrio               |
-| 12  | **Comandante dos Mortos**  | Seus servos ganham +30% HP e Attack (Max Servos: 3)   | Exército dos Mortos         |
-| 13  | **Imortal**                | Ao morrer, vira Lich por 20s, pode continuar lutando  | Lich Form                   |
-| 14  | **Sinergia Sombria**       | Cada servo vivo aumenta dano mágico em +10%           | Comandante dos Mortos       |
-| 15  | **Senhor das Trevas**      | +100% Mana, Servos reanimam 1x após morrerem          | Apocalipse Sombrio + Lvl 11 |
+| #   | Nome                     | Efeito                                              | Requer                   |
+| --- | ------------------------ | --------------------------------------------------- | ------------------------ |
+| 1   | **Soul Harvest**         | Ganha 25 Mana ao matar inimigo                      | Nível 1                  |
+| 2   | **Shadow Essence**       | +25% Mana máximo                                    | Nível 1                  |
+| 3   | **Minion Mastery**       | Invocações têm +50% HP e Attack                     | Raise Skeleton           |
+| 4   | **Necrotic Mastery**     | +20% dano necrótico                                 | Shadow Bolt              |
+| 5   | **Vital Siphon**         | Spells de dano curam 15% do dano causado            | Drain Life               |
+| 6   | **Undead Resilience**    | +30% resistência a necrótico e veneno               | Nível 3                  |
+| 7   | **Chain Detonation**     | Corpse Explosion pode detonar outros cadáveres      | Corpse Explosion         |
+| 8   | **Minion Longevity**     | Invocações duram +50% tempo                         | Minion Mastery           |
+| 9   | **Undying Essence**      | Regenera 10 Mana/turno                              | Soul Harvest             |
+| 10  | **Necrotic Aura**        | Inimigos próximos (8m) perdem 4% HP máximo/t        | Necrotic Mastery         |
+| 11  | **Eternal Pact**         | Ao usar Dark Pact, não perde HP mas servos morrem   | Dark Pact                |
+| 12  | **Lord of the Dead**     | Seus servos ganham +30% HP e Attack (Max Servos: 3) | Army of the Dead         |
+| 13  | **Immortal**             | Ao morrer, vira Lich por 2 Turnos, pode lutar       | Lich Form                |
+| 14  | **Dark Synergy**         | Cada servo vivo aumenta dano mágico em +10%         | Lord of the Dead         |
+| 15  | **Overlord of Darkness** | +100% Mana, Servos reanimam 1x após morrerem        | Dark Apocalypse + Lvl 11 |
 
 ---
 
@@ -4671,43 +4665,43 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🎶 Skills Ativas (15)
 
-| #   | Nome                      | Custo    | Cooldown   | Descrição                                            | Requer                 |
-| --- | ------------------------- | -------- | ---------- | ---------------------------------------------------- | ---------------------- |
-| 1   | **Melodia de Ataque**     | 15 Mana  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1                |
-| 2   | **Acorde Dissonante**     | 20 Mana  | 8s         | Nota musical, 60 dano + confunde por 1 turno         | Nível 1                |
-| 3   | **Canção de Cura**        | 25 Mana  | Sustentada | Canta, aliados 15m curam HP a cada turno             | Melodia de Ataque      |
-| 4   | **Grito de Guerra**       | 30 Mana  | 30s        | Todos aliados ganham +30% Speed por 3 turnos         | Nível 2                |
-| 5   | **Faca Lançada**          | 20 Mana  | 5s         | Arremessa faca, 50 dano, 3 cargas                    | Acorde Dissonante      |
-| 6   | **Hino de Resistência**   | 35 Mana  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Canção de Cura         |
-| 7   | **Solo Devastador**       | 40 Mana  | 35s        | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Acorde Dissonante      |
-| 8   | **Inspirar Aliados**      | 40 Mana  | 40s        | Aliados ganham Turno Extra Imediato (1x combate)     | Grito de Guerra        |
-| 9   | **Balada da Regeneração** | 50 Mana  | Sustentada | Canta, aliados 15m regeneram HP a cada turno         | Hino de Resistência    |
-| 10  | **Canto de Sirene**       | 45 Mana  | 45s        | Encanta inimigos 12m (3 alvos), perdem próximo turno | Solo Devastador        |
-| 11  | **Sinfonia de Grupo**     | 60 Mana  | 60s        | Todos aliados ganham +40% stats (3 turnos)           | Balada da Regeneração  |
-| 12  | **Contra-Melodia**        | 50 Mana  | 50s        | Cancela buffs inimigos em 20m                        | Canto de Sirene        |
-| 13  | **Épico Heróico**         | 70 Mana  | 90s        | Aliado ignora dano de 2 ataques recebidos            | Sinfonia de Grupo      |
-| 14  | **Onda Sônica**           | 80 Mana  | 55s        | Cone 25m, 200 dano + knock-back 10m                  | Solo Devastador        |
-| 15  | **Requiem**               | 150 Mana | 180s       | Inimigos -50% stats, Aliados +100% (3 turnos)        | Épico Heróico + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown   | Descrição                                            | Requer               |
+| --- | ---------------------- | -------- | ---------- | ---------------------------------------------------- | -------------------- |
+| 1   | **War Song**           | 15 Mana  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1              |
+| 2   | **Dissonant Chord**    | 20 Mana  | 1 Turno    | Nota musical, 60 dano + confunde por 1 Turno         | Nível 1              |
+| 3   | **Healing Lullaby**    | 25 Mana  | Sustentada | Canta, aliados 15m curam HP a cada Turno             | War Song             |
+| 4   | **Inspiring Shout**    | 30 Mana  | 4 Turnos   | Todos aliados ganham +30% Speed por 3 Turnos         | Nível 2              |
+| 5   | **Throwing Knife**     | 20 Mana  | 1 Turno    | Arremessa faca, 50 dano, 3 cargas                    | Dissonant Chord      |
+| 6   | **Anthem of Stalwart** | 35 Mana  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Healing Lullaby      |
+| 7   | **Devastating Solo**   | 40 Mana  | 4 Turnos   | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Dissonant Chord      |
+| 8   | **Rally Allies**       | 40 Mana  | 5 Turnos   | Aliados ganham Turno Extra Imediato (1x combate)     | Inspiring Shout      |
+| 9   | **Ballad of Regen**    | 50 Mana  | Sustentada | Canta, aliados 15m regeneram HP a cada Turno         | Anthem of Stalwart   |
+| 10  | **Siren's Song**       | 45 Mana  | 5 Turnos   | Encanta inimigos 12m (3 alvos), perdem próximo Turno | Devastating Solo     |
+| 11  | **Grand Symphony**     | 60 Mana  | 6 Turnos   | Todos aliados ganham +40% stats (3 Turnos)           | Ballad of Regen      |
+| 12  | **Counter-Melody**     | 50 Mana  | 5 Turnos   | Cancela buffs inimigos em 20m                        | Siren's Song         |
+| 13  | **Heroic Saga**        | 70 Mana  | 8 Turnos   | Aliado ignora dano de 2 ataques recebidos            | Grand Symphony       |
+| 14  | **Sonic Wave**         | 80 Mana  | 6 Turnos   | Cone 25m, 200 dano + knock-back 10m                  | Devastating Solo     |
+| 15  | **Requiem**            | 150 Mana | 1x comb.   | Inimigos -50% stats, Aliados +100% (3 Turnos)        | Heroic Saga + Lvl 12 |
 
 ### 🎵 Skills Passivas (15)
 
-| #   | Nome                      | Efeito                                                      | Requer              |
-| --- | ------------------------- | ----------------------------------------------------------- | ------------------- |
-| 1   | **Ganho de Inspiração**   | Ganha 20 Mana ao ver aliado matar inimigo                   | Nível 1             |
-| 2   | **Carismático**           | +30% Affinity natural com todos heróis                      | Nível 1             |
-| 3   | **Alcance Musical**       | Canções afetam +5m de raio (20m em vez de 15m)              | Melodia de Ataque   |
-| 4   | **Multitarefa**           | Pode manter canção e atacar (com penalidade de dano)        | Canção de Cura      |
-| 5   | **Maestria Sonic a**      | +15% dano de habilidades sonoras                            | Acorde Dissonante   |
-| 6   | **Performer Nato**        | Canções custam -20% Mana                                    | Ganho de Inspiração |
-| 7   | **Velocidade de Canto**   | Canções começam a fazer efeito 50% mais rápido              | Multitarefa         |
-| 8   | **Inspiração Automática** | Regenera 10 Mana/s quando em grupo                          | Ganho de Inspiração |
-| 9   | **Ressonância**           | Canções persistem por 5s após parar de cantar               | Alcance Musical     |
-| 10  | **Moral Elevado**         | Aliados próximos nunca fogem                                | Carismático         |
-| 11  | **Virtuoso**              | Pode ter 2 canções ativas simultaneamente                   | Ressonância         |
-| 12  | **Aura de Carisma**       | Grupo forma 3x mais rápido                                  | Moral Elevado       |
-| 13  | **Coro**                  | Cada aliado próximo aumenta efeito de canções em +15%       | Virtuoso            |
-| 14  | **Imortalidade Musical**  | Se morrer durante canção, canção continua por 30s           | Nível 9             |
-| 15  | **Lenda Viva**            | Presença proporciona +50% XP para aliados, +100% Mana Regen | Requiem + Lvl 11    |
+| #   | Nome                  | Efeito                                                      | Requer           |
+| --- | --------------------- | ----------------------------------------------------------- | ---------------- |
+| 1   | **Inspiration Gain**  | Ganha 20 Mana ao ver aliado matar inimigo                   | Nível 1          |
+| 2   | **Charismatic**       | +30% Affinity natural com todos heróis                      | Nível 1          |
+| 3   | **Musical Reach**     | Canções afetam +5m de raio (20m em vez de 15m)              | War Song         |
+| 4   | **Multitasking**      | Pode manter canção e atacar (com penalidade de dano)        | Healing Lullaby  |
+| 5   | **Sonic Mastery**     | +15% dano de habilidades sonoras                            | Dissonant Chord  |
+| 6   | **Natural Performer** | Canções custam -20% Mana                                    | Inspiration Gain |
+| 7   | **Performance Speed** | Canções começam a fazer efeito 50% mais rápido              | Multitasking     |
+| 8   | **Auto-Inspiration**  | Regenera 20 Mana/turno quando em grupo                      | Inspiration Gain |
+| 9   | **Resonance**         | Canções persistem por 1 Turno após parar de cantar          | Musical Reach    |
+| 10  | **High Morale**       | Aliados próximos nunca fogem                                | Charismatic      |
+| 11  | **Virtuoso**          | Pode ter 2 canções ativas simultaneamente                   | Resonance        |
+| 12  | **Charisma Aura**     | Grupo forma 3x mais rápido                                  | High Morale      |
+| 13  | **Chorus Influence**  | Cada aliado próximo aumenta efeito de canções em +15%       | Virtuoso         |
+| 14  | **Eternal Echo**      | Se morrer cantando, canção dura +4 Turnos                   | Nível 9          |
+| 15  | **Living Legend**     | Presença proporciona +50% XP para aliados, +100% Mana Regen | Requiem + Lvl 11 |
 
 ---
 
@@ -4715,43 +4709,43 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🥋 Skills Ativas (15)
 
-| #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                  |
-| --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ----------------------- |
-| 1   | **Golpe de Palma**       | 10 Mana  | 3s       | Soco rápido, 55 dano, gera 1 combo                             | Nível 1                 |
-| 2   | **Chute Giratório**      | 15 Mana  | 8s       | Ataque 360°, 70 dano, atinge até 4 inimigos                    | Golpe de Palma          |
-| 3   | **Dash do Vento**        | 20 Mana  | 10s      | Teleporta 15m instantly, gera 2 combos                         | Nível 2                 |
-| 4   | **Soco do Dragão**       | 25 Mana  | 15s      | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos      | Chute Giratório         |
-| 5   | **Meditação**            | 0 Mana   | 30s      | Regenera 50 Mana, gasta turno                                  | Nível 3                 |
-| 6   | **Rajada de Mil Punhos** | 30 Mana  | 20s      | Ataque frenético em alvo único, 10 hits                        | Soco do Dragão          |
-| 7   | **Toque Paralisante**    | 35 Mana  | 25s      | Paralisa inimigo por 1 turno                                   | Nível 4                 |
-| 8   | **Ciclone**              | 40 Mana  | 30s      | Gira rapidamente, atinge todos adjacentes (max 5)              | Chute Giratório         |
-| 9   | **Aura de Mana**         | 45 Mana  | 35s      | +50% Velocidade de Ação por 20s, consome 5 combos              | Rajada de Mil Punhos    |
-| 10  | **Teletransporte**       | 50 Mana  | 40s      | Teleporta para qualquer local em 30m                           | Dash do Vento           |
-| 11  | **Punho da Fúria**       | 60 Mana  | 45s      | Golpe massivo, 300 dano, consome todos combos (+20 dano/combo) | Rajada de Mil Punhos    |
-| 12  | **Transcendência**       | 70 Mana  | 90s      | Imune a dano por 8s, atravessa inimigos                        | Meditação               |
-| 13  | **Explosão de Mana**     | 80 Mana  | 50s      | Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back        | Aura de Mana            |
-| 14  | **Forma do Dragão**      | 90 Mana  | 120s     | Espírito, +150% Attack, ignora terreno, 3 turnos               | Punho da Fúria          |
-| 15  | **Iluminação**           | 150 Mana | 180s     | Velocidade 2x, +50% Esquiva, Combos infinitos (3 turnos)       | Transcendência + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Descrição                                                 | Requer                 |
+| --- | --------------------- | -------- | -------- | --------------------------------------------------------- | ---------------------- |
+| 1   | **Palm Strike**       | 10 Mana  | 1 Turno  | Soco rápido, 55 dano, gera 1 combo                        | Nível 1                |
+| 2   | **Spinning Kick**     | 15 Mana  | 1 Turno  | Ataque 360°, 70 dano, atinge até 4 inimigos               | Palm Strike            |
+| 3   | **Wind Dash**         | 20 Mana  | 1 Turno  | Teleporta 15m instantly, gera 2 combos                    | Nível 2                |
+| 4   | **Dragon Punch**      | 25 Mana  | 2 Turnos | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos | Spinning Kick          |
+| 5   | **Meditation**        | 0 Mana   | 4 Turnos | Regenera 50 Mana, gasta turno                             | Nível 3                |
+| 6   | **Hundred-Hand Slap** | 30 Mana  | 3 Turnos | Ataque frenético em alvo único, 10 hits                   | Dragon Punch           |
+| 7   | **Paralyzing Touch**  | 35 Mana  | 3 Turnos | Paralisa inimigo por 1 Turno                              | Nível 4                |
+| 8   | **Cyclone**           | 40 Mana  | 4 Turnos | Gira rapidamente, atinge todos adjacentes (max 5)         | Spinning Kick          |
+| 9   | **Mana Aura**         | 45 Mana  | 4 Turnos | +50% Velocidade de Ação por 3 Turnos, consome 5 combos    | Hundred-Hand Slap      |
+| 10  | **Spirit Step**       | 50 Mana  | 5 Turnos | Teleporta para qualquer local em 30m                      | Wind Dash              |
+| 11  | **Fist of Fury**      | 60 Mana  | 5 Turnos | Golpe massivo, 300 dano, consome combos (+20 dano/c)      | Hundred-Hand Slap      |
+| 12  | **Transcendence**     | 70 Mana  | 8 Turnos | Imune a dano por 1 Turno, atravessa inimigos              | Meditation             |
+| 13  | **Mana Burst**        | 80 Mana  | 5 Turnos | Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back   | Mana Aura              |
+| 14  | **Dragon Form**       | 90 Mana  | 1x comb. | Espírito, +150% Attack, ignora terreno, 3 Turnos          | Fist of Fury           |
+| 15  | **Enlightenment**     | 150 Mana | 1x comb. | Velocidade 2x, +50% Esquiva, Combos infinitos (3 Turnos)  | Transcendence + Lvl 12 |
 
 ### 🧘 Skills Passivas (15)
 
-| #   | Nome                         | Efeito                                          | Requer                   |
-| --- | ---------------------------- | ----------------------------------------------- | ------------------------ |
-| 1   | **Regeneração de Mana**      | Regenera 5 Mana/s                               | Nível 1                  |
-| 2   | **Mestre em Artes Marciais** | +20% dano corpo-a-corpo                         | Nível 1                  |
-| 3   | **Sistema de Combos**        | Cada ataque gera 1 combo, máximo 10 combos      | Golpe de Palma           |
-| 4   | **Dano de Combo**            | +5% dano por combo ativo                        | Sistema de Combos        |
-| 5   | **Reflexos Sobre-Humanos**   | +25% Speed                                      | Dash do Vento            |
-| 6   | **Esquiva de Mestre**        | +20% chance de esquivar                         | Reflexos Sobre-Humanos   |
-| 7   | **Contra-Ataque Perfeito**   | 30% chance de contra-atacar ao esquivar         | Esquiva de Mestre        |
-| 8   | **Meditação Passiva**        | Regenera 2% HP máximo/s quando fora de combate  | Meditação                |
-| 9   | **Mana Infinito**            | Mana máximo +50                                 | Regeneração de Mana      |
-| 10  | **Disciplina de Ferro**      | Imune a atordoamentos quando tem 5+ combos      | Sistema de Combos        |
-| 11  | **Golpes Críticos**          | +30% chance de crítico                          | Mestre em Artes Marciais |
-| 12  | **Velocidade da Luz**        | +40% Velocidade de Ação                         | Reflexos Sobre-Humanos   |
-| 13  | **Sem Armas, Sem Problemas** | Sem arma equipada, +50% todos stats             | Mestre em Artes Marciais |
-| 14  | **Espírito do Dragão**       | Ao atingir 10 combos, próximo ataque +300% dano | Dano de Combo            |
-| 15  | **Mestre Iluminado**         | Quando em Iluminação, combos nunca resetam      | Iluminação + Lvl 11      |
+| #   | Nome                    | Efeito                                          | Requer                 |
+| --- | ----------------------- | ----------------------------------------------- | ---------------------- |
+| 1   | **Mana Regen**          | Regenera 10 Mana/turno                          | Nível 1                |
+| 2   | **Martial Arts Master** | +20% dano corpo-a-corpo                         | Nível 1                |
+| 3   | **Combo System**        | Cada ataque gera 1 combo, máximo 10 combos      | Palm Strike            |
+| 4   | **Combo Damage**        | +5% dano por combo ativo                        | Combo System           |
+| 5   | **Superhuman Reflexes** | +25% Speed                                      | Wind Dash              |
+| 6   | **Master Evasion**      | +20% chance de esquivar                         | Superhuman Reflexes    |
+| 7   | **Perfect Counter**     | 30% chance de contra-atacar ao esquivar         | Master Evasion         |
+| 8   | **Passive Meditation**  | Regenera 5% HP máximo/turno fora de combate     | Meditation             |
+| 9   | **Infinite Mana**       | Mana máximo +50                                 | Mana Regen             |
+| 10  | **Iron Discipline**     | Imune a atordoamentos quando tem 5+ combos      | Combo System           |
+| 11  | **Critical Strikes**    | +30% chance de crítico                          | Martial Arts Master    |
+| 12  | **Flash Speed**         | +40% Velocidade de Ação                         | Superhuman Reflexes    |
+| 13  | **Fist Mastery**        | Sem arma equipada, +50% todos stats             | Martial Arts Master    |
+| 14  | **Dragon Spirit**       | Ao atingir 10 combos, próximo ataque +300% dano | Combo Damage           |
+| 15  | **Enlightened Master**  | Quando em Enlightenment, combos nunca resetam   | Enlightenment + Lvl 11 |
 
 ---
 
@@ -4765,44 +4759,44 @@ Diferente de skills normais, **Combos de Afinidade** (baseados em Chrono Trigger
 
 | Parceiro     | Nome do Combo            | Efeito Visual & Mecânico                                                                         |
 | :----------- | :----------------------- | :----------------------------------------------------------------------------------------------- |
-| **Mago**     | **Espada Flamejante**    | Mago encanta espada do Guerreiro. Dano Físico + Mágico explozivo em área cônica.                 |
-| **Ladino**   | **Distração Brutal**     | Ladino joga bomba de fumaça, Guerreiro executa ataque surpresa crítico (Insta-Stun).             |
-| **Arqueiro** | **Lançamento Humano**    | Guerreiro "arremessa" Arqueiro para o alto. Arqueiro chove flechas de cima (Dano em Área total). |
-| **Paladino** | **Falange Impenetrável** | Ambos erguem escudos. Criam barreira que reflete 100% projéteis por 5s.                          |
+| **Mago**     | **Flaming Blade**        | Mago encanta espada do Guerreiro. Dano Físico + Mágico explozivo em área cônica.                 |
+| **Ladino**   | **Tactical Smoke**       | Ladino joga bomba de fumaça, Guerreiro executa ataque surpresa crítico (Insta-Stun).             |
+| **Arqueiro** | **Skyward Toss**         | Guerreiro "arremessa" Arqueiro para o alto. Arqueiro chove flechas de cima (Dano em Área total). |
+| **Paladino** | **Impenetrable Phalanx** | Ambos erguem escudos. Criam barreira que reflete 100% projéteis por 1 Turno.                     |
 
 #### 🔮 Combos de Mago (Iniciador)
 
-| Parceiro       | Nome do Combo              | Efeito Visual & Mecânico                                                                 |
-| :------------- | :------------------------- | :--------------------------------------------------------------------------------------- |
-| **Ladino**     | **Sombra Elementar**       | Mago congela o tempo, Ladino desfere 20 cortes em 1 segundo. Dano massivo single-target. |
-| **Druida**     | **Tempestade de Espinhos** | Mago lança ciclone de fogo, Druida adiciona espinhos. Tornado de fogo físico/mágico.     |
-| **Necromante** | **Paradoxo Vital**         | Drenam vida de todos inimigos e curam todo o grupo instantaneamente (Inversão de Fluxo). |
-| **Elfo**       | **Convergência Arcana**    | Dois raios de energia se fundem em um feixe prismático (Dano Puro que ignora defesa).    |
+| Parceiro       | Nome do Combo          | Efeito Visual & Mecânico                                                                 |
+| :------------- | :--------------------- | :--------------------------------------------------------------------------------------- |
+| **Ladino**     | **Frost Rush**         | Mago congela o tempo, Ladino desfere 20 cortes instantâneos. Dano massivo single-target. |
+| **Druida**     | **Blazing Briar**      | Mago lança ciclone de fogo, Druida adiciona espinhos. Tornado de fogo físico/mágico.     |
+| **Necromante** | **Vital Paradox**      | Drenam vida de todos inimigos e curam todo o grupo instantaneamente (Inversão de Fluxo). |
+| **Elfo**       | **Arcane Convergence** | Dois raios de energia se fundem em um feixe prismático (Dano Puro que ignora defesa).    |
 
 #### 🏹 Combos de Arqueiro (Iniciador)
 
-| Parceiro  | Nome do Combo         | Efeito Visual & Mecânico                                                                      |
-| :-------- | :-------------------- | :-------------------------------------------------------------------------------------------- |
-| **Elfo**  | **Chuva de Estrelas** | Arqueiro dispara para o céu, Elfo encanta flechas. Caem como meteoros teleguiados.            |
-| **Monge** | **Acupuntura Aérea**  | Monge chuta inimigo para o ar, Arqueiro o "prega" na parede com uma flecha gigante (Stun 5s). |
-| **Bardo** | **Ritmo da Caçada**   | Bardo toca acelerado, Arqueiro entra em modo "Metralhadora" (Dobro de Speed por 10s).         |
+| Parceiro  | Nome do Combo       | Efeito Visual & Mecânico                                                                           |
+| :-------- | :------------------ | :------------------------------------------------------------------------------------------------- |
+| **Elfo**  | **Star Shower**     | Arqueiro dispara para o céu, Elfo encanta flechas. Caem como meteoros teleguiados.                 |
+| **Monge** | **Sky Piercer**     | Monge chuta inimigo para o ar, Arqueiro o "prega" na parede com uma flecha gigante (Stun 1 Turno). |
+| **Bardo** | **Hunter’s Groove** | Bardo toca acelerado, Arqueiro entra em modo "Metralhadora" (Dobro de Speed por 2 Turnos).         |
 
 #### 🛡️ Combos de Suporte/Outros
 
-| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                        |
-| :------------- | :------------- | :--------------------- | :-------------------------------------------------------------------------------------------- |
-| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).              |
-| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).           |
-| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.              |
-| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino saqueia itens de TODOS os bolsos simultaneamente. |
-| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.       |
+| Parceiro A     | Parceiro B     | Nome do Combo        | Efeito                                                                                        |
+| :------------- | :------------- | :------------------- | :-------------------------------------------------------------------------------------------- |
+| **Paladino**   | **Necromante** | **Final Judgment**   | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).              |
+| **Druida**     | **Bardo**      | **Wild Harmony**     | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).           |
+| **Monge**      | **Guerreiro**  | **Ground Slam**      | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.              |
+| **Ladino**     | **Bardo**      | **The Bard's Grift** | Bardo distrai inimigos com monólogo, Ladino saqueia itens de TODOS os bolsos simultaneamente. |
+| **Necromante** | **Guerreiro**  | **Death Knight**     | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/turno.   |
 
 **Regras de Ativação:**
 
-1.  Cooldown interno de 60s por par.
+1.  Cooldown interno de 1x por combate por par.
 2.  Requer ambos heróis vivos, próximos e sem status negativos (Stun/Silence).
 3.  Combos possuem **Alto Delay** (Animação longa e pós-cast delay).
-4.  Gera log diferenciado: `⚔️ [COMBO] Kaelen & Lila executaram "Distração Brutal"! (850 Dano)`
+4.  Gera log diferenciado: `⚔️ [COMBO] Kaelen & Lila executaram "Tactical Smoke"! (850 Dano)`
 
 ---
 # 4. OS HERÓIS: AGENTES AUTÔNOMOS
@@ -9822,35 +9816,37 @@ Exemplo de layout:
 ---
 # 14. ESTÉTICA E "JUICE" VISUAL/SONORO
 
-## 14.1 A Filosofia do "Cyber-Fantasy Terminal"
+## 14.1 A Filosofia do "Terminal Mágico de Fantasia"
 
 ### Identidade Visual
 
-O jogo **não tenta** parecer um terminal DOS antigo. Em vez disso, é um **terminal mágico futurista** com elementos de fantasia.
+O jogo **não tenta** parecer um terminal DOS antigo. Em vez disso, é um **terminal mágico fantásia medieval RPG** com elementos de fantasia.
 
 **Paleta de Cores:**
 
 ```css
 :root {
-  --primary-bg: #0a0e1a; /* Azul escuro profundo */
-  --terminal-green: #00ff41; /* Verde neon (texto padrão) */
-  --warning-amber: #ffaa00; /* Laranja/âmbar (alertas) */
-  --critical-red: #ff0055; /* Rosa neon (perigo) */
-  --magic-purple: #aa00ff; /* Roxo mágico (eventos raros) */
-  --border-glow: #00ffff; /* Ciano (bordas ativas) */
+  --primary-bg: #0d0c0b; /* Ébano profano (fundo) */
+  --text-parchment: #e2d1b4; /* Pergaminho antigo (texto geral) */
+  --royal-gold: #e6b422; /* Ouro real (títulos e destaque) */
+  --mana-blue: #4da6ff; /* Azul arcano (magia e mana) */
+  --blood-red: #a30000; /* Sangue de Dragão (perigo e dano) */
+  --emerald-green: #2ecc71; /* Verde esmeralda (cura e natureza) */
+  --border-iron: #3d3d3d; /* Ferro batido (bordas e divisórias) */
+  --shadow-purple: #8e44ad; /* Púrpura do Vazio (eventos sombrios) */
 }
 ```
 
 **Tipografia:**
 
 ```css
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=JetBrains+Mono&display=swap");
 
 body {
-  font-family: "Fira Code", "Courier New", monospace;
+  font-family: "JetBrains Mono", "Crimson Pro", monospace;
   font-size: 14px;
   line-height: 1.6;
-  text-shadow: 0 0 5px currentColor; /* Glow sutil */
+  text-shadow: 0 0 3px rgba(226, 209, 180, 0.3); /* Brilho de pergaminho */
 }
 ```
 
@@ -10369,7 +10365,7 @@ IP funciona como **mana** em ARPGs:
 
 #### 3. **Terminal Imersivo e Estético**
 
-- Cyber-Fantasy único
+- Estética de Fantasia Medieval Única
 - Portraits Doom-style
 - Sonoplastia cinematográfica
 

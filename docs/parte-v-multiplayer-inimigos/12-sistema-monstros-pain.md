@@ -286,12 +286,14 @@ const bossTemplate = {
 
 ### Tier de Monstros por Ciclo
 
-| Ciclo             | Tier | Monstros Comuns                 | Boss Típico     |
-| ----------------- | ---- | ------------------------------- | --------------- |
-| **1 (Dias 1-2)**  | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe      |
-| **2 (Dias 3-4)**  | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem    |
-| **3 (Dias 5-6)**  | T3   | Dragões, Demônios, Liches       | Rei Vilão       |
-| **4 (Dias 7-8+)** | T4   | _Apocalipse_ (Hordas sem fim)   | **Global Boss** |
+| Ciclo             | Nível (NMG) | Tier | Monstros Comuns                 | Boss Típico     |
+| ----------------- | ----------- | ---- | ------------------------------- | --------------- |
+| **1 (Dias 1-2)**  | **1 - 2**   | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe      |
+| **2 (Dias 3-4)**  | **3 - 4**   | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem    |
+| **3 (Dias 5-6)**  | **5 - 6**   | T3   | Dragões, Demônios, Liches       | Mini Boss Elite |
+| **4 (Dias 7-8+)** | **7 - 10**  | T4   | _Apocalipse_ (Até Lvl 8)        | **Global Boss** |
+
+> **Nota sobre o CAP:** Monstros comuns nunca ultrapassam o Lvl 8. Apenas Heróis, Bosses e Mini Bosses do Ciclo 4 podem atingir o **Lvl 10 (MAX CAP)**.
 
 ### Modificadores de Stats
 
@@ -300,6 +302,7 @@ const cycleMult = {
   1: 1.0, // Baseline
   2: 1.5, // +50% HP/Attack
   3: 2.5, // +150% HP/Attack
+  4: 4.0, // +300% HP/Attack (Lua de Sangue)
 };
 
 monster.hp *= cycleMult[currentCycle];

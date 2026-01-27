@@ -237,7 +237,7 @@ IP funciona como **mana** em ARPGs:
 
 #### 3. **Terminal Imersivo e Estético**
 
-- Cyber-Fantasy único
+- Estética de Fantasia Medieval Única
 - Portraits Doom-style
 - Sonoplastia cinematográfica
 

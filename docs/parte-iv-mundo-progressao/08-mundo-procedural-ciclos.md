@@ -63,35 +63,34 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 ```
 ┌─────────────────────────────────────────────┐
 │ CICLO 1: "Primavera" (Dias 1-2)            │
+│ - Progressão: Monstros Lvl 1-2             │
 │ - Monstros: Tier 1 (Goblins, Lobos)        │
 │ - Clima: Ameno, chuvas leves                │
 │ - Eventos: Tutoriais, expansão básica      │
-│ - Tom: Esperançoso, construção             │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 2: "Verão Vermelho" (Dias 3-4)       │
+│ - Progressão: Monstros Lvl 3-4             │
 │ - Monstros: Tier 2 (Ogros, Trolls)         │
 │ - Clima: Calor extremo, tempestades        │
 │ - Eventos: Invasões massivas, traições     │
-│ - Tom: Conflito intenso, guerras           │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 3: "Inverno" (Dias 5-6)              │
+│ - Progressão: Monstros Lvl 5-6             │
 │ - Monstros: Tier 2-3 (Gigantes, Liches)    │
 │ - Clima: Neve, nevasca, gelo               │
 │ - Eventos: Fome, primeira Lua de Sangue    │
-│ - Tom: Sobrevivência, desespero            │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 4: "Apocalipse" (Dias 7-8+)          │
+│ - Progressão: Monstros Lvl 7-8 (Max)       │
+│ - Elites: Heróis/Bosses chegam ao Lvl 10   │
 │ - Monstros: Tier 3 (Dragões, Demônios)     │
-│ - Clima: Lua de Sangue, Eclipse            │
 │ - Evento Final: Castelo Amaldiçoado        │
-│ - Tom: Épico, climático, fim dos tempos    │
-│ - Duração: Indefinida (até vitória/derrota)│
 └─────────────────────────────────────────────┘
 ```
 
@@ -522,9 +521,9 @@ O jogo **ajusta a dificuldade** baseado na performance do jogador.
 const difficultyMultiplier = 1.0 + (avgHeroLevel / 10) - (heroDeaths * 0.05);
 
 // Exemplo:
-// Heróis nível médio: 5
-// Mortes totais: 3
-difficultyMultiplier = 1.0 + (5/10) - (3*0.05) = 1.35
+// Heróis nível médio: 4 (Max: 10)
+// Mortes totais: 2
+difficultyMultiplier = 1.0 + (4/10) - (2*0.05) = 1.30
 
 // Todos monstros spawnam com:
 monsterHP *= difficultyMultiplier; // +35% HP

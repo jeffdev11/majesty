@@ -671,7 +671,8 @@ Esse é o momento PERFEITO para atacar o boss!"
 | Painel | Nome                        | Conteúdo                                                            |
 | ------ | --------------------------- | ------------------------------------------------------------------- |
 | **P1** | **Build Menu**              | Lista de construções e guildas disponíveis para compra/upgrade      |
-| **P2** | **Escola Estoica**          | Interface de treinamento para modificação de traits P.E.C.M.A.      |
+| **P2** | **Árvore de Skills**        | Pesquisa e desbloqueio de novas habilidades com Ouro                |
+| **P9** | **Escola Estoica**          | Interface de treinamento para modificação de traits P.E.C.M.A.      |
 | **P3** | **Stock & Inventário**      | Controle de poções, armas, armaduras e recursos básicos             |
 | **P4** | **Detalhes Econômicos**     | Relatório de Fluxo de Caixa (Receitas vs Despesas)                  |
 | **P5** | **Orçamento**               | Alocação de recursos por categoria (Manutenção, Salários, Obras)    |
@@ -683,13 +684,13 @@ Esse é o momento PERFEITO para atacar o boss!"
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│ P1: BUILD MENU                 │ P2: ESCOLA ESTOICA                       │
-│ [1] Guilda Guerreiros (Lvl 2)  │ Herói Selecionado: Sir Kaelen (Lvl 8)    │
-│ [2] Guilda Magos (Lvl 1)       │ Trait Atual: Mind (0.4)                  │
-│ [3] Guilda Paladinos (Bloq.)   │ Objetivo: Elevar para 0.55               │
-│ [4] Torre de Vigia (Lvl 3)     │ Custo Estimado: 950g | Tempo: 180s       │
-│ [5] Escola Estoica (Lvl 1)     │ [T] Iniciar Treinamento                  │
-│ [6] Mercado (Lvl 2)            │ [ESC] Cancelar Seleção                   │
+│ P1: BUILD MENU                 │ P2: ÁRVORE DE SKILLS (Requer Ouro)       │
+│ [1] Guilda Guerreiros (Lvl 2)  │ [T1] Power Strike (200g) [✓]             │
+│ [2] Guilda Magos (Lvl 1)       │  └── [T2] Battle Cry (400g) [ ]          │
+│ [3] Guilda Paladinos (Bloq.)   │ [T1] Fireball (200g) [✓]                 │
+│ [4] Torre de Vigia (Lvl 3)     │  └── [T2] Frost Bolt (400g) [ ]          │
+│ [5] Escola Estoica (Lvl 1)     │ [Clique para Pesquisar]                   │
+│ [6] Mercado (Lvl 2)            │ [G] Mudar Classe (Tab)                   │
 ├────────────────────────────────┼──────────────────────────────────────────┤
 │ P3: STOCK & INVENTÁRIO         │ P4: ECONOMIA (Resumo Diário)             │
 │ Poções HP: [████░░░░░░] 45/100 │ Receita: +450g (Taxas: 120g, Loot: 330g) │

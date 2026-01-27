@@ -145,7 +145,7 @@
 
 14. [Estética e "Juice" Visual/Sonoro](#14-estética-e-juice-visualsonoro)
 
-- 14.1 [Cyber-Fantasy Terminal](#141-a-filosofia-do-cyber-fantasy-terminal)
+- 14.1 [Terminal Mágico de Fantasia](#141-a-filosofia-do-terminal-mágico-de-fantasia)
 - 14.2 [Portraits Dinâmicos](#142-portraits-dinâmicos-doom-style)
 - 14.3 [Ícones Vivos](#143-ícones-vivos-micro-animações)
 - 14.4 [Sonoplastia Imersiva](#144-sonoplastia-imersiva-o-mundo-sonoro)
