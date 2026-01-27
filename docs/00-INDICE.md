@@ -25,33 +25,37 @@
    - 2.5 [[F3] LIBRARY](#25-f3-library---the-armanaves)
    - 2.6 [[F4] WORLD MAP](#26-f4-world-map---the-conquest)
    - 2.7 [[F5] THE AVIARY](#27-f5-the-aviary---royal-mail)
+   - 2.8 [[F6] THE CHRONICLES](#28-f6-the-chronicles---the-living-book)
 
 ### PARTE II: SISTEMAS DE IA
 
 3. [Arquitetura de IA Híbrida](#3-arquitetura-de-ia-híbrida)
-   - 3.1 [Visão Geral](#31-visão-geral)
-   - 3.2 [Utility AI](#32-utility-ai-tomada-de-decisão-ponderada)
-   - 3.3 [Behavior Trees](#33-behavior-trees-execução-tática)
-   - 3.4 [FSM (Máquinas de Estados)](#34-fsm-máquinas-de-estados-finitos)
-   - 3.5 [NLP (Conselheiro)](#35-nlp-processamento-de-linguagem-natural)
+   - 3.1 [Visão Geral](#31-visão-geral-o-cérebro-dos-heróis)
+   - 3.2 [Utility AI](#32-utility-ai-o-sistema-de-decisão-estratégica)
+   - 3.3 [Behavior Trees](#33-behavior-trees-a-execução-tática)
+   - 3.4 [FSM (Máquinas de Estados)](#34-fsm-gerenciamento-de-estados-macro)
+   - 3.5 [NLP (Conselheiro)](#35-nlp-processamento-de-linguagem-natural-conselheiro)
 
 4. [Os Heróis: Agentes Autônomos](#4-os-heróis-agentes-autônomos)
-   - 4.1 [Estrutura de Dados](#41-estrutura-de-dados-do-agente)
+   - 4.1 [Estrutura de Dados](#41-estrutura-de-dados-de-um-herói)
    - 4.2 [Sistema P.E.C.M.A.](#42-sistema-pecma-os-5-vetores-de-personalidade)
-   - 4.3 [Camadas de Modificação](#43-camadas-de-modificação-comportamental)
-   - 4.4 [Classes de Heróis](#44-classes-de-heróis-e-arquétipos-de-ia)
-   - 4.5 [Ciclo de Vida](#45-ciclo-de-vida-recrutamento-evolução-e-aposentadoria)
-   - 4.6 [Limitação: 5 Heróis Máximo](#46-o-ciclo-da-morte-e-legado)
-   - 4.7 [Sistema de Skills](#47-sistema-de-skills-árvore-completa)
+   - 4.3 [Camadas de Modificação](#43-camadas-de-modificação-estados-e-peculiaridades)
+   - 4.4 [Classes de Heróis](#44-classes-de-heróis-vieses-e-identidade)
+   - 4.5 [Sistema de Loot](#45-sistema-de-loot-e-economia)
+   - 4.6 [Ciclo de Vida](#46-ciclo-de-vida-morte-trabalho-e-redenção)
+   - 4.7 [Limitação: 5 Heróis Máximo](#47-limitação-estratégica-máximo-de-5-heróis)
+   - 4.8 [Sistema de Skills](#48-sistema-de-skills-árvore-completa-de-habilidades)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
    - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
    - 5.2 [Disputa de Glória](#52-disputa-de-glória-quem-finalizou)
-   - 5.3 [Combate PvP](#53-combate-pvp-quando-heróis-se-atacam)
+   - 5.3 [Combate PvP](#53-combate-pvp-player-vs-player-entre-heróis)
    - 5.4 [Amizades e Lealdade](#54-amizades-e-lealdade)
-   - 5.5 [Sistema de Banter](#56-sistema-de-banter-diálogos-dinâmicos)
-   - 5.6 [Matriz de Relacionamento](#57-matriz-de-relacionamento-visualização)
+   - 5.5 [Saque de Heróis Caídos](#55-saque-de-heróis-caídos-sem-roubo)
+   - 5.6 [Sistema de Banter](#56-sistema-de-banter-diálogos-dinâmicos)
+   - 5.7 [Matriz de Relacionamento](#57-matriz-de-relacionamento-visualização)
+   - 5.8 [Outros Conflitos](#58-outros-gatilhos-de-conflito-social)
 
 6. [O Conselheiro Real de IA](#6-o-conselheiro-real-de-ia)
    - 6.1 [O NPC Mais Importante](#61-o-npc-mais-importante-do-jogo)
@@ -73,13 +77,13 @@
 ### PARTE IV: MUNDO E PROGRESSÃO
 
 8. [Mundo Procedural e Ciclos](#8-mundo-procedural-e-ciclos-temporais)
-   - 8.1 [Névoa de Guerra](#81-névoa-de-guerra-e-visibilidade)
-   - 8.2 [Os 4 Ciclos de 2 Dias](#82-os-4-ciclos-de-2-dias-a-jornada-do-herói)
-   - 8.3 [Ciclo Dia/Noite](#83-ciclo-dianoite)
+   - 8.1 [Névoa de Guerra](#81-névoa-de-guerra-pessoal-o-reino-oculto)
+   - 8.2 [Os 4 Ciclos de 2 Dias](#82-os-4-ciclos-de-2-dias-progressão-temporal)
+   - 8.3 [Ciclo Dia/Noite](#83-ciclo-dianoite-perigo-após-o-pôr-do-sol)
    - 8.4 [Eventos Globais](#84-eventos-globais-o-caos-controlado)
-   - 8.5 [Boss Global](#85-boss-global-o-clímax-de-cada-ciclo)
+   - 8.5 [Boss Global](#85-boss-global-o-rei-vilão)
    - 8.6 [Escalonamento Dinâmico](#86-escalonamento-dinâmico-de-dificuldade)
-   - 8.7 [Mapas Procedurais](#87-mapas-procedurais-e-biomas)
+   - 8.7 [Mapas Procedurais](#87-mapas-procedurais-cada-partida-é-única)
 
 9. [Mecânicas Avançadas de Expansão](#9-mecânicas-avançadas-de-expansão)
    - 9.1 [Postos Avançados](#91-postos-avançados-expandindo-o-reino)
@@ -90,6 +94,8 @@
    - 9.6 [Mudança de Capital](#96-mudança-de-capital-decisão-irreversível)
    - 9.7 [Traição Individual](#97-traição-quando-heróis-se-voltam-contra-você)
    - 9.8 [Colônia Rebelde](#98-colônia-rebelde-traição-em-massa)
+   - 9.9 [Classes e Evolução](#99-notas-sobre-classes-e-evolução)
+   - 9.10 [Habitação](#910-habitação-e-bases)
 
 10. [Narrativa Emergente e Legado](#10-narrativa-emergente-e-legado)
 
@@ -106,45 +112,46 @@
 
 11. [Multiplayer (Visão Futura)](#11-multiplayer-visão-futura)
 
-- 11.1 [Por Que Foi Desprioritizado](#111-por-que-foi-desprioritizado)
-- 11.2 [Co-op Assíncrono](#112-co-op-assíncrono-o-multiverso)
-- 11.3 [PvP Indireto](#113-pvp-indireto-guerra-de-influência)
-- 11.4 [Leaderboards e Seasons](#114-leaderboards-e-seasons)
-- 11.5 [Desafios de Amigos](#115-desafios-de-amigos)
+- 11.1 [Por Que Foi Desprioritizado](#111-por-que-multiplayer-foi-desprioritizado)
+- 11.2 [Co-op Assíncrono](#112-modo-co-op-assíncrono-proposta-futura)
+- 11.3 [PvP Indireto](#113-modo-pvp-indireto-proposta-futura)
+- 11.4 [Leaderboards e Seasons](#114-leaderboards-e-seasons-proposta-futura)
+- 11.5 [Desafios de Amigos](#115-desafios-de-amigos-proposta-futura)
 
 12. [Sistema de Monstros: IA P.A.I.N.](#12-sistema-de-monstros-ia-pain)
 
 - 12.1 [Visão Geral](#121-visão-geral-os-inimigos-autônomos)
-- 12.2 [Perfis de Monstros](#122-perfis-de-monstros-arquétipos)
-- 12.3 [Sistema de Nêmesis](#123-sistema-de-nêmesis)
-- 12.4 [Facções](#124-facções-e-ecossistema)
-- 12.5 [Patrulhas](#125-patrulhas-e-território)
-- 12.6 [Ondas de Invasão](#126-ondas-de-invasão)
-- 12.7 [Bosses Dinâmicos](#127-bosses-dinâmicos)
-- 12.8 [Escalonamento por Ciclo](#128-escalonamento-por-ciclo)
-- 12.9 [Anti-Padrões](#129-anti-padrões-evitando-burrice-artificial)
-- 12.10 [Loot Dinâmico](#1210-loot-dinâmico)
+- 12.2 [Perfis de Monstros](#122-perfis-de-monstros)
+- 12.3 [Sistema de Nêmesis](#123-sistema-de-nêmesis-monstros-que-evoluem)
+- 12.4 [Facções](#124-facções-de-monstros-comportamento-coletivo)
+- 12.5 [Patrulhas](#125-patrulhas-e-spawn-dinâmico)
+- 12.6 [Ondas de Invasão](#126-ondas-de-invasão-eventos-de-cerco)
+- 12.7 [Bosses Dinâmicos](#127-bosses-dinâmicos-diferentes-a-cada-partida)
+- 12.8 [Escalonamento por Ciclo](#128-escalonamento-de-dificuldade-por-ciclo)
+- 12.9 [Anti-Padrões](#129-comportamentos-especiais-anti-padrões)
+- 12.10 [Loot Dinâmico](#1210-loot-dinâmico-recompensa-por-risco)
 
 ### PARTE VI: COMBATE E APRESENTAÇÃO
 
 13. [Sistema de Combate e Flavor Texts](#13-sistema-de-combate-e-flavor-texts)
 
-- 13.1 [Mecânica de Combate](#131-mecânica-de-combate)
+- 13.1 [Mecânica de Combate](#131-mecânica-de-combate-simplificada-mas-profunda)
 - 13.2 [Flavor Texts](#132-flavor-texts-o-coração-da-narrativa)
 - 13.3 [Contextos de Eventos](#133-contextos-de-eventos)
-- 13.4 [Geração de Logs](#134-geração-de-logs)
-- 13.5 [Prompt para LLM](#135-prompt-para-llm)
+- 13.4 [Geração de Logs](#134-sistema-de-geração-de-logs)
+- 13.5 [Prompt para LLM](#135-prompt-para-llm-geração-de-flavor-texts)
 - 13.6 [Cache e Performance](#136-cache-e-performance)
+- 13.7 [Estilização Visual](#137-guia-de-estilização-visual-dos-logs)
 
 14. [Estética e "Juice" Visual/Sonoro](#14-estética-e-juice-visualsonoro)
 
-- 14.1 [Cyber-Fantasy Terminal](#141-a-estética-cyber-fantasy-terminal)
-- 14.2 [Portraits Dinâmicos](#142-portraits-dinâmicos-pixel-art-moderna)
-- 14.3 [Ícones Vivos](#143-ícones-vivos-e-feedback-visual)
-- 14.4 [Sonoplastia Imersiva](#144-sonoplastia-imersiva)
-- 14.5 [Audio Manager](#145-audio-manager-sistema-técnico)
-- 14.6 [Variação de Pitch](#146-variação-de-pitch-e-humanização)
-- 14.7 [Efeitos de Partículas](#147-efeitos-de-partículas-ascii)
+- 14.1 [Cyber-Fantasy Terminal](#141-a-filosofia-do-cyber-fantasy-terminal)
+- 14.2 [Portraits Dinâmicos](#142-portraits-dinâmicos-doom-style)
+- 14.3 [Ícones Vivos](#143-ícones-vivos-micro-animações)
+- 14.4 [Sonoplastia Imersiva](#144-sonoplastia-imersiva-o-mundo-sonoro)
+- 14.5 [Audio Manager](#145-audio-manager-gerenciamento-de-som)
+- 14.6 [Variação de Pitch](#146-variação-de-pitch-evitando-repetição)
+- 14.7 [Efeitos de Partículas](#147-efeitos-de-partículas-csscanvas)
 
 15. [Análise Crítica e Justificativas](#15-análise-crítica-e-justificativas-de-design)
 
@@ -163,29 +170,29 @@
 
 ### PARTE VII: NARRATIVA GENERATIVA
 
-16. [O Motor de Narrativa "Infinite Tales"](#16-o-motor-de-narrativa-infinite-tales)
+16. [O Motor de Narrativa](#16-o-motor-de-narrativa-infinite-tales)
 
 - 16.1 [Visão Geral](#161-visão-geral-o-problema-da-fadiga-de-texto)
-- 16.2 [A Solução: Separação de Poderes](#162-a-solução-separação-de-poderes-dois-cérebros)
+- 16.2 [A Solução](#162-a-solução-separação-de-poderes-dois-cérebros)
 
-17. [Infraestrutura de Dados (PostgreSQL & RAM)](#17-infraestrutura-de-dados-postgresql--ram)
+17. [Infraestrutura de Dados](#17-infraestrutura-de-dados-postgresql--ram)
 
 - 17.1 [Schema do Banco de Dados](#171-schema-do-banco-de-dados)
 - 17.2 [Estratégia de Cache](#172-estratégia-de-cache)
 
-18. [O Conceito de Entropia e "Sopa de Tags"](#18-o-conceito-de-entropia-e-sopa-de-tags)
+18. [Entropia e Sopa de Tags](#18-o-conceito-de-entropia-e-sopa-de-tags)
 
 - 18.1 [Por que não usar Templates?](#181-por-que-não-usar-templates)
 - 18.2 [O Algoritmo do "Liquidificador"](#182-o-algoritmo-do-liquidificador)
 - 18.3 [A Matemática da Variedade](#183-a-matemática-da-variedade)
 
-19. [Configuração do Modelo (WebLLM)](#19-configuração-do-modelo-webllm)
+19. [Configuração do Modelo](#19-configuração-do-modelo-webllm)
 
 - 19.1 [O Modelo Escolhido](#191-o-modelo-escolhido)
 - 19.2 [Parâmetros de Inferência](#192-parâmetros-de-inferência)
 - 19.3 [O System Prompt Otimizado](#193-o-system-prompt-otimizado)
 
-20. [Implementação Técnica (Angular + WebGPU)](#20-implementação-técnica-angular--webgpu)
+20. [Implementação Técnica](#20-implementação-técnica-angular--webgpu)
 
 - 20.1 [Serviço de IA](#201-serviço-de-ia)
 - 20.2 [Consumo no Componente](#202-consumo-no-componente)

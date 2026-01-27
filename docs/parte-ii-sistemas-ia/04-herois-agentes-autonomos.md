@@ -876,7 +876,7 @@ Se um **Necromancer Boss** aparecer, ele pode corromper heróis mortos antes de 
 
 ---
 
-## 4.6 Limitação Estratégica: Máximo de 5 Heróis
+## 4.7 Limitação Estratégica: Máximo de 5 Heróis
 
 **Regra de Ouro:** O jogador pode ter no máximo **5 heróis ativos** simultaneamente.
 

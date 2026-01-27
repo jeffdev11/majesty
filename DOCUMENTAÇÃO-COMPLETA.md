@@ -11,173 +11,191 @@
 ### PARTE I: FUNDAMENTOS
 
 1. [Visão Geral e Filosofia do Jogo](#1-visão-geral-e-filosofia-do-jogo)
-   - 1.1 O Monarca Indireto
-   - 1.2 O Efeito Aquário
-   - 1.3 Pilares de Diversão
-   - 1.4 A Nova Direção (RTS → Terminal)
-   - 1.5 Viabilidade Técnica
+   - 1.1 [O Monarca Indireto](#11-o-monarca-indireto-a-filosofia-de-observar-mais-do-que-comandar)
+   - 1.2 [O Efeito Aquário](#12-o-efeito-aquário-criando-uma-simulação-viva-e-reativa-em-tempo-real)
+   - 1.3 [Pilares de Diversão](#13-pilares-de-diversão-imprevisibilidade-agência-indireta-e-narrativa-emergente)
+   - 1.4 [A Nova Direção (RTS → Terminal)](#14-a-nova-direção-do-rts-visual-para-a-simulação-profunda)
+   - 1.5 [Viabilidade Técnica](#15-por-que-a-mudança-viabilidade-técnica)
 
 2. [Interface e Experiência do Usuário (UI/UX)](#2-interface-e-experiência-do-usuário-uiux)
-   - 2.1 Conceito de Workspaces
-   - 2.2 Regras Globais de Interação
-   - 2.3 [F1] COMMAND CENTER - "The War Room" (Logs Regionais Dinâmicos)
-   - 2.4 [F2] ADMIN - "The Tycoon"
-   - 2.5 [F3] LIBRARY - "The Armanaves"
-   - 2.6 [F4] WORLD MAP - "The Conquest"
-   - 2.7 [F5] THE AVIARY - "Royal Mail"
+   - 2.1 [Conceito de Workspaces](#21-o-conceito-de-workspaces-tty)
+   - 2.2 [Regras Globais de Interação](#22-regras-globais-de-interação-system-wide)
+   - 2.3 [[F1] COMMAND CENTER](#23-f1-command-center---the-war-room)
+   - 2.4 [[F2] ADMIN](#24-f2-management---the-tycoon)
+   - 2.5 [[F3] LIBRARY](#25-f3-library---the-armanaves)
+   - 2.6 [[F4] WORLD MAP](#26-f4-world-map---the-conquest)
+   - 2.7 [[F5] THE AVIARY](#27-f5-the-aviary---royal-mail)
+   - 2.8 [[F6] THE CHRONICLES](#28-f6-the-chronicles---the-living-book)
 
 ### PARTE II: SISTEMAS DE IA
 
 3. [Arquitetura de IA Híbrida](#3-arquitetura-de-ia-híbrida)
-   - 3.1 Visão Geral
-   - 3.2 Utility AI
-   - 3.3 Behavior Trees
-   - 3.4 FSM (Máquinas de Estados)
-   - 3.5 NLP (Conselheiro)
+   - 3.1 [Visão Geral](#31-visão-geral-o-cérebro-dos-heróis)
+   - 3.2 [Utility AI](#32-utility-ai-o-sistema-de-decisão-estratégica)
+   - 3.3 [Behavior Trees](#33-behavior-trees-a-execução-tática)
+   - 3.4 [FSM (Máquinas de Estados)](#34-fsm-gerenciamento-de-estados-macro)
+   - 3.5 [NLP (Conselheiro)](#35-nlp-processamento-de-linguagem-natural-conselheiro)
 
 4. [Os Heróis: Agentes Autônomos](#4-os-heróis-agentes-autônomos)
-   - 4.1 Estrutura de Dados
-   - 4.2 Sistema P.E.C.M.A.
-   - 4.3 Camadas de Modificação
-   - 4.4 Classes de Heróis
-   - 4.5 Ciclo de Vida (Morte e Redenção)
-   - 4.6 Limitação: 5 Heróis Máximo
-   - 4.7 Sistema de Skills (Árvore Completa)
+   - 4.1 [Estrutura de Dados](#41-estrutura-de-dados-de-um-herói)
+   - 4.2 [Sistema P.E.C.M.A.](#42-sistema-pecma-os-5-vetores-de-personalidade)
+   - 4.3 [Camadas de Modificação](#43-camadas-de-modificação-estados-e-peculiaridades)
+   - 4.4 [Classes de Heróis](#44-classes-de-heróis-vieses-e-identidade)
+   - 4.5 [Sistema de Loot](#45-sistema-de-loot-e-economia)
+   - 4.6 [Ciclo de Vida](#46-ciclo-de-vida-morte-trabalho-e-redenção)
+   - 4.7 [Limitação: 5 Heróis Máximo](#47-limitação-estratégica-máximo-de-5-heróis)
+   - 4.8 [Sistema de Skills](#48-sistema-de-skills-árvore-completa-de-habilidades)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
-   - 5.1 Formação de Grupos
-
-   - 5.3 Combate PvP
-   - 5.4 Amizades e Lealdade
-   - 5.5 Mercado Ambulante
-   - 5.6 Sistema de Banter
-   - 5.7 Matriz de Relacionamento
+   - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
+   - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
+   - 5.2 [Disputa de Glória](#52-disputa-de-glória-quem-finalizou)
+   - 5.3 [Combate PvP](#53-combate-pvp-player-vs-player-entre-heróis)
+   - 5.4 [Amizades e Lealdade](#54-amizades-e-lealdade)
+   - 5.5 [Saque de Heróis Caídos](#55-saque-de-heróis-caídos-sem-roubo)
+   - 5.6 [Sistema de Banter](#56-sistema-de-banter-diálogos-dinâmicos)
+   - 5.7 [Matriz de Relacionamento](#57-matriz-de-relacionamento-visualização)
+   - 5.8 [Outros Conflitos](#58-outros-gatilhos-de-conflito-social)
 
 6. [O Conselheiro Real de IA](#6-o-conselheiro-real-de-ia)
-   - 6.1 O NPC Mais Importante
-   - 6.2 Chat Interativo via NLP
-   - 6.3 Personalidades do Conselheiro
-   - 6.4 Cronista e Analista
-   - 6.5 Sussurros e Lore
-   - 6.6 Espionagem
-   - 6.7 Influence Points (IP)
+   - 6.1 [O NPC Mais Importante](#61-o-npc-mais-importante-do-jogo)
+   - 6.2 [Chat Interativo via NLP](#62-chat-interativo-via-nlp)
+   - 6.3 [Personalidades do Conselheiro](#63-personalidades-do-conselheiro)
+   - 6.4 [Cronista e Analista](#64-cronista-e-analista-o-historiador)
+   - 6.5 [Sussurros e Lore](#65-sussurros-e-lore-dinâmica)
+   - 6.6 [Espionagem](#66-espionagem-e-estratégia)
+   - 6.7 [Influence Points (IP)](#67-custo-de-influência-o-rate-limit-narrativo)
 
 7. [Economia e Gestão do Reino](#7-economia-e-gestão-do-reino)
-   - 7.1 Tesouro Real
-   - 7.2 Curadoria de Habilidades
-   - 7.3 Gestão de Estoques
-   - 7.4 Decretos Reais
-   - 7.5 Influence Points
-   - 7.6 Manutenção de Edifícios
+   - 7.1 [Tesouro Real](#71-tesouro-real-a-fonte-de-ouro)
+   - 7.2 [Curadoria de Habilidades](#72-curadoria-de-habilidades-tech-tree)
+   - 7.3 [Gestão de Estoques](#73-gestão-de-estoques-poções-e-salários)
+   - 7.4 [Decretos Reais](#74-decretos-reais-buffs-globais-com-risco)
+   - 7.5 [Influence Points](#75-influence-points-ip-sistema-completo-de-mana-social)
+   - 7.6 [Manutenção de Edifícios](#76-manutenção-de-edifícios)
 
 ### PARTE IV: MUNDO E PROGRESSÃO
 
 8. [Mundo Procedural e Ciclos](#8-mundo-procedural-e-ciclos-temporais)
-   - 8.1 Névoa de Guerra
-   - 8.2 Os 4 Ciclos de 2 Dias
-   - 8.3 Ciclo Dia/Noite
-   - 8.4 Eventos Globais
-   - 8.5 Boss Global
-   - 8.6 Escalonamento Dinâmico
-   - 8.7 Mapas Procedurais
+   - 8.1 [Névoa de Guerra](#81-névoa-de-guerra-pessoal-o-reino-oculto)
+   - 8.2 [Os 4 Ciclos de 2 Dias](#82-os-4-ciclos-de-2-dias-progressão-temporal)
+   - 8.3 [Ciclo Dia/Noite](#83-ciclo-dianoite-perigo-após-o-pôr-do-sol)
+   - 8.4 [Eventos Globais](#84-eventos-globais-o-caos-controlado)
+   - 8.5 [Boss Global](#85-boss-global-o-rei-vilão)
+   - 8.6 [Escalonamento Dinâmico](#86-escalonamento-dinâmico-de-dificuldade)
+   - 8.7 [Mapas Procedurais](#87-mapas-procedurais-cada-partida-é-única)
 
 9. [Mecânicas Avançadas de Expansão](#9-mecânicas-avançadas-de-expansão)
-   - 9.1 Postos Avançados
-   - 9.2 Fundando Postos
-   - 9.3 Gestão Autônoma
-   - 9.4 Lealdade do Posto
-   - 9.5 Morte do Capitão
-   - 9.6 Mudança de Capital
-   - 9.7 Traição Individual
-   - 9.8 Colônia Rebelde
+   - 9.1 [Postos Avançados](#91-postos-avançados-expandindo-o-reino)
+   - 9.2 [Fundando Postos](#92-fundando-um-posto-avançado)
+   - 9.3 [Gestão Autônoma](#93-gestão-autônoma-do-posto)
+   - 9.4 [Lealdade do Posto](#94-lealdade-do-posto)
+   - 9.5 [Morte do Capitão](#95-morte-do-capitão-condição-de-falha)
+   - 9.6 [Mudança de Capital](#96-mudança-de-capital-decisão-irreversível)
+   - 9.7 [Traição Individual](#97-traição-quando-heróis-se-voltam-contra-você)
+   - 9.8 [Colônia Rebelde](#98-colônia-rebelde-traição-em-massa)
+   - 9.9 [Classes e Evolução](#99-notas-sobre-classes-e-evolução)
+   - 9.10 [Habitação](#910-habitação-e-bases)
 
 10. [Narrativa Emergente e Legado](#10-narrativa-emergente-e-legado)
-    - 10.1 Crônicas do Reino (PDF)
-    - 10.2 Sonhos e Sussurros
-    - 10.3 Títulos Dinâmicos
-    - 10.4 Modo Historiador
-    - 10.5 Ecos do Passado
-    - 10.5 Ecos do Passado
-    - 10.7 Amanaevements Narrativos
-    - 10.8 Compartilhamento Social
+
+- 10.1 [Crônicas do Reino (PDF)](#101-crônicas-do-reino-o-pdf-ilustrado)
+- 10.2 [Sonhos e Sussurros](#102-sonhos-e-sussurros-balões-de-pensamento)
+- 10.3 [Títulos Dinâmicos](#103-títulos-e-epítetos-dinâmicos)
+- 10.4 [Modo Historiador](#104-modo-historiador-replay-com-onisciência)
+- 10.5 [Ecos do Passado](#105-ecos-do-passado-itens-lendários-de-partidas-anteriores)
+- 10.7 [Amanaevements Narrativos](#107-amanaevements-narrativos-conquistas)
+- 10.8 [Compartilhamento Social](#108-compartilhamento-social)
+- 10.9 [Vitória e Pós-Jogo](#109-vitória-e-pós-jogo-a-comemoração)
 
 ### PARTE V: MULTIPLAYER E INIMIGOS
 
 11. [Multiplayer (Visão Futura)](#11-multiplayer-visão-futura)
-    - 11.1 Por Que Foi Desprioritizado
-    - 11.2 Co-op Assíncrono
-    - 11.3 PvP Indireto
-    - 11.4 Leaderboards e Seasons
-    - 11.5 Desafios de Amigos
+
+- 11.1 [Por Que Foi Desprioritizado](#111-por-que-multiplayer-foi-desprioritizado)
+- 11.2 [Co-op Assíncrono](#112-modo-co-op-assíncrono-proposta-futura)
+- 11.3 [PvP Indireto](#113-modo-pvp-indireto-proposta-futura)
+- 11.4 [Leaderboards e Seasons](#114-leaderboards-e-seasons-proposta-futura)
+- 11.5 [Desafios de Amigos](#115-desafios-de-amigos-proposta-futura)
 
 12. [Sistema de Monstros: IA P.A.I.N.](#12-sistema-de-monstros-ia-pain)
-    - 12.1 Visão Geral
-    - 12.2 Perfis de Monstros
-    - 12.3 Sistema de Nêmesis
-    - 12.4 Facções
-    - 12.5 Patrulhas
-    - 12.6 Ondas de Invasão
-    - 12.7 Bosses Dinâmicos
-    - 12.8 Escalonamento por Ciclo
-    - 12.9 Anti-Padrões
-    - 12.10 Loot Dinâmico
+
+- 12.1 [Visão Geral](#121-visão-geral-os-inimigos-autônomos)
+- 12.2 [Perfis de Monstros](#122-perfis-de-monstros)
+- 12.3 [Sistema de Nêmesis](#123-sistema-de-nêmesis-monstros-que-evoluem)
+- 12.4 [Facções](#124-facções-de-monstros-comportamento-coletivo)
+- 12.5 [Patrulhas](#125-patrulhas-e-spawn-dinâmico)
+- 12.6 [Ondas de Invasão](#126-ondas-de-invasão-eventos-de-cerco)
+- 12.7 [Bosses Dinâmicos](#127-bosses-dinâmicos-diferentes-a-cada-partida)
+- 12.8 [Escalonamento por Ciclo](#128-escalonamento-de-dificuldade-por-ciclo)
+- 12.9 [Anti-Padrões](#129-comportamentos-especiais-anti-padrões)
+- 12.10 [Loot Dinâmico](#1210-loot-dinâmico-recompensa-por-risco)
 
 ### PARTE VI: COMBATE E APRESENTAÇÃO
 
 13. [Sistema de Combate e Flavor Texts](#13-sistema-de-combate-e-flavor-texts)
-    - 13.1 Mecânica de Combate
-    - 13.2 Flavor Texts
-    - 13.3 Contextos de Eventos
-    - 13.4 Geração de Logs
-    - 13.5 Prompt para LLM
-    - 13.6 Cache e Performance
+
+- 13.1 [Mecânica de Combate](#131-mecânica-de-combate-simplificada-mas-profunda)
+- 13.2 [Flavor Texts](#132-flavor-texts-o-coração-da-narrativa)
+- 13.3 [Contextos de Eventos](#133-contextos-de-eventos)
+- 13.4 [Geração de Logs](#134-sistema-de-geração-de-logs)
+- 13.5 [Prompt para LLM](#135-prompt-para-llm-geração-de-flavor-texts)
+- 13.6 [Cache e Performance](#136-cache-e-performance)
+- 13.7 [Estilização Visual](#137-guia-de-estilização-visual-dos-logs)
 
 14. [Estética e "Juice" Visual/Sonoro](#14-estética-e-juice-visualsonoro)
-    - 14.1 Cyber-Fantasy Terminal
-    - 14.2 Portraits Dinâmicos
-    - 14.3 Ícones Vivos
-    - 14.4 Sonoplastia Imersiva
-    - 14.5 Audio Manager
-    - 14.6 Variação de Pitch
-    - 14.7 Efeitos de Partículas
+
+- 14.1 [Cyber-Fantasy Terminal](#141-a-filosofia-do-cyber-fantasy-terminal)
+- 14.2 [Portraits Dinâmicos](#142-portraits-dinâmicos-doom-style)
+- 14.3 [Ícones Vivos](#143-ícones-vivos-micro-animações)
+- 14.4 [Sonoplastia Imersiva](#144-sonoplastia-imersiva-o-mundo-sonoro)
+- 14.5 [Audio Manager](#145-audio-manager-gerenciamento-de-som)
+- 14.6 [Variação de Pitch](#146-variação-de-pitch-evitando-repetição)
+- 14.7 [Efeitos de Partículas](#147-efeitos-de-partículas-csscanvas)
 
 15. [Análise Crítica e Justificativas](#15-análise-crítica-e-justificativas-de-design)
-    - 15.1 Por Que Controle Indireto?
-    - 15.2 Por Que Terminal?
-    - 15.3 Limite de 5 Heróis
-    - 15.4 Progressão Lenta
-    - 15.5 IA Determinística vs Generativa
-    - 15.6 Multiplayer: Por Que Não Agora?
-    - 15.7 Influence Points
-    - 15.8 Crônicas em PDF
-    - 15.9 Features Cortadas
-    - 15.10 Visão Final
-    - 15.11 Métricas de Sucesso
-    - 15.12 Roadmap Pós-Lançamento
+
+- 15.1 [Por Que Controle Indireto?](#151-por-que-controle-indireto)
+- 15.2 [Por Que Terminal?](#152-por-que-terminal-em-vez-de-gráficos-3d)
+- 15.3 [Limite de 5 Heróis](#153-limite-de-5-heróis-por-quê)
+- 15.4 [Progressão Lenta](#154-progressão-lenta-feature-ou-bug)
+- 15.5 [IA Determinística vs Generativa](#155-ia-determinística-vs-generativa)
+- 15.6 [Multiplayer: Por Que Não Agora?](#156-multiplayer-por-que-não-agora)
+- 15.7 [Influence Points](#157-influence-points-limitação-ou-mecânica)
+- 15.8 [Crônicas em PDF](#158-crônicas-em-pdf-vale-a-pena)
+- 15.9 [Features Cortadas](#159-features-cortadas-com-tristeza)
+- 15.10 [Visão Final](#1510-a-visão-final-o-que-torna-este-jogo-especial)
+- 15.11 [Métricas de Sucesso](#1511-métricas-de-sucesso)
+- 15.12 [Roadmap Pós-Lançamento](#1512-roadmap-pós-lançamento)
 
 ### PARTE VII: NARRATIVA GENERATIVA
 
-16. [O Motor de Narrativa "Infinite Tales"](#16-o-motor-de-narrativa-infinite-tales)
-    - 16.1 Visão Geral: O Problema da "Fadiga de Texto"
-    - 16.2 A Solução: Separação de Poderes (Dois Cérebros)
+16. [O Motor de Narrativa](#16-o-motor-de-narrativa-infinite-tales)
 
-17. [Infraestrutura de Dados (PostgreSQL & RAM)](#17-infraestrutura-de-dados-postgresql--ram)
-    - 17.1 Schema do Banco de Dados
-    - 17.2 Estratégia de Cache
+- 16.1 [Visão Geral](#161-visão-geral-o-problema-da-fadiga-de-texto)
+- 16.2 [A Solução](#162-a-solução-separação-de-poderes-dois-cérebros)
 
-18. [O Conceito de Entropia e "Sopa de Tags"](#18-o-conceito-de-entropia-e-sopa-de-tags)
-    - 18.1 Por que não usar Templates?
-    - 18.2 O Algoritmo do "Liquidificador"
-    - 18.3 A Matemática da Variedade
+17. [Infraestrutura de Dados](#17-infraestrutura-de-dados-postgresql--ram)
 
-19. [Configuração do Modelo (WebLLM)](#19-configuração-do-modelo-webllm)
-    - 19.1 O Modelo Escolhido
-    - 19.2 Parâmetros de Inferência
-    - 19.3 O System Prompt Otimizado
+- 17.1 [Schema do Banco de Dados](#171-schema-do-banco-de-dados)
+- 17.2 [Estratégia de Cache](#172-estratégia-de-cache)
 
-20. [Implementação Técnica (Angular + WebGPU)](#20-implementação-técnica-angular--webgpu)
-    - 20.1 Serviço de IA
-    - 20.2 Consumo no Componente
+18. [Entropia e Sopa de Tags](#18-o-conceito-de-entropia-e-sopa-de-tags)
+
+- 18.1 [Por que não usar Templates?](#181-por-que-não-usar-templates)
+- 18.2 [O Algoritmo do "Liquidificador"](#182-o-algoritmo-do-liquidificador)
+- 18.3 [A Matemática da Variedade](#183-a-matemática-da-variedade)
+
+19. [Configuração do Modelo](#19-configuração-do-modelo-webllm)
+
+- 19.1 [O Modelo Escolhido](#191-o-modelo-escolhido)
+- 19.2 [Parâmetros de Inferência](#192-parâmetros-de-inferência)
+- 19.3 [O System Prompt Otimizado](#193-o-system-prompt-otimizado)
+
+20. [Implementação Técnica](#20-implementação-técnica-angular--webgpu)
+
+- 20.1 [Serviço de IA](#201-serviço-de-ia)
+- 20.2 [Consumo no Componente](#202-consumo-no-componente)
 
 21. [Conclusão Técnica](#21-conclusão-técnica)
 
@@ -2782,7 +2800,7 @@ P3: PERFIL DO ALVO
 **Exemplos de Razões:**
 
 - "Acabou de matar um boss (orgulhoso)"
-- "Lila roubou seu kill (irritado)"
+- "Lila tomou seu kill (irritado)"
 - "Você enviou ouro (agradecido)"
 - "Ignorou pedido de ajuda (ressentido)"
 
@@ -3127,7 +3145,7 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 |                      | A primeira missão foi humilde: exterminar        |                  |
 |                      | goblins que infestavam a Floresta Sombria. Mas   |                  |
 |                      | mesmo nessa tarefa simples, os deuses viram a    |                  |
-|                      | semente do drama: Lila roubou o último golpe de  |                  |
+|                      | semente do drama: Lila tomou o último golpe de   |                  |
 |                      | um goblin ferido por Kaelen. O guerreiro jurou   |                  |
 |                      | silenciosamente que não esqueceria.              |                  |
 |                      |                                                  |                  |
@@ -3233,7 +3251,7 @@ Apenas o parágrafo narrativo, sem títulos ou metadados.
 {
   "eventList": [
     "Kaelen matou 5 Goblins (XP: +500)",
-    "Lila roubou último golpe de Kaelen (Kill Steal)",
+    "Lila tomou último golpe de Kaelen (Kill Steal)",
     "Affinity Kaelen ↔ Lila: +40 → +25",
     "Kaelen enviou carta hostil para Lila",
     "Gandalf usou Bola de Fogo (8 kills)",
@@ -3253,7 +3271,7 @@ bem; e Gandalf, cujo cajado brilhava com promessas arcanas.
 
 A primeira missão foi humilde: exterminar goblins que infestavam
 a Floresta Sombria. Mas mesmo nessa tarefa simples, os deuses
-viram a semente do drama: Lila roubou o último golpe de um goblin
+viram a semente do drama: Lila tomou o último golpe de um goblin
 ferido por Kaelen. O guerreiro jurou silenciosamente que não
 esqueceria. Enquanto isso, Gandalf incinerou hordas com seu fogo
 arcano, indiferente às tensões mortais ao seu redor.
@@ -4201,7 +4219,7 @@ O **Conselheiro Real** usa NLP para interpretar comandos do jogador.
 
 ---
 
-# 4.7. SISTEMA DE SKILLS: ÁRVORE COMPLETA DE HABILIDADES
+# 4.8. SISTEMA DE SKILLS: ÁRVORE COMPLETA DE HABILIDADES
 
 ## Visão Geral
 
@@ -4611,7 +4629,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 | #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                   |
 | --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ------------------------ |
-| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                 | Nível 1                  |
+| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, drena 20 HP                 | Nível 1                  |
 | 2   | **Reanimar Cadáver**     | 30 Mana  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
 | 3   | **Drenar Vida**          | 25 Mana  | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
 | 4   | **Invocar Zumbi**        | 50 Mana  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
@@ -4771,13 +4789,13 @@ Diferente de skills normais, **Combos de Afinidade** (baseados em Chrono Trigger
 
 #### 🛡️ Combos de Suporte/Outros
 
-| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                      |
-| :------------- | :------------- | :--------------------- | :------------------------------------------------------------------------------------------ |
-| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).            |
-| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).         |
-| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.            |
-| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino rouba itens de TODOS os bolsos simultaneamente. |
-| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.     |
+| Parceiro A     | Parceiro B     | Nome do Combo          | Efeito                                                                                        |
+| :------------- | :------------- | :--------------------- | :-------------------------------------------------------------------------------------------- |
+| **Paladino**   | **Necromante** | **Juízo Final**        | Luz e Trevas colidem. Elimina instantaneamente todos inimigos não-boss (Low HP).              |
+| **Druida**     | **Bardo**      | **Sons da Natureza**   | Invoca animais da floresta que dançam e lutam ao ritmo da música (+50% stats pets).           |
+| **Monge**      | **Guerreiro**  | **Tremor de Terra**    | Ambos golpeiam o chão. Terremoto global que derruba (knock-down) todos inimigos.              |
+| **Ladino**     | **Bardo**      | **Peça Trágica**       | Bardo distrai inimigos com monólogo, Ladino saqueia itens de TODOS os bolsos simultaneamente. |
+| **Necromante** | **Guerreiro**  | **Cavaleiro da Morte** | Necromante anima armadura do Guerreiro. Guerreiro luta com +200% Defesa mas perde HP/s.       |
 
 **Regras de Ativação:**
 
@@ -5665,7 +5683,7 @@ Se um **Necromancer Boss** aparecer, ele pode corromper heróis mortos antes de 
 
 ---
 
-## 4.6 Limitação Estratégica: Máximo de 5 Heróis
+## 4.7 Limitação Estratégica: Máximo de 5 Heróis
 
 **Regra de Ouro:** O jogador pode ter no máximo **5 heróis ativos** simultaneamente.
 
@@ -5854,43 +5872,44 @@ Quando dois heróis são "Rivais" ou "Inimigos":
 
 ---
 
-## 5.5 Mercado Ambulante (Hero Trading)
+## 5.2 Disputa de Glória (Quem finalizou?)
 
-Heróis não dependem apenas do jogador para equipamento. Eles **negociam entre si**.
+Embora o XP seja compartilhado em grupos, apenas quem desfere o **Golpe Final (Last Hit)** ganha o bônus de **Glória** e incrementa o contador de Kills.
 
-### Mecânica de Troca
+### Conflito Narrativo
 
-**Iniciador:** Herói com item duplicado ou inferior
-**Alvo:** Herói com item complementar
+Heróis orgulhosos (Power > 0.7) podem ficar ofendidos se um aliado "tomar a glória" de um inimigo que eles enfraqueceram.
 
-**Fluxo:**
-
-1. Iniciador propõe troca via log social
-2. Alvo avalia baseado em:
-   - **Affinity:** Amigos aceitam trades injustas
-   - **Resource (Ganância):** Ladinos exigem ouro extra
-   - **Mind (Intelecto):** Heróis inteligentes avaliam valor real
-3. Aceitação ou Contraproposta
-
-### Exemplo de Negociação
+**Exemplo de Log:**
 
 ```
-[15:30] 💼 TRADE [Lila ➜ Elara] Oferece: Adaga +5 | Quer: Arco +3
-[15:31] � MIND [Elara] [Mind: 0.8] Avalia: "Adaga vale menos que arco."
-         Contraproposta: Adaga+5 + 50 Ouro
-[15:32] 💰 LOOT [Lila] [Resource: 0.9] Recusa: "Muito caro!"
-[15:33] 🤝 TRADE [Elara] [Aff: +40] Aceita por amizade.
-[15:34] ✔️ TRADE [Lila] [+Arco+3] Troca concluída.
+[14:30] ⚔️ Kaelen deixou Ogro com 5% HP.
+[14:31] 🏹 Lila disparou flecha final! (Last Hit)
+[14:32] 💢 Kaelen: "Essa foi MINHA vitória, ladina!"
+[14:33] 📉 Affinity: Kaelen ↔ Lila (-5)
 ```
 
-### Trades Especiais: "Presentes"
+> **Nota:** Isso NÃO é roubo de recursos (o loot é gerado para quem matou, mas pode ser compartilhado se forem amigos). É puramente uma disputa de ego.
 
-Se Affinity > +60, heróis podem **doar** itens sem esperar retorno:
+---
+
+## 5.5 Saque de Heróis Caídos (Sem Roubo)
+
+Heróis nunca roubam itens de aliados vivos. Porém, se um herói morrer:
+
+1. **Drop:** Todos os itens inventariados caem no chão (Loot Bag).
+2. **Recuperação:** Qualquer herói próximo pode pegar a bolsa.
+3. **Decisão Ética:**
+   - **Ético (Ethics > 0.6):** Guarda os itens para devolver ao dono quando ele renascer.
+   - **Pragmático (Ethics < 0.4):** Usa os itens se forem melhores que os seus.
+   - **Ganancioso (Resource > 0.8):** Vende os itens no mercado para lucro próprio.
+
+**Exemplo:**
 
 ```
-[10:15] 🎁 Sir Kaelen doou Poção de Vida para Gandalf.
-        Razão: "Você salvou minha vida ontem."
-        Affinity: +65 → +70
+[10:15] 💀 Gandalf caiu em combate. Dropou: "Cajado das Cinzas".
+[10:16] ✋ Sir Kaelen recolheu o Cajado.
+[10:17] 💬 Kaelen: "Vou guardar isso para você, velho amigo."
 ```
 
 ---
@@ -6051,7 +6070,7 @@ Lila: Lvl 6 (Power: 0.9 - muito ambiciosa)
 [Sistema detecta inveja]:
 Lila começa a sabotar Kaelen:
 - Não cura ele em combate
-- Rouba seus kills
+- Compete por kills
 - Fala mal dele para outros heróis
 
 [Carta de Lila para Gandalf]:
@@ -6107,7 +6126,7 @@ vs
 Lila Rogue (Ética: 0.1, amoral)
 
 [Diálogo automático - Dia 10]:
-Kaelen: "Lila, roubar dos mortos é DESONROSO!"
+Kaelen: "Lila, saquear os mortos é DESONROSO!"
 Lila: "Honra não paga contas, paladino."
 
 [Resultado]:
@@ -6294,7 +6313,7 @@ O **Conselheiro Real** não é apenas um chatbot. Ele é:
 Jogador: /why is Lila angry?
 
 Conselheiro: "Majestade, Lila Rogue está irritada porque
-Sir Kaelen roubou o último golpe dela contra um Ogro há
+Sir Kaelen tomou o último golpe dela contra um Ogro há
 15 minutos. Ela perdeu 200 XP e um item raro. Baseado
 na personalidade dela (Ganância: Alta), sugiro oferecer
 compensação em ouro ou ela pode iniciar PvP."
@@ -6382,7 +6401,7 @@ O Conselheiro gera automaticamente:
 "Majestade, o dia foi produtivo. Sir Kaelen subiu
 de nível após derrotar 5 Ogros. Lila e Gandalf
 formaram um novo grupo. Observo tensão crescente
-entre Kaelen e Lila devido ao incidente de roubo
+entre Kaelen e Lila devido ao incidente de disputa
 de kill. Recomendo intervenção diplomática."
 ```
 
@@ -7166,7 +7185,7 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 | **Goblin**         | 50-100  | 10-15  | Covardes, fogem com HP < 30% |
 | **Lobo**           | 80-120  | 15-20  | Caçam em matilhas de 3-5     |
 | **Aranha Gigante** | 100-150 | 12-18  | Veneno leve, teias           |
-| **Bandido**        | 120-180 | 20-25  | Inteligente, rouba ouro      |
+| **Bandido**        | 120-180 | 20-25  | Inteligente, saqueia ouro    |
 
 #### Eventos Globais Únicos do Ciclo 1
 
@@ -7864,13 +7883,13 @@ Alvo: Guilda de Ladinos (vingança)
 🚩 REBELIÃO DETECTADA!
 
 Kaelen, Lila e Gandalf formaram uma facção rebelde!
-Eles roubaram 500 Ouro e 20 poções.
+Eles saquearam 500 Ouro e 20 poções.
 Localização: Fundaram "Vila dos Exilados" (X:15, Y:15)
 
 [Nova ameaça no mapa]
 Vila dos Exilados:
 - População: 3 heróis traidores
-- Comportamento: Atacam caravanas, roubam recursos
+- Comportamento: Atacam caravanas, saqueiam recursos
 - Objetivo: Destruir sua capital
 ```
 
@@ -7914,7 +7933,7 @@ Em _Heroes of Majesty_, **não existe** sistema de evolução de classe (ex: Gue
 
 O jogador pode substituir heróis veteranos por novatos de outras classes, mas deve pesar o **Trade-off**:
 
-- **Manter Veterano Problemático:** Um ladino nível 20 que rouba demais? Poderoso em combate, mas um risco social.
+- **Manter Veterano Problemático:** Um ladino nível 20 que causa conflitos? Poderoso em combate, mas um risco social.
 - **Recrutar Novato Ideal:** Um paladino nível 1. Comportamento perfeito, mas inútil em combate de alto nível até evoluir.
 - **Decisão:** Vale a pena "carregar" um novato para substituir uma maçã podre?
 
@@ -7960,7 +7979,7 @@ Ouro acumulado: 2,400
 Mortes: 1 (Gandalf, Dia 23, morto por Ogro)
 
 [EVENTO MEMORÁVEL]
-Dia 18: Lila roubou o kill de Kaelen.
+Dia 18: Lila tomou a glória de Kaelen (Kill Steal).
 Iniciou-se a rivalidade que duraria 80 dias.
 
 ───────────────────────────────────────────
@@ -8278,7 +8297,7 @@ Objetivos em conflito:
 **Em vez disso:**
 
 - Heróis podem **sabotar** construções do oponente
-- Roubar recursos de caravanas
+- Saquear recursos de caravanas
 - Contratar mercenários para atacar indiretamente
 
 ---
