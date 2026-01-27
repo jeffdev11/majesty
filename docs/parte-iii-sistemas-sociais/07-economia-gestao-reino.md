@@ -188,14 +188,14 @@ motivados. Mas atenção: Gandalf está murmurando sobre
 
 #### Tabela Completa de Custos
 
-| Ação                                   | Custo IP | Frequência Esperada |
-| -------------------------------------- | -------- | ------------------- |
-| **Comando Simples ao Conselheiro**     | -10 IP   | Alta (1-2/min)      |
-| **Análise Rápida (Consulta)**          | -15 IP   | Média (1/5min)      |
-| **Enviar Carta para Herói**            | -25 IP   | Média (1/10min)     |
-| **Decreto Real**                       | -30 IP   | Baixa (1/partida)   |
-| **Análise Profunda (Dossiê Completo)** | -40 IP   | Baixa (1/hora)      |
-| **Comando Estratégico Global**         | -50 IP   | Rara (emergências)  |
+| Ação                               | Custo IP | Frequência Esperada |
+| ---------------------------------- | -------- | ------------------- |
+| **Comando Simples ao Conselheiro** | -10 IP   | Alta (1-2/min)      |
+| **Análise Rápida (Consulta)**      | -15 IP   | Média (1/5min)      |
+| **Enviar Carta para Herói**        | -25 IP   | Média (1/10min)     |
+
+| **Análise Profunda (Dossiê Completo)** | -40 IP | Baixa (1/hora) |
+| **Comando Estratégico Global** | -50 IP | Rara (emergências) |
 
 | \*\*Telepor
 
@@ -246,7 +246,7 @@ Depois: +40 IP/min
 
 **Custo:** 3,000 Ouro  
 **Requer:** Todos anteriores  
-**Efeito:** +50 IP máximo (100 → 150 IP) + Decretos custam -10 IP
+**Efeito:** +50 IP máximo (100 → 150 IP) + Regeneração +50% em momentos de crise
 
 **Árvore de Upgrades:**
 

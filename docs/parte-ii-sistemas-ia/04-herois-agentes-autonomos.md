@@ -792,7 +792,44 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.5 Ciclo de Vida: Morte, Trabalho e Redenção
+## 4.5 Sistema de Loot e Economia
+
+### Loot Instanciado (Individual)
+
+O sistema de recompensas do Majesty utiliza uma filosofia de **Loot Privado Instanciado**.
+
+**Regras Fundamentais:**
+
+1.  **Drops Individuais:** Quando um monstro morre, o jogo calcula o loot **separadamente para cada herói elegível**. O item que o Guerreiro recebe (ex: Espada Longa) não existe para o Mago (que pode receber um Pergaminho ou nada).
+2.  **Independência:** O fato de um herói receber um item lendário **NÃO diminui** a chance de outro herói receber um item lendário. _Não existe competição por bolo._
+3.  **Elegibilidade (Participação):** Para receber loot, o herói precisa ter **participado ativamente** do combate:
+    - **Atacante:** Causou pelo menos 1 ponto de dano ao monstro.
+    - **Suporte:** Usou uma skill de buff ou cura em um aliado que estava atacando o monstro.
+    - _Observadores (AFK) não recebem nada._
+
+### Economia Pessoal do Herói
+
+#### Estado Inicial (Bootstrap)
+
+Para garantir que a economia flua desde o minuto 1, todos os heróis chegam ao reino preparados:
+
+- **Ouro Inicial:** 150g (suficiente para poções e manutenção básica).
+- **Equipamento:** Set Básico Completo (Arma T1, Armadura T1).
+- **Inventário:** 2 Poções Menores de Vida.
+
+Isso permite que eles iniciem caçadas imediatamente sem depender de investimento inicial do Rei.
+
+#### Trabalho Voluntário (Renda Segura)
+
+Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de monstros, equipamento quebrado), ele pode optar por **Trabalhar na Cidade**.
+
+- **Mecânica:** O herói se dirige a um edifício (Taverna, Ferreiro, Fazenda) e realiza trabalhos manuais.
+- **Rendimento:** Baixo (ex: 5g a 10g por hora), mas seguro.
+- **Utilidade:** Garante que nenhum herói fique "soft-locked" por falta de dinheiro para comprar equipamentos básicos.
+
+---
+
+## 4.6 Ciclo de Vida: Morte, Trabalho e Redenção
 
 ### A Morte Temporária
 

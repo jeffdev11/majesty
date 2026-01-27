@@ -19,7 +19,7 @@
 
 1. **3 Heróis Vivos** dispostos a se mudar
 2. **1,000 Ouro** para construção
-3. **Localização válida** no mapa (>20 hexágonos da capital)
+3. **Localização válida** no mapa (>20 células da capital)
 
 ### Processo
 
@@ -275,4 +275,3 @@ mas evita guerra civil."
 - Atacam periodicamente (mini-boss)
 
 ---
-

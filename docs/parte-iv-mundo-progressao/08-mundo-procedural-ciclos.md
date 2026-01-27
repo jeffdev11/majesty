@@ -341,7 +341,7 @@ Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória o
 | **Dificuldade**   | ★☆☆☆      | ★★☆☆     | ★★★☆      | ★★★★                         |
 | **Moral Médio**   | 80%       | 60%      | 40%       | 20%                          |
 | **Taxa de Morte** | 10%       | 30%      | 50%       | 80%                          |
-| **Ouro/Dia**      | +500g     | +300g    | +100g     | -200g (gasta mais que ganha) |
+| **Ouro/Dia**      | +500g     | +300g    | +100g     | Variável (economia circular) |
 | **Eventos/Dia**   | 0.5       | 1.0      | 1.5       | 3.0                          |
 
 ---
@@ -530,7 +530,7 @@ DIFICULDADE: [||||......] (Média-Alta)
 
 ### Geração de Mundo
 
-Cada nova partida gera um **mapa hexagonal aleatório** usando **Perlin Noise**.
+Cada nova partida gera um **mapa tático (grid) aleatório** usando **Perlin Noise**.
 
 #### Biomas Disponíveis
 

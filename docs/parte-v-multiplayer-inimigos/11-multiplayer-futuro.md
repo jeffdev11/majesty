@@ -29,7 +29,7 @@ Dois jogadores **não jogam simultaneamente**, mas seus reinos **coexistem no me
 Jogador A cria partida.
 Jogador B entra como "Reino Vizinho".
 
-- Ambos têm vilas separadas (distância: 50 hexágonos)
+- Ambos têm vilas separadas (distância: 50 células)
 - Névoa de Guerra compartilhada (se A explora, B vê)
 - Podem enviar heróis em missões conjuntas
 - Heróis de A e B podem formar grupos mistos
@@ -55,7 +55,7 @@ Dois jogadores competem **indiretamente** pelos mesmos recursos.
 #### Mecânica
 
 ```
-Mapa compartilhado com 2 vilas (distância: 100 hexágonos)
+Mapa compartilhado com 2 vilas (distância: 100 células)
 
 Objetivos em conflito:
 - Mesmas minas de ouro (só 1 pode controlar)
@@ -124,4 +124,3 @@ Ao final: Comparação lado a lado
 ```
 
 ---
-

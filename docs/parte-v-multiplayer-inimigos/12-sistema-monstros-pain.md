@@ -175,7 +175,7 @@ Sir Kaelen derrotou Ogro Matador de Gandalf!
 #### 4. Dragões Anciões
 
 - **Comportamento:** Territoriais, defendem covil
-- **Alvo:** Qualquer um que entre em raio de 30 hexágonos
+- **Alvo:** Qualquer um que entre em raio de 30 células
 - **Especial:** Não perseguem (ficam no ninho)
 
 ---
@@ -218,7 +218,7 @@ Conselheiro: "Detectei movimento em massa.
 Invasão de Goblins em 5 minutos. Prepare defesas!"
 
 [FASE 1: Aproximação]
-30 Goblins spawnam a 50 hexágonos da vila.
+30 Goblins spawnam a 50 células da vila.
 Marcha lenta em direção à capital.
 
 [FASE 2: Primeiro Contato]
@@ -286,12 +286,12 @@ const bossTemplate = {
 
 ### Tier de Monstros por Ciclo
 
-| Ciclo                | Tier | Monstros Comuns                 | Boss Típico  |
-| -------------------- | ---- | ------------------------------- | ------------ |
-| **1 (Dias 1-2)**     | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe   |
-| **2 (Dias 3-4)**     | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem |
-| **3 (Dias 5-6)**     | T3   | Dragões, Demônios, Liches       | Rei Vilão    |
-| **4 (Dias 7-8+)**    | T4   | *Apocalipse* (Hordas sem fim)   | **Global Boss**|
+| Ciclo             | Tier | Monstros Comuns                 | Boss Típico     |
+| ----------------- | ---- | ------------------------------- | --------------- |
+| **1 (Dias 1-2)**  | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe      |
+| **2 (Dias 3-4)**  | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem    |
+| **3 (Dias 5-6)**  | T3   | Dragões, Demônios, Liches       | Rei Vilão       |
+| **4 (Dias 7-8+)** | T4   | _Apocalipse_ (Hordas sem fim)   | **Global Boss** |
 
 ### Modificadores de Stats
 
@@ -370,4 +370,3 @@ Risk: 3.3x
 ```
 
 ---
-
