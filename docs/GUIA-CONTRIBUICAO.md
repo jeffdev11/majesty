@@ -189,26 +189,26 @@ cat docs/parte-vii-narrativa-generativa/16-21-arquitetura-narrativa-generativa.m
 
 ## 📊 Mapa de Conteúdo por Arquivo
 
-| Arquivo                                     | Conteúdo Principal  | Quando Editar        |
-| ------------------------------------------- | ------------------- | -------------------- |
-| `00-INDICE.md`                              | Índice completo     | Adicionar nova seção |
-| `01-visao-geral-filosofia.md`               | Filosofia do jogo   | Mudar conceitos core |
-| `02-interface-ux.md`                        | F1-F6 Workspaces    | Alterar UI/UX        |
-| `03-arquitetura-ia-hibrida.md`              | Sistemas de IA      | Mudar lógica de IA   |
-| `04-herois-agentes-autonomos.md`            | P.E.C.M.A., Classes | Editar heróis        |
-| `05-dinamica-social.md`                     | Kill Stealing, PvP  | Sistema social       |
-| `06-conselheiro-real-ia.md`                 | Chat NLP            | Conselheiro          |
-| `07-economia-gestao-reino.md`               | Ouro, IP, Decretos  | Economia             |
-| `08-mundo-procedural-ciclos.md`             | 4 Ciclos, Eventos   | Mundo/Progressão     |
-| `09-mecanicas-expansao.md`                  | Postos Avançados    | Expansão             |
-| `10-narrativa-emergente-legado.md`          | Crônicas, Títulos   | Narrativa            |
-| `11-multiplayer-futuro.md`                  | Visão multiplayer   | Futuro               |
-| `12-sistema-monstros-pain.md`               | P.A.I.N., Bosses    | Inimigos             |
-| `13-sistema-combate-flavor-texts.md`        | Combate, Logs       | Sistema de luta      |
-| `14-estetica-juice-visual-sonoro.md`        | Audio, Visual       | Apresentação         |
-| `15-analise-critica-justificativas.md`      | Design choices      | Justificativas       |
-| `16-21-arquitetura-narrativa-generativa.md` | WebGPU, Llama 3.2   | IA Generativa        |
-| `99-CONCLUSAO.md`                           | Resumo executivo    | Info do projeto      |
+| Arquivo                                     | Conteúdo Principal     | Quando Editar        |
+| ------------------------------------------- | ---------------------- | -------------------- |
+| `00-INDICE.md`                              | Índice completo        | Adicionar nova seção |
+| `01-visao-geral-filosofia.md`               | Filosofia do jogo      | Mudar conceitos core |
+| `02-interface-ux.md`                        | F1-F6 Workspaces       | Alterar UI/UX        |
+| `03-arquitetura-ia-hibrida.md`              | Sistemas de IA         | Mudar lógica de IA   |
+| `04-herois-agentes-autonomos.md`            | P.E.C.M.A., Classes    | Editar heróis        |
+| `05-dinamica-social.md`                     | Disputa de Glória, PvP | Sistema social       |
+| `06-conselheiro-real-ia.md`                 | Chat NLP               | Conselheiro          |
+| `07-economia-gestao-reino.md`               | Ouro, IP, Decretos     | Economia             |
+| `08-mundo-procedural-ciclos.md`             | 4 Ciclos, Eventos      | Mundo/Progressão     |
+| `09-mecanicas-expansao.md`                  | Postos Avançados       | Expansão             |
+| `10-narrativa-emergente-legado.md`          | Crônicas, Títulos      | Narrativa            |
+| `11-multiplayer-futuro.md`                  | Visão multiplayer      | Futuro               |
+| `12-sistema-monstros-pain.md`               | P.A.I.N., Bosses       | Inimigos             |
+| `13-sistema-combate-flavor-texts.md`        | Combate, Logs          | Sistema de luta      |
+| `14-estetica-juice-visual-sonoro.md`        | Audio, Visual          | Apresentação         |
+| `15-analise-critica-justificativas.md`      | Design choices         | Justificativas       |
+| `16-21-arquitetura-narrativa-generativa.md` | WebGPU, Llama 3.2      | IA Generativa        |
+| `99-CONCLUSAO.md`                           | Resumo executivo       | Info do projeto      |
 
 ---
 

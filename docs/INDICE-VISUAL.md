@@ -42,7 +42,7 @@ _Dinâmica social e gestão do reino_
 
 | Arquivo                                                                                 | Título                 | Linhas | Tópicos                                  |
 | --------------------------------------------------------------------------------------- | ---------------------- | ------ | ---------------------------------------- |
-| [05-dinamica-social.md](./parte-iii-sistemas-sociais/05-dinamica-social.md)             | Dinâmica Social        | 591    | Kill Stealing, PvP, Amizades, Banter     |
+| [05-dinamica-social.md](./parte-iii-sistemas-sociais/05-dinamica-social.md)             | Dinâmica Social        | 591    | Disputa de Glória, PvP, Amizades, Banter |
 | [06-conselheiro-real-ia.md](./parte-iii-sistemas-sociais/06-conselheiro-real-ia.md)     | Conselheiro Real de IA | 302    | Chat NLP, Personalidades, Cronista, IP   |
 | [07-economia-gestao-reino.md](./parte-iii-sistemas-sociais/07-economia-gestao-reino.md) | Economia e Gestão      | 556    | Tesouro, Habilidades, Estoques, Decretos |
 

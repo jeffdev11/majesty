@@ -3154,7 +3154,7 @@ O **F6 THE CHRONICLES** é onde a **história da partida é contada em tempo rea
 | P4: ESTATÍSTICAS     |      P5: EVENTOS-CHAVE DO CAPÍTULO               | P6: EXPORTAÇÃO   |
 |                      |                                                  |                  |
 | Período: Dias 1-2    | 🏆 MAIS IMPORTANTE:                              | [📄] Exportar PDF|
-| Tempo real: 5min     | > Primeiro Kill Steal (Lila vs Kaelen)           | [🔗] Compartilhar|
+| Tempo real: 5min     | > Primeira Disputa de Glória (Lila vs Kaelen)       | [🔗] Compartilhar|
 |                      |   Affinity: +40 → +25                            | [✏️] Editar Texto|
 | Kills: 15            |                                                  | [🎨] Regerar Img |
 | Ouro ganho: +450g    | ⚔️ COMBATE ÉPICO:                                |                  |
@@ -3251,7 +3251,7 @@ Apenas o parágrafo narrativo, sem títulos ou metadados.
 {
   "eventList": [
     "Kaelen matou 5 Goblins (XP: +500)",
-    "Lila tomou último golpe de Kaelen (Kill Steal)",
+    "Lila tomou último golpe de Kaelen",
     "Affinity Kaelen ↔ Lila: +40 → +25",
     "Kaelen enviou carta hostil para Lila",
     "Gandalf usou Bola de Fogo (8 kills)",
@@ -3343,7 +3343,7 @@ Os capítulos são agrupados em **Arcos Narrativos** baseados nos ciclos:
 
 - 10 capítulos
 - Tom: Conflitos aumentam, guerras intensas
-- Eventos típicos: Invasões, Kill Steals, primeira morte de herói
+- Eventos típicos: Invasões, Disputas de Glória, primeira morte de herói
 
 #### Arco 3: "O Inverno do Desespero" (Dias 5-6)
 
@@ -3404,7 +3404,7 @@ Estatísticas do Capítulo:
 - Heróis recrutados: 3
 - Kills: 15 Goblins
 - Ouro acumulado: 450g
-- Eventos épicos: Primeiro Kill Steal
+- Eventos épicos: Primeira Disputa de Glória
 
 ---
 
@@ -3874,7 +3874,7 @@ Exemplos:
 [15:13] 🧠 MIND [Lila] [😠 -15 Aff] Relacionamento piorou.
 ```
 
-#### KILL STEAL (Exemplo Clássico)
+#### DISPUTA DE GLÓRIA (Exemplo Clássico)
 
 ```
 [15:20] ⚔️ ATK [Kaelen ⚔️ Boss] [Iniciou] Kaelen causou 90% dano.
@@ -5970,7 +5970,7 @@ Elara    +25    +10    +55      -
 
 ## 5.8 Outros Gatilhos de Conflito Social
 
-**IMPORTANTE:** Kill Stealing NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
+**IMPORTANTE:** A Disputa de Glória NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
 
 ### 1. Covardia Causando Morte
 
@@ -7979,7 +7979,7 @@ Ouro acumulado: 2,400
 Mortes: 1 (Gandalf, Dia 23, morto por Ogro)
 
 [EVENTO MEMORÁVEL]
-Dia 18: Lila tomou a glória de Kaelen (Kill Steal).
+Dia 18: Lila tomou a glória de Kaelen.
 Iniciou-se a rivalidade que duraria 80 dias.
 
 ───────────────────────────────────────────

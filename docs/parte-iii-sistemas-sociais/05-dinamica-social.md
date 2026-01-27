@@ -267,7 +267,7 @@ Elara    +25    +10    +55      -
 
 ## 5.8 Outros Gatilhos de Conflito Social
 
-**IMPORTANTE:** Kill Stealing NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
+**IMPORTANTE:** A Disputa de Glória NÃO é o único tipo de conflito! Para evitar redundância narrativa, o sistema possui **6 categorias principais** de conflitos emergentes.
 
 ### 1. Covardia Causando Morte
 
