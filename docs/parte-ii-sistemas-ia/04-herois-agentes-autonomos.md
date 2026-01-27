@@ -155,7 +155,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 **Interação com cartas:**
 
 - Proatividade baixa: Obedece cartas instantaneamente
-- Proatividade alta: Pode ignorar cartas se encontrar "oportunidade melhor"
+- Proatividade alta: Pode ignorar cartas se encontrar "oportunidade melhor". O IP é gasto (sem reembolso), mas o jogo notifica: _"O corvo retornou sem resposta. Kaelen ignorou sua ordem."_
 
 ---
 
@@ -731,7 +731,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Viés P.E.C.M.A.:** Ethics ↑↑↑, Cooperation ↑↑, Proactivity ↑
 - **Comportamento:** Extremamente honrado, protege aliados, autossacrifica-se
 - **Mecânica Única:** **Aura Sagrada** - Buffa aliados em 12m (+15% Defense)
-- **Recurso Especial:** **Devoção** (acumula ao proteger aliados, gasta em heals)
+- **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
 
 #### 💀 Necromante (Necromancer)
 
@@ -740,7 +740,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Viés P.E.C.M.A.:** Mind ↑↑, Ethics ↓↓, Cooperation ↓
 - **Comportamento:** Solitário, pragmático, usa cadáveres como recursos
 - **Mecânica Única:** **Reanimar Mortos** - Transforma cadáveres em servos
-- **Recurso Especial:** **Essência Sombria** (ganha ao matar, gasta em invocações)
+- **Recurso Especial:** **Mana** (regenera ao matar inimigos com habilidades passivas)
 
 #### 🎵 Bardo (Bard)
 
@@ -749,7 +749,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Viés P.E.C.M.A.:** Cooperation ↑↑↑, Affect ↑↑, Ethics ↑
 - **Comportamento:** Altamente social, forma grupos grandes, sempre otimista
 - **Mecânica Única:** **Canções** - Buffs em área que persistem enquanto canta
-- **Recurso Especial:** **Inspiração** (ganha ao assistir kills de aliados)
+- **Recurso Especial:** **Mana** (regenera ao assistir kills de aliados com habilidades passivas)
 
 #### 👊 Monge (Monk)
 

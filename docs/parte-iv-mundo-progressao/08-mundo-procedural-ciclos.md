@@ -270,8 +270,13 @@ Dia 6:      Primeira Lua de Sangue, perdas massivas. Sobreviventes se preparam p
 
 #### Duração Indefinida
 
-O Ciclo 4 inicia no Dia 7 e **não tem fim pré-determinado**. O jogo entra em modo "Morte Súbita".
-Os eventos aleatórios **PARAM**. O Boss Global assume o controle da narrativa. O jogador tem o tempo que precisar (ou conseguir sobreviver) para derrotar o Rei Vilão.
+O Ciclo 4 inicia no Dia 7 e **não tem fim pré-determinado**.
+Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
+**Após o Dia 8 (após os 30 minutos regulamentares do ciclo):**
+
+1.  Os eventos globais aleatórios **PARAM**.
+2.  A mecânica de **Ondas do Rei Vilão** assume o controle total.
+3.  O jogo continua indefinidamente até a vitória ou derrota.
 
 #### Características
 
@@ -474,13 +479,23 @@ Exército: 50 Esqueletos, 10 Necromantes
 
 ### Mecânica do Boss Final
 
-**Objetivo:** Derrotar o Rei Vilão antes do **Dia 8** (fim da partida).
+**Objetivo:** Derrotar o Rei Vilão (não há limite de dias, mas a dificuldade aumenta infinitamente).
 
-**Desafio:**
+**Mecânica de Pressão Crescente (Ondas):**
 
-- Boss está **dentro do castelo** (precisa atravessar hordas)
-- Cada herói pode atacar **uma vez** antes de precisar recuar (HP baixo)
-- Trabalho em equipe é **obrigatório**
+O Rei Vilão envia **ondas periódicas** de monstros diretamente contra a Casa Central.
+
+- **Frequência:** A cada 12 horas (tempo do jogo).
+- **Escalonamento:** Cada nova onda é **20% mais forte** que a anterior.
+
+**Desafio Estratégico:**
+
+O jogador deve dividir suas forças:
+
+1.  **Defesa:** Manter heróis e guardas na vila para proteger a Casa Central das ondas (Game Over se destruída).
+2.  **Ataque:** Enviar um grupo de elite para invadir o Castelo e matar o Boss.
+
+Quanto mais tempo o jogador demorar, **mais insustentável** a defesa se torna.
 
 **Vitória:**
 

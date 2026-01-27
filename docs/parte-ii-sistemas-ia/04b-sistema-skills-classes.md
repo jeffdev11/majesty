@@ -358,7 +358,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 # Skills das Novas Classes
 
-## 🛡️ PALE DINO (Paladin) - 30 Skills
+## 🛡️ PALADINO (Paladin) - 30 Skills
 
 ### ⚔️ Skills Ativas (15)
 
@@ -385,7 +385,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | #   | Nome                        | Efeito                                           | Requer                 |
 | --- | --------------------------- | ------------------------------------------------ | ---------------------- |
 | 1   | **Fé Inabalável**           | +15% HP máximo, +10% Defense                     | Nível 1                |
-| 2   | **Ganho de Devoção**        | Ganha 10 Devoção ao ser atingido                 | Nível 1                |
+| 2   | **Ganho de Devoção**        | Ganha 10 Mana ao ser atingido                    | Nível 1                |
 | 3   | **Mártir**                  | +20% Defense quando HP < 30%                     | Fé Inabalável          |
 | 4   | **Protetor Nato**           | Aliados próximos recebem -15% dano               | Aura de Proteção       |
 | 5   | **Regeneração Sagrada**     | Cura 2% HP máximo a cada 10s                     | Cura Divina            |
@@ -395,7 +395,7 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 9   | **Ressurreição Automática** | Ao morrer, revive com 30% HP (1x/partida)        | Ressurreição           |
 | 10  | **Escudo de Aliados**       | Pode bloquear ataques destinados a aliados (5m)  | Protetor Nato          |
 | 11  | **Aura Expandida**          | Alcance de auras +50% (18m em vez de 12m)        | Protetor Nato          |
-| 12  | **Devotado**                | Curas gastam -20% Devoção                        | Regeneração Sagrada    |
+| 12  | **Devotado**                | Curas custam -20% Mana                           | Regeneração Sagrada    |
 | 13  | **Bastião**                 | +50% Defense quando não se move por 3s           | Fé Inabalável          |
 | 14  | **Purificação**             | Remove todos debuffs de si mesmo a cada 30s      | Justiça Inabalável     |
 | 15  | **Santo Guerreiro**         | +40% stats, imune a críticos, aliados +25% moral | Avatar da Luz + Lvl 11 |
@@ -406,29 +406,29 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🌑 Skills Ativas (15)
 
-| #   | Nome                     | Custo        | Cooldown | Descrição                                                      | Requer                   |
-| --- | ------------------------ | ------------ | -------- | -------------------------------------------------------------- | ------------------------ |
-| 1   | **Bola Sombria**         | 20 Mana      | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                 | Nível 1                  |
-| 2   | **Reanimar Cadáver**     | 30 Essência  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
-| 3   | **Drenar Vida**          | 25 Mana      | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
-| 4   | **Invocar Zumbi**        | 50 Essência  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
-| 5   | **Maldição de Fraqueza** | 30 Mana      | 20s      | Alvo perde -40% Attack por 15s                                 | Nível 3                  |
-| 6   | **Explosão Cadavérica**  | 40 Mana      | 25s      | Detona cadáver, 150 dano em 8m                                 | Reanimar Cadáver         |
-| 7   | **Escudo Ósseo**         | 35 Mana      | 30s      | Absorve 200 dano, dura até quebrar                             | Nível 4                  |
-| 8   | **Peste**                | 45 Mana      | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos        | Drenar Vida              |
-| 9   | **Invocar Espectro**     | 70 Essência  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)               | Invocar Zumbi            |
-| 10  | **Toque da Morte**       | 50 Mana      | 35s      | Instakill inimigo não-elite com HP < 20%                       | Drenar Vida              |
-| 11  | **Exército dos Mortos**  | 100 Essência | 120s     | Invoca 5 esqueletos simultaneamente (duram 45s)                | Invocar Espectro         |
-| 12  | **Pacto Sombrio**        | 60 Mana      | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s               | Nível 7                  |
-| 13  | **Necrose**              | 55 Mana      | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável | Peste                    |
-| 14  | **Lich Form**            | 80 Mana      | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s     | Pacto Sombrio            |
-| 15  | **Apocalipse Sombrio**   | 200 Essência | 180s     | Reanima todos cadáveres (Max 5) como servos permanentes        | Exército Mortos + Lvl 12 |
+| #   | Nome                     | Custo    | Cooldown | Descrição                                                      | Requer                   |
+| --- | ------------------------ | -------- | -------- | -------------------------------------------------------------- | ------------------------ |
+| 1   | **Bola Sombria**         | 20 Mana  | 7s       | Projétil negro, 75 dano necrótico, rouba 20 HP                 | Nível 1                  |
+| 2   | **Reanimar Cadáver**     | 30 Mana  | 10s      | Transforma cadáver em Esqueleto (dura 60s)                     | Nível 1                  |
+| 3   | **Drenar Vida**          | 25 Mana  | 12s      | Canaliza por 4s, drena 15 HP/s do alvo                         | Bola Sombria             |
+| 4   | **Invocar Zumbi**        | 50 Mana  | 30s      | Invoca Zumbi resistente (dura 90s)                             | Reanimar Cadáver         |
+| 5   | **Maldição de Fraqueza** | 30 Mana  | 20s      | Alvo perde -40% Attack por 15s                                 | Nível 3                  |
+| 6   | **Explosão Cadavérica**  | 40 Mana  | 25s      | Detona cadáver, 150 dano em 8m                                 | Reanimar Cadáver         |
+| 7   | **Escudo Ósseo**         | 35 Mana  | 30s      | Absorve 200 dano, dura até quebrar                             | Nível 4                  |
+| 8   | **Peste**                | 45 Mana  | 40s      | Zona 10m, 5 dano/s necrótico, se espalha entre inimigos        | Drenar Vida              |
+| 9   | **Invocar Espectro**     | 70 Mana  | 60s      | Invoca fantasma que atravessa paredes (dura 60s)               | Invocar Zumbi            |
+| 10  | **Toque da Morte**       | 50 Mana  | 35s      | Instakill inimigo não-elite com HP < 20%                       | Drenar Vida              |
+| 11  | **Exército dos Mortos**  | 100 Mana | 120s     | Invoca 3 esqueletos simultaneamente (duram 45s)                | Invocar Espectro         |
+| 12  | **Pacto Sombrio**        | 60 Mana  | 50s      | Sacrifica 30% HP, ganha +80% dano mágico por 20s               | Nível 7                  |
+| 13  | **Necrose**              | 55 Mana  | 45s      | DoT massivo, 50 dano/s por 10s, mata = vira cadáver utilizável | Peste                    |
+| 14  | **Lich Form**            | 80 Mana  | 90s      | Transforma em Lich, imune a físico, +100% dano mágico, 25s     | Pacto Sombrio            |
+| 15  | **Apocalipse Sombrio**   | 200 Mana | 180s     | Reanima todos cadáveres (Max 3) como servos permanentes        | Exército Mortos + Lvl 12 |
 
 ### 💀 Skills Passivas (15)
 
 | #   | Nome                       | Efeito                                                | Requer                      |
 | --- | -------------------------- | ----------------------------------------------------- | --------------------------- |
-| 1   | **Colheita Sombria**       | Ganha 25 Essência Sombria ao matar inimigo            | Nível 1                     |
+| 1   | **Colheita Sombria**       | Ganha 25 Mana ao matar inimigo                        | Nível 1                     |
 | 2   | **Mana das Sombras**       | +25% Mana máximo                                      | Nível 1                     |
 | 3   | **Servos Aprimorados**     | Invocações têm +50% HP e Attack                       | Reanimar Cadáver            |
 | 4   | **Maestria Necrótica**     | +20% dano necrótico                                   | Bola Sombria                |
@@ -436,13 +436,13 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 | 6   | **Resistência Morta-Viva** | +30% resistência a necrótico e veneno                 | Nível 3                     |
 | 7   | **Explosões em Cadeia**    | Explosão Cadavérica pode detonar outros cadáveres     | Explosão Cadavérica         |
 | 8   | **Longevidade de Servos**  | Invocações duram +50% tempo                           | Servos Aprimorados          |
-| 9   | **Essência Infinita**      | Regenera 5 Essência/s                                 | Colheita Sombria            |
+| 9   | **Essência Infinita**      | Regenera 5 Mana/s                                     | Colheita Sombria            |
 | 10  | **Aura Necrótica**         | Inimigos próximos (8m) perdem 2% HP máximo/s          | Maestria Necrótica          |
 | 11  | **Pacto Eterno**           | Ao usar Pacto Sombrio, não perde HP mas servos morrem | Pacto Sombrio               |
-| 12  | **Comandante dos Mortos**  | Pode ter até 8 servos simultâneos (padrão 3)          | Exército dos Mortos         |
+| 12  | **Comandante dos Mortos**  | Seus servos ganham +30% HP e Attack (Max Servos: 3)   | Exército dos Mortos         |
 | 13  | **Imortal**                | Ao morrer, vira Lich por 20s, pode continuar lutando  | Lich Form                   |
 | 14  | **Sinergia Sombria**       | Cada servo vivo aumenta dano mágico em +10%           | Comandante dos Mortos       |
-| 15  | **Senhor das Trevas**      | +100% Essência, Limite de Servos aument p/ 5          | Apocalipse Sombrio + Lvl 11 |
+| 15  | **Senhor das Trevas**      | +100% Mana, Servos reanimam 1x após morrerem          | Apocalipse Sombrio + Lvl 11 |
 
 ---
 
@@ -450,43 +450,43 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🎶 Skills Ativas (15)
 
-| #   | Nome                      | Custo          | Cooldown   | Descrição                                            | Requer                 |
-| --- | ------------------------- | -------------- | ---------- | ---------------------------------------------------- | ---------------------- |
-| 1   | **Melodia de Ataque**     | 15 Inspiração  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1                |
-| 2   | **Acorde Dissonante**     | 20 Mana        | 8s         | Nota musical, 60 dano + confunde por 1 turno         | Nível 1                |
-| 3   | **Canção de Cura**        | 25 Inspiração  | Sustentada | Canta, aliados 15m curam HP a cada turno             | Melodia de Ataque      |
-| 4   | **Grito de Guerra**       | 30 Inspiração  | 30s        | Todos aliados ganham +30% Speed por 3 turnos         | Nível 2                |
-| 5   | **Faca Lançada**          | 20 Mana        | 5s         | Arremessa faca, 50 dano, 3 cargas                    | Acorde Dissonante      |
-| 6   | **Hino de Resistência**   | 35 Inspiração  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Canção de Cura         |
-| 7   | **Solo Devastador**       | 40 Mana        | 35s        | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Acorde Dissonante      |
-| 8   | **Inspirar Aliados**      | 40 Inspiração  | 40s        | Aliados ganham Turno Extra Imediato (1x combate)     | Grito de Guerra        |
-| 9   | **Balada da Regeneração** | 50 Inspiração  | Sustentada | Canta, aliados 15m regeneram HP a cada turno         | Hino de Resistência    |
-| 10  | **Canto de Sirene**       | 45 Mana        | 45s        | Encanta inimigos 12m (3 alvos), perdem próximo turno | Solo Devastador        |
-| 11  | **Sinfonia de Grupo**     | 60 Inspiração  | 60s        | Todos aliados ganham +40% stats (3 turnos)           | Balada da Regeneração  |
-| 12  | **Contra-Melodia**        | 50 Mana        | 50s        | Cancela buffs inimigos em 20m                        | Canto de Sirene        |
-| 13  | **Épico Heróico**         | 70 Inspiração  | 90s        | Aliado ignora dano de 2 ataques recebidos            | Sinfonia de Grupo      |
-| 14  | **Onda Sônica**           | 80 Mana        | 55s        | Cone 25m, 200 dano + knock-back 10m                  | Solo Devastador        |
-| 15  | **Requiem**               | 150 Inspiração | 180s       | Inimigos -50% stats, Aliados +100% (3 turnos)        | Épico Heróico + Lvl 12 |
+| #   | Nome                      | Custo    | Cooldown   | Descrição                                            | Requer                 |
+| --- | ------------------------- | -------- | ---------- | ---------------------------------------------------- | ---------------------- |
+| 1   | **Melodia de Ataque**     | 15 Mana  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1                |
+| 2   | **Acorde Dissonante**     | 20 Mana  | 8s         | Nota musical, 60 dano + confunde por 1 turno         | Nível 1                |
+| 3   | **Canção de Cura**        | 25 Mana  | Sustentada | Canta, aliados 15m curam HP a cada turno             | Melodia de Ataque      |
+| 4   | **Grito de Guerra**       | 30 Mana  | 30s        | Todos aliados ganham +30% Speed por 3 turnos         | Nível 2                |
+| 5   | **Faca Lançada**          | 20 Mana  | 5s         | Arremessa faca, 50 dano, 3 cargas                    | Acorde Dissonante      |
+| 6   | **Hino de Resistência**   | 35 Mana  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Canção de Cura         |
+| 7   | **Solo Devastador**       | 40 Mana  | 35s        | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Acorde Dissonante      |
+| 8   | **Inspirar Aliados**      | 40 Mana  | 40s        | Aliados ganham Turno Extra Imediato (1x combate)     | Grito de Guerra        |
+| 9   | **Balada da Regeneração** | 50 Mana  | Sustentada | Canta, aliados 15m regeneram HP a cada turno         | Hino de Resistência    |
+| 10  | **Canto de Sirene**       | 45 Mana  | 45s        | Encanta inimigos 12m (3 alvos), perdem próximo turno | Solo Devastador        |
+| 11  | **Sinfonia de Grupo**     | 60 Mana  | 60s        | Todos aliados ganham +40% stats (3 turnos)           | Balada da Regeneração  |
+| 12  | **Contra-Melodia**        | 50 Mana  | 50s        | Cancela buffs inimigos em 20m                        | Canto de Sirene        |
+| 13  | **Épico Heróico**         | 70 Mana  | 90s        | Aliado ignora dano de 2 ataques recebidos            | Sinfonia de Grupo      |
+| 14  | **Onda Sônica**           | 80 Mana  | 55s        | Cone 25m, 200 dano + knock-back 10m                  | Solo Devastador        |
+| 15  | **Requiem**               | 150 Mana | 180s       | Inimigos -50% stats, Aliados +100% (3 turnos)        | Épico Heróico + Lvl 12 |
 
 ### 🎵 Skills Passivas (15)
 
 | #   | Nome                      | Efeito                                                      | Requer              |
 | --- | ------------------------- | ----------------------------------------------------------- | ------------------- |
-| 1   | **Ganho de Inspiração**   | Ganha 20 Inspiração ao ver aliado matar inimigo             | Nível 1             |
+| 1   | **Ganho de Inspiração**   | Ganha 20 Mana ao ver aliado matar inimigo                   | Nível 1             |
 | 2   | **Carismático**           | +30% Affinity natural com todos heróis                      | Nível 1             |
 | 3   | **Alcance Musical**       | Canções afetam +5m de raio (20m em vez de 15m)              | Melodia de Ataque   |
 | 4   | **Multitarefa**           | Pode manter canção e atacar (com penalidade de dano)        | Canção de Cura      |
 | 5   | **Maestria Sonic a**      | +15% dano de habilidades sonoras                            | Acorde Dissonante   |
-| 6   | **Performer Nato**        | Canções custam -20% Inspiração                              | Ganho de Inspiração |
+| 6   | **Performer Nato**        | Canções custam -20% Mana                                    | Ganho de Inspiração |
 | 7   | **Velocidade de Canto**   | Canções começam a fazer efeito 50% mais rápido              | Multitarefa         |
-| 8   | **Inspiração Automática** | Regenera 10 Inspiraç ão/s quando em grupo                   | Ganho de Inspiração |
+| 8   | **Inspiração Automática** | Regenera 10 Mana/s quando em grupo                          | Ganho de Inspiração |
 | 9   | **Ressonância**           | Canções persistem por 5s após parar de cantar               | Alcance Musical     |
 | 10  | **Moral Elevado**         | Aliados próximos nunca fogem                                | Carismático         |
 | 11  | **Virtuoso**              | Pode ter 2 canções ativas simultaneamente                   | Ressonância         |
 | 12  | **Aura de Carisma**       | Grupo forma 3x mais rápido                                  | Moral Elevado       |
 | 13  | **Coro**                  | Cada aliado próximo aumenta efeito de canções em +15%       | Virtuoso            |
 | 14  | **Imortalidade Musical**  | Se morrer durante canção, canção continua por 30s           | Nível 9             |
-| 15  | **Lenda Viva**            | Presença proporciona +50% XP para aliados, +100% Inspiração | Requiem + Lvl 11    |
+| 15  | **Lenda Viva**            | Presença proporciona +50% XP para aliados, +100% Mana Regen | Requiem + Lvl 11    |
 
 ---
 

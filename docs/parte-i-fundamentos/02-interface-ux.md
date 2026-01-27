@@ -81,6 +81,17 @@ O problema de heróis em múltiplas regiões gerando uma "sopa de logs" é resol
 4.  **4-5 Regiões:** Grid 2x2 ou 2x3. Logs menores, mas ainda legíveis. Altura 30%.
 5.  **Prioridade:** Se espaço for crítico, P1 e P2 reduzem (mínimo 20% cada). Logs nunca ficam menores que 25% de largura.
 
+### Renderização de Log: UX e Ritmo
+
+Para garantir legibilidade mesmo em layouts divididos, o sistema segue regras estritas de renderização:
+
+1.  **Texto Fluido (Text Wrap):** Linhas longas de log quebram automaticamente para a próxima linha com indentação, garantindo que nenhum texto seja cortado horizontalmente.
+2.  **Ritmo de Leitura (Cognitive Delay):** O jogo **NÃO** é um fluxo frenético de dados. Existe um **delay intencional** (500ms a 1.5s) entre cada ação de combate ou diálogo, permitindo que o jogador acompanhe o desenrolar da batalha confortavelmente.
+3.  **Destaque para Banter (Diálogos):**
+    - Diferente dos logs de combate (que usam colunas rígidas), o Banter é renderizado como um **bloco de destaque**.
+    - Possui borda colorida (ex: amarelo) e ignora a formatação de colunas, ocupando toda a largura disponível da janela regional.
+    - Isso garante que o "Drama" nunca se perca no meio dos números.
+
 ### Layout Visual: 1 Região Ativa (Todos heróis juntos)
 
 ```
