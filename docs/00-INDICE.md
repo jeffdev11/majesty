@@ -97,7 +97,7 @@
     - 10.3 Títulos Dinâmicos
     - 10.4 Modo Historiador
     - 10.5 Ecos do Passado
-    - 10.6 Memorial dos Mortos
+    - 10.5 Ecos do Passado
     - 10.7 Amanaevements Narrativos
     - 10.8 Compartilhamento Social
 

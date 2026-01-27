@@ -219,7 +219,6 @@ IP funciona como **mana** em ARPGs:
 #### 1. **Narrativa Emergente Documentada**
 
 - Crônicas em PDF
-- Memorial permanente
 - Ecos de partidas anteriores
 
 **Nenhum outro jogo faz isso.**

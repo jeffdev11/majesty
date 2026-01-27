@@ -4,7 +4,7 @@
 
 ### O Sistema de Legado Permanente
 
-Ao final de cada partida (vitória ou derrota no Dia 150), o jogo gera um **PDF ilustrado** contendo a história única daquela partida.
+Ao final de cada partida (vitória ao derrotar o Rei Vilão ou derrota pela destruição da Casa Central), o jogo gera um **PDF ilustrado** contendo a história única daquela partida.
 
 ### Conteúdo das Crônicas
 
@@ -52,7 +52,7 @@ Foi a primeira vez que confiou em alguém."
 
 ───────────────────────────────────────────
 
-CAPÍTULO 3: O APOCALIPSE (Dias 101-150)
+CAPÍTULO 3: O APOCALIPSE (Dias 101+ - O Confronto Final)
 ───────────────────────────────────────────
 
 [IMAGEM: Castelo Amaldiçoado]
@@ -166,7 +166,7 @@ Filtros disponíveis:
 ☑ Eventos Raros
 
 [Linha do Tempo]
-Dia 1  ━━━━━━━━━━ Dia 50 ━━━━━━━━━ Dia 100 ━━━ Dia 150
+Dia 1  ━━━━━━━━━━ Dia 50 ━━━━━━━━━ Dia 100 ━━━ Vitória (Boss Morto)
   ^cursor (Dia 23: Morte de Gandalf)
 ```
 
@@ -218,42 +218,6 @@ Lore: "Sir Kaelen, o lendário matador de ogros,
 
 ---
 
-## 10.6 O Livro dos Mortos: Memorial Permanente
-
-### Cada Herói Morto é Lembrado
-
-No **[F3] LIBRARY → MEMORIAL**, há uma lista de **todos os heróis mortos** de todas as partidas.
-
-```
-═══════════════════════════════════════════
-           MEMORIAL DOS CAÍDOS
-═══════════════════════════════════════════
-
-🕯️ Gandalf, O Sábio
-   Partida: #7
-   Nível: 5
-   Morto por: Ogro das Cavernas
-   Dia: 23
-   Kills: 18
-   Última palavra: "Cuidado com... *ugh*"
-
-   [VER BIOGRAFIA] [VER ÚLTIMA BATALHA]
-
-───────────────────────────────────────────
-
-🕯️ Elara, A Arqueira
-   Partida: #5
-   Nível: 8
-   Morto por: Dragão de Fogo
-   Dia: 142
-   Kills: 76
-   Epíteto: "A Caçadora Silenciosa"
-
-   [VER CRÔNICAS] [HONRAR] (-10 IP gera oração)
-```
-
----
-
 ## 10.7 Amanaevements Narrativos (Conquistas)
 
 ### Conquistas Baseadas em História, Não Grind
@@ -265,7 +229,6 @@ No **[F3] LIBRARY → MEMORIAL**, há uma lista de **todos os heróis mortos** d
 | **"Traição Shakespeariana"** | Ter herói traidor que era amigo (+60 Affinity) | Épica    |
 | **"O Nécio"**                | Enviar herói lvl 1 contra boss lvl 10          | Comum    |
 | **"Dinastia"**               | Ter 3 itens lendários de partidas anteriores   | Mítica   |
-| **"Último Suspiro"**         | Ganhar com apenas 1 herói vivo no Dia 150      | Lendária |
 
 ---
 
@@ -287,5 +250,30 @@ Link: heroesofmajesty.com/chronicles/a7x9k2
 
 Amigos podem ler e ver estatísticas (sem spoilers)."
 ```
+
+---
+
+## 10.9 Vitória e Pós-Jogo: A Comemoração
+
+### Condição de Vitória
+
+A partida **não tem limite de dias**. A vitória é alcançada exclusivamente ao **derrotar o Rei Vilão (Boss Global)** que surge no Ciclo 4 (Apocalipse).
+
+### O "Grand Finale"
+
+Imediatamente após a morte do Boss Global:
+
+1.  **Cessa o Caos:** O backend para de gerar novos eventos de monstros ou crises.
+2.  **Evento Final:** O sistema gera um evento especial único: `"A Grande Comemoração"`.
+3.  **Animação Dinâmica:** A interface exibe uma cena especial na Taverna, com todos os heróis sobreviventes e o Majesty celebrando.
+    - **Enriquecimento LLM:** A IA gera diálogos emocionantes onde heróis relembram os caídos e brindam à vitória.
+
+### Modo Sandbox (Leitura)
+
+Após a comemoração, o jogador tem duas opções:
+
+1.  **Gerar Crônicas e Sair:** Encerrar a partida e exportar o PDF.
+2.  **Continuar no Mundo (Read-Only):** Permanecer no jogo para ler logs antigos, revisar estatísticas e explorar o mapa pacífico.
+    - _Nota:_ Nenhuma nova ameaça surgirá. É um momento de contemplação do legado construído.
 
 ---

@@ -8,7 +8,7 @@ Esta documentação define **todas as mecânicas funcionais** de **Heroes of Maj
 - **Plataforma:** Desktop (Angular + Tauri + Deno)
 - **Público:** Fãs de Rimworld, Dwarf Fortress, Majesty, Crusader Kings
 - **Diferencial:** Controle indireto + IA complexa + Narrativa generativa local + Crônicas documentadas
-- **Tempo de Partida:** ~1h20min a 2h (4 ciclos de 20 min, extensível no último ciclo)
+- **Tempo de Partida:** ~2h a 2h30min (4 ciclos de 30 min, extensível no último ciclo)
 - **Rejogabilidade:** Alta (mapas procedurais, eventos dinâmicos, narrativa infinita)
 
 ---

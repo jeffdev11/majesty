@@ -56,7 +56,7 @@ _Mundo procedural e expansão_
 | ------------------------------------------------------------------------------------------------ | --------------------- | ------ | ----------------------------------------- |
 | [08-mundo-procedural-ciclos.md](./parte-iv-mundo-progressao/08-mundo-procedural-ciclos.md)       | Mundo Procedural      | 565    | 4 Ciclos, Dia/Noite, Eventos, Boss Global |
 | [09-mecanicas-expansao.md](./parte-iv-mundo-progressao/09-mecanicas-expansao.md)                 | Mecânicas de Expansão | 278    | Postos Avançados, Lealdade, Traição       |
-| [10-narrativa-emergente-legado.md](./parte-iv-mundo-progressao/10-narrativa-emergente-legado.md) | Narrativa e Legado    | 293    | Crônicas PDF, Títulos, Memorial           |
+| [10-narrativa-emergente-legado.md](./parte-iv-mundo-progressao/10-narrativa-emergente-legado.md) | Narrativa e Legado    | 293    | Crônicas PDF, Títulos                     |
 
 ---
 
