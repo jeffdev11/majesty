@@ -11,7 +11,9 @@ interface Hero {
   // Identificação
   id: string;
   name: string;
-  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE, DRUID, ELF, PALADIN, NECROMANCER, BARD, MONK
+  class: HeroClass; // WARRIOR, MAGE, etc.
+  sex: "M" | "F"; // Gerado no recrutamento
+  ageGroup: "YOUNG" | "ADULT" | "ELDERLY"; // Impacto visual e narrativo
 
   // Atributos Físicos
   stats: {
@@ -26,11 +28,11 @@ interface Hero {
 
   // Personalidade (P.E.C.M.A.)
   personality: {
-    power: number; // Audácia (0.0 - 1.0)
-    ethics: number; // Ética (0.0 - 1.0)
-    resource: number; // Ganância (0.0 - 1.0)
-    mind: number; // Intelecto (0.0 - 1.0)
-    affect: number; // Humor (0.0 - 1.0)
+    proactivity: number;
+    ethics: number;
+    cooperation: number;
+    mind: number;
+    affect: number;
   };
 
   // Estados Temporários
@@ -58,10 +60,10 @@ interface Hero {
 
   // Background Procedural
   background: {
-    birthplace: string;
-    motivation: string;
-    fear: string;
-    biography: string; // Gerado por LLM
+    birthplace: string; // Tag de local
+    originEvent: string; // Tag de acontecimento
+    motivation: string; // Tag de objetivo
+    biography: string; // Resumo rico gerado por LLM
   };
 }
 ```
@@ -796,7 +798,56 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.5 Sistema de Loot e Economia
+## 4.6 Geração Procedural de Biografia e Identidade (LLM)
+
+Sempre que o jogador escolhe um herói de uma determinada classe para recrutar, o sistema gera instantaneamente uma **identidade única**. Este processo combina variáveis fixas, sorteios em tabelas de tags e processamento de linguagem natural (LLM).
+
+### 1. Definição da Identidade Base
+
+No momento do clique em "Recrutar [Classe]", o motor define os pilares biológicos e narrativos:
+
+- **Sexo:** Masculino (50%) ou Feminino (50%). Define o modelo visual e pronomes na biografia.
+- **Faixa Etária:**
+  - **Jovem (30%):** Visual ágil, biografia focada em "aprendizado" ou "fuga de casa".
+  - **Adulto (60%):** Visual padrão, biografia focada em "carreira militar", "mercenarismo" ou "dever".
+  - **Idoso (10%):** Visual experiente/grisalho, biografia focada em "redenção", "última jornada" ou "mestre caído".
+
+### 2. A "Sopa de Tags" (Backstory Seeds)
+
+O sistema sorteia 3 tags principais da base de dados do mundo para servir de prompt para a LLM:
+
+| Categoria                | Exemplo de Tags (Sopa de Tags)                                                                                                          |
+| :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| **Locais de Nascimento** | Vila de Oakhaven, Cidadela de Ferro, Pântano das Sombras, Deserto de Areia Viva, Arquipélago Místico, Floresta de Prata.                |
+| **Acontecimentos**       | Sobrevivente de massacre, Ex-guarda real expulso, Buscador de vingança familiar, Órfão da Grande Guerra, Erudito em busca de relíquias. |
+| **Traços Destino**       | Nobre caído em desgraça, Camponês dotado de magia, Amaldiçoado por um Lich, Mercenário em busca de ouro, Escolhido por uma profecia.    |
+
+### 3. Integração com P.E.C.M.A.
+
+A biografia gerada **DEVE** refletir os valores sorteados para o herói.
+
+- _Se o herói sorteou Ethics 0.1 (Sem Escrúpulos), a LLM incluirá fatos sobre traição ou pragmatismo cruel em sua história._
+
+### 4. Fluxo de Geração (Prompt Interno)
+
+O jogo envia para a IA o seguinte contexto estruturado:
+
+> "Gere um parágrafo de biografia (300 caracteres) para um herói da classe [CLASSE], sexo [SEXO], idade [IDADE]. Ele nasceu em [LOCAL], passou por [ACONTECIMENTO] e sua principal motivação é [TRAÇO]. Sua personalidade é marcada por [VETOR P.E.C.M.A. DOMINANTE]."
+
+### 5. Exemplo de Resultado Final (In-Game)
+
+**Herói:** Valerius
+**Classe:** Paladino | **Sexo:** M | **Idade:** Idoso
+**Tags:** Cidadela de Ferro + Sobrevivente de massacre + Nobre caído.
+**P.E.C.M.A.:** Ethics 0.9 (Alma Pura), Proactivity 0.7.
+
+**Biografia Gerada:**
+
+> "Antigo senhor da Cidadela de Ferro, Valerius viu seu linhagem ser dizimada em uma noite de traição. Único sobrevivente, abdicou de seus títulos para seguir a senda da luz. Apesar da idade avançada e do peso da perda, sua alma permanece pura, buscando proteger os inocentes e restaurar a honra de sua família através do sacrifício e do dever inabalável."
+
+---
+
+## 4.7 Sistema de Loot e Economia
 
 ### Loot Instanciado (Individual)
 

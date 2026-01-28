@@ -4244,29 +4244,33 @@ Cada classe possui **30 skills únicas**:
 
 O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. Diferente de RPGs tradicionais, os heróis não escolhem o que aprender; o Majesty compra a "licença" da skill para a guilda, e todos os heróis aptos (nível e pré-requisitos) passam a utilizá-la.
 
+> **📊 Nota Técnica de Escalonamento:**
+> Para fins de exemplo nas tabelas abaixo, consideramos um **Poder Base de Herói Lvl 1 = 20**.
+> Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de dano). Skills com valores fixos (Ex: 80 dano) são tratadas como o valor absoluto para o nível 1.
+
 ---
 
 ## 🗡️ GUERREIRO (Warrior) - 30 Skills
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome               | Custo    | Cooldown | Descrição                                        | Requer                 |
-| --- | ------------------ | -------- | -------- | ------------------------------------------------ | ---------------------- |
-| 1   | **Power Strike**   | 10 Mana  | 1 Turno  | +50% dano no próximo ataque                      | Nível 1                |
-| 2   | **Battle Cry**     | 20 Mana  | 4 Turnos | +20% Attack para aliados próximos por 2 Turnos   | Power Strike           |
-| 3   | **Charge**         | 15 Mana  | 2 Turnos | Carga rápida até o inimigo, atordoa 1 Turno      | Nível 3                |
-| 4   | **Blade Spin**     | 25 Mana  | 3 Turnos | Ataque em área 360°, atinge até 5 inimigos       | Charge                 |
-| 5   | **Armor Sunder**   | 30 Mana  | 3 Turnos | Ignora 50% da defesa do alvo                     | Nível 5                |
-| 6   | **Mortal Thrust**  | 35 Mana  | 4 Turnos | Golpe crítico garantido, +100% dano              | Armor Sunder           |
-| 7   | **Taunt**          | 20 Mana  | 3 Turnos | Força inimigos próximos a atacarem o guerreiro   | Battle Cry             |
-| 8   | **Second Wind**    | 50 Mana  | 6 Turnos | Recupera 30% HP instantaneamente                 | Nível 7                |
-| 9   | **Berserker Rage** | 40 Mana  | 5 Turnos | +50% Attack, -30% Defense por 3 Turnos           | Mortal Thrust          |
-| 10  | **Earthshaker**    | 60 Mana  | 6 Turnos | Golpeia o chão, atordoa todos em 10m por 1 Turno | Blade Spin             |
-| 11  | **Shield Block**   | 30 Mana  | 5 Turnos | Bloqueia próximo ataque completamente            | Nível 9                |
-| 12  | **Vengeance**      | 35 Mana  | 4 Turnos | Próximo ataque causa dano = HP perdido           | Berserker Rage         |
-| 13  | **Execute**        | 25 Mana  | 4 Turnos | Mata instantaneamente inimigo com HP < 15%       | Nível 10               |
-| 14  | **Iron Bulwark**   | 70 Mana  | 8 Turnos | Imune a dano por 1 Turno, não pode se mover      | Shield Block           |
-| 15  | **Avatar of War**  | 100 Mana | 1x comb. | Cresce de tamanho, +200% Attack, ataques em área | Execute + Wyvern Scale |
+| #   | Nome               | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                        | Requer                 |
+| --- | ------------------ | -------- | -------- | ------------ | ------------------------------------------------ | ---------------------- |
+| 1   | **Power Strike**   | 10 Mana  | 1 Turno  | **30**       | +50% dano no próximo ataque                      | Nível 1                |
+| 2   | **Battle Cry**     | 20 Mana  | 4 Turnos | -            | +20% Attack para aliados próximos por 2 Turnos   | Power Strike           |
+| 3   | **Charge**         | 15 Mana  | 2 Turnos | **20**       | Carga rápida até o inimigo, atordoa 1 Turno      | Nível 3                |
+| 4   | **Blade Spin**     | 25 Mana  | 3 Turnos | **20 AoE**   | Ataque em área 360°, atinge até 5 inimigos       | Charge                 |
+| 5   | **Armor Sunder**   | 30 Mana  | 3 Turnos | **20**       | Ignora 50% da defesa do alvo                     | Nível 5                |
+| 6   | **Mortal Thrust**  | 35 Mana  | 4 Turnos | **40**       | Golpe crítico garantido, +100% dano              | Armor Sunder           |
+| 7   | **Taunt**          | 20 Mana  | 3 Turnos | -            | Força inimigos próximos a atacarem o guerreiro   | Battle Cry             |
+| 8   | **Second Wind**    | 50 Mana  | 6 Turnos | 15 HP Heal   | Recupera 30% HP instantaneamente                 | Nível 7                |
+| 9   | **Berserker Rage** | 40 Mana  | 5 Turnos | **30**       | +50% Attack, -30% Defense por 3 Turnos           | Mortal Thrust          |
+| 10  | **Earthshaker**    | 60 Mana  | 6 Turnos | **20 AoE**   | Golpeia o chão, atordoa todos em 10m por 1 Turno | Blade Spin             |
+| 11  | **Shield Block**   | 30 Mana  | 5 Turnos | -            | Bloqueia próximo ataque completamente            | Nível 9                |
+| 12  | **Vengeance**      | 35 Mana  | 4 Turnos | Var.         | Próximo ataque causa dano = HP perdido           | Berserker Rage         |
+| 13  | **Execute**        | 25 Mana  | 4 Turnos | Fatal        | Mata instantaneamente inimigo com HP < 15%       | Nível 10               |
+| 14  | **Iron Bulwark**   | 70 Mana  | 8 Turnos | -            | Imune a dano por 1 Turno, não pode se mover      | Shield Block           |
+| 15  | **Avatar of War**  | 100 Mana | 1x comb. | **60**       | Cresce de tamanho, +200% Attack, ataques em área | Execute + Wyvern Scale |
 
 ### 🛡️ Skills Passivas (15)
 
@@ -4294,23 +4298,23 @@ O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. D
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                  | Custo    | Cooldown | Descrição                                           | Requer                    |
-| --- | --------------------- | -------- | -------- | --------------------------------------------------- | ------------------------- |
-| 1   | **Fireball**          | 20 Mana  | 1 Turno  | Projétil de fogo, 80 dano mágico                    | Nível 1                   |
-| 2   | **Frost Bolt**        | 25 Mana  | 2 Turnos | Congela alvo por 1 Turno, 60 dano                   | Fireball                  |
-| 3   | **Mana Shield**       | 30 Mana  | 3 Turnos | Absorve 150 de dano por 2 Turnos                    | Nível 2                   |
-| 4   | **Meteor Shower**     | 60 Mana  | 5 Turnos | 6 meteoros em área, 50 dano cada                    | Fireball                  |
-| 5   | **Teleport**          | 40 Mana  | 3 Turnos | Teleporta 15m instantaneamente                      | Nível 4                   |
-| 6   | **Frost Nova**        | 50 Mana  | 4 Turnos | Congela inimigos em 8m por 1 Turno                  | Frost Bolt                |
-| 7   | **Chain Lightning**   | 45 Mana  | 4 Turnos | Atinge até 4 alvos, 90 dano cada                    | Nível 5                   |
-| 8   | **Arcane Barrier**    | 35 Mana  | 4 Turnos | Aliados próximos ganham +50% Defense por 2 Turnos   | Mana Shield               |
-| 9   | **Firestorm**         | 80 Mana  | 6 Turnos | Área de 12m queima por 3 Turnos, 15 dano/turno      | Meteor Shower             |
-| 10  | **Time Stop**         | 70 Mana  | 7 Turnos | Reduz velocidade de inimigos em 70% por 2 Turnos    | Frost Nova                |
-| 11  | **Arcane Explosion**  | 55 Mana  | 4 Turnos | AoE de 10m, 120 dano + knock-back                   | Nível 7                   |
-| 12  | **Summon Elemental**  | 100 Mana | 8 Turnos | Invoca elemental de fogo que luta por 3 Turnos      | Firestorm                 |
-| 13  | **Obliteration Ray**  | 90 Mana  | 5 Turnos | Feixe contínuo, 200 dano total (Alto Delay)         | Chain Lightning           |
-| 14  | **Event Horizon**     | 60 Mana  | 8 Turnos | 100 dano área, aplica Condensado (-30% Esquiva AoE) | Teleport                  |
-| 15  | **Arcane Apocalypse** | 150 Mana | 1x comb. | Explosão 20m, 500 dano, atinge todos inimigos       | Obliteration Ray + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                           | Requer                    |
+| --- | --------------------- | -------- | -------- | ------------ | --------------------------------------------------- | ------------------------- |
+| 1   | **Fireball**          | 20 Mana  | 1 Turno  | **80**       | Projétil de fogo, 80 dano mágico                    | Nível 1                   |
+| 2   | **Frost Bolt**        | 25 Mana  | 2 Turnos | **60**       | Congela alvo por 1 Turno, 60 dano                   | Fireball                  |
+| 3   | **Mana Shield**       | 30 Mana  | 3 Turnos | 150 Shield   | Absorve 150 de dano por 2 Turnos                    | Nível 2                   |
+| 4   | **Meteor Shower**     | 60 Mana  | 5 Turnos | **300 AoE**  | 6 meteoros em área, 50 dano cada                    | Fireball                  |
+| 5   | **Teleport**          | 40 Mana  | 3 Turnos | -            | Teleporta 15m instantaneamente                      | Nível 4                   |
+| 6   | **Frost Nova**        | 50 Mana  | 4 Turnos | Stun AoE     | Congela inimigos em 8m por 1 Turno                  | Frost Bolt                |
+| 7   | **Chain Lightning**   | 45 Mana  | 4 Turnos | **360 AoE**  | Atinge até 4 alvos, 90 dano cada                    | Nível 5                   |
+| 8   | **Arcane Barrier**    | 35 Mana  | 4 Turnos | -            | Aliados próximos ganham +50% Defense por 2 Turnos   | Mana Shield               |
+| 9   | **Firestorm**         | 80 Mana  | 6 Turnos | **15/t DoT** | Área de 12m queima por 3 Turnos, 15 dano/turno      | Meteor Shower             |
+| 10  | **Time Stop**         | 70 Mana  | 7 Turnos | Slow         | Reduz velocidade de inimigos em 70% por 2 Turnos    | Frost Nova                |
+| 11  | **Arcane Explosion**  | 55 Mana  | 4 Turnos | **120 AoE**  | AoE de 10m, 120 dano + knock-back                   | Nível 7                   |
+| 12  | **Summon Elemental**  | 100 Mana | 8 Turnos | Summon       | Invoca elemental de fogo que luta por 3 Turnos      | Firestorm                 |
+| 13  | **Obliteration Ray**  | 90 Mana  | 5 Turnos | **200**      | Feixe contínuo, 200 dano total (Alto Delay)         | Chain Lightning           |
+| 14  | **Event Horizon**     | 60 Mana  | 8 Turnos | **100 AoE**  | 100 dano área, aplica Condensado (-30% Esquiva AoE) | Teleport                  |
+| 15  | **Arcane Apocalypse** | 150 Mana | 1x comb. | **500 AoE**  | Explosão 20m, 500 dano, atinge todos inimigos       | Obliteration Ray + Lvl 12 |
 
 ### 🧙 Skills Passivas (15)
 
@@ -4338,23 +4342,23 @@ O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. D
 
 ### 🎯 Skills Ativas (15)
 
-| #   | Nome                 | Custo    | Cooldown | Descrição                                          | Requer            |
-| --- | -------------------- | -------- | -------- | -------------------------------------------------- | ----------------- |
-| 1   | **Aimed Shot**       | 10 Mana  | 1 Turno  | +30% precisão, 60 dano                             | Nível 1           |
-| 2   | **Explosive Arrow**  | 25 Mana  | 2 Turnos | AoE 5m, 80 dano total                              | Aimed Shot        |
-| 3   | **Tactical Retreat** | 15 Mana  | 2 Turnos | Salta para longe e dispara flecha retardadora      | Nível 2           |
-| 4   | **Rain of Arrows**   | 40 Mana  | 4 Turnos | 12 flechas em área 10m, 25 dano cada               | Explosive Arrow   |
-| 5   | **Piercing Shot**    | 20 Mana  | 1 Turno  | Atravessa alvos, atinge até 3 inimigos             | Nível 3           |
-| 6   | **Hunter's Mark**    | 30 Mana  | 3 Turnos | Marca alvo, +50% dano nele por 3 Turnos            | Aimed Shot        |
-| 7   | **Poison Arrow**     | 35 Mana  | 3 Turnos | Envenena alvo, 10 dano/turno por 3 Turnos          | Nível 4           |
-| 8   | **Rapid Fire**       | 25 Mana  | 2 Turnos | Dispara 3 flechas instantâneas no alvo             | Tactical Retreat  |
-| 9   | **Explosive Trap**   | 40 Mana  | 4 Turnos | Coloca armadilha, 150 dano + atordoa 1 Turno       | Nível 5           |
-| 10  | **Headshot**         | 50 Mana  | 5 Turnos | Crítico garantido, +200% dano, headshot instakill  | Hunter's Mark     |
-| 11  | **Summon Wolf**      | 60 Mana  | 8 Turnos | Invoca lobo que luta por 5 Turnos                  | Nível 7           |
-| 12  | **Frost Arrow**      | 45 Mana  | 4 Turnos | Congela alvo por 1 Turno, 70 dano                  | Poison Arrow      |
-| 13  | **Elven Volley**     | 70 Mana  | 5 Turnos | Dispara rajada rápida (atinge alvo 5 vezes)        | Piercing Shot     |
-| 14  | **Shadow Step**      | 40 Mana  | 6 Turnos | Fica 'Evasivo' (+50% Esquiva) e ignora Defense     | Nível 9           |
-| 15  | **Doom Arrow**       | 100 Mana | 1x comb. | Flecha gigante, 600 dano, stuns área (até 3 alvos) | Headshot + Lvl 12 |
+| #   | Nome                 | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                          | Requer            |
+| --- | -------------------- | -------- | -------- | ------------ | -------------------------------------------------- | ----------------- |
+| 1   | **Aimed Shot**       | 10 Mana  | 1 Turno  | **60**       | +30% precisão, 60 dano                             | Nível 1           |
+| 2   | **Explosive Arrow**  | 25 Mana  | 2 Turnos | **80 AoE**   | AoE 5m, 80 dano total                              | Aimed Shot        |
+| 3   | **Tactical Retreat** | 15 Mana  | 2 Turnos | **20**       | Salta para longe e dispara flecha retardadora      | Nível 2           |
+| 4   | **Rain of Arrows**   | 40 Mana  | 4 Turnos | **300 AoE**  | 12 flechas em área 10m, 25 dano cada               | Explosive Arrow   |
+| 5   | **Piercing Shot**    | 20 Mana  | 1 Turno  | **60**       | Atravessa alvos, atinge até 3 inimigos             | Nível 3           |
+| 6   | **Hunter's Mark**    | 30 Mana  | 3 Turnos | -            | Marca alvo, +50% dano nele por 3 Turnos            | Aimed Shot        |
+| 7   | **Poison Arrow**     | 35 Mana  | 3 Turnos | **10/t DoT** | Envenena alvo, 10 dano/turno por 3 Turnos          | Nível 4           |
+| 8   | **Rapid Fire**       | 25 Mana  | 2 Turnos | **60**       | Dispara 3 flechas instantâneas no alvo             | Tactical Retreat  |
+| 9   | **Explosive Trap**   | 40 Mana  | 4 Turnos | **150**      | Coloca armadilha, 150 dano + atordoa 1 Turno       | Nível 5           |
+| 10  | **Headshot**         | 50 Mana  | 5 Turnos | **60**       | Crítico garantido, +200% dano, headshot instakill  | Hunter's Mark     |
+| 11  | **Summon Wolf**      | 60 Mana  | 8 Turnos | Summon       | Invoca lobo que luta por 5 Turnos                  | Nível 7           |
+| 12  | **Frost Arrow**      | 45 Mana  | 4 Turnos | **70**       | Congela alvo por 1 Turno, 70 dano                  | Poison Arrow      |
+| 13  | **Elven Volley**     | 70 Mana  | 5 Turnos | **100**      | Dispara rajada rápida (atinge alvo 5 vezes)        | Piercing Shot     |
+| 14  | **Shadow Step**      | 40 Mana  | 6 Turnos | -            | Fica 'Evasivo' (+50% Esquiva) e ignora Defense     | Nível 9           |
+| 15  | **Doom Arrow**       | 100 Mana | 1x comb. | **600 AoE**  | Flecha gigante, 600 dano, stuns área (até 3 alvos) | Headshot + Lvl 12 |
 
 ### 🦅 Skills Passivas (15)
 
@@ -4382,23 +4386,23 @@ O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. D
 
 ### 🔪 Skills Ativas (15)
 
-| #   | Nome                   | Custo    | Cooldown | Descrição                                               | Requer                   |
-| --- | ---------------------- | -------- | -------- | ------------------------------------------------------- | ------------------------ |
-| 1   | **Backstab**           | 10 Mana  | 1 Turno  | Ataque rápido pelas costas, +50% dano                   | Nível 1                  |
-| 2   | **Smoke Bomb**         | 20 Mana  | 3 Turnos | Cria nuvem, invisível por 1 Turno                       | Backstab                 |
-| 3   | **Hamstring**          | 15 Mana  | 2 Turnos | Causa dano leve e reduz Speed do alvo em 30%            | Nível 2                  |
-| 4   | **Envenom**            | 25 Mana  | 3 Turnos | Próximos 5 ataques aplicam veneno (Dano por turno)      | Backstab                 |
-| 5   | **Death Shadow**       | 30 Mana  | 4 Turnos | Força Back Attack (mesmo de frente), +100% dano crit    | Smoke Bomb               |
-| 6   | **Blade Flurry**       | 40 Mana  | 4 Turnos | Gira rapidamente, 8 ataques em 1 Turno                  | Nível 4                  |
-| 7   | **Cheap Shot**         | 35 Mana  | 5 Turnos | Atordoa alvo por 1 Turno                                | Death Shadow             |
-| 8   | **Shadow Dodge**       | 20 Mana  | 2 Turnos | Esquiva garantida do próximo ataque e recupera mana     | Nível 3                  |
-| 9   | **Opportunist Strike** | 45 Mana  | 4 Turnos | Se alvo estiver atordoado/congelado, +300% dano         | Cheap Shot               |
-| 10  | **Mirror Image**       | 60 Mana  | 6 Turnos | Cria clone que dura 3 Turnos e causa 50% dano           | Smoke Bomb               |
-| 11  | **Hemorrhage**         | 50 Mana  | 4 Turnos | Causa sangramento severo, 15 dano/turno por 3 Turnos    | Envenom                  |
-| 12  | **Stealth Execute**    | 55 Mana  | 5 Turnos | Força Back Attack furtivo, instakill if HP < 30%        | Death Shadow             |
-| 13  | **Fan of Knives**      | 70 Mana  | 5 Turnos | 20 adagas em cone, 20 dano cada                         | Blade Flurry             |
-| 14  | **Master of Shadows**  | 40 Mana  | 6 Turnos | Invisível por 4 Turnos, +50% velocidade                 | Mirror Image             |
-| 15  | **Blade Dance**        | 100 Mana | 1x comb. | Teleporta entre 5 inimigos, causando dano crítico fatal | Stealth Execute + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                               | Requer                   |
+| --- | ---------------------- | -------- | -------- | ------------ | ------------------------------------------------------- | ------------------------ |
+| 1   | **Backstab**           | 10 Mana  | 1 Turno  | **30**       | Ataque rápido pelas costas, +50% dano                   | Nível 1                  |
+| 2   | **Smoke Bomb**         | 20 Mana  | 3 Turnos | -            | Cria nuvem, invisível por 1 Turno                       | Backstab                 |
+| 3   | **Hamstring**          | 15 Mana  | 2 Turnos | **20**       | Causa dano leve e reduz Speed do alvo em 30%            | Nível 2                  |
+| 4   | **Envenom**            | 25 Mana  | 3 Turnos | Poison       | Próximos 5 ataques aplicam veneno (Dano por turno)      | Backstab                 |
+| 5   | **Death Shadow**       | 30 Mana  | 4 Turnos | **40**       | Força Back Attack (mesmo de frente), +100% dano crit    | Smoke Bomb               |
+| 6   | **Blade Flurry**       | 40 Mana  | 4 Turnos | **160**      | Gira rapidamente, 8 ataques em 1 Turno                  | Nível 4                  |
+| 7   | **Cheap Shot**         | 35 Mana  | 5 Turnos | **20**       | Atordoa alvo por 1 Turno                                | Death Shadow             |
+| 8   | **Shadow Dodge**       | 20 Mana  | 2 Turnos | -            | Esquiva garantida do próximo ataque e recupera mana     | Nível 3                  |
+| 9   | **Opportunist Strike** | 45 Mana  | 4 Turnos | **80**       | Se alvo estiver atordoado/congelado, +300% dano         | Cheap Shot               |
+| 10  | **Mirror Image**       | 60 Mana  | 6 Turnos | **10/t**     | Cria clone que dura 3 Turnos e causa 50% dano           | Smoke Bomb               |
+| 11  | **Hemorrhage**         | 50 Mana  | 4 Turnos | **15/t DoT** | Causa sangramento severo, 15 dano/turno por 3 Turnos    | Envenom                  |
+| 12  | **Stealth Execute**    | 55 Mana  | 5 Turnos | Fatal        | Força Back Attack furtivo, instakill if HP < 30%        | Death Shadow             |
+| 13  | **Fan of Knives**      | 70 Mana  | 5 Turnos | **400 AoE**  | 20 adagas em cone, 20 dano cada                         | Blade Flurry             |
+| 14  | **Master of Shadows**  | 40 Mana  | 6 Turnos | -            | Invisível por 4 Turnos, +50% velocidade                 | Mirror Image             |
+| 15  | **Blade Dance**        | 100 Mana | 1x comb. | Fatal        | Teleporta entre 5 inimigos, causando dano crítico fatal | Stealth Execute + Lvl 12 |
 
 ### 🌑 Skills Passivas (15)
 
@@ -4426,23 +4430,23 @@ O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. D
 
 ### 🍃 Skills Ativas (15)
 
-| #   | Nome                   | Custo    | Cooldown | Descrição                                                   | Requer           |
-| --- | ---------------------- | -------- | -------- | ----------------------------------------------------------- | ---------------- |
-| 1   | **Entangling Roots**   | 20 Mana  | 2 Turnos | Prende inimigo por 1 Turno, 40 dano                         | Nível 1          |
-| 2   | **Nature's Heal**      | 30 Mana  | 2 Turnos | Cura alvo em 150 HP                                         | Nível 1          |
-| 3   | **Bear Form**          | 40 Mana  | 4 Turnos | Transforma em urso por 3 Turnos, +100% HP, +50% Attack      | Nível 2          |
-| 4   | **Toxic Briar**        | 25 Mana  | 3 Turnos | Cria barreira de espinhos, 80 dano + 10 dano/t por 3 Turnos | Entangling Roots |
-| 5   | **Summon Spirit Wolf** | 50 Mana  | 6 Turnos | Invoca lobo espiritual que luta por 4 Turnos                | Nível 3          |
-| 6   | **Tranquility**        | 45 Mana  | 4 Turnos | Cura todos aliados em 12m, 80 HP + 10 HP/t por 3 Turnos     | Nature's Heal    |
-| 7   | **Nature's Fury**      | 55 Mana  | 5 Turnos | Tempestade 8m, atinge 3-5 inimigos, dano + lentidão         | Nível 4          |
-| 8   | **Treant Form**        | 30 Mana  | 4 Turnos | Vira árvore, +200% Defesa, imune a Knockback, Lento         | Nível 5          |
-| 9   | **Feral Claws**        | 35 Mana  | 3 Turnos | Transforma mãos em garras, 5 ataques rápidos, 40 cada       | Bear Form        |
-| 10  | **Rebirth**            | 80 Mana  | 1x comb. | Revive herói morto com 50% HP (aliado ou próprio)           | Tranquility      |
-| 11  | **Insect Swarm**       | 60 Mana  | 5 Turnos | Nuvem 10m, cega inimigos, 15 dano/t por 3 Turnos            | Toxic Briar      |
-| 12  | **Panther Form**       | 45 Mana  | 5 Turnos | +80% velocidade, +50% dano crítico por 3 Turnos             | Nível 6          |
-| 13  | **Earth's Tremor**     | 70 Mana  | 6 Turnos | Fissura 15m, atordoa 1 Turno, 150 dano                      | Nature's Fury    |
-| 14  | **Gaia's Communion**   | 50 Mana  | 8 Turnos | Imune a controle de grupo por 4 Turnos, +30% todos stats    | Nível 8          |
-| 15  | **Avatar of Nature**   | 120 Mana | 1x comb. | Forma definitiva, +200% HP/Attack, cura 10%/t, 4 Turnos     | Rebirth + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Ex: Dmg (L1)  | Descrição                                                   | Requer           |
+| --- | ---------------------- | -------- | -------- | ------------- | ----------------------------------------------------------- | ---------------- |
+| 1   | **Entangling Roots**   | 20 Mana  | 2 Turnos | **40**        | Prende inimigo por 1 Turno, 40 dano                         | Nível 1          |
+| 2   | **Nature's Heal**      | 30 Mana  | 2 Turnos | 150 HP Heal   | Cura alvo em 150 HP                                         | Nível 1          |
+| 3   | **Bear Form**          | 40 Mana  | 4 Turnos | **30**        | Transforma em urso por 3 Turnos, +100% HP, +50% Attack      | Nível 2          |
+| 4   | **Toxic Briar**        | 25 Mana  | 3 Turnos | **80 + 10/t** | Cria barreira de espinhos, 80 dano + 10 dano/t por 3 Turnos | Entangling Roots |
+| 5   | **Summon Spirit Wolf** | 50 Mana  | 6 Turnos | Summon        | Invoca lobo espiritual que luta por 4 Turnos                | Nível 3          |
+| 6   | **Tranquility**        | 45 Mana  | 4 Turnos | 80 HP Heal    | Cura todos aliados em 12m, 80 HP + 10 HP/t por 3 Turnos     | Nature's Heal    |
+| 7   | **Nature's Fury**      | 55 Mana  | 5 Turnos | **20 AoE**    | Tempestade 8m, atinge 3-5 inimigos, dano + lentidão         | Nível 4          |
+| 8   | **Treant Form**        | 30 Mana  | 4 Turnos | -             | Vira árvore, +200% Defesa, imune a Knockback, Lento         | Nível 5          |
+| 9   | **Feral Claws**        | 35 Mana  | 3 Turnos | **200**       | Transforma mãos em garras, 5 ataques rápidos, 40 cada       | Bear Form        |
+| 10  | **Rebirth**            | 80 Mana  | 1x comb. | 50% HP Heal   | Revive herói morto com 50% HP (aliado ou próprio)           | Tranquility      |
+| 11  | **Insect Swarm**       | 60 Mana  | 5 Turnos | **15/t DoT**  | Nuvem 10m, cega inimigos, 15 dano/t por 3 Turnos            | Toxic Briar      |
+| 12  | **Panther Form**       | 45 Mana  | 5 Turnos | **30**        | +80% velocidade, +50% dano crítico por 3 Turnos             | Nível 6          |
+| 13  | **Earth's Tremor**     | 70 Mana  | 6 Turnos | **150 AoE**   | Fissura 15m, atordoa 1 Turno, 150 dano                      | Nature's Fury    |
+| 14  | **Gaia's Communion**   | 50 Mana  | 8 Turnos | -             | Imune a controle de grupo por 4 Turnos, +30% todos stats    | Nível 8          |
+| 15  | **Avatar of Nature**   | 120 Mana | 1x comb. | **60**        | Forma definitiva, +200% HP/Attack, cura 10%/t, 4 Turnos     | Rebirth + Lvl 12 |
 
 ### 🌳 Skills Passivas (15)
 
@@ -4470,23 +4474,23 @@ O Majesty pode **desbloquear** essas skills gastando **Ouro** do Tesouro Real. D
 
 ### ✨ Skills Ativas (15)
 
-| #   | Nome                   | Custo    | Cooldown | Descrição                                                    | Requer                   |
-| --- | ---------------------- | -------- | -------- | ------------------------------------------------------------ | ------------------------ |
-| 1   | **Arcane Arrow**       | 15 Mana  | 1 Turno  | Flecha mágica, 70 dano + penetra defesa                      | Nível 1                  |
-| 2   | **Elven Step**         | 20 Mana  | 2 Turnos | Teleporta 12m, próximos 3 ataques +30% dano                  | Nível 1                  |
-| 3   | **Moonlight Blessing** | 30 Mana  | 3 Turnos | Aliados próximos ganham +20% Speed por 2 Turnos              | Nível 2                  |
-| 4   | **Starfall**           | 50 Mana  | 4 Turnos | 10 projéteis mágicos, 35 dano cada, rastreiam alvos          | Arcane Arrow             |
-| 5   | **Protection Circle**  | 40 Mana  | 4 Turnos | Zona 8m, aliados ganham +40% Defense por 2 Turnos            | Moonlight Blessing       |
-| 6   | **Mystic Blade**       | 25 Mana  | 3 Turnos | Espada de energia por 3 Turnos, +80% Attack médico           | Nível 3                  |
-| 7   | **Spirit Bond**        | 45 Mana  | 5 Turnos | Liga com aliado, compartilha 30% dano/cura por 4 Turnos      | Protection Circle        |
-| 8   | **Arcane Barrage**     | 35 Mana  | 2 Turnos | 6 flechas instantâneas, 40 dano cada                         | Starfall                 |
-| 9   | **Elven Sanctuary**    | 60 Mana  | 6 Turnos | Cria zona 10m, cura 20 HP/turno, +25% resistência mágica     | Protection Circle        |
-| 10  | **Ethereal Form**      | 50 Mana  | 5 Turnos | Imune a dano físico, ganha turno extra se esquivar           | Elven Step               |
-| 11  | **Celestial Prism**    | 70 Mana  | 5 Turnos | Raio que divide em 5, 100 dano cada                          | Starfall                 |
-| 12  | **Arcane Resonance**   | 55 Mana  | 5 Turnos | Próximas 3 skills custam 0 Mana                              | Nível 7                  |
-| 13  | **Blade Storm**        | 65 Mana  | 5 Turnos | Lâminas giram, atinge até 4 inimigos adjacentes              | Mystic Blade             |
-| 14  | **Ascension**          | 80 Mana  | 8 Turnos | Levita (imune corpo-a-corpo), Skills Instantâneas (3 Turnos) | Ethereal Form            |
-| 15  | **Total Eclipse**      | 150 Mana | 1x comb. | Escurece área 25m, cega todos inimigos por 3 Turnos          | Celestial Prism + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                                    | Requer                   |
+| --- | ---------------------- | -------- | -------- | ------------ | ------------------------------------------------------------ | ------------------------ |
+| 1   | **Arcane Arrow**       | 15 Mana  | 1 Turno  | **70**       | Flecha mágica, 70 dano + penetra defesa                      | Nível 1                  |
+| 2   | **Elven Step**         | 20 Mana  | 2 Turnos | **26**       | Teleporta 12m, próximos 3 ataques +30% dano                  | Nível 1                  |
+| 3   | **Moonlight Blessing** | 30 Mana  | 3 Turnos | -            | Aliados próximos ganham +20% Speed por 2 Turnos              | Nível 2                  |
+| 4   | **Starfall**           | 50 Mana  | 4 Turnos | **350 AoE**  | 10 projéteis mágicos, 35 dano cada, rastreiam alvos          | Arcane Arrow             |
+| 5   | **Protection Circle**  | 40 Mana  | 4 Turnos | -            | Zona 8m, aliados ganham +40% Defense por 2 Turnos            | Moonlight Blessing       |
+| 6   | **Mystic Blade**       | 25 Mana  | 3 Turnos | **36**       | Espada de energia por 3 Turnos, +80% Attack médico           | Nível 3                  |
+| 7   | **Spirit Bond**        | 45 Mana  | 5 Turnos | -            | Liga com aliado, compartilha 30% dano/cura por 4 Turnos      | Protection Circle        |
+| 8   | **Arcane Barrage**     | 35 Mana  | 2 Turnos | **240**      | 6 flechas instantâneas, 40 dano cada                         | Starfall                 |
+| 9   | **Elven Sanctuary**    | 60 Mana  | 6 Turnos | 20 HP/t Heal | Cria zona 10m, cura 20 HP/turno, +25% resistência mágica     | Protection Circle        |
+| 10  | **Ethereal Form**      | 50 Mana  | 5 Turnos | -            | Imune a dano físico, ganha turno extra se esquivar           | Elven Step               |
+| 11  | **Celestial Prism**    | 70 Mana  | 5 Turnos | **500 AoE**  | Raio que divide em 5, 100 dano cada                          | Starfall                 |
+| 12  | **Arcane Resonance**   | 55 Mana  | 5 Turnos | -            | Próximas 3 skills custam 0 Mana                              | Nível 7                  |
+| 13  | **Blade Storm**        | 65 Mana  | 5 Turnos | **80 AoE**   | Lâminas giram, atinge até 4 inimigos adjacentes              | Mystic Blade             |
+| 14  | **Ascension**          | 80 Mana  | 8 Turnos | -            | Levita (imune corpo-a-corpo), Skills Instantâneas (3 Turnos) | Ethereal Form            |
+| 15  | **Total Eclipse**      | 150 Mana | 1x comb. | Blind AoE    | Escurece área 25m, cega todos inimigos por 3 Turnos          | Celestial Prism + Lvl 12 |
 
 ### 🌟 Skills Passivas (15)
 
@@ -4577,23 +4581,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### ⚔️ Skills Ativas (15)
 
-| #   | Nome                  | Custo    | Cooldown | Descrição                                            | Requer                |
-| --- | --------------------- | -------- | -------- | ---------------------------------------------------- | --------------------- |
-| 1   | **Holy Strike**       | 15 Mana  | 1 Turno  | Ataque sagrado, 70 dano + 30 HP de cura própria      | Nível 1               |
-| 2   | **Devotion Aura**     | 20 Mana  | Passiva  | Aliados em 12m ganham +15% Defense permanente        | Nível 1               |
-| 3   | **Holy Light**        | 30 Mana  | 2 Turnos | Cura aliado em 200 HP                                | Holy Strike           |
-| 4   | **Shield of Faith**   | 25 Mana  | 3 Turnos | Absorve 250 dano por 2 Turnos                        | Nível 2               |
-| 5   | **Hammer of Justice** | 35 Mana  | 3 Turnos | Arremessa martelo, 100 dano + atordoa 1 Turno        | Holy Strike           |
-| 6   | **Divine Sacrifice**  | 40 Mana  | 4 Turnos | Transfere 50% do dano de aliado para si por 3 Turnos | Holy Light            |
-| 7   | **Judgment**          | 45 Mana  | 4 Turnos | Marca inimigo maligno, +60% dano contra ele          | Nível 4               |
-| 8   | **Resurrection**      | 80 Mana  | 1x comb. | Revive aliado com 70% HP (melhor que Druida)         | Holy Light            |
-| 9   | **Consecration**      | 50 Mana  | 5 Turnos | Zona 10m, inimigos malignos -30% Attack por 4 Turnos | Nível 5               |
-| 10  | **Mirror Shield**     | 55 Mana  | 5 Turnos | Próximos 5 ataques são refletidos 100%               | Shield of Faith       |
-| 11  | **Divine Wrath**      | 60 Mana  | 5 Turnos | +100% Attack por 3 Turnos, ganha Mana ao atacar      | Hammer of Justice     |
-| 12  | **Grand Blessing**    | 70 Mana  | 6 Turnos | Todos aliados em 15m ganham +30% stats (3 Turnos)    | Devotion Aura         |
-| 13  | **Vow of Vengeance**  | 65 Mana  | 6 Turnos | Se aliado morrer próximo, ganha +150% Attack         | Judgment              |
-| 14  | **Sanctuary**         | 75 Mana  | 8 Turnos | Cria zona 12m, aliados recebem -80% Dano (1 Turno)   | Consecration          |
-| 15  | **Avatar of Light**   | 150 Mana | 1x comb. | Forma angelical, cura em área/turno, +200% stats     | Resurrection + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                            | Requer                |
+| --- | --------------------- | -------- | -------- | ------------ | ---------------------------------------------------- | --------------------- |
+| 1   | **Holy Strike**       | 15 Mana  | 1 Turno  | **70**       | Ataque sagrado, 70 dano + 30 HP de cura própria      | Nível 1               |
+| 2   | **Devotion Aura**     | 20 Mana  | Passiva  | -            | Aliados em 12m ganham +15% Defense permanente        | Nível 1               |
+| 3   | **Holy Light**        | 30 Mana  | 2 Turnos | 200 HP Heal  | Cura aliado em 200 HP                                | Holy Strike           |
+| 4   | **Shield of Faith**   | 25 Mana  | 3 Turnos | 250 Shield   | Absorve 250 dano por 2 Turnos                        | Nível 2               |
+| 5   | **Hammer of Justice** | 35 Mana  | 3 Turnos | **100**      | Arremessa martelo, 100 dano + atordoa 1 Turno        | Holy Strike           |
+| 6   | **Divine Sacrifice**  | 40 Mana  | 4 Turnos | -            | Transfere 50% do dano de aliado para si por 3 Turnos | Holy Light            |
+| 7   | **Judgment**          | 45 Mana  | 4 Turnos | **32**       | Marca inimigo maligno, +60% dano contra ele          | Nível 4               |
+| 8   | **Resurrection**      | 80 Mana  | 1x comb. | 70% HP Heal  | Revive aliado com 70% HP (melhor que Druida)         | Holy Light            |
+| 9   | **Consecration**      | 50 Mana  | 5 Turnos | Debuff AoE   | Zona 10m, inimigos malignos -30% Attack por 4 Turnos | Nível 5               |
+| 10  | **Mirror Shield**     | 55 Mana  | 5 Turnos | -            | Próximos 5 ataques são refletidos 100%               | Shield of Faith       |
+| 11  | **Divine Wrath**      | 60 Mana  | 5 Turnos | **40**       | +100% Attack por 3 Turnos, ganha Mana ao atacar      | Hammer of Justice     |
+| 12  | **Grand Blessing**    | 70 Mana  | 6 Turnos | -            | Todos aliados em 15m ganham +30% stats (3 Turnos)    | Devotion Aura         |
+| 13  | **Vow of Vengeance**  | 65 Mana  | 6 Turnos | **50**       | Se aliado morrer próximo, ganha +150% Attack         | Judgment              |
+| 14  | **Sanctuary**         | 75 Mana  | 8 Turnos | -            | Cria zona 12m, aliados recebem -80% Dano (1 Turno)   | Consecration          |
+| 15  | **Avatar of Light**   | 150 Mana | 1x comb. | **60**       | Forma angelical, cura em área/turno, +200% stats     | Resurrection + Lvl 12 |
 
 ### 🛡️ Skills Passivas (15)
 
@@ -4621,23 +4625,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🌑 Skills Ativas (15)
 
-| #   | Nome                 | Custo    | Cooldown | Descrição                                            | Requer                    |
-| --- | -------------------- | -------- | -------- | ---------------------------------------------------- | ------------------------- |
-| 1   | **Shadow Bolt**      | 20 Mana  | 1 Turno  | Projétil sombrio, 75 dano necrótico, drena 20 HP     | Nível 1                   |
-| 2   | **Raise Skeleton**   | 30 Mana  | 1 Turno  | Transforma cadáver em Esqueleto (dura 8 Turnos)      | Nível 1                   |
-| 3   | **Drain Life**       | 25 Mana  | 2 Turnos | Canaliza 1 Turno, drena 40 HP/t do alvo              | Shadow Bolt               |
-| 4   | **Summon Zombie**    | 50 Mana  | 4 Turnos | Invoca Zumbi resistente (dura 10 Turnos)             | Raise Skeleton            |
-| 5   | **Curse of Frailty** | 30 Mana  | 3 Turnos | Alvo perde -40% Attack por 3 Turnos                  | Nível 3                   |
-| 6   | **Corpse Explosion** | 40 Mana  | 3 Turnos | Detona cadáver, 150 dano em 8m                       | Raise Skeleton            |
-| 7   | **Bone Shield**      | 35 Mana  | 4 Turnos | Absorve 200 dano, dura até quebrar                   | Nível 4                   |
-| 8   | **Pestilence**       | 45 Mana  | 5 Turnos | Zona 10m, 10 dano/t necrótico, se espalha            | Drain Life                |
-| 9   | **Summon Wraith**    | 70 Mana  | 6 Turnos | Invoca fantasma que ignora Defense física (6 Turnos) | Summon Zombie             |
-| 10  | **Death's Touch**    | 50 Mana  | 4 Turnos | Instakill inimigo não-elite com HP < 20%             | Drain Life                |
-| 11  | **Army of the Dead** | 100 Mana | 1x comb. | Invoca 3 esqueletos simultaneamente (6 Turnos)       | Summon Wraith             |
-| 12  | **Dark Pact**        | 60 Mana  | 5 Turnos | Sacrifica 30% HP, ganha +80% dano mágico (4 Turnos)  | Nível 7                   |
-| 13  | **Necrosis**         | 55 Mana  | 5 Turnos | DoT massivo, 80 dano/t por 3 Turnos, gera cadáver    | Pestilence                |
-| 14  | **Lich Form**        | 80 Mana  | 8 Turnos | Transforma em Lich, imune a físico, +100% dano (4t)  | Dark Pact                 |
-| 15  | **Dark Apocalypse**  | 200 Mana | 1x comb. | Reanima todos cadáveres (Max 3) permanentes          | Army of the Dead + Lvl 12 |
+| #   | Nome                 | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                            | Requer                    |
+| --- | -------------------- | -------- | -------- | ------------ | ---------------------------------------------------- | ------------------------- |
+| 1   | **Shadow Bolt**      | 20 Mana  | 1 Turno  | **75**       | Projétil sombrio, 75 dano necrótico, drena 20 HP     | Nível 1                   |
+| 2   | **Raise Skeleton**   | 30 Mana  | 1 Turno  | Summon       | Transforma cadáver em Esqueleto (dura 8 Turnos)      | Nível 1                   |
+| 3   | **Drain Life**       | 25 Mana  | 2 Turnos | **40/t**     | Canaliza 1 Turno, drena 40 HP/t do alvo              | Shadow Bolt               |
+| 4   | **Summon Zombie**    | 50 Mana  | 4 Turnos | Summon       | Invoca Zumbi resistente (dura 10 Turnos)             | Raise Skeleton            |
+| 5   | **Curse of Frailty** | 30 Mana  | 3 Turnos | Debuff       | Alvo perde -40% Attack por 3 Turnos                  | Nível 3                   |
+| 6   | **Corpse Explosion** | 40 Mana  | 3 Turnos | **150 AoE**  | Detona cadáver, 150 dano em 8m                       | Raise Skeleton            |
+| 7   | **Bone Shield**      | 35 Mana  | 4 Turnos | 200 Shield   | Absorve 200 dano, dura até quebrar                   | Nível 4                   |
+| 8   | **Pestilence**       | 45 Mana  | 5 Turnos | **10/t DoT** | Zona 10m, 10 dano/t necrótico, se espalha            | Drain Life                |
+| 9   | **Summon Wraith**    | 70 Mana  | 6 Turnos | Summon       | Invoca fantasma que ignora Defense física (6 Turnos) | Summon Zombie             |
+| 10  | **Death's Touch**    | 50 Mana  | 4 Turnos | Fatal        | Instakill inimigo não-elite com HP < 20%             | Drain Life                |
+| 11  | **Army of the Dead** | 100 Mana | 1x comb. | Summon x3    | Invoca 3 esqueletos simultaneamente (6 Turnos)       | Summon Wraith             |
+| 12  | **Dark Pact**        | 60 Mana  | 5 Turnos | **36**       | Sacrifica 30% HP, ganha +80% dano mágico (4 Turnos)  | Nível 7                   |
+| 13  | **Necrosis**         | 55 Mana  | 5 Turnos | **80/t DoT** | DoT massivo, 80 dano/t por 3 Turnos, gera cadáver    | Pestilence                |
+| 14  | **Lich Form**        | 80 Mana  | 8 Turnos | **40**       | Transforma em Lich, imune a físico, +100% dano (4t)  | Dark Pact                 |
+| 15  | **Dark Apocalypse**  | 200 Mana | 1x comb. | Summon Max   | Reanima todos cadáveres (Max 3) permanentes          | Army of the Dead + Lvl 12 |
 
 ### 💀 Skills Passivas (15)
 
@@ -4665,23 +4669,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🎶 Skills Ativas (15)
 
-| #   | Nome                   | Custo    | Cooldown   | Descrição                                            | Requer               |
-| --- | ---------------------- | -------- | ---------- | ---------------------------------------------------- | -------------------- |
-| 1   | **War Song**           | 15 Mana  | Sustentada | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1              |
-| 2   | **Dissonant Chord**    | 20 Mana  | 1 Turno    | Nota musical, 60 dano + confunde por 1 Turno         | Nível 1              |
-| 3   | **Healing Lullaby**    | 25 Mana  | Sustentada | Canta, aliados 15m curam HP a cada Turno             | War Song             |
-| 4   | **Inspiring Shout**    | 30 Mana  | 4 Turnos   | Todos aliados ganham +30% Speed por 3 Turnos         | Nível 2              |
-| 5   | **Throwing Knife**     | 20 Mana  | 1 Turno    | Arremessa faca, 50 dano, 3 cargas                    | Dissonant Chord      |
-| 6   | **Anthem of Stalwart** | 35 Mana  | Sustentada | Canta, aliados 15m ganham +30% Defense               | Healing Lullaby      |
-| 7   | **Devastating Solo**   | 40 Mana  | 4 Turnos   | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Dissonant Chord      |
-| 8   | **Rally Allies**       | 40 Mana  | 5 Turnos   | Aliados ganham Turno Extra Imediato (1x combate)     | Inspiring Shout      |
-| 9   | **Ballad of Regen**    | 50 Mana  | Sustentada | Canta, aliados 15m regeneram HP a cada Turno         | Anthem of Stalwart   |
-| 10  | **Siren's Song**       | 45 Mana  | 5 Turnos   | Encanta inimigos 12m (3 alvos), perdem próximo Turno | Devastating Solo     |
-| 11  | **Grand Symphony**     | 60 Mana  | 6 Turnos   | Todos aliados ganham +40% stats (3 Turnos)           | Ballad of Regen      |
-| 12  | **Counter-Melody**     | 50 Mana  | 5 Turnos   | Cancela buffs inimigos em 20m                        | Siren's Song         |
-| 13  | **Heroic Saga**        | 70 Mana  | 8 Turnos   | Aliado ignora dano de 2 ataques recebidos            | Grand Symphony       |
-| 14  | **Sonic Wave**         | 80 Mana  | 6 Turnos   | Cone 25m, 200 dano + knock-back 10m                  | Devastating Solo     |
-| 15  | **Requiem**            | 150 Mana | 1x comb.   | Inimigos -50% stats, Aliados +100% (3 Turnos)        | Heroic Saga + Lvl 12 |
+| #   | Nome                   | Custo    | Cooldown   | Ex: Dmg (L1) | Descrição                                            | Requer               |
+| --- | ---------------------- | -------- | ---------- | ------------ | ---------------------------------------------------- | -------------------- |
+| 1   | **War Song**           | 15 Mana  | Sustentada | **24 Buff**  | Canta, aliados 15m ganham +20% Attack (Gasta turno)  | Nível 1              |
+| 2   | **Dissonant Chord**    | 20 Mana  | 1 Turno    | **60**       | Nota musical, 60 dano + confunde por 1 Turno         | Nível 1              |
+| 3   | **Healing Lullaby**    | 25 Mana  | Sustentada | AoE Heal     | Canta, aliados 15m curam HP a cada Turno             | War Song             |
+| 4   | **Inspiring Shout**    | 30 Mana  | 4 Turnos   | -            | Todos aliados ganham +30% Speed por 3 Turnos         | Nível 2              |
+| 5   | **Throwing Knife**     | 20 Mana  | 1 Turno    | **150**      | Arremessa faca, 50 dano, 3 cargas                    | Dissonant Chord      |
+| 6   | **Anthem of Stalwart** | 35 Mana  | Sustentada | -            | Canta, aliados 15m ganham +30% Defense               | Healing Lullaby      |
+| 7   | **Devastating Solo**   | 40 Mana  | 4 Turnos   | **480 AoE**  | Toca solo, 15m AoE (até 4 alvos), 120 dano           | Dissonant Chord      |
+| 8   | **Rally Allies**       | 40 Mana  | 5 Turnos   | -            | Aliados ganham Turno Extra Imediato (1x combate)     | Inspiring Shout      |
+| 9   | **Ballad of Regen**    | 50 Mana  | Sustentada | AoE Regen    | Canta, aliados 15m regeneram HP a cada Turno         | Anthem of Stalwart   |
+| 10  | **Siren's Song**       | 45 Mana  | 5 Turnos   | -            | Encanta inimigos 12m (3 alvos), perdem próximo Turno | Devastating Solo     |
+| 11  | **Grand Symphony**     | 60 Mana  | 6 Turnos   | **28 Buff**  | Todos aliados ganham +40% stats (3 Turnos)           | Ballad of Regen      |
+| 12  | **Counter-Melody**     | 50 Mana  | 5 Turnos   | -            | Cancela buffs inimigos em 20m                        | Siren's Song         |
+| 13  | **Heroic Saga**        | 70 Mana  | 8 Turnos   | -            | Aliado ignora dano de 2 ataques recebidos            | Grand Symphony       |
+| 14  | **Sonic Wave**         | 80 Mana  | 6 Turnos   | **200 AoE**  | Cone 25m, 200 dano + knock-back 10m                  | Devastating Solo     |
+| 15  | **Requiem**            | 150 Mana | 1x comb.   | **40 Buff**  | Inimigos -50% stats, Aliados +100% (3 Turnos)        | Heroic Saga + Lvl 12 |
 
 ### 🎵 Skills Passivas (15)
 
@@ -4709,23 +4713,23 @@ No workspace F2, painel P2 mostra a árvore de skills interativa onde o Majesty 
 
 ### 🥋 Skills Ativas (15)
 
-| #   | Nome                  | Custo    | Cooldown | Descrição                                                 | Requer                 |
-| --- | --------------------- | -------- | -------- | --------------------------------------------------------- | ---------------------- |
-| 1   | **Palm Strike**       | 10 Mana  | 1 Turno  | Soco rápido, 55 dano, gera 1 combo                        | Nível 1                |
-| 2   | **Spinning Kick**     | 15 Mana  | 1 Turno  | Ataque 360°, 70 dano, atinge até 4 inimigos               | Palm Strike            |
-| 3   | **Wind Dash**         | 20 Mana  | 1 Turno  | Teleporta 15m instantly, gera 2 combos                    | Nível 2                |
-| 4   | **Dragon Punch**      | 25 Mana  | 2 Turnos | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos | Spinning Kick          |
-| 5   | **Meditation**        | 0 Mana   | 4 Turnos | Regenera 50 Mana, gasta turno                             | Nível 3                |
-| 6   | **Hundred-Hand Slap** | 30 Mana  | 3 Turnos | Ataque frenético em alvo único, 10 hits                   | Dragon Punch           |
-| 7   | **Paralyzing Touch**  | 35 Mana  | 3 Turnos | Paralisa inimigo por 1 Turno                              | Nível 4                |
-| 8   | **Cyclone**           | 40 Mana  | 4 Turnos | Gira rapidamente, atinge todos adjacentes (max 5)         | Spinning Kick          |
-| 9   | **Mana Aura**         | 45 Mana  | 4 Turnos | +50% Velocidade de Ação por 3 Turnos, consome 5 combos    | Hundred-Hand Slap      |
-| 10  | **Spirit Step**       | 50 Mana  | 5 Turnos | Teleporta para qualquer local em 30m                      | Wind Dash              |
-| 11  | **Fist of Fury**      | 60 Mana  | 5 Turnos | Golpe massivo, 300 dano, consome combos (+20 dano/c)      | Hundred-Hand Slap      |
-| 12  | **Transcendence**     | 70 Mana  | 8 Turnos | Imune a dano por 1 Turno, atravessa inimigos              | Meditation             |
-| 13  | **Mana Burst**        | 80 Mana  | 5 Turnos | Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back   | Mana Aura              |
-| 14  | **Dragon Form**       | 90 Mana  | 1x comb. | Espírito, +150% Attack, ignora terreno, 3 Turnos          | Fist of Fury           |
-| 15  | **Enlightenment**     | 150 Mana | 1x comb. | Velocidade 2x, +50% Esquiva, Combos infinitos (3 Turnos)  | Transcendence + Lvl 12 |
+| #   | Nome                  | Custo    | Cooldown | Ex: Dmg (L1) | Descrição                                                 | Requer                 |
+| --- | --------------------- | -------- | -------- | ------------ | --------------------------------------------------------- | ---------------------- |
+| 1   | **Palm Strike**       | 10 Mana  | 1 Turno  | **55**       | Soco rápido, 55 dano, gera 1 combo                        | Nível 1                |
+| 2   | **Spinning Kick**     | 15 Mana  | 1 Turno  | **280 AoE**  | Ataque 360°, 70 dano, atinge até 4 inimigos               | Palm Strike            |
+| 3   | **Wind Dash**         | 20 Mana  | 1 Turno  | -            | Teleporta 15m instantly, gera 2 combos                    | Nível 2                |
+| 4   | **Dragon Punch**      | 25 Mana  | 2 Turnos | **120**      | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos | Spinning Kick          |
+| 5   | **Meditation**        | 0 Mana   | 4 Turnos | -            | Regenera 50 Mana, gasta turno                             | Nível 3                |
+| 6   | **Hundred-Hand Slap** | 30 Mana  | 3 Turnos | **200**      | Ataque frenético em alvo único, 10 hits                   | Dragon Punch           |
+| 7   | **Paralyzing Touch**  | 35 Mana  | 3 Turnos | -            | Paralisa inimigo por 1 Turno                              | Nível 4                |
+| 8   | **Cyclone**           | 40 Mana  | 4 Turnos | **100 AoE**  | Gira rapidamente, atinge todos adjacentes (max 5)         | Spinning Kick          |
+| 9   | **Mana Aura**         | 45 Mana  | 4 Turnos | -            | +50% Velocidade de Ação por 3 Turnos, consome 5 combos    | Hundred-Hand Slap      |
+| 10  | **Spirit Step**       | 50 Mana  | 5 Turnos | -            | Teleporta para qualquer local em 30m                      | Wind Dash              |
+| 11  | **Fist of Fury**      | 60 Mana  | 5 Turnos | **300**      | Golpe massivo, 300 dano, consome combos (+20 dano/c)      | Hundred-Hand Slap      |
+| 12  | **Transcendence**     | 70 Mana  | 8 Turnos | -            | Imune a dano por 1 Turno, atravessa inimigos              | Meditation             |
+| 13  | **Mana Burst**        | 80 Mana  | 5 Turnos | **900 AoE**  | Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back   | Mana Aura              |
+| 14  | **Dragon Form**       | 90 Mana  | 1x comb. | **50**       | Espírito, +150% Attack, ignora terreno, 3 Turnos          | Fist of Fury           |
+| 15  | **Enlightenment**     | 150 Mana | 1x comb. | -            | Velocidade 2x, +50% Esquiva, Combos infinitos (3 Turnos)  | Transcendence + Lvl 12 |
 
 ### 🧘 Skills Passivas (15)
 
@@ -4812,7 +4816,9 @@ interface Hero {
   // Identificação
   id: string;
   name: string;
-  class: HeroClass; // WARRIOR, MAGE, ARCHER, ROGUE, DRUID, ELF, PALADIN, NECROMANCER, BARD, MONK
+  class: HeroClass; // WARRIOR, MAGE, etc.
+  sex: "M" | "F"; // Gerado no recrutamento
+  ageGroup: "YOUNG" | "ADULT" | "ELDERLY"; // Impacto visual e narrativo
 
   // Atributos Físicos
   stats: {
@@ -4827,11 +4833,11 @@ interface Hero {
 
   // Personalidade (P.E.C.M.A.)
   personality: {
-    power: number; // Audácia (0.0 - 1.0)
-    ethics: number; // Ética (0.0 - 1.0)
-    resource: number; // Ganância (0.0 - 1.0)
-    mind: number; // Intelecto (0.0 - 1.0)
-    affect: number; // Humor (0.0 - 1.0)
+    proactivity: number;
+    ethics: number;
+    cooperation: number;
+    mind: number;
+    affect: number;
   };
 
   // Estados Temporários
@@ -4853,16 +4859,16 @@ interface Hero {
   };
 
   // Progressão
-  level: number;
+  level: number; // Teto Máximo: Lvl 10 (Max Cap)
   xp: number;
-  unlockedSkills: Skill[];
+  unlockedSkills: Skill[]; // Skills são liberadas até o Lvl 10
 
   // Background Procedural
   background: {
-    birthplace: string;
-    motivation: string;
-    fear: string;
-    biography: string; // Gerado por LLM
+    birthplace: string; // Tag de local
+    originEvent: string; // Tag de acontecimento
+    motivation: string; // Tag de objetivo
+    biography: string; // Resumo rico gerado por LLM
   };
 }
 ```
@@ -5597,7 +5603,56 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.5 Sistema de Loot e Economia
+## 4.6 Geração Procedural de Biografia e Identidade (LLM)
+
+Sempre que o jogador escolhe um herói de uma determinada classe para recrutar, o sistema gera instantaneamente uma **identidade única**. Este processo combina variáveis fixas, sorteios em tabelas de tags e processamento de linguagem natural (LLM).
+
+### 1. Definição da Identidade Base
+
+No momento do clique em "Recrutar [Classe]", o motor define os pilares biológicos e narrativos:
+
+- **Sexo:** Masculino (50%) ou Feminino (50%). Define o modelo visual e pronomes na biografia.
+- **Faixa Etária:**
+  - **Jovem (30%):** Visual ágil, biografia focada em "aprendizado" ou "fuga de casa".
+  - **Adulto (60%):** Visual padrão, biografia focada em "carreira militar", "mercenarismo" ou "dever".
+  - **Idoso (10%):** Visual experiente/grisalho, biografia focada em "redenção", "última jornada" ou "mestre caído".
+
+### 2. A "Sopa de Tags" (Backstory Seeds)
+
+O sistema sorteia 3 tags principais da base de dados do mundo para servir de prompt para a LLM:
+
+| Categoria                | Exemplo de Tags (Sopa de Tags)                                                                                                          |
+| :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| **Locais de Nascimento** | Vila de Oakhaven, Cidadela de Ferro, Pântano das Sombras, Deserto de Areia Viva, Arquipélago Místico, Floresta de Prata.                |
+| **Acontecimentos**       | Sobrevivente de massacre, Ex-guarda real expulso, Buscador de vingança familiar, Órfão da Grande Guerra, Erudito em busca de relíquias. |
+| **Traços Destino**       | Nobre caído em desgraça, Camponês dotado de magia, Amaldiçoado por um Lich, Mercenário em busca de ouro, Escolhido por uma profecia.    |
+
+### 3. Integração com P.E.C.M.A.
+
+A biografia gerada **DEVE** refletir os valores sorteados para o herói.
+
+- _Se o herói sorteou Ethics 0.1 (Sem Escrúpulos), a LLM incluirá fatos sobre traição ou pragmatismo cruel em sua história._
+
+### 4. Fluxo de Geração (Prompt Interno)
+
+O jogo envia para a IA o seguinte contexto estruturado:
+
+> "Gere um parágrafo de biografia (300 caracteres) para um herói da classe [CLASSE], sexo [SEXO], idade [IDADE]. Ele nasceu em [LOCAL], passou por [ACONTECIMENTO] e sua principal motivação é [TRAÇO]. Sua personalidade é marcada por [VETOR P.E.C.M.A. DOMINANTE]."
+
+### 5. Exemplo de Resultado Final (In-Game)
+
+**Herói:** Valerius
+**Classe:** Paladino | **Sexo:** M | **Idade:** Idoso
+**Tags:** Cidadela de Ferro + Sobrevivente de massacre + Nobre caído.
+**P.E.C.M.A.:** Ethics 0.9 (Alma Pura), Proactivity 0.7.
+
+**Biografia Gerada:**
+
+> "Antigo senhor da Cidadela de Ferro, Valerius viu seu linhagem ser dizimada em uma noite de traição. Único sobrevivente, abdicou de seus títulos para seguir a senda da luz. Apesar da idade avançada e do peso da perda, sua alma permanece pura, buscando proteger os inocentes e restaurar a honra de sua família através do sacrifício e do dever inabalável."
+
+---
+
+## 4.7 Sistema de Loot e Economia
 
 ### Loot Instanciado (Individual)
 
@@ -7121,35 +7176,34 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 ```
 ┌─────────────────────────────────────────────┐
 │ CICLO 1: "Primavera" (Dias 1-2)            │
+│ - Progressão: Monstros Lvl 1-2             │
 │ - Monstros: Tier 1 (Goblins, Lobos)        │
 │ - Clima: Ameno, chuvas leves                │
 │ - Eventos: Tutoriais, expansão básica      │
-│ - Tom: Esperançoso, construção             │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 2: "Verão Vermelho" (Dias 3-4)       │
+│ - Progressão: Monstros Lvl 3-4             │
 │ - Monstros: Tier 2 (Ogros, Trolls)         │
 │ - Clima: Calor extremo, tempestades        │
 │ - Eventos: Invasões massivas, traições     │
-│ - Tom: Conflito intenso, guerras           │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 3: "Inverno" (Dias 5-6)              │
+│ - Progressão: Monstros Lvl 5-6             │
 │ - Monstros: Tier 2-3 (Gigantes, Liches)    │
 │ - Clima: Neve, nevasca, gelo               │
 │ - Eventos: Fome, primeira Lua de Sangue    │
-│ - Tom: Sobrevivência, desespero            │
 └─────────────────────────────────────────────┘
            ↓
 ┌─────────────────────────────────────────────┐
 │ CICLO 4: "Apocalipse" (Dias 7-8+)          │
+│ - Progressão: Monstros Lvl 7-8 (Max)       │
+│ - Elites: Heróis/Bosses chegam ao Lvl 10   │
 │ - Monstros: Tier 3 (Dragões, Demônios)     │
-│ - Clima: Lua de Sangue, Eclipse            │
 │ - Evento Final: Castelo Amaldiçoado        │
-│ - Tom: Épico, climático, fim dos tempos    │
-│ - Duração: Indefinida (até vitória/derrota)│
 └─────────────────────────────────────────────┘
 ```
 
@@ -7580,9 +7634,9 @@ O jogo **ajusta a dificuldade** baseado na performance do jogador.
 const difficultyMultiplier = 1.0 + (avgHeroLevel / 10) - (heroDeaths * 0.05);
 
 // Exemplo:
-// Heróis nível médio: 5
-// Mortes totais: 3
-difficultyMultiplier = 1.0 + (5/10) - (3*0.05) = 1.35
+// Heróis nível médio: 4 (Max: 10)
+// Mortes totais: 2
+difficultyMultiplier = 1.0 + (4/10) - (2*0.05) = 1.30
 
 // Todos monstros spawnam com:
 monsterHP *= difficultyMultiplier; // +35% HP
@@ -8353,12 +8407,23 @@ Este documento serve como a base de dados definitiva para a implementação do s
 
 ---
 
-## 🧮 1. FÓRMULAS DE ESCALONAMENTO (CORE)
+## 🧮 1. REGRAS DE ESCALONAMENTO (CAP 10)
+
+O nível (**NMG**) é o multiplicador central de poder. O teto máximo do jogo é o **Level 10**.
+
+| Ciclo  | Nível (Comum) | Nível (Elites/Boss/Heróis) | Crescimento de Stats (Global) |
+| :----- | :------------ | :------------------------- | :---------------------------- |
+| **C1** | 1 - 2         | 1 - 2                      | Base (1.0x)                   |
+| **C2** | 3 - 4         | 3 - 5                      | +50% HP/Atk                   |
+| **C3** | 5 - 6         | 6 - 8                      | +150% HP/Atk                  |
+| **C4** | 7 - 8         | 9 - **10 (MAX CAP)**       | +300% HP/Atk (Lua de Sangue)  |
+
+### Fórmulas de Cálculo
 
 - **HP Base:** `(NMG * 50) * Multiplicador_HP * (1 + (Ciclo * 0.2))`
 - **Dano Base:** `(NMG * 8) * Multiplicador_ATK * (1 + (Ciclo * 0.1))`
 - **Defesa:** `(NMG * 2) * Multiplicador_DEF`
-- **Velocidade de Ação:** `100 / (1 + Bonus_Velocidade)` (Segundos entre turnos)
+- **Velocidade:** `100 / (1 + Bonus_Vel)` (Segundos/Turno)
 
 ---
 
@@ -8366,18 +8431,18 @@ Este documento serve como a base de dados definitiva para a implementação do s
 
 _Multiplicadores: HP x10 | ATK x3 | DEF x2 | Skills: 3_
 
-| Boss           | Visual Detalhado                                       | Skill 1 (Dano/Efeito/CD)                        | Skill 2 (Dano/Efeito/CD)                     | Skill 3 (Dano/Efeito/CD)                       |
-| :------------- | :----------------------------------------------------- | :---------------------------------------------- | :------------------------------------------- | :--------------------------------------------- |
-| **Aeternus**   | Dragão carmesim colossal, escamas de obsidiana.        | **Sopro:** 150% Mag AoE + DoT. CD: 15s          | **Terror:** Stun Global 2s. CD: 20s          | **Meteoros:** 200% Mag em 3 alvos. CD: 12s     |
-| **Malphas**    | Esqueleto gigante em armadura de osso negro flutuante. | **Erguer:** Invoca 4 Esqueletos. CD: 30s        | **Dreno:** Rouba 10% HP. CD: 18s             | **Peste:** DoT AoE + -50% cura. CD: 25s        |
-| **Grok**       | Gigante de 12m com braços de pedra e peles.            | **Esmagar:** 180% Phys + 3s Stun. CD: 10s       | **Arremesso:** 120% Phys Retaguarda. CD: 8s  | **Fúria:** Atk Speed +100% se HP <40%.         |
-| **Xandira**    | Aranha com torso humanoide pálido e muitos olhos.      | **Casulo:** Stun alvo por 5s. CD: 14s           | **Veneno:** DoT 8%/s por 5s. CD: 10s         | **Prole:** Invoca 8 Aranhas. CD: 20s           |
-| **Hydros**     | Serpente marinha com barbatanas de serra azul neon.    | **Tsunami:** Pushback + Stun + 80% Mag. CD: 18s | **Jato:** 150% Mag em linha. CD: 10s         | **Vórtice:** Puxa alvos + Fuga Bloq. CD: 30s   |
-| **Cyrus**      | Cavaleiro real negro, capa rasgada, espada de fogo.    | **Estocada:** 220% Phys + 50% Crit. CD: 6s      | **Comando:** Invoca 2 Elites. CD: 25s        | **Ripostar:** Reflete 30% dano por 5s. CD: 20s |
-| **Valac**      | Demônio de lava com chicote de chamas.                 | **Chicote:** 110% Phys AoE + Queima. CD: 5s     | **Portal:** Invoca 2 Diabretes. CD: 15s      | **Corrupção:** -0.2 Ethics (Temp). CD: 40s     |
-| **Yggdrasil**  | Árvore distorcida com rostos negros no tronco.         | **Raízes:** Enraíza todos + Dreno Mana. CD: 20s | **Esporos:** Confusão (50% azar) 4s. CD: 15s | **Fúria:** 140% Mag estacas AoE. CD: 10s       |
-| **Magmator**   | Núcleo de cristal flutuante em lava viva.              | **Explosão:** 130% Mag AoE + Knockback. CD: 12s | **Escudo:** -80% dano recebido (4s). CD: 20s | **Terremoto:** Stun 2s AoE + 70% Phys. CD: 15s |
-| **Observador** | Olho central gigante com tentáculos oculares.          | **Raio:** 250% Mag (Ignora 100% Def). CD: 20s   | **Salto:** Fica invisível por 2s. CD: 15s    | **Loucura:** Mind = 0 por 10s. CD: 30s         |
+| Boss          | Atk | Dmg (%) | Ex: Dmg (L1) | Visual Detalhado                                       | Skill 1 (Dano/Efeito/CD)                        | Skill 2 (Dano/Efeito/CD)                     | Skill 3 (Dano/Efeito/CD)                       |
+| :------------ | :-- | :------ | :----------- | :----------------------------------------------------- | :---------------------------------------------- | :------------------------------------------- | :--------------------------------------------- |
+| **Aeternus**  | Mag | 150%    | **36**       | Dragão carmesim colossal, escamas de obsidiana.        | **Sopro:** 150% Mag AoE + DoT. CD: 15s          | **Terror:** Stun Global 2s. CD: 20s          | **Meteoros:** 180% Mag em 3 alvos. CD: 12s     |
+| **Malphas**   | Mag | 120%    | **29**       | Esqueleto gigante em armadura de osso negro flutuante. | **Erguer:** Invoca 4 Esqueletos. CD: 30s        | **Dreno:** Rouba 10% HP. CD: 18s             | **Peste:** DoT AoE + -50% cura. CD: 25s        |
+| **Grok**      | Phy | 180%    | **43**       | Gigante de 12m com braços de pedra e peles.            | **Esmagar:** 180% Phys + 3s Stun. CD: 10s       | **Arremesso:** 120% Phys Retaguarda. CD: 8s  | **Fúria:** Atk Speed +100% se HP <40%.         |
+| **Xandira**   | Phy | 110%    | **26**       | Aranha com torso humanoide pálido e muitos olhos.      | **Casulo:** Stun alvo por 5s. CD: 14s           | **Veneno:** DoT 8%/s por 5s. CD: 10s         | **Prole:** Invoca 8 Aranhas. CD: 20s           |
+| **Hydros**    | Mag | 130%    | **31**       | Serpente marinha com barbatanas de serra azul neon.    | **Tsunami:** Pushback + Stun + 80% Mag. CD: 18s | **Jato:** 150% Mag em linha. CD: 10s         | **Vórtice:** Puxa alvos + Fuga Bloq. CD: 30s   |
+| **Cyrus**     | Phy | 140%    | **34**       | Cavaleiro real negro, capa rasgada, espada de fogo.    | **Estocada:** 200% Phys + 50% Crit. CD: 6s      | **Comando:** Invoca 2 Elites. CD: 25s        | **Ripostar:** Reflete 30% dano por 5s. CD: 20s |
+| **Valac**     | Mix | 120%    | **29**       | Demônio de lava com chicote de chamas.                 | **Chicote:** 110% Phys AoE + Queima. CD: 5s     | **Portal:** Invoca 2 Diabretes. CD: 15s      | **Corrupção:** -0.2 Ethics (Temp). CD: 40s     |
+| **Yggdrasil** | Mag | 100%    | **24**       | Árvore distorcida com rostos negros no tronco.         | **Raízes:** Enraíza todos + Dreno Mana. CD: 20s | **Esporos:** Confusão (50% azar) 4s. CD: 15s | **Fúria:** 140% Mag estacas AoE. CD: 10s       |
+| **Magmator**  | Mag | 140%    | **34**       | Núcleo de cristal flutuante em lava viva.              | **Explosão:** 130% Mag AoE + Knockback. CD: 12s | **Escudo:** -80% dano recebido (4s). CD: 20s | **Terremoto:** Stun 2s AoE + 70% Phys. CD: 15s |
+| **Oculus**    | Mag | 160%    | **38**       | Olho central gigante com tentáculos oculares.          | **Raio:** 200% Mag (Ignora 100% Def). CD: 20s   | **Salto:** Fica invisível por 2s. CD: 15s    | **Loucura:** Mind = 0 por 10s. CD: 30s         |
 
 ---
 
@@ -8385,58 +8450,58 @@ _Multiplicadores: HP x10 | ATK x3 | DEF x2 | Skills: 3_
 
 _Multiplicadores: HP x4 | ATK x2 | DEF x1.5 | Skills: 2_
 
-| ID      | Nome                 | Tipo    | Visual                                  | Skill 1 (Dano/Efeito/CD)         | Skill 2 (Dano/Efeito/CD)         |
-| :------ | :------------------- | :------ | :-------------------------------------- | :------------------------------- | :------------------------------- |
-| **M1**  | Cavaleiro Sem Cabeça | Phys    | Cavaleiro espectral com abóbora.        | Carga: 130% + Knockback (8s)     | Arremesso: 100% AoE (12s)        |
-| **M2**  | Lich Menor           | Mag     | Esqueleto com mantos e cajado.          | Seta Gelo: 110% + Slow (5s)      | Barreira: Escudo 20% HP (20s)    |
-| **M3**  | Banshee Anciã        | Mag     | Espectro pálido com mandíbula caída.    | Grito: Silence 4s (15s)          | Pavor: Fear 3s (18s)             |
-| **M4**  | Wraith de Elite      | Mag     | Sombra translúcida gigante.             | Dreno: 15% HP Dreno (12s)        | Invisível: 3s (25s)              |
-| **M5**  | Carniçal Rei         | Phys    | Zumbi enorme com garras roxas.          | Mordida: 120% + Infecção (8s)    | Frenesi: Atk Speed +50% (15s)    |
-| **M6**  | Múmia do Faraó       | Mag     | Enrolada em ouro e faixas negras.       | Maldição: -30% Stats (20s)       | Prisão: Stun 2s (12s)            |
-| **M7**  | Esqueleto General    | Phys    | Armadura de placas completa.            | Comando: Buff Atk Aliados (15s)  | Golpe: 150% + Quebra Def (10s)   |
-| **M8**  | Vampiro Nobre        | Mag/Phy | Nobre pálido em traje de gala.          | Forma Morcego: Dodge +80% (5s)   | Sedução: Alvo não ataca (12s)    |
-| **M9**  | Sombra Voraz         | Mag     | Nuvem negra com dentes visíveis.        | Roubo Mana: 30 Mana (10s)        | Salto Sombrio: Blink (8s)        |
-| **M10** | Zumbi Gigante        | Phys    | Frankenstein de retalhos humanos.       | Arremesso: Lança cadáver (10s)   | Pancada: 140% + Stun (12s)       |
-| **M11** | Lobo Alfa Prata      | Phys    | Lobo enorme de pelagem branca.          | Uivo: Buff Atk Aliados (15s)     | Salto: 130% em longe (7s)        |
-| **M12** | Urso Corrompido      | Phys    | Urso com cristais roxos saindo.         | Abraço: Stun 4s no alvo (18s)    | Rugido: -20% Atk Medo (12s)      |
-| **M13** | Ent Ancião           | Phys    | Árvore com pernas e braços longos.      | Rocha: 140% AoE (10s)            | Raiz: Stun 2s (15s)              |
-| **M14** | Pantera Sombra       | Phys    | Pantera com fumaça negra.               | Furtivo: Hit 100% Crit (20s)     | Corte: Sangramento 5%/s (8s)     |
-| **M15** | Javali de Ferro      | Phys    | Javali com placas de metal crescidas.   | Investida: 160% + Stun (12s)     | Casco: Reflete 20% Dano Phys.    |
-| **M16** | Serpente Imperatriz  | Mag     | Cobra gigante com crista dourada.       | Olhar: Petrificação 3s (20s)     | Névoa: Veneno 4%/s AoE (10s)     |
-| **M17** | Grifo Tempestade     | Mag/Phy | Meio águia, meio leão, penas elétricas. | Mergulho: 150% + Choque (10s)    | Choque: 100% Mag AoE (15s)       |
-| **M18** | Aranha Brodeira      | Phys    | Aranha que "tece" armadilhas.           | Armadilha: Imobiliza 5s (12s)    | Picada: 180% Dano Único (8s)     |
-| **M19** | Verme de Areia       | Phys    | Verme segmentado gigante.               | Buraco: Puxa alvo pro solo (15s) | Cuspe: 100% Mag Ácido (8s)       |
-| **M20** | Planta Carnívora     | Mag     | Boca gigante floral com dentes.         | Chicote: Puxa alvo (8s)          | Esporos: Sono 4s (20s)           |
-| **M21** | Golem Obsidiana      | Phys    | Gigante de rocha negra brilhante.       | Pulso: Afasta alvos (12s)        | Regenerar: +10% HP (30s)         |
-| **M22** | Elemental Infernal   | Mag     | Fogo azulado com forma humana.          | Aura: 2%/s Dano em todos.        | Labareda: 120% Mag AoE (10s)     |
-| **M23** | Espírito Geada       | Mag     | Vulto de gelo translúcido.              | Prisão: Alvo congelado 3s (15s)  | Nevasca: Slow Global (25s)       |
-| **M24** | Djinn Corrompido     | Mag     | Gênio em névoa roxa.                    | Desejo: Debuff aleatório (15s)   | Choque: 140% Mag (8s)            |
-| **M25** | Sentinela Rúnico     | Phys    | Estátua com runas neon azuis.           | Raio: 150% Mag (10s)             | Barreira: Imune a Mag por 5s.    |
-| **M26** | Vulto Tempestade     | Mag     | Nuvem de trovão em movimento.           | Cadeia: Relâmpago 3 alvos (12s)  | Voo: Speed +50% (10s)            |
-| **M27** | Gárgula Patriarca    | Phys    | Estátua alada gigante.                  | Forma Pedra: Cura 15% (25s)      | Investida: 130% + Stun (10s)     |
-| **M28** | Arconte Luz          | Mag     | Entidade de pura luz amarela.           | Clarão: Stun 2s AoE (18s)        | Punição: 160% Mag (10s)          |
-| **M29** | Horror de Carne      | Phys    | Massa amorfa de braços e bocas.         | Regeneração: 2% HP/s.            | Multi-Atk: Ataca 2x (8s)         |
-| **M30** | Autômato Cerco       | Phys    | Robô de engrenagens e vapor.            | Canhão: 200% Phys fura Def.      | Pisotear: 100% Phys AoE (10s)    |
-| **M31** | Chefe Orc            | Phys    | Orc em armadura de espinhos.            | Grito: +20% Atk Aliados (15s)    | Salto: 140% + Stun (10s)         |
-| **M32** | Xamã Goblin          | Mag     | Máscara de crânio de dragão.            | Totem: Cura Aliados 5%/s (20s)   | Sapo: Transforma em sapo 4s.     |
-| **M33** | Capitão Mercenário   | Phys    | Armadura completa, espada longa.        | Bomba: Fumaça (Dodge 50%) (15s)  | Tiro: 120% Sangramento (8s)      |
-| **M34** | Arquimago            | Mag     | Manto roxo, flutuando.                  | Meteoro: 180% Mag AoE (15s)      | Imagem: Cria 2 clones fak.       |
-| **M35** | Grão-Assassino       | Phys    | Máscara ninja, dagas verdes.            | Veneno: DoT 10%/s (10s)          | Sumiço: Invisível 4s (20s)       |
-| **M36** | Inquisidor           | Mag     | Veste branca e prata.                   | Fogo Sagrado: 130% Mag (8s)      | Martelo: Stun 3s (15s)           |
-| **M37** | Lorde Ladino         | Phys    | Capa elegante, chapéu com pena.         | Roubo: Rouba Poção/Item (20s)    | Golpe Baixo: Stun 2s (10s)       |
-| **M38** | Bárbaro Sangrento    | Phys    | Sem camisa, machado gigante duplo.      | Fúria: Atk +50% (15s)            | Rodopio: 110% AoE Phys (8s)      |
-| **M39** | Cultista Caos        | Mag     | Túnica negra com olhos pintados.        | Portal: Invoca 2 Diabretes (20s) | Sacrifício: Dmg em si = AoE Mag. |
-| **M40** | Cavaleiro Negro      | Phys    | Armadura negra, olhos vermelhos.        | Puxão: Traz alvo pro melee (10s) | Aura: -20% Def Aliados.          |
-| **M41** | Succubus Rainha      | Mag     | Asas de morcego, vestes pretas.         | Charme: Alvo ataca aliado (20s)  | Chicote: 100% + Stun 1s (8s)     |
-| **M42** | Beholder Menor       | Mag     | Olho gigante flutuante.                 | Paralisia: Raio Stun 3s (15s)    | Debuff: -50% Atk Speed (12s)     |
-| **M43** | Minotauro            | Phys    | Homem-touro com machado.                | Carga: 150% + Knockback (10s)    | Parede: Separa grupo (20s)       |
-| **M44** | Medusa Anciã         | Mag     | Cabelos de cobra, calda serpente.       | Pedra: Petro (Stun 5s) (30s)     | Sopro: 110% Mag Veneno (10s)     |
-| **M45** | Kraken Jovem         | Phys    | Tentáculos saindo do chão/água.         | Tinta: Cega (Miss 80%) (15s)     | Mult: 4 atks de 40% (10s)        |
-| **M46** | Sereia Cantora       | Mag     | Parte peixe, parte humana bela.         | Canto: Sono 5s (25s)             | Onda: 120% Mag AoE (10s)         |
-| **M47** | Troll da Ponte       | Phys    | Troll de 4m cor de pedra.               | Regeneração: 5% HP/s.            | Rocha: 140% Phys (10s)           |
-| **M48** | Diabrete Mestre      | Mag     | Diabrete com tocha e poções.            | Piro: Fogo em todos (12s)        | Multi: Se divide em 3 (30s).     |
-| **M49** | Gorgona              | Phys    | Guerreira com escudo de serpente.       | Olhar: -50% Speed (10s)          | Cauda: 130% Phys Stun (12s)      |
-| **M50** | Quimera Real         | Mix     | Leão, Bode e Cobra em um corpo.         | Sopro: 140% Mag Fogo (12s)       | Mordida: 120% Phys Veneno.       |
+| ID      | Nome                   | Atk | Dmg (%) | Ex: Dmg (L1) | Visual                                  | Skill 1 (Dano/Efeito/CD)         | Skill 2 (Dano/Efeito/CD)         |
+| :------ | :--------------------- | :-- | :------ | :----------- | :-------------------------------------- | :------------------------------- | :------------------------------- |
+| **M1**  | **Headless Knight**    | Phy | 120%    | **19**       | Cavaleiro espectral com abóbora.        | Carga: 130% + Knockback (8s)     | Arremesso: 100% AoE (12s)        |
+| **M2**  | **Lesser Lich**        | Mag | 110%    | **18**       | Esqueleto com mantos e cajado.          | Seta Gelo: 110% + Slow (5s)      | Barreira: Escudo 20% HP (20s)    |
+| **M3**  | **Elder Banshee**      | Mag | 90%     | **14**       | Espectro pálido com mandíbula caída.    | Grito: Silence 4s (15s)          | Pavor: Fear 3s (18s)             |
+| **M4**  | **Elite Wraith**       | Mag | 100%    | **16**       | Sombra translúcida gigante.             | Dreno: 15% HP Dreno (12s)        | Invisível: 3s (25s)              |
+| **M5**  | **Ghoul King**         | Phy | 130%    | **21**       | Zumbi enorme com garras roxas.          | Mordida: 120% + Infecção (8s)    | Frenesi: Atk Speed +50% (15s)    |
+| **M6**  | **Pharaoh Mummy**      | Mag | 110%    | **18**       | Enrolada em ouro e faixas negras.       | Maldição: -30% Stats (20s)       | Prisão: Stun 2s (12s)            |
+| **M7**  | **Skeleton General**   | Phy | 140%    | **22**       | Armadura de placas completa.            | Comando: Buff Atk Aliados (15s)  | Golpe: 140% + Quebra Def (10s)   |
+| **M8**  | **Noble Vampire**      | Mix | 120%    | **19**       | Nobre pálido em traje de gala.          | Forma Morcego: Dodge +80% (5s)   | Sedução: Alvo não ataca (12s)    |
+| **M9**  | **Ravenous Shadow**    | Mag | 110%    | **18**       | Nuvem negra com dentes visíveis.        | Roubo Mana: 30 Mana (10s)        | Salto Sombrio: Blink (8s)        |
+| **M10** | **Giant Zombie**       | Phy | 130%    | **21**       | Frankenstein de retalhos humanos.       | Arremesso: Lança cadáver (10s)   | Pancada: 140% + Stun (12s)       |
+| **M11** | **Silver Alpha Wolf**  | Phy | 125%    | **20**       | Lobo enorme de pelagem branca.          | Uivo: Buff Atk Aliados (15s)     | Salto: 130% em longe (7s)        |
+| **M12** | **Corrupted Bear**     | Phy | 135%    | **22**       | Urso com cristais roxos saindo.         | Abraço: Stun 4s no alvo (18s)    | Rugido: -20% Atk Medo (12s)      |
+| **M13** | **Elder Treant**       | Phy | 115%    | **18**       | Árvore com pernas e braços longos.      | Rocha: 140% AoE (10s)            | Raiz: Stun 2s (15s)              |
+| **M14** | **Shadow Panther**     | Phy | 130%    | **21**       | Pantera com fumaça negra.               | Furtivo: Hit 100% Crit (20s)     | Corte: Sangramento 5%/s (8s)     |
+| **M15** | **Iron Boar**          | Phy | 140%    | **22**       | Javali com placas de metal crescidas.   | Investida: 160% + Stun (12s)     | Casco: Reflete 20% Dano Phys.    |
+| **M16** | **Empress Serpent**    | Mag | 120%    | **19**       | Cobra gigante com crista dourada.       | Olhar: Petrificação 3s (20s)     | Névoa: Veneno 4%/s AoE (10s)     |
+| **M17** | **Storm Griffin**      | Mix | 130%    | **21**       | Meio águia, meio leão, penas elétricas. | Mergulho: 140% + Choque (10s)    | Choque: 100% Mag AoE (15s)       |
+| **M18** | **Broodmother**        | Phy | 120%    | **19**       | Aranha que "tece" armadilhas.           | Armadilha: Imobiliza 5s (12s)    | Picada: 180% Dano Único (8s)     |
+| **M19** | **Sand Worm**          | Phy | 140%    | **22**       | Verme segmentado gigante.               | Buraco: Puxa alvo pro solo (15s) | Cuspe: 100% Mag Ácido (8s)       |
+| **M20** | **Carnivorous Plant**  | Mag | 110%    | **18**       | Boca gigante floral com dentes.         | Chicote: Puxa alvo (8s)          | Esporos: Sono 4s (20s)           |
+| **M21** | **Obsidian Golem**     | Phy | 150%    | **24**       | Gigante de rocha negra brilhante.       | Pulso: Afasta alvos (12s)        | Regenerar: +10% HP (30s)         |
+| **M22** | **Infernal Elemental** | Mag | 130%    | **21**       | Fogo azulado com forma humana.          | Aura: 2%/s Dano em todos.        | Labareda: 120% Mag AoE (10s)     |
+| **M23** | **Frost Spirit**       | Mag | 110%    | **18**       | Vulto de gelo translúcido.              | Prisão: Alvo congelado 3s (15s)  | Nevasca: Slow Global (25s)       |
+| **M24** | **Corrupted Djinn**    | Mag | 125%    | **20**       | Gênio em névoa roxa.                    | Desejo: Debuff aleatório (15s)   | Choque: 140% Mag (8s)            |
+| **M25** | **Runic Sentinel**     | Mix | 135%    | **22**       | Estátua com runas neon azuis.           | Raio: 150% Mag (10s)             | Barreira: Imune a Mag por 5s.    |
+| **M26** | **Storm Wraith**       | Mag | 120%    | **19**       | Nuvem de trovão em movimento.           | Cadeia: Relâmpago 3 alvos (12s)  | Voo: Speed +50% (10s)            |
+| **M27** | **Gargoyle Patriarch** | Phy | 140%    | **22**       | Estátua alada gigante.                  | Forma Pedra: Cura 15% (25s)      | Investida: 130% + Stun (10s)     |
+| **M28** | **Light Archon**       | Mag | 145%    | **23**       | Entidade de pura luz amarela.           | Clarão: Stun 2s AoE (18s)        | Punição: 160% Mag (10s)          |
+| **M29** | **Flesh Horror**       | Phy | 130%    | **21**       | Massa amorfa de braços e bocas.         | Regeneração: 2% HP/s.            | Multi-Atk: Ataca 2x (8s)         |
+| **M30** | **Siege Automaton**    | Phy | 160%    | **26**       | Robô de engrenagens e vapor.            | Canhão: 180% Phys fura Def.      | Pisotear: 100% Phys AoE (10s)    |
+| **M31** | **Orc Chieftain**      | Phy | 150%    | **24**       | Orc em armadura de espinhos.            | Grito: +20% Atk Aliados (15s)    | Salto: 140% + Stun (10s)         |
+| **M32** | **Goblin Shaman**      | Mag | 100%    | **16**       | Máscara de crânio de dragão.            | Totem: Cura Aliados 5%/s (20s)   | Sapo: Transforma em sapo 4s.     |
+| **M33** | **Mercenary Captain**  | Phy | 130%    | **21**       | Armadura completa, espada longa.        | Bomba: Fumaça (Dodge 50%) (15s)  | Tiro: 120% Sangramento (8s)      |
+| **M34** | **Archmage**           | Mag | 140%    | **22**       | Manto roxo, flutuando.                  | Meteoro: 160% Mag AoE (15s)      | Imagem: Cria 2 clones fak.       |
+| **M35** | **Grand Assassin**     | Phy | 135%    | **22**       | Máscara ninja, dagas verdes.            | Veneno: DoT 10%/s (10s)          | Sumiço: Invisível 4s (20s)       |
+| **M36** | **High Inquisitor**    | Mag | 130%    | **21**       | Veste branca e prata.                   | Fogo Sagrado: 130% Mag (8s)      | Martelo: Stun 3s (15s)           |
+| **M37** | **Rogue Lord**         | Phy | 125%    | **20**       | Capa elegante, chapéu com pena.         | Roubo: Rouba Poção/Item (20s)    | Golpe Baixo: Stun 2s (10s)       |
+| **M38** | **Blood Barbarian**    | Phy | 155%    | **25**       | Sem camisa, machado gigante duplo.      | Fúria: Atk +50% (15s)            | Rodopio: 110% AoE Phys (8s)      |
+| **M39** | **Chaos Cultist**      | Mag | 110%    | **18**       | Túnica negra com olhos pintados.        | Portal: Invoca 2 Diabretes (20s) | Sacrifício: Dmg em si = AoE Mag. |
+| **M40** | **Black Knight**       | Phy | 145%    | **23**       | Armadura negra, olhos vermelhos.        | Puxão: Traz alvo pro melee (10s) | Aura: -20% Def Aliados.          |
+| **M41** | **Succubus Queen**     | Mag | 120%    | **19**       | Asas de morcego, vestes pretas.         | Charme: Alvo ataca aliado (20s)  | Chicote: 100% + Stun 1s (8s)     |
+| **M42** | **Lesser Beholder**    | Mag | 130%    | **21**       | Olho gigante flutuante.                 | Paralisia: Raio Stun 3s (15s)    | Debuff: -50% Atk Speed (12s)     |
+| **M43** | **Minotaur**           | Phy | 150%    | **24**       | Homem-touro com machado.                | Carga: 150% + Knockback (10s)    | Parede: Separa grupo (20s)       |
+| **M44** | **Elder Medusa**       | Mag | 120%    | **19**       | Cabelos de cobra, calda serpente.       | Pedra: Petro (Stun 5s) (30s)     | Sopro: 110% Mag Veneno (10s)     |
+| **M45** | **Young Kraken**       | Phy | 140%    | **22**       | Tentacles saindo do chão/água.          | Tinta: Cega (Miss 80%) (15s)     | Mult: 4 atks de 40% (10s)        |
+| **M46** | **Siren Songstress**   | Mag | 115%    | **18**       | Parte peixe, parte humana bela.         | Canto: Sono 5s (25s)             | Onda: 120% Mag AoE (10s)         |
+| **M47** | **Bridge Troll**       | Phy | 140%    | **22**       | Troll de 4m cor de pedra.               | Regeneração: 5% HP/s.            | Rocha: 140% Phys (10s)           |
+| **M48** | **Master Imp**         | Mag | 100%    | **16**       | Diabrete com tocha e poções.            | Piro: Fogo em todos (12s)        | Multi: Se divide em 3 (30s).     |
+| **M49** | **Gorgon**             | Phy | 135%    | **22**       | Guerreira com escudo de serpente.       | Olhar: -50% Speed (10s)          | Cauda: 130% Phys Stun (12s)      |
+| **M50** | **Royal Chimera**      | Mix | 140%    | **22**       | Leão, Bode e Cobra em um corpo.         | Sopro: 140% Mag Fogo (12s)       | Mordida: 120% Phys Veneno.       |
 
 ---
 
@@ -8446,253 +8511,253 @@ _Multiplicadores: HP x1 | ATK x1 | DEF x1 | Skills: 1 (Máx)_
 
 ### Goblins & Orcs (20)
 
-| ID      | Nome           | Atk  | Visual                       | Skill (Dmg/Ef/CD)                 |
-| :------ | :------------- | :--- | :--------------------------- | :-------------------------------- |
-| **C1**  | Gob Ladrão     | Phys | Verde, adaga ferrugem.       | Roubo: 5-10g. CD: 10s.            |
-| **C2**  | Gob Arqueiro   | Phys | Arco de osso, capuz.         | Fogo: 5% HP DoT 3s. CD: 8s.       |
-| **C3**  | Gob Xamã       | Mag  | Máscara de osso, penas.      | Raio: 90% Mag. CD: 6s.            |
-| **C4**  | Gob Guerreiro  | Phys | Escudo de tábua, clava.      | Bloqueio: -30% Dmg (3s).          |
-| **C5**  | Gob Lobo       | Phys | Montado em lobo cinza.       | Carga: 110% Phys. CD: 5s.         |
-| **C6**  | Gob Assassino  | Phys | Adaga dupla, negro.          | Backstab: 150% Phys (12s).        |
-| **C7**  | Orc Bruto      | Phys | Verde escuro, pele grossa.   | Pancada: 120% + Stun 1s. CD: 10s. |
-| **C8**  | Orc Atirador   | Phys | Lança machados curtos.       | Atirar: 110% Phys. CD: 7s.        |
-| **C9**  | Orc Feiticeiro | Mag  | Tatuagens tribais vermelhas. | Blood: +20% Atk Aliado (15s).     |
-| **C10** | Orc Lanceiro   | Phys | Lança longa de bronze.       | Estocada: 115% Phys. CD: 6s.      |
-| **C11** | Hobgoblin      | Phys | Mais alto, couro.            | Tática: +10% Def Aliados.         |
-| **C12** | Orc Líder      | Phys | Capacete com crina.          | Grito: +10% Atk Speed (20s).      |
-| **C13** | Orc Berserker  | Phys | Espadas duplas.              | Fúria: Atk +40% (HP <30%).        |
-| **C14** | Gob Inventor   | Phys | Mochila com frascos.         | Bomba: 80% Mag AoE (10s).         |
-| **C15** | Gob Tambor     | Mag  | Tambor gigante.              | Marcha: Speed +20% Aliados.       |
-| **C16** | Orc Escravo    | Phys | Chicote longo.               | Chicote: 90% + Sangue (8s).       |
-| **C17** | Orc Pesado     | Phys | Ferro batido.                | Muralha: Def +40% (5s).           |
-| **C18** | Gob Rede       | Phys | Segura rede.                 | Rede: Enraíza 3s (15s).           |
-| **C19** | Orc Explorador | Phys | Tapa olho, luneta.           | Mark: Alvo +10% Dmg.              |
-| **C20** | Meio-Orc       | Phys | Mistura humano.              | Saque: Dobra ouro loot.           |
+| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                       | Skill (Dmg/Ef/CD)                 |
+| :------ | :---------------- | :--- | :------ | :----------- | :--------------------------- | :-------------------------------- |
+| **C1**  | Goblin Thief      | Phys | 90%     | **7**        | Verde, adaga ferrugem.       | Roubo: 5-10g. CD: 10s.            |
+| **C2**  | Goblin Archer     | Phys | 80%     | **6**        | Arco de osso, capuz.         | Fogo: 5% HP DoT 3s. CD: 8s.       |
+| **C3**  | Goblin Shaman     | Mag  | 100%    | **8**        | Máscara de osso, penas.      | Raio: 90% Mag. CD: 6s.            |
+| **C4**  | Goblin Warrior    | Phys | 110%    | **9**        | Escudo de tábua, clava.      | Bloqueio: -30% Dmg (3s).          |
+| **C5**  | Goblin Wolf Rider | Phys | 115%    | **9**        | Montado em lobo cinza.       | Carga: 110% Phys. CD: 5s.         |
+| **C6**  | Goblin Assassin   | Phys | 105%    | **8**        | Adaga dupla, negro.          | Backstab: 150% Phys (12s).        |
+| **C7**  | Orc Brute         | Phys | 125%    | **10**       | Verde escuro, pele grossa.   | Pancada: 120% + Stun 1s. CD: 10s. |
+| **C8**  | Orc Axeman        | Phys | 110%    | **9**        | Lança machados curtos.       | Atirar: 110% Phys. CD: 7s.        |
+| **C9**  | Orc Sorcerer      | Mag  | 110%    | **9**        | Tatuagens tribais vermelhas. | Blood: +20% Atk Aliado (15s).     |
+| **C10** | Orc Lancer        | Phys | 115%    | **9**        | Lança longa de bronze.       | Estocada: 115% Phys. CD: 6s.      |
+| **C11** | Hobgoblin         | Phys | 120%    | **10**       | Mais alto, couro.            | Tática: +10% Def Aliados.         |
+| **C12** | Orc Leader        | Phys | 110%    | **9**        | Capacete com crina.          | Grito: +10% Atk Speed (20s).      |
+| **C13** | Orc Berserker     | Phys | 130%    | **10**       | Espadas duplas.              | Fúria: Atk +40% (HP <30%).        |
+| **C14** | Goblin Tinker     | Phys | 90%     | **7**        | Mochila com frascos.         | Bomba: 80% Mag AoE (10s).         |
+| **C15** | Goblin Drummer    | Mag  | 70%     | **6**        | Tambor gigante.              | Marcha: Speed +20% Aliados.       |
+| **C16** | Orc Slave         | Phys | 100%    | **8**        | Chicote longo.               | Chicote: 90% + Sangue (8s).       |
+| **C17** | Heavy Orc         | Phys | 120%    | **10**       | Ferro batido.                | Muralha: Def +40% (5s).           |
+| **C18** | Goblin Trapper    | Phys | 80%     | **6**        | Segura rede.                 | Rede: Enraíza 3s (15s).           |
+| **C19** | Orc Scout         | Phys | 95%     | **8**        | Tapa olho, luneta.           | Mark: Alvo +10% Dmg.              |
+| **C20** | Half-Orc          | Phys | 110%    | **9**        | Mistura humano.              | Saque: Dobra ouro loot.           |
 
 ### Mortos-Vivos (30)
 
-| ID      | Nome           | Atk  | Visual               | Skill (Dmg/Ef/CD)            |
-| :------ | :------------- | :--- | :------------------- | :--------------------------- |
-| **C21** | Esqueleto Raso | Phys | Ossos.               | Golpe: 105% Phys (4s).       |
-| **C22** | Esq. Arqueiro  | Phys | Aljava nas costelas. | Salva: 2x 60% Phys (7s).     |
-| **C23** | Esq. Mago      | Mag  | Mastro roxo.         | Seta: 100% Mag (6s).         |
-| **C24** | Esq. Aluguel   | Phys | Escudo podre.        | Bloqueio: Def +20% (8s).     |
-| **C25** | Esq. Blindado  | Phys | Peitoral velho.      | Passivo: Resist Phys +10%.   |
-| **C26** | Zumbi Fome     | Phys | Sem um braço.        | Mordida: Veneno 2%/s (10s).  |
-| **C27** | Zumbi Lento    | Phys | Camponês.            | Passivo: +50% HP.            |
-| **C28** | Zumbi Incho    | Mag  | Barriga cinza.       | Explode: 150% AoE (Morte).   |
-| **C29** | Carniçal V.    | Phys | 4 patas.             | Garra: 110% Atk Speed +.     |
-| **C30** | Carniçal C.    | Phys | Olhos amarelos.      | Salto: 120% Dmg (8s).        |
-| **C31** | Wraith Fraco   | Mag  | Fumaça cinza.        | Dreno: 10 Mana (15s).        |
-| **C32** | Aparição       | Mag  | Véu branco.          | Passivo: Esquiva Phys +20%.  |
-| **C33** | Sombra         | Mag  | Silhueta negra.      | Invisível: 2s (20s).         |
-| **C34** | Múmia Seca     | Phys | Faixas amarelas.     | Fragil: Alvo -20% Def (12s). |
-| **C35** | Esq. SemCab    | Phys | Carrega crânio.      | Arremesso: 100% Phys (10s).  |
-| **C36** | Caveira Flu    | Mag  | Aura azul.           | Raio: 120% Mag (8s).         |
-| **C37** | Resto Cada     | Phys | Pilha de ossos.      | Reforma: Cura 5% HP (20s).   |
-| **C38** | Cavaleiro Esq  | Phys | Espada quebrada.     | Estocada: 130% Phys (10s).   |
-| **C39** | Cão Inf (M)    | Phys | Olhos fogo.          | Mordida: Queima 3s (5s).     |
-| **C40** | Esq. Gigante   | Phys | 3 metros.            | Pisotear: 100% AoE (12s).    |
-| **C41** | Espírito V.    | Mag  | Rosto agonia.        | Grito: -15% Atk (15s).       |
-| **C42** | Zumbi Corr     | Phys | Atleta morto.        | Rapidez: Speed +30%.         |
-| **C43** | Espantalho     | Mag  | Palha/Sacos.         | Medo: Fuga 2s (20s).         |
-| **C44** | Boneco Poss    | Mag  | Madeira/Pano.        | Alfinete: 110% Mag (8s).     |
-| **C45** | Armadura Vaz   | Phys | Sem corpo.           | Passivo: Imune a Veneno.     |
-| **C46** | Cadaver Exp    | Mag  | Com bomba.           | Explode: 200% Mag (Morte).   |
-| **C47** | Sombra Fame    | Mag  | Boca enorme.         | Dreno: 5% Dmg = Heal.        |
-| **C48** | Fantasma C.    | Mag  | Criança chora.       | Choro: -30% Speed (15s).     |
-| **C49** | Guerreiro T.   | Phys | Runas antigas.       | Golpe: 140% Phys (12s).      |
-| **C50** | Mago Necro     | Mag  | Cajado fêmur.        | Sombra: 130% Mag (8s).       |
+| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual               | Skill (Dmg/Ef/CD)            |
+| :------ | :---------------- | :--- | :------ | :----------- | :------------------- | :--------------------------- |
+| **C21** | Basic Skeleton    | Phys | 105%    | **8**        | Ossos.               | Golpe: 105% Phys (4s).       |
+| **C22** | Skeleton Archer   | Phys | 90%     | **7**        | Aljava nas costelas. | Salva: 2x 60% Phys (7s).     |
+| **C23** | Skeleton Mage     | Mag  | 110%    | **9**        | Mastro roxo.         | Seta: 100% Mag (6s).         |
+| **C24** | Skeleton Guard    | Phys | 100%    | **8**        | Escudo podre.        | Bloqueio: Def +20% (8s).     |
+| **C25** | Armored Skeleton  | Phys | 105%    | **8**        | Peitoral velho.      | Passivo: Resist Phys +10%.   |
+| **C26** | Starving Zombie   | Phys | 115%    | **9**        | Sem um braço.        | Mordida: Veneno 2%/s (10s).  |
+| **C27** | Slow Zombie       | Phys | 120%    | **10**       | Camponês.            | Passivo: +50% HP.            |
+| **C28** | Bloated Zombie    | Mag  | 130%    | **10**       | Barriga cinza.       | Explode: 150% AoE (Morte).   |
+| **C29** | Fast Ghoul        | Phys | 125%    | **10**       | 4 patas.             | Garra: 110% Atk Speed +.     |
+| **C30** | Corrupted Ghoul   | Phys | 115%    | **9**        | Olhos amarelos.      | Salto: 120% Dmg (8s).        |
+| **C31** | Lesser Wraith     | Mag  | 100%    | **8**        | Fumaça cinza.        | Dreno: 10 Mana (15s).        |
+| **C32** | Apparition        | Mag  | 110%    | **9**        | Véu branco.          | Passivo: Esquiva Phys +20%.  |
+| **C33** | Shadow            | Mag  | 120%    | **10**       | Silhueta negra.      | Invisível: 2s (20s).         |
+| **C34** | Dried Mummy       | Phys | 110%    | **9**        | Faixas amarelas.     | Fragil: Alvo -20% Def (12s). |
+| **C35** | Headless Skeleton | Phys | 120%    | **10**       | Carrega crânio.      | Arremesso: 100% Phys (10s).  |
+| **C36** | Floating Skull    | Mag  | 130%    | **10**       | Aura azul.           | Raio: 120% Mag (8s).         |
+| **C37** | Corpse Remnants   | Phys | 80%     | **6**        | Pilha de ossos.      | Reforma: Cura 5% HP (20s).   |
+| **C38** | Skeleton Knight   | Phys | 125%    | **10**       | Espada quebrada.     | Estocada: 130% Phys (10s).   |
+| **C39** | Lesser Hellhound  | Phys | 115%    | **9**        | Olhos fogo.          | Mordida: Queima 3s (5s).     |
+| **C40** | Giant Skeleton    | Phys | 140%    | **11**       | 3 metros.            | Pisotear: 100% AoE (12s).    |
+| **C41** | Wandering Spirit  | Mag  | 100%    | **8**        | Rosto agonia.        | Grito: -15% Atk (15s).       |
+| **C42** | Runner Zombie     | Phys | 120%    | **10**       | Atleta morto.        | Rapidez: Speed +30%.         |
+| **C43** | Scarecrow         | Mag  | 90%     | **7**        | Palha/Sacos.         | Medo: Fuga 2s (20s).         |
+| **C44** | Possessed Doll    | Mag  | 110%    | **9**        | Madeira/Pano.        | Alfinete: 110% Mag (8s).     |
+| **C45** | Hollow Armor      | Phys | 130%    | **10**       | Sem corpo.           | Passivo: Imune a Veneno.     |
+| **C46** | Explosive Corpse  | Mag  | 200%    | **16**       | Com bomba.           | Explode: 200% Mag (Morte).   |
+| **C47** | Ravenous Shadow   | Mag  | 120%    | **10**       | Boca enorme.         | Dreno: 5% Dmg = Heal.        |
+| **C48** | Ghost Child       | Mag  | 80%     | **6**        | Criança chora.       | Choro: -30% Speed (15s).     |
+| **C49** | Tomb Warrior      | Phys | 135%    | **11**       | Runas antigas.       | Golpe: 140% Phys (12s).      |
+| **C50** | Necro Mage        | Mag  | 120%    | **10**       | Cajado fêmur.        | Sombra: 130% Mag (8s).       |
 
 ### Bestas & Animais (30)
 
-| ID      | Nome           | Atk  | Visual                  | Skill (Dmg/Ef/CD)                  |
-| :------ | :------------- | :--- | :---------------------- | :--------------------------------- |
-| **C51** | Lobo Florestal | Phys | Marrom.                 | Mordida: 110% Phys (5s).           |
-| **C52** | Lobo Cinzento  | Phys | Cinza espessa.          | Uivo: +10% Atk matilha (15s).      |
-| **C53** | Lobo Faminto   | Phys | Magro.                  | Frenesi: Atk Speed +20% (<50% HP). |
-| **C54** | Lobo Branco    | Phys | Albino.                 | Salto: 120% Phys (8s).             |
-| **C55** | Urso Pardo     | Phys | Grande.                 | Patada: 130% + Knockback (10s).    |
-| **C56** | Urso Negro     | Phys | Menor.                  | Garras: 110% Phys (5s).            |
-| **C57** | Urso Polar     | Phys | Branco.                 | Abraço: Stun 2s (15s).             |
-| **C58** | Javali Bravo   | Phys | Presas.                 | Investida: 125% + Stun 1s (10s).   |
-| **C59** | Javali Gelo    | Phys | Cristais.               | Frio: -20% Speed (8s).             |
-| **C60** | Tigre Dentes S | Phys | Caninos.                | Corte: Sangue 3%/s (6s).           |
-| **C61** | Leopardo Neve  | Phys | Manchas cinza.          | Bote: 140% Phys (Início).          |
-| **C62** | Águia Gigante  | Phys | 5 metros.               | Rasante: 120% + Pushback (8s).     |
-| **C63** | Falcão Caça    | Phys | Rápido.                 | Cego: Miss +20% (10s).             |
-| **C64** | Coruja Somb    | Mag  | Penas que absorvem luz. | Confundir: Erra prox atk (15s).    |
-| **C65** | Morcego Sede   | Phys | Orelhas G.              | Drito: Drena 5 HP (6s).            |
-| **C66** | Morcego Gigan  | Phys | 2 metros.               | Eco: Revela invisíveis (20s).      |
-| **C67** | Rato Esgoto    | Phys | Sujo.                   | Peste: Stats -10% (15s).           |
-| **C68** | Rato Peste     | Phys | Olhos Verm.             | Infecção: DoT 2%/s (10s).          |
-| **C69** | Cobra Veneno   | Phys | Verde.                  | Veneno: DoT 4%/s (8s).             |
-| **C70** | Cobra Jiboia   | Phys | Grossa.                 | Constringir: Stun 3s (20s).        |
-| **C71** | Crocodilo      | Phys | Verde musgo.            | Mordida: 150% Phys (12s).          |
-| **C72** | Aranha Comum   | Phys | Oito olhos.             | Teia: Slow 30% (10s).              |
-| **C73** | Aranha Tecelã  | Phys | Listrada.               | Prisão: Imobiliza 2s (18s).        |
-| **C74** | Raposa Fogo    | Mag  | Faíscas.                | Ignição: 80% Mag + Queima (10s).   |
-| **C75** | Alce Tundra    | Phys | Chifres gelo.           | Chifrada: 130% Phys (10s).         |
-| **C76** | Javali Fogo    | Phys | Presas incan.           | Calor: 90% Phys + Queima (8s).     |
-| **C77** | Lobo Raios     | Mag  | Estática.               | Choque: 100% Mag (7s).             |
-| **C78** | Urso Rúnico    | Mag  | Runas.                  | Escudo: Absorve 50 (20s).          |
-| **C79** | Aranha Somb    | Mag  | Translúcida.            | Sombra: Invisível 2s (15s).        |
-| **C80** | Javali Pedra   | Phys | Granito.                | Resist: +30% Phys Def (15s).       |
+| ID      | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                  | Skill (Dmg/Ef/CD)                  |
+| :------ | :------------------ | :--- | :------ | :----------- | :---------------------- | :--------------------------------- |
+| **C51** | Forest Wolf         | Phys | 110%    | **9**        | Marrom.                 | Mordida: 110% Phys (5s).           |
+| **C52** | Grey Wolf           | Phys | 100%    | **8**        | Cinza espessa.          | Uivo: +10% Atk matilha (15s).      |
+| **C53** | Starving Wolf       | Phys | 120%    | **10**       | Magro.                  | Frenesi: Atk Speed +20% (<50% HP). |
+| **C54** | White Wolf          | Phys | 115%    | **9**        | Albino.                 | Salto: 120% Phys (8s).             |
+| **C55** | Brown Bear          | Phys | 130%    | **10**       | Grande.                 | Patada: 130% + Knockback (10s).    |
+| **C56** | Black Bear          | Phys | 115%    | **9**        | Menor.                  | Garras: 110% Phys (5s).            |
+| **C57** | Polar Bear          | Phys | 125%    | **10**       | Branco.                 | Abraço: Stun 2s (15s).             |
+| **C58** | Wild Boar           | Phys | 125%    | **10**       | Presas.                 | Investida: 125% + Stun 1s (10s).   |
+| **C59** | Frost Boar          | Phys | 115%    | **9**        | Cristais.               | Frio: -20% Speed (8s).             |
+| **C60** | Saber-toothed Tiger | Phys | 135%    | **11**       | Caninos.                | Corte: Sangue 3%/s (6s).           |
+| **C61** | Snow Leopard        | Phys | 130%    | **10**       | Manchas cinza.          | Bote: 140% Phys (Início).          |
+| **C62** | Giant Eagle         | Phys | 120%    | **10**       | 5 metros.               | Rasante: 120% + Pushback (8s).     |
+| **C63** | Hunting Falcon      | Phys | 90%     | **7**        | Rápido.                 | Cego: Miss +20% (10s).             |
+| **C64** | Shadow Owl          | Mag  | 100%    | **8**        | Penas que absorvem luz. | Confundir: Erra prox atk (15s).    |
+| **C65** | Blood Bat           | Phys | 85%     | **7**        | Orelhas G.              | Drito: Drena 5 HP (6s).            |
+| **C66** | Giant Bat           | Phys | 110%    | **9**        | 2 metros.               | Eco: Revela invisíveis (20s).      |
+| **C67** | Sewer Rat           | Phys | 80%     | **6**        | Sujo.                   | Peste: Stats -10% (15s).           |
+| **C68** | Plague Rat          | Phys | 95%     | **8**        | Olhos Verm.             | Infecção: DoT 2%/s (10s).          |
+| **C69** | Venom Snake         | Phys | 100%    | **8**        | Verde.                  | Veneno: DoT 4%/s (8s).             |
+| **C70** | Constrictor Snake   | Phys | 120%    | **10**       | Grossa.                 | Constringir: Stun 3s (20s).        |
+| **C71** | Crocodile           | Phys | 140%    | **11**       | Verde musgo.            | Mordida: 150% Phys (12s).          |
+| **C72** | Common Spider       | Phys | 90%     | **7**        | Oito olhos.             | Teia: Slow 30% (10s).              |
+| **C73** | Weaver Spider       | Phys | 105%    | **8**        | Listrada.               | Prisão: Imobiliza 2s (18s).        |
+| **C74** | Fire Fox            | Mag  | 110%    | **9**        | Faíscas.                | Ignição: 80% Mag + Queima (10s).   |
+| **C75** | Tundra Elk          | Phys | 110%    | **9**        | Chifres gelo.           | Chifrada: 130% Phys (10s).         |
+| **C76** | Fire Boar           | Phys | 120%    | **10**       | Presas incan.           | Calor: 90% Phys + Queima (8s).     |
+| **C77** | Lightning Wolf      | Mag  | 115%    | **9**        | Estática.               | Choque: 100% Mag (7s).             |
+| **C78** | Runic Bear          | Mag  | 120%    | **10**       | Runas.                  | Escudo: Absorve 50 (20s).          |
+| **C79** | Shadow Spider       | Mag  | 100%    | **8**        | Translúcida.            | Sombra: Invisível 2s (15s).        |
+| **C80** | Stone Boar          | Phys | 130%    | **10**       | Granito.                | Resist: +30% Phys Def (15s).       |
 
 ### Insetos (20)
 
-| ID       | Nome          | Atk  | Visual        | Skill (Dmg/Ef/CD)           |
-| :------- | :------------ | :--- | :------------ | :-------------------------- |
-| **C81**  | Vespa Gigante | Phys | Neon, ferrão. | Ferrada: Veneno 3%/s (6s).  |
-| **C82**  | Abelha Sold   | Phys | Zumbido.      | Sacrifício: 200% Morre.     |
-| **C83**  | Besouro Chif  | Phys | Casco preto.  | Carga: 130% + Knock (10s).  |
-| **C84**  | Besouro Bomba | Mag  | Laranja.      | Explode: 120% AoE (Morte).  |
-| **C85**  | Centopeia G   | Phys | Vermelha.     | Enroscar: Stun 1s (8s).     |
-| **C86**  | Escorpião Am  | Phys | Pequeno.      | Paralisia: Stun 2s (15s).   |
-| **C87**  | Escorpião N   | Phys | Pinças.       | Esmagar: 140% Phys (10s).   |
-| **C88**  | Louva-a-Deus  | Phys | Foice.        | Corte: 150% Phys (7s).      |
-| **C89**  | Lagarta Seda  | Mag  | Felpuda.      | Casulo: Imobiliza 3s (20s). |
-| **C90**  | Borboleta Alu | Mag  | Colorida.     | Pó: Confusão 3s AoE (18s).  |
-| **C91**  | Aranha Salt   | Phys | Pula alto.    | Salto: 130% Atk (12s).      |
-| **C92**  | Cupim Devora  | Phys | Mandíbulas.   | Corrosão: -10 Def (15s).    |
-| **C93**  | Barata Esgoto | Phys | Marrom.       | Casco: Imune a Crit.        |
-| **C94**  | Grilo Trovão  | Mag  | Elétrico.     | Chirp: Silêncio 2s (15s).   |
-| **C95**  | Vaga-lume M   | Mag  | Luz Azul.     | Cego: Miss +30% (12s).      |
-| **C96**  | Formiga Sold  | Phys | Vermelha.     | Mordida: 110% (5s).         |
-| **C97**  | Formiga Ácid  | Phys | Verde.        | Ácido: DoT 2%/s (8s).       |
-| **C98**  | Aranha Crist  | Mag  | Quartzo.      | Raio: 110% Mag (10s).       |
-| **C99**  | Besouro Joia  | Mag  | Brilhante.    | Reflexo: 10% Refletido.     |
-| **C100** | Mosca Peste   | Mag  | Vermelho.     | Doença: -10% Speed (15s).   |
+| ID       | Nome                    | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)           |
+| :------- | :---------------------- | :--- | :------ | :----------- | :------------ | :-------------------------- |
+| **C81**  | Giant Wasp              | Phys | 100%    | **8**        | Neon, ferrão. | Ferrada: Veneno 3%/s (6s).  |
+| **C82**  | Soldier Bee             | Phys | 90%     | **7**        | Zumbido.      | Sacrifício: 200% Morre.     |
+| **C83**  | Horned Beetle           | Phys | 115%    | **9**        | Casco preto.  | Carga: 130% + Knock (100).  |
+| **C84**  | Bombardier Beetle       | Mag  | 105%    | **8**        | Laranja.      | Explode: 120% AoE (Morte).  |
+| **C85**  | Giant Centipede         | Phys | 110%    | **9**        | Vermelha.     | Enroscar: Stun 1s (8s).     |
+| **C86**  | Yellow Scorpion         | Phys | 95%     | **8**        | Pequeno.      | Paralisia: Stun 2s (15s).   |
+| **C87**  | Black Scorpion          | Phys | 120%    | **10**       | Pinças.       | Esmagar: 140% Phys (10s).   |
+| **C88**  | Mantis                  | Phys | 130%    | **10**       | Foice.        | Corte: 150% Phys (7s).      |
+| **C89**  | Silk Caterpillar        | Mag  | 80%     | **6**        | Felpuda.      | Casulo: Imobiliza 3s (20s). |
+| **C90**  | Hallucination Butterfly | Mag  | 85%     | **7**        | Colorida.     | Pó: Confusão 3s AoE (18s).  |
+| **C91**  | Jumping Spider          | Phys | 115%    | **9**        | Pula alto.    | Salto: 130% Atk (12s).      |
+| **C92**  | Devouring Termite       | Phys | 100%    | **8**        | Mandíbulas.   | Corrosão: -10 Def (15s).    |
+| **C93**  | Sewer Roach             | Phys | 105%    | **8**        | Marrom.       | Casco: Imune a Crit.        |
+| **C94**  | Thunder Cricket         | Mag  | 90%     | **7**        | Elétrico.     | Chirp: Silêncio 2s (15s).   |
+| **C95**  | Magical Firefly         | Mag  | 80%     | **6**        | Luz Azul.     | Cego: Miss +30% (12s).      |
+| **C96**  | Soldier Ant             | Phys | 110%    | **9**        | Vermelha.     | Mordida: 110% (5s).         |
+| **C97**  | Acid Ant                | Phys | 105%    | **8**        | Verde.        | Ácido: DoT 2%/s (8s).       |
+| **C98**  | Crystal Spider          | Mag  | 115%    | **9**        | Quartzo.      | Raio: 110% Mag (10s).       |
+| **C99**  | Jewel Beetle            | Mag  | 95%     | **8**        | Brilhante.    | Reflexo: 10% Refletido.     |
+| **C100** | Plague Fly              | Mag  | 85%     | **7**        | Vermelho.     | Doença: -10% Speed (15s).   |
 
 ### Elementais (20)
 
-| ID       | Nome          | Atk  | Visual        | Skill (Dmg/Ef/CD)           |
-| :------- | :------------ | :--- | :------------ | :-------------------------- |
-| **C101** | Fogo Fátuo    | Mag  | Esfera azul.  | Choque: 90% (5s).           |
-| **C102** | Elem. Fogo    | Mag  | Humano chama. | Queima: 5%/s (8s).          |
-| **C103** | Mão Magma     | Phys | Pedra/Lava.   | Calor: 120% + Queima (10s). |
-| **C104** | Elem. Gelo    | Mag  | Escultura.    | Congelar: Slow 50% (12s).   |
-| **C105** | Frag. Gelo    | Phys | Estalactite.  | Estocada: 130% (7s).        |
-| **C106** | Golem Barro   | Phys | Massa barro.  | Regen: 3% HP/s (20s).       |
-| **C107** | Golem Areia   | Phys | Redemoinho.   | Cego: Visão Baixa (15s).    |
-| **C108** | Elem. Água    | Mag  | Bolha.        | Prisão: Stun 2s (18s).      |
-| **C109** | Esp. Brisa    | Mag  | Ar visível.   | Vento: Empurra (10s).       |
-| **C110** | Elem. Raio    | Mag  | Faíscas.      | Cadeia: 2 alvos (10s).      |
-| **C111** | Gárgula Pedra | Phys | Cinza.        | Queda: 140% AoE (15s).      |
-| **C112** | Gárgula Rubi  | Mag  | Vermelho.     | Raio: 150% (12s).           |
-| **C113** | Elem. Lama    | Phys | Barro preto.  | Lento: -40% Speed (10s).    |
-| **C114** | Elem. Vapor   | Mag  | Nuvem branca. | Queima: 100% AoE (15s).     |
-| **C115** | Golem Ferro   | Phys | Blocos.       | Resist: Imune Sangue.       |
-| **C116** | Esp. Terra    | Phys | Pedras flu.   | Terremoto: Stun 1s (20s).   |
-| **C117** | Elem. Cinzas  | Mag  | Fumaça.       | Sufocar: Silêncio 3s (15s). |
-| **C118** | Elem. Planta  | Mag  | Raízes.       | Laço: Imobiliza (12s).      |
-| **C119** | Golem Vidro   | Phys | Afiado.       | Sangue: 5%/s (8s).          |
-| **C120** | Arconte M.    | Mag  | Luz pura.     | Banir: Remove Buff (30s).   |
+| ID       | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)           |
+| :------- | :------------------ | :--- | :------ | :----------- | :------------ | :-------------------------- |
+| **C101** | Will-o'-the-Wisp    | Mag  | 90%     | **7**        | Esfera azul.  | Choque: 90% (5s).           |
+| **C102** | Fire Elemental      | Mag  | 115%    | **9**        | Humano chama. | Queima: 5%/s (8s).          |
+| **C103** | Magma Hand          | Phys | 120%    | **10**       | Pedra/Lava.   | Calor: 120% + Queima (10s). |
+| **C104** | Ice Elemental       | Mag  | 105%    | **8**        | Escultura.    | Congelar: Slow 50% (12s).   |
+| **C105** | Ice Shard           | Phys | 110%    | **9**        | Estalactite.  | Estocada: 130% (7s).        |
+| **C106** | Clay Golem          | Phys | 125%    | **10**       | Massa barro.  | Regen: 3% HP/s (20s).       |
+| **C107** | Sand Golem          | Phys | 115%    | **9**        | Redemoinho.   | Cego: Visão Baixa (15s).    |
+| **C108** | Water Elemental     | Mag  | 100%    | **8**        | Bolha.        | Prisão: Stun 2s (18s).      |
+| **C109** | Breeze Spirit       | Mag  | 85%     | **7**        | Ar visível.   | Vento: Empurra (10s).       |
+| **C110** | Lightning Elemental | Mag  | 110%    | **9**        | Faíscas.      | Cadeia: 2 alvos (10s).      |
+| **C111** | Stone Gargoyle      | Phys | 125%    | **10**       | Cinza.        | Queda: 140% AoE (15s).      |
+| **C112** | Ruby Gargoyle       | Mag  | 120%    | **10**       | Vermelho.     | Raio: 150% (12s).           |
+| **C113** | Mud Elemental       | Phys | 115%    | **9**        | Barro preto.  | Lento: -40% Speed (10s).    |
+| **C114** | Steam Elemental     | Mag  | 100%    | **8**        | Nuvem branca. | Queima: 100% AoE (15s).     |
+| **C115** | Iron Golem          | Phys | 140%    | **11**       | Blocos.       | Resist: Imune Sangue.       |
+| **C116** | Earth Spirit        | Phys | 120%    | **10**       | Pedras flu.   | Terremoto: Stun 1s (20s).   |
+| **C117** | Ash Elemental       | Mag  | 100%    | **8**        | Fumaça.       | Sufocar: Silêncio 3s (15s). |
+| **C118** | Plant Elemental     | Mag  | 95%     | **8**        | Raízes.       | Laço: Imobiliza (12s).      |
+| **C119** | Glass Golem         | Phys | 120%    | **10**       | Afiado.       | Sangue: 5%/s (8s).          |
+| **C120** | Lesser Archon       | Mag  | 130%    | **10**       | Luz pura.     | Banir: Remove Buff (30s).   |
 
 ### Demônios (20)
 
-| ID       | Nome        | Atk  | Visual        | Skill (Dmg/Ef/CD)         |
-| :------- | :---------- | :--- | :------------ | :------------------------ |
-| **C121** | Diabrete    | Mag  | Vermelho.     | Fogo: 100% (6s).          |
-| **C122** | Demônio Som | Mag  | Negro.        | Sombra: Invisível (20s).  |
-| **C123** | Cão Inferno | Phys | Chama olhos.  | Mordida: Queima (8s).     |
-| **C124** | Succubus M. | Mag  | Sedução.      | Charme: Não ataca (25s).  |
-| **C125** | Demônio Ala | Phys | Carnudo.      | Rasante: Ataca longe.     |
-| **C126** | Esp. Corr.  | Mag  | Distorcido.   | Grito: -20% Atk (15s).    |
-| **C127** | Olho Flutu  | Mag  | Pupila G.     | Raio: Stun 2s (15s).      |
-| **C128** | Tentáculo   | Phys | Negro.        | Agarrar: Imobiliza (20s). |
-| **C129** | Voz Abismo  | Mag  | Névoa boca.   | Silêncio: 4s (20s).       |
-| **C130** | Horror Mas  | Phys | Retalhos.     | Pancada: 140% (12s).      |
-| **C131** | Diabrete T  | Mag  | Saco ouro.    | Fuga: Turno 3 some.       |
-| **C132** | Pesadelo    | Mag  | Cavalo fogo.  | Pavor: Fear 3s (18s).     |
-| **C133** | Lorde Cham  | Mag  | Roxo.         | Inferno: 130% AoE (15s).  |
-| **C134** | Cria Vazio  | Mag  | Estelar.      | Dreno: 20 Mana (15s).     |
-| **C135** | Ocultista   | Mag  | Olhos negros. | Mald: Luck = 0 (30s).     |
-| **C136** | Demônio C   | Phys | Algemas.      | Chicote: Puxa (10s).      |
-| **C137** | Devorador   | Phys | Boca peito.   | Engolir: Dmg p/ HP.       |
-| **C138** | Gárgula S   | Phys | Sangue.       | Sede: Cura 50% Dmg.       |
-| **C139** | Estátua M   | Mag  | 4 braços.     | Maldição: -50% Cura.      |
-| **C140** | Vulto Caos  | Mag  | Instável.     | Caos: Elem aleatório.     |
+| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)         |
+| :------- | :--------------- | :--- | :------ | :----------- | :------------ | :------------------------ |
+| **C121** | Imp              | Mag  | 100%    | **8**        | Vermelho.     | Fogo: 100% (6s).          |
+| **C122** | Shadow Demon     | Mag  | 110%    | **9**        | Negro.        | Sombra: Invisível (20s).  |
+| **C123** | Hellhound        | Phys | 115%    | **9**        | Chama olhos.  | Mordida: Queima (8s).     |
+| **C124** | Lesser Succubus  | Mag  | 95%     | **8**        | Sedução.      | Charme: Não ataca (25s).  |
+| **C125** | Winged Demon     | Phys | 110%    | **9**        | Carnudo.      | Rasante: Ataca longe.     |
+| **C126** | Corrupted Spirit | Mag  | 105%    | **8**        | Distorcido.   | Grito: -20% Atk (15s).    |
+| **C127** | Floating Eye     | Mag  | 115%    | **9**        | Pupila G.     | Raio: Stun 2s (15s).      |
+| **C128** | Tentacle         | Phys | 100%    | **8**        | Negro.        | Agarrar: Imobiliza (20s). |
+| **C129** | Abyss Voice      | Mag  | 110%    | **9**        | Névoa boca.   | Silêncio: 4s (20s).       |
+| **C130** | Stitched Horror  | Phys | 130%    | **10**       | Retalhos.     | Pancada: 140% (12s).      |
+| **C131** | Treasure Imp     | Mag  | 70%     | **6**        | Saco ouro.    | Fuga: Turno 3 some.       |
+| **C132** | Nightmare        | Mag  | 120%    | **10**       | Cavalo fogo.  | Pavor: Fear 3s (18s).     |
+| **C133** | Flame Lord       | Mag  | 135%    | **11**       | Roxo.         | Inferno: 130% AoE (15s).  |
+| **C134** | Void Spawn       | Mag  | 110%    | **9**        | Estelar.      | Dreno: 20 Mana (15s).     |
+| **C135** | Occultist        | Mag  | 100%    | **8**        | Olhos negros. | Mald: Luck = 0 (30s).     |
+| **C136** | Chained Demon    | Phys | 125%    | **10**       | Algemas.      | Chicote: Puxa (10s).      |
+| **C137** | Devourer         | Phys | 140%    | **11**       | Boca peito.   | Engolir: Dmg p/ HP.       |
+| **C138** | Blood Gargoyle   | Phys | 120%    | **10**       | Sangue.       | Sede: Cura 50% Dmg.       |
+| **C139** | Cursed Statue    | Mag  | 115%    | **9**        | 4 braços.     | Maldição: -50% Cura.      |
+| **C140** | Chaos Wraith     | Mag  | 110%    | **9**        | Instável.     | Caos: Elem aleatório.     |
 
 ### Dracônicos (10)
 
-| ID       | Nome        | Atk  | Visual         | Skill (Dmg/Ef/CD)       |
-| :------- | :---------- | :--- | :------------- | :---------------------- |
-| **C141** | Dragonete V | Mag  | Verde.         | Ácido: -15 Def (12s).   |
-| **C142** | Dragonete R | Mag  | Vermelho.      | Faísca: 110% (8s).      |
-| **C143** | Dragonete A | Mag  | Azul.          | Choque: Stun 1s (15s).  |
-| **C144** | Lagarto F   | Phys | Fogo.          | Calor: Queima toque.    |
-| **C145** | Lagarto R   | Phys | Raio.          | Carga: 120% + Choque.   |
-| **C146** | Pseudo-Dra  | Mag  | Camaleão.      | Invis: 5s (30s).        |
-| **C147** | Wurm Jovem  | Phys | Metálico.      | Bote: 140% (7s).        |
-| **C148** | Drake Mont  | Phys | Alado.         | Vento: Knock AoE (15s). |
-| **C149** | Draco Osso  | Phys | Esqueleto dra. | Sopro: 110% + Medo.     |
-| **C150** | Dragão Arei | Phys | Terra.         | Emboscada: +50% 1º Atk. |
+| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)       |
+| :------- | :--------------- | :--- | :------ | :----------- | :------------- | :---------------------- |
+| **C141** | Green Dragonet   | Mag  | 105%    | **8**        | Verde.         | Ácido: -15 Def (12s).   |
+| **C142** | Red Dragonet     | Mag  | 110%    | **9**        | Vermelho.      | Faísca: 110% (8s).      |
+| **C143** | Blue Dragonet    | Mag  | 105%    | **8**        | Azul.          | Choque: Stun 1s (15s).  |
+| **C144** | Fire Lizard      | Phys | 115%    | **9**        | Fogo.          | Calor: Queima toque.    |
+| **C145** | Lightning Lizard | Phys | 115%    | **9**        | Raio.          | Carga: 120% + Choque.   |
+| **C146** | Pseudo-Dragon    | Mag  | 100%    | **8**        | Camaleão.      | Invis: 5s (30s).        |
+| **C147** | Young Wurm       | Phys | 140%    | **11**       | Metálico.      | Bote: 140% (7s).        |
+| **C148** | Mountain Drake   | Phys | 130%    | **10**       | Alado.         | Vento: Knock AoE (15s). |
+| **C149** | Bone Drake       | Phys | 125%    | **10**       | Esqueleto dra. | Sopro: 110% + Medo.     |
+| **C150** | Sand Dragon      | Phys | 145%    | **12**       | Terra.         | Emboscada: +50% 1º Atk. |
 
 ### Humanos/Bandidos (20)
 
-| ID       | Nome       | Atk  | Visual         | Skill (Dmg/Ef/CD)        |
-| :------- | :--------- | :--- | :------------- | :----------------------- |
-| **C151** | Ladrão     | Phys | Capuz.         | Roubo: Rouba Item.       |
-| **C152** | Assaltante | Phys | Porrete.       | Atordoar: Stun 2s (12s). |
-| **C153** | Arqueiro B | Phys | Arco.          | Veneno: Flecha Ven.      |
-| **C154** | Mago Negro | Mag  | Túnica.        | Seta: 12 Mag Somb. (8s). |
-| **C155** | Mercenário | Phys | Couro/Espada.  | Bloqueio: Def +30% (5s). |
-| **C156** | Lutador    | Phys | Enfaixado.     | Combo: 2x 60% Dmg.       |
-| **C157** | Cultista   | Mag  | Máscara cabra. | Mald: -20% Atk (15s).    |
-| **C158** | Soldado    | Phys | Desertor.      | União: +20% Def Al.      |
-| **C159** | Assassino  | Phys | Capa verde.    | Sangue: 5%/s (10s).      |
-| **C160** | Pirata Rio | Phys | Tapa olho.     | Gancho: Puxa (12s).      |
-| **C161** | Contraband | Phys | Fardos.        | Carga: 130% Lento.       |
-| **C162** | Ninja      | Phys | Preto.         | Shuriken: 80% (Veloz).   |
-| **C163** | Monge R    | Phys | Robe sujo.     | Palma: Knockback (10s).  |
-| **C164** | Fanático   | Mag  | Livro fogo.    | Julgar: 140% (12s).      |
-| **C165** | Necromante | Mag  | Pálido.        | Erguer: Cria Esq Raso.   |
-| **C166** | Caçador    | Phys | Besta/Rede.    | Rede: Imobiliza (20s).   |
-| **C167** | Duelista   | Phys | Vendado.       | Riposte: Contra-atk.     |
-| **C168** | Executor   | Phys | Capuz/Machad.  | Decap: 300% (HP <20%).   |
-| **C169** | Besta Rep  | Phys | Mecânica.      | Tiro: 3x 40% (10s).      |
-| **C170** | Espião     | Phys | Camponês.      | Veneno: Infecção Sile.   |
+| ID       | Nome                  | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)        |
+| :------- | :-------------------- | :--- | :------ | :----------- | :------------- | :----------------------- |
+| **C151** | Thief                 | Phys | 90%     | **7**        | Capuz.         | Roubo: Rouba Item.       |
+| **C152** | Mugger                | Phys | 100%    | **8**        | Porrete.       | Atordoar: Stun 2s (12s). |
+| **C153** | Bandit Archer         | Phys | 85%     | **7**        | Arco.          | Veneno: Flecha Ven.      |
+| **C154** | Dark Mage             | Mag  | 110%    | **9**        | Túnica.        | Seta: 12 Mag Somb. (8s). |
+| **C155** | Mercenary             | Phys | 115%    | **9**        | Couro/Espada.  | Bloqueio: Def +30% (5s). |
+| **C156** | Brawler               | Phys | 105%    | **8**        | Enfaixado.     | Combo: 2x 60% Dmg.       |
+| **C157** | Cultist               | Mag  | 95%     | **8**        | Máscara cabra. | Mald: -20% Atk (15s).    |
+| **C158** | Soldier               | Phys | 110%    | **9**        | Desertor.      | União: +20% Def Al.      |
+| **C159** | Assassin              | Phys | 100%    | **8**        | Capa verde.    | Sangue: 5%/s (10s).      |
+| **C160** | River Pirate          | Phys | 110%    | **9**        | Tapa olho.     | Gancho: Puxa (12s).      |
+| **C161** | Smuggler              | Phys | 120%    | **10**       | Fardos.        | Carga: 130% Lento.       |
+| **C162** | Ninja                 | Phys | 105%    | **8**        | Preto.         | Shuriken: 80% (Veloz).   |
+| **C163** | Rogue Monk            | Phys | 110%    | **9**        | Robe sujo.     | Palma: Knockback (10s).  |
+| **C164** | Fanatic               | Mag  | 120%    | **10**       | Livro fogo.    | Julgar: 140% (12s).      |
+| **C165** | Necromancer           | Mag  | 115%    | **9**        | Pálido.        | Erguer: Cria Esq Raso.   |
+| **C166** | Hunter                | Phys | 90%     | **7**        | Besta/Rede.    | Rede: Imobiliza (20s).   |
+| **C167** | Duelist               | Phys | 115%    | **9**        | Vendado.       | Riposte: Contra-atk.     |
+| **C168** | Executioner           | Phys | 140%    | **11**       | Capuz/Machad.  | Decap: 300% (HP <20%).   |
+| **C169** | Repeating Crossbowman | Phys | 95%     | **8**        | Mecânica.      | Tiro: 3x 40% (10s).      |
+| **C170** | Spy                   | Phys | 85%     | **7**        | Camponês.      | Veneno: Infecção Sile.   |
 
 ### Aquáticos (15)
 
-| ID       | Nome        | Atk  | Visual        | Skill (Dmg/Ef/CD)         |
-| :------- | :---------- | :--- | :------------ | :------------------------ |
-| **C171** | Piranha     | Phys | Vermelho.     | Enxame: +10% Dmg/un.      |
-| **C172** | Lula Pân    | Phys | Verde.        | Tinta: Miss 50% (15s).    |
-| **C173** | Homem-Peixe | Phys | Lança osso.   | Estocada: 120% (Veloz).   |
-| **C174** | Sereia M    | Mag  | Algas.        | Canto: Sono 2s (20s).     |
-| **C175** | Cobra D'Á   | Phys | Listrada.     | Paralisia: 1s (10s).      |
-| **C176** | Elem Água   | Mag  | Corrente.     | Bolha: Silêncio 3s (15s). |
-| **C177** | Tubarão C   | Phys | Híbrido.      | Mordida: 160% (12s).      |
-| **C178** | Tartaruga   | Phys | Coral.        | Retrair: Def +80% (20s).  |
-| **C179** | Medusa V    | Mag  | Luz.          | Choque: 110% AoE (15s).   |
-| **C180** | Polvo G     | Phys | Gigante.      | Agarrar: 2 alvos (25s).   |
-| **C181** | Sapo G      | Phys | Língua G.     | Língua: Puxa/Stun (10s).  |
-| **C182** | Dugongo S   | Mag  | Negro.        | Eco: Stun 1s AoE (18s).   |
-| **C183** | Esp. Lago   | Mag  | Água pura.    | Cura: 20% Heal (15s).     |
-| **C184** | Crustáceo   | Phys | Caranguejo F. | Pinça: Quebra Escudo.     |
-| **C185** | Nereida     | Mag  | Escamas N.    | Maldição: Drena 2%.       |
+| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)         |
+| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :------------------------ |
+| **C171** | Piranha                | Phys | 80%     | **6**        | Vermelho.      | Enxame: +10% Dmg/un.      |
+| **C172** | Swamp Squid            | Phys | 110%    | **9**        | Verde.         | Tinta: Miss 50% (15s).    |
+| **C173** | Fishman                | Phys | 105%    | **8**        | Lança osso.    | Estocada: 120% (Veloz).   |
+| **C174** | Sea Siren              | Mag  | 90%     | **7**        | Algas.         | Canto: Sono 2s (20s).     |
+| **C175** | Water Snake            | Phys | 100%    | **8**        | Listrada.      | Paralisia: 1s (10s).      |
+| **C176** | Water Elemental Spirit | Mag  | 115%    | **9**        | Corrente.      | Bolha: Silêncio 3s (15s). |
+| **C177** | Shark Hybrid           | Phys | 135%    | **11**       | Híbrido.       | Mordida: 160% (12s).      |
+| **C178** | Turtle                 | Phys | 90%     | **7**        | Coral.         | Retrair: Def +80% (20s).  |
+| **C179** | Poisonous Jellyfish    | Mag  | 100%    | **8**        | Luz.           | Choque: 110% AoE (15s).   |
+| **C180** | Giant Octopus          | Phys | 125%    | **10**       | Gigante.       | Agarrar: 2 alvos (25s).   |
+| **C181** | Giant Toad             | Phys | 115%    | **9**        | Língua G.      | Língua: Puxa/Stun (10s).  |
+| **C182** | Shadow Dugong          | Mag  | 110%    | **9**        | Negro.         | Eco: Stun 1s AoE (18s).   |
+| **C183** | Lake Spirit            | Mag  | 85%     | **7**        | Água pura.     | Cura: 20% Heal (15s).     |
+| **C184** | Hard-shell Crustacean  | Phys | 120%    | **10**       | Carranguejo F. | Pinça: Quebra Escudo.     |
+| **C185** | Nereid                 | Mag  | 105%    | **8**        | Escamas N.     | Maldição: Drena 2%.       |
 
 ### Plantas/Fungos (15)
 
-| ID       | Nome       | Atk  | Visual         | Skill (Dmg/Ef/CD)         |
-| :------- | :--------- | :--- | :------------- | :------------------------ |
-| **C186** | Cogumelo E | Mag  | Manchado spot. | Explode: 140% AoE.        |
-| **C187** | Cogumelo A | Mag  | Roxo.          | Confuse: Atk Al (4s).     |
-| **C188** | Planta Esp | Phys | Arbusto.       | Sangue: 3%/s (8s).        |
-| **C189** | Lótus N    | Mag  | Aura roxa.     | Veneno: 6%/s (15s).       |
-| **C190** | Raiz And   | Phys | Galhos.        | Tropeço: Pula turno (12). |
-| **C191** | Fungo Pod  | Mag  | Fumaça.        | Doença: -20% Stats.       |
-| **C192** | Trepadeira | Phys | Cipó dentes.   | Stun 2s (15s).            |
-| **C193** | Árvore M   | Phys | Rosto tronco.  | Esmagar: 130% (10s).      |
-| **C194** | Broto Som  | Mag  | Pétalas N.     | Dreno: 5 Mana (10s).      |
-| **C195** | Muda Ent   | Phys | 1.5 metro.     | Chute: Knock (8s).        |
-| **C196** | Cacto      | Phys | Redondo.       | Espinhos: Reflete 15%.    |
-| **C197** | Samambaia  | Mag  | Prateada.      | Clarão: Miss 50% (20s).   |
-| **C198** | Musgo Par  | Mag  | Verde tapete.  | Dreno: 2% p/ Cura Al.     |
-| **C199** | Orquídea   | Phys | Boca aberta.   | Mordida: 120% (10s).      |
-| **C200** | Limo       | Phys | Gelatina V.    | Ácido: Reduz Def (10s).   |
+| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)         |
+| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :------------------------ |
+| **C186** | Spore Mushroom         | Mag  | 100%    | **8**        | Manchado spot. | Explode: 140% AoE.        |
+| **C187** | Hallucination Mushroom | Mag  | 85%     | **7**        | Roxo.          | Confuse: Atk Al (4s).     |
+| **C188** | Thorny Bush            | Phys | 110%    | **9**        | Arbusto.       | Sangue: 3%/s (8s).        |
+| **C189** | Black Lotus            | Mag  | 115%    | **9**        | Aura roxa.     | Veneno: 6%/s (15s).       |
+| **C190** | Walking Root           | Phys | 100%    | **8**        | Galhos.        | Tropeço: Pula turno (12). |
+| **C191** | Rotting Fungus         | Mag  | 95%     | **8**        | Fumaça.        | Doença: -20% Stats.       |
+| **C192** | Vining Creeper         | Phys | 110%    | **9**        | Cipó dentes.   | Stun 2s (15s).            |
+| **C193** | Cursed Tree            | Phys | 130%    | **10**       | Rosto tronco.  | Esmagar: 130% (10s).      |
+| **C194** | Shadow Sprout          | Mag  | 90%     | **7**        | Pétalas N.     | Dreno: 5 Mana (10s).      |
+| **C195** | Ent Sapling            | Phys | 110%    | **9**        | 1.5 metro.     | Chute: Knock (8s).        |
+| **C196** | Cactus                 | Phys | 105%    | **8**        | Redondo.       | Espinhos: Reflete 15%.    |
+| **C197** | Silver Fern            | Mag  | 80%     | **6**        | Prateada.      | Clarão: Miss 50% (20s).   |
+| **C198** | Parasitic Moss         | Mag  | 100%    | **8**        | Verde tapete.  | Dreno: 2% p/ Cura Al.     |
+| **C199** | Carnivorous Orchid     | Phys | 120%    | **10**       | Boca aberta.   | Mordida: 120% (10s).      |
+| **C200** | Slime                  | Phys | 100%    | **8**        | Gelatina V.    | Ácido: Reduz Def (10s).   |
 
 ---
 
@@ -8985,12 +9050,14 @@ const bossTemplate = {
 
 ### Tier de Monstros por Ciclo
 
-| Ciclo             | Tier | Monstros Comuns                 | Boss Típico     |
-| ----------------- | ---- | ------------------------------- | --------------- |
-| **1 (Dias 1-2)**  | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe      |
-| **2 (Dias 3-4)**  | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem    |
-| **3 (Dias 5-6)**  | T3   | Dragões, Demônios, Liches       | Rei Vilão       |
-| **4 (Dias 7-8+)** | T4   | _Apocalipse_ (Hordas sem fim)   | **Global Boss** |
+| Ciclo             | Nível (NMG) | Tier | Monstros Comuns                 | Boss Típico     |
+| ----------------- | ----------- | ---- | ------------------------------- | --------------- |
+| **1 (Dias 1-2)**  | **1 - 2**   | T1   | Goblins, Lobos, Esqueletos      | Ogro Chefe      |
+| **2 (Dias 3-4)**  | **3 - 4**   | T2   | Ogros, Trolls, Aranhas Gigantes | Hidra, Golem    |
+| **3 (Dias 5-6)**  | **5 - 6**   | T3   | Dragões, Demônios, Liches       | Mini Boss Elite |
+| **4 (Dias 7-8+)** | **7 - 10**  | T4   | _Apocalipse_ (Até Lvl 8)        | **Global Boss** |
+
+> **Nota sobre o CAP:** Monstros comuns nunca ultrapassam o Lvl 8. Apenas Heróis, Bosses e Mini Bosses do Ciclo 4 podem atingir o **Lvl 10 (MAX CAP)**.
 
 ### Modificadores de Stats
 
@@ -8999,6 +9066,7 @@ const cycleMult = {
   1: 1.0, // Baseline
   2: 1.5, // +50% HP/Attack
   3: 2.5, // +150% HP/Attack
+  4: 4.0, // +300% HP/Attack (Lua de Sangue)
 };
 
 monster.hp *= cycleMult[currentCycle];
