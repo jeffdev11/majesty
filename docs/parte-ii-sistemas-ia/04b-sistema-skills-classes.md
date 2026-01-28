@@ -453,6 +453,7 @@ A "Categoria" representa o grupo de skills conforme sua posição nas tabelas (I
 - **Posição (#):** Refere-se ao número identificador da skill em cada tabela de classe abaixo (exemplo: Active #1 ou Passive #1).
 - **Custo (Rei):** Gasto único do Tesouro Real para habilitar a skill na guilda para SEMPRE.
 - **Preço (Herói):** O que cada herói paga individualmente para ter direito a usar aquela skill (pago apenas uma vez pelo herói).
+- **1x comb.:** Abreviação de "1 vez por combate". A skill só pode ser usada uma única vez em cada encontro de batalha.
 
 ### Árvore de Dependências
 
