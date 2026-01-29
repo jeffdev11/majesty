@@ -22,7 +22,7 @@ body, html {
     /* 2. O SELETOR CORINGA (*): 
        Isso diz: "Para QUALQUER elemento que exista, mude a cor do texto para claro".
        Isso resolve o problema do h2, h3, p, li, span, etc. ficarem pretos. */
-    * {
+    *:not(pre *):not(code *) {
         color: #cbcbcb !important;
         border-color: #444 !important; /* Escurece todas as bordas existentes */
     }
@@ -50,6 +50,43 @@ body, html {
     /* 6. IMAGENS: Opcional - diminui um pouco o brilho para não "doer" o olho no escuro */
     img, video {
         filter: brightness(0.85);
+    }
+
+    /* 7. AJUSTES PARA CÓDIGO (Highlight.js) */
+    pre, code {
+        background-color: #1e1e1e !important;
+    }
+    
+    code.hljs {
+        color: #abb2bf !important; /* Cor padrão do Atom One Dark (claro) */
+        padding: 1.2em !important;
+        display: block;
+        overflow-x: auto;
+    }
+
+    /* Garantir que texto simples e atributos sejam visíveis */
+    .hljs-attr, 
+    .hljs-attribute, 
+    .hljs-keyword {
+        color: #d19a66 !important; /* Laranja suave para atributos/keywords */
+    }
+    
+    .hljs-string, 
+    .hljs-value {
+        color: #98c379 !important; /* Verde para strings */
+    }
+
+    .hljs-number, 
+    .hljs-literal {
+        color: #d19a66 !important;
+    }
+
+    /* Plain text deve ser cinza claro, não escuro */
+    .language-text, 
+    .language-plaintext,
+    .hljs.language-text,
+    .hljs.language-plaintext {
+        color: #cbcbcb !important;
     }
       </style>
       <!-- The content below will be included at the end of the <head> element. -->
@@ -95,9 +132,30 @@ body, html {
         }, false);
 
         document.addEventListener("DOMContentLoaded", function () {
-          // any additional initialization
+          if (window.hljs) {
+            document.querySelectorAll('pre').forEach((pre) => {
+              const code = pre.querySelector('code');
+              if (!code) return;
+              
+              // Move language class from pre to code if missing
+              const langClass = Array.from(pre.classList).find(c => c.startsWith('language-'));
+              if (langClass && !code.classList.contains(langClass)) {
+                code.classList.add(langClass);
+              }
+
+              // Strip existing Prism.js/MPE tokens to let Highlight.js work on clean text
+              if (code.querySelector('span.token')) {
+                code.textContent = code.textContent;
+              }
+              
+              hljs.highlightElement(code);
+            });
+          }
         });
       </script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     </head>
     <body for="html-export">
       <!-- Galeria de Imagens Sequenciais e Chat NotebookLM -->
@@ -109,13 +167,17 @@ body, html {
           <img src="The_Console_Kingdom_page-0004.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0003.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0004.jpg" style="width: 100%; height: auto; display: block;">
+          <img src="Majesty_Operating_System_page-0013.jpg" style="width: 100%; height: auto; display: block;">
           <img src="The_Console_Kingdom_page-0005.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0005.jpg" style="width: 100%; height: auto; display: block;">
+          <img src="Majesty_Operating_System_page-0007.jpg" style="width: 100%; height: auto; display: block;">
           <img src="The_Console_Kingdom_page-0006.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0006.jpg" style="width: 100%; height: auto; display: block;">
           <img src="The_Console_Kingdom_page-0007.jpg" style="width: 100%; height: auto; display: block;">
+          <img src="Majesty_Operating_System_page-0008.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0007.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0008.jpg" style="width: 100%; height: auto; display: block;">
+          <img src="Majesty_Operating_System_page-0009.jpg" style="width: 100%; height: auto; display: block;">
           <img src="The_Console_Kingdom_page-0008.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0009.jpg" style="width: 100%; height: auto; display: block;">          
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0010.jpg" style="width: 100%; height: auto; display: block;">
@@ -127,6 +189,7 @@ body, html {
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0012.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0013.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0014.jpg" style="width: 100%; height: auto; display: block;">
+          <img src="Majesty_Operating_System_page-0015.jpg" style="width: 100%; height: auto; display: block;">
           <img src="Majesty_Console_Autonomous_Fantasy_pages-to-jpg-0015.jpg" style="width: 100%; height: auto; display: block;">
           
           <!-- Link NotebookLM Destacado -->
@@ -5230,162 +5293,209 @@ GUARDA_DA_CIDADE → AVENTUREIRO (Após completar 5 missões)
 <li>🎵 <strong>Bardo</strong> (Bard) - Suporte musical</li>
 <li>👊 <strong>Monge</strong> (Monk) - DPS corpo-a-corpo sem armas</li>
 </ol>
-<p>O Majesty pode <strong>desbloquear</strong> essas skills gastando <strong>Ouro</strong> do Tesouro Real. Diferente de RPGs tradicionais, os heróis não escolhem o que aprender; o Majesty compra a "licença" da skill para a guilda, e todos os heróis aptos (nível e pré-requisitos) passam a utilizá-la.</p>
+<p>O Rei (Majesty) <strong>desbloqueia</strong> essas habilidades pesquisando as "licenças de ensino" nas guildas. Isso disponibiliza o conhecimento no reino, mas o aprendizado <strong>não é automático</strong>:</p>
+<ol>
+<li><strong>O Rei</strong> paga a pesquisa para incluir a skill no "catálogo" da guilda.</li>
+<li><strong>O Herói</strong> decide, via IA, quando gastar o <strong>próprio ouro</strong> para ir à guilda e aprender a skill disponível.</li>
+</ol>
 <blockquote>
-<p><strong>📊 Nota Técnica de Escalonamento:</strong><br>
-Para fins de exemplo nas tabelas abaixo, consideramos um <strong>Poder Base de Herói Lvl 1 = 20</strong>.<br>
-Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de dano). Skills com valores fixos (Ex: 80 dano) são tratadas como o valor absoluto para o nível 1.</p>
+<p><strong>�️ Diretrizes de Log e UX (Modelo Console):</strong><br>
+Para garantir a clareza no modelo baseado em texto/logs, seguimos estas regras:</p>
+<ul>
+<li><strong>Agregação de Log:</strong> Skills de múltiplos acertos (ex: 8 flechas) são exibidas em uma única linha no log resumindo o total (ex: <code>8x golpes, Total: 450 Dano</code>).</li>
+<li><strong>Alvos em Área (AoE):</strong> Em vez de metros ou raios, as skills definem o número de alvos (Máximo de 5 inimigos por batalha).</li>
+<li><strong>Recursos de Cena:</strong> Cadáveres são notificados no log de cena (<code>[CENA] Cadáver disponível</code>) para uso do Necromante.</li>
+<li><strong>Auras e Suporte:</strong> Habilidades de área afetam todos os aliados/inimigos presentes no mesmo <strong>Local do Mapa</strong> (Nó/Área) que o herói.</li>
+<li><strong>Visibilidade:</strong> Status de buffs e debuffs ativos são monitorados via Janela de Status (F1), evitando spam no log principal.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>�📊 Nota Técnica de Escalonamento:</strong><br>
+Uma vez que o herói compra a skill, o poder dela escala <strong>automaticamente</strong> com o <strong>Nível do Herói (Lvl 1 a 10)</strong>. O herói nunca precisa "upar" a skill novamente; ele compra a licença individual uma única vez e ela evolui com ele (+20% de efeito por nível adicional).</p>
 </blockquote>
 <hr>
 <h2 id="️-guerreiro-warrior---30-skills">🗡️ GUERREIRO (Warrior) - 30 Skills </h2>
-<h3 id="️-skills-ativas-15">⚔️ Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    PS[1. Power Strike] --&gt; BC[2. Battle Cry]
+    BC --&gt; T[7. Taunt]
+    PS --&gt; CH[3. Charge]
+    CH --&gt; BS[4. Blade Spin]
+    BS --&gt; ES[10. Earthshaker]
+    PS --&gt; AS[5. Armor Sunder]
+    AS --&gt; MT[6. Mortal Thrust]
+    MT --&gt; BR[9. Berserker Rage]
+    BR --&gt; V[12. Vengeance]
+    PS --&gt; SB[11. Shield Block]
+    SB --&gt; IB[14. Iron Bulwark]
+    PS --&gt; EX[13. Execute]
+    EX --&gt; AW[15. Avatar of War]
+    style AW fill:#f96,stroke:#333,stroke-width:4px
+</div><h3 id="️-skills-ativas-15">⚔️ Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Power Strike</strong></td>
-<td>10 Mana</td>
-<td>1 Turno</td>
-<td><strong>30</strong></td>
-<td>+50% dano no próximo ataque</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Power Strike</strong> 🗡️</td>
+<td style="text-align:left">10 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>30</strong></td>
+<td style="text-align:left">+50% dano no próximo ataque.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra inimigos com HP cheio para abrir vantagem.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Battle Cry</strong></td>
-<td>20 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>+20% Attack para aliados próximos por 2 Turnos</td>
-<td>Power Strike</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Battle Cry</strong> 📢</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+20% Attack para aliados no mesmo local.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">No início do combate, quando o grupo está reunido.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Charge</strong></td>
-<td>15 Mana</td>
-<td>2 Turnos</td>
-<td><strong>20</strong></td>
-<td>Carga rápida até o inimigo, atordoa 1 Turno</td>
-<td>Nível 3</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Charge</strong> ⚡</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">Carga rápida, atordoa alvo por 1 turno.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Para anular healers ou arqueiros na retaguarda.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Blade Spin</strong></td>
-<td>25 Mana</td>
-<td>3 Turnos</td>
-<td><strong>20 AoE</strong></td>
-<td>Ataque em área 360°, atinge até 5 inimigos</td>
-<td>Charge</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Blade Spin</strong> 🌪️</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>20 AoE</strong></td>
+<td style="text-align:left">Ataque em área, atinge até 5 inimigos.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando cercado por múltiplos inimigos fracos (zergs).</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Armor Sunder</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td><strong>20</strong></td>
-<td>Ignora 50% da defesa do alvo</td>
-<td>Nível 5</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Armor Sunder</strong> 🛡️</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">Ignora 50% da defesa do alvo.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Contra Tanks ou Bosses de armadura pesada.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Mortal Thrust</strong></td>
-<td>35 Mana</td>
-<td>4 Turnos</td>
-<td><strong>40</strong></td>
-<td>Golpe crítico garantido, +100% dano</td>
-<td>Armor Sunder</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Mortal Thrust</strong> 🗡️</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>40</strong></td>
+<td style="text-align:left">Golpe crítico garantido (+100% dano).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Para finalizar alvos prioritários rapidamente.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Taunt</strong></td>
-<td>20 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Força inimigos próximos a atacarem o guerreiro</td>
-<td>Battle Cry</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Taunt</strong> 💢</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Força inimigos a atacarem o guerreiro.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para salvar um herói frágil (Mago/Ladino) sob ataque.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Second Wind</strong></td>
-<td>50 Mana</td>
-<td>6 Turnos</td>
-<td>15 HP Heal</td>
-<td>Recupera 30% HP instantaneamente</td>
-<td>Nível 7</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Second Wind</strong> 🌬️</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">15 HP Heal</td>
+<td style="text-align:left">Recupera 30% HP instantaneamente.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Quando o HP cai abaixo de 20% e a cura aliada falha.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Berserker Rage</strong></td>
-<td>40 Mana</td>
-<td>5 Turnos</td>
-<td><strong>30</strong></td>
-<td>+50% Attack, -30% Defense por 3 Turnos</td>
-<td>Mortal Thrust</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Berserker Rage</strong> 💢</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>30</strong></td>
+<td style="text-align:left">+50% Atk, -30% Def por 3 turnos.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Quando a vitória é certa, mas precisa acelerar o kill.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Earthshaker</strong></td>
-<td>60 Mana</td>
-<td>6 Turnos</td>
-<td><strong>20 AoE</strong></td>
-<td>Golpeia o chão, atordoa todos em 10m por 1 Turno</td>
-<td>Blade Spin</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Earthshaker</strong> 🌋</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>20 AoE</strong></td>
+<td style="text-align:left">Atordoa até 5 inimigos no local por 1 turno.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Para interromper múltiplas conjurações de magos inimigos.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Shield Block</strong></td>
-<td>30 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Bloqueia próximo ataque completamente</td>
-<td>Nível 9</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Shield Block</strong> 🛡️</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Bloqueia o próximo ataque completamente.</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Antecipando um golpe pesado anunciado de um Boss.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Vengeance</strong></td>
-<td>35 Mana</td>
-<td>4 Turnos</td>
-<td>Var.</td>
-<td>Próximo ataque causa dano = HP perdido</td>
-<td>Berserker Rage</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Vengeance</strong> 🩸</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">Var.</td>
+<td style="text-align:left">Dano causado = HP perdido pelo herói.</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">No momento de quase-morte para um contra-ataque fatal.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Execute</strong></td>
-<td>25 Mana</td>
-<td>4 Turnos</td>
-<td>Fatal</td>
-<td>Mata instantaneamente inimigo com HP &lt; 15%</td>
-<td>Nível 10</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Execute</strong> 💀</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">Fatal</td>
+<td style="text-align:left">Mata instantaneamente se Alvo HP &lt; 15%.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Contra Bosses para evitar a fase final furiosa.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Iron Bulwark</strong></td>
-<td>70 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Imune a dano por 1 Turno, não pode se mover</td>
-<td>Shield Block</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Iron Bulwark</strong> 🧱</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Imune a dano por 1 turno (imóvel).</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Para segurar uma horda enquanto o time recua.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Avatar of War</strong></td>
-<td>100 Mana</td>
-<td>1x comb.</td>
-<td><strong>60</strong></td>
-<td>Cresce de tamanho, +200% Attack, ataques em área</td>
-<td>Execute + Wyvern Scale</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Avatar of War</strong> 👑</td>
+<td style="text-align:left">100 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Forma Gigante, +200% Atk, Ataques em Área.</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Durante invasões massivas ao reino (Ciclo 4).</td>
 </tr>
 </tbody>
 </table>
@@ -5393,255 +5503,305 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Iron Skin</strong></td>
-<td>+10% Defense permanente</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Iron Skin</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+10% Defense permanente.</td>
+<td style="text-align:left">Essencial para todo Guerreiro sobreviver na frente.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Vitality</strong></td>
-<td>+15% HP máximo</td>
-<td>Iron Skin</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Vitality</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+15% HP máximo.</td>
+<td style="text-align:left">Aumenta a janela de erro para o Curandeiro do grupo.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Menacing Presence</strong></td>
-<td>Inimigos priorizam atacar este herói</td>
-<td>Taunt</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Menacing Presence</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Inimigos priorizam atacar este herói.</td>
+<td style="text-align:left">Mantém o herói como o alvo principal do Boss.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Durable</strong></td>
-<td>Ignora 20% do dano de DoT (sangramento, veneno)</td>
-<td>Vitality</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Durable</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Ignora 20% do dano de DoT.</td>
+<td style="text-align:left">Contra aranhas ou cobras (veneno frequente).</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Brutal Strength</strong></td>
-<td>+15% Attack permanente</td>
-<td>Nível 4</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Brutal Strength</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+15% Attack permanente.</td>
+<td style="text-align:left">Garante que o Tank também contribua com dano real.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Combat Regen</strong></td>
-<td>Recupera 3% HP a cada turno em combate</td>
-<td>Second Wind</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Combat Regen</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Cura 3% HP a cada turno em luta.</td>
+<td style="text-align:left">Sustentação em batalhas de longa duração contra Elites.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Unstoppable</strong></td>
-<td>Reduz duração de atordoamentos em 50%</td>
-<td>Nível 6</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Unstoppable</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">-50% duração de Stuns recebidos.</td>
+<td style="text-align:left">Crítico contra inimigos que abusam de controle.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Counter-Strike</strong></td>
-<td>15% chance de revidar quando bloqueado</td>
-<td>Shield Block</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Counter-Strike</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">15% chance de revidar ao bloquear.</td>
+<td style="text-align:left">Transforma defesa absoluta em dano passivo.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Bloodlust</strong></td>
-<td>+5% Attack para cada inimigo morto (máx 50%)</td>
-<td>Berserker Rage</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Bloodlust</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+5% Atk por kill (máx 50%).</td>
+<td style="text-align:left">Em missões de extermínio de hordas baixas.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Juggernaut</strong></td>
-<td>+20% HP máximo, -10% velocidade</td>
-<td>Vitality</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Juggernaut</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+20% HP Max, -10% Speed.</td>
+<td style="text-align:left">Para Guerreiros que focam 100% em ser parede.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Plate Mastery</strong></td>
-<td>+25% Defense, imune a knock-back</td>
-<td>Iron Skin</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Plate Mastery</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">+25% Defense, imune a knock-back.</td>
+<td style="text-align:left">Impede que o Boss tire você da posição de guarda.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Last Stand</strong></td>
-<td>Ao chegar a 1 HP, fica invulnerável por 1 Turno (1x/comb)</td>
-<td>Nível 8</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Last Stand</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Fica invulnerável por 1t se HP=1.</td>
+<td style="text-align:left">Evita mortes por "one-shot" de bosses poderosos.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Guardian Aura</strong></td>
-<td>Aliados próximos ganham +10% Defense</td>
-<td>Menacing Presence</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Guardian Aura</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Aliados no mesmo local +10% Defense.</td>
+<td style="text-align:left">Protege o grupo quando estão todos próximos no mapa.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Weapon Master</strong></td>
-<td>+20% dano com espadas e machados</td>
-<td>Brutal Strength</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Weapon Master</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">+20% dano com armas brancas.</td>
+<td style="text-align:left">Especialização ofensiva para Guerreiros veteranos.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Battle Titan</strong></td>
-<td>+30% todos stats quando HP &lt; 30%</td>
-<td>Last Stand + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Battle Titan</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+30% stats quando HP &lt; 30%.</td>
+<td style="text-align:left">Transforma o Guerreiro no herói mais perigoso à beira da morte.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-mago-mage---30-skills">🔮 MAGO (Mage) - 30 Skills </h2>
-<h3 id="-skills-ativas-15">✨ Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-1">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    FB[1. Fireball] --&gt; MB[3. Mana Shield]
+    MB --&gt; AB[8. Arcane Barrier]
+    FB --&gt; FR[2. Frost Bolt]
+    FR --&gt; FN[6. Frost Nova]
+    FN --&gt; TS[10. Time Stop]
+    FB --&gt; MS[4. Meteor Shower]
+    MS --&gt; FS[9. Firestorm]
+    FS --&gt; SE[12. Summon Elemental]
+    FB --&gt; CL[7. Chain Lightning]
+    CL --&gt; OR[13. Obliteration Ray]
+    FB --&gt; TP[5. Teleport]
+    TP --&gt; EH[14. Event Horizon]
+    FB --&gt; AX[11. Arcane Explosion]
+    OR --&gt; AA[15. Arcane Apocalypse]
+    style AA fill:#b3f,stroke:#333,stroke-width:4px,color:#fff
+</div><h3 id="-skills-ativas-15">✨ Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Fireball</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td><strong>80</strong></td>
-<td>Projétil de fogo, 80 dano mágico</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Fireball</strong> 🔥</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>80</strong></td>
+<td style="text-align:left">Projétil de fogo focado.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Dano constante contra alvos únicos de longe.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Frost Bolt</strong></td>
-<td>25 Mana</td>
-<td>2 Turnos</td>
-<td><strong>60</strong></td>
-<td>Congela alvo por 1 Turno, 60 dano</td>
-<td>Fireball</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Frost Bolt</strong> ❄️</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Dano + Congela alvo por 1 turno.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Para prender um inimigo corpo-a-corpo perigoso.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Mana Shield</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td>150 Shield</td>
-<td>Absorve 150 de dano por 2 Turnos</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Mana Shield</strong> 🔮</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">150 Shield</td>
+<td style="text-align:left">Absorve 150 de dano por 2 turnos.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Ativar assim que um inimigo se aproximar demais.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Meteor Shower</strong></td>
-<td>60 Mana</td>
-<td>5 Turnos</td>
-<td><strong>300 AoE</strong></td>
-<td>6 meteoros em área, 50 dano cada</td>
-<td>Fireball</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Meteor Shower</strong> ☄️</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>300 AoE</strong></td>
+<td style="text-align:left">Chuva de fogo, atinge até 5 inimigos.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Contra grupos estáticos ou grandes bosses.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Teleport</strong></td>
-<td>40 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Teleporta 15m instantaneamente</td>
-<td>Nível 4</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Teleport</strong> ✨</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Salta p/ área s/ Fog of War (Máx 2x/dia).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Escapar de cercos ou cruzar grandes distâncias no mapa.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Frost Nova</strong></td>
-<td>50 Mana</td>
-<td>4 Turnos</td>
-<td>Stun AoE</td>
-<td>Congela inimigos em 8m por 1 Turno</td>
-<td>Frost Bolt</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Frost Nova</strong> ❄️</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">Stun AoE</td>
+<td style="text-align:left">Congela até 5 inimigos na área.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando cercado por múltiplos inimigos rápidos.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Chain Lightning</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td><strong>360 AoE</strong></td>
-<td>Atinge até 4 alvos, 90 dano cada</td>
-<td>Nível 5</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Chain Lightning</strong> ⚡</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>360 AoE</strong></td>
+<td style="text-align:left">Salta entre até 5 alvos.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Excelente contra grupos dispersos de arqueiros.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Arcane Barrier</strong></td>
-<td>35 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Aliados próximos ganham +50% Defense por 2 Turnos</td>
-<td>Mana Shield</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Arcane Barrier</strong> 🛡️</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliados no local +50% Defesa (2t).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Proteger o grupo durante um golpe de área do Boss.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Firestorm</strong></td>
-<td>80 Mana</td>
-<td>6 Turnos</td>
-<td><strong>15/t DoT</strong></td>
-<td>Área de 12m queima por 3 Turnos, 15 dano/turno</td>
-<td>Meteor Shower</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Firestorm</strong> 🔥</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>15/t DoT</strong></td>
+<td style="text-align:left">Queima até 5 inimigos por 3 turnos (DoT).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Controlar o fluxo de uma horda em caminho estreito.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Time Stop</strong></td>
-<td>70 Mana</td>
-<td>7 Turnos</td>
-<td>Slow</td>
-<td>Reduz velocidade de inimigos em 70% por 2 Turnos</td>
-<td>Frost Nova</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Time Stop</strong> ⏳</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">7 Turnos</td>
+<td style="text-align:left">Slow</td>
+<td style="text-align:left">Lentidão (70%) em até 5 inimigos.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Para dar tempo ao grupo de recuar ou se curar.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Arcane Explosion</strong></td>
-<td>55 Mana</td>
-<td>4 Turnos</td>
-<td><strong>120 AoE</strong></td>
-<td>AoE de 10m, 120 dano + knock-back</td>
-<td>Nível 7</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Arcane Explosion</strong> 💥</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>120 AoE</strong></td>
+<td style="text-align:left">Dano em até 5 inimigos + Empurrão.</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Momento "sai de perto" quando inimigos encostam.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Summon Elemental</strong></td>
-<td>100 Mana</td>
-<td>8 Turnos</td>
-<td>Summon</td>
-<td>Invoca elemental de fogo que luta por 3 Turnos</td>
-<td>Firestorm</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Summon Elemental</strong> 🕯️</td>
+<td style="text-align:left">100 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Invoca Elemental no local (Tank/DPS).</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Quando o grupo precisa de um "tanque" extra na luta.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Obliteration Ray</strong></td>
-<td>90 Mana</td>
-<td>5 Turnos</td>
-<td><strong>200</strong></td>
-<td>Feixe contínuo, 200 dano total (Alto Delay)</td>
-<td>Chain Lightning</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Obliteration Ray</strong> 🔦</td>
+<td style="text-align:left">90 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>200</strong></td>
+<td style="text-align:left">Raio contínuo (Dano consolidado em log).</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Contra alvos lentos ou com muita vida.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Event Horizon</strong></td>
-<td>60 Mana</td>
-<td>8 Turnos</td>
-<td><strong>100 AoE</strong></td>
-<td>100 dano área, aplica Condensado (-30% Esquiva AoE)</td>
-<td>Teleport</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Event Horizon</strong> 🕳️</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left"><strong>100 AoE</strong></td>
+<td style="text-align:left">Dano em até 5 inimigos + Reduz Esquiva.</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Preparar o combo para o Arqueiro ou Ladino.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Arcane Apocalypse</strong></td>
-<td>150 Mana</td>
-<td>1x comb.</td>
-<td><strong>500 AoE</strong></td>
-<td>Explosão 20m, 500 dano, atinge todos inimigos</td>
-<td>Obliteration Ray + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Arcane Apocalypse</strong> 🎆</td>
+<td style="text-align:left">150 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>500 AoE</strong></td>
+<td style="text-align:left">Mega explosão, atinge todos os 5 inimigos.</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Para limpar o mapa instantaneamente no Apocalipse.</td>
 </tr>
 </tbody>
 </table>
@@ -5649,255 +5809,302 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Arcane Intellect</strong></td>
-<td>+20% Mana máximo</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Arcane Intellect</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+20% Mana máximo permanente.</td>
+<td style="text-align:left">Essencial para permitir o uso de magias de alto tier.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Mana Flow</strong></td>
-<td>+10 Mana/turno fora de combate</td>
-<td>Arcane Intellect</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Mana Flow</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+10 Mana/t fora de combate.</td>
+<td style="text-align:left">Reduz o tempo de espera entre combates na jornada.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Mana Shielding</strong></td>
-<td>Converte 10% Mana em escudo mágico</td>
-<td>Mana Shield</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Mana Shielding</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Converte 10% Mana em escudo natural.</td>
+<td style="text-align:left">Aumenta drasticamente a sobrevivência do Mago frágil.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Elemental Mastery</strong></td>
-<td>+15% dano mágico</td>
-<td>Nível 3</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Elemental Mastery</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+15% dano mágico permanente.</td>
+<td style="text-align:left">Escala todo o arsenal ofensivo do Mago.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Focused Mind</strong></td>
-<td>-10% custo de Mana em todas skills</td>
-<td>Mana Flow</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Focused Mind</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">-10% custo de Mana em todas skills.</td>
+<td style="text-align:left">Permite conjurar magias por mais tempo em lutas longas.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Pyromania</strong></td>
-<td>+25% dano de fogo, imune a queimadura</td>
-<td>Fireball</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Pyromania</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+25% dano de fogo, imune a queima.</td>
+<td style="text-align:left">Especialização em dano puro e controle de fogo.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Cryomancy</strong></td>
-<td>+25% dano de gelo, reduz 50% lentidão</td>
-<td>Frost Bolt</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Cryomancy</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+25% dano gelo, reduz lentidão.</td>
+<td style="text-align:left">Especialização em controle de grupo e sobrevivência.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Quick Cast</strong></td>
-<td>-20% tempo de cast</td>
-<td>Nível 5</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Quick Cast</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">-20% tempo de conjuração.</td>
+<td style="text-align:left">Reduz a janela de interrupção para magias complexas.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Spell Reflection</strong></td>
-<td>Reflete 20% do dano mágico recebido</td>
-<td>Mana Shielding</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Spell Reflection</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Reflete 20% dano mágico recebido.</td>
+<td style="text-align:left">Defesa ofensiva contra outros magos e bosses.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Endless Mana</strong></td>
-<td>Regenera 2% Mana máximo a cada kill</td>
-<td>Focused Mind</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Endless Mana</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Regenera 2% Mana por kill.</td>
+<td style="text-align:left">Sustentação infinita durante a limpeza de hordas.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Arcane Crit</strong></td>
-<td>15% chance de crítico mágico (+100% dano)</td>
-<td>Elemental Mastery</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Arcane Crit</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">+15% chance de Crítico Mágico.</td>
+<td style="text-align:left">Multiplica o potencial de dano explosivo do Magos.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Arcane Presence</strong></td>
-<td>Aliados próximos ganham +10% resistência mágica</td>
-<td>Nível 7</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Arcane Presence</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Aliados no mesmo local +10% Resistência Mágica.</td>
+<td style="text-align:left">Defesa em área útil contra ataques elementais.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Mana Siphon</strong></td>
-<td>Restaura 5% Mana ao matar inimigo</td>
-<td>Endless Mana</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Mana Siphon</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Restaura 5% Mana ao matar com spell.</td>
+<td style="text-align:left">Permite manter a ofensiva sem parar para descansar.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Overload</strong></td>
-<td>Skills custam +50% Mana mas causam +40% dano</td>
-<td>Arcane Crit</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Overload</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">+50% custo Mana por +40% Dano.</td>
+<td style="text-align:left">Modo de dano extremo para o fim do jogo.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Archmage</strong></td>
-<td>+50% Mana máximo, +30% dano mágico</td>
-<td>Overload + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Archmage</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+50% Mana Max, +30% Dano Mag total.</td>
+<td style="text-align:left">O ápice do poder místico, definindo o "Mestre do Conclave".</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-arqueiro-archer---30-skills">🏹 ARQUEIRO (Archer) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-1">🎯 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-2">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    AS[1. Aimed Shot] --&gt; EA[2. Explosive Arrow]
+    EA --&gt; RA[4. Rain of Arrows]
+    AS --&gt; HM[6. Hunter's Mark]
+    HM --&gt; HS[10. Headshot]
+    HS --&gt; DA[15. Doom Arrow]
+    TR[3. Tactical Retreat] --&gt; RF[8. Rapid Fire]
+    PS[5. Piercing Shot] --&gt; EV[13. Elven Volley]
+    PA[7. Poison Arrow] --&gt; FA[12. Frost Arrow]
+    ET[9. Explosive Trap]
+    SW[11. Summon Wolf]
+    SS[14. Shadow Step]
+    style DA fill:#f66,stroke:#333,stroke-width:4px
+</div><h3 id="-skills-ativas-15-1">🎯 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Aimed Shot</strong></td>
-<td>10 Mana</td>
-<td>1 Turno</td>
-<td><strong>60</strong></td>
-<td>+30% precisão, 60 dano</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Aimed Shot</strong> 🎯</td>
+<td style="text-align:left">10 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">+30% precisão.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra inimigos esquivos ou voadores.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Explosive Arrow</strong></td>
-<td>25 Mana</td>
-<td>2 Turnos</td>
-<td><strong>80 AoE</strong></td>
-<td>AoE 5m, 80 dano total</td>
-<td>Aimed Shot</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Explosive Arrow</strong> 💥</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>80 AoE</strong></td>
+<td style="text-align:left">Atinge até 5 inimigos.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra grupos de pequenos monstros (Goblins/Lutadores).</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Tactical Retreat</strong></td>
-<td>15 Mana</td>
-<td>2 Turnos</td>
-<td><strong>20</strong></td>
-<td>Salta para longe e dispara flecha retardadora</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Tactical Retreat</strong> 👣</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">Recua na linha de batalha + Flecha lenta.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando um inimigo corpo-a-corpo encosta no arqueiro.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Rain of Arrows</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>300 AoE</strong></td>
-<td>12 flechas em área 10m, 25 dano cada</td>
-<td>Explosive Arrow</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Rain of Arrows</strong> 🏹</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>300 AoE</strong></td>
+<td style="text-align:left">Chuva em até 5 inimigos (Log Agregado).</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Limpeza massiva de área quando monstros estão agrupados.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Piercing Shot</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td><strong>60</strong></td>
-<td>Atravessa alvos, atinge até 3 inimigos</td>
-<td>Nível 3</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Piercing Shot</strong> 🏹</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Atravessa até 5 alvos.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Inimigos em horda ou corredores estreitos.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Hunter's Mark</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Marca alvo, +50% dano nele por 3 Turnos</td>
-<td>Aimed Shot</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Hunter's Mark</strong> 🎯</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Alvo marcado (Log alerta o grupo).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">No início da luta contra um Boss ou monstro Elite.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Poison Arrow</strong></td>
-<td>35 Mana</td>
-<td>3 Turnos</td>
-<td><strong>10/t DoT</strong></td>
-<td>Envenena alvo, 10 dano/turno por 3 Turnos</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Poison Arrow</strong> ☣️</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>10/t DoT</strong></td>
+<td style="text-align:left">Envenena alvo (Status Visível F1).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Contra heróis ou monstros com muita vida.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Rapid Fire</strong></td>
-<td>25 Mana</td>
-<td>2 Turnos</td>
-<td><strong>60</strong></td>
-<td>Dispara 3 flechas instantâneas no alvo</td>
-<td>Tactical Retreat</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Rapid Fire</strong> 🏹</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">3 flechas (Log: 3x, Dano Agregado).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para finalizar um alvo com HP baixo rapidamente.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Explosive Trap</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>150</strong></td>
-<td>Coloca armadilha, 150 dano + atordoa 1 Turno</td>
-<td>Nível 5</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Explosive Trap</strong> 🪤</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>150</strong></td>
+<td style="text-align:left">Armadilha (Recurso de Cena) + Stun.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Posicionada defensivamente no local.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Headshot</strong></td>
-<td>50 Mana</td>
-<td>5 Turnos</td>
-<td><strong>60</strong></td>
-<td>Crítico garantido, +200% dano, headshot instakill</td>
-<td>Hunter's Mark</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Headshot</strong> 💀</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Crítico (+200%) ou Instakill.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Quando um monstro perigoso está marcado.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Summon Wolf</strong></td>
-<td>60 Mana</td>
-<td>8 Turnos</td>
-<td>Summon</td>
-<td>Invoca lobo que luta por 5 Turnos</td>
-<td>Nível 7</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Summon Wolf</strong> 🐺</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Invoca lobo no local para lutar.</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Distrair o inimigo enquanto o arqueiro atira de longe.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Frost Arrow</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td><strong>70</strong></td>
-<td>Congela alvo por 1 Turno, 70 dano</td>
-<td>Poison Arrow</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Frost Arrow</strong> ❄️</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>70</strong></td>
+<td style="text-align:left">Congela alvo por 1 turno.</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Impedir que o Boss alcance o grupo.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Elven Volley</strong></td>
-<td>70 Mana</td>
-<td>5 Turnos</td>
-<td><strong>100</strong></td>
-<td>Dispara rajada rápida (atinge alvo 5 vezes)</td>
-<td>Piercing Shot</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Elven Volley</strong> 🏹</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>100</strong></td>
+<td style="text-align:left">Rajada (5x acertos, Log Agregado).</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Para explodir o dano em um único turno no Boss.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Shadow Step</strong></td>
-<td>40 Mana</td>
-<td>6 Turnos</td>
-<td>-</td>
-<td>Fica 'Evasivo' (+50% Esquiva) e ignora Defense</td>
-<td>Nível 9</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Shadow Step</strong> 👥</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+50% Esquiva e ignora defesa.</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Quando sob ataque pesado ou para ignorar escudos.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Doom Arrow</strong></td>
-<td>100 Mana</td>
-<td>1x comb.</td>
-<td><strong>600 AoE</strong></td>
-<td>Flecha gigante, 600 dano, stuns área (até 3 alvos)</td>
-<td>Headshot + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Doom Arrow</strong> 🏹</td>
+<td style="text-align:left">100 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>600 AoE</strong></td>
+<td style="text-align:left">Flecha em até 5 inimigos + Stun AoE.</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Golpe final épico na Fase 3 de um Boss.</td>
 </tr>
 </tbody>
 </table>
@@ -5905,255 +6112,304 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Eagle Eye</strong></td>
-<td>+15% Precisão e +10% Chance de Crítico</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Eagle Eye</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+15% Precisão, +10% Crítico.</td>
+<td style="text-align:left">Garante que flechas cruciais nunca errem o alvo.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Fleet Foot</strong></td>
-<td>+15% Speed</td>
-<td>Eagle Eye</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Fleet Foot</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+15% Speed.</td>
+<td style="text-align:left">Facilita a exploração e a fuga de perigos.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Mortal Precision</strong></td>
-<td>+10% chance de crítico</td>
-<td>Aimed Shot</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Mortal Precision</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+10% chance de crítico adicional.</td>
+<td style="text-align:left">Aumenta a letalidade constante do arqueiro.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Archer Mastery</strong></td>
-<td>+15% dano com arcos</td>
-<td>Nível 2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Archer Mastery</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+15% dano com arcos.</td>
+<td style="text-align:left">Upgrade básico para manter a progressão de dano.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Evasion</strong></td>
-<td>+15% chance de esquivar ataques corpo-a-corpo</td>
-<td>Tactical Retreat</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Evasion</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+15% chance de esquivar corpo-a-corpo.</td>
+<td style="text-align:left">Sobrevivência contra assassinos e monstros rápidos.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Skirmishing</strong></td>
-<td>Pode atacar e mover no mesmo turno (menor alcance)</td>
-<td>Archer Mastery</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Skirmishing</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Pode atacar e mover no mesmo turno.</td>
+<td style="text-align:left">Manter a distância (Kiting) enquanto ataca.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Sharpshooter Stance</strong></td>
-<td>+20% dano se não mover no turno</td>
-<td>Mortal Precision</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Sharpshooter Stance</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+20% dano se parado.</td>
+<td style="text-align:left">Quando o guerreiro está segurando o Boss e você está seguro.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Exploit Weakness</strong></td>
-<td>+25% dano contra inimigos abaixo de 50% HP</td>
-<td>Hunter's Mark</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Exploit Weakness</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+25% dano se Alvo HP &lt; 50%.</td>
+<td style="text-align:left">Acelera a fase final da morte de monstros elites.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Ambush</strong></td>
-<td>Primeiro ataque de combate +100% dano</td>
-<td>Nível 4</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Ambush</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Primeiro ataque de combate +100% dano.</td>
+<td style="text-align:left">Abrir combate com um tiro devastador.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Steady Aim</strong></td>
-<td>+10% Precisão, ignora 25% da esquiva do alvo</td>
-<td>Nível 5</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Steady Aim</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+10% Precisão, ignora esquiva inimiga.</td>
+<td style="text-align:left">Contra fantasmas ou sombras (inimigos com alta esquiva).</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Toxic Mastery</strong></td>
-<td>DoTs duram +1 turno</td>
-<td>Poison Arrow</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Toxic Mastery</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Efeitos de DoT duram +1 turno.</td>
+<td style="text-align:left">Maximiza o dano passivo contra Bosses.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Feline Reflexes</strong></td>
-<td>+25% Velocidade de Ação (Turno chega mais rápido)</td>
-<td>Evasion</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Feline Reflexes</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">+25% Velocidade de Ação (Turnos).</td>
+<td style="text-align:left">Atira mais vezes que o inimigo consegue reagir.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Natural Hunter</strong></td>
-<td>+30% dano contra criaturas selvagens</td>
-<td>Summon Wolf</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Natural Hunter</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">+30% dano contra animais/bestas.</td>
+<td style="text-align:left">Especialização para caçar monstros selvagens.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Devastating Crit</strong></td>
-<td>Críticos causam +150% dano em vez de +100%</td>
-<td>Mortal Precision</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Devastating Crit</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Críticos causam +150% dano (em vez de 100).</td>
+<td style="text-align:left">Transforma o arqueiro em uma máquina de instakill.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Living Legend</strong></td>
-<td>+40% todos stats durante o dia</td>
-<td>Devastating Crit + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Living Legend</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+40% stats durante o dia.</td>
+<td style="text-align:left">Torna o Arqueiro invencível durante as horas de sol.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="️-ladino-rogue---30-skills">🗝️ LADINO (Rogue) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-2">🔪 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-3">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    B[1. Backstab] --&gt; SB[2. Smoke Bomb]
+    SB --&gt; DS[5. Death Shadow]
+    DS --&gt; CS[7. Cheap Shot]
+    CS --&gt; OS[9. Opportunist Strike]
+    B --&gt; E[4. Envenom]
+    E --&gt; H[11. Hemorrhage]
+    SB --&gt; MI[10. Mirror Image]
+    MI --&gt; MS[14. Master of Shadows]
+    HS[3. Hamstring]
+    BF[6. Blade Flurry] --&gt; FK[13. Fan of Knives]
+    CS --&gt; SE[12. Stealth Execute]
+    SE --&gt; BD[15. Blade Dance]
+    SD[8. Shadow Dodge]
+    style BD fill:#333,stroke:#f00,stroke-width:4px,color:#fff
+</div><h3 id="-skills-ativas-15-2">🔪 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Backstab</strong></td>
-<td>10 Mana</td>
-<td>1 Turno</td>
-<td><strong>30</strong></td>
-<td>Ataque rápido pelas costas, +50% dano</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Backstab</strong> 🔪</td>
+<td style="text-align:left">10 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>30</strong></td>
+<td style="text-align:left">+50% dano se atacar pelas costas.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra arqueiros ou magos distraídos focado em aliados.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Smoke Bomb</strong></td>
-<td>20 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Cria nuvem, invisível por 1 Turno</td>
-<td>Backstab</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Smoke Bomb</strong> 💨</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Invisível por 1 turno.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Para cancelar o foco do inimigo ou fugir de combate fatal.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Hamstring</strong></td>
-<td>15 Mana</td>
-<td>2 Turnos</td>
-<td><strong>20</strong></td>
-<td>Causa dano leve e reduz Speed do alvo em 30%</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Hamstring</strong> 🦶</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">Dano e -30% Speed do alvo.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Impedir que um inimigo fujo escape ou alcance sua vila.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Envenom</strong></td>
-<td>25 Mana</td>
-<td>3 Turnos</td>
-<td>Poison</td>
-<td>Próximos 5 ataques aplicam veneno (Dano por turno)</td>
-<td>Backstab</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Envenom</strong> ☣️</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">Poison</td>
+<td style="text-align:left">Próximos 5 ataques aplicam Veneno.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">No início de uma luta prolongada contra alvos resistentes.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Death Shadow</strong></td>
-<td>30 Mana</td>
-<td>4 Turnos</td>
-<td><strong>40</strong></td>
-<td>Força Back Attack (mesmo de frente), +100% dano crit</td>
-<td>Smoke Bomb</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Death Shadow</strong> 🌑</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>40</strong></td>
+<td style="text-align:left">Força Back Attack (mesmo de frente).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando você não consegue flanquear o Boss fisicamente.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Blade Flurry</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>160</strong></td>
-<td>Gira rapidamente, 8 ataques em 1 Turno</td>
-<td>Nível 4</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Blade Flurry</strong> ⚔️</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>160</strong></td>
+<td style="text-align:left">8 ataques (Log Agregado: 8x).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Para causar o máximo de dano no menor tempo possível.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Cheap Shot</strong></td>
-<td>35 Mana</td>
-<td>5 Turnos</td>
-<td><strong>20</strong></td>
-<td>Atordoa alvo por 1 Turno</td>
-<td>Death Shadow</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Cheap Shot</strong> 👊</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">Atordoa o alvo por 1 turno.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para interromper uma habilidade poderosa do Boss.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Shadow Dodge</strong></td>
-<td>20 Mana</td>
-<td>2 Turnos</td>
-<td>-</td>
-<td>Esquiva garantida do próximo ataque e recupera mana</td>
-<td>Nível 3</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Shadow Dodge</strong> 👥</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Esquiva + Recupera Mana (Aparece no Log).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Quando o inimigo usa uma skill pesada.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Opportunist Strike</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td><strong>80</strong></td>
-<td>Se alvo estiver atordoado/congelado, +300% dano</td>
-<td>Cheap Shot</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Opportunist Strike</strong> 🗡️</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>80</strong></td>
+<td style="text-align:left">+300% dano contra alvos atordoados.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Combo imediato após o Cheap Shot ou Stun de aliado.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Mirror Image</strong></td>
-<td>60 Mana</td>
-<td>6 Turnos</td>
-<td><strong>10/t</strong></td>
-<td>Cria clone que dura 3 Turnos e causa 50% dano</td>
-<td>Smoke Bomb</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Mirror Image</strong> 👥</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>10/t</strong></td>
+<td style="text-align:left">Clones no local (Status F1).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Confundir o Boss e aumentar a pressão ofensiva.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Hemorrhage</strong></td>
-<td>50 Mana</td>
-<td>4 Turnos</td>
-<td><strong>15/t DoT</strong></td>
-<td>Causa sangramento severo, 15 dano/turno por 3 Turnos</td>
-<td>Envenom</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Hemorrhage</strong> 🩸</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>15/t DoT</strong></td>
+<td style="text-align:left">Sangramento (Status Visível F1).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Contra inimigos que regeneram HP rapidamente.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Stealth Execute</strong></td>
-<td>55 Mana</td>
-<td>5 Turnos</td>
-<td>Fatal</td>
-<td>Força Back Attack furtivo, instakill if HP &lt; 30%</td>
-<td>Death Shadow</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Stealth Execute</strong> 💀</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">Fatal</td>
+<td style="text-align:left">Instakill se HP &lt; 30%.</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Para finalizar Elite sem chance de reação.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Fan of Knives</strong></td>
-<td>70 Mana</td>
-<td>5 Turnos</td>
-<td><strong>400 AoE</strong></td>
-<td>20 adagas em cone, 20 dano cada</td>
-<td>Blade Flurry</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Fan of Knives</strong> 🔪</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>400 AoE</strong></td>
+<td style="text-align:left">20 adagas em até 5 inimigos (Log Agregado).</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Quando hordas de monstros tentam cercar o ladino.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Master of Shadows</strong></td>
-<td>40 Mana</td>
-<td>6 Turnos</td>
-<td>-</td>
-<td>Invisível por 4 Turnos, +50% velocidade</td>
-<td>Mirror Image</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Master of Shadows</strong> 🌑</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Invisível no local +50% Speed.</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Infiltração profunda ou fuga estratégica.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Blade Dance</strong></td>
-<td>100 Mana</td>
-<td>1x comb.</td>
-<td>Fatal</td>
-<td>Teleporta entre 5 inimigos, causando dano crítico fatal</td>
-<td>Stealth Execute + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Blade Dance</strong> 💃</td>
+<td style="text-align:left">100 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">Fatal</td>
+<td style="text-align:left">Teleporte e ataque em até 5 inimigos.</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Momento cinematográfico para limpar uma sala inteira.</td>
 </tr>
 </tbody>
 </table>
@@ -6161,255 +6417,302 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Stealth</strong></td>
-<td>-30% chance de ser alvo de ataques (Aggro Baixo)</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Stealth</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">-30% chance de ser alvo (Aggro Baixo).</td>
+<td style="text-align:left">Garante que o Ladino não seja o foco inicial da pancada.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Quick Fingers</strong></td>
-<td>-20% tempo de cooldown em skills</td>
-<td>Stealth</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Quick Fingers</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">-20% cooldown em skills.</td>
+<td style="text-align:left">Permite o uso frequente de invisibilidade e venenos.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Back Attack</strong></td>
-<td>+50% dano se atacar por trás</td>
-<td>Backstab</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Back Attack</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+50% dano permanente se atacar por trás.</td>
+<td style="text-align:left">Especialização em flanqueamento com aliados.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Dagger Mastery</strong></td>
-<td>+20% dano com adagas</td>
-<td>Nível 2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Dagger Mastery</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% dano com adagas.</td>
+<td style="text-align:left">Upgrade essencial para a progressão base de dano.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Plunder</strong></td>
-<td>Chance maior de encontrar itens raros</td>
-<td>Hamstring</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Plunder</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Maior chance de itens raros e ouro.</td>
+<td style="text-align:left">Se o objetivo da partida for acumular riqueza rápida.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Lethal Poison</strong></td>
-<td>DoTs de veneno causam +40% dano</td>
-<td>Envenom</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Lethal Poison</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">DoTs de veneno causam +40% dano.</td>
+<td style="text-align:left">Transforma o veneno em uma arma mortal silenciada.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Deadly Dodge</strong></td>
-<td>+20% chance de esquivar</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Deadly Dodge</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+20% chance de esquiva permanente.</td>
+<td style="text-align:left">Proteção contra ataques físicos diretos inevitáveis.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Poison Immunity</strong></td>
-<td>Imune a todos venenos</td>
-<td>Lethal Poison</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Poison Immunity</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Imune a todos os venenos.</td>
+<td style="text-align:left">Essencial em biomas de Pântano ou contra necromantes.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Critical Strike</strong></td>
-<td>+25% chance de crítico</td>
-<td>Back Attack</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Critical Strike</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+25% chance de crítico permanente.</td>
+<td style="text-align:left">Foco em burst damage e instakills constantes.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Acrobat</strong></td>
-<td>+30% Speed</td>
-<td>Deadly Dodge</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Acrobat</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+30% Speed permanente.</td>
+<td style="text-align:left">Torna o Ladino o herói mais rápido do reino.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Preparation</strong></td>
-<td>Reduz todos cooldowns em 30% ao entrar em combate</td>
-<td>Quick Fingers</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Preparation</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Reduz 30% cooldowns ao iniciar combate.</td>
+<td style="text-align:left">Permite usar magias potentes logo no início da luta.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Cold Blood</strong></td>
-<td>+40% dano contra alvos com HP cheio</td>
-<td>Critical Strike</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Cold Blood</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">+40% dano contra alvos com HP completo.</td>
+<td style="text-align:left">Para deletar inimigos frágeis com um único golpe inicial.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Natural Assassin</strong></td>
-<td>+50% dano contra alvos solitários</td>
-<td>Stealth</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Natural Assassin</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">+50% dano contra alvos solitários.</td>
+<td style="text-align:left">Perfeito para caçar monstros perdidos no mapa.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Living Shadow</strong></td>
-<td>Regenera 6% HP/turno quando invisível</td>
-<td>Master of Shadows</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Living Shadow</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Regenera 6% HP/turno quando invisível.</td>
+<td style="text-align:left">Permite recuperar vida sem precisar de poções ou curas.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Silent Death</strong></td>
-<td>+60% dano crítico, ao matar fica invisível por 1 turno</td>
-<td>Stealth Execute + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Silent Death</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+60% dano crítico, mata e fica invisível.</td>
+<td style="text-align:left">Permite abates sucessivos sem nunca ser detectado.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-druida-druid---30-skills">🌿 DRUIDA (Druid) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-3">🍃 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-4">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    ER[1. Entangling Roots] --&gt; TB[4. Toxic Briar]
+    TB --&gt; IS[11. Insect Swarm]
+    NH[2. Nature's Heal] --&gt; TQ[6. Tranquility]
+    TQ --&gt; RB[10. Rebirth]
+    RB --&gt; AN[15. Avatar of Nature]
+    BF[3. Bear Form] --&gt; FC[9. Feral Claws]
+    SW[5. Summon Spirit Wolf]
+    NF[7. Nature's Fury] --&gt; ET[13. Earth's Tremor]
+    TF[8. Treant Form]
+    PF[12. Panther Form]
+    GC[14. Gaia's Communion]
+    style AN fill:#6f6,stroke:#333,stroke-width:4px
+</div><h3 id="-skills-ativas-15-3">🍃 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Entangling Roots</strong></td>
-<td>20 Mana</td>
-<td>2 Turnos</td>
-<td><strong>40</strong></td>
-<td>Prende inimigo por 1 Turno, 40 dano</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Entangling Roots</strong> 🌿</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>40</strong></td>
+<td style="text-align:left">Prende inimigo por 1 turno.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Para imobilizar um inimigo corpo-a-corpo que persegue o grupo.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Nature's Heal</strong></td>
-<td>30 Mana</td>
-<td>2 Turnos</td>
-<td>150 HP Heal</td>
-<td>Cura alvo em 150 HP</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Nature's Heal</strong> 💚</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left">150 HP Heal</td>
+<td style="text-align:left">Cura alvo em 150 HP.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Quando um herói Tank está com HP abaixo de 50%.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Bear Form</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>30</strong></td>
-<td>Transforma em urso por 3 Turnos, +100% HP, +50% Attack</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Bear Form</strong> 🐻</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>30</strong></td>
+<td style="text-align:left">Vira Urso (+100% HP, +50% Atk).</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando o Druida precisa assumir a linha de frente por falta de Tank.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Toxic Briar</strong></td>
-<td>25 Mana</td>
-<td>3 Turnos</td>
-<td><strong>80 + 10/t</strong></td>
-<td>Cria barreira de espinhos, 80 dano + 10 dano/t por 3 Turnos</td>
-<td>Entangling Roots</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Toxic Briar</strong> 🌵</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>80 + 10/t</strong></td>
+<td style="text-align:left">Espinhos em até 5 inimigos + DoT.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Criar um obstáculo em gargalos de hordas inimigos.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Summon Spirit Wolf</strong></td>
-<td>50 Mana</td>
-<td>6 Turnos</td>
-<td>Summon</td>
-<td>Invoca lobo espiritual que luta por 4 Turnos</td>
-<td>Nível 3</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Summon Spirit Wolf</strong> 🐺</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Invoca lobo no local por 4 turnos.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Adicionar um aliado extra para flanquear arqueiros.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Tranquility</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td>80 HP Heal</td>
-<td>Cura todos aliados em 12m, 80 HP + 10 HP/t por 3 Turnos</td>
-<td>Nature's Heal</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Tranquility</strong> 🍃</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">80 HP Heal</td>
+<td style="text-align:left">Cura todos os aliados no mesmo local.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Após um ataque em área massivo do Boss.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Nature's Fury</strong></td>
-<td>55 Mana</td>
-<td>5 Turnos</td>
-<td><strong>20 AoE</strong></td>
-<td>Tempestade 8m, atinge 3-5 inimigos, dano + lentidão</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Nature's Fury</strong> ⚡</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>20 AoE</strong></td>
+<td style="text-align:left">Tempestade em até 5 inimigos + Lentidão.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para reduzir a velocidade de avanço de grandes grupos.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Treant Form</strong></td>
-<td>30 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Vira árvore, +200% Defesa, imune a Knockback, Lento</td>
-<td>Nível 5</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Treant Form</strong> 🌳</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Transformação no local (Imune a repulsão).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para se tornar uma muralha imóvel durante a defesa.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Feral Claws</strong></td>
-<td>35 Mana</td>
-<td>3 Turnos</td>
-<td><strong>200</strong></td>
-<td>Transforma mãos em garras, 5 ataques rápidos, 40 cada</td>
-<td>Bear Form</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Feral Claws</strong> 🐾</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>200</strong></td>
+<td style="text-align:left">5 ataques (Log Agregado: 5x).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Para explodir o dano enquanto está em forma de urso.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Rebirth</strong></td>
-<td>80 Mana</td>
-<td>1x comb.</td>
-<td>50% HP Heal</td>
-<td>Revive herói morto com 50% HP (aliado ou próprio)</td>
-<td>Tranquility</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Rebirth</strong> 🌟</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">50% HP Heal</td>
+<td style="text-align:left">Revive herói no local com 50% HP.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Quando o herói principal morre em uma luta crucial.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Insect Swarm</strong></td>
-<td>60 Mana</td>
-<td>5 Turnos</td>
-<td><strong>15/t DoT</strong></td>
-<td>Nuvem 10m, cega inimigos, 15 dano/t por 3 Turnos</td>
-<td>Toxic Briar</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Insect Swarm</strong> 🐝</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>15/t DoT</strong></td>
+<td style="text-align:left">Nuvem cega até 5 inimigos (DoT).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Contra grupos de arqueiros inimigos.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Panther Form</strong></td>
-<td>45 Mana</td>
-<td>5 Turnos</td>
-<td><strong>30</strong></td>
-<td>+80% velocidade, +50% dano crítico por 3 Turnos</td>
-<td>Nível 6</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Panther Form</strong> 🐈</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>30</strong></td>
+<td style="text-align:left">Transformação no local (+80% Speed).</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Para perseguição rápida ou para chegar primeiro.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Earth's Tremor</strong></td>
-<td>70 Mana</td>
-<td>6 Turnos</td>
-<td><strong>150 AoE</strong></td>
-<td>Fissura 15m, atordoa 1 Turno, 150 dano</td>
-<td>Nature's Fury</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Earth's Tremor</strong> 🌋</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>150 AoE</strong></td>
+<td style="text-align:left">Terremoto em até 5 inimigos + Stun AoE.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Para interromper múltiplas habilidades de inimigos.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Gaia's Communion</strong></td>
-<td>50 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Imune a controle de grupo por 4 Turnos, +30% todos stats</td>
-<td>Nível 8</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Gaia's Communion</strong> ✨</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Buff geral p/ aliados no local.</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Preparação final antes de entrar em uma sala de Boss.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Avatar of Nature</strong></td>
-<td>120 Mana</td>
-<td>1x comb.</td>
-<td><strong>60</strong></td>
-<td>Forma definitiva, +200% HP/Attack, cura 10%/t, 4 Turnos</td>
-<td>Rebirth + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Avatar of Nature</strong> 🌲</td>
+<td style="text-align:left">120 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Forma e cura em área (Aliados no local).</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">O ápice do poder Druídico para vencer a batalha final.</td>
 </tr>
 </tbody>
 </table>
@@ -6417,255 +6720,302 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Forest Guardian</strong></td>
-<td>+15% stats em terreno de floresta</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Forest Guardian</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+15% stats em florestas.</td>
+<td style="text-align:left">Torna o Druida imbatível em biomas de matas densas.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Nature's Bond</strong></td>
-<td>Heals sobre-curam viram escudo temporário (máx 20% HP)</td>
-<td>Nature's Heal</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Nature's Bond</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Sobre-cura vira escudo temporário.</td>
+<td style="text-align:left">Mantém o grupo protegido mesmo quando eles estão com HP cheio.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Barkskin</strong></td>
-<td>+12% Defense, imune a sangramento</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Barkskin</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+12% Defense, imune a sangramento.</td>
+<td style="text-align:left">Melhora a sobrevivência contra animais e monstros de corte.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Wild Instincts</strong></td>
-<td>+20% chance de esquivar quando HP &lt; 50%</td>
-<td>Bear Form</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Wild Instincts</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% Esquiva se HP &lt; 50%.</td>
+<td style="text-align:left">Ajuda o Druida a sobreviver em situações desesperadoras.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Beast Tongue</strong></td>
-<td>Todos os pets invocados ganham +20% HP e dano</td>
-<td>Summon Spirit Wolf</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Beast Tongue</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Pets invocados ganham +20% HP/Dmg.</td>
+<td style="text-align:left">Especialização em comando de feras espirituais.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Accelerated Regen</strong></td>
-<td>+10 HP/t fora de combate, +5 HP/t em combate</td>
-<td>Nível 3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Accelerated Regen</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Regeneração passiva constante (HP).</td>
+<td style="text-align:left">Reduz a dependência de poções de cura fora de combate.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Elemental Resistance</strong></td>
-<td>+30% resistência a fogo, gelo e veneno</td>
-<td>Barkskin</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Elemental Resistance</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+30% resist a Fogo, Gelo, Veneno.</td>
+<td style="text-align:left">Proteção vital contra ataques mágicos e ambientais.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Ancient Wisdom</strong></td>
-<td>+25% Mana máximo</td>
-<td>Nível 4</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Ancient Wisdom</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+25% Mana máximo.</td>
+<td style="text-align:left">Permite mais trocas de forma e conjurações de cura.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Shapeshifter</strong></td>
-<td>Formas animais duram +50% tempo</td>
-<td>Panther Form</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Shapeshifter</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Formas animais duram +50% tempo.</td>
+<td style="text-align:left">Maximiza a utilidade estratégica das transformações.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Forest Spirit</strong></td>
-<td>Aliados próximos regeneram +5 HP/turno</td>
-<td>Accelerated Regen</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Forest Spirit</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Aliados no mesmo local ganham regeneração de HP.</td>
+<td style="text-align:left">Atua como uma "fonte de cura ambulante" para o grupo.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Primordial Fury</strong></td>
-<td>Em forma animal, +40% Attack</td>
-<td>Wild Instincts</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Primordial Fury</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">+40% Attack em formas animais.</td>
+<td style="text-align:left">Torna o Urso e a Pantera máquinas de destruição real.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Symbiosis</strong></td>
-<td>Heals em aliados curam o druida por 30% do valor</td>
-<td>Nature's Bond</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Symbiosis</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Curar aliado cura o druida em 30%.</td>
+<td style="text-align:left">Mantém o herói saudável enquanto ele cuida dos outros.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Deep Roots</strong></td>
-<td>Imune a knock-back e empurrões</td>
-<td>Barkskin</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Deep Roots</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Imune a empurrões e repulsão.</td>
+<td style="text-align:left">Mantém o Druida na posição estratégica desejada.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Master Shapeshifter</strong></td>
-<td>Pode trocar entre formas sem cooldown (1x turno)</td>
-<td>Shapeshifter</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Master Shapeshifter</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Troca de forma sem cooldown (1x/t).</td>
+<td style="text-align:left">Versatilidade total para adaptar a tática no meio da luta.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>One with Nature</strong></td>
-<td>+50% todos stats em lua cheia, revive 1x/combate</td>
-<td>Avatar of Nature + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>One with Nature</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Buff extremo em Lua Cheia + Reviver.</td>
+<td style="text-align:left">O Druida se torna uma força da natureza imparável.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-elfo-elf---30-skills">🏹 ELFO (Elf) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-4">✨ Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-5">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    AA[1. Arcane Arrow] --&gt; SF[4. Starfall]
+    SF --&gt; AB[8. Arcane Barrage]
+    SF --&gt; CP[11. Celestial Prism]
+    CP --&gt; TE[15. Total Eclipse]
+    ES[2. Elven Step] --&gt; EF[10. Ethereal Form]
+    EF --&gt; AS[14. Ascension]
+    MB[3. Moonlight Blessing] --&gt; PC[5. Protection Circle]
+    PC --&gt; SB[7. Spirit Bond]
+    PC --&gt; EN[9. Elven Sanctuary]
+    MY[6. Mystic Blade] --&gt; BS[13. Blade Storm]
+    AR[12. Arcane Resonance]
+    style TE fill:#66f,stroke:#333,stroke-width:4px,color:#fff
+</div><h3 id="-skills-ativas-15-4">✨ Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Arcane Arrow</strong></td>
-<td>15 Mana</td>
-<td>1 Turno</td>
-<td><strong>70</strong></td>
-<td>Flecha mágica, 70 dano + penetra defesa</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Arcane Arrow</strong> 🏹</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>70</strong></td>
+<td style="text-align:left">Flecha mágica que penetra defesa.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra inimigos com alta armadura (como Golems).</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Elven Step</strong></td>
-<td>20 Mana</td>
-<td>2 Turnos</td>
-<td><strong>26</strong></td>
-<td>Teleporta 12m, próximos 3 ataques +30% dano</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Elven Step</strong> ✨</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>26</strong></td>
+<td style="text-align:left">Salta p/ área s/ Fog of War (Máx 2x/dia).</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Para flanquear o inimigo e ganhar vantagem estratégica.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Moonlight Blessing</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Aliados próximos ganham +20% Speed por 2 Turnos</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Moonlight Blessing</strong> 🌙</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+20% Speed para o grupo no local.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">No início de uma caçada para chegar antes ao alvo.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Starfall</strong></td>
-<td>50 Mana</td>
-<td>4 Turnos</td>
-<td><strong>350 AoE</strong></td>
-<td>10 projéteis mágicos, 35 dano cada, rastreiam alvos</td>
-<td>Arcane Arrow</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Starfall</strong> 💫</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>350 AoE</strong></td>
+<td style="text-align:left">10 projéteis teleguiados (Log Agregado).</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando inimigos estão dispersos e você quer atingir todos.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Protection Circle</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Zona 8m, aliados ganham +40% Defense por 2 Turnos</td>
-<td>Moonlight Blessing</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Protection Circle</strong> 🛡</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+40% Defense p/ aliados no local.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Durante uma defesa de posição imóvel contra hordas.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Mystic Blade</strong></td>
-<td>25 Mana</td>
-<td>3 Turnos</td>
-<td><strong>36</strong></td>
-<td>Espada de energia por 3 Turnos, +80% Attack médico</td>
-<td>Nível 3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Mystic Blade</strong> 🗡️</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>36</strong></td>
+<td style="text-align:left">Espada de energia no local por 3 turnos.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando o inimigo fecha a distância.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Spirit Bond</strong></td>
-<td>45 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Liga com aliado, compartilha 30% dano/cura por 4 Turnos</td>
-<td>Protection Circle</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Spirit Bond</strong> 🔗</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Link de dano/cura com aliado no local.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para proteger o Tank do grupo, dividindo o fardo.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Arcane Barrage</strong></td>
-<td>35 Mana</td>
-<td>2 Turnos</td>
-<td><strong>240</strong></td>
-<td>6 flechas instantâneas, 40 dano cada</td>
-<td>Starfall</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Arcane Barrage</strong> 🏹</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>240</strong></td>
+<td style="text-align:left">6 flechas rápidos (Log Agregado: 6x).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para matar um inimigo específico instantaneamente.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Elven Sanctuary</strong></td>
-<td>60 Mana</td>
-<td>6 Turnos</td>
-<td>20 HP/t Heal</td>
-<td>Cria zona 10m, cura 20 HP/turno, +25% resistência mágica</td>
-<td>Protection Circle</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Elven Sanctuary</strong> 🌿</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">20 HP/t Heal</td>
+<td style="text-align:left">Zona local de cura + Resistência Mágica.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Refúgio seguro para o grupo se recuperar.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Ethereal Form</strong></td>
-<td>50 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Imune a dano físico, ganha turno extra se esquivar</td>
-<td>Elven Step</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Ethereal Form</strong> 👻</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Imune a físico (Status Visível F1).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Ativar quando um inimigo pesado investir contra você.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Celestial Prism</strong></td>
-<td>70 Mana</td>
-<td>5 Turnos</td>
-<td><strong>500 AoE</strong></td>
-<td>Raio que divide em 5, 100 dano cada</td>
-<td>Starfall</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Celestial Prism</strong> 💎</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>500 AoE</strong></td>
+<td style="text-align:left">Raio que divide em 5 inimigos (Log Narrativo).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Em combates contra múltiplos inimigos de HP médio.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Arcane Resonance</strong></td>
-<td>55 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Próximas 3 skills custam 0 Mana</td>
-<td>Nível 7</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Arcane Resonance</strong> 🌀</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Próximas 3 skills do Elfo custam 0 Mana.</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Preparar o terreno para usar magias poderosas.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Blade Storm</strong></td>
-<td>65 Mana</td>
-<td>5 Turnos</td>
-<td><strong>80 AoE</strong></td>
-<td>Lâminas giram, atinge até 4 inimigos adjacentes</td>
-<td>Mystic Blade</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Blade Storm</strong> 🌪️</td>
+<td style="text-align:left">65 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>80 AoE</strong></td>
+<td style="text-align:left">Lâminas em até 5 inimigos no local.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Quando cercado por inimigos fracos.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Ascension</strong></td>
-<td>80 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Levita (imune corpo-a-corpo), Skills Instantâneas (3 Turnos)</td>
-<td>Ethereal Form</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Ascension</strong> 👼</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Levita (Status F1) + Magias instantâneas.</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Modo de dominação total atacando de cima.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Total Eclipse</strong></td>
-<td>150 Mana</td>
-<td>1x comb.</td>
-<td>Blind AoE</td>
-<td>Escurece área 25m, cega todos inimigos por 3 Turnos</td>
-<td>Celestial Prism + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Total Eclipse</strong> 🌒</td>
+<td style="text-align:left">150 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">Blind AoE</td>
+<td style="text-align:left">Cega até 5 inimigos no local por 3 turnos.</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Para ganhar a vantagem definitiva em uma luta de Boss.</td>
 </tr>
 </tbody>
 </table>
@@ -6673,153 +7023,185 @@ Skills que indicam porcentagem (%) escalam sobre este valor (Ex: +50% = 30 de da
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Elven Grace</strong></td>
-<td>+25% Speed</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Elven Grace</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+25% Speed permanente.</td>
+<td style="text-align:left">Torna o Elfo o mestre da movimentação no campo.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Mystic Vision</strong></td>
-<td>Detecta inimigos invisíveis e escondidos</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Mystic Vision</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Detecta invisíveis e ocultos.</td>
+<td style="text-align:left">Crítico contra Ladinos inimigos ou monstros que se escondem.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Longevity</strong></td>
-<td>+20% HP máximo, imune a doenças</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Longevity</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% HP máximo, imune a doenças.</td>
+<td style="text-align:left">Aumenta a resistência do Elfo para expedições longas.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Arcane Affinity</strong></td>
-<td>+20% dano mágico</td>
-<td>Arcane Arrow</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Arcane Affinity</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% dano mágico permanente.</td>
+<td style="text-align:left">Multiplica o efeito de todas as flechas e lâminas místicas.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Supernatural Evasion</strong></td>
-<td>+18% chance de esquivar</td>
-<td>Elven Grace</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Supernatural Evasion</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+18% chance de esquivar permanente.</td>
+<td style="text-align:left">Melhora a defesa passiva do herói sem gastar mana.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Ancestral Wisdom</strong></td>
-<td>+30% Mana máximo, -10% custo skills</td>
-<td>Nível 3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Ancestral Wisdom</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+30% Mana max, -10% custo skills.</td>
+<td style="text-align:left">Permite que o Elfo atue por mais tempo com magia.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Elven Precision</strong></td>
-<td>+15% chance de crítico, críticos ignoram 20% defesa</td>
-<td>Arcane Barrage</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Elven Precision</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+15% Crítico + Penetra Defesa.</td>
+<td style="text-align:left">Garante que cada tiro conte contra inimigos de elite.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Lunar Protection</strong></td>
-<td>Durante a noite, +15% todos stats</td>
-<td>Moonlight Blessing</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Lunar Protection</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+15% stats durante a noite.</td>
+<td style="text-align:left">Torna o Elfo a escolha perfeita para missões noturnas.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Magic Harmony</strong></td>
-<td>Regenera 3% Mana máximo a cada skill usada</td>
-<td>Ancestral Wisdom</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Magic Harmony</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Regenera 3% Mana por skill usada.</td>
+<td style="text-align:left">Sustentação de mana infinita se o herói for bem gerenciado.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Shadow Cloak</strong></td>
-<td>+15% Esquiva contra magias e projéteis</td>
-<td>Supernatural Evasion</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Shadow Cloak</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">+15% Esquiva contra magia/flechas.</td>
+<td style="text-align:left">Proteção contra outros atacantes à distância.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Arcane Resilience</strong></td>
-<td>+35% resistência mágica</td>
-<td>Longevity</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Arcane Resilience</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">+35% Resistência Mágica.</td>
+<td style="text-align:left">Torna o Elfo um "Anti-Mago" nato.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Soul Link</strong></td>
-<td>Quando aliado morre próximo, ganha +50% dano por 30s</td>
-<td>Spirit Bond</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Soul Link</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Quando aliado morre, ganha +50% dano (30s).</td>
+<td style="text-align:left">Vingança poderosa para virar uma luta perdida.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Arcane Master</strong></td>
-<td>Cooldowns de skills -15%</td>
-<td>Magic Harmony</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Arcane Master</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Cooldowns reduzidos em 15%.</td>
+<td style="text-align:left">Aumenta a frequência de uso de habilidades poderosas.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Elven Immortality</strong></td>
-<td>Ao morrer, revive with 1 HP (1x/10min)</td>
-<td>Longevity</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Elven Immortality</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Revive com 1 HP ao morrer (1x/10min).</td>
+<td style="text-align:left">Evita mortes acidentais por erros de posicionamento.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Transcendence</strong></td>
-<td>+60% Mana, +40% dano mágico, habilidades custam metade</td>
-<td>Total Eclipse + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Transcendence</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+60% Mana, +40% Dano, Custo 50%.</td>
+<td style="text-align:left">O estado de perfeição elfo, dominante em todas as distâncias.</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h2 id="sistema-de-desbloqueio-e-custos">Sistema de Desbloqueio e Custos </h2>
-<h3 id="investimento-em-pesquisa-ouro">Investimento em Pesquisa (Ouro) </h3>
-<p>O Majesty não "compra" a skill para um herói, mas sim <strong>pesquisa</strong> a habilidade na guilda correspondente. Uma vez pesquisada, qualquer herói daquela classe que atenda aos requisitos de nível pode usá-la.</p>
-<p><strong>Tabela de Custos por Tier:</strong></p>
+<h2 id="sistema-de-desbloqueio-e-economia">Sistema de Desbloqueio e Economia </h2>
+<p>O progresso de poder no reino é dividido em duas etapas econômicas distintas.</p>
+<h3 id="1-pesquisa-real-o-rei-paga-para-desbloquear">1. Pesquisa Real (O Rei paga para Desbloquear) </h3>
+<p>O Rei investe no "conhecimento" da guilda. Sem isso, nenhum herói verá a skill disponível para venda.</p>
+<h3 id="2-contratação-individual-o-herói-paga-para-aprender">2. Contratação Individual (O Herói paga para Aprender) </h3>
+<p>O Herói usa o ouro que acumulou em caçadas ou trabalho para comprar a skill da guilda. A escolha é baseada na <strong>IA e Personalidade (PECMA)</strong>: heróis mais proativos compram skills assim que podem; heróis mais gananciosos podem demorar mais para investir.</p>
+<p><strong>Tabela de Categorias e Custos:</strong></p>
+<p>A "Categoria" representa o grupo de skills conforme sua posição nas tabelas (ID #1 a #15).</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Categoria</th>
-<th style="text-align:left">Nível Requerido</th>
-<th style="text-align:left">Custo em Ouro</th>
-<th style="text-align:left">Exemplo</th>
+<th style="text-align:left">Categoria da Skill</th>
+<th style="text-align:left">Posição (#) na Tabela</th>
+<th style="text-align:left">Nível do Herói</th>
+<th style="text-align:left">Custo (Rei)</th>
+<th style="text-align:left">Preço (Herói)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong>Tier 1 (Básica)</strong></td>
-<td style="text-align:left">Nível 1</td>
-<td style="text-align:left">200g</td>
-<td style="text-align:left">Fireball, Power Strike</td>
+<td style="text-align:left"><strong>Básicas</strong></td>
+<td style="text-align:left">Skills #1 a #5</td>
+<td style="text-align:left">Nível 1 - 2</td>
+<td style="text-align:left">250g</td>
+<td style="text-align:left">100g</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Tier 2 (Intermediária)</strong></td>
-<td style="text-align:left">Nível 3+</td>
-<td style="text-align:left">400g</td>
-<td style="text-align:left">Frost Bolt, Battle Cry</td>
+<td style="text-align:left"><strong>Intermediárias</strong></td>
+<td style="text-align:left">Skills #6 a #10</td>
+<td style="text-align:left">Nível 3 - 5</td>
+<td style="text-align:left">750g</td>
+<td style="text-align:left">300g</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Tier 3 (Avançada)</strong></td>
-<td style="text-align:left">Nível 5+</td>
+<td style="text-align:left"><strong>Avançadas</strong></td>
+<td style="text-align:left">Skills #11 a #13</td>
+<td style="text-align:left">Nível 6 - 8</td>
+<td style="text-align:left">2.000g</td>
 <td style="text-align:left">800g</td>
-<td style="text-align:left">Meteor Shower, Taunt</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Tier 4 (Elite)</strong></td>
-<td style="text-align:left">Nível 8+</td>
+<td style="text-align:left"><strong>Elite</strong></td>
+<td style="text-align:left">Skill #14</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">4.000g</td>
 <td style="text-align:left">1.500g</td>
-<td style="text-align:left">Teleport, Iron Skin</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Tier 5 (Ultimate)</strong></td>
-<td style="text-align:left">Nível 12+</td>
+<td style="text-align:left"><strong>Lendária (Ult)</strong></td>
+<td style="text-align:left">Skill #15</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">10.000g</td>
 <td style="text-align:left">5.000g</td>
-<td style="text-align:left">Arcane Apocalypse, Battle Titan</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Nota:</strong> Skills Passivas seguem os mesmos custos de seus respectivos Tiers de pré-requisito.</p>
+<p><strong>Legenda de Termos:</strong></p>
+<ul>
+<li><strong>Posição (#):</strong> Refere-se ao número identificador da skill em cada tabela de classe abaixo (exemplo: Active #1 ou Passive #1).</li>
+<li><strong>Custo (Rei):</strong> Gasto único do Tesouro Real para habilitar a skill na guilda para SEMPRE.</li>
+<li><strong>Preço (Herói):</strong> O que cada herói paga individualmente para ter direito a usar aquela skill (pago apenas uma vez pelo herói).</li>
+<li><strong>1x comb.:</strong> Abreviação de "1 vez por combate". A skill só pode ser usada uma única vez em cada encontro de batalha.</li>
+</ul>
 <h3 id="árvore-de-dependências">Árvore de Dependências </h3>
 <pre data-role="codeBlock" data-info="" class="language-text"><code>Skills seguem hierarquia:
 - Básicas (Nível 1) → Intermediárias → Avançadas → Ultimate
@@ -6857,154 +7239,184 @@ Menacing Presence (Passiva, Lvl 6)
 <hr>
 <h1 id="skills-das-novas-classes">Skills das Novas Classes </h1>
 <h2 id="️-paladino-paladin---30-skills">🛡️ PALADINO (Paladin) - 30 Skills </h2>
-<h3 id="️-skills-ativas-15-1">⚔️ Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-6">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    HS[1. Holy Strike] --&gt; HL[3. Holy Light]
+    HL --&gt; DS[6. Divine Sacrifice]
+    HL --&gt; RS[8. Resurrection]
+    RS --&gt; AL[15. Avatar of Light]
+    HS --&gt; HJ[5. Hammer of Justice]
+    HJ --&gt; DW[11. Divine Wrath]
+    DA[2. Devotion Aura] --&gt; GB[12. Grand Blessing]
+    SF[4. Shield of Faith] --&gt; MS[10. Mirror Shield]
+    JU[7. Judgment] --&gt; VV[13. Vow of Vengeance]
+    CO[9. Consecration] --&gt; SA[14. Sanctuary]
+    style AL fill:#ff0,stroke:#333,stroke-width:4px
+</div><h3 id="️-skills-ativas-15-1">⚔️ Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Holy Strike</strong></td>
-<td>15 Mana</td>
-<td>1 Turno</td>
-<td><strong>70</strong></td>
-<td>Ataque sagrado, 70 dano + 30 HP de cura própria</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Holy Strike</strong> ⚔️</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>70</strong></td>
+<td style="text-align:left">Ataque sagrado + auto-cura.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Combate constante para manter a vida alta sem ajuda.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Devotion Aura</strong></td>
-<td>20 Mana</td>
-<td>Passiva</td>
-<td>-</td>
-<td>Aliados em 12m ganham +15% Defense permanente</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Devotion Aura</strong> 🛡️</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">Passiva</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+15% Defesa para aliados (Passiva Sustentada).</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Sempre ativa para proteger o grupo em formação fechada.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Holy Light</strong></td>
-<td>30 Mana</td>
-<td>2 Turnos</td>
-<td>200 HP Heal</td>
-<td>Cura aliado em 200 HP</td>
-<td>Holy Strike</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Holy Light</strong> ✨</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left">200 HP Heal</td>
+<td style="text-align:left">Cura um aliado em 200 HP.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Salvar o Guerreiro ou Ladino em perigo imediato.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Shield of Faith</strong></td>
-<td>25 Mana</td>
-<td>3 Turnos</td>
-<td>250 Shield</td>
-<td>Absorve 250 dano por 2 Turnos</td>
-<td>Nível 2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Shield of Faith</strong> 🛡️</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">250 Shield</td>
+<td style="text-align:left">Escudo de 250 de absorção (2t).</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Ativar em si mesmo antes de entrar em uma área perigosa.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Hammer of Justice</strong></td>
-<td>35 Mana</td>
-<td>3 Turnos</td>
-<td><strong>100</strong></td>
-<td>Arremessa martelo, 100 dano + atordoa 1 Turno</td>
-<td>Holy Strike</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Hammer of Justice</strong> 🔨</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>100</strong></td>
+<td style="text-align:left">100 Dano + Stun 1 turno.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Para interromper um Boss prestes a usar uma skill forte.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Divine Sacrifice</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Transfere 50% do dano de aliado para si por 3 Turnos</td>
-<td>Holy Light</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Divine Sacrifice</strong> 🩸</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Transfere 50% do dano do aliado para o Paladino.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando o curandeiro não consegue dar conta do dano no Tank.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Judgment</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td><strong>32</strong></td>
-<td>Marca inimigo maligno, +60% dano contra ele</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Judgment</strong> ⚖️</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>32</strong></td>
+<td style="text-align:left">Marca inimigo, +60% dano contra ele.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Focar o dano do grupo em um Alvo Prioritário ou Boss.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Resurrection</strong></td>
-<td>80 Mana</td>
-<td>1x comb.</td>
-<td>70% HP Heal</td>
-<td>Revive aliado com 70% HP (melhor que Druida)</td>
-<td>Holy Light</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Resurrection</strong> 🕊️</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">70% HP Heal</td>
+<td style="text-align:left">Revive herói com 70% HP.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Reverter uma morte crítica no meio de uma batalha épica.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Consecration</strong></td>
-<td>50 Mana</td>
-<td>5 Turnos</td>
-<td>Debuff AoE</td>
-<td>Zona 10m, inimigos malignos -30% Attack por 4 Turnos</td>
-<td>Nível 5</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Consecration</strong> 🌞</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">Debuff AoE</td>
+<td style="text-align:left">Até 5 inimigos no local (-30% Atk).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Para mitigar o dano de hordas de mortos-vivos.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Mirror Shield</strong></td>
-<td>55 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Próximos 5 ataques são refletidos 100%</td>
-<td>Shield of Faith</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Mirror Shield</strong> 🪞</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Reflete ataques (Status Visível F1).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Quando o Boss foca o Paladino with ataques rápidos.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Divine Wrath</strong></td>
-<td>60 Mana</td>
-<td>5 Turnos</td>
-<td><strong>40</strong></td>
-<td>+100% Attack por 3 Turnos, ganha Mana ao atacar</td>
-<td>Hammer of Justice</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Divine Wrath</strong> ⚡</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>40</strong></td>
+<td style="text-align:left">+100% Atk e recuperação de Mana.</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Quando o Paladino precisa assumir o papel de executor.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Grand Blessing</strong></td>
-<td>70 Mana</td>
-<td>6 Turnos</td>
-<td>-</td>
-<td>Todos aliados em 15m ganham +30% stats (3 Turnos)</td>
-<td>Devotion Aura</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Grand Blessing</strong> 🌟</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliados no local +30% stats.</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Pré-requisito para iniciar uma investida contra o Boss final.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Vow of Vengeance</strong></td>
-<td>65 Mana</td>
-<td>6 Turnos</td>
-<td><strong>50</strong></td>
-<td>Se aliado morrer próximo, ganha +150% Attack</td>
-<td>Judgment</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Vow of Vengeance</strong> 🩸</td>
+<td style="text-align:left">65 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>50</strong></td>
+<td style="text-align:left">Buff de morte (Aliado no mesmo local).</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Para evitar que a morte de um amigo resulte em derrota total.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Sanctuary</strong></td>
-<td>75 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Cria zona 12m, aliados recebem -80% Dano (1 Turno)</td>
-<td>Consecration</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Sanctuary</strong> 🏰</td>
+<td style="text-align:left">75 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Zona local, aliados -80% dano (1t).</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Sobrevivência de último segundo contra um "Wipe".</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Avatar of Light</strong></td>
-<td>150 Mana</td>
-<td>1x comb.</td>
-<td><strong>60</strong></td>
-<td>Forma angelical, cura em área/turno, +200% stats</td>
-<td>Resurrection + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Avatar of Light</strong> 👼</td>
+<td style="text-align:left">150 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Forma e cura em área (Aliados no local).</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Ativar no clímax da invasão para garantir a vitória do reino.</td>
 </tr>
 </tbody>
 </table>
@@ -7012,255 +7424,303 @@ Menacing Presence (Passiva, Lvl 6)
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Unwavering Faith</strong></td>
-<td>+15% HP máximo, +10% Defense</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Unwavering Faith</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+15% HP Max, +10% Defense.</td>
+<td style="text-align:left">Reforça a base de sobrevivência do herói sagrado.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Devotion Gain</strong></td>
-<td>Ganha 10 Mana ao ser atingido</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Devotion Gain</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Ganha 10 Mana ao ser atingido.</td>
+<td style="text-align:left">Mantém o herói com recursos enquanto apanha dos inimigos.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Martyr</strong></td>
-<td>+20% Defense quando HP &lt; 30%</td>
-<td>Unwavering Faith</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Martyr</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% Defense se HP &lt; 30%.</td>
+<td style="text-align:left">Torna o herói mais difícil de matar quanto mais perto da morte.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Natural Protector</strong></td>
-<td>Aliados próximos recebem -15% dano</td>
-<td>Devotion Aura</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Natural Protector</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Aliados no mesmo local recebem -15% dano.</td>
+<td style="text-align:left">Melhora a eficiência da aura protetora natural.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Holy Regen</strong></td>
-<td>Cura 5% HP máximo a cada turno</td>
-<td>Holy Light</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Holy Regen</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Cura 5% HP máximo a cada turno.</td>
+<td style="text-align:left">Sustentação passiva inigualável para o Paladino.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Unshakable Justice</strong></td>
-<td>Imune a medo e corrupção</td>
-<td>Nível 3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Unshakable Justice</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Imune a Medo e Corrupção.</td>
+<td style="text-align:left">Fundamental em combates contra Necromantes e Liches.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Avenger</strong></td>
-<td>+30% dano contra mortos-vivos e demônios</td>
-<td>Judgment</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Avenger</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">+30% dano contra Undead/Demônios.</td>
+<td style="text-align:left">Especialização para purgar o mal supremo do mapa.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Eternal Blessing</strong></td>
-<td>Inicia combate com +20% todos stats por 3 Turnos</td>
-<td>Grand Blessing</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Eternal Blessing</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Começa combate com +20% stats (3t).</td>
+<td style="text-align:left">Garante uma vantagem explosiva em cada novo encontro.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Divine Rebirth</strong></td>
-<td>Ao morrer, revive com 30% HP (1x/partida)</td>
-<td>Resurrection</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Divine Rebirth</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Revive com 30% HP (1x por partida).</td>
+<td style="text-align:left">Segunda chance automática para o baluarte do reino.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Guardian Shield</strong></td>
-<td>Pode bloquear ataques destinados a aliados (5m)</td>
-<td>Natural Protector</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Guardian Shield</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Bloqueia ataques para aliados no mesmo local.</td>
+<td style="text-align:left">Atuação como o protetor supremo dos heróis mais fracos.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Expanded Aura</strong></td>
-<td>Alcance de auras +50% (18m em vez de 12m)</td>
-<td>Natural Protector</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Expanded Aura</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Alcance de auras +50% (18m).</td>
+<td style="text-align:left">Protege o grupo mesmo quando eles se espalham um pouco.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Devoted</strong></td>
-<td>Curas custam -20% Mana</td>
-<td>Holy Regen</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Devoted</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Curas custam -20% Mana.</td>
+<td style="text-align:left">Permite economizar mana para habilidades de ataque e aura.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Bastion</strong></td>
-<td>+50% Defense quando não se move por 3s</td>
-<td>Unwavering Faith</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Bastion</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">+50% Defense se não mover por 3s.</td>
+<td style="text-align:left">Invicto em lutas contra inimigos que não têm repulsão.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Purification</strong></td>
-<td>Remove todos debuffs de si mesmo a cada 4 Turnos</td>
-<td>Unshakable Justice</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Purification</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Remove todos debuffs a cada 4 turnos.</td>
+<td style="text-align:left">Auto-sustento contra venenos, pragas e lentidões.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Holy Warrior</strong></td>
-<td>+40% stats, imune a críticos, aliados +25% moral</td>
-<td>Avatar of Light + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Holy Warrior</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+40% stats, imune a críticos.</td>
+<td style="text-align:left">O Paladino se torna o guerreiro definitivo da luz.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-necromante-necromancer---30-skills">💀 NECROMANTE (Necromancer) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-5">🌑 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-7">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    SB[1. Shadow Bolt] --&gt; DL[3. Drain Life]
+    DL --&gt; PE[8. Pestilence]
+    PE --&gt; NE[13. Necrosis]
+    SB --&gt; CF[5. Curse of Frailty]
+    RS[2. Raise Skeleton] --&gt; SZ[4. Summon Zombie]
+    SZ --&gt; SW[9. Summon Wraith]
+    SW --&gt; AD[11. Army of the Dead]
+    AD --&gt; DA[15. Dark Apocalypse]
+    RS --&gt; CE[6. Corpse Explosion]
+    BH[7. Bone Shield]
+    DT[10. Death's Touch]
+    DP[12. Dark Pact] --&gt; LF[14. Lich Form]
+    style DA fill:#303,stroke:#f0f,stroke-width:4px,color:#fff
+</div><h3 id="-skills-ativas-15-5">🌑 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Shadow Bolt</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td><strong>75</strong></td>
-<td>Projétil sombrio, 75 dano necrótico, drena 20 HP</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Shadow Bolt</strong> 🌑</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>75</strong></td>
+<td style="text-align:left">Projétil sombrio, 75 dano necrótico, drena 20 HP</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Contra inimigos com pouco HP para se curar rápido.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Raise Skeleton</strong></td>
-<td>30 Mana</td>
-<td>1 Turno</td>
-<td>Summon</td>
-<td>Transforma cadáver em Esqueleto (dura 8 Turnos)</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Raise Skeleton</strong> 💀</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Transforma cadáver em Esqueleto (dura 8 Turnos)</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Assim que o herói ou aliado mata o primeiro inimigo da horda.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Drain Life</strong></td>
-<td>25 Mana</td>
-<td>2 Turnos</td>
-<td><strong>40/t</strong></td>
-<td>Canaliza 1 Turno, drena 40 HP/t do alvo</td>
-<td>Shadow Bolt</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Drain Life</strong> 🔋</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>40/t</strong></td>
+<td style="text-align:left">Canaliza 1 Turno, drena 40 HP/t do alvo</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando o Necromante está sob foco e precisa de sustento contínuo.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Summon Zombie</strong></td>
-<td>50 Mana</td>
-<td>4 Turnos</td>
-<td>Summon</td>
-<td>Invoca Zumbi resistente (dura 10 Turnos)</td>
-<td>Raise Skeleton</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Summon Zombie</strong> 🧟</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Invoca Zumbi resistente (dura 10 Turnos)</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Adicionar uma linha de defesa extra contra o Boss.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Curse of Frailty</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td>Debuff</td>
-<td>Alvo perde -40% Attack por 3 Turnos</td>
-<td>Nível 3</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Curse of Frailty</strong> 📉</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">Debuff</td>
+<td style="text-align:left">Alvo perde -40% Attack por 3 Turnos</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Contra heróis ataucantes ou monstros elite de alto dano físico.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Corpse Explosion</strong></td>
-<td>40 Mana</td>
-<td>3 Turnos</td>
-<td><strong>150 AoE</strong></td>
-<td>Detona cadáver, 150 dano em 8m</td>
-<td>Raise Skeleton</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Corpse Explosion</strong> 💥</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>150 AoE</strong></td>
+<td style="text-align:left">Detona cadáver (Recurso Cena), atinge 5 inimigos.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando hordas de monstros pequenos cercam um corpo.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Bone Shield</strong></td>
-<td>35 Mana</td>
-<td>4 Turnos</td>
-<td>200 Shield</td>
-<td>Absorve 200 dano, dura até quebrar</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Bone Shield</strong> 🛡️</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">200 Shield</td>
+<td style="text-align:left">Escudo (Status Visível F1).</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Ativação constante para compensar o HP baixo.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Pestilence</strong></td>
-<td>45 Mana</td>
-<td>5 Turnos</td>
-<td><strong>10/t DoT</strong></td>
-<td>Zona 10m, 10 dano/t necrótico, se espalha</td>
-<td>Drain Life</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Pestilence</strong> ☣️</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>10/t DoT</strong></td>
+<td style="text-align:left">Atinge até 5 inimigos no local com DoT.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Para "sujar" o campo de batalha e causar dano em todos os alvos.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Summon Wraith</strong></td>
-<td>70 Mana</td>
-<td>6 Turnos</td>
-<td>Summon</td>
-<td>Invoca fantasma que ignora Defense física (6 Turnos)</td>
-<td>Summon Zombie</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Summon Wraith</strong> 👻</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left">Summon</td>
+<td style="text-align:left">Invoca fantasma no local (Ignora Defesa).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Contra inimigos com armaduras de placas.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Death's Touch</strong></td>
-<td>50 Mana</td>
-<td>4 Turnos</td>
-<td>Fatal</td>
-<td>Instakill inimigo não-elite com HP &lt; 20%</td>
-<td>Drain Life</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Death's Touch</strong> 💀</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">Fatal</td>
+<td style="text-align:left">Instakill inimigo não-elite (Status Alvo F1).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Rapidez para remover magos ou curandeiros inimigos.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Army of the Dead</strong></td>
-<td>100 Mana</td>
-<td>1x comb.</td>
-<td>Summon x3</td>
-<td>Invoca 3 esqueletos simultaneamente (6 Turnos)</td>
-<td>Summon Wraith</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Army of the Dead</strong> 🧟‍♂️🧟‍♀️</td>
+<td style="text-align:left">100 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">Summon x3</td>
+<td style="text-align:left">Invoca 3 esqueletos no local (6 Turnos).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Momento crucial de uma luta de larga escala ou invasão.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Dark Pact</strong></td>
-<td>60 Mana</td>
-<td>5 Turnos</td>
-<td><strong>36</strong></td>
-<td>Sacrifica 30% HP, ganha +80% dano mágico (4 Turnos)</td>
-<td>Nível 7</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Dark Pact</strong> 🩸</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>36</strong></td>
+<td style="text-align:left">Sacrifício p/ Buff mágico (Status F1).</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Quando o Mago inimigo está exposto para um burst fatal.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Necrosis</strong></td>
-<td>55 Mana</td>
-<td>5 Turnos</td>
-<td><strong>80/t DoT</strong></td>
-<td>DoT massivo, 80 dano/t por 3 Turnos, gera cadáver</td>
-<td>Pestilence</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Necrosis</strong> 🦴</td>
+<td style="text-align:left">55 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>80/t DoT</strong></td>
+<td style="text-align:left">DoT massivo, gera cadáver ao finalizar.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Contra alvos únicos de muita vida para derretê-los.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Lich Form</strong></td>
-<td>80 Mana</td>
-<td>8 Turnos</td>
-<td><strong>40</strong></td>
-<td>Transforma em Lich, imune a físico, +100% dano (4t)</td>
-<td>Dark Pact</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Lich Form</strong> 🧙‍♂️</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left"><strong>40</strong></td>
+<td style="text-align:left">Transformação em Lich no local (Status F1).</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Escapar de assassinos ou tanks heróis inimigos.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Dark Apocalypse</strong></td>
-<td>200 Mana</td>
-<td>1x comb.</td>
-<td>Summon Max</td>
-<td>Reanima todos cadáveres (Max 3) permanentes</td>
-<td>Army of the Dead + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Dark Apocalypse</strong> 🌋</td>
+<td style="text-align:left">200 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">Summon Max</td>
+<td style="text-align:left">Reanima TODOS os cadáveres do local (Máx 3 corpos).</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Preparar um exército imortal para o cerco final.</td>
 </tr>
 </tbody>
 </table>
@@ -7268,255 +7728,303 @@ Menacing Presence (Passiva, Lvl 6)
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Soul Harvest</strong></td>
-<td>Ganha 25 Mana ao matar inimigo</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Soul Harvest</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Ganha 25 Mana ao matar.</td>
+<td style="text-align:left">Sustentação infinita de mana durante a limpeza do mapa.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Shadow Essence</strong></td>
-<td>+25% Mana máximo</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Shadow Essence</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+25% Mana máximo permanente.</td>
+<td style="text-align:left">Essencial para gerenciar múltiplas invocações e magias.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Minion Mastery</strong></td>
-<td>Invocações têm +50% HP e Attack</td>
-<td>Raise Skeleton</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Minion Mastery</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Invocações +50% HP e Attack.</td>
+<td style="text-align:left">Cria lacaios que podem realmente peitar monstros elites.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Necrotic Mastery</strong></td>
-<td>+20% dano necrótico</td>
-<td>Shadow Bolt</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Necrotic Mastery</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+20% dano necrótico permanente.</td>
+<td style="text-align:left">Escala todo o arsenal de sombras do herói.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Vital Siphon</strong></td>
-<td>Spells de dano curam 15% do dano causado</td>
-<td>Drain Life</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Vital Siphon</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Spells curam 15% do dano causado.</td>
+<td style="text-align:left">Transforma cada ataque em uma fonte de sobrevivência.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Undead Resilience</strong></td>
-<td>+30% resistência a necrótico e veneno</td>
-<td>Nível 3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Undead Resilience</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+30% resist a necrótico/veneno.</td>
+<td style="text-align:left">Proteção contra as próprias magias e inimigos sombrios.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Chain Detonation</strong></td>
-<td>Corpse Explosion pode detonar outros cadáveres</td>
-<td>Corpse Explosion</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Chain Detonation</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Explosão de corpos gera reações em cadeia.</td>
+<td style="text-align:left">Limpa salas inteiras de monstros fracos em segundos.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Minion Longevity</strong></td>
-<td>Invocações duram +50% tempo</td>
-<td>Minion Mastery</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Minion Longevity</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Invocações duram +50% tempo.</td>
+<td style="text-align:left">Reduz o custo de mana por minuto de serviço dos servos.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Undying Essence</strong></td>
-<td>Regenera 10 Mana/turno</td>
-<td>Soul Harvest</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Undying Essence</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Regenera 10 Mana/turno constante.</td>
+<td style="text-align:left">Garante que o Necromante nunca fique totalmente desarmado.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Necrotic Aura</strong></td>
-<td>Inimigos próximos (8m) perdem 4% HP máximo/t</td>
-<td>Necrotic Mastery</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Necrotic Aura</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Inimigos no local perdem 4% HP/t.</td>
+<td style="text-align:left">Dano passivo que acumula muito em lutas longas.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Eternal Pact</strong></td>
-<td>Ao usar Dark Pact, não perde HP mas servos morrem</td>
-<td>Dark Pact</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Eternal Pact</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Dark Pact não gasta HP, sacrifica servos.</td>
+<td style="text-align:left">Melhor estratégia quando se tem many summons ativos.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Lord of the Dead</strong></td>
-<td>Seus servos ganham +30% HP e Attack (Max Servos: 3)</td>
-<td>Army of the Dead</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Lord of the Dead</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Servos +30% stats (Max 3 servos).</td>
+<td style="text-align:left">Especialização em um pequeno grupo de servos elite.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Immortal</strong></td>
-<td>Ao morrer, vira Lich por 2 Turnos, pode lutar</td>
-<td>Lich Form</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Immortal</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Vira Lich por 2 turnos ao morrer.</td>
+<td style="text-align:left">Permite um último esforço desesperado ou contra-ataque antes da morte.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Dark Synergy</strong></td>
-<td>Cada servo vivo aumenta dano mágico em +10%</td>
-<td>Lord of the Dead</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Dark Synergy</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Cada servo vivo +10% dano mágico.</td>
+<td style="text-align:left">Recompensa manter suas invocações vivas e protegidas.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Overlord of Darkness</strong></td>
-<td>+100% Mana, Servos reanimam 1x após morrerem</td>
-<td>Dark Apocalypse + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Overlord of Darkness</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+100% Mana, Servos revivem 1x.</td>
+<td style="text-align:left">O Necromante se torna o Deus-Rei dos Mortos-Vivos.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-bardo-bard---30-skills">🎵 BARDO (Bard) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-6">🎶 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-8">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    WS[1. War Song] --&gt; HL[3. Healing Lullaby]
+    HL --&gt; AS[6. Anthem of Stalwart]
+    AS --&gt; BR[9. Ballad of Regen]
+    BR --&gt; GS[11. Grand Symphony]
+    GS --&gt; HS[13. Heroic Saga]
+    HS --&gt; RE[15. Requiem]
+    DC[2. Dissonant Chord] --&gt; TK[5. Throwing Knife]
+    DC --&gt; DS[7. Devastating Solo]
+    DS --&gt; SS[10. Siren's Song]
+    SS --&gt; CM[12. Counter-Melody]
+    DC --&gt; SW[14. Sonic Wave]
+    IS[4. Inspiring Shout] --&gt; RA[8. Rally Allies]
+    style RE fill:#f9f,stroke:#333,stroke-width:4px
+</div><h3 id="-skills-ativas-15-6">🎶 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>War Song</strong></td>
-<td>15 Mana</td>
-<td>Sustentada</td>
-<td><strong>24 Buff</strong></td>
-<td>Canta, aliados 15m ganham +20% Attack (Gasta turno)</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>War Song</strong> 🎸</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">Sustentada</td>
+<td style="text-align:left"><strong>24 Buff</strong></td>
+<td style="text-align:left">Aliados no mesmo local ganham +20% Attack.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Durante toda a fase ofensiva de um combate em grupo.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Dissonant Chord</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td><strong>60</strong></td>
-<td>Nota musical, 60 dano + confunde por 1 Turno</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Dissonant Chord</strong> 🎶</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>60</strong></td>
+<td style="text-align:left">Ataca 1 inimigo + Confunde por 1 turno.</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Para desviar a atenção de um oponente perigoso.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Healing Lullaby</strong></td>
-<td>25 Mana</td>
-<td>Sustentada</td>
-<td>AoE Heal</td>
-<td>Canta, aliados 15m curam HP a cada Turno</td>
-<td>War Song</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Healing Lullaby</strong> 💤</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">Sustentada</td>
+<td style="text-align:left">AoE Heal</td>
+<td style="text-align:left">Aliados no mesmo local curam HP por turno.</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Quando múltiplos aliados estão feridos no local.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Inspiring Shout</strong></td>
-<td>30 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Todos aliados ganham +30% Speed por 3 Turnos</td>
-<td>Nível 2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Inspiring Shout</strong> 📢</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliados no local ganham +30% Speed (3t).</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Iniciar uma investida ou ajudar na fuga rápida.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Throwing Knife</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td><strong>150</strong></td>
-<td>Arremessa faca, 50 dano, 3 cargas</td>
-<td>Dissonant Chord</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Throwing Knife</strong> 🔪</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>150</strong></td>
+<td style="text-align:left">3 facas (Log: 3x, Dano Agregado).</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Finalizar inimigos distantes.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Anthem of Stalwart</strong></td>
-<td>35 Mana</td>
-<td>Sustentada</td>
-<td>-</td>
-<td>Canta, aliados 15m ganham +30% Defense</td>
-<td>Healing Lullaby</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Anthem of Stalwart</strong> 🛡️</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">Sustentada</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliados no local ganham +30% Defense.</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Quando o grupo está sob fogo pesado no local.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Devastating Solo</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>480 AoE</strong></td>
-<td>Toca solo, 15m AoE (até 4 alvos), 120 dano</td>
-<td>Dissonant Chord</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Devastating Solo</strong> 🎸</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>480 AoE</strong></td>
+<td style="text-align:left">Atinge os 5 inimigos no local.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Limpar um grupo de inimigos agrupados ao redor do Bardo.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Rally Allies</strong></td>
-<td>40 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Aliados ganham Turno Extra Imediato (1x combate)</td>
-<td>Inspiring Shout</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Rally Allies</strong> 🎺</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliado no local ganha Turno Extra Imediato.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Momento decisivo para finalizar o Boss.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Ballad of Regen</strong></td>
-<td>50 Mana</td>
-<td>Sustentada</td>
-<td>AoE Regen</td>
-<td>Canta, aliados 15m regeneram HP a cada Turno</td>
-<td>Anthem of Stalwart</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Ballad of Regen</strong> 🌿</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">Sustentada</td>
+<td style="text-align:left">AoE Regen</td>
+<td style="text-align:left">Aliados no local regeneram HP por turno.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Manter o grupo saudável durante lutas de desgaste.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Siren's Song</strong></td>
-<td>45 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Encanta inimigos 12m (3 alvos), perdem próximo Turno</td>
-<td>Devastating Solo</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Siren's Song</strong> 🧜‍♀️</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Encanta os 5 inimigos no local (Perdem turno).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Para neutralizar heróis inimigos temporariamente.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Grand Symphony</strong></td>
-<td>60 Mana</td>
-<td>6 Turnos</td>
-<td><strong>28 Buff</strong></td>
-<td>Todos aliados ganham +40% stats (3 Turnos)</td>
-<td>Ballad of Regen</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Grand Symphony</strong> 🎼</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>28 Buff</strong></td>
+<td style="text-align:left">Aliados no local ganham +40% stats (3t).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">O "buff de vitória" usado antes da investida final.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Counter-Melody</strong></td>
-<td>50 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Cancela buffs inimigos em 20m</td>
-<td>Siren's Song</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Counter-Melody</strong> 🔇</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Cancela buffs inimigos no mesmo local.</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Contra Bosses que usam buffs de escudo ou dano massivo.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Heroic Saga</strong></td>
-<td>70 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Aliado ignora dano de 2 ataques recebidos</td>
-<td>Grand Symphony</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Heroic Saga</strong> 📖</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Aliado no local ignora 2 ataques.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Proteger o herói mais importante em um momento crítico.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Sonic Wave</strong></td>
-<td>80 Mana</td>
-<td>6 Turnos</td>
-<td><strong>200 AoE</strong></td>
-<td>Cone 25m, 200 dano + knock-back 10m</td>
-<td>Devastating Solo</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Sonic Wave</strong> 🔊</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">6 Turnos</td>
+<td style="text-align:left"><strong>200 AoE</strong></td>
+<td style="text-align:left">Empurra os 5 inimigos no local (Log: Recuo).</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Para afastar inimigos da vila ou postos.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Requiem</strong></td>
-<td>150 Mana</td>
-<td>1x comb.</td>
-<td><strong>40 Buff</strong></td>
-<td>Inimigos -50% stats, Aliados +100% (3 Turnos)</td>
-<td>Heroic Saga + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Requiem</strong> 💀</td>
+<td style="text-align:left">150 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>40 Buff</strong></td>
+<td style="text-align:left">Inimigos -50%, Aliados +100% (No local).</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">A cartada final para garantir a dominação total.</td>
 </tr>
 </tbody>
 </table>
@@ -7524,255 +8032,303 @@ Menacing Presence (Passiva, Lvl 6)
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Inspiration Gain</strong></td>
-<td>Ganha 20 Mana ao ver aliado matar inimigo</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Inspiration Gain</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Ganha 20 Mana ao ver kill de aliado.</td>
+<td style="text-align:left">Permite que o Bardo nunca pare de cantar durante o combate.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Charismatic</strong></td>
-<td>+30% Affinity natural com todos heróis</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Charismatic</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+30% afinidade natural com heróis.</td>
+<td style="text-align:left">Acelera a formação de grupos e combos de afinidade.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Musical Reach</strong></td>
-<td>Canções afetam +5m de raio (20m em vez de 15m)</td>
-<td>War Song</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Musical Reach</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Raio das canções +5m (Total 20m).</td>
+<td style="text-align:left">Protege aliados que lutam na retaguarda ou estão distantes.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Multitasking</strong></td>
-<td>Pode manter canção e atacar (com penalidade de dano)</td>
-<td>Healing Lullaby</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Multitasking</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Pode cantar e atacar simultaneamente.</td>
+<td style="text-align:left">Garante que o Bardo contribua com dano sem cessar o suporte.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Sonic Mastery</strong></td>
-<td>+15% dano de habilidades sonoras</td>
-<td>Dissonant Chord</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Sonic Mastery</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+15% dano sonoro permanente.</td>
+<td style="text-align:left">Melhora as magias ofensivas do Bardo.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Natural Performer</strong></td>
-<td>Canções custam -20% Mana</td>
-<td>Inspiration Gain</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Natural Performer</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Canções custam -20% Mana.</td>
+<td style="text-align:left">Eficiência econômica para expedições de longa duração.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Performance Speed</strong></td>
-<td>Canções começam a fazer efeito 50% mais rápido</td>
-<td>Multitasking</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Performance Speed</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Canções têm efeito 50% mais rápido.</td>
+<td style="text-align:left">Reação tática veloz a mudanças no campo de batalha.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Auto-Inspiration</strong></td>
-<td>Regenera 20 Mana/turno quando em grupo</td>
-<td>Inspiration Gain</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Auto-Inspiration</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Regenera 20 Mana/turno em grupo.</td>
+<td style="text-align:left">Mantém o herói sempre pronto para a próxima composição.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Resonance</strong></td>
-<td>Canções persistem por 1 Turno após parar de cantar</td>
-<td>Musical Reach</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Resonance</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Canções duram +1 turno após parar.</td>
+<td style="text-align:left">Permite trocar de música sem perder o buff anterior imediatamente.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>High Morale</strong></td>
-<td>Aliados próximos nunca fogem</td>
-<td>Charismatic</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>High Morale</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Aliados no mesmo local nunca fogem de medo.</td>
+<td style="text-align:left">Essencial em lutas contra o Dragão ou Necromantes.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Virtuoso</strong></td>
-<td>Pode ter 2 canções ativas simultaneamente</td>
-<td>Resonance</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Virtuoso</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Mantém 2 canções simultâneas.</td>
+<td style="text-align:left">Dobra a utilidade tática do Bardo para o reino.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Charisma Aura</strong></td>
-<td>Grupo forma 3x mais rápido</td>
-<td>High Morale</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Charisma Aura</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Grupos formam 3x mais rápido na taverna.</td>
+<td style="text-align:left">Logística acelerada para novas expedições e ataques.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Chorus Influence</strong></td>
-<td>Cada aliado próximo aumenta efeito de canções em +15%</td>
-<td>Virtuoso</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Chorus Influence</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Cada aliado no mesmo local +15% efeito canção.</td>
+<td style="text-align:left">Recompensa manter o reino unido e lutar em grandes exércitos.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Eternal Echo</strong></td>
-<td>Se morrer cantando, canção dura +4 Turnos</td>
-<td>Nível 9</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Eternal Echo</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Canção dura +4t se o Bardo morrer.</td>
+<td style="text-align:left">Um último presente heróico para o grupo vencer a luta.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Living Legend</strong></td>
-<td>Presença proporciona +50% XP para aliados, +100% Mana Regen</td>
-<td>Requiem + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Living Legend</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">+50% XP Aliados, +100% Mana Regen.</td>
+<td style="text-align:left">O Bardo se torna o farol de progresso de todo o reino.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 <h2 id="-monge-monk---30-skills">👊 MONGE (Monk) - 30 Skills </h2>
-<h3 id="-skills-ativas-15-7">🥋 Skills Ativas (15) </h3>
+<h3 id="️-árvore-de-progressão-ativas-9">🗺️ Árvore de Progressão (Ativas) </h3>
+<div class="mermaid">
+graph TD
+    PS[1. Palm Strike] --&gt; SK[2. Spinning Kick]
+    SK --&gt; DP[4. Dragon Punch]
+    DP --&gt; HH[6. Hundred-Hand Slap]
+    HH --&gt; FF[11. Fist of Fury]
+    FF --&gt; DF[14. Dragon Form]
+    SK --&gt; CY[8. Cyclone]
+    WD[3. Wind Dash] --&gt; SS[10. Spirit Step]
+    ME[5. Meditation] --&gt; TR[12. Transcendence]
+    TR --&gt; EN[15. Enlightenment]
+    HH --&gt; MA[9. Mana Aura]
+    MA --&gt; MB[13. Mana Burst]
+    PT[7. Paralyzing Touch]
+    style EN fill:#fff,stroke:#333,stroke-width:4px
+</div><h3 id="-skills-ativas-15-7">🥋 Skills Ativas (15) </h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Custo</th>
-<th>Cooldown</th>
-<th>Ex: Dmg (L1)</th>
-<th>Descrição</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Nome</th>
+<th style="text-align:left">Custo</th>
+<th style="text-align:left">Cooldown</th>
+<th style="text-align:left">Ex: Dmg (L1)</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Momento Ideal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Palm Strike</strong></td>
-<td>10 Mana</td>
-<td>1 Turno</td>
-<td><strong>55</strong></td>
-<td>Soco rápido, 55 dano, gera 1 combo</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Palm Strike</strong> 👊</td>
+<td style="text-align:left">10 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>55</strong></td>
+<td style="text-align:left">Soco rápido, 55 dano, gera 1 combo</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Início da sequência para acumular combos rapidamente.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Spinning Kick</strong></td>
-<td>15 Mana</td>
-<td>1 Turno</td>
-<td><strong>280 AoE</strong></td>
-<td>Ataque 360°, 70 dano, atinge até 4 inimigos</td>
-<td>Palm Strike</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Spinning Kick</strong> 🦵</td>
+<td style="text-align:left">15 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left"><strong>280 AoE</strong></td>
+<td style="text-align:left">Ataque 360°, 70 dano, atinge até 4 inimigos</td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Combater múltiplos inimigos que cercaram o Monge.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Wind Dash</strong></td>
-<td>20 Mana</td>
-<td>1 Turno</td>
-<td>-</td>
-<td>Teleporta 15m instantly, gera 2 combos</td>
-<td>Nível 2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Wind Dash</strong> 💨</td>
+<td style="text-align:left">20 Mana</td>
+<td style="text-align:left">1 Turno</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Teleporta 15m instantly, gera 2 combos</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Para se aproximar instantaneamente de alvos à distância.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Dragon Punch</strong></td>
-<td>25 Mana</td>
-<td>2 Turnos</td>
-<td><strong>120</strong></td>
-<td>3 socos rápidos (ação única), 40 dano cada, gera 3 combos</td>
-<td>Spinning Kick</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Dragon Punch</strong> 🐉</td>
+<td style="text-align:left">25 Mana</td>
+<td style="text-align:left">2 Turnos</td>
+<td style="text-align:left"><strong>120</strong></td>
+<td style="text-align:left">3 socos rápidos (ação única), 40 dano cada, gera 3 combos</td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Contra alvos únicos para maximizar o acúmulo de recursos.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Meditation</strong></td>
-<td>0 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>Regenera 50 Mana, gasta turno</td>
-<td>Nível 3</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Meditation</strong> 🧘</td>
+<td style="text-align:left">0 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Regenera 50 Mana, gasta turno</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Momento de pausa segura para restaurar energia vital.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Hundred-Hand Slap</strong></td>
-<td>30 Mana</td>
-<td>3 Turnos</td>
-<td><strong>200</strong></td>
-<td>Ataque frenético em alvo único, 10 hits</td>
-<td>Dragon Punch</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Hundred-Hand Slap</strong> ✋</td>
+<td style="text-align:left">30 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left"><strong>200</strong></td>
+<td style="text-align:left">Ataque frenético em alvo único, 10 hits</td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">Descarregar o burst de dano em um oponente imobilizado.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Paralyzing Touch</strong></td>
-<td>35 Mana</td>
-<td>3 Turnos</td>
-<td>-</td>
-<td>Paralisa inimigo por 1 Turno</td>
-<td>Nível 4</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Paralyzing Touch</strong> 🧪</td>
+<td style="text-align:left">35 Mana</td>
+<td style="text-align:left">3 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Paralisa inimigo por 1 Turno</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Garantir que um monstro perigoso perca sua vez de ataque.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Cyclone</strong></td>
-<td>40 Mana</td>
-<td>4 Turnos</td>
-<td><strong>100 AoE</strong></td>
-<td>Gira rapidamente, atinge todos adjacentes (max 5)</td>
-<td>Spinning Kick</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Cyclone</strong> 🌪️</td>
+<td style="text-align:left">40 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left"><strong>100 AoE</strong></td>
+<td style="text-align:left">Gira e atinge todos os 5 inimigos no local.</td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Limpeza de área eficiente quando cercado.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Mana Aura</strong></td>
-<td>45 Mana</td>
-<td>4 Turnos</td>
-<td>-</td>
-<td>+50% Velocidade de Ação por 3 Turnos, consome 5 combos</td>
-<td>Hundred-Hand Slap</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Mana Aura</strong> ✨</td>
+<td style="text-align:left">45 Mana</td>
+<td style="text-align:left">4 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Buff action speed (Status F1), consome combo.</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Acelerar seus turnos para dominar a luta.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Spirit Step</strong></td>
-<td>50 Mana</td>
-<td>5 Turnos</td>
-<td>-</td>
-<td>Teleporta para qualquer local em 30m</td>
-<td>Wind Dash</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Spirit Step</strong> 🌌</td>
+<td style="text-align:left">50 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Salta p/ área s/ Fog of War (Máx 2x/dia).</td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Movimentação tática livre pelo mapa.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Fist of Fury</strong></td>
-<td>60 Mana</td>
-<td>5 Turnos</td>
-<td><strong>300</strong></td>
-<td>Golpe massivo, 300 dano, consome combos (+20 dano/c)</td>
-<td>Hundred-Hand Slap</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Fist of Fury</strong> 👊💥</td>
+<td style="text-align:left">60 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>300</strong></td>
+<td style="text-align:left">Golpe massivo (Bônus de combo agregado no Log).</td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">Finalizar um oponente when estiver com 10 combos.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Transcendence</strong></td>
-<td>70 Mana</td>
-<td>8 Turnos</td>
-<td>-</td>
-<td>Imune a dano por 1 Turno, atravessa inimigos</td>
-<td>Meditation</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Transcendence</strong> 💎</td>
+<td style="text-align:left">70 Mana</td>
+<td style="text-align:left">8 Turnos</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Imunidade no local (Status Visível F1).</td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">Escapar de uma armadilha fatal ou golpe inevitável.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Mana Burst</strong></td>
-<td>80 Mana</td>
-<td>5 Turnos</td>
-<td><strong>900 AoE</strong></td>
-<td>Libera Mana, 15m AoE (3-5 alvos), 180 dano + knock-back</td>
-<td>Mana Aura</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Mana Burst</strong> 💥</td>
+<td style="text-align:left">80 Mana</td>
+<td style="text-align:left">5 Turnos</td>
+<td style="text-align:left"><strong>900 AoE</strong></td>
+<td style="text-align:left">Libera Mana em todos os 5 inimigos + Empurrão.</td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">Afastar hordas massivas com dano explosivo.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Dragon Form</strong></td>
-<td>90 Mana</td>
-<td>1x comb.</td>
-<td><strong>50</strong></td>
-<td>Espírito, +150% Attack, ignora terreno, 3 Turnos</td>
-<td>Fist of Fury</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Dragon Form</strong> 🐲</td>
+<td style="text-align:left">90 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left"><strong>50</strong></td>
+<td style="text-align:left">Transformação no local (Status Visível F1).</td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Transformação heróica para enfrentar os piores males.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Enlightenment</strong></td>
-<td>150 Mana</td>
-<td>1x comb.</td>
-<td>-</td>
-<td>Velocidade 2x, +50% Esquiva, Combos infinitos (3 Turnos)</td>
-<td>Transcendence + Lvl 12</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Enlightenment</strong> 🧘‍♂️✨</td>
+<td style="text-align:left">150 Mana</td>
+<td style="text-align:left">1x comb.</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">Boost extremo no local (Status Visível F1).</td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">O ápice do domínio corporal, imparável no combate final.</td>
 </tr>
 </tbody>
 </table>
@@ -7780,102 +8336,118 @@ Menacing Presence (Passiva, Lvl 6)
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Nome</th>
-<th>Efeito</th>
-<th>Requer</th>
+<th style="text-align:left">#</th>
+<th style="text-align:left">Passiva</th>
+<th style="text-align:left">Requer</th>
+<th style="text-align:left">Efeito</th>
+<th style="text-align:left">Momento Ideal (Contexto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td><strong>Mana Regen</strong></td>
-<td>Regenera 10 Mana/turno</td>
-<td>Nível 1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Mana Regen</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">Regenera 10 Mana/turno natural.</td>
+<td style="text-align:left">Sustenta o uso constante de socos e técnicas de combo.</td>
 </tr>
 <tr>
-<td>2</td>
-<td><strong>Martial Arts Master</strong></td>
-<td>+20% dano corpo-a-corpo</td>
-<td>Nível 1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Martial Arts Master</strong></td>
+<td style="text-align:left">Nível 1</td>
+<td style="text-align:left">+20% dano corpo-a-corpo permanente.</td>
+<td style="text-align:left">Fortalece todos os ataques físicos básicos do herói.</td>
 </tr>
 <tr>
-<td>3</td>
-<td><strong>Combo System</strong></td>
-<td>Cada ataque gera 1 combo, máximo 10 combos</td>
-<td>Palm Strike</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>Combo System</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">Cada ataque gera 1 combo (Max 10).</td>
+<td style="text-align:left">A base de todo o poder e estratégia do Monge.</td>
 </tr>
 <tr>
-<td>4</td>
-<td><strong>Combo Damage</strong></td>
-<td>+5% dano por combo ativo</td>
-<td>Combo System</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Combo Damage</strong></td>
+<td style="text-align:left">Nível 2</td>
+<td style="text-align:left">+5% dano por combo ativo.</td>
+<td style="text-align:left">Faz com que o Monge fique mais forte conforme a luta progride.</td>
 </tr>
 <tr>
-<td>5</td>
-<td><strong>Superhuman Reflexes</strong></td>
-<td>+25% Speed</td>
-<td>Wind Dash</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Superhuman Reflexes</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+25% Speed permanente.</td>
+<td style="text-align:left">Melhora a iniciativa e a capacidade de fuga do herói.</td>
 </tr>
 <tr>
-<td>6</td>
-<td><strong>Master Evasion</strong></td>
-<td>+20% chance de esquivar</td>
-<td>Superhuman Reflexes</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Master Evasion</strong></td>
+<td style="text-align:left">Nível 3</td>
+<td style="text-align:left">+20% chance de esquiva natural.</td>
+<td style="text-align:left">Principal método de defesa para uma classe sem armadura.</td>
 </tr>
 <tr>
-<td>7</td>
-<td><strong>Perfect Counter</strong></td>
-<td>30% chance de contra-atacar ao esquivar</td>
-<td>Master Evasion</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Perfect Counter</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">30% chance de revidar ao esquivar.</td>
+<td style="text-align:left">Transforma defesa passiva in agressão constante.</td>
 </tr>
 <tr>
-<td>8</td>
-<td><strong>Passive Meditation</strong></td>
-<td>Regenera 5% HP máximo/turno fora de combate</td>
-<td>Meditation</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>Passive Meditation</strong></td>
+<td style="text-align:left">Nível 4</td>
+<td style="text-align:left">Regenera 5% HP/turno fora de combate.</td>
+<td style="text-align:left">Mantém o herói sempre pronto para a próxima batalha.</td>
 </tr>
 <tr>
-<td>9</td>
-<td><strong>Infinite Mana</strong></td>
-<td>Mana máximo +50</td>
-<td>Mana Regen</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Infinite Mana</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Mana máximo +50.</td>
+<td style="text-align:left">Permite sequências mais longas de habilidades especiais.</td>
 </tr>
 <tr>
-<td>10</td>
-<td><strong>Iron Discipline</strong></td>
-<td>Imune a atordoamentos quando tem 5+ combos</td>
-<td>Combo System</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Iron Discipline</strong></td>
+<td style="text-align:left">Nível 5</td>
+<td style="text-align:left">Imune a Stun se tiver 5+ combos.</td>
+<td style="text-align:left">Mantém o herói em movimento mesmo sob CC pesado.</td>
 </tr>
 <tr>
-<td>11</td>
-<td><strong>Critical Strikes</strong></td>
-<td>+30% chance de crítico</td>
-<td>Martial Arts Master</td>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>Critical Strikes</strong></td>
+<td style="text-align:left">Nível 6</td>
+<td style="text-align:left">+30% chance de crítico corpo-a-corpo.</td>
+<td style="text-align:left">Potencializa o dano explosivo dos ataques rápidos.</td>
 </tr>
 <tr>
-<td>12</td>
-<td><strong>Flash Speed</strong></td>
-<td>+40% Velocidade de Ação</td>
-<td>Superhuman Reflexes</td>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Flash Speed</strong></td>
+<td style="text-align:left">Nível 7</td>
+<td style="text-align:left">+40% Velocidade de Ação (Iniciativa).</td>
+<td style="text-align:left">Garante que o Monge quase sempre ataque primeiro.</td>
 </tr>
 <tr>
-<td>13</td>
-<td><strong>Fist Mastery</strong></td>
-<td>Sem arma equipada, +50% todos stats</td>
-<td>Martial Arts Master</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>Fist Mastery</strong></td>
+<td style="text-align:left">Nível 8</td>
+<td style="text-align:left">+50% stats se estiver sem arma.</td>
+<td style="text-align:left">O caminho do monge purista, focado no próprio corpo.</td>
 </tr>
 <tr>
-<td>14</td>
-<td><strong>Dragon Spirit</strong></td>
-<td>Ao atingir 10 combos, próximo ataque +300% dano</td>
-<td>Combo Damage</td>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>Dragon Spirit</strong></td>
+<td style="text-align:left">Nível 9</td>
+<td style="text-align:left">Próximo ataque +300% Dano se 10 combos.</td>
+<td style="text-align:left">Golpe de misericórdia após uma sequência perfeita.</td>
 </tr>
 <tr>
-<td>15</td>
-<td><strong>Enlightened Master</strong></td>
-<td>Quando em Enlightenment, combos nunca resetam</td>
-<td>Enlightenment + Lvl 11</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><strong>Enlightened Master</strong></td>
+<td style="text-align:left">Nível 10</td>
+<td style="text-align:left">Combos nunca resetam em Enlightenment.</td>
+<td style="text-align:left">Permite disparar golpes máximos repetidamente no ápice da força.</td>
 </tr>
 </tbody>
 </table>
@@ -17242,7 +17814,30 @@ Responda apenas com o texto narrativo final.</span><span class="token template-p
       
     
     
-    
+    <script>
+      (async () => {
+        const MERMAID_CONFIG = {
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            fontSize: '16px',
+            primaryColor: '#bb86fc',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#7c4dff',
+            lineColor: '#f8f8f2',
+            secondaryColor: '#03dac6',
+            tertiaryColor: '#3700b3'
+          }
+        };
+
+        if (window.mermaid) {
+          mermaid.initialize(MERMAID_CONFIG);
+          await mermaid.run({
+            nodes: document.querySelectorAll('.mermaid'),
+          });
+        }
+      })();
+    </script>
     
     
     
