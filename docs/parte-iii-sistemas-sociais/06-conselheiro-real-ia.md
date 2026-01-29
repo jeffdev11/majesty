@@ -271,7 +271,7 @@ Para evitar **spam de comandos** e manter a **imersão narrativa**:
 - Jogador começa com **100/100 IP**
 - Cada comando gasto: **-10 IP**
 - Enviar carta: **-25 IP**
-- Regeneração: **+1 IP a cada 3 segundos** (20 IP/min)
+- Regeneração: **+1 IP por Turno** (20 IP/min)
 
 ### Estratégia de Uso
 
@@ -285,7 +285,7 @@ Jogador precisa:
 - Pedir relatório (10 IP) ✅ Pode
 - Comprar item (10 IP) ❌ Ficaria com 5 IP
 
-Decisão: Esperar 30s para regenerar 10 IP, então
+Decisão: Esperar 10 Turnos para regenerar 10 IP, então
 enviar carta (total: 25 IP).
 ```
 

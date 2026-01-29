@@ -57,7 +57,7 @@ Monge: speed = 160; // EXTREMAMENTE rápido
 timeToNextAction = baseTime / (speed / 100)
 
 // Exemplo:
-baseTime = 3000ms (3 segundos padrão)
+baseTime = 3000ms (1 Turno padrão)
 
 Guerreiro (speed 80): 3000 / 0.8 = 3750ms (~3.8s por ação)
 Monge (speed 160): 3000 / 1.6 = 1875ms (~1.9s por ação)
@@ -173,7 +173,7 @@ Exemplo: Bardo cantando "Melodia de Ataque"
 ### Atordoamento (Stun)
 
 ```
-[Herói atordoado por 3s]
+[Herói atordoado por 1 Turno]
 ┌─────────────────────────┐
 │ X ─ X ─ X ─ [Herói]     │ ← Não progride na timeline
 └─────────────────────────┘

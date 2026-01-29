@@ -404,23 +404,23 @@ graph TD
 
 ### 🌟 Skills Passivas (15)
 
-| #   | Passiva                  | Requer   | Efeito                                      | Momento Ideal (Contexto)                                      |
-| :-- | :----------------------- | :------- | :------------------------------------------ | :------------------------------------------------------------ |
-| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                      | Torna o Elfo o mestre da movimentação no campo.               |
-| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.               | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
-| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.            | Aumenta a resistência do Elfo para expedições longas.         |
-| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                | Multiplica o efeito de todas as flechas e lâminas místicas.   |
-| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.         | Melhora a defesa passiva do herói sem gastar mana.            |
-| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.           | Permite que o Elfo atue por mais tempo com magia.             |
-| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.              | Garante que cada tiro conte contra inimigos de elite.         |
-| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                 | Torna o Elfo a escolha perfeita para missões noturnas.        |
-| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.           | Sustentação de mana infinita se o herói for bem gerenciado.   |
-| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.          | Proteção contra outros atacantes à distância.                 |
-| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                    | Torna o Elfo um "Anti-Mago" nato.                             |
-| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (30s). | Vingança poderosa para virar uma luta perdida.                |
-| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                 | Aumenta a frequência de uso de habilidades poderosas.         |
-| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10min).       | Evita mortes acidentais por erros de posicionamento.          |
-| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.            | O estado de perfeição elfo, dominante em todas as distâncias. |
+| #   | Passiva                  | Requer   | Efeito                                            | Momento Ideal (Contexto)                                      |
+| :-- | :----------------------- | :------- | :------------------------------------------------ | :------------------------------------------------------------ |
+| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                            | Torna o Elfo o mestre da movimentação no campo.               |
+| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.                     | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
+| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.                  | Aumenta a resistência do Elfo para expedições longas.         |
+| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                      | Multiplica o efeito de todas as flechas e lâminas místicas.   |
+| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.               | Melhora a defesa passiva do herói sem gastar mana.            |
+| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.                 | Permite que o Elfo atue por mais tempo com magia.             |
+| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.                    | Garante que cada tiro conte contra inimigos de elite.         |
+| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                       | Torna o Elfo a escolha perfeita para missões noturnas.        |
+| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.                 | Sustentação de mana infinita se o herói for bem gerenciado.   |
+| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.                | Proteção contra outros atacantes à distância.                 |
+| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                          | Torna o Elfo um "Anti-Mago" nato.                             |
+| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (10 Turnos). | Vingança poderosa para virar uma luta perdida.                |
+| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                       | Aumenta a frequência de uso de habilidades poderosas.         |
+| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10min).             | Evita mortes acidentais por erros de posicionamento.          |
+| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.                  | O estado de perfeição elfo, dominante em todas as distâncias. |
 
 ---
 
@@ -556,7 +556,7 @@ graph TD
 | 10  | **Guardian Shield**    | Nível 5  | Bloqueia ataques para aliados no mesmo local. | Atuação como o protetor supremo dos heróis mais fracos.         |
 | 11  | **Expanded Aura**      | Nível 6  | Alcance de auras +50% (18m).                  | Protege o grupo mesmo quando eles se espalham um pouco.         |
 | 12  | **Devoted**            | Nível 7  | Curas custam -20% Mana.                       | Permite economizar mana para habilidades de ataque e aura.      |
-| 13  | **Bastion**            | Nível 8  | +50% Defense se não mover por 3s.             | Invicto em lutas contra inimigos que não têm repulsão.          |
+| 13  | **Bastion**            | Nível 8  | +50% Defense se não mover por 1 Turno.        | Invicto em lutas contra inimigos que não têm repulsão.          |
 | 14  | **Purification**       | Nível 9  | Remove todos debuffs a cada 4 turnos.         | Auto-sustento contra venenos, pragas e lentidões.               |
 | 15  | **Holy Warrior**       | Nível 10 | +40% stats, imune a críticos.                 | O Paladino se torna o guerreiro definitivo da luz.              |
 
@@ -614,8 +614,8 @@ graph TD
 | 4   | **Necrotic Mastery**     | Nível 2  | +20% dano necrótico permanente.            | Escala todo o arsenal de sombras do herói.                             |
 | 5   | **Vital Siphon**         | Nível 3  | Spells curam 15% do dano causado.          | Transforma cada ataque em uma fonte de sobrevivência.                  |
 | 6   | **Undead Resilience**    | Nível 3  | +30% resist a necrótico/veneno.            | Proteção contra as próprias magias e inimigos sombrios.                |
-| 7   | **Chain Detonation**     | Nível 4  | Explosão de corpos gera reações em cadeia. | Limpa salas inteiras de monstros fracos em segundos.                   |
-| 8   | **Minion Longevity**     | Nível 4  | Invocações duram +50% tempo.               | Reduz o custo de mana por minuto de serviço dos servos.                |
+| 7   | **Chain Detonation**     | Nível 4  | Explosão de corpos gera reações em cadeia. | Limpa salas inteiras de monstros fracos em poucos Turnos.              |
+| 8   | **Minion Longevity**     | Nível 4  | Invocações duram +50% tempo.               | Reduz o custo de mana por Turno de serviço dos servos.                 |
 | 9   | **Undying Essence**      | Nível 5  | Regenera 10 Mana/turno constante.          | Garante que o Necromante nunca fique totalmente desarmado.             |
 | 10  | **Necrotic Aura**        | Nível 5  | Inimigos no local perdem 4% HP/t.          | Dano passivo que acumula muito em lutas longas.                        |
 | 11  | **Eternal Pact**         | Nível 6  | Dark Pact não gasta HP, sacrifica servos.  | Melhor estratégia quando se tem many summons ativos.                   |

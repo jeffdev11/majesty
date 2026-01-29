@@ -129,7 +129,7 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 **"Decreto de Guerra Total"**
 
 - **Custo:** 500 Ouro
-- **Duração:** 10 minutos
+- **Duração:** 10 minutos (200 Turnos)
 - **Buff:** +30% Ataque Global, +20% XP
 - **Risco:** 20% chance de evento "Motim" (1 herói fica com -50 Lealdade)
 
@@ -277,10 +277,10 @@ Se 80%+ dos heróis têm Lealdade > 70%:
 
 | Evento                     | Efeito em IP                  | Duração                               |
 | -------------------------- | ----------------------------- | ------------------------------------- |
-| **Festival da Vila**       | +50% regeneração              | 10 min                                |
+| **Festival da Vila**       | +50% regeneração              | 10 min (`200 Turnos`)                 |
 | **Motim**                  | -50% regeneração + Custo +50% | Até resolver                          |
 | **Vitória contra Boss**    | +25 IP imediato               | Instantâneo                           |
-| **Morte de Herói Popular** | -10 IP/min por 5 min          | 5 min                                 |
+| **Morte de Herói Popular** | -10 IP/min por 5 min          | 5 min (`100 Turnos`)                  |
 | **Traição**                | IP máximo -20 (100→80)        | Permanente até reconquistar confiança |
 
 ---
@@ -332,7 +332,7 @@ Meta: Gastar 80% do IP disponível (alta atividade)
 ```
 ┌─────────────────────────────────────────┐
 │ IP: [████████░░] 75/100                 │
-│     Regen: +40/min | Next: 3s           │
+│     Regen: +40/min | Next: 1 Turno        │
 └─────────────────────────────────────────┘
 
 Estados visuais:
@@ -457,7 +457,7 @@ const regenFinal = regenBase * upgradeMultiplier * eventBonus;
 
 // Exemplo:
 // Base: 1, Upgrade: 2x, Festival (+50% = 1.5)
-// = 1 * 2 * 1.5 = 3 IP a cada 3s = 60 IP/min!
+// = 1 * 2 * 1.5 = 3 IP por Turno = 60 IP/min!
 ```
 
 #### Custo Dinâmico

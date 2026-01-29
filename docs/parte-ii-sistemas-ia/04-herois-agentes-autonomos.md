@@ -100,10 +100,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **P - Proactivity Extrema**
 
-| Valor    | Título                  | Buffs                                                                                                                                     | Debuffs                                                                                |
-| -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente (0s delay)<br>+15% vigilância (detecta inimigos +2s antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
-| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                                | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+| Valor    | Título                  | Buffs                                                                                                                               | Debuffs                                                                                |
+| -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente<br>+15% vigilância (detecta inimigos +1 Turno antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                          | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
 
 #### **E - Ethics Extrema**
 
@@ -330,7 +330,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 **Reação a Crítico (Sorte):**
 
 - Affect 0.2: Fica eufórico, gasta cooldowns sem pensar
-- Affect 0.5: Fica animado (+5% stats por 30s)
+- Affect 0.5: Fica animado (+5% stats por 10 Turnos)
 - Affect 0.9: Mantém o ritmo, guarda skills para o momento certo
 
 **Reação a Insultos (de outros heróis):**
@@ -527,9 +527,9 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 
 | Nível       | Custo | Tempo de Construção | Benefício                                            |
 | ----------- | ----- | ------------------- | ---------------------------------------------------- |
-| **Nível 1** | 800g  | 120s                | Permite treinar 1 trait por vez                      |
-| **Nível 2** | 1500g | 180s                | Permite treinar 2 traits simultaneamente             |
-| **Nível 3** | 2500g | 240s                | Permite treinar 3 traits + -20% custo de treinamento |
+| **Nível 1** | 800g  | 40 Turnos           | Permite treinar 1 trait por vez                      |
+| **Nível 2** | 1500g | 60 Turnos           | Permite treinar 2 traits simultaneamente             |
+| **Nível 3** | 2500g | 80 Turnos           | Permite treinar 3 traits + -20% custo de treinamento |
 
 #### Sistema de Treinamento
 
@@ -543,12 +543,12 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 
 **Tabela de Custos:**
 
-| Trait Atual               | Custo Base | Tempo | Aumento       |
-| ------------------------- | ---------- | ----- | ------------- |
-| **0.0-0.3** (Muito Baixo) | 200g       | 60s   | +0.10 a +0.15 |
-| **0.4-0.6** (Médio)       | 400g       | 90s   | +0.08 a +0.12 |
-| **0.7-0.8** (Alto)        | 800g       | 120s  | +0.05 a +0.10 |
-| **0.9+** (Extremo)        | **1500g**  | 180s  | +0.02 a +0.05 |
+| Trait Atual               | Custo Base | Tempo     | Aumento       |
+| ------------------------- | ---------- | --------- | ------------- |
+| **0.0-0.3** (Muito Baixo) | 200g       | 20 Turnos | +0.10 a +0.15 |
+| **0.4-0.6** (Médio)       | 400g       | 30 Turnos | +0.08 a +0.12 |
+| **0.7-0.8** (Alto)        | 800g       | 40 Turnos | +0.05 a +0.10 |
+| **0.9+** (Extremo)        | **1500g**  | 60 Turnos | +0.02 a +0.05 |
 
 **Modificadores de Custo:**
 
@@ -660,13 +660,13 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 
 ### Estados Temporários (Buffs/Debuffs Psicológicos)
 
-| Estado            | Duração   | Efeito                                                |
-| ----------------- | --------- | ----------------------------------------------------- |
-| **DRUNK**         | 5 min     | Proactivity +0.3, Mind -0.5 (Corajoso mas burro)      |
-| **HUNGRY**        | Até comer | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
-| **INSPIRED**      | 2 min     | Todos vetores +0.1                                    |
-| **SCARED**        | 1 min     | Proactivity -0.4, Flee Threshold +30%                 |
-| **GREEDY_FRENZY** | 30s       | Cooperation -0.5 (Ignora segurança para pegar ouro)   |
+| Estado            | Duração    | Efeito                                                |
+| ----------------- | ---------- | ----------------------------------------------------- |
+| **DRUNK**         | 100 Turnos | Proactivity +0.3, Mind -0.5 (Corajoso mas burro)      |
+| **HUNGRY**        | Até comer  | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
+| **INSPIRED**      | 40 Turnos  | Todos vetores +0.1                                    |
+| **SCARED**        | 20 Turnos  | Proactivity -0.4, Flee Threshold +30%                 |
+| **GREEDY_FRENZY** | 10 Turnos  | Cooperation -0.5 (Ignora segurança para pegar ouro)   |
 
 ### Peculiaridades (Overrides Binários)
 

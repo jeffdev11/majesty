@@ -126,8 +126,8 @@ Para garantir legibilidade mesmo em layouts divididos, o sistema segue regras es
 │ [14:39] ❤️ RELAÇÃO [Kaelen ↔ Lila] +5 (Elogio em combate)                 │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P8: 🔀 STATUS TEMPORÁRIOS ATIVOS                                          │
-│  ├─ Sir Kaelen [⚡ Fúria +50% ATK] ⏱️ 12s                                 │
-│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 8s                                     │
+│  ├─ Sir Kaelen [⚡ Fúria +50% ATK] ⏱️ 4 Turnos                              │
+│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 3 Turnos                                  │
 │  └─ Elara [🛡️ Aura Sagrada +Cura] ⏱️ Permanente                          │
 └───────────────────────────────────────────────────────────────────────────┘
 ```
@@ -359,7 +359,7 @@ Painel dedicado para mostrar **todos os buffs, debuffs e condições especiais**
 [ÍCONE] [TIPO]: [Alvo] [Efeito] [Duração]
 
 Exemplo:
-🔼 BUFFS: Kaelen [⚔️ Fúria +20% ATK] 45s
+🔼 BUFFS: Kaelen [⚔️ Fúria +20% ATK] 15 Turnos
 ```
 
 #### Lista Completa de Status Temporários
@@ -368,42 +368,42 @@ Exemplo:
 
 | Ícone | Nome               | Efeito                   | Duração Típica | Fonte              |
 | ----- | ------------------ | ------------------------ | -------------- | ------------------ |
-| ⚔️    | **Fúria**          | +20-50% Attack           | 30-60s         | Skill de Guerreiro |
-| 🛡️    | **Fortificado**    | +30% Defense             | 60s            | Poção/Buff         |
-| ⚡    | **Acelerado**      | +50% Velocidade          | 30s            | Skill de Mago      |
-| 💪    | **Força Titânica** | +100% Attack             | 15s            | Decreto Real       |
-| ❤️    | **Regeneração**    | +10 HP/s                 | 120s           | Poção de Cura      |
-| 🔥    | **Chama Interior** | +30% Dano Fogo           | 40s            | Buff de Mago       |
-| 🧠    | **Concentração**   | +50% Crit Chance         | 20s            | Habilidade         |
-| 🌟    | **Bênção Divina**  | Invulnerável             | 5s             | Skill Rara         |
+| ⚔️    | **Fúria**          | +20-50% Attack           | 10-20 Turnos   | Skill de Guerreiro |
+| 🛡️    | **Fortificado**    | +30% Defense             | 20 Turnos      | Poção/Buff         |
+| ⚡    | **Acelerado**      | +50% Velocidade          | 10 Turnos      | Skill de Mago      |
+| 💪    | **Força Titânica** | +100% Attack             | 5 Turnos       | Decreto Real       |
+| ❤️    | **Regeneração**    | +10 HP/s                 | 40 Turnos      | Poção de Cura      |
+| 🔥    | **Chama Interior** | +30% Dano Fogo           | 13 Turnos      | Buff de Mago       |
+| 🧠    | **Concentração**   | +50% Crit Chance         | 7 Turnos       | Habilidade         |
+| 🌟    | **Bênção Divina**  | Invulnerável             | 2 Turnos       | Skill Rara         |
 | 👥    | **Grupo Unido**    | +15% Stats (se em grupo) | Passivo        | Social             |
 
 **DEBUFFS (Negativos)**
 
 | Ícone | Nome                | Efeito                 | Duração Típica | Fonte                  |
 | ----- | ------------------- | ---------------------- | -------------- | ---------------------- |
-| ☣️    | **Envenenado**      | -2 a -10 HP/s          | 30-60s         | Ataque de Aranha/Snake |
-| 🔥    | **Queimando**       | -5 HP/s                | 10-20s         | Magia de Fogo          |
-| ❄️    | **Congelado/Lento** | -50% Velocidade        | 15-30s         | Magia de Gelo          |
-| 🩸    | **Sangrando**       | -3 HP/s + deixa rastro | 20-40s         | Corte Profundo         |
-| 😨    | **Amedrontado**     | -30% Attack, foge      | 10-20s         | Grito/Roar             |
-| 🤮    | **Doente**          | -25% todos stats       | 120s           | Pântano/Praga          |
-| 👁️    | **Cego**            | Miss 50% ataques       | 15s            | Flash Bang             |
-| 🧟    | **Amaldiçoado**     | XP -50%                | 300s           | Boss/Magia negra       |
-| 😵    | **Confuso**         | Ataca aliados          | 10s            | Skill de Controle      |
-| 🐌    | **Exausto**         | -75% Stamina regen     | 60s            | Cansaço/Sobrecarga     |
+| ☣️    | **Envenenado**      | -2 a -10 HP/s          | 10-20 Turnos   | Ataque de Aranha/Snake |
+| 🔥    | **Queimando**       | -5 HP/s                | 3-7 Turnos     | Magia de Fogo          |
+| ❄️    | **Congelado/Lento** | -50% Velocidade        | 5-10 Turnos    | Magia de Gelo          |
+| 🩸    | **Sangrando**       | -3 HP/s + deixa rastro | 7-13 Turnos    | Corte Profundo         |
+| 😨    | **Amedrontado**     | -30% Attack, foge      | 3-7 Turnos     | Grito/Roar             |
+| 🤮    | **Doente**          | -25% todos stats       | 40 Turnos      | Pântano/Praga          |
+| 👁️    | **Cego**            | Miss 50% ataques       | 5 Turnos       | Flash Bang             |
+| 🧟    | **Amaldiçoado**     | XP -50%                | 100 Turnos     | Boss/Magia negra       |
+| 😵    | **Confuso**         | Ataca aliados          | 3 Turnos       | Skill de Controle      |
+| 🐌    | **Exausto**         | -75% Stamina regen     | 20 Turnos      | Cansaço/Sobrecarga     |
 
 **CONDIÇÕES ESPECIAIS**
 
 | Ícone | Nome                | Efeito                         | Duração      | Fonte        |
 | ----- | ------------------- | ------------------------------ | ------------ | ------------ |
-| ⚡    | **Atordoado**       | Não pode agir                  | 3-8s         | Stun/Bash    |
+| ⚡    | **Atordoado**       | Não pode agir                  | 1-3 Turnos   | Stun/Bash    |
 | 💤    | **Dormindo**        | Inconsciente (remove com dano) | Até acordar  | Skill Sleep  |
-| 🪨    | **Petrificado**     | Imóvel + Invulnerável          | 10-30s       | Magia/Medusa |
-| 👻    | **Invisível**       | Não pode ser atacado           | 20s          | Skill Ladino |
-| 🔗    | **Preso/Enraizado** | Não pode mover                 | 15s          | Trap/Root    |
-| 🌀    | **Levitando**       | Imune a dano terrestre         | 10s          | Magia        |
-| 🍺    | **Bêbado**          | Stats aleatórios (-20 a +20)   | 180s         | Taverna      |
+| 🪨    | **Petrificado**     | Imóvel + Invulnerável          | 3-10 Turnos  | Magia/Medusa |
+| 👻    | **Invisível**       | Não pode ser atacado           | 7 Turnos     | Skill Ladino |
+| 🔗    | **Preso/Enraizado** | Não pode mover                 | 5 Turnos     | Trap/Root    |
+| 🌀    | **Levitando**       | Imune a dano terrestre         | 3 Turnos     | Magia        |
+| 🍺    | **Bêbado**          | Stats aleatórios (-20 a +20)   | 60 Turnos    | Taverna      |
 | 🚩    | **Marcado (PvP)**   | Pode ser atacado por aliados   | Até resolver | Sistema PvP  |
 | 💀    | **Necromancia**     | Morto mas reanimado            | Até morrer   | Boss Lich    |
 
@@ -435,7 +435,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [1] ⚔️ Fúria (Kaelen)                                         │ │
 │ │     Efeito: +20% Attack                                      │ │
-│ │     Duração: 45s restantes (de 60s)                          │ │
+│ │     Duração: 15 Turnos restantes (de 20)                     │ │
 │ │     Fonte: Skill "Grito de Guerra"                           │ │
 │ │     Empilha?: Não                                            │ │
 │ │     [X] Remover (custaria 10 IP)                             │ │
@@ -452,7 +452,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [3] ☣️ Envenenada (Lila)                                      │ │
 │ │     Efeito: -2 HP/s (já perdeu 40 HP)                        │ │
-│ │     Duração: 28s restantes                                   │ │
+│ │     Duração: 9 Turnos restantes                              │ │
 │ │     Fonte: Mordida de Aranha Gigante                         │ │
 │ │     CRÍTICO: HP atual 35% - RISCO DE MORTE!                  │ │
 │ │     [!] Enviar antídoto? (Custo: 50g)                        │ │
@@ -460,7 +460,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [4] ❄️ Lento (Gandalf)                                        │ │
 │ │     Efeito: -50% Velocidade de movimento                     │ │
-│ │     Duração: 14s restantes                                   │ │
+│ │     Duração: 5 Turnos restantes                              │ │
 │ │     Fonte: Magia de Gelo (Mago Inimigo)                      │ │
 │ │     Status: Moderado (não crítico)                           │ │
 │ └──────────────────────────────────────────────────────────────┘ │
@@ -469,7 +469,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [5] 🔥 Queimando (Ogro - Inimigo)                             │ │
 │ │     Efeito: -5 HP/s                                          │ │
-│ │     Duração: 11s restantes                                   │ │
+│ │     Duração: 4 Turnos restantes                              │ │
 │ │     Fonte: Bola de Fogo de Gandalf                           │ │
 │ │     [✓] Contribuindo para a vitória                          │ │
 │ └──────────────────────────────────────────────────────────────┘ │
@@ -524,15 +524,16 @@ O P8 emite **alertas visuais** quando:
    ⚠️ ALERTA: Lila morrendo! Envenenada + HP crítico!
    ```
 
-2. **Buff Expirando:** Buff importante termina em < 10s
+2. **Buff Expirando:** Buff importante termina em < 3 Turnos
 
    ```
-   ⏰ Fúria de Kaelen expira em 8 segundos!
+   Let's replace:
+   ⏰ Fúria de Kaelen expira em 3 Turnos!
    ```
 
-3. **Condição Permanente:** Status > 5 minutos
+3. **Condição Permanente:** Status > 100 Turnos
    ```
-   🚩 Amaldiçoado há 6 minutos! Considere cura especial.
+   🚩 Amaldiçoado há 200 Turnos! Considere cura especial.
    ```
 
 #### Ações Rápidas do P8
@@ -557,8 +558,8 @@ O P8 emite **alertas visuais** quando:
   ```
   APLICAR BUFF GLOBAL:
   [1] Banquete (30 IP, 10min)
-  [2] Fúria Coletiva (+15% ATK, 50 IP, 60s)
-  [3] Escudo Divino (+20% DEF, 40 IP, 120s)
+  [2] Fúria Coletiva (+15% ATK, 50 IP, 20 Turnos)
+  [3] Escudo Divino (+20% DEF, 40 IP, 40 Turnos)
   ```
 
 ---
@@ -570,15 +571,15 @@ O P8 emite **alertas visuais** quando:
 ```
 Jogador olha P8:
 🔽 DEBUFFS (3):
-  Lila [☣️ Envenenada] 55s
-  Lila [🩸 Sangrando] 30s
-  Lila [😨 Amedrontada] 15s
+  Lila [☣️ Envenenada] 18 Turnos
+  Lila [🩸 Sangrando] 10 Turnos
+  Lila [😨 Amedrontada] 5 Turnos
 
 P8 pisca VERMELHO (3 debuffs simultâneos!)
 
 Conselheiro (P7):
 "MAJESTADE! Lila está em CRISE! 3 debuffs ativos.
-Recomendo enviar poção AGORA ou ela morre em 40s!"
+Recomendo enviar poção AGORA ou ela morre em 13 Turnos!"
 ```
 
 **Exemplo 2: Buff Stacking (Combos)**
@@ -586,9 +587,9 @@ Recomendo enviar poção AGORA ou ela morre em 40s!"
 ```
 P8 mostra:
 🔼 BUFFS:
-  Kaelen [⚔️ Fúria] 30s
-  Kaelen [💪 Força Tit.] 10s
-  Kaelen [🧠 Concentração] 15s
+  Kaelen [⚔️ Fúria] 10 Turnos
+  Kaelen [💪 Força Tit.] 3 Turnos
+  Kaelen [🧠 Concentração] 5 Turnos
 
 Conselheiro:
 "Kaelen está com TRIPLO buff! Attack +120%!
@@ -627,9 +628,9 @@ Esse é o momento PERFEITO para atacar o boss!"
 | > Resposta: A caminho|                                         |                     |
 +---------------------+------------------------------------------+---------------------+
 |                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10% Stats] 8min            |
-| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
-| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
+| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 15 Turnos | Reino [Banquete +10% Stats] 8min      |
+| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 10 Turnos | Gandalf [❄️ Lento -50% Vel] 5 Turnos    |
+| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 2 Turnos | Ogro [🔥 Queimando -5HP/s] 4 Turnos          |
 +--------------------------------------------------------------------------------------+
 |                        P7: CONSELHEIRO REAL (CHAT)                                   |
 | IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
@@ -709,8 +710,8 @@ Esse é o momento PERFEITO para atacar o boss!"
 │ [P] Pagar Salários (100g) | [U] Upgrade Prédio (Selecionado em P1)        │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P8: 🏗️ LOG DE ORDEM DE SERVIÇO                                           │
-│ [14:30] 🏗️ Guilda Magos concluída (300g, 60s)                            │
-│ [14:32] 🔨 Taverna Lvl 2 em construção (45s restantes)                   │
+│ [14:30] 🏗️ Guilda Magos concluída (300g, 20 Turnos)                         │
+│ [14:32] 🔨 Taverna Lvl 2 em construção (15 Turnos restantes)                   │
 │ [14:35] ⚙️ Manutenção de rotina em torres concluída (-30g)               │
 │ [14:40] 🏛️ Escola Estoica iniciou treinamento: Sir Kaelen                │
 └───────────────────────────────────────────────────────────────────────────┘
@@ -776,7 +777,7 @@ A **Casa Central** (Crown Keep) é o edifício mais importante do reino. É onde
 
 - Torres adjacentes (raio 5 hexágonos) ganham +50% range
 - Heróis defendendo Casa Central ganham +20% stats
-- Alertas de invasão acontecem 2 minutos antes (vs 30s normal)
+- Alertas de invasão acontecem 40 Turnos antes (vs 10 Turnos normal)
 
 #### Estados Visuais (P1)
 
@@ -1857,12 +1858,12 @@ P3: PREVISÃO GLOBAL
 
 **3. EVENTOS MÁGICOS**
 
-| Evento                   | Frequência         | Duração | Efeitos                                            |
-| ------------------------ | ------------------ | ------- | -------------------------------------------------- |
-| **🔮 Fenda Mágica**      | 5%/dia (Ciclo 2+)  | 10 min  | Portal spawna 10-20 monstros elite                 |
-| **🌙 Lua de Sangue**     | Dias 100, 125, 150 | 15 min  | Todos monstros +100% HP/Attack, Boss Global spawna |
-| **✨ Chuva de Estrelas** | Raro (3%)          | 5 min   | +50% XP global, Chance loot lendário dobra         |
-| **🕯️ Eclipse**           | Ciclo 3            | 8 min   | Mortos-vivos +200% poder, Sol = Noite              |
+| Evento                   | Frequência         | Duração    | Efeitos                                            |
+| ------------------------ | ------------------ | ---------- | -------------------------------------------------- |
+| **🔮 Fenda Mágica**      | 5%/dia (Ciclo 2+)  | 200 Turnos | Portal spawna 10-20 monstros elite                 |
+| **🌙 Lua de Sangue**     | Dias 100, 125, 150 | 300 Turnos | Todos monstros +100% HP/Attack, Boss Global spawna |
+| **✨ Chuva de Estrelas** | Raro (3%)          | 100 Turnos | +50% XP global, Chance loot lendário dobra         |
+| **🕯️ Eclipse**           | Ciclo 3            | 160 Turnos | Mortos-vivos +200% poder, Sol = Noite              |
 
 **4. EVENTOS DE INVASÃO**
 
@@ -1877,8 +1878,8 @@ P3: PREVISÃO GLOBAL
 
 | Evento                   | Frequência      | Duração      | Efeitos                                 |
 | ------------------------ | --------------- | ------------ | --------------------------------------- |
-| **💰 Caravana Mercante** | Aleatório       | 5 min        | Desconto -30% em todos os itens da loja |
-| **🎭 Festival da Vila**  | A cada 30 dias  | 10 min       | +20 Moral, Heróis não lutam (descansam) |
+| **💰 Caravana Mercante** | Aleatório       | 100 Turnos   | Desconto -30% em todos os itens da loja |
+| **🎭 Festival da Vila**  | A cada 30 dias  | 200 Turnos   | +20 Moral, Heróis não lutam (descansam) |
 | **⚖️ Motim**             | Se Moral < 30%  | Até resolver | Guardas desertam, Heróis podem trair    |
 | **🎖️ Lenda Nasce**       | Herói 50+ kills | Permanente   | +10% Recrutamento, -20% custo skills    |
 
@@ -3604,7 +3605,7 @@ Exemplos:
 [18:00] 🌅 SYS [Mundo] [Noite] Sol se põe. Penalidade ativa.
 [18:05] 🌅 SYS [Ciclo] [Verão] Tempestade se aproxima (ETA: 5min).
 [18:10] ⚠️ ALERT [Global] 🌪️ TEMPESTADE ATIVA!
-[18:11] 🩸 STAT [Todos] [-30% Vel] Dura 10 minutos.
+[18:11] 🩸 STAT [Todos] [-30% Vel] Dura 200 Turnos.
 ```
 
 #### COVARDIA E TRAUMA (Seção 5.8 Exemplo)

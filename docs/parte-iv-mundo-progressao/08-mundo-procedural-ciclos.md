@@ -45,9 +45,9 @@ Mapa mostra:
   [?] Montanha (Névoa)
 
 Jogador: /scout cavern
-Conselheiro: "Lila foi enviada para explorar. ETA: 2 min."
+Conselheiro: "Lila foi enviada para explorar. ETA: 40 Turnos."
 
-[2 minutos depois]
+[Após 40 Turnos]
 Conselheiro: "Caverna revelada! Detectado: Boss Ogro
 Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 ```
@@ -110,7 +110,7 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 | --------------------- | ------------------------------------------------- |
 | **Temperatura**       | Amena (15-25°C)                                   |
 | **Precipitação**      | Chuvas leves (benéficas para fazendas)            |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)                    |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão)        |
 | **Visibilidade**      | Alta (névoa de guerra se dissipa 20% mais rápido) |
 
 #### Monstros Tier 1
@@ -155,12 +155,12 @@ Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para
 
 #### Características
 
-| Aspecto               | Detalhes                            |
-| --------------------- | ----------------------------------- |
-| **Temperatura**       | Calor extremo (30-45°C)             |
-| **Precipitação**      | Seca + tempestades súbitas          |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)      |
-| **Visibilidade**      | Média (poeira/calor distorce visão) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Calor extremo (30-45°C)                    |
+| **Precipitação**      | Seca + tempestades súbitas                 |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Média (poeira/calor distorce visão)        |
 
 #### Monstros Tier 2
 
@@ -176,7 +176,7 @@ Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para
 **Eventos Frequentes:**
 
 - 🌪️ **Tempestade de Areia** (A cada 5 dias): -50% visibilidade, monstros +30% stats
-- 🔥 **Onda de Calor** (Aleatório): Heróis perdem -2 HP/min se não beberem água
+- 🔥 **Onda de Calor** (Aleatório): Heróis perdem -1 HP/Turno se não beberem água
 - ⚔️ **Invasão Ogro** (Dia 3): 15-25 Ogros atacam capital
 - 🌋 **Terremoto** (Dia 4): Abre novas passagens, 5% chance destruir prédio
 
@@ -204,12 +204,12 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 #### Características
 
-| Aspecto               | Detalhes                        |
-| --------------------- | ------------------------------- |
-| **Temperatura**       | Congelante (-10 a 5°C)          |
-| **Precipitação**      | Neve constante, nevascas        |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)  |
-| **Visibilidade**      | Baixa (neve reduz visão em 40%) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Congelante (-10 a 5°C)                     |
+| **Precipitação**      | Neve constante, nevascas                   |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Baixa (neve reduz visão em 40%)            |
 
 #### Monstros Tier 2-3 (Híbrido)
 
@@ -230,7 +230,7 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 **FRIO:**
 
-- Heróis perdem -1 HP/min ao ar livre
+- Heróis perdem -1 HP/Turno ao ar livre
 - Torres consomem lenha para manter aquecidas
 - Moral -10 global
 
@@ -279,12 +279,12 @@ Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
 
 #### Características
 
-| Aspecto               | Detalhes                          |
-| --------------------- | --------------------------------- |
-| **Temperatura**       | Caótico (-20°C a 40°C aleatório)  |
-| **Precipitação**      | Chuva ácida, neve de cinzas       |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)    |
-| **Visibilidade**      | Mínima (lua de sangue permanente) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Caótico (-20°C a 40°C aleatório)           |
+| **Precipitação**      | Chuva ácida, neve de cinzas                |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Mínima (lua de sangue permanente)          |
 
 #### Monstros Tier 3 (Apocalípticos)
 
@@ -301,17 +301,17 @@ Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
 
 - Monstros +100% HP/Attack (sempre ativo)
 - Heróis -20% Moral (constante)
-- Mortos reanimam automaticamente após 5min
+- Mortos reanimam automaticamente após 100 Turnos
 
 **FENDAS MÁGICAS:**
 
-- Portais spawnam a cada 10min
+- Portais spawnam a cada 200 Turnos
 - Liberam 10-20 monstros elite
 - Só fecham se destruídos (5,000 HP cada)
 
 **ECLIPSE ALEATÓRIO:**
 
-- Dia vira noite por 5min
+- Dia vira noite por 100 Turnos
 - Mortos-vivos +200% poder **(CRITICAL)**
 
 #### Eventos Globais Únicos do Ciclo 4
@@ -415,7 +415,7 @@ Heróis sem **iluminação** sofrem:
 ```
 [18:45] 🌅 SYS [Mundo] [Noite] Sol se pôs. Penalidade ativa.
 [18:46] 💬 CHAT [Lila] "É muito escuro... preciso de luz."
-[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina 20m/5min.
+[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina 20m/100 Turnos.
 [18:48] 👣 MOVE [Kaelen] [Retornou] Voltou à vila por medo.
 ```
 
@@ -433,7 +433,7 @@ Heróis sem **iluminação** sofrem:
 
 #### 2. Tempestades
 
-- **Duração:** 5 minutos
+- **Duração:** 100 Turnos
 - **Efeito:**
   - Magos têm +50% poder (raios)
   - Arqueiros têm -30% acurácia (vento)
@@ -443,7 +443,7 @@ Heróis sem **iluminação** sofrem:
 
 - **Evento Raro:** 5% chance por dia (Ciclo 2+)
 - **Efeito:** Portal abre e spawna 10-20 monstros de elite
-- **Duração:** 10 minutos (deve ser fechado por mago)
+- **Duração:** 200 Turnos (deve ser fechado por mago)
 
 #### 4. Lua de Sangue
 

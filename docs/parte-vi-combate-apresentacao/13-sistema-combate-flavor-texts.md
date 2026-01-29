@@ -4,7 +4,7 @@
 
 ### Sistema de Combate Baseado em Turnos Rápidos
 
-O combate acontece em **micro-turnos** (1 turno = 1 segundo real).
+O combate acontece em **Turnos** (1 Turno = 3 Segundos).
 
 #### Fórmula de Dano
 

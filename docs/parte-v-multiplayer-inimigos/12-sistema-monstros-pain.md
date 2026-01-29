@@ -214,7 +214,7 @@ Periodicamente (a cada 20 dias), uma **horda** ataca a vila.
 
 ```
 [ALERTA - 5 min antes]
-Conselheiro: "Detectei movimento em massa.
+Conselheiro: "Detectada movimentação sísmica no quadrante (45,12).
 Invasão de Goblins em 5 minutos. Prepare defesas!"
 
 [FASE 1: Aproximação]

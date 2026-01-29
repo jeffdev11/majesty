@@ -16,6 +16,7 @@
    - 1.3 [Pilares de Diversão](#13-pilares-de-diversão-imprevisibilidade-agência-indireta-e-narrativa-emergente)
    - 1.4 [A Nova Direção (RTS → Terminal)](#14-a-nova-direção-do-rts-visual-para-a-simulação-profunda)
    - 1.5 [Viabilidade Técnica](#15-por-que-a-mudança-viabilidade-técnica)
+   - 1.6 [Sistema de Tempo e Turnos](#16-sistema-de-tempo-e-turnos-a-regra-dos-3-segundos)
 
 2. [Interface e Experiência do Usuário (UI/UX)](#2-interface-e-experiência-do-usuário-uiux)
    - 2.1 [Conceito de Workspaces](#21-o-conceito-de-workspaces-tty)
