@@ -26,7 +26,7 @@
 **Passo 1: Seleção de Heróis**
 
 ```
-Jogador: /found_outpost forest_north
+Jogador: "Crie um posto avançado na floresta norte."
 
 Conselheiro: "Para fundar um posto, você deve escolher
 3 heróis. ATENÇÃO: Eles deixarão a capital permanentemente
@@ -174,7 +174,7 @@ Se o Posto prosperar muito, o jogador pode **mudar a capital** para lá.
 ### Consequências Permanentes
 
 ```
-Jogador: /move_capital outpost_north
+Jogador: "Transfira a capital para o posto norte. É urgente."
 
 Conselheiro: "ATENÇÃO! Esta decisão é IRREVERSÍVEL.
 A vila atual se tornará um posto, e o Posto Norte
@@ -262,7 +262,7 @@ Vila dos Exilados:
 **Opção 2: Negociação**
 
 ```
-Jogador: /negotiate rebels
+Jogador: "Tente negociar com os rebeldes."
 
 Conselheiro: "Kaelen exige: 1,500 Ouro, perdão total
 e autonomia completa. Aceitar significa perder 3 heróis,

@@ -85,6 +85,7 @@
    - 8.5 [Boss Global](#85-boss-global-o-rei-vilão)
    - 8.6 [Escalonamento Dinâmico](#86-escalonamento-dinâmico-de-dificuldade)
    - 8.7 [Mapas Procedurais](#87-mapas-procedurais-cada-partida-é-única)
+   - 8.8 [Tutorial e Onboarding](#88-tutorial-e-onboarding)
 
 9. [Mecânicas Avançadas de Expansão](#9-mecânicas-avançadas-de-expansão)
    - 9.1 [Postos Avançados](#91-postos-avançados-expandindo-o-reino)

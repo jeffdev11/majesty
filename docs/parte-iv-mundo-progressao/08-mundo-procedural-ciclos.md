@@ -44,7 +44,7 @@ Mapa mostra:
   [?] Caverna (Névoa - nenhum herói lá)
   [?] Montanha (Névoa)
 
-Jogador: /scout cavern
+Jogador: "Envie alguém para explorar a caverna."
 Conselheiro: "Lila foi enviada para explorar. ETA: 40 Turnos."
 
 [Após 40 Turnos]

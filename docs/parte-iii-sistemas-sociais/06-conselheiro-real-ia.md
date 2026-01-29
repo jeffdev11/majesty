@@ -70,7 +70,7 @@ O **Conselheiro Real** não é apenas um chatbot. Ele é:
 ### Exemplo de Conversa
 
 ```
-Jogador: /why is Lila angry?
+Jogador: "Por que a Lila está tão brava?"
 
 Conselheiro: "Majestade, Lila Rogue está irritada porque
 Sir Kaelen tomou o último golpe dela contra um Ogro há
@@ -78,7 +78,7 @@ Sir Kaelen tomou o último golpe dela contra um Ogro há
 na personalidade dela (Ganância: Alta), sugiro oferecer
 compensação em ouro ou ela pode iniciar PvP."
 
-Jogador: /send letter Lila sorry, here's 300 gold
+Jogador: "Envie uma carta para a Lila pedindo desculpas e mande 300 de ouro."
 
 Conselheiro: "Carta enviada. Custo: 25 IP. Lila deve
 receber em aproximadamente 20 segundos."
@@ -101,7 +101,7 @@ O jogador escolhe **uma das 3 personalidades** no início do jogo:
 **Exemplo:**
 
 ```
-Jogador: /attack elite dragon
+Jogador: "Ataquem o dragão de elite!"
 
 Conselheiro: "Majestade, com todo respeito... isso é
 insanidade. Seus heróis mal derrotam Goblins. Mas se
@@ -137,7 +137,7 @@ Conselheiro: "Majestade, grandes perdas, mas que
 **Exemplo:**
 
 ```
-Jogador: /summary today
+Jogador: "Resumo do dia, por favor."
 
 Conselheiro: "RELATÓRIO DIÁRIO - DIA 45
 - Heróis ativos: 4/5
@@ -231,7 +231,9 @@ vingança contra o Dragão que o matou.
 O jogador pode enviar o Conselheiro para espionar:
 
 ```
-/send advisor scout [location]
+"Vá investigar aquela área escura no mapa."
+ ou
+ "Espione o acampamento inimigo."
 ```
 
 **Consequências:**

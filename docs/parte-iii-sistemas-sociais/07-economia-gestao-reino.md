@@ -97,7 +97,7 @@ P3: ESTADO DO REINO
 #### Compra Manual
 
 ```
-Jogador: /buy health_potion 30
+Jogador: "Compre 30 poções de vida."
 
 Conselheiro: "Compra realizada. Estoque atualizado:
 42/50 Poções de Vida. Saldo: 350 Ouro."
@@ -148,7 +148,7 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 
 ```
 Dia 73: Boss Dragão detectado no radar.
-Jogador: /decree war_effort
+Jogador: "Publique um decreto de esforço de guerra!"
 Conselheiro: "Decreto emitido! Todos os heróis estão
 motivados. Mas atenção: Gandalf está murmurando sobre
 'autoritarismo'. Lealdade dele caiu para 40%."
@@ -377,7 +377,7 @@ Problema: Não tem IP suficiente!
 Soluções:
 1. Aguardar 30s (regenera 10 IP = total 25 IP)
 2. Usar comando simples ao Conselheiro (10 IP):
-   "/alert lila retreat" (Conselheiro envia aviso)
+   "Avise a Lila para recuar!" (Conselheiro envia aviso)
 3. APRENDER: Sempre manter reserva de 30 IP!
 ```
 
@@ -386,10 +386,10 @@ Soluções:
 ```
 Dia 45:
 08:00 - IP: 100/100 (cheio)
-08:05 - Comando: "/status heroes" (-10 IP = 90)
+08:05 - Pedido: "Situação dos heróis?" (-10 IP = 90)
 08:10 - Carta para Kaelen (-25 IP = 65)
 08:15 - Aguarda regeneração (+10 IP = 75)
-08:20 - Comando: "/report economy" (-10 IP = 65)
+08:20 - Pedido: "Relatório econômico." (-10 IP = 65)
 08:30 - Aguarda (+20 IP = 85)
 08:35 - Decreto: "Banquete Real" (-30 IP = 55)
 08:45 - Aguarda (+20 IP = 75)
@@ -513,7 +513,7 @@ Se o Tesouro chegar a **0 Ouro** e não conseguir pagar:
 ### Solução de Emergência
 
 ```
-Jogador: /emergency_tax
+Jogador: "Cobre uma taxa de emergência agora!"
 
 Conselheiro: "Taxa de emergência cobrada! Heróis
 doaram 30% do ouro individual. Arrecadado: 400g.
