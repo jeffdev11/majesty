@@ -46,6 +46,7 @@
    - 4.6 [Ciclo de Vida](#46-ciclo-de-vida-morte-trabalho-e-redenção)
    - 4.7 [Limitação: 5 Heróis Máximo](#47-limitação-estratégica-máximo-de-5-heróis)
    - 4.8 [Sistema de Skills](#48-sistema-de-skills-árvore-completa-de-habilidades)
+   - 4.9 [Sistema de Itens e Loot](#49-sistema-de-itens-e-loot-a-arma-e-a-lenda)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
@@ -66,6 +67,7 @@
    - 6.5 [Sussurros e Lore](#65-sussurros-e-lore-dinâmica)
    - 6.6 [Espionagem](#66-espionagem-e-estratégia)
    - 6.7 [Influence Points (IP)](#67-custo-de-influência-o-rate-limit-narrativo)
+   - 6.8 [API de Comandos da LLM](#68-api-de-comandos-da-llm-interface-homem-máquina)
 
 7. [Economia e Gestão do Reino](#7-economia-e-gestão-do-reino)
    - 7.1 [Tesouro Real](#71-tesouro-real-a-fonte-de-ouro)

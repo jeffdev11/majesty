@@ -59,7 +59,7 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 #### 2. Morte
 
-- Perdedor morre (entra em recuperação de 60s)
+- Perdedor morre (entra em recuperação de 60s (20 Turnos))
 - Ganhador ganha título: `"Matador de [Nome]"`
 - Affinity com todos aliados da vítima: -30
 
@@ -491,13 +491,13 @@ Grog vai morrer. Por minha mão ou pelo céu."
 
 Para evitar **fadiga narrativa**, o sistema controla frequência:
 
-| Tipo de Conflito       | Cooldown    | Máximo/Partida        |
-| ---------------------- | ----------- | --------------------- |
-| Covardia               | 30 min      | 3 eventos             |
-| Negligência Tática     | 20 min      | 5 eventos             |
-| Ciúmes                 | Passivo     | 1 por par de heróis   |
-| Conflito Personalidade | Passivo     | 1-2 pares             |
-| Vingança               | 1 por morte | Quantas mortes houver |
+| Tipo de Conflito       | Cooldown            | Máximo/Partida        |
+| ---------------------- | ------------------- | --------------------- |
+| Covardia               | 30 min (600 Turnos) | 3 eventos             |
+| Negligência Tática     | 20 min (400 Turnos) | 5 eventos             |
+| Ciúmes                 | Passivo             | 1 por par de heróis   |
+| Conflito Personalidade | Passivo             | 1-2 pares             |
+| Vingança               | 1 por morte         | Quantas mortes houver |
 
 **Prioridade de Narrativa (IA decide qual contar):**
 

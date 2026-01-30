@@ -179,392 +179,84 @@ function generateNarrativePrompt(event: CombatEvent): string {
 Se tivermos apenas 10 tags por categoria e usarmos 4 categorias:
 `10 * 10 * 10 * 10` = **10.000 combinações únicas de prompt** para o _mesmo_ tipo de ataque.
 
-Como a IA (Temperature 0.6) escreve cada combinação de forma diferente a cada vez, a repetição textual se torna **estatisticamente impossível**.
-
-**Exemplo Real:**
-
-Com apenas **50 tags no banco** distribuídas em 8 categorias:
-
-- 6 tags de WEATHER
-- 8 tags de WEAPON
-- 6 tags de EMOTION
-- 5 tags de CRITICAL
-- ...
-
-**Combinações possíveis:** `6 × 8 × 6 × 5` = **1.440 prompts únicos**
-
 Se a IA gerar 100 textos diferentes para cada prompt (Temperature 0.6): **144.000 textos únicos**.
 
----
+### 18.4 Sopa de Tags na Geração de Backstory (História Pregressa)
 
-## 19. CONFIGURAÇÃO DO MODELO (WEBLLM)
+A "Sopa" não serve apenas para combate. Ela é fundamental para criar a alma dos heróis no momento do recrutamento. O jogo sorteia tags de diferentes categorias de vida (Origem, Trauma, Ambição, Medo) para compor um personagem tridimensional.
 
-### 19.1 O Modelo Escolhido
+**Exemplo de Geração de Herói (Sopa de Criação):**
 
-- **Modelo:** `Llama-3.2-3B-Instruct-q4f16_1-MLC`
-- **Justificativa:** É o estado da arte para eficiência em _edge devices_. Ocupa ~2.2GB de VRAM, rodando confortavelmente em placas GTX 1060+ e iGPUs modernas (M1/M2/AMD RDNA), entregando qualidade narrativa superior a modelos 7B antigos.
+- **Nome Gerado:** Kaelen, o Quebrado
+- **Tags Sorteadas:**
+  - `ORIGIN:` [Filho de Ferreiro, Vila Queimada]
+  - `TRAUMA:` [Medo de Fogo, Cicatriz no Rosto]
+  - `AMBITION:` [Reconstruir o Lar, Proteger os Fracos]
+  - `SECRET:` [Roubou a espada do mestre]
 
-**Requisitos:**
+**Prompt Gerado para a LLM:**
 
-- GPU com suporte a WebGPU (Chrome 113+, Edge 113+)
-- ~4GB de VRAM disponível (2.2GB modelo + overhead)
-- Taxa de geração: ~15-30 tokens/segundo em GPUs mid-range
+> "Crie uma breve biografia (2 frases) para Kaelen. O user quer um tom melancólico. Use as tags: [Vila Queimada, Medo de Fogo, Roubou a espada]."
 
-### 19.2 Parâmetros de Inferência (Calibrados)
+**Resultado Narrativo:**
 
-Estas configurações são **obrigatórias** para evitar alucinações (poesia excessiva) ou textos cortados.
+> "Kaelen empunha uma lâmina que não é sua, roubada das cinzas da forja de seu pai. Ele luta não pela glória, mas para abafar o estalo da madeira queimando que ainda ouve em seus pesadelos."
 
-```typescript
-const INFERENCE_CONFIG = {
-  temperature: 0.6, // Criatividade controlada (0.8 é muito caótico, 0.4 é robótico)
-  top_p: 0.9, // Corta caudas estatísticas improváveis
-  max_tokens: 150, // Força brevidade (1-2 frases)
-  stop: [
-    // Vital para o Llama 3 parar de falar
-    "<|eot_id|>",
-    "User:",
-    "\n\n",
-  ],
-};
-```
+Isso cria um herói com **motivações reais**. O sistema de jogo (Lógico) lerá a tag `Medo de Fogo` e aplicará um debuff quando ele lutar contra Dragões, fechando o ciclo entre a narrativa gerada e a mecânica de jogo.
 
-**Por que esses valores?**
+### 18.5 Expansão: Sopa Universal (Ouro em Palavras)
 
-| Parâmetro     | Valor | Justificativa                                   |
-| ------------- | ----- | ----------------------------------------------- | ---- | ---------------------------------- |
-| `temperature` | 0.6   | Equilíbrio perfeito entre variedade e coerência |
-| `top_p`       | 0.9   | Previne escolhas estatisticamente absurdas      |
-| `max_tokens`  | 150   | 1-2 frases (30-60 palavras em português)        |
-| `stop`        | `["<  | eot_id                                          | >"]` | Previne loop infinito do Llama 3.2 |
+A técnica de "Sopa de Tags" permeia todos os sistemas do Majesty, convertendo dados frios em calor narrativo e mecânico.
 
-### 19.3 O System Prompt Otimizado (Few-Shot)
+#### A. Sopa de Mundo (World Gen & Clima)
 
-Este prompt foi testado exaustivamente para o **Llama 3.2 3B**. Ele usa a técnica _Few-Shot_ (dar exemplos) para "travar" o estilo do modelo no tom "Dark Fantasy/Visceral" do jogo.
+O ambiente não é apenas um fundo estático. As tags de clima e bioma alteram a percepção e as regras.
 
-```text
-Você é o Motor de Narrativa do jogo "Heroes of Majesty". Converta dados do jogo em texto curto, visceral e medieval.
+- **Tags Sorteadas:** `[Chuva Ácida, Pântano, Névoa Tóxica]`
+- **Narrativa Gerada:** "A chuva chia ao tocar a armadura de Kaelen, o metal escurecendo sob a corrosão."
+- **Efeito de Gameplay:** Tags como `Ácida` ativam a regra `Corrosion_Tick`, danificando durabilidade de armaduras a cada turno.
 
-DIRETRIZES RÍGIDAS:
-1. BREVIDADE: Máximo 1 ou 2 frases. Seja seco.
-2. SEM POESIA: Não use metáforas como "dança da morte" ou "alma". Descreva sangue, metal, impacto e som.
-3. SEM NÚMEROS: Nunca cite valores numéricos (HP, Dano).
-4. USO DE TAGS: Incorpore os conceitos enviados entre colchetes [ ] de forma natural.
-5. PLACEHOLDERS: Mantenha {HERO} e {MONSTER} exatos.
+#### B. Sopa de Loot (A Alma dos Itens)
 
-EXEMPLOS DE ESTILO (Copie este padrão):
+Cada item lendário nasce de uma sopa de tags baseada no momento do drop (Quem matou? Onde? Como?).
 
-User: Contexto: Ataque Crítico. Tags: [lama, estalo seco, costelas].
-Assistant: {HERO} firma o pé na lama e enterra a arma, quebrando as costelas de {MONSTER} com um estalo seco.
+- **Contexto:** Kaelen matou o Rei Lich com um acerto crítico de fogo.
+- **Tags Sorteadas:** `[Ossos, Cinzas, Realeza Caída, Chama Eterna]`
+- **Item Gerado:** _Coroa de Cinzas do Rei Morto_
+- **Descrição:** "Ainda quente ao toque, esta coroa de osso cheira a soberania queimada."
+- **Stats Derivados:** A tag `Chama Eterna` adiciona o efeito `Burn Chance +10%`.
 
-User: Contexto: Magia de Fogo. Tags: [cheiro de enxofre, pele derretendo, clarão].
-Assistant: Um clarão cega o campo enquanto o cheiro de enxofre e pele derretendo emana de {MONSTER}.
+#### C. Sopa Social (Banter & Fofoca)
 
-User: Contexto: Banter (Ladrão para Guerreiro). Tags: [ouro, lento, ferrugem].
-Assistant: "Lento demais, pilha de ferrugem. Esse ouro já tem dono."
+Conversas entre heróis (Banter) usam tags de personalidade e histórico recente.
 
-Responda apenas com o texto narrativo final.
-```
+- **Contexto:** Lila (Gananciosa) e Kaelen (Honrado) descansando após batalha.
+- **Tags:** `[Roubo Recente, Cicatriz Nova (Kaelen), Saco de Ouro (Lila)]`
+- **Diálogo Gerado:**
+  - _Lila:_ "Bela cicatriz, Kaelen. Combina com sua carteira vazia."
+  - _Kaelen:_ "E esse ouro pesa na sua consciência, ladra?"
+- **Efeito:** Gera um log de `Affinity Change: -5` (Rivalidade).
 
-**Por que Few-Shot funciona?**
+#### D. Sopa de Logs Contextuais (O Historiador)
 
-Modelos pequenos (3B) não têm "memória de longo prazo" como GPT-4. Few-Shot ensina o padrão **no contexto imediato**, funcionando como "mini-treinamento" em cada chamada.
+O sistema gera resumos inteligentes de períodos longos, condensando centenas de linhas de log em um parágrafo coerente.
+
+- **Input:** [Kaelen matou 50 Goblins, Kaelen quase morreu 2x, Kaelen ganhou 500g]
+- **Tags:** `[Massacre, Sobrevivente, Riqueza Súbita]`
+- **Log de Fim de Dia:** "O dia foi um banho de sangue lucrativo para Kaelen, que emergiu de uma montanha de cadáveres goblins com os bolsos cheios e a armadura quase destruída."
 
 ---
 
-## 20. IMPLEMENTAÇÃO TÉCNICA (ANGULAR + WEBGPU)
-
-### 20.1 Serviço de IA (`llm.service.ts`)
-
-Este serviço gerencia a WebGPU e mantém o modelo aquecido na memória do navegador.
-
-```typescript
-import { Injectable, signal } from "@angular/core";
-import {
-  CreateMLCEngine,
-  MLCEngine,
-  InitProgressCallback,
-} from "@mlc-ai/web-llm";
-
-// Configuração Travada para Produção
-const MODEL_ID = "Llama-3.2-3B-Instruct-q4f16_1-MLC";
-const SYSTEM_PROMPT = `Você é o Motor de Narrativa do jogo "Heroes of Majesty". Converta dados do jogo em texto curto, visceral e medieval.
-
-DIRETRIZES RÍGIDAS:
-1. BREVIDADE: Máximo 1 ou 2 frases. Seja seco.
-2. SEM POESIA: Não use metáforas como "dança da morte" ou "alma". Descreva sangue, metal, impacto e som.
-3. SEM NÚMEROS: Nunca cite valores numéricos (HP, Dano).
-4. USO DE TAGS: Incorpore os conceitos enviados entre colchetes [ ] de forma natural.
-5. PLACEHOLDERS: Mantenha {HERO} e {MONSTER} exatos.
-
-EXEMPLOS DE ESTILO (Copie este padrão):
-
-User: Contexto: Ataque Crítico. Tags: [lama, estalo seco, costelas].
-Assistant: {HERO} firma o pé na lama e enterra a arma, quebrando as costelas de {MONSTER} com um estalo seco.
-
-User: Contexto: Magia de Fogo. Tags: [cheiro de enxofre, pele derretendo, clarão].
-Assistant: Um clarão cega o campo enquanto o cheiro de enxofre e pele derretendo emana de {MONSTER}.
-
-User: Contexto: Banter (Ladrão para Guerreiro). Tags: [ouro, lento, ferrugem].
-Assistant: "Lento demais, pilha de ferrugem. Esse ouro já tem dono."
-
-Responda apenas com o texto narrativo final.`;
-
-@Injectable({ providedIn: "root" })
-export class LlmService {
-  private engine: MLCEngine | null = null;
-
-  // Sinais Reativos para UI
-  public isReady = signal(false);
-  public progress = signal(0); // 0 a 100%
-  public currentAction = signal(""); // "Baixando shaders", "Carregando pesos"
-
-  async init() {
-    if (this.engine) return;
-
-    const initCallback: InitProgressCallback = (report) => {
-      this.progress.set(report.progress * 100);
-      this.currentAction.set(report.text);
-    };
-
-    try {
-      this.engine = await CreateMLCEngine(MODEL_ID, {
-        initProgressCallback: initCallback,
-        logLevel: "WARN", // Reduz poluição no console
-      });
-      this.isReady.set(true);
-      console.log("✅ Llama 3.2 3B carregado na GPU");
-    } catch (e) {
-      console.error("❌ WebGPU não suportada ou erro de carga", e);
-      // Implementar Fallback para texto estático aqui
-      this.fallbackToStaticText();
-    }
-  }
-
-  async generateFlavorText(userPrompt: string): Promise<string> {
-    if (!this.engine) {
-      return this.getFallbackText();
-    }
-
-    try {
-      const reply = await this.engine.chat.completions.create({
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: userPrompt },
-        ],
-        temperature: 0.6,
-        top_p: 0.9,
-        max_tokens: 150,
-        stop: ["<|eot_id|>", "User:", "\n\n"],
-      });
-
-      return reply.choices[0].message.content || "";
-    } catch (e) {
-      console.warn("⚠️ Erro na geração, usando fallback", e);
-      return this.getFallbackText();
-    }
-  }
-
-  private fallbackToStaticText() {
-    // Modo de compatibilidade para GPUs sem WebGPU
-    console.warn("⚠️ Modo Fallback ativado - usando textos estáticos");
-  }
-
-  private getFallbackText(): string {
-    // Pool de textos genéricos como backup
-    const fallbacks = [
-      "O golpe atinge o alvo com força brutal.",
-      "Metal contra carne. Sangue jorra.",
-      "Um ataque certeiro derruba o inimigo.",
-    ];
-    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
-  }
-}
-```
-
-### 20.2 Consumo no Componente (`combat-log.component.ts`)
-
-O componente recebe o evento do Backend (Deno) já com as Tags sorteadas e solicita a narração.
-
-```typescript
-import { Component, signal } from "@angular/core";
-import { LlmService } from "./llm.service";
-
-// Exemplo de payload vindo do Deno (WebSocket/API)
-interface CombatEventPayload {
-  hero: string;
-  monster: string;
-  isCritical: boolean;
-  damage: number;
-  // O Deno já fez o trabalho sujo de ir no Postgres e sortear as tags:
-  narrativeTags: string[];
-}
-
-@Component({
-  selector: "app-combat-log",
-  template: `
-    <div class="combat-log">
-      <h3>Timeline de Combate</h3>
-
-      @if (!llm.isReady()) {
-        <div class="loading">
-          <progress [value]="llm.progress()" max="100"></progress>
-          <p>{{ llm.currentAction() }}</p>
-        </div>
-      }
-
-      <div class="logs">
-        @for (log of logs(); track $index) {
-          <div class="log-entry" [class.critical]="log.isCritical">
-            <span class="timestamp">{{ log.time }}</span>
-            <span class="text">{{ log.text }}</span>
-          </div>
-        }
-      </div>
-    </div>
-  `,
-  styles: [
-    `
-      .combat-log {
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid #00ff00;
-        padding: 1rem;
-        height: 400px;
-        overflow-y: auto;
-      }
-
-      .log-entry {
-        padding: 0.5rem;
-        border-left: 3px solid #00bfff;
-        margin-bottom: 0.5rem;
-        animation: slideIn 0.3s ease;
-      }
-
-      .log-entry.critical {
-        border-left-color: #ff0000;
-        background: rgba(255, 0, 0, 0.1);
-        animation: pulse 0.5s infinite;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-      }
-    `,
-  ],
-})
-export class CombatLogComponent {
-  logs = signal<Array<{ time: string; text: string; isCritical: boolean }>>([]);
-
-  constructor(public llm: LlmService) {
-    // Inicializar o modelo ao carregar o componente
-    this.llm.init();
-  }
-
-  async onCombatEvent(event: CombatEventPayload) {
-    // 1. Montar o Prompt com as Tags vindas do Backend
-    const prompt = `
-      Contexto: ${event.isCritical ? "Ataque Crítico" : "Ataque Normal"}.
-      Ator: ${event.hero}. Alvo: ${event.monster}.
-      Tags Obrigatórias: [${event.narrativeTags.join(", ")}].
-    `.trim();
-
-    // 2. Gerar Texto (Async - não bloqueia UI)
-    const text = await this.llm.generateFlavorText(prompt);
-
-    // 3. Substituir Placeholders finais (Segurança)
-    const finalText = text
-      .replace("{HERO}", event.hero)
-      .replace("{MONSTER}", event.monster);
-
-    // 4. Adicionar ao Log Visual
-    const timestamp = new Date().toLocaleTimeString();
-    this.logs.update((l) =>
-      [
-        { time: timestamp, text: finalText, isCritical: event.isCritical },
-        ...l,
-      ].slice(0, 100),
-    ); // Limitar a 100 logs
-  }
-}
-```
-
-**Integração com WebSocket (Deno → Angular):**
-
-```typescript
-// websocket.service.ts
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-
-@Injectable({ providedIn: 'root' })
-export class WebSocketService {
-  private ws: WebSocket | null = null;
-  public combatEvents$ = new Subject<CombatEventPayload>();
-
-  connect(url: string) {
-    this.ws = new WebSocket(url);
-
-    this.ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === 'COMBAT_EVENT') {
-        this.combatEvents$.next(data.payload);
-      }
-    };
-  }
-}
-
-// No componente:
-constructor(
-  private ws: WebSocketService,
-  public llm: LlmService
-) {
-  this.ws.connect('ws://localhost:8000/game');
-  this.ws.combatEvents$.subscribe(event => {
-    this.onCombatEvent(event);
-  });
-}
-```
-
----
-
-## 21. CONCLUSÃO TÉCNICA
+## 19. CONCLUSÃO DA ARQUITETURA
 
 Esta arquitetura resolve o trilema da narrativa em jogos:
 
-### ✅ Vantagens da Arquitetura
+### ✅ Vantagens do Modelo Híbrido
 
-1. **Custo Zero:** Roda na GPU do cliente, poupando milhares de dólares em API (vs OpenAI/Claude)
-2. **Variedade Infinita:** A combinação de _Postgres → Deno RAM Mixer → Llama 3.2_ garante que o jogador nunca lerá a mesma frase duas vezes em 500 horas
-3. **Controle Total:** O System Prompt rígido e a lógica determinística do Deno impedem que a IA "quebre" o jogo inventando regras que não existem
-4. **Performance:** Geração em ~50-200ms (dependendo da GPU), não bloqueante
-5. **Privacidade:** Nenhum dado do jogador sai da máquina
-6. **Modding Friendly:** Comunidade pode adicionar tags ao banco PostgreSQL
-
-### 📊 Benchmarks Esperados
-
-| Hardware     | Tempo de Carregamento | Tokens/seg | Latência/Texto |
-| ------------ | --------------------- | ---------- | -------------- |
-| GTX 1060 6GB | ~15s                  | 15-20      | ~200ms         |
-| RTX 3060     | ~8s                   | 30-40      | ~100ms         |
-| RTX 4090     | ~4s                   | 60+        | ~50ms          |
-| M1/M2 Mac    | ~10s                  | 25-35      | ~120ms         |
-
-### 🎯 KPIs de Sucesso
+1.  **Imprevisibilidade Controlada:** A IA gera prosa infinita, mas o jogo dita as regras, impedindo alucinações.
+2.  **Profundidade Psicológica:** Através das Sopas de Tags de Backstory e Personalidade, os heróis deixam de ser números e viram personagens.
+3.  **Custo Zero:** Todo o processamento é local, usando a GPU do jogador, sem depender de APIs externas pagas.
+4.  **Imersão Total:** O jogador não vê números subindo, vê histórias acontecendo.
 
 **Métrica 1: Taxa de Repetição**
 
@@ -582,4 +274,3 @@ Esta arquitetura resolve o trilema da narrativa em jogos:
 - Medição: Telemetria integrada
 
 ---
-

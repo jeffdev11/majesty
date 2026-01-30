@@ -16,6 +16,7 @@
    - 1.3 [Pilares de Diversão](#13-pilares-de-diversão-imprevisibilidade-agência-indireta-e-narrativa-emergente)
    - 1.4 [A Nova Direção (RTS → Terminal)](#14-a-nova-direção-do-rts-visual-para-a-simulação-profunda)
    - 1.5 [Viabilidade Técnica](#15-por-que-a-mudança-viabilidade-técnica)
+   - 1.6 [Sistema de Tempo e Turnos](#16-sistema-de-tempo-e-turnos-a-regra-dos-3-segundos)
 
 2. [Interface e Experiência do Usuário (UI/UX)](#2-interface-e-experiência-do-usuário-uiux)
    - 2.1 [Conceito de Workspaces](#21-o-conceito-de-workspaces-tty)
@@ -45,6 +46,7 @@
    - 4.6 [Ciclo de Vida](#46-ciclo-de-vida-morte-trabalho-e-redenção)
    - 4.7 [Limitação: 5 Heróis Máximo](#47-limitação-estratégica-máximo-de-5-heróis)
    - 4.8 [Sistema de Skills](#48-sistema-de-skills-árvore-completa-de-habilidades)
+   - 4.9 [Sistema de Itens e Loot](#49-sistema-de-itens-e-loot-a-arma-e-a-lenda)
 
 5. [Dinâmica Social: O Drama Emergente](#5-dinâmica-social-o-drama-emergente)
    - 5.1 [Formação de Grupos](#51-formação-de-grupos-party-system)
@@ -65,6 +67,7 @@
    - 6.5 [Sussurros e Lore](#65-sussurros-e-lore-dinâmica)
    - 6.6 [Espionagem](#66-espionagem-e-estratégia)
    - 6.7 [Influence Points (IP)](#67-custo-de-influência-o-rate-limit-narrativo)
+   - 6.8 [API de Comandos da LLM](#68-api-de-comandos-da-llm-interface-homem-máquina)
 
 7. [Economia e Gestão do Reino](#7-economia-e-gestão-do-reino)
    - 7.1 [Tesouro Real](#71-tesouro-real-a-fonte-de-ouro)
@@ -84,6 +87,7 @@
    - 8.5 [Boss Global](#85-boss-global-o-rei-vilão)
    - 8.6 [Escalonamento Dinâmico](#86-escalonamento-dinâmico-de-dificuldade)
    - 8.7 [Mapas Procedurais](#87-mapas-procedurais-cada-partida-é-única)
+   - 8.8 [Tutorial e Onboarding](#88-tutorial-e-onboarding)
 
 9. [Mecânicas Avançadas de Expansão](#9-mecânicas-avançadas-de-expansão)
    - 9.1 [Postos Avançados](#91-postos-avançados-expandindo-o-reino)
@@ -313,6 +317,68 @@ Como um **Solopreneur e Senior Web Developer**, essa mudança alinha o desenvolv
 > _Heroes of Majesty deixou de ser um jogo que você assiste para ser um sistema que você opera._
 
 ---
+# 02b. Sistema de Tempo e Turnos
+
+## Conceito Fundamental
+
+O Majesty opera sob um sistema híbrido de tempo: **Turnos Lógicos** que são traduzidos em **Tempo Real** para a experiência do jogador. Para garantir consistência nas mecânicas, durações de habilidades, cooldowns e eventos, o jogo utiliza o **Turno** como unidade padrão de medida.
+
+## A Regra de Ouro da Equivalência Temporal
+
+> **1 Turno = 3 Segundos**
+
+Essa equivalência foi estabelecida com base no ritmo de leitura dos logs e na cadência de atualização do mundo.
+
+### Por que 3 Segundos?
+
+1.  **Ritmo de Leitura:** É o tempo médio para o jogador ler uma nova linha de log sem se sentir sobrecarregado (spam).
+2.  **Ciclo de Processamento:** Permite que a IA processe a lógica de todos os agentes e gere uma narrativa coerente.
+3.  **Fluidez Variável:** Fora de combate, os turnos passam automaticamente e fluidamente. Em situações críticas (como combate pausado), o jogador pode ter controle mais granular.
+
+## Conversão de Tempo para Turnos
+
+Todas as mecânicas que anteriormente utilizavam "segundos" devem ser interpretadas em "Turnos".
+
+| Tempo Real (Anterior) | Unidade de Turnos (Novo Padrão) | Exemplo de Aplicação                                              |
+| :-------------------- | :------------------------------ | :---------------------------------------------------------------- |
+| **3 seg**             | **1 Turno**                     | Duração mínima de um stun simples ou ataque rápido.               |
+| **6 seg**             | **2 Turnos**                    | Pequenos buffs ou debuffs.                                        |
+| **9-12 seg**          | **3-4 Turnos**                  | Duração padrão de habilidades de controle (CC) médias.            |
+| **30 seg**            | **10 Turnos**                   | Cooldowns rápidos, durações de buffs significativos.              |
+| **60 seg (1 min)**    | **20 Turnos**                   | Tempo de construção de estruturas simples, cooldown de Ultimates. |
+| **300 seg (5 min)**   | **100 Turnos**                  | Ciclos de eventos menores, duração de efeitos climáticos curtos.  |
+
+## Aplicação Prática nas Mecânicas
+
+### 1. Combate e Habilidades
+
+Em vez de uma habilidade durar "8 segundos", ela durará **3 Turnos** (aprox. 9s), arredondando para manter a integridade do sistema de turnos.
+
+- **Antes:** "Atordoa o alvo por 3 segundos."
+- **Agora:** "Atordoa o alvo por **1 Turno**."
+
+### 2. Construção e Coleta
+
+Ações de longo prazo são medidas em ciclos de turnos.
+
+- **Antes:** "Mina de Ouro gera recursos a cada 30 segundos."
+- **Agora:** "Mina de Ouro gera recursos a cada **10 Turnos**."
+
+### 3. Notificações e UI
+
+O tempo de exibição de alertas e a cadência de mensagens no log seguem o ritmo dos turnos.
+
+- **Cadência de Log:** 1 mensagem relevante a cada ~1 Turno (3s).
+- **Timeouts de Resposta:** Se um conselheiro pede uma decisão, o tempo limite será contabilizado em turnos do jogo (ex: "Você tem 15 Turnos para decidir").
+
+## Observação sobre Efeitos Visuais (Juice)
+
+Efeitos puramente visuais (como _crossfades_, _flashes_ de crítico, animações de particulas) continuam sendo descritos em **segundos ou milissegundos** reais, pois referem-se à renderização na tela e não à lógica do jogo.
+
+Exemplo:
+
+- **Lógica:** O ataque causa dano no Turno 5.
+- **Visual:** A animação da espada dura 0.5s e o flash da tela 0.2s.
 # 2. INTERFACE E EXPERIÊNCIA DO USUÁRIO (UI/UX)
 
 ## 2.1 O Conceito de Workspaces (TTY)
@@ -441,8 +507,8 @@ Para garantir legibilidade mesmo em layouts divididos, o sistema segue regras es
 │ [14:39] ❤️ RELAÇÃO [Kaelen ↔ Lila] +5 (Elogio em combate)                 │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P8: 🔀 STATUS TEMPORÁRIOS ATIVOS                                          │
-│  ├─ Sir Kaelen [⚡ Fúria +50% ATK] ⏱️ 12s                                 │
-│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 8s                                     │
+│  ├─ Sir Kaelen [⚡ Fúria +50% ATK] ⏱️ 4 Turnos                              │
+│  ├─ Lila [☣️ Envenenada -2HP/s] ⏱️ 3 Turnos                                  │
 │  └─ Elara [🛡️ Aura Sagrada +Cura] ⏱️ Permanente                          │
 └───────────────────────────────────────────────────────────────────────────┘
 ```
@@ -674,7 +740,7 @@ Painel dedicado para mostrar **todos os buffs, debuffs e condições especiais**
 [ÍCONE] [TIPO]: [Alvo] [Efeito] [Duração]
 
 Exemplo:
-🔼 BUFFS: Kaelen [⚔️ Fúria +20% ATK] 45s
+🔼 BUFFS: Kaelen [⚔️ Fúria +20% ATK] 15 Turnos
 ```
 
 #### Lista Completa de Status Temporários
@@ -683,42 +749,42 @@ Exemplo:
 
 | Ícone | Nome               | Efeito                   | Duração Típica | Fonte              |
 | ----- | ------------------ | ------------------------ | -------------- | ------------------ |
-| ⚔️    | **Fúria**          | +20-50% Attack           | 30-60s         | Skill de Guerreiro |
-| 🛡️    | **Fortificado**    | +30% Defense             | 60s            | Poção/Buff         |
-| ⚡    | **Acelerado**      | +50% Velocidade          | 30s            | Skill de Mago      |
-| 💪    | **Força Titânica** | +100% Attack             | 15s            | Decreto Real       |
-| ❤️    | **Regeneração**    | +10 HP/s                 | 120s           | Poção de Cura      |
-| 🔥    | **Chama Interior** | +30% Dano Fogo           | 40s            | Buff de Mago       |
-| 🧠    | **Concentração**   | +50% Crit Chance         | 20s            | Habilidade         |
-| 🌟    | **Bênção Divina**  | Invulnerável             | 5s             | Skill Rara         |
+| ⚔️    | **Fúria**          | +20-50% Attack           | 10-20 Turnos   | Skill de Guerreiro |
+| 🛡️    | **Fortificado**    | +30% Defense             | 20 Turnos      | Poção/Buff         |
+| ⚡    | **Acelerado**      | +50% Velocidade          | 10 Turnos      | Skill de Mago      |
+| 💪    | **Força Titânica** | +100% Attack             | 5 Turnos       | Decreto Real       |
+| ❤️    | **Regeneração**    | +10 HP/s                 | 40 Turnos      | Poção de Cura      |
+| 🔥    | **Chama Interior** | +30% Dano Fogo           | 13 Turnos      | Buff de Mago       |
+| 🧠    | **Concentração**   | +50% Crit Chance         | 7 Turnos       | Habilidade         |
+| 🌟    | **Bênção Divina**  | Invulnerável             | 2 Turnos       | Skill Rara         |
 | 👥    | **Grupo Unido**    | +15% Stats (se em grupo) | Passivo        | Social             |
 
 **DEBUFFS (Negativos)**
 
 | Ícone | Nome                | Efeito                 | Duração Típica | Fonte                  |
 | ----- | ------------------- | ---------------------- | -------------- | ---------------------- |
-| ☣️    | **Envenenado**      | -2 a -10 HP/s          | 30-60s         | Ataque de Aranha/Snake |
-| 🔥    | **Queimando**       | -5 HP/s                | 10-20s         | Magia de Fogo          |
-| ❄️    | **Congelado/Lento** | -50% Velocidade        | 15-30s         | Magia de Gelo          |
-| 🩸    | **Sangrando**       | -3 HP/s + deixa rastro | 20-40s         | Corte Profundo         |
-| 😨    | **Amedrontado**     | -30% Attack, foge      | 10-20s         | Grito/Roar             |
-| 🤮    | **Doente**          | -25% todos stats       | 120s           | Pântano/Praga          |
-| 👁️    | **Cego**            | Miss 50% ataques       | 15s            | Flash Bang             |
-| 🧟    | **Amaldiçoado**     | XP -50%                | 300s           | Boss/Magia negra       |
-| 😵    | **Confuso**         | Ataca aliados          | 10s            | Skill de Controle      |
-| 🐌    | **Exausto**         | -75% Stamina regen     | 60s            | Cansaço/Sobrecarga     |
+| ☣️    | **Envenenado**      | -2 a -10 HP/s          | 10-20 Turnos   | Ataque de Aranha/Snake |
+| 🔥    | **Queimando**       | -5 HP/s                | 3-7 Turnos     | Magia de Fogo          |
+| ❄️    | **Congelado/Lento** | -50% Velocidade        | 5-10 Turnos    | Magia de Gelo          |
+| 🩸    | **Sangrando**       | -3 HP/s + deixa rastro | 7-13 Turnos    | Corte Profundo         |
+| 😨    | **Amedrontado**     | -30% Attack, foge      | 3-7 Turnos     | Grito/Roar             |
+| 🤮    | **Doente**          | -25% todos stats       | 40 Turnos      | Pântano/Praga          |
+| 👁️    | **Cego**            | Miss 50% ataques       | 5 Turnos       | Flash Bang             |
+| 🧟    | **Amaldiçoado**     | XP -50%                | 100 Turnos     | Boss/Magia negra       |
+| 😵    | **Confuso**         | Ataca aliados          | 3 Turnos       | Skill de Controle      |
+| 🐌    | **Exausto**         | -75% Stamina regen     | 20 Turnos      | Cansaço/Sobrecarga     |
 
 **CONDIÇÕES ESPECIAIS**
 
 | Ícone | Nome                | Efeito                         | Duração      | Fonte        |
 | ----- | ------------------- | ------------------------------ | ------------ | ------------ |
-| ⚡    | **Atordoado**       | Não pode agir                  | 3-8s         | Stun/Bash    |
+| ⚡    | **Atordoado**       | Não pode agir                  | 1-3 Turnos   | Stun/Bash    |
 | 💤    | **Dormindo**        | Inconsciente (remove com dano) | Até acordar  | Skill Sleep  |
-| 🪨    | **Petrificado**     | Imóvel + Invulnerável          | 10-30s       | Magia/Medusa |
-| 👻    | **Invisível**       | Não pode ser atacado           | 20s          | Skill Ladino |
-| 🔗    | **Preso/Enraizado** | Não pode mover                 | 15s          | Trap/Root    |
-| 🌀    | **Levitando**       | Imune a dano terrestre         | 10s          | Magia        |
-| 🍺    | **Bêbado**          | Stats aleatórios (-20 a +20)   | 180s         | Taverna      |
+| 🪨    | **Petrificado**     | Imóvel + Invulnerável          | 3-10 Turnos  | Magia/Medusa |
+| 👻    | **Invisível**       | Não pode ser atacado           | 7 Turnos     | Skill Ladino |
+| 🔗    | **Preso/Enraizado** | Não pode mover                 | 5 Turnos     | Trap/Root    |
+| 🌀    | **Levitando**       | Imune a dano terrestre         | 3 Turnos     | Magia        |
+| 🍺    | **Bêbado**          | Stats aleatórios (-20 a +20)   | 60 Turnos    | Taverna      |
 | 🚩    | **Marcado (PvP)**   | Pode ser atacado por aliados   | Até resolver | Sistema PvP  |
 | 💀    | **Necromancia**     | Morto mas reanimado            | Até morrer   | Boss Lich    |
 
@@ -750,7 +816,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [1] ⚔️ Fúria (Kaelen)                                         │ │
 │ │     Efeito: +20% Attack                                      │ │
-│ │     Duração: 45s restantes (de 60s)                          │ │
+│ │     Duração: 15 Turnos restantes (de 20)                     │ │
 │ │     Fonte: Skill "Grito de Guerra"                           │ │
 │ │     Empilha?: Não                                            │ │
 │ │     [X] Remover (custaria 10 IP)                             │ │
@@ -767,7 +833,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [3] ☣️ Envenenada (Lila)                                      │ │
 │ │     Efeito: -2 HP/s (já perdeu 40 HP)                        │ │
-│ │     Duração: 28s restantes                                   │ │
+│ │     Duração: 9 Turnos restantes                              │ │
 │ │     Fonte: Mordida de Aranha Gigante                         │ │
 │ │     CRÍTICO: HP atual 35% - RISCO DE MORTE!                  │ │
 │ │     [!] Enviar antídoto? (Custo: 50g)                        │ │
@@ -775,7 +841,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [4] ❄️ Lento (Gandalf)                                        │ │
 │ │     Efeito: -50% Velocidade de movimento                     │ │
-│ │     Duração: 14s restantes                                   │ │
+│ │     Duração: 5 Turnos restantes                              │ │
 │ │     Fonte: Magia de Gelo (Mago Inimigo)                      │ │
 │ │     Status: Moderado (não crítico)                           │ │
 │ └──────────────────────────────────────────────────────────────┘ │
@@ -784,7 +850,7 @@ P8: STATUS TEMPORÁRIOS ATIVOS
 │ ┌──────────────────────────────────────────────────────────────┐ │
 │ │ [5] 🔥 Queimando (Ogro - Inimigo)                             │ │
 │ │     Efeito: -5 HP/s                                          │ │
-│ │     Duração: 11s restantes                                   │ │
+│ │     Duração: 4 Turnos restantes                              │ │
 │ │     Fonte: Bola de Fogo de Gandalf                           │ │
 │ │     [✓] Contribuindo para a vitória                          │ │
 │ └──────────────────────────────────────────────────────────────┘ │
@@ -839,15 +905,16 @@ O P8 emite **alertas visuais** quando:
    ⚠️ ALERTA: Lila morrendo! Envenenada + HP crítico!
    ```
 
-2. **Buff Expirando:** Buff importante termina em < 10s
+2. **Buff Expirando:** Buff importante termina em < 3 Turnos
 
    ```
-   ⏰ Fúria de Kaelen expira em 8 segundos!
+   Let's replace:
+   ⏰ Fúria de Kaelen expira em 3 Turnos!
    ```
 
-3. **Condição Permanente:** Status > 5 minutos
+3. **Condição Permanente:** Status > 100 Turnos
    ```
-   🚩 Amaldiçoado há 6 minutos! Considere cura especial.
+   🚩 Amaldiçoado há 200 Turnos! Considere cura especial.
    ```
 
 #### Ações Rápidas do P8
@@ -872,8 +939,8 @@ O P8 emite **alertas visuais** quando:
   ```
   APLICAR BUFF GLOBAL:
   [1] Banquete (30 IP, 10min)
-  [2] Fúria Coletiva (+15% ATK, 50 IP, 60s)
-  [3] Escudo Divino (+20% DEF, 40 IP, 120s)
+  [2] Fúria Coletiva (+15% ATK, 50 IP, 20 Turnos)
+  [3] Escudo Divino (+20% DEF, 40 IP, 40 Turnos)
   ```
 
 ---
@@ -885,15 +952,15 @@ O P8 emite **alertas visuais** quando:
 ```
 Jogador olha P8:
 🔽 DEBUFFS (3):
-  Lila [☣️ Envenenada] 55s
-  Lila [🩸 Sangrando] 30s
-  Lila [😨 Amedrontada] 15s
+  Lila [☣️ Envenenada] 18 Turnos
+  Lila [🩸 Sangrando] 10 Turnos
+  Lila [😨 Amedrontada] 5 Turnos
 
 P8 pisca VERMELHO (3 debuffs simultâneos!)
 
 Conselheiro (P7):
 "MAJESTADE! Lila está em CRISE! 3 debuffs ativos.
-Recomendo enviar poção AGORA ou ela morre em 40s!"
+Recomendo enviar poção AGORA ou ela morre em 13 Turnos!"
 ```
 
 **Exemplo 2: Buff Stacking (Combos)**
@@ -901,9 +968,9 @@ Recomendo enviar poção AGORA ou ela morre em 40s!"
 ```
 P8 mostra:
 🔼 BUFFS:
-  Kaelen [⚔️ Fúria] 30s
-  Kaelen [💪 Força Tit.] 10s
-  Kaelen [🧠 Concentração] 15s
+  Kaelen [⚔️ Fúria] 10 Turnos
+  Kaelen [💪 Força Tit.] 3 Turnos
+  Kaelen [🧠 Concentração] 5 Turnos
 
 Conselheiro:
 "Kaelen está com TRIPLO buff! Attack +120%!
@@ -942,9 +1009,9 @@ Esse é o momento PERFEITO para atacar o boss!"
 | > Resposta: A caminho|                                         |                     |
 +---------------------+------------------------------------------+---------------------+
 |                 P8: STATUS TEMPORÁRIOS ATIVOS (BUFFS/DEBUFFS)                        |
-| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 45s | Reino [Banquete +10% Stats] 8min            |
-| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 30s | Gandalf [❄️ Lento -50% Vel] 15s         |
-| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 5s | Ogro [🔥 Queimando -5HP/s] 12s                |
+| 🔼 BUFFS: Kaelen [Fúria +20% ATK] 15 Turnos | Reino [Banquete +10% Stats] 8min      |
+| 🔽 DEBUFFS: Lila [☣️ Envenenada -2HP/s] 10 Turnos | Gandalf [❄️ Lento -50% Vel] 5 Turnos    |
+| ⚠️ CONDIÇÕES: Elara [⚡ Atordoada] 2 Turnos | Ogro [🔥 Queimando -5HP/s] 4 Turnos          |
 +--------------------------------------------------------------------------------------+
 |                        P7: CONSELHEIRO REAL (CHAT)                                   |
 | IA: "Majestade, a carta surtiu efeito. Kaelen parece motivado, mas Lila enviou uma   |
@@ -1024,8 +1091,8 @@ Esse é o momento PERFEITO para atacar o boss!"
 │ [P] Pagar Salários (100g) | [U] Upgrade Prédio (Selecionado em P1)        │
 ├───────────────────────────────────────────────────────────────────────────┤
 │ P8: 🏗️ LOG DE ORDEM DE SERVIÇO                                           │
-│ [14:30] 🏗️ Guilda Magos concluída (300g, 60s)                            │
-│ [14:32] 🔨 Taverna Lvl 2 em construção (45s restantes)                   │
+│ [14:30] 🏗️ Guilda Magos concluída (300g, 20 Turnos)                         │
+│ [14:32] 🔨 Taverna Lvl 2 em construção (15 Turnos restantes)                   │
 │ [14:35] ⚙️ Manutenção de rotina em torres concluída (-30g)               │
 │ [14:40] 🏛️ Escola Estoica iniciou treinamento: Sir Kaelen                │
 └───────────────────────────────────────────────────────────────────────────┘
@@ -1091,7 +1158,7 @@ A **Casa Central** (Crown Keep) é o edifício mais importante do reino. É onde
 
 - Torres adjacentes (raio 5 hexágonos) ganham +50% range
 - Heróis defendendo Casa Central ganham +20% stats
-- Alertas de invasão acontecem 2 minutos antes (vs 30s normal)
+- Alertas de invasão acontecem 40 Turnos antes (vs 10 Turnos normal)
 
 #### Estados Visuais (P1)
 
@@ -2172,12 +2239,12 @@ P3: PREVISÃO GLOBAL
 
 **3. EVENTOS MÁGICOS**
 
-| Evento                   | Frequência         | Duração | Efeitos                                            |
-| ------------------------ | ------------------ | ------- | -------------------------------------------------- |
-| **🔮 Fenda Mágica**      | 5%/dia (Ciclo 2+)  | 10 min  | Portal spawna 10-20 monstros elite                 |
-| **🌙 Lua de Sangue**     | Dias 100, 125, 150 | 15 min  | Todos monstros +100% HP/Attack, Boss Global spawna |
-| **✨ Chuva de Estrelas** | Raro (3%)          | 5 min   | +50% XP global, Chance loot lendário dobra         |
-| **🕯️ Eclipse**           | Ciclo 3            | 8 min   | Mortos-vivos +200% poder, Sol = Noite              |
+| Evento                   | Frequência         | Duração    | Efeitos                                            |
+| ------------------------ | ------------------ | ---------- | -------------------------------------------------- |
+| **🔮 Fenda Mágica**      | 5%/dia (Ciclo 2+)  | 200 Turnos | Portal spawna 10-20 monstros elite                 |
+| **🌙 Lua de Sangue**     | Dias 100, 125, 150 | 300 Turnos | Todos monstros +100% HP/Attack, Boss Global spawna |
+| **✨ Chuva de Estrelas** | Raro (3%)          | 100 Turnos | +50% XP global, Chance loot lendário dobra         |
+| **🕯️ Eclipse**           | Ciclo 3            | 160 Turnos | Mortos-vivos +200% poder, Sol = Noite              |
 
 **4. EVENTOS DE INVASÃO**
 
@@ -2192,8 +2259,8 @@ P3: PREVISÃO GLOBAL
 
 | Evento                   | Frequência      | Duração      | Efeitos                                 |
 | ------------------------ | --------------- | ------------ | --------------------------------------- |
-| **💰 Caravana Mercante** | Aleatório       | 5 min        | Desconto -30% em todos os itens da loja |
-| **🎭 Festival da Vila**  | A cada 30 dias  | 10 min       | +20 Moral, Heróis não lutam (descansam) |
+| **💰 Caravana Mercante** | Aleatório       | 100 Turnos   | Desconto -30% em todos os itens da loja |
+| **🎭 Festival da Vila**  | A cada 30 dias  | 200 Turnos   | +20 Moral, Heróis não lutam (descansam) |
 | **⚖️ Motim**             | Se Moral < 30%  | Até resolver | Guardas desertam, Heróis podem trair    |
 | **🎖️ Lenda Nasce**       | Herói 50+ kills | Permanente   | +10% Recrutamento, -20% custo skills    |
 
@@ -3919,7 +3986,7 @@ Exemplos:
 [18:00] 🌅 SYS [Mundo] [Noite] Sol se põe. Penalidade ativa.
 [18:05] 🌅 SYS [Ciclo] [Verão] Tempestade se aproxima (ETA: 5min).
 [18:10] ⚠️ ALERT [Global] 🌪️ TEMPESTADE ATIVA!
-[18:11] 🩸 STAT [Todos] [-30% Vel] Dura 10 minutos.
+[18:11] 🩸 STAT [Todos] [-30% Vel] Dura 200 Turnos.
 ```
 
 #### COVARDIA E TRAUMA (Seção 5.8 Exemplo)
@@ -4626,23 +4693,23 @@ graph TD
 
 ### 🌟 Skills Passivas (15)
 
-| #   | Passiva                  | Requer   | Efeito                                      | Momento Ideal (Contexto)                                      |
-| :-- | :----------------------- | :------- | :------------------------------------------ | :------------------------------------------------------------ |
-| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                      | Torna o Elfo o mestre da movimentação no campo.               |
-| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.               | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
-| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.            | Aumenta a resistência do Elfo para expedições longas.         |
-| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                | Multiplica o efeito de todas as flechas e lâminas místicas.   |
-| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.         | Melhora a defesa passiva do herói sem gastar mana.            |
-| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.           | Permite que o Elfo atue por mais tempo com magia.             |
-| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.              | Garante que cada tiro conte contra inimigos de elite.         |
-| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                 | Torna o Elfo a escolha perfeita para missões noturnas.        |
-| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.           | Sustentação de mana infinita se o herói for bem gerenciado.   |
-| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.          | Proteção contra outros atacantes à distância.                 |
-| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                    | Torna o Elfo um "Anti-Mago" nato.                             |
-| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (30s). | Vingança poderosa para virar uma luta perdida.                |
-| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                 | Aumenta a frequência de uso de habilidades poderosas.         |
-| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10min).       | Evita mortes acidentais por erros de posicionamento.          |
-| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.            | O estado de perfeição elfo, dominante em todas as distâncias. |
+| #   | Passiva                  | Requer   | Efeito                                              | Momento Ideal (Contexto)                                      |
+| :-- | :----------------------- | :------- | :-------------------------------------------------- | :------------------------------------------------------------ |
+| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                              | Torna o Elfo o mestre da movimentação no campo.               |
+| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.                       | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
+| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.                    | Aumenta a resistência do Elfo para expedições longas.         |
+| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                        | Multiplica o efeito de todas as flechas e lâminas místicas.   |
+| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.                 | Melhora a defesa passiva do herói sem gastar mana.            |
+| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.                   | Permite que o Elfo atue por mais tempo com magia.             |
+| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.                      | Garante que cada tiro conte contra inimigos de elite.         |
+| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                         | Torna o Elfo a escolha perfeita para missões noturnas.        |
+| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.                   | Sustentação de mana infinita se o herói for bem gerenciado.   |
+| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.                  | Proteção contra outros atacantes à distância.                 |
+| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                            | Torna o Elfo um "Anti-Mago" nato.                             |
+| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (10 Turnos).   | Vingança poderosa para virar uma luta perdida.                |
+| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                         | Aumenta a frequência de uso de habilidades poderosas.         |
+| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10 min (200 Turnos)). | Evita mortes acidentais por erros de posicionamento.          |
+| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.                    | O estado de perfeição elfo, dominante em todas as distâncias. |
 
 ---
 
@@ -4776,9 +4843,9 @@ graph TD
 | 8   | **Eternal Blessing**   | Nível 4  | Começa combate com +20% stats (3t).           | Garante uma vantagem explosiva em cada novo encontro.           |
 | 9   | **Divine Rebirth**     | Nível 5  | Revive com 30% HP (1x por partida).           | Segunda chance automática para o baluarte do reino.             |
 | 10  | **Guardian Shield**    | Nível 5  | Bloqueia ataques para aliados no mesmo local. | Atuação como o protetor supremo dos heróis mais fracos.         |
-| 11  | **Expanded Aura**      | Nível 6  | Alcance de auras +50% (18m).                  | Protege o grupo mesmo quando eles se espalham um pouco.         |
+| 11  | **Expanded Aura**      | Nível 6  | Auras afetam **todo o Local (+Adjacentes)**.  | Protege o grupo mesmo quando eles se espalham um pouco.         |
 | 12  | **Devoted**            | Nível 7  | Curas custam -20% Mana.                       | Permite economizar mana para habilidades de ataque e aura.      |
-| 13  | **Bastion**            | Nível 8  | +50% Defense se não mover por 3s.             | Invicto em lutas contra inimigos que não têm repulsão.          |
+| 13  | **Bastion**            | Nível 8  | +50% Defense se não mover por 1 Turno.        | Invicto em lutas contra inimigos que não têm repulsão.          |
 | 14  | **Purification**       | Nível 9  | Remove todos debuffs a cada 4 turnos.         | Auto-sustento contra venenos, pragas e lentidões.               |
 | 15  | **Holy Warrior**       | Nível 10 | +40% stats, imune a críticos.                 | O Paladino se torna o guerreiro definitivo da luz.              |
 
@@ -4836,8 +4903,8 @@ graph TD
 | 4   | **Necrotic Mastery**     | Nível 2  | +20% dano necrótico permanente.            | Escala todo o arsenal de sombras do herói.                             |
 | 5   | **Vital Siphon**         | Nível 3  | Spells curam 15% do dano causado.          | Transforma cada ataque em uma fonte de sobrevivência.                  |
 | 6   | **Undead Resilience**    | Nível 3  | +30% resist a necrótico/veneno.            | Proteção contra as próprias magias e inimigos sombrios.                |
-| 7   | **Chain Detonation**     | Nível 4  | Explosão de corpos gera reações em cadeia. | Limpa salas inteiras de monstros fracos em segundos.                   |
-| 8   | **Minion Longevity**     | Nível 4  | Invocações duram +50% tempo.               | Reduz o custo de mana por minuto de serviço dos servos.                |
+| 7   | **Chain Detonation**     | Nível 4  | Explosão de corpos gera reações em cadeia. | Limpa salas inteiras de monstros fracos em poucos Turnos.              |
+| 8   | **Minion Longevity**     | Nível 4  | Invocações duram +50% tempo.               | Reduz o custo de mana por Turno de serviço dos servos.                 |
 | 9   | **Undying Essence**      | Nível 5  | Regenera 10 Mana/turno constante.          | Garante que o Necromante nunca fique totalmente desarmado.             |
 | 10  | **Necrotic Aura**        | Nível 5  | Inimigos no local perdem 4% HP/t.          | Dano passivo que acumula muito em lutas longas.                        |
 | 11  | **Eternal Pact**         | Nível 6  | Dark Pact não gasta HP, sacrifica servos.  | Melhor estratégia quando se tem many summons ativos.                   |
@@ -4896,7 +4963,7 @@ graph TD
 | :-- | :-------------------- | :------- | :--------------------------------------------- | :----------------------------------------------------------------- |
 | 1   | **Inspiration Gain**  | Nível 1  | Ganha 20 Mana ao ver kill de aliado.           | Permite que o Bardo nunca pare de cantar durante o combate.        |
 | 2   | **Charismatic**       | Nível 1  | +30% afinidade natural com heróis.             | Acelera a formação de grupos e combos de afinidade.                |
-| 3   | **Musical Reach**     | Nível 2  | Raio das canções +5m (Total 20m).              | Protege aliados que lutam na retaguarda ou estão distantes.        |
+| 3   | **Musical Reach**     | Nível 2  | Canções afetam **todo o Local**.               | Protege aliados que lutam na retaguarda ou estão distantes.        |
 | 4   | **Multitasking**      | Nível 2  | Pode cantar e atacar simultaneamente.          | Garante que o Bardo contribua com dano sem cessar o suporte.       |
 | 5   | **Sonic Mastery**     | Nível 3  | +15% dano sonoro permanente.                   | Melhora as magias ofensivas do Bardo.                              |
 | 6   | **Natural Performer** | Nível 3  | Canções custam -20% Mana.                      | Eficiência econômica para expedições de longa duração.             |
@@ -4940,7 +5007,7 @@ graph TD
 | :-- | :----------------------- | :------- | :------- | :----------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------- |
 | 1   | **Palm Strike** 👊       | 10 Mana  | 1 Turno  | **55**       | Soco rápido, 55 dano, gera 1 combo                        | Nível 1  | Início da sequência para acumular combos rapidamente.     |
 | 2   | **Spinning Kick** 🦵     | 15 Mana  | 1 Turno  | **280 AoE**  | Ataque 360°, 70 dano, atinge até 4 inimigos               | Nível 1  | Combater múltiplos inimigos que cercaram o Monge.         |
-| 3   | **Wind Dash** 💨         | 20 Mana  | 1 Turno  | -            | Teleporta 15m instantly, gera 2 combos                    | Nível 2  | Para se aproximar instantaneamente de alvos à distância.  |
+| 3   | **Wind Dash** 💨         | 20 Mana  | 1 Turno  | -            | Teleporta para **qualquer ponto do Local**, gera 2 combos | Nível 2  | Para se aproximar instantaneamente de alvos à distância.  |
 | 4   | **Dragon Punch** 🐉      | 25 Mana  | 2 Turnos | **120**      | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos | Nível 2  | Contra alvos únicos para maximizar o acúmulo de recursos. |
 | 5   | **Meditation** 🧘        | 0 Mana   | 4 Turnos | -            | Regenera 50 Mana, gasta turno                             | Nível 3  | Momento de pausa segura para restaurar energia vital.     |
 | 6   | **Hundred-Hand Slap** ✋ | 30 Mana  | 3 Turnos | **200**      | Ataque frenético em alvo único, 10 hits                   | Nível 3  | Descarregar o burst de dano em um oponente imobilizado.   |
@@ -5024,6 +5091,189 @@ Diferente de skills normais, **Combos de Afinidade** (baseados em Chrono Trigger
 2.  Requer ambos heróis vivos, próximos e sem status negativos (Stun/Silence).
 3.  Combos possuem **Alto Delay** (Animação longa e pós-cast delay).
 4.  Gera log diferenciado: `⚔️ [COMBO] Kaelen & Lila executaram "Tactical Smoke"! (850 Dano)`
+
+---
+# 4.9. SISTEMA DE ITENS E LOOT: A ARMA E A LENDA
+
+O sistema de itens em _Heroes of Majesty_ é projetado para criar histórias, não apenas estatísticas. Cada item encontrado no mundo conta uma parte da saga procedural do reino.
+
+## 4.9.1 Filosofia de Design e Escalonamento
+
+Os heróis em _Majesty_ têm um **Level Cap rígido no Nível 10**. Isso significa que a escalada de poder não pode ser infinita ou baseada em números inflacionados (ex: danos de milhões). O progresso é **horizontal e qualitativo**.
+
+- **Level Cap:** Nível 10 (Heroi) / Nível 10 (Item).
+- **Tiers de Loot:** Diretamente ligados aos **4 Ciclos do Mundo**.
+- **Durabilidade:** Itens NÃO quebram, mas podem ser "consumidos" ou "sacrificados" para upgrades.
+
+### Escalonamento por Ciclo
+
+Os itens encontrados no mundo progridem em poder junto com os Ciclos da Campanha.
+
+| Ciclo             | Tier do Item    | Nível do Item | Raridade Comum    | Descrição Visual                                           |
+| :---------------- | :-------------- | :------------ | :---------------- | :--------------------------------------------------------- |
+| **1. Primavera**  | **Tier 1 (T1)** | Lvl 1-3       | Comum / Incomum   | Ferro, Couro, Madeira simples. Limpo e novo.               |
+| **2. Verão**      | **Tier 2 (T2)** | Lvl 4-6       | Raro              | Aço, Malha, Runas brilhantes. Aspecto de veterano.         |
+| **3. Inverno**    | **Tier 3 (T3)** | Lvl 7-9       | Épico             | Mithril, Obsidiana, Gelo eterno. Aura mágica visível.      |
+| **4. Apocalipse** | **Tier 4 (T4)** | Lvl 10 (MAX)  | Lendário / Mítico | Adamantina, Fogo Sagrado. Itens com "nome próprio" e alma. |
+
+---
+
+## 4.9.2 Tipos de Itens
+
+Os heróis possuem slots fixos de equipamento. A simplicidade é chave para a interface de log/terminal.
+
+### Slots de Equipamento
+
+1.  **Arma Principal (Main Hand):** Define o dano base e tipo de ataque.
+2.  **Armadura (Body):** Define a defesa física e resistência.
+3.  **Acessório (Relic):** Define bônus especiais e mecânicas passivas únicas.
+
+### 1. Armas (Weapons)
+
+As armas definem o "flavor" do combate.
+
+| Tipo                 | Classes            | Stat Principal   | Exemplo T1                  | Exemplo T4                             |
+| :------------------- | :----------------- | :--------------- | :-------------------------- | :------------------------------------- |
+| **Espada Longa**     | Warrior, Paladin   | Attack           | Espada de Ferro (30 Dmg)    | _Lâmina do Rei Caído_ (300 Dmg + Holy) |
+| **Cajado**           | Mage, Druid, Necro | Magic Attack     | Cajado de Carvalho (25 Mag) | _Vazio Eterno_ (280 Mag + Mana Regen)  |
+| **Arco Curto/Longo** | Archer, Elf        | Ranged Dmg       | Arco de Caça (28 Dmg)       | _Sussurro do Vento_ (290 Dmg + Speed)  |
+| **Adagas**           | Rogue              | Critical / Speed | Adaga Enferrujada (20 Dmg)  | _Presas de Viper_ (250 Dmg + Poison)   |
+| **Instrumento**      | Bard               | Inspire / Buff   | Alaúde Velho (+10% Buff)    | _Harpa de Apolo_ (+100% Buff Effect)   |
+| **Punhos/Manoplas**  | Monk               | Combo / Speed    | Faixas de Pano (+5% Speed)  | _Punhos de Dragão_ (+50% Dmg + Fire)   |
+
+### 2. Armaduras (Armor)
+
+| Tipo               | Classes                       | Stat Principal | Foco                                      |
+| :----------------- | :---------------------------- | :------------- | :---------------------------------------- |
+| **Placas (Heavy)** | Warrior, Paladin              | Defense        | Redução de Dano Físico Bruto.             |
+| **Couro (Medium)** | Rogue, Archer, Monk           | Evasion        | Equilíbrio entre Defesa e Esquiva.        |
+| **Tecido (Light)** | Mage, Druid, Necro, Bard, Elf | Mana / Resist  | Bônus de Mana Regen e Resistência Mágica. |
+
+### 3. Acessórios (Relics) - O Loot que Importa
+
+Enquanto armas e armaduras dão stats brutos, os acessórios mudam _como_ o herói joga.
+
+| Nome (Exemplo)           | Efeito Passivo                             | Raridade |
+| :----------------------- | :----------------------------------------- | :------- |
+| **Anel da Fortuna**      | +20% Ouro encontrado em monstros.          | Incomum  |
+| **Botas de Hermes**      | Permite fugir de combate com 100% chance.  | Raro     |
+| **Amuleto de Sangue**    | Cura 5% HP ao matar inimigos.              | Épico    |
+| **Orbe da Onisciência**  | Revela o mapa 2x mais rápido (Fog of War). | Lendário |
+| **Coração de Tarrasque** | Revive 1x por batalha com 50% HP.          | Mítico   |
+
+### 4. Consumíveis (Além de Poções)
+
+Itens que heróis compram ou encontram e usam automaticamente.
+
+- **Poção de Vida (P/M/G):** Cura HP instantâneo.
+- **Poção de Mana (P/M/G):** Restaura Mana.
+- **Elixir de Força:** +20% Attack por 10 min (200 Turnos).
+- **Pó de Desaparecimento:** Fuga instantânea (Ladino/Mago).
+- **Kit de Reparo:** Repara equipamento em campo (sem voltar vila).
+- **Tocha:** Ilumina o Local no escuro (Ciclo Dia/Noite).
+
+---
+
+## 4.9.3 Geração Procedural: Sufixos e Prefixos
+
+Para criar variedade infinita dentro do level cap limitado, os itens usam um sistema de afixos.
+
+**Nome do Item = [Prefixo] + [Item Base] + [Sufixo]**
+
+Ex: _Espada Longa Flamejante da Rapidez_
+
+### Prefixos (Qualidade/Material)
+
+Definem o nível base de stats do item.
+
+| Prefixo         | Efeito Stats | Tier      |
+| :-------------- | :----------- | :-------- |
+| **Enferrujado** | -10%         | T0 (Lixo) |
+| **Comum**       | +0%          | T1        |
+| **Reforçado**   | +10%         | T1/T2     |
+| **Mestre**      | +20%         | T2        |
+| **Ancião**      | +30%         | T3        |
+| **Divino**      | +50%         | T4 (Max)  |
+
+### Sufixos (Encantamento)
+
+Adicionam efeitos secundários ou elementais.
+
+| Sufixo             | Efeito                    |
+| :----------------- | :------------------------ |
+| **...do Urso**     | +HP Max                   |
+| **...da Águia**    | +Precisão/Crítico         |
+| **...do Gelo**     | Aplica Slow (Lentidão)    |
+| **...da Fênix**    | Regeneração de HP passiva |
+| **...do Vampiro**  | Roubo de Vida (Lifesteal) |
+| **...da Ganância** | +Geração de Ouro          |
+
+---
+
+## 4.9.4 Materiais e Crafting Simplificado
+
+Embora o jogador não "crafte" diretamente (quem crafta é o Ferreiro), o sistema de materiais alimenta a economia.
+
+### Materiais de Drop (Loot de Monstros)
+
+Monstros não dropam apenas ouro. Eles dropam materiais que os heróis **vendem** para o Ferreiro ou Alquimista. O jogador (Rei) pode então usar esses estoques para encomendar itens melhores nas lojas.
+
+| Material             | Origem (Mob)  | Uso                        |
+| :------------------- | :------------ | :------------------------- |
+| **Couro de Lobo**    | Lobos         | Armaduras Leves T1         |
+| **Presa de Aranha**  | Aranhas       | Adagas venenosas / Flechas |
+| **Ferro Negro**      | Goblins       | Armas T1                   |
+| **Pó de Osso**       | Esqueletos    | Poções de Necromancia      |
+| **Essência de Fogo** | Elementais    | Encantamentos de Fogo      |
+| **Escama de Dragão** | Dragão (Boss) | Armadura Lendária T4       |
+
+### A "Corrente de Upgrade"
+
+1.  **Herói mata Lobo:** Dropa "Couro de Lobo".
+2.  **Herói vende:** Ganha Ouro na loja.
+3.  **Loja estoca:** O Ferreiro agora tem "1x Couro de Lobo".
+4.  **Rei (Jogador):** Vê notificação "Novo Equipamento Disponível: Armadura de Lobo".
+5.  **Rei Pesquisa:** Gasta Ouro para desbloquear a receita.
+6.  **Heróis Compram:** O item agora aparece na loja para todos os heróis comprarem.
+
+Isso cria um ciclo onde **caçar monstros específicos** libera equipamentos temáticos para o reino.
+
+---
+
+## 4.9.5 Itens Lendários (Lore Items)
+
+Alguns itens não são gerados proceduralmente. Eles são únicos e possuem uma história. Só existe 1 cópia por partida.
+
+**Exemplos:**
+
+1.  **A Espada da Pedra (Excalibur):**
+    - _Origem:_ Evento aleatório em Floresta (Tier 2).
+    - _Efeito:_ +100 Dano. O portador se torna o "Líder" (todos heróis ganham +10 Lealdade a ele).
+    - _Maldição:_ Se o portador morrer, a espada retorna à pedra em local aleatório.
+
+2.  **O Anel de Giges:**
+    - _Origem:_ Drop raro de Ladino Chefe (Tier 3).
+    - _Efeito:_ Invisibilidade permanente fora de combate.
+    - _Maldição:_ Ethics cai para 0.1 lentamente ao longo dos dias.
+
+3.  **Necronomicon:**
+    - _Origem:_ Drop de Lich (Tier 3).
+    - _Efeito:_ Skills de Necromante custam 0 Mana.
+    - _Maldição:_ O usuário invoca esqueletos hostis aleatoriamente ao seu redor quando dorme.
+
+---
+
+## 4.9.6 Log de Loot (Exemplo UX)
+
+```
+[COMBAT] ⚔️ Kaelen derrotou Ogro Berserker! (XP +450)
+[LOOT] ✨ Kaelen encontrou:
+       ├─ 💰 150 Ouro
+       ├─ 🦴 2x Osso Grande (Material)
+       └─ 🗡️ [RARO] Espada Bastarda da Fúria (T2)
+          (Dano: 95 | Efeito: +10% Speed se HP < 50%)
+[EQUIP] 🦾 Kaelen equipou a nova espada! (Atk 60 -> 95)
+```
 
 ---
 # 4. OS HERÓIS: AGENTES AUTÔNOMOS
@@ -5128,10 +5378,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **P - Proactivity Extrema**
 
-| Valor    | Título                  | Buffs                                                                                                                                     | Debuffs                                                                                |
-| -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente (0s delay)<br>+15% vigilância (detecta inimigos +2s antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
-| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                                | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+| Valor    | Título                  | Buffs                                                                                                                                       | Debuffs                                                                                    |
+| -------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando em **Locais Adjacentes à Vila**<br>Obedece cartas instantaneamente<br>+15% vigilância (detecta inimigos +1 Turno antes) | Nunca explora além de 3 Locais da vila<br>-30% XP de exploração<br>Recusa missões de scout |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                                  | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%       |
 
 #### **E - Ethics Extrema**
 
@@ -5145,7 +5395,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor    | Título               | Buffs                                                                                                           | Debuffs                                                                                          |
 | -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | **≤0.1** | 🐺 **Lobo Alfa**     | +40% stats quando lutando sozinho<br>Não sofre penalidade por estar sozinho<br>+20% velocidade quando sem grupo | -50% XP quando em grupo<br>Nunca compartilha recursos<br>Affinity máxima com qualquer herói: +30 |
-| **≥0.9** | 🤝 **Líder Natural** | +25% stats para aliados próximos (10m)<br>Grupos formam 2x mais rápido<br>Compartilha buffs com o time          | -30% stats quando sozinho<br>Recusa lutar sem grupo (foge)<br>Dá itens valiosos para aliados     |
+| **≥0.9** | 🤝 **Líder Natural** | +25% stats para aliados no mesmo **Local**<br>Grupos formam 2x mais rápido<br>Compartilha buffs com o time      | -30% stats quando sozinho<br>Recusa lutar sem grupo (foge)<br>Dá itens valiosos para aliados     |
 
 #### **M - Mind Extremo**
 
@@ -5169,13 +5419,13 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 **Comportamentos por faixa:**
 
-| Valor       | Comportamento        | Exemplo Prático                                                     |
-| ----------- | -------------------- | ------------------------------------------------------------------- |
-| **0.0-0.2** | Extremamente reativo | Só sai da vila se receber carta direta. Patrulha em raio de 50m.    |
-| **0.3-0.4** | Cauteloso            | Explora apenas áreas seguras (já reveladas). Evita névoa de guerra. |
-| **0.5-0.6** | Equilibrado          | Explora quando não há ameaças próximas. Balanceia segurança e ação. |
-| **0.7-0.8** | Aventureiro          | Busca ativamente monstros. Entra em névoa de guerra.                |
-| **0.9-1.0** | Temerário            | Vai direto para bosses sozinho. Ignora avisos de perigo.            |
+| Valor       | Comportamento        | Exemplo Prático                                                              |
+| ----------- | -------------------- | ---------------------------------------------------------------------------- |
+| **0.0-0.2** | Extremamente reativo | Só sai da vila se receber carta direta. Patrulha apenas o **Local da Vila**. |
+| **0.3-0.4** | Cauteloso            | Explora apenas áreas seguras (já reveladas). Evita névoa de guerra.          |
+| **0.5-0.6** | Equilibrado          | Explora quando não há ameaças próximas. Balanceia segurança e ação.          |
+| **0.7-0.8** | Aventureiro          | Busca ativamente monstros. Entra em névoa de guerra.                         |
+| **0.9-1.0** | Temerário            | Vai direto para bosses sozinho. Ignora avisos de perigo.                     |
 
 **Exemplos em gameplay:**
 
@@ -5352,13 +5602,13 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 **Reação a Morte de Aliado:**
 
 - Affect 0.2: Entra em pânico, foge ou ataca furiosamente boss (alterna)
-- Affect 0.5: Fica triste (-10% stats por 5min)
+- Affect 0.5: Fica triste (-10% stats por 5 min (100 Turnos))
 - Affect 0.9: Continua focado, sem mudança de comportamento
 
 **Reação a Crítico (Sorte):**
 
 - Affect 0.2: Fica eufórico, gasta cooldowns sem pensar
-- Affect 0.5: Fica animado (+5% stats por 30s)
+- Affect 0.5: Fica animado (+5% stats por 10 Turnos)
 - Affect 0.9: Mantém o ritmo, guarda skills para o momento certo
 
 **Reação a Insultos (de outros heróis):**
@@ -5555,9 +5805,9 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 
 | Nível       | Custo | Tempo de Construção | Benefício                                            |
 | ----------- | ----- | ------------------- | ---------------------------------------------------- |
-| **Nível 1** | 800g  | 120s                | Permite treinar 1 trait por vez                      |
-| **Nível 2** | 1500g | 180s                | Permite treinar 2 traits simultaneamente             |
-| **Nível 3** | 2500g | 240s                | Permite treinar 3 traits + -20% custo de treinamento |
+| **Nível 1** | 800g  | 40 Turnos           | Permite treinar 1 trait por vez                      |
+| **Nível 2** | 1500g | 60 Turnos           | Permite treinar 2 traits simultaneamente             |
+| **Nível 3** | 2500g | 80 Turnos           | Permite treinar 3 traits + -20% custo de treinamento |
 
 #### Sistema de Treinamento
 
@@ -5571,12 +5821,12 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 
 **Tabela de Custos:**
 
-| Trait Atual               | Custo Base | Tempo | Aumento       |
-| ------------------------- | ---------- | ----- | ------------- |
-| **0.0-0.3** (Muito Baixo) | 200g       | 60s   | +0.10 a +0.15 |
-| **0.4-0.6** (Médio)       | 400g       | 90s   | +0.08 a +0.12 |
-| **0.7-0.8** (Alto)        | 800g       | 120s  | +0.05 a +0.10 |
-| **0.9+** (Extremo)        | **1500g**  | 180s  | +0.02 a +0.05 |
+| Trait Atual               | Custo Base | Tempo     | Aumento       |
+| ------------------------- | ---------- | --------- | ------------- |
+| **0.0-0.3** (Muito Baixo) | 200g       | 20 Turnos | +0.10 a +0.15 |
+| **0.4-0.6** (Médio)       | 400g       | 30 Turnos | +0.08 a +0.12 |
+| **0.7-0.8** (Alto)        | 800g       | 40 Turnos | +0.05 a +0.10 |
+| **0.9+** (Extremo)        | **1500g**  | 60 Turnos | +0.02 a +0.05 |
 
 **Modificadores de Custo:**
 
@@ -5593,7 +5843,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Ethics 0.2 (Sem Escrúpulos)
 - Objetivo: Aumentar para evitar traições
 - Custo: 200g (base) + 50g (nível 6) + 200g (oposta à classe) = **450g**
-- Tempo: 60s
+- Tempo: 60s (20 Turnos)
 - Resultado: Ethics 0.2 → 0.33 (+0.13)
 
 **Exemplo 2: Guerreiro Tático**
@@ -5602,7 +5852,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Mind 0.4 (Impulsivo)
 - Objetivo: Torná-lo mais estratégico
 - Custo: 400g (base) + 150g (nível 8) + 400g (oposta à classe) = **950g**
-- Tempo: 90s
+- Tempo: 90s (30 Turnos)
 - Resultado: Mind 0.4 → 0.51 (+0.11)
 
 **Exemplo 3: Druida Líder**
@@ -5611,7 +5861,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Cooperation 0.7 (Sociável)
 - Objetivo: Torná-la Líder Natural (≥0.9)
 - Custo: 800g (base) - 240g (natural da classe, -30%) = **560g**
-- Tempo: 120s
+- Tempo: 120s (40 Turnos)
 - Resultado: Cooperation 0.7 → 0.78 (+0.08)
 - **Precisa de mais 2 treinamentos para atingir 0.9**
 
@@ -5620,7 +5870,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 **Regras importantes:**
 
 1. **Sem Diminuir Traits:** Só é possível aumentar, nunca diminuir
-2. **Cooldown por Herói:** Cada herói só pode treinar 1x a cada 5 minutos
+2. **Cooldown por Herói:** Cada herói só pode treinar 1x a cada 5 min (100 Turnos)
 3. **Máximo por Trait:** Não pode ultrapassar 1.0
 4. **Herói Indisponível:** Durante treinamento, herói não pode sair da vila
 5. **Cancelamento:** Se cancelado, perde 50% do ouro pago
@@ -5688,13 +5938,13 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 
 ### Estados Temporários (Buffs/Debuffs Psicológicos)
 
-| Estado            | Duração   | Efeito                                                |
-| ----------------- | --------- | ----------------------------------------------------- |
-| **DRUNK**         | 5 min     | Proactivity +0.3, Mind -0.5 (Corajoso mas burro)      |
-| **HUNGRY**        | Até comer | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
-| **INSPIRED**      | 2 min     | Todos vetores +0.1                                    |
-| **SCARED**        | 1 min     | Proactivity -0.4, Flee Threshold +30%                 |
-| **GREEDY_FRENZY** | 30s       | Cooperation -0.5 (Ignora segurança para pegar ouro)   |
+| Estado            | Duração    | Efeito                                                |
+| ----------------- | ---------- | ----------------------------------------------------- |
+| **DRUNK**         | 100 Turnos | Proactivity +0.3, Mind -0.5 (Corajoso mas burro)      |
+| **HUNGRY**        | Até comer  | Cooperation -0.2, Speed -10% (Egoísta quando faminto) |
+| **INSPIRED**      | 40 Turnos  | Todos vetores +0.1                                    |
+| **SCARED**        | 20 Turnos  | Proactivity -0.4, Flee Threshold +30%                 |
+| **GREEDY_FRENZY** | 10 Turnos  | Cooperation -0.5 (Ignora segurança para pegar ouro)   |
 
 ### Peculiaridades (Overrides Binários)
 
@@ -5760,7 +6010,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Stats Base:** HP Muito Alto, Mana Médio, Defesa Muito Alta
 - **Viés P.E.C.M.A.:** Ethics ↑↑↑, Cooperation ↑↑, Proactivity ↑
 - **Comportamento:** Extremamente honrado, protege aliados, autossacrifica-se
-- **Mecânica Única:** **Aura Sagrada** - Buffa aliados em 12m (+15% Defense)
+- **Mecânica Única:** **Aura Sagrada** - Buffa aliados no mesmo **Local** (+15% Defense)
 - **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
 
 #### 💀 Necromante (Necromancer)
@@ -5826,7 +6076,7 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.6 Geração Procedural de Biografia e Identidade (LLM)
+## 4.4.1 Geração Procedural de Biografia e Identidade (LLM)
 
 Sempre que o jogador escolhe um herói de uma determinada classe para recrutar, o sistema gera instantaneamente uma **identidade única**. Este processo combina variáveis fixas, sorteios em tabelas de tags e processamento de linguagem natural (LLM).
 
@@ -5875,7 +6125,7 @@ O jogo envia para a IA o seguinte contexto estruturado:
 
 ---
 
-## 4.7 Sistema de Loot e Economia
+## 4.5 Sistema de Loot e Economia
 
 ### Loot Instanciado (Individual)
 
@@ -5908,8 +6158,8 @@ Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de 
 
 - **Mecânica:** O herói realiza trabalhos manuais (Taverna, Ferreiro).
 - **Pagador:** O salário é pago pela **população civil**, injetando novo ouro na economia (Faucet), e não pelo Tesouro Real.
-- **Rendimento:** Ganha **100 Ouro a cada 30 segundos**.
-- **Frequência:** Permitido apenas **1 vez por dia (a cada 15 min)**.
+- **Rendimento:** Ganha **100 Ouro a cada 10 Turnos/30s**.
+- **Frequência:** Permitido apenas **1 vez por dia (a cada 15 min (300 Turnos))**.
 - **Exceção de Morte:** Após renascer (respawn), o trabalho é liberado imediatamente sem cooldown.
 - **Limite:** Ao atingir **500 Ouro**, o herói é **forçado a sair** do trabalho.
 
@@ -5919,7 +6169,7 @@ Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de 
 
 ### Morte e Retorno
 
-Quando um herói "morre", ele é resgatado, perde o ouro e entra em um estado de recuperação (60s).
+Quando um herói "morre", ele é resgatado, perde o ouro e entra em um estado de recuperação (20 Turnos/60s).
 Após recuperar a consciência, se estiver sem ouro, ele realiza trabalhos na cidade (toca música, ajuda na forja) para comprar equipamento básico antes de voltar a se aventurar.
 
 Este ciclo garante que heróis nunca fiquem "presos" sem ter como jogar.
@@ -5937,7 +6187,7 @@ Este ciclo garante que heróis nunca fiquem "presos" sem ter como jogar.
 | **Bardo**      | Taverna do Javali             | "Tocando alaúde por gorjetas"           |
 | **Monge**      | Moinho de Trigo               | "Carregando sacos de farinha (treino)"  |
 
-**Duração:** 2 a 5 minutos (dependendo do nível). Após esse tempo, ele retorna à ativa.
+**Duração:** 40 a 100 Turnos (dependendo do nível). Após esse tempo, ele retorna à ativa.
 
 ### Guardas da Cidade (Mercenários)
 
@@ -5973,6 +6223,169 @@ Se um **Necromancer Boss** aparecer, ele pode corromper heróis mortos antes de 
 3. **Demissão:** Para contratar um novo tipo de herói, o jogador deve explicitamente "Demitir" (banir) um herói existente.
 
 ---
+# 5b. SISTEMA DE LEGADO E HALL DA FAMA (PERSISTÊNCIA)
+
+## 1. O Chamado Eterno (Overview)
+
+Em _Heroes of Majesty_, a morte não é o fim, e a vitória não é esquecida. Através do **Sistema de Legado**, feitos heroicos ecoam em partidas futuras, criando uma narrativa emergente que atravessa gerações de reinos.
+A persistência não é apenas um "Hall da Fama" estático, mas um mercado vivo de lendas que podem ser contratadas para virar o jogo em momentos de crise.
+
+---
+
+## 2. Hall da Fama (The Pantheon)
+
+Ao final de cada partida (Vitória ou Derrota no Dia 8+), o sistema avalia o desempenho dos heróis. A entrada no Panteão não depende apenas de força bruta, mas de **impacto e sacrifício**.
+
+### 2.1 Critérios de Ascensão
+
+Para entrar no Hall da Fama, um herói deve cumprir **pelo menos um** dos requisitos abaixo:
+
+| Categoria      | Requisito                                                                   | Exemplo Narrativo                         |
+| :------------- | :-------------------------------------------------------------------------- | :---------------------------------------- |
+| **Lenda Viva** | Atingir **Level 10 (Max Level)**.                                           | "Alcançou o ápice do poder mortal."       |
+| **O Salvador** | Salvar aliados da morte (Curar/Proteger em HP Crítico) **15+ vezes**.       | "O escudo que nunca falhou."              |
+| **O Mártir**   | Morrer permanentemente para **evitar o Wipe** do grupo (Salvar 2+ aliados). | "Deu sua vida para que outros vivessem."  |
+| **O Matador**  | Derrotar sozinho (Solo Kill) um Boss ou 5+ Elites.                          | "Enfrentou a escuridão sozinho e venceu." |
+| **O Líder**    | Manter Afinidade Máxima (+100) com 2+ heróis até o fim.                     | "Uniu corações e mentes."                 |
+| **O Imortal**  | Sobreviver aos 4 Ciclos sem nunca cair (0 K.O.s).                           | "Aquele que a morte não conseguiu tocar." |
+
+> **Nota:** O "Last Hit" em Bosses **NÃO** garante vaga automática, valorizando suportes e tanks.
+
+### 2.2 Benefícios na Próxima Partida (Patronos)
+
+Heróis no Hall da Fama concedem **bênçãos passivas** para novos reinos. O jogador pode escolher **1 Patrono** no início do jogo, baseado na classe do herói lendário.
+
+| Classe do Patrono | Bênção de Legado (Passiva Global)                                | Descrição Narrativa                                        |
+| :---------------- | :--------------------------------------------------------------- | :--------------------------------------------------------- |
+| **Guerreiro**     | **Vontade de Ferro:** Todos heróis começam com +10% HP.          | "A resistência de Kaelen ainda protege nossas muralhas."   |
+| **Mago**          | **Fluxo Arcano:** Regeneração de Mana +5% para todos.            | "Os estudos de Gandalf elevaram nossa compreensão mágica." |
+| **Ladino**        | **Sorte do Trapaceiro:** +5% Ouro Loot e +2% Chance Crítica.     | "Lila ensinou que o ouro está onde você procura."          |
+| **Paladino**      | **Aura de Devoção:** Regeneração de IP +10% (Fé no Reino).       | "A fé de Sir Arthur inspira lealdade ao trono."            |
+| **Bardo**         | **Lendas Vivas:** Ganho de XP +5% para todos.                    | "As canções de Elara inspiram novos aventureiros."         |
+| **Necromante**    | **Pacto Sombrio:** Ninguém morre no 1º Dia (Sobrevive com 1 HP). | "A morte hesita onde Malakai caminhou."                    |
+| **Monge**         | **Disciplina Mental:** -20% Penalidade de Fadiga/Cansaço.        | "O foco de Liu-Kang transcende o corpo."                   |
+| **Arqueiro**      | **Olhos de Águia:** +1 Distância de Visão (Fog of War reduzido). | "Legolas vigia o horizonte por nós."                       |
+| **Druida**        | **Bênção da Terra:** Regeneração de HP +2%/turno em Florestas.   | "A natureza reconhece seus filhos."                        |
+| **Elfo**          | **Graça Ancestral:** +5% Speed e Evasão para todos.              | "Movemo-nos como o vento, graças a Eldrin."                |
+
+---
+
+### 2.3 Crônicas do Legado (Histórico Estendido)
+
+Ao entrar no Hall da Fama, o arquivo do herói torna-se imutável em sua essência, mas aberto a novas histórias como **Mercenário Global**.
+
+**Estrutura do Log de Vida:**
+
+```json
+{
+  "hero_id": "kaelen_legend_01",
+  "original_saga": {
+    "world_seed": "kingdom_alpha_1",
+    "achievements": ["Matou o Dragão Vermelho", "Salvou a Princesa"],
+    "death": null, // Sobreviveu
+    "status": "HALL_OF_FAME"
+  },
+  "mercenary_contracts": [
+    {
+      "hired_by": "Player_X99",
+      "cycle": "Inverno",
+      "feat": "Ajudou a defender a Muralha do Norte contra 50 Orcs.",
+      "outcome": "Success"
+    },
+    {
+      "hired_by": "Player_Z01",
+      "cycle": "Lua de Sangue",
+      "feat": "Caiu em combate contra o Lich King (Retornou Ferido).",
+      "outcome": "Defeat"
+    }
+  ]
+}
+```
+
+Isso garante que a **lenda original** permaneça pura, enquanto as "aventuras paralelas" enriquecem a fama do herói sem corromper sua história canônica.
+
+### 2.4 Mecânica de Mercenários Globais (The Freelancers)
+
+Heróis lendários de outros jogadores (ou de suas vidas passadas) podem ser contratados temporariamente.
+
+#### A. Requisito de Infraestrutura (Embaixada das Lendas)
+
+Para acessar o mercado global, o Reino deve construir a **Embaixada das Lendas**.
+
+- **Custo de Construção:** 3.000 Ouro + 500 Magia.
+- **Função:** Portal de conexão com o Hall da Fama Global.
+
+#### B. Regras de Contratação (Fixo e Justo)
+
+Diferente da contratação local, as regras para Lendas são rígidas para manter o balanceamento:
+
+- **Custo Único:** **1.000 Ouro**.
+  - _Detalhe Crucial:_ Esse ouro não some. Ele é **transferido para o "Cofre de Legado" do Criador do Herói**, disponível para ele iniciar sua próxima partida com mais recursos.
+- **Duração do Contrato:** Exatamente **1 Ciclo (2 Dias do Jogo)**. Após isso, o herói parte.
+- **Adaptação de Poder (Level Sync):** Embora seja uma Lenda Level 10, o herói chegará com o nível ajustado ao **Level Cap do Ciclo Atual** para não trivializar o jogo.
+  - _Ciclo 1:_ Lenda chega no Level 3 (Máx do Ciclo).
+  - _Ciclo 2:_ Lenda chega no Level 5.
+  - _Ciclo 3:_ Lenda chega no Level 8.
+  - _Ciclo 4:_ Lenda libera seu poder total (Level 10).
+  - _Vantagem:_ Eles sempre chegam no topo do poder permitido, com skills otimizadas e equipamentos de alto tier.
+
+---
+
+## 3. Relíquias Ancestrais (Itens de Herança)
+
+Itens lendários empunhados por heróis do Hall da Fama não desaparecem. Eles se tornam **Relíquias** que podem ser encontradas em partidas futuras.
+
+### Mecânica de Descoberta
+
+- **Chance:** 5% ao explorar Ruínas/Dungeons de Nível Alto (Ciclo 3+).
+- **Evento:** "Túmulo Esquecido" ou "Câmara do Tesouro Antigo".
+- **Restrição:** Somente 1 Relíquia por partida.
+
+### Exemplo de Narrativa de Loot
+
+```
+[Exploração - Ruínas do Norte]
+Sir Balin encontrou: [Espada Quebrada de Kaelen] (Relíquia)
+Descrição: "A lâmina ainda vibra com a fúria de seu antigo dono."
+Efeito: +50 Attack, +20 Speed. Mas o portador ganha Trait: 'Melancólico' (Ethics +0.2).
+Memória Desbloqueada: "Kaelen morreu protegendo a vila no Inverno de 1024."
+```
+
+---
+
+## 4. Memórias Sociais (Ecos do Passado)
+
+O sistema social (Affinity/Banter) reconhece o legado.
+
+### 4.1 Referências em Diálogos (Banter)
+
+Bardos e NPCs podem mencionar heróis antigos em suas falas.
+
+**Template:**
+`"Até [NOME_HEROI_ANTIGO] teria medo desse monstro!"`
+`"Você luta como [NOME_HEROI_ANTIGO], mas sem a mesma elegância."`
+
+### 4.2 Reencarnação (Alma Retornada)
+
+Existe uma chance significativa de uma lenda retornar em um novo corpo.
+
+- **Chance:** **10%** ao recrutar um novo herói.
+- **Nome:** Idêntico ao antigo (com sufixo numérico, ex: "Kaelen II").
+- **Traits:** Herda a mesma personalidade base e arquétipo.
+- **Conexão:** Se encontrar a Relíquia do seu antecessor, ganha bônus de stats dobrado.
+
+---
+
+## 5. Resumo da Persistência
+
+```mermaid
+graph TD
+    A[Partida Atual] -->|Fim de Jogo| B(Avaliação de Heróis)
+    B -->|Critérios Atingidos| C[Hall da Fama]
+    C -->|Bênção Escolhida| D[Nova Partida]
+    C -->|Relíquia Gerada| E[Loot Table Futuro]
+    C -->|"Reencarnação (10%)"| D
+```
 # 5. DINÂMICA SOCIAL: O "DRAMA EMERGENTE"
 
 ## 5.1 Formação de Grupos (Party System)
@@ -6034,7 +6447,7 @@ Heróis não são solitários por natureza. Eles formam **grupos dinâmicos** ba
 
 #### 2. Morte
 
-- Perdedor morre (entra em recuperação de 60s)
+- Perdedor morre (entra em recuperação de 60s (20 Turnos))
 - Ganhador ganha título: `"Matador de [Nome]"`
 - Affinity com todos aliados da vítima: -30
 
@@ -6466,13 +6879,13 @@ Grog vai morrer. Por minha mão ou pelo céu."
 
 Para evitar **fadiga narrativa**, o sistema controla frequência:
 
-| Tipo de Conflito       | Cooldown    | Máximo/Partida        |
-| ---------------------- | ----------- | --------------------- |
-| Covardia               | 30 min      | 3 eventos             |
-| Negligência Tática     | 20 min      | 5 eventos             |
-| Ciúmes                 | Passivo     | 1 por par de heróis   |
-| Conflito Personalidade | Passivo     | 1-2 pares             |
-| Vingança               | 1 por morte | Quantas mortes houver |
+| Tipo de Conflito       | Cooldown            | Máximo/Partida        |
+| ---------------------- | ------------------- | --------------------- |
+| Covardia               | 30 min (600 Turnos) | 3 eventos             |
+| Negligência Tática     | 20 min (400 Turnos) | 5 eventos             |
+| Ciúmes                 | Passivo             | 1 por par de heróis   |
+| Conflito Personalidade | Passivo             | 1-2 pares             |
+| Vingança               | 1 por morte         | Quantas mortes houver |
 
 **Prioridade de Narrativa (IA decide qual contar):**
 
@@ -6510,6 +6923,219 @@ Para evitar **fadiga narrativa**, o sistema controla frequência:
 ```
 
 ---
+# 6b. REFERÊNCIA DE COMANDOS DA LLM (ADVISOR API)
+
+## 6b.1 Visão Geral da Arquitetura
+
+Este documento define a **API de Comandos** que a IA (Conselheiro Real) utiliza para traduzir a linguagem natural do jogador em ações de jogo.
+
+**Fluxo de Execução:**
+
+1.  **Input:** Jogador digita "Compre 10 poções para o estoque."
+2.  **Processamento:** LLM analisa intenção e extrai parâmetros.
+3.  **Output (Function Call):** LLM gera `GAME.economy.buy_item("potion_health", 10)`.
+4.  **Execução:** A Engine valida (tem ouro?) e aplica a ação.
+
+---
+
+## 6b.2 Comandos de Economia e Gestão
+
+Ações que afetam o Tesouro Real e as estruturas da vila.
+
+### `BUY_ITEM`
+
+Compra itens do mercado externo para repor o estoque das lojas da vila.
+
+- **Assinatura:** `buy_item(item_id: string, quantity: number)`
+- **Parâmetros:**
+  - `item_id`: ID do item (ex: "potion_health", "potion_mana", "wheat", "iron_ingot").
+  - `quantity`: Quantidade a comprar.
+- **Exemplo de Intenção:** "Precisamos de mais poções de vida." / "Encha o estoque de trigo."
+
+### `UPGRADE_BUILDING`
+
+Melhora uma construção existente para o próximo nível.
+
+- **Assinatura:** `upgrade_building(building_id: string)`
+- **Parâmetros:**
+  - `building_id`: ID da construção (ex: "guild_warriors", "market", "blacksmith").
+- **Exemplo de Intenção:** "Melhore a guilda dos guerreiros." / "O mercado precisa crescer."
+
+### `RECRUIT_HERO`
+
+Contrata um novo herói nível 1 para o reino.
+
+- **Assinatura:** `recruit_hero(class_id: string, name?: string)`
+- **Parâmetros:**
+  - `class_id`: ID da classe (ex: "warrior", "ranger", "mage", "cleric").
+  - `name` (Opcional): Nome customizado solicitado pelo jogador.
+- **Exemplo de Intenção:** "Contrate um novo mago." / "Chame um guerreiro chamado Bob."
+
+### `UNLOCK_SKILL`
+
+Libera uma nova habilidade na árvore tecnológica de uma guilda.
+
+- **Assinatura:** `unlock_skill(skill_id: string)`
+- **Parâmetros:**
+  - `skill_id`: ID da skill (ex: "spin_attack", "fireball").
+- **Exemplo de Intenção:** "Ensine a bola de fogo para os magos."
+
+---
+
+## 6b.3 Comandos Estratégicos (Influence System)
+
+Ações que custam **Influence Points (IP)** e afetam AI de Heróis ou o Mundo.
+
+### `SET_FLAG` (Bandeiras)
+
+Coloca uma bandeira de missão no mapa para atrair heróis.
+
+- **Assinatura:** `set_flag(type: "ATTACK" | "EXPLORE" | "DEFEND", target_id: string, bounty: number)`
+- **Parâmetros:**
+  - `type`: Tipo de missão.
+  - `target_id`: ID do alvo (Monstro) ou Local (Coordenada/POI).
+  - `bounty`: Recompensa em ouro oferecida.
+- **Exemplo de Intenção:** "Coloque uma recompensa na cabeça daquele Ogro." / "Quero que explorem a caverna norte."
+
+### `SEND_LETTER` (Correio)
+
+Envia uma mensagem direta para um herói específico (Owl Post).
+
+- **Assinatura:** `send_letter(hero_id: string, content: string, gift_gold: number)`
+- **Parámetros:**
+  - `hero_id`: Nome ou ID do herói.
+  - `content`: Texto da mensagem (personalizado ou gerado pela LLM).
+  - `gift_gold`: Ouro anexado como presente (opcional).
+- **Exemplo de Intenção:** "Mande uma carta para a Lila pedindo desculpas e 100 moedas."
+
+### `CAST_SPELL` (Poderes Reais)
+
+Ativa feitiços globais ou intervenções de emergência.
+
+- **Assinatura:** `cast_spell(spell_id: string)`
+- **Parâmetros:**
+  - `spell_id`: ID do feitiço (ex: "spell_lightning", "spell_heal_all", "spell_teleport_home").
+- **Exemplo de Intenção:** "Jogue um raio naquele Chefe!" / "Cure todos agora!"
+
+### `ISSUE_DECREE` (Decretos)
+
+Ativa modificadores globais temporários.
+
+- **Assinatura:** `issue_decree(decree_id: string)`
+- **Parâmetros:**
+  - `decree_id`: ID do decreto (ex: "decree_festival", "decree_curfew", "decree_war_effort").
+- **Exemplo de Intenção:** "Vamos dar uma festa (Festival)." / "Declare lei marcial (Toque de Recolher)."
+
+### `EMERGENCY_TAX` (Taxa)
+
+Ativa a cobrança de emergência (Cap 7.6).
+
+- **Assinatura:** `emergency_tax()`
+- **Exemplo de Intenção:** "Estamos falidos! Cobre a taxa de emergência!" / "Pegue o ouro dos heróis, é urgente."
+
+### `RESOLVE_SOCIAL_CONFLICT` (Intervenção)
+
+Tenta mediar disputas entre heróis (mencionado no Cap 5.8).
+
+- **Assinatura:** `resolve_social_conflict(hero_a: string, hero_b: string, action: "BRIBE" | "MEDIATE" | "THREATEN")`
+- **Exemplo de Intenção:** "Dê um jeito na briga entre Lila e Kaelen." / "Ameace expulsar quem continuar brigando!"
+
+---
+
+## 6b.4 Expansão e Diplocia (Avançado)
+
+Comandos relacionados à expansão do reino (Cap 9).
+
+### `FOUND_OUTPOST`
+
+Cria um novo posto avançado.
+
+- **Assinatura:** `found_outpost(location: string, heroes_ids: string[])`
+- **Exemplo de Intenção:** "Vamos fundar um posto na floresta. Leve Alric e Lyra."
+
+### `MOVE_CAPITAL`
+
+Transfere a capital para um posto (Cap 9.6).
+
+- **Assinatura:** `move_capital(target_outpost: string)`
+- **Exemplo de Intenção:** "A vila caiu. Transfira a coroa para o Posto Norte."
+
+### `NEGOTIATE_FACTION`
+
+Interage com facções externas (Cap 9.8).
+
+- **Assinatura:** `negotiate_faction(faction_id: string, offer: "GOLD" | "ALLIANCE" | "IGNORE")`
+- **Exemplo de Intenção:** "Ofereça ouro para os rebeldes nos deixarem em paz."
+
+---
+
+## 6b.5 Comandos de Consulta (Queries)
+
+Ações onde o jogador pergunta algo e a LLM precisa buscar dados "Live" na Engine.
+
+### `GET_HERO_STATUS`
+
+Busca dados detalhados de um herói.
+
+- **Assinatura:** `get_hero_status(hero_id: string)`
+- **Retorno:** JSON com HP, MP, Localização, Atividade Atual, Inventário, Buffs.
+- **Exemplo de Intenção:** "Como está o Kaelen?" / "Onde está a Lila?"
+
+### `GET_ECONOMY_REPORT`
+
+Analisa o fluxo de caixa do reino.
+
+- **Assinatura:** `get_economy_report(period: "today" | "cycle")`
+- **Retorno:** Ganhos, Gastos, Previsão.
+- **Exemplo de Intenção:** "Quanto lucramos hoje?" / "Relatório econômico."
+
+### `ANALYZE_THREAT`
+
+Pede informações sobre um inimigo ou perigo.
+
+- **Assinatura:** `analyze_threat(target_id: string)`
+- **Retorno:** Stats do monstro, fraquezas, loot provável.
+- **Exemplo de Intenção:** "O que é aquele monstro vermelho?" / "Analise o Dragão."
+
+### `GET_HISTORY_LOG`
+
+Busca eventos passados (Narrativa).
+
+- **Assinatura:** `get_history_log(events: number)`
+- **Exemplo de Intenção:** "O que aconteceu ontem?" / "Quem matou o Dragão?"
+
+---
+
+## 6b.6 O Que o Conselheiro NÃO Pode Fazer
+
+Para manter a consistência do jogo, a LLM deve rejeitar estes pedidos:
+
+1.  **Controle Direto:** (Ex: "Mande o Alric atacar agora!") - _Resposta:_ "Eles têm vontade própria, Majestade."
+2.  **Ressurreição Manual:** (Ex: "Reviva a Lila!") - _Resposta:_ "A morte é um ciclo natural (ou requer clérigos), não um comando real."
+3.  **Cheat/Ouro Infinito:** (Ex: "Me dê ouro!") - _Resposta:_ "O ouro vem dos impostos, não de magia."
+4.  **Micro-Gestão de Vícios:** (Ex: "Proíba beber!") - _Resposta:_ "Não posso controlar a sede deles."
+
+---
+
+## 6b.7 Tratamento de Erros e Feedback
+
+Quando a LLM tenta executar um comando, a Engine retorna um status:
+
+1.  **`SUCCESS`**: Ação realizada. LLM narra o sucesso.
+    - _Engine:_ `200 OK`
+    - _LLM:_ "Feito, Majestade. 10 poções compradas."
+
+2.  **`INSUFFICIENT_FUNDS`**: Ouro insuficiente.
+    - _Engine:_ `402 Payment Required`
+    - _LLM:_ "Não temos ouro suficiente nos cofres para isso, meu senhor."
+
+3.  **`INSUFFICIENT_IP`**: Influence Points insuficientes.
+    - _Engine:_ `403 Forbidden (Low IP)`
+    - _LLM:_ "Sua influência está baixa. Espere recuperar sua autoridade ou use comandos mais simples."
+
+4.  **`INVALID_TARGET`**: Alvo não existe ou não pode receber a ação.
+    - _Engine:_ `404 Not Found`
+    - _LLM:_ "Não vejo nenhum herói com esse nome nas nossas terras."
 # 6. O CONSELHEIRO REAL DE IA
 
 ## 6.1 O NPC Mais Importante do Jogo
@@ -6523,66 +7149,67 @@ O **Conselheiro Real** não é apenas um chatbot. Ele é:
 
 ### Características Únicas
 
-| Propriedade       | Valor                                          |
-| ----------------- | ---------------------------------------------- |
-| **Mortalidade**   | Pode morrer (mas respawna após 5 minutos)      |
-| **Mobilidade**    | Se desloca pela vila (pode estar indisponível) |
-| **Personalidade** | 3 arquétipos disponíveis                       |
-| **Custo de Uso**  | 10 IP (Influence Points) por interação         |
+| Propriedade       | Valor                                              |
+| ----------------- | -------------------------------------------------- |
+| **Mortalidade**   | Pode morrer (mas respawna após 5 min (100 Turnos)) |
+| **Mobilidade**    | Se desloca pela vila (pode estar indisponível)     |
+| **Personalidade** | 3 arquétipos disponíveis                           |
+| **Custo de Uso**  | 10 IP (Influence Points) por interação             |
 
 ---
 
-## 6.2 Chat Interativo via NLP
+## 6.2 Interação Natural & Contextual
 
-### Interface de Comando
+Esqueça comandos de linha como `/buy` ou `/attack`. O Conselheiro Real utiliza um modelo de linguagem avançado para **interpretar sua intenção** com base no contexto do jogo. Você fala como um Rei, e ele entende como um servo leal (ou sarcástico).
 
-**Localização:** Painel P7 (presente em todos os workspaces)
+### Interface de Diálogo
 
-**Ativação:** Pressionar `/` (barra) foca o input instantaneamente
+**Ativação:** Basta começar a digitar. O prompt `Majesty>` está sempre ouvindo.
 
-### Categorias de Comando
+### Exemplos de Interação (Intenção -> Ação)
 
-#### 1. Comandos Administrativos
+#### 1. Gestão e Economia
 
-```
-/buy [item] [quantidade]
-/upgrade [building]
-/recruit [class]
-/unlock [skill_name]
-```
+- **Jogador:** "Precisamos de mais poções, compre 10."
+  - _Ação do Sistema:_ Executa compra de 10 Health Potions.
+  - _Resposta:_ "Feito, Majestade. O estoque está seguro."
+- **Jogador:** "Melhore a Guilda dos Guerreiros, eles estão fracos."
+  - _Ação do Sistema:_ Upgrade `Warrior_Guild` para Nível 2.
+- **Jogador:** "Recrute um novo mago, precisamos de magia."
+  - _Ação do Sistema:_ Inicia processo de recrutamento de `Mage`.
 
-#### 2. Comandos Sociais
+#### 2. Dinâmica Social
 
-```
-/send letter [hero] [mensagem]
-/who is [hero_name]?
-/why is [hero] angry?
-/show relationships [hero]
-```
+- **Jogador:** "Por que a Lila está tão brava?"
+  - _Ação do Sistema:_ Consulta tabela `affinity_logs` e `personality`.
+  - _Resposta:_ "Ela odeia Kaelen por roubar o loot do Dragão ontem. Sugiro um presente."
+- **Jogador:** "Mande uma carta para ela pedindo desculpas em meu nome e envie 300 de ouro."
+  - _Ação do Sistema:_ Envia Carta (+Afinidade) e transfere 300g.
+- **Jogador:** "Quem são os amigos de Kaelen?"
+  - _Ação do Sistema:_ Exibe grafo de relacionamentos de Kaelen.
 
-#### 3. Comandos Estratégicos
+#### 3. Estratégia e Táticas
 
-```
-/attack [location] with [hero]
-/defend [location]
-/scout [area]
-/retreat all
-```
+- **Jogador:** "Aquele posto avançado no norte está em perigo. Mande Kaelen para lá."
+  - _Ação do Sistema:_ Cria uma `Defend_Quest` no Norte com restrição `Hero: Kaelen`.
+- **Jogador:** "Ordene que todos recuem! O inverno chegou."
+  - _Ação do Sistema:_ Emite `Retreat_Call` global.
+- **Jogador:** "Onde está o covil dos Goblins?"
+  - _Ação do Sistema:_ Marca no mapa se já foi descoberto ou sugere missão de exploração.
 
 #### 4. Consultas Analíticas
 
-```
-/summary today
-/who is fighting?
-/what happened to [hero]?
-/top killers
-/economy report
-```
+- **Jogador:** "Como foi o dia hoje?"
+  - _Ação do Sistema:_ Gera resumo dos logs do dia.
+- **Jogador:** "Quem mais matou monstros?"
+  - _Ação do Sistema:_ Exibe ranking de Kills.
+- **Jogador:** "Estamos falindo?"
+  - _Ação do Sistema:_ Analisa fluxo de caixa e projeta falência.
 
 ### Exemplo de Conversa
 
 ```
-Jogador: /why is Lila angry?
+Jogador: "Por que a Lila está tão brava?"
 
 Conselheiro: "Majestade, Lila Rogue está irritada porque
 Sir Kaelen tomou o último golpe dela contra um Ogro há
@@ -6590,10 +7217,10 @@ Sir Kaelen tomou o último golpe dela contra um Ogro há
 na personalidade dela (Ganância: Alta), sugiro oferecer
 compensação em ouro ou ela pode iniciar PvP."
 
-Jogador: /send letter Lila sorry, here's 300 gold
+Jogador: "Envie uma carta para a Lila pedindo desculpas e mande 300 de ouro."
 
 Conselheiro: "Carta enviada. Custo: 25 IP. Lila deve
-receber em aproximadamente 20 segundos."
+receber em aproximadamente 20s (7 Turnos)."
 ```
 
 ---
@@ -6613,7 +7240,7 @@ O jogador escolhe **uma das 3 personalidades** no início do jogo:
 **Exemplo:**
 
 ```
-Jogador: /attack elite dragon
+Jogador: "Ataquem o dragão de elite!"
 
 Conselheiro: "Majestade, com todo respeito... isso é
 insanidade. Seus heróis mal derrotam Goblins. Mas se
@@ -6649,7 +7276,7 @@ Conselheiro: "Majestade, grandes perdas, mas que
 **Exemplo:**
 
 ```
-Jogador: /summary today
+Jogador: "Resumo do dia, por favor."
 
 Conselheiro: "RELATÓRIO DIÁRIO - DIA 45
 - Heróis ativos: 4/5
@@ -6697,7 +7324,7 @@ de kill. Recomendo intervenção diplomática."
 "Majestade, baseado nos padrões atuais, prevejo:
 - 60% chance de PvP entre Kaelen e Lila nas
   próximas 2 horas.
-- Invasão de Goblins estimada para 05:30 min.
+- Invasão de Goblins estimada para 05:30 min (110 Turnos).
 - Gandalf está próximo de Level Up (XP: 480/500)."
 ```
 
@@ -6743,12 +7370,14 @@ vingança contra o Dragão que o matou.
 O jogador pode enviar o Conselheiro para espionar:
 
 ```
-/send advisor scout [location]
+"Vá investigar aquela área escura no mapa."
+ ou
+ "Espione o acampamento inimigo."
 ```
 
 **Consequências:**
 
-- Conselheiro fica **incomunicável** por 2-5 minutos
+- Conselheiro fica **incomunicável** por 2-5 min (40-100 Turnos)
 - **Risco:** 10% chance de ser morto por monstros
 - **Recompensa:** Intel sobre:
   - Localização de chefes
@@ -6766,8 +7395,8 @@ Conselheiro: "Majestade... com todo respeito, você
 é PÉSSIMO nisso. Vou vender informações do reino
 para a Guilda Mercante. Tchau! 💼"
 
-[ALERTA] Conselheiro fugiu! Ficará ausente por 10
-minutos. Todos comandos NLP desabilitados.
+[ALERTA] Conselheiro fugiu! Ficará ausente por 10 min (200 Turnos).
+Todos comandos NLP desabilitados.
 ```
 
 ---
@@ -6783,7 +7412,7 @@ Para evitar **spam de comandos** e manter a **imersão narrativa**:
 - Jogador começa com **100/100 IP**
 - Cada comando gasto: **-10 IP**
 - Enviar carta: **-25 IP**
-- Regeneração: **+1 IP a cada 3 segundos** (20 IP/min)
+- Regeneração: **+1 IP por Turno** (20 IP/min)
 
 ### Estratégia de Uso
 
@@ -6797,7 +7426,7 @@ Jogador precisa:
 - Pedir relatório (10 IP) ✅ Pode
 - Comprar item (10 IP) ❌ Ficaria com 5 IP
 
-Decisão: Esperar 30s para regenerar 10 IP, então
+Decisão: Esperar 10 Turnos para regenerar 10 IP, então
 enviar carta (total: 25 IP).
 ```
 
@@ -6910,7 +7539,7 @@ P3: ESTADO DO REINO
 #### Compra Manual
 
 ```
-Jogador: /buy health_potion 30
+Jogador: "Compre 30 poções de vida."
 
 Conselheiro: "Compra realizada. Estoque atualizado:
 42/50 Poções de Vida. Saldo: 350 Ouro."
@@ -6942,18 +7571,18 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 **"Decreto de Guerra Total"**
 
 - **Custo:** 500 Ouro
-- **Duração:** 10 minutos
+- **Duração:** 10 min (200 Turnos)
 - **Buff:** +30% Ataque Global, +20% XP
 - **Risco:** 20% chance de evento "Motim" (1 herói fica com -50 Lealdade)
 
 ### Lista de Decretos
 
-| Nome                  | Custo | Buff                                            | Risco                                   |
-| --------------------- | ----- | ----------------------------------------------- | --------------------------------------- |
-| **Banquete Real**     | 300g  | +10% all stats, sem deserções por 15 min        | Pode atrair ladrões (invasão Goblin)    |
-| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança) | -10 Affect global (reclamam)            |
-| **Bênção Divina**     | 800g  | +50% Regeneração de HP/Mana por 5 min           | Pode atrair mortos-vivos (sentem magia) |
-| **Dia de Folga**      | 0g    | Heróis param de lutar por 5 min (descansam)     | Perde oportunidades de loot             |
+| Nome                  | Custo | Buff                                                  | Risco                                   |
+| --------------------- | ----- | ----------------------------------------------------- | --------------------------------------- |
+| **Banquete Real**     | 300g  | +10% all stats, sem deserções por 15 min (300 Turnos) | Pode atrair ladrões (invasão Goblin)    |
+| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança)       | -10 Affect global (reclamam)            |
+| **Bênção Divina**     | 800g  | +50% Regeneração de HP/Mana por 5 min (100 Turnos)    | Pode atrair mortos-vivos (sentem magia) |
+| **Dia de Folga**      | 0g    | Heróis param de lutar por 5 min (100 Turnos)          | Perde oportunidades de loot             |
 
 ### Uso Estratégico
 
@@ -6961,7 +7590,7 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 
 ```
 Dia 73: Boss Dragão detectado no radar.
-Jogador: /decree war_effort
+Jogador: "Publique um decreto de esforço de guerra!"
 Conselheiro: "Decreto emitido! Todos os heróis estão
 motivados. Mas atenção: Gandalf está murmurando sobre
 'autoritarismo'. Lealdade dele caiu para 40%."
@@ -6994,12 +7623,12 @@ motivados. Mas atenção: Gandalf está murmurando sobre
 
 #### Valores Iniciais
 
-| Atributo                | Valor                       |
-| ----------------------- | --------------------------- |
-| **IP Máximo**           | 100 IP                      |
-| **IP Inicial**          | 100 IP (começa cheio)       |
-| **Regeneração Base**    | +1 IP a cada 3s (20 IP/min) |
-| **Velocidade de Gasto** | Variável (10-30 IP/ação)    |
+| Atributo                | Valor                                 |
+| ----------------------- | ------------------------------------- |
+| **IP Máximo**           | 100 IP                                |
+| **IP Inicial**          | 100 IP (começa cheio)                 |
+| **Regeneração Base**    | +1 IP a cada 3s (1 Turno / 20 IP/min) |
+| **Velocidade de Gasto** | Variável (10-30 IP/ação)              |
 
 #### Tabela Completa de Custos
 
@@ -7037,7 +7666,7 @@ tar Herói (Comando Avançado)\*\* | -50 IP | Rara |
 #### 1. Corte Real (Tier 1)
 
 **Custo:** 500 Ouro  
-**Efeito:** Regeneração +100% (1 IP/3s → 2 IP/3s)  
+**Efeito:** Regeneração +100% (1 IP/3s → 2 IP/3s (2 IP/Turno))  
 **Quando comprar:** Ciclo 1 (primeiros 20 dias)
 
 ```
@@ -7088,13 +7717,13 @@ Se 80%+ dos heróis têm Lealdade > 70%:
 
 #### Eventos que Afetam IP
 
-| Evento                     | Efeito em IP                  | Duração                               |
-| -------------------------- | ----------------------------- | ------------------------------------- |
-| **Festival da Vila**       | +50% regeneração              | 10 min                                |
-| **Motim**                  | -50% regeneração + Custo +50% | Até resolver                          |
-| **Vitória contra Boss**    | +25 IP imediato               | Instantâneo                           |
-| **Morte de Herói Popular** | -10 IP/min por 5 min          | 5 min                                 |
-| **Traição**                | IP máximo -20 (100→80)        | Permanente até reconquistar confiança |
+| Evento                     | Efeito em IP                      | Duração                               |
+| -------------------------- | --------------------------------- | ------------------------------------- |
+| **Festival da Vila**       | +50% regeneração                  | 10 min (200 Turnos)                   |
+| **Motim**                  | -50% regeneração + Custo +50%     | Até resolver                          |
+| **Vitória contra Boss**    | +25 IP imediato                   | Instantâneo                           |
+| **Morte de Herói Popular** | -10 IP/min por 5 min (100 Turnos) | 5 min (100 Turnos)                    |
+| **Traição**                | IP máximo -20 (100→80)            | Permanente até reconquistar confiança |
 
 ---
 
@@ -7145,7 +7774,7 @@ Meta: Gastar 80% do IP disponível (alta atividade)
 ```
 ┌─────────────────────────────────────────┐
 │ IP: [████████░░] 75/100                 │
-│     Regen: +40/min | Next: 3s           │
+│     Regen: +40/min | Next: 1 Turno        │
 └─────────────────────────────────────────┘
 
 Estados visuais:
@@ -7170,7 +7799,7 @@ Aguarde regeneração ou economize.
 ```
 🚫 SEM INFLUENCE!
 Você não pode dar comandos.
-Aguarde 30s para recuperar 10 IP.
+Aguarde 30s (10 Turnos) para recuperar 10 IP.
 ```
 
 ---
@@ -7188,9 +7817,9 @@ Situação:
 Problema: Não tem IP suficiente!
 
 Soluções:
-1. Aguardar 30s (regenera 10 IP = total 25 IP)
+1. Aguardar 30s (10 Turnos) (regenera 10 IP = total 25 IP)
 2. Usar comando simples ao Conselheiro (10 IP):
-   "/alert lila retreat" (Conselheiro envia aviso)
+   "Avise a Lila para recuar!" (Conselheiro envia aviso)
 3. APRENDER: Sempre manter reserva de 30 IP!
 ```
 
@@ -7199,10 +7828,10 @@ Soluções:
 ```
 Dia 45:
 08:00 - IP: 100/100 (cheio)
-08:05 - Comando: "/status heroes" (-10 IP = 90)
+08:05 - Pedido: "Situação dos heróis?" (-10 IP = 90)
 08:10 - Carta para Kaelen (-25 IP = 65)
 08:15 - Aguarda regeneração (+10 IP = 75)
-08:20 - Comando: "/report economy" (-10 IP = 65)
+08:20 - Pedido: "Relatório econômico." (-10 IP = 65)
 08:30 - Aguarda (+20 IP = 85)
 08:35 - Decreto: "Banquete Real" (-30 IP = 55)
 08:45 - Aguarda (+20 IP = 75)
@@ -7262,7 +7891,7 @@ Mesmo sendo rei, você não pode fazer TUDO o tempo todo.
 #### Regeneração com Modificadores
 
 ```typescript
-const regenBase = 1; // 1 IP a cada 3s
+const regenBase = 1; // 1 IP a cada 3s (1 Turno)
 const upgradeMultiplier = hasCorteReal ? 2 : 1;
 const eventBonus = getActiveEventBonus("ip_regen");
 
@@ -7270,7 +7899,7 @@ const regenFinal = regenBase * upgradeMultiplier * eventBonus;
 
 // Exemplo:
 // Base: 1, Upgrade: 2x, Festival (+50% = 1.5)
-// = 1 * 2 * 1.5 = 3 IP a cada 3s = 60 IP/min!
+// = 1 * 2 * 1.5 = 3 IP por Turno = 60 IP/min!
 ```
 
 #### Custo Dinâmico
@@ -7326,7 +7955,7 @@ Se o Tesouro chegar a **0 Ouro** e não conseguir pagar:
 ### Solução de Emergência
 
 ```
-Jogador: /emergency_tax
+Jogador: "Cobre uma taxa de emergência agora!"
 
 Conselheiro: "Taxa de emergência cobrada! Heróis
 doaram 30% do ouro individual. Arrecadado: 400g.
@@ -7334,6 +7963,164 @@ Mas eles estão FURIOSOS. -20 Lealdade (Ethics) temporária."
 ```
 
 ---
+# 8b. TUTORIAL E FLUXO DE ONBOARDING: A JORNADA DO NOVO REI
+
+## 8b.1 Filosofia de Ensino: "A Mão Invisível"
+
+Como _Heroes of Majesty_ é um jogo de **influência indireta**, o tutorial não pode simplesmente dizer "Clique aqui para atacar". Isso ensinaria a mecânica errada.
+
+**O Objetivo Central do Onboarding:**
+Ensinar o jogador a **tolerar a falta de controle**. O tutorial deve frustrar propositalmente a tentativa de controle direto e recompensar a influência indireta.
+
+---
+
+## 8b.2 Fase 0: O Prólogo (Configuração Mental)
+
+Antes mesmo do jogo começar, o Conselheiro prepara o palco.
+
+**Tela Preta. Apenas texto terminal datilografado.**
+
+```
+> SISTEMA INICIANDO... v1.0.4
+> CARREGANDO CONSCIÊNCIA REAL... OK.
+> VERIFICANDO LISTA DE SÚDITOS... 0 ENCONTRADOS.
+> ALERTA: O REINO ESTÁ VAZIO E SILENCIOSO.
+
+CONSELHEIRO: "Majestade? Você acordou. Os antigos reis governavam
+pela espada. Você governará pela *Vontade*. Mas cuidado...
+Vontade sem Ouro é apenas um desejo."
+
+> PRESSIONE [ENTER] PARA ASSUMIR O TRONO.
+```
+
+---
+
+## 8b.3 Fase 1: O Despertar (Minutos 0-3)
+
+**Objetivo:** Navegar pela interface TTY (F1-F4).
+
+1.  **O Silêncio:** O jogo abre no [F1] OPS CENTER. Não há música. Apenas vento.
+2.  **O Primeiro Comando:**
+    - _Tarefa:_ O Conselheiro pede: "Abra o Mapa do Mundo [F4] para ver nossa insignificância."
+    - _Ação:_ Jogador tecla `F4`.
+    - _Resultado:_ O mapa revela apenas a Vila (um ponto de luz) e escuridão total (Fog of War) ao redor.
+    - _Feedback:_ "Pequeno, não? Mas é tudo nosso."
+
+3.  **A Primeira Decisão:**
+    - _Ação:_ Jogador deve teclar `F2` (Admin) para ver o Tesouro.
+    - _Estado:_ 1000 Ouro. 0 Income.
+    - _Conselheiro:_ "Temos ouro para um único herói. Escolha com sabedoria, pois ele será sua única lâmina contra a noite."
+
+---
+
+## 8b.4 Fase 2: O Primeiro Súdito (Minutos 3-6)
+
+**Objetivo:** Recrutamento e compreensão da IA Autônoma.
+
+1.  **O Recrutamento:**
+    - Jogador seleciona `GUILD_WARRIOR`.
+    - _Script:_ O jogo força a geração de um herói com traço `BRAVE` (Corajoso) para garantir ação imediata.
+    - _Nome:_ "Sir Alric" (ou aleatório).
+    - _Evento:_ Assim que recrutado, Alric **não** fica parado. Ele imediatamente compra uma poção e sai da vila.
+
+2.  **A Lição do Controle (CRÍTICA):**
+    - _Teste:_ O jogador tentará clicar no herói ou digitar ordens diretas.
+    - _Reação do Sistema:_ O Conselheiro interrompe:
+      > "NÃO! Um rei não grita ordens para um soldado individual. Sir Alric tem vontade própria. Apenas observe."
+
+3.  **A Observação:**
+    - O jogador é obrigado a assistir (F1 ou F4) Sir Alric andar até a orla da floresta.
+    - Um `Goblin Scout` (Tutorial Mob - HP reduzido) aparece.
+    - **Batalha Automática:** Alric luta. O jogador vê os logs de combate no F1.
+    - _Vitória:_ Alric vence. Loot: 50g.
+    - _Conselheiro:_ "Viu? Ele sabe o que fazer. Sua confiança foi recompensada."
+
+---
+
+## 8b.5 Fase 3: A Primeira Crise (Minutos 6-10)
+
+**Objetivo:** Ensinar Recompensas (Bounties) e uso de IP.
+
+1.  **O Problema Escalado:**
+    - Alric fica confiante (IA muda para `CONFIDENT`). Ele avança demais na floresta.
+    - _Spawn:_ Um `Ogro Jovem` (Elite) aparece. Alric não consegue vencer sozinho.
+
+2.  **A Falha da Autonomia:**
+    - Alric começa a perder HP rapidamente.
+    - Conselheiro: "Ele é bravo, mas estúpido. Vai morrer se continuar. Você não pode controlá-lo, mas pode **motivá-lo** a fugir ou **chamar ajuda** (se houvesse outro herói)."
+
+3.  **A Intervenção (Mecânica de Reward/Flag):**
+    - O jogo pausa o tempo (apenas no tutorial).
+    - Tutorial ensina: Clicar na **Bandeira de Medo** no mapa e posicioná-la, ou pedir ao Conselheiro: "Ordene que Alric recue!".
+    - _Custo:_ 10 IP.
+    - _Ação:_ Jogador executa.
+    - _Resultado:_ Alric vê o sinal real, a IA prioriza `SELF_PRESERVATION` e ele foge de volta para a vila.
+
+4.  **Lição:** "Você não controla a espada, mas controla o campo de batalha."
+
+---
+
+## 8b.6 Fase 4: Ciclo Econômico e Expansão (Minutos 10-15)
+
+**Objetivo:** Entender que Heróis gastam dinheiro.
+
+1.  **A Recuperação:**
+    - Alric, ferido, vai para a Taverna ou compra poção.
+    - _Efeito Sonoro:_ Moedas caindo.
+    - _HUD:_ Ouro do jogador sobe (Imposto).
+
+2.  **O Investimento:**
+    - Com o imposto gerado + loot passivo, o jogador agora tem 1200g.
+    - Conselheiro sugere: "Recrute um Clérigo ou Mago para apoiar Alric."
+    - Jogador recruta "Lyra (Mage)".
+
+3.  **A Sinergia (O "Click" Mental):**
+    - Alric volta à floresta com Lyra.
+    - O Ogro Jovem ainda está lá.
+    - Alric "tanka", Lyra causa dano de longe. Eles matam o Ogro.
+    - _Loot Massivo:_ Item Raro dropa. O jogador sente a glória.
+
+---
+
+## 8b.7 Mecânicas de "Network Social"
+
+O tutorial deve introduzir rapidamente que os heróis conversam.
+
+- Após matarem o Ogro, o Log Social mostra:
+  > `[SOCIAL] Alric pagou uma cerveja para Lyra. Afinidade +15.`
+- Conselheiro: "Eles estão formando laços. Um exército unido luta melhor que mercenários isolados."
+
+---
+
+## 8b.8 Checklist de Finalização do Tutorial
+
+O tutorial é considerado "Completo" quando o jogador (invisivelmente) atinge estas flags no banco de dados:
+
+1.  `TUTORIAL_CAMERA_MOVED`: Navegou F1-F4.
+2.  `TUTORIAL_FIRST_RECRUIT`: Recrutou 1 herói.
+3.  `TUTORIAL_FIRST_TAX`: Coletou imposto de uma compra de IA.
+4.  `TUTORIAL_SAVED_HERO`: Usou IP/Comando para evitar uma morte.
+5.  `TUTORIAL_PARTY_FORMED`: Viu dois heróis lutarem juntos.
+
+Após isso, o Conselheiro diz:
+
+> "Eles estão prontos, Majestade. E você também. A noite se aproxima e os verdadeiros monstros virão. Eu estarei aqui... observando."
+
+**[FIM DO MODO TUTORIAL - INÍCIO DO CICLO 1: PRIMAVERA]**
+
+---
+
+## 8b.9 Redes de Segurança (Fail States)
+
+O que acontece se o jogador falhar no tutorial?
+
+- **Se Alric morrer para o Ogro:**
+  - O jogo **não** dá Game Over.
+  - O Conselheiro fica sombrio: "Uma lição dura. O reino pagou com sangue. Aqui, pegue as economias da viúva de Alric (+200g) e tente de novo. Não desperdice novas vidas."
+  - Isso ensina que a morte é permanente, mas a economia persiste.
+
+- **Se o jogador gastar todo dinheiro em decorações inúteis:**
+  - Evento scriptado `MERCHANT_ERROR`: Um mercadante deixa cair um saco de ouro (+500g) no portão. O Conselheiro suspira: "Sorte de tolo. Não conte com isso novamente."
 # 8. MUNDO PROCEDURAL E CICLOS TEMPORAIS
 
 ## 8.1 Névoa de Guerra Pessoal: O Reino Oculto
@@ -7356,7 +8143,7 @@ heroes.forEach((hero) => {
 // 2. Torres e construções têm visão estática
 buildings.forEach((building) => {
   if (building.type === "WATCHTOWER") {
-    visibleNodes.push(...getNodesInRadius(building.position, 50));
+    visibleNodes.push(...getNodesInRadius(building.position, 1)); // Raio de Locais Adjacentes
   }
 });
 
@@ -7380,10 +8167,10 @@ Mapa mostra:
   [?] Caverna (Névoa - nenhum herói lá)
   [?] Montanha (Névoa)
 
-Jogador: /scout cavern
-Conselheiro: "Lila foi enviada para explorar. ETA: 2 min."
+Jogador: "Envie alguém para explorar a caverna."
+Conselheiro: "Lila foi enviada para explorar. ETA: 40 Turnos."
 
-[2 minutos depois]
+[Após 40 Turnos]
 Conselheiro: "Caverna revelada! Detectado: Boss Ogro
 Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 ```
@@ -7394,7 +8181,7 @@ Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 
 ### Estrutura da Partida
 
-Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 minutos** (Total: 2 horas ou mais).
+Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 min (600 Turnos)** (Total: 2h ou mais).
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -7446,7 +8233,7 @@ Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada cicl
 | --------------------- | ------------------------------------------------- |
 | **Temperatura**       | Amena (15-25°C)                                   |
 | **Precipitação**      | Chuvas leves (benéficas para fazendas)            |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)                    |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão)        |
 | **Visibilidade**      | Alta (névoa de guerra se dissipa 20% mais rápido) |
 
 #### Monstros Tier 1
@@ -7491,12 +8278,12 @@ Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para
 
 #### Características
 
-| Aspecto               | Detalhes                            |
-| --------------------- | ----------------------------------- |
-| **Temperatura**       | Calor extremo (30-45°C)             |
-| **Precipitação**      | Seca + tempestades súbitas          |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)      |
-| **Visibilidade**      | Média (poeira/calor distorce visão) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Calor extremo (30-45°C)                    |
+| **Precipitação**      | Seca + tempestades súbitas                 |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Média (poeira/calor distorce visão)        |
 
 #### Monstros Tier 2
 
@@ -7512,7 +8299,7 @@ Dia 2:      Expandir para 8 heróis, primeiro posto avançado. Preparação para
 **Eventos Frequentes:**
 
 - 🌪️ **Tempestade de Areia** (A cada 5 dias): -50% visibilidade, monstros +30% stats
-- 🔥 **Onda de Calor** (Aleatório): Heróis perdem -2 HP/min se não beberem água
+- 🔥 **Onda de Calor** (Aleatório): Heróis perdem -1 HP/Turno se não beberem água
 - ⚔️ **Invasão Ogro** (Dia 3): 15-25 Ogros atacam capital
 - 🌋 **Terremoto** (Dia 4): Abre novas passagens, 5% chance destruir prédio
 
@@ -7540,12 +8327,12 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 #### Características
 
-| Aspecto               | Detalhes                        |
-| --------------------- | ------------------------------- |
-| **Temperatura**       | Congelante (-10 a 5°C)          |
-| **Precipitação**      | Neve constante, nevascas        |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)  |
-| **Visibilidade**      | Baixa (neve reduz visão em 40%) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Congelante (-10 a 5°C)                     |
+| **Precipitação**      | Neve constante, nevascas                   |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Baixa (neve reduz visão em 40%)            |
 
 #### Monstros Tier 2-3 (Híbrido)
 
@@ -7566,11 +8353,10 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 **FRIO:**
 
-- Heróis perdem -1 HP/min ao ar livre
+- Heróis perdem -1 HP/Turno ao ar livre
 - Torres consomem lenha para manter aquecidas
-- Moral -10 global
 
-**Solução:** Construir "Fogueiras" (100g cada, área 10m aquecida)
+**Solução:** Construir "Fogueiras" (100g cada, aquece o Local)
 
 #### Eventos Globais Únicos do Ciclo 3
 
@@ -7615,12 +8401,12 @@ Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
 
 #### Características
 
-| Aspecto               | Detalhes                          |
-| --------------------- | --------------------------------- |
-| **Temperatura**       | Caótico (-20°C a 40°C aleatório)  |
-| **Precipitação**      | Chuva ácida, neve de cinzas       |
-| **Duração Dia/Noite** | 8min dia / 7min noite (Padrão)    |
-| **Visibilidade**      | Mínima (lua de sangue permanente) |
+| Aspecto               | Detalhes                                   |
+| --------------------- | ------------------------------------------ |
+| **Temperatura**       | Caótico (-20°C a 40°C aleatório)           |
+| **Precipitação**      | Chuva ácida, neve de cinzas                |
+| **Duração Dia/Noite** | 160 Turnos dia / 140 Turnos noite (Padrão) |
+| **Visibilidade**      | Mínima (lua de sangue permanente)          |
 
 #### Monstros Tier 3 (Apocalípticos)
 
@@ -7636,18 +8422,17 @@ Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
 **LUA DE SANGUE PECMANENTE:**
 
 - Monstros +100% HP/Attack (sempre ativo)
-- Heróis -20% Moral (constante)
-- Mortos reanimam automaticamente após 5min
+- Mortos reanimam automaticamente após 100 Turnos
 
 **FENDAS MÁGICAS:**
 
-- Portais spawnam a cada 10min
+- Portais spawnam a cada 200 Turnos
 - Liberam 10-20 monstros elite
 - Só fecham se destruídos (5,000 HP cada)
 
 **ECLIPSE ALEATÓRIO:**
 
-- Dia vira noite por 5min
+- Dia vira noite por 100 Turnos
 - Mortos-vivos +200% poder **(CRITICAL)**
 
 #### Eventos Globais Únicos do Ciclo 4
@@ -7679,7 +8464,6 @@ Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória o
 | ----------------- | --------- | -------- | --------- | ---------------------------- |
 | **Tom**           | Esperança | Conflito | Desespero | Épico                        |
 | **Dificuldade**   | ★☆☆☆      | ★★☆☆     | ★★★☆      | ★★★★                         |
-| **Moral Médio**   | 80%       | 60%      | 40%       | 20%                          |
 | **Taxa de Morte** | 10%       | 30%      | 50%       | 80%                          |
 | **Ouro/Dia**      | +500g     | +300g    | +100g     | Variável (economia circular) |
 | **Eventos/Dia**   | 0.5       | 1.0      | 1.5       | 3.0                          |
@@ -7719,12 +8503,10 @@ Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória o
 
 ## 8.3 Ciclo Dia/Noite: Perigo após o Pôr do Sol
 
-### Mecânica
+O mundo tem um **ciclo de 15 min (300 Turnos)** (tempo real):
 
-O mundo tem um **ciclo de 15 minutos** (tempo real):
-
-- **8 minutos:** Dia (seguro)
-- **7 minutos:** Noite (perigoso)
+- **8 min (160 Turnos):** Dia (seguro)
+- **7 min (140 Turnos):** Noite (perigoso)
 
 ### Mudanças Noturnas
 
@@ -7751,7 +8533,7 @@ Heróis sem **iluminação** sofrem:
 ```
 [18:45] 🌅 SYS [Mundo] [Noite] Sol se pôs. Penalidade ativa.
 [18:46] 💬 CHAT [Lila] "É muito escuro... preciso de luz."
-[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina 20m/5min.
+[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina o Local/100 Turnos.
 [18:48] 👣 MOVE [Kaelen] [Retornou] Voltou à vila por medo.
 ```
 
@@ -7769,7 +8551,7 @@ Heróis sem **iluminação** sofrem:
 
 #### 2. Tempestades
 
-- **Duração:** 5 minutos
+- **Duração:** 100 Turnos
 - **Efeito:**
   - Magos têm +50% poder (raios)
   - Arqueiros têm -30% acurácia (vento)
@@ -7779,14 +8561,13 @@ Heróis sem **iluminação** sofrem:
 
 - **Evento Raro:** 5% chance por dia (Ciclo 2+)
 - **Efeito:** Portal abre e spawna 10-20 monstros de elite
-- **Duração:** 10 minutos (deve ser fechado por mago)
+- **Duração:** 200 Turnos (deve ser fechado por mago)
 
 #### 4. Lua de Sangue
 
 - **Frequência:** Dia 4, Dia 6, Dia 8
 - **Efeito:**
   - Todos monstros ganham +100% HP/Attack
-  - Heróis têm -10 Moral
   - Mortos-vivos spawnam em massa
   - **Boss Global** aparece
 
@@ -7820,7 +8601,7 @@ Exército: 50 Esqueletos, 10 Necromantes
 
 O Rei Vilão envia **ondas periódicas** de monstros diretamente contra a Casa Central.
 
-- **Frequência:** A cada 12 horas (tempo do jogo).
+- **Frequência:** A cada 12 horas (tempo do jogo - 150 Turnos).
 - **Escalonamento:** Cada nova onda é **20% mais forte** que a anterior.
 
 **Desafio Estratégico:**
@@ -7842,6 +8623,36 @@ Reino Salvo. Partida Concluída.
 
 Gerando Crônicas do Reino...
 ```
+
+---
+
+## 8.5 Tempos de Viagem e Eficiência de Ações
+
+Em _Heroes of Majesty_, o tempo é um recurso precioso. Cada ação consome **Turnos** do Ciclo de Dia/Noite.
+
+### Tabela de Tempos de Viagem (Deslocamento Global)
+
+Considerando que cada **Tile** (Local do Mapa) representa uma área significativa (Floresta Inteira, Bairro da Vila, Dungeon):
+
+| Tipo de Deslocamento               | Tempo Real | Turnos    | Descrição                                               |
+| :--------------------------------- | :--------- | :-------- | :------------------------------------------------------ |
+| **Viagem entre Locais Adjacentes** | 60s        | 20 Turnos | Tempo para cruzar a fronteira de um Tile para outro.    |
+| **Viagem Longa (Teleporte)**       | 10s        | 3 Turnos  | Viajando via Portal Mágico ou Skill de Teleporte.       |
+| **Fuga de Combate**                | 15s        | 5 Turnos  | Tempo para recuar de um Tile perigoso para um seguro.   |
+| **Patrulha no Local**              | 120s       | 40 Turnos | Tempo para explorar completamente um Tile desconhecido. |
+| **Busca por Monstros**             | 60s        | 20 Turnos | Procurar inimigos escondidos no local atual.            |
+
+### Tabela de Tempos de Ação em Construções
+
+| Ação                      | Tempo Real | Turnos       | Descrição                                 |
+| :------------------------ | :--------- | :----------- | :---------------------------------------- |
+| **Descanso na Taverna**   | 60s        | 20 Turnos    | Recupera Fadiga e HP/Mana.                |
+| **Visita ao Mercado**     | 15s        | 5 Turnos     | Comprar/Vender itens (Logística).         |
+| **Treinamento na Guilda** | 60s-120s   | 20-40 Turnos | Aprender nova skill ou melhorar atributo. |
+| **Rezar no Templo**       | 30s        | 10 Turnos    | Remover maldição ou ganhar abençoamento.  |
+| **Forjar Item**           | 90s        | 30 Turnos    | Criar equipamento no Ferreiro.            |
+
+> **Nota:** Estes tempos são **simulados** para os heróis (IA). O jogador não precisa "esperar" olhando para a tela de loading, mas verá no log que o herói está "Ocupado: Comprando Poções (5 Turnos restantes)".
 
 ---
 
@@ -7938,7 +8749,7 @@ generateMap(seed) => {
 **Passo 1: Seleção de Heróis**
 
 ```
-Jogador: /found_outpost forest_north
+Jogador: "Crie um posto avançado na floresta norte."
 
 Conselheiro: "Para fundar um posto, você deve escolher
 3 heróis. ATENÇÃO: Eles deixarão a capital permanentemente
@@ -8086,7 +8897,7 @@ Se o Posto prosperar muito, o jogador pode **mudar a capital** para lá.
 ### Consequências Permanentes
 
 ```
-Jogador: /move_capital outpost_north
+Jogador: "Transfira a capital para o posto norte. É urgente."
 
 Conselheiro: "ATENÇÃO! Esta decisão é IRREVERSÍVEL.
 A vila atual se tornará um posto, e o Posto Norte
@@ -8174,7 +8985,7 @@ Vila dos Exilados:
 **Opção 2: Negociação**
 
 ```
-Jogador: /negotiate rebels
+Jogador: "Tente negociar com os rebeldes."
 
 Conselheiro: "Kaelen exige: 1,500 Ouro, perdão total
 e autonomia completa. Aceitar significa perder 3 heróis,
@@ -8654,18 +9465,18 @@ O nível (**NMG**) é o multiplicador central de poder. O teto máximo do jogo �
 
 _Multiplicadores: HP x10 | ATK x3 | DEF x2 | Skills: 3_
 
-| Boss          | Atk | Dmg (%) | Ex: Dmg (L1) | Visual Detalhado                                       | Skill 1 (Dano/Efeito/CD)                        | Skill 2 (Dano/Efeito/CD)                     | Skill 3 (Dano/Efeito/CD)                       |
-| :------------ | :-- | :------ | :----------- | :----------------------------------------------------- | :---------------------------------------------- | :------------------------------------------- | :--------------------------------------------- |
-| **Aeternus**  | Mag | 150%    | **36**       | Dragão carmesim colossal, escamas de obsidiana.        | **Sopro:** 150% Mag AoE + DoT. CD: 15s          | **Terror:** Stun Global 2s. CD: 20s          | **Meteoros:** 180% Mag em 3 alvos. CD: 12s     |
-| **Malphas**   | Mag | 120%    | **29**       | Esqueleto gigante em armadura de osso negro flutuante. | **Erguer:** Invoca 4 Esqueletos. CD: 30s        | **Dreno:** Rouba 10% HP. CD: 18s             | **Peste:** DoT AoE + -50% cura. CD: 25s        |
-| **Grok**      | Phy | 180%    | **43**       | Gigante de 12m com braços de pedra e peles.            | **Esmagar:** 180% Phys + 3s Stun. CD: 10s       | **Arremesso:** 120% Phys Retaguarda. CD: 8s  | **Fúria:** Atk Speed +100% se HP <40%.         |
-| **Xandira**   | Phy | 110%    | **26**       | Aranha com torso humanoide pálido e muitos olhos.      | **Casulo:** Stun alvo por 5s. CD: 14s           | **Veneno:** DoT 8%/s por 5s. CD: 10s         | **Prole:** Invoca 8 Aranhas. CD: 20s           |
-| **Hydros**    | Mag | 130%    | **31**       | Serpente marinha com barbatanas de serra azul neon.    | **Tsunami:** Pushback + Stun + 80% Mag. CD: 18s | **Jato:** 150% Mag em linha. CD: 10s         | **Vórtice:** Puxa alvos + Fuga Bloq. CD: 30s   |
-| **Cyrus**     | Phy | 140%    | **34**       | Cavaleiro real negro, capa rasgada, espada de fogo.    | **Estocada:** 200% Phys + 50% Crit. CD: 6s      | **Comando:** Invoca 2 Elites. CD: 25s        | **Ripostar:** Reflete 30% dano por 5s. CD: 20s |
-| **Valac**     | Mix | 120%    | **29**       | Demônio de lava com chicote de chamas.                 | **Chicote:** 110% Phys AoE + Queima. CD: 5s     | **Portal:** Invoca 2 Diabretes. CD: 15s      | **Corrupção:** -0.2 Ethics (Temp). CD: 40s     |
-| **Yggdrasil** | Mag | 100%    | **24**       | Árvore distorcida com rostos negros no tronco.         | **Raízes:** Enraíza todos + Dreno Mana. CD: 20s | **Esporos:** Confusão (50% azar) 4s. CD: 15s | **Fúria:** 140% Mag estacas AoE. CD: 10s       |
-| **Magmator**  | Mag | 140%    | **34**       | Núcleo de cristal flutuante em lava viva.              | **Explosão:** 130% Mag AoE + Knockback. CD: 12s | **Escudo:** -80% dano recebido (4s). CD: 20s | **Terremoto:** Stun 2s AoE + 70% Phys. CD: 15s |
-| **Oculus**    | Mag | 160%    | **38**       | Olho central gigante com tentáculos oculares.          | **Raio:** 200% Mag (Ignora 100% Def). CD: 20s   | **Salto:** Fica invisível por 2s. CD: 15s    | **Loucura:** Mind = 0 por 10s. CD: 30s         |
+| Boss          | Atk | Dmg (%) | Ex: Dmg (L1) | Visual Detalhado                                       | Skill 1 (Dano/Efeito/CD)                             | Skill 2 (Dano/Efeito/CD)                               | Skill 3 (Dano/Efeito/CD)                                  |
+| :------------ | :-- | :------ | :----------- | :----------------------------------------------------- | :--------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------- |
+| **Aeternus**  | Mag | 150%    | **36**       | Dragão carmesim colossal, escamas de obsidiana.        | **Sopro:** 150% Mag AoE + DoT. CD: 5 Turnos          | **Terror:** Stun Global 1 Turno. CD: 7 Turnos          | **Meteoros:** 180% Mag em 3 alvos. CD: 4 Turnos           |
+| **Malphas**   | Mag | 120%    | **29**       | Esqueleto gigante em armadura de osso negro flutuante. | **Erguer:** Invoca 4 Esqueletos. CD: 10 Turnos       | **Dreno:** Rouba 10% HP. CD: 6 Turnos                  | **Peste:** DoT AoE + -50% cura. CD: 8 Turnos              |
+| **Grok**      | Phy | 180%    | **43**       | Gigante de 12m com braços de pedra e peles.            | **Esmagar:** 180% Phys + 1 Turno Stun. CD: 3 Turnos  | **Arremesso:** 120% Phys Retaguarda. CD: 3 Turnos      | **Fúria:** Atk Speed +100% se HP <40%.                    |
+| **Xandira**   | Phy | 110%    | **26**       | Aranha com torso humanoide pálido e muitos olhos.      | **Casulo:** Stun alvo por 2 Turnos. CD: 5 Turnos     | **Veneno:** DoT 8%/Turno por 2 Turnos. CD: 3 Turnos    | **Prole:** Invoca 8 Aranhas. CD: 7 Turnos                 |
+| **Hydros**    | Mag | 130%    | **31**       | Serpente marinha com barbatanas de serra azul neon.    | **Tsunami:** Pushback + Stun + 80% Mag. CD: 6 Turnos | **Jato:** 150% Mag em linha. CD: 3 Turnos              | **Vórtice:** Puxa alvos + Fuga Bloq. CD: 10 Turnos        |
+| **Cyrus**     | Phy | 140%    | **34**       | Cavaleiro real negro, capa rasgada, espada de fogo.    | **Estocada:** 200% Phys + 50% Crit. CD: 2 Turnos     | **Comando:** Invoca 2 Elites. CD: 8 Turnos             | **Ripostar:** Reflete 30% dano por 2 Turnos. CD: 7 Turnos |
+| **Valac**     | Mix | 120%    | **29**       | Demônio de lava com chicote de chamas.                 | **Chicote:** 110% Phys AoE + Queima. CD: 2 Turnos    | **Portal:** Invoca 2 Diabretes. CD: 5 Turnos           | **Corrupção:** -0.2 Ethics (Temp). CD: 13 Turnos          |
+| **Yggdrasil** | Mag | 100%    | **24**       | Árvore distorcida com rostos negros no tronco.         | **Raízes:** Enraíza todos + Dreno Mana. CD: 7 Turnos | **Esporos:** Confusão (50% azar) 1 Turno. CD: 5 Turnos | **Fúria:** 140% Mag estacas AoE. CD: 3 Turnos             |
+| **Magmator**  | Mag | 140%    | **34**       | Núcleo de cristal flutuante em lava viva.              | **Explosão:** 130% Mag AoE + Knockback. CD: 4 Turnos | **Escudo:** -80% dano recebido (1 Turno). CD: 7 Turnos | **Terremoto:** Stun 1 Turno AoE + 70% Phys. CD: 5 Turnos  |
+| **Oculus**    | Mag | 160%    | **38**       | Olho central gigante com tentáculos oculares.          | **Raio:** 200% Mag (Ignora 100% Def). CD: 7 Turnos   | **Salto:** Fica invisível por 1 Turno. CD: 5 Turnos    | **Loucura:** Mind = 0 por 3 Turnos. CD: 10 Turnos         |
 
 ---
 
@@ -8673,58 +9484,58 @@ _Multiplicadores: HP x10 | ATK x3 | DEF x2 | Skills: 3_
 
 _Multiplicadores: HP x4 | ATK x2 | DEF x1.5 | Skills: 2_
 
-| ID      | Nome                   | Atk | Dmg (%) | Ex: Dmg (L1) | Visual                                  | Skill 1 (Dano/Efeito/CD)         | Skill 2 (Dano/Efeito/CD)         |
-| :------ | :--------------------- | :-- | :------ | :----------- | :-------------------------------------- | :------------------------------- | :------------------------------- |
-| **M1**  | **Headless Knight**    | Phy | 120%    | **19**       | Cavaleiro espectral com abóbora.        | Carga: 130% + Knockback (8s)     | Arremesso: 100% AoE (12s)        |
-| **M2**  | **Lesser Lich**        | Mag | 110%    | **18**       | Esqueleto com mantos e cajado.          | Seta Gelo: 110% + Slow (5s)      | Barreira: Escudo 20% HP (20s)    |
-| **M3**  | **Elder Banshee**      | Mag | 90%     | **14**       | Espectro pálido com mandíbula caída.    | Grito: Silence 4s (15s)          | Pavor: Fear 3s (18s)             |
-| **M4**  | **Elite Wraith**       | Mag | 100%    | **16**       | Sombra translúcida gigante.             | Dreno: 15% HP Dreno (12s)        | Invisível: 3s (25s)              |
-| **M5**  | **Ghoul King**         | Phy | 130%    | **21**       | Zumbi enorme com garras roxas.          | Mordida: 120% + Infecção (8s)    | Frenesi: Atk Speed +50% (15s)    |
-| **M6**  | **Pharaoh Mummy**      | Mag | 110%    | **18**       | Enrolada em ouro e faixas negras.       | Maldição: -30% Stats (20s)       | Prisão: Stun 2s (12s)            |
-| **M7**  | **Skeleton General**   | Phy | 140%    | **22**       | Armadura de placas completa.            | Comando: Buff Atk Aliados (15s)  | Golpe: 140% + Quebra Def (10s)   |
-| **M8**  | **Noble Vampire**      | Mix | 120%    | **19**       | Nobre pálido em traje de gala.          | Forma Morcego: Dodge +80% (5s)   | Sedução: Alvo não ataca (12s)    |
-| **M9**  | **Ravenous Shadow**    | Mag | 110%    | **18**       | Nuvem negra com dentes visíveis.        | Roubo Mana: 30 Mana (10s)        | Salto Sombrio: Blink (8s)        |
-| **M10** | **Giant Zombie**       | Phy | 130%    | **21**       | Frankenstein de retalhos humanos.       | Arremesso: Lança cadáver (10s)   | Pancada: 140% + Stun (12s)       |
-| **M11** | **Silver Alpha Wolf**  | Phy | 125%    | **20**       | Lobo enorme de pelagem branca.          | Uivo: Buff Atk Aliados (15s)     | Salto: 130% em longe (7s)        |
-| **M12** | **Corrupted Bear**     | Phy | 135%    | **22**       | Urso com cristais roxos saindo.         | Abraço: Stun 4s no alvo (18s)    | Rugido: -20% Atk Medo (12s)      |
-| **M13** | **Elder Treant**       | Phy | 115%    | **18**       | Árvore com pernas e braços longos.      | Rocha: 140% AoE (10s)            | Raiz: Stun 2s (15s)              |
-| **M14** | **Shadow Panther**     | Phy | 130%    | **21**       | Pantera com fumaça negra.               | Furtivo: Hit 100% Crit (20s)     | Corte: Sangramento 5%/s (8s)     |
-| **M15** | **Iron Boar**          | Phy | 140%    | **22**       | Javali com placas de metal crescidas.   | Investida: 160% + Stun (12s)     | Casco: Reflete 20% Dano Phys.    |
-| **M16** | **Empress Serpent**    | Mag | 120%    | **19**       | Cobra gigante com crista dourada.       | Olhar: Petrificação 3s (20s)     | Névoa: Veneno 4%/s AoE (10s)     |
-| **M17** | **Storm Griffin**      | Mix | 130%    | **21**       | Meio águia, meio leão, penas elétricas. | Mergulho: 140% + Choque (10s)    | Choque: 100% Mag AoE (15s)       |
-| **M18** | **Broodmother**        | Phy | 120%    | **19**       | Aranha que "tece" armadilhas.           | Armadilha: Imobiliza 5s (12s)    | Picada: 180% Dano Único (8s)     |
-| **M19** | **Sand Worm**          | Phy | 140%    | **22**       | Verme segmentado gigante.               | Buraco: Puxa alvo pro solo (15s) | Cuspe: 100% Mag Ácido (8s)       |
-| **M20** | **Carnivorous Plant**  | Mag | 110%    | **18**       | Boca gigante floral com dentes.         | Chicote: Puxa alvo (8s)          | Esporos: Sono 4s (20s)           |
-| **M21** | **Obsidian Golem**     | Phy | 150%    | **24**       | Gigante de rocha negra brilhante.       | Pulso: Afasta alvos (12s)        | Regenerar: +10% HP (30s)         |
-| **M22** | **Infernal Elemental** | Mag | 130%    | **21**       | Fogo azulado com forma humana.          | Aura: 2%/s Dano em todos.        | Labareda: 120% Mag AoE (10s)     |
-| **M23** | **Frost Spirit**       | Mag | 110%    | **18**       | Vulto de gelo translúcido.              | Prisão: Alvo congelado 3s (15s)  | Nevasca: Slow Global (25s)       |
-| **M24** | **Corrupted Djinn**    | Mag | 125%    | **20**       | Gênio em névoa roxa.                    | Desejo: Debuff aleatório (15s)   | Choque: 140% Mag (8s)            |
-| **M25** | **Runic Sentinel**     | Mix | 135%    | **22**       | Estátua com runas neon azuis.           | Raio: 150% Mag (10s)             | Barreira: Imune a Mag por 5s.    |
-| **M26** | **Storm Wraith**       | Mag | 120%    | **19**       | Nuvem de trovão em movimento.           | Cadeia: Relâmpago 3 alvos (12s)  | Voo: Speed +50% (10s)            |
-| **M27** | **Gargoyle Patriarch** | Phy | 140%    | **22**       | Estátua alada gigante.                  | Forma Pedra: Cura 15% (25s)      | Investida: 130% + Stun (10s)     |
-| **M28** | **Light Archon**       | Mag | 145%    | **23**       | Entidade de pura luz amarela.           | Clarão: Stun 2s AoE (18s)        | Punição: 160% Mag (10s)          |
-| **M29** | **Flesh Horror**       | Phy | 130%    | **21**       | Massa amorfa de braços e bocas.         | Regeneração: 2% HP/s.            | Multi-Atk: Ataca 2x (8s)         |
-| **M30** | **Siege Automaton**    | Phy | 160%    | **26**       | Robô de engrenagens e vapor.            | Canhão: 180% Phys fura Def.      | Pisotear: 100% Phys AoE (10s)    |
-| **M31** | **Orc Chieftain**      | Phy | 150%    | **24**       | Orc em armadura de espinhos.            | Grito: +20% Atk Aliados (15s)    | Salto: 140% + Stun (10s)         |
-| **M32** | **Goblin Shaman**      | Mag | 100%    | **16**       | Máscara de crânio de dragão.            | Totem: Cura Aliados 5%/s (20s)   | Sapo: Transforma em sapo 4s.     |
-| **M33** | **Mercenary Captain**  | Phy | 130%    | **21**       | Armadura completa, espada longa.        | Bomba: Fumaça (Dodge 50%) (15s)  | Tiro: 120% Sangramento (8s)      |
-| **M34** | **Archmage**           | Mag | 140%    | **22**       | Manto roxo, flutuando.                  | Meteoro: 160% Mag AoE (15s)      | Imagem: Cria 2 clones fak.       |
-| **M35** | **Grand Assassin**     | Phy | 135%    | **22**       | Máscara ninja, dagas verdes.            | Veneno: DoT 10%/s (10s)          | Sumiço: Invisível 4s (20s)       |
-| **M36** | **High Inquisitor**    | Mag | 130%    | **21**       | Veste branca e prata.                   | Fogo Sagrado: 130% Mag (8s)      | Martelo: Stun 3s (15s)           |
-| **M37** | **Rogue Lord**         | Phy | 125%    | **20**       | Capa elegante, chapéu com pena.         | Roubo: Rouba Poção/Item (20s)    | Golpe Baixo: Stun 2s (10s)       |
-| **M38** | **Blood Barbarian**    | Phy | 155%    | **25**       | Sem camisa, machado gigante duplo.      | Fúria: Atk +50% (15s)            | Rodopio: 110% AoE Phys (8s)      |
-| **M39** | **Chaos Cultist**      | Mag | 110%    | **18**       | Túnica negra com olhos pintados.        | Portal: Invoca 2 Diabretes (20s) | Sacrifício: Dmg em si = AoE Mag. |
-| **M40** | **Black Knight**       | Phy | 145%    | **23**       | Armadura negra, olhos vermelhos.        | Puxão: Traz alvo pro melee (10s) | Aura: -20% Def Aliados.          |
-| **M41** | **Succubus Queen**     | Mag | 120%    | **19**       | Asas de morcego, vestes pretas.         | Charme: Alvo ataca aliado (20s)  | Chicote: 100% + Stun 1s (8s)     |
-| **M42** | **Lesser Beholder**    | Mag | 130%    | **21**       | Olho gigante flutuante.                 | Paralisia: Raio Stun 3s (15s)    | Debuff: -50% Atk Speed (12s)     |
-| **M43** | **Minotaur**           | Phy | 150%    | **24**       | Homem-touro com machado.                | Carga: 150% + Knockback (10s)    | Parede: Separa grupo (20s)       |
-| **M44** | **Elder Medusa**       | Mag | 120%    | **19**       | Cabelos de cobra, calda serpente.       | Pedra: Petro (Stun 5s) (30s)     | Sopro: 110% Mag Veneno (10s)     |
-| **M45** | **Young Kraken**       | Phy | 140%    | **22**       | Tentacles saindo do chão/água.          | Tinta: Cega (Miss 80%) (15s)     | Mult: 4 atks de 40% (10s)        |
-| **M46** | **Siren Songstress**   | Mag | 115%    | **18**       | Parte peixe, parte humana bela.         | Canto: Sono 5s (25s)             | Onda: 120% Mag AoE (10s)         |
-| **M47** | **Bridge Troll**       | Phy | 140%    | **22**       | Troll de 4m cor de pedra.               | Regeneração: 5% HP/s.            | Rocha: 140% Phys (10s)           |
-| **M48** | **Master Imp**         | Mag | 100%    | **16**       | Diabrete com tocha e poções.            | Piro: Fogo em todos (12s)        | Multi: Se divide em 3 (30s).     |
-| **M49** | **Gorgon**             | Phy | 135%    | **22**       | Guerreira com escudo de serpente.       | Olhar: -50% Speed (10s)          | Cauda: 130% Phys Stun (12s)      |
-| **M50** | **Royal Chimera**      | Mix | 140%    | **22**       | Leão, Bode e Cobra em um corpo.         | Sopro: 140% Mag Fogo (12s)       | Mordida: 120% Phys Veneno.       |
+| ID      | Nome                   | Atk | Dmg (%) | Ex: Dmg (L1) | Visual                                  | Skill 1 (Dano/Efeito/CD)                  | Skill 2 (Dano/Efeito/CD)                |
+| :------ | :--------------------- | :-- | :------ | :----------- | :-------------------------------------- | :---------------------------------------- | :-------------------------------------- |
+| **M1**  | **Headless Knight**    | Phy | 120%    | **19**       | Cavaleiro espectral com abóbora.        | Carga: 130% + Knockback (3 Turnos)        | Arremesso: 100% AoE (4 Turnos)          |
+| **M2**  | **Lesser Lich**        | Mag | 110%    | **18**       | Esqueleto com mantos e cajado.          | Seta Gelo: 110% + Slow (2 Turnos)         | Barreira: Escudo 20% HP (7 Turnos)      |
+| **M3**  | **Elder Banshee**      | Mag | 90%     | **14**       | Espectro pálido com mandíbula caída.    | Grito: Silence 1 Turno (5 Turnos)         | Pavor: Fear 1 Turno (6 Turnos)          |
+| **M4**  | **Elite Wraith**       | Mag | 100%    | **16**       | Sombra translúcida gigante.             | Dreno: 15% HP Dreno (4 Turnos)            | Invisível: 1 Turno (8 Turnos)           |
+| **M5**  | **Ghoul King**         | Phy | 130%    | **21**       | Zumbi enorme com garras roxas.          | Mordida: 120% + Infecção (3 Turnos)       | Frenesi: Atk Speed +50% (5 Turnos)      |
+| **M6**  | **Pharaoh Mummy**      | Mag | 110%    | **18**       | Enrolada em ouro e faixas negras.       | Maldição: -30% Stats (7 Turnos)           | Prisão: Stun 1 Turno (4 Turnos)         |
+| **M7**  | **Skeleton General**   | Phy | 140%    | **22**       | Armadura de placas completa.            | Comando: Buff Atk Aliados (5 Turnos)      | Golpe: 140% + Quebra Def (3 Turnos)     |
+| **M8**  | **Noble Vampire**      | Mix | 120%    | **19**       | Nobre pálido em traje de gala.          | Forma Morcego: Dodge +80% (2 Turnos)      | Sedução: Alvo não ataca (4 Turnos)      |
+| **M9**  | **Ravenous Shadow**    | Mag | 110%    | **18**       | Nuvem negra com dentes visíveis.        | Roubo Mana: 30 Mana (3 Turnos)            | Salto Sombrio: Blink (3 Turnos)         |
+| **M10** | **Giant Zombie**       | Phy | 130%    | **21**       | Frankenstein de retalhos humanos.       | Arremesso: Lança cadáver (3 Turnos)       | Pancada: 140% + Stun (4 Turnos)         |
+| **M11** | **Silver Alpha Wolf**  | Phy | 125%    | **20**       | Lobo enorme de pelagem branca.          | Uivo: Buff Atk Aliados (5 Turnos)         | Salto: 130% em longe (2 Turnos)         |
+| **M12** | **Corrupted Bear**     | Phy | 135%    | **22**       | Urso com cristais roxos saindo.         | Abraço: Stun 1 Turno no alvo (6 Turnos)   | Rugido: -20% Atk Medo (4 Turnos)        |
+| **M13** | **Elder Treant**       | Phy | 115%    | **18**       | Árvore com pernas e braços longos.      | Rocha: 140% AoE (3 Turnos)                | Raiz: Stun 1 Turno (5 Turnos)           |
+| **M14** | **Shadow Panther**     | Phy | 130%    | **21**       | Pantera com fumaça negra.               | Furtivo: Hit 100% Crit (7 Turnos)         | Corte: Sangramento 5%/Turno (3 Turnos)  |
+| **M15** | **Iron Boar**          | Phy | 140%    | **22**       | Javali com placas de metal crescidas.   | Investida: 160% + Stun (4 Turnos)         | Casco: Reflete 20% Dano Phys.           |
+| **M16** | **Empress Serpent**    | Mag | 120%    | **19**       | Cobra gigante com crista dourada.       | Olhar: Petrificação 1 Turno (7 Turnos)    | Névoa: Veneno 4%/Turno AoE (3 Turnos)   |
+| **M17** | **Storm Griffin**      | Mix | 130%    | **21**       | Meio águia, meio leão, penas elétricas. | Mergulho: 140% + Choque (3 Turnos)        | Choque: 100% Mag AoE (5 Turnos)         |
+| **M18** | **Broodmother**        | Phy | 120%    | **19**       | Aranha que "tece" armadilhas.           | Armadilha: Imobiliza 2 Turnos (4 Turnos)  | Picada: 180% Dano Único (3 Turnos)      |
+| **M19** | **Sand Worm**          | Phy | 140%    | **22**       | Verme segmentado gigante.               | Buraco: Puxa alvo pro solo (5 Turnos)     | Cuspe: 100% Mag Ácido (3 Turnos)        |
+| **M20** | **Carnivorous Plant**  | Mag | 110%    | **18**       | Boca gigante floral com dentes.         | Chicote: Puxa alvo (3 Turnos)             | Esporos: Sono 1 Turno (7 Turnos)        |
+| **M21** | **Obsidian Golem**     | Phy | 150%    | **24**       | Gigante de rocha negra brilhante.       | Pulso: Afasta alvos (4 Turnos)            | Regenerar: +10% HP (10 Turnos)          |
+| **M22** | **Infernal Elemental** | Mag | 130%    | **21**       | Fogo azulado com forma humana.          | Aura: 2%/Turno Dano em todos.             | Labareda: 120% Mag AoE (3 Turnos)       |
+| **M23** | **Frost Spirit**       | Mag | 110%    | **18**       | Vulto de gelo translúcido.              | Prisão: Alvo congelado 1 Turno (5 Turnos) | Nevasca: Slow Global (8 Turnos)         |
+| **M24** | **Corrupted Djinn**    | Mag | 125%    | **20**       | Gênio em névoa roxa.                    | Desejo: Debuff aleatório (5 Turnos)       | Choque: 140% Mag (3 Turnos)             |
+| **M25** | **Runic Sentinel**     | Mix | 135%    | **22**       | Estátua com runas neon azuis.           | Raio: 150% Mag (3 Turnos)                 | Barreira: Imune a Mag por 2 Turnos.     |
+| **M26** | **Storm Wraith**       | Mag | 120%    | **19**       | Nuvem de trovão em movimento.           | Cadeia: Relâmpago 3 alvos (4 Turnos)      | Voo: Speed +50% (3 Turnos)              |
+| **M27** | **Gargoyle Patriarch** | Phy | 140%    | **22**       | Estátua alada gigante.                  | Forma Pedra: Cura 15% (8 Turnos)          | Investida: 130% + Stun (3 Turnos)       |
+| **M28** | **Light Archon**       | Mag | 145%    | **23**       | Entidade de pura luz amarela.           | Clarão: Stun 1 Turno AoE (6 Turnos)       | Punição: 160% Mag (3 Turnos)            |
+| **M29** | **Flesh Horror**       | Phy | 130%    | **21**       | Massa amorfa de braços e bocas.         | Regeneração: 2% HP/s.                     | Multi-Atk: Ataca 2x (3 Turnos)          |
+| **M30** | **Siege Automaton**    | Phy | 160%    | **26**       | Robô de engrenagens e vapor.            | Canhão: 180% Phys fura Def.               | Pisotear: 100% Phys AoE (3 Turnos)      |
+| **M31** | **Orc Chieftain**      | Phy | 150%    | **24**       | Orc em armadura de espinhos.            | Grito: +20% Atk Aliados (5 Turnos)        | Salto: 140% + Stun (3 Turnos)           |
+| **M32** | **Goblin Shaman**      | Mag | 100%    | **16**       | Máscara de crânio de dragão.            | Totem: Cura Aliados 5%/Turno (7 Turnos)   | Sapo: Transforma em sapo 1 Turno.       |
+| **M33** | **Mercenary Captain**  | Phy | 130%    | **21**       | Armadura completa, espada longa.        | Bomba: Fumaça (Dodge 50%) (5 Turnos)      | Tiro: 120% Sangramento (3 Turnos)       |
+| **M34** | **Archmage**           | Mag | 140%    | **22**       | Manto roxo, flutuando.                  | Meteoro: 160% Mag AoE (5 Turnos)          | Imagem: Cria 2 clones fak.              |
+| **M35** | **Grand Assassin**     | Phy | 135%    | **22**       | Máscara ninja, dagas verdes.            | Veneno: DoT 10%/Turno (3 Turnos)          | Sumiço: Invisível 1 Turno (7 Turnos)    |
+| **M36** | **High Inquisitor**    | Mag | 130%    | **21**       | Veste branca e prata.                   | Fogo Sagrado: 130% Mag (3 Turnos)         | Martelo: Stun 1 Turno (5 Turnos)        |
+| **M37** | **Rogue Lord**         | Phy | 125%    | **20**       | Capa elegante, chapéu com pena.         | Roubo: Rouba Poção/Item (7 Turnos)        | Golpe Baixo: Stun 1 Turno (3 Turnos)    |
+| **M38** | **Blood Barbarian**    | Phy | 155%    | **25**       | Sem camisa, machado gigante duplo.      | Fúria: Atk +50% (5 Turnos)                | Rodopio: 110% AoE Phys (3 Turnos)       |
+| **M39** | **Chaos Cultist**      | Mag | 110%    | **18**       | Túnica negra com olhos pintados.        | Portal: Invoca 2 Diabretes (7 Turnos)     | Sacrifício: Dmg em si = AoE Mag.        |
+| **M40** | **Black Knight**       | Phy | 145%    | **23**       | Armadura negra, olhos vermelhos.        | Puxão: Traz alvo pro melee (3 Turnos)     | Aura: -20% Def Aliados.                 |
+| **M41** | **Succubus Queen**     | Mag | 120%    | **19**       | Asas de morcego, vestes pretas.         | Charme: Alvo ataca aliado (7 Turnos)      | Chicote: 100% + Stun 1 Turno (3 Turnos) |
+| **M42** | **Lesser Beholder**    | Mag | 130%    | **21**       | Olho gigante flutuante.                 | Paralisia: Raio Stun 1 Turno (5 Turnos)   | Debuff: -50% Atk Speed (4 Turnos)       |
+| **M43** | **Minotaur**           | Phy | 150%    | **24**       | Homem-touro com machado.                | Carga: 150% + Knockback (3 Turnos)        | Parede: Separa grupo (7 Turnos)         |
+| **M44** | **Elder Medusa**       | Mag | 120%    | **19**       | Cabelos de cobra, calda serpente.       | Pedra: Petro (Stun 2 Turnos) (10 Turnos)  | Sopro: 110% Mag Veneno (3 Turnos)       |
+| **M45** | **Young Kraken**       | Phy | 140%    | **22**       | Tentacles saindo do chão/água.          | Tinta: Cega (Miss 80%) (5 Turnos)         | Mult: 4 atks de 40% (3 Turnos)          |
+| **M46** | **Siren Songstress**   | Mag | 115%    | **18**       | Parte peixe, parte humana bela.         | Canto: Sono 2 Turnos (8 Turnos)           | Onda: 120% Mag AoE (3 Turnos)           |
+| **M47** | **Bridge Troll**       | Phy | 140%    | **22**       | Troll de 4m cor de pedra.               | Regeneração: 5% HP/s.                     | Rocha: 140% Phys (3 Turnos)             |
+| **M48** | **Master Imp**         | Mag | 100%    | **16**       | Diabrete com tocha e poções.            | Piro: Fogo em todos (4 Turnos)            | Multi: Se divide em 3 (10 Turnos).      |
+| **M49** | **Gorgon**             | Phy | 135%    | **22**       | Guerreira com escudo de serpente.       | Olhar: -50% Speed (3 Turnos)              | Cauda: 130% Phys Stun (4 Turnos)        |
+| **M50** | **Royal Chimera**      | Mix | 140%    | **22**       | Leão, Bode e Cobra em um corpo.         | Sopro: 140% Mag Fogo (4 Turnos)           | Mordida: 120% Phys Veneno.              |
 
 ---
 
@@ -8734,257 +9545,379 @@ _Multiplicadores: HP x1 | ATK x1 | DEF x1 | Skills: 1 (Máx)_
 
 ### Goblins & Orcs (20)
 
-| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                       | Skill (Dmg/Ef/CD)                 |
-| :------ | :---------------- | :--- | :------ | :----------- | :--------------------------- | :-------------------------------- |
-| **C1**  | Goblin Thief      | Phys | 90%     | **7**        | Verde, adaga ferrugem.       | Roubo: 5-10g. CD: 10s.            |
-| **C2**  | Goblin Archer     | Phys | 80%     | **6**        | Arco de osso, capuz.         | Fogo: 5% HP DoT 3s. CD: 8s.       |
-| **C3**  | Goblin Shaman     | Mag  | 100%    | **8**        | Máscara de osso, penas.      | Raio: 90% Mag. CD: 6s.            |
-| **C4**  | Goblin Warrior    | Phys | 110%    | **9**        | Escudo de tábua, clava.      | Bloqueio: -30% Dmg (3s).          |
-| **C5**  | Goblin Wolf Rider | Phys | 115%    | **9**        | Montado em lobo cinza.       | Carga: 110% Phys. CD: 5s.         |
-| **C6**  | Goblin Assassin   | Phys | 105%    | **8**        | Adaga dupla, negro.          | Backstab: 150% Phys (12s).        |
-| **C7**  | Orc Brute         | Phys | 125%    | **10**       | Verde escuro, pele grossa.   | Pancada: 120% + Stun 1s. CD: 10s. |
-| **C8**  | Orc Axeman        | Phys | 110%    | **9**        | Lança machados curtos.       | Atirar: 110% Phys. CD: 7s.        |
-| **C9**  | Orc Sorcerer      | Mag  | 110%    | **9**        | Tatuagens tribais vermelhas. | Blood: +20% Atk Aliado (15s).     |
-| **C10** | Orc Lancer        | Phys | 115%    | **9**        | Lança longa de bronze.       | Estocada: 115% Phys. CD: 6s.      |
-| **C11** | Hobgoblin         | Phys | 120%    | **10**       | Mais alto, couro.            | Tática: +10% Def Aliados.         |
-| **C12** | Orc Leader        | Phys | 110%    | **9**        | Capacete com crina.          | Grito: +10% Atk Speed (20s).      |
-| **C13** | Orc Berserker     | Phys | 130%    | **10**       | Espadas duplas.              | Fúria: Atk +40% (HP <30%).        |
-| **C14** | Goblin Tinker     | Phys | 90%     | **7**        | Mochila com frascos.         | Bomba: 80% Mag AoE (10s).         |
-| **C15** | Goblin Drummer    | Mag  | 70%     | **6**        | Tambor gigante.              | Marcha: Speed +20% Aliados.       |
-| **C16** | Orc Slave         | Phys | 100%    | **8**        | Chicote longo.               | Chicote: 90% + Sangue (8s).       |
-| **C17** | Heavy Orc         | Phys | 120%    | **10**       | Ferro batido.                | Muralha: Def +40% (5s).           |
-| **C18** | Goblin Trapper    | Phys | 80%     | **6**        | Segura rede.                 | Rede: Enraíza 3s (15s).           |
-| **C19** | Orc Scout         | Phys | 95%     | **8**        | Tapa olho, luneta.           | Mark: Alvo +10% Dmg.              |
-| **C20** | Half-Orc          | Phys | 110%    | **9**        | Mistura humano.              | Saque: Dobra ouro loot.           |
+| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                       | Skill (Dmg/Ef/CD)                           |
+| :------ | :---------------- | :--- | :------ | :----------- | :--------------------------- | :------------------------------------------ |
+| **C1**  | Goblin Thief      | Phys | 90%     | **7**        | Verde, adaga ferrugem.       | Roubo: 5-10g. CD: 3 Turnos.                 |
+| **C2**  | Goblin Archer     | Phys | 80%     | **6**        | Arco de osso, capuz.         | Fogo: 5% HP DoT 1 Turno. CD: 3 Turnos.      |
+| **C3**  | Goblin Shaman     | Mag  | 100%    | **8**        | Máscara de osso, penas.      | Raio: 90% Mag. CD: 2 Turnos.                |
+| **C4**  | Goblin Warrior    | Phys | 110%    | **9**        | Escudo de tábua, clava.      | Bloqueio: -30% Dmg (1 Turno).               |
+| **C5**  | Goblin Wolf Rider | Phys | 115%    | **9**        | Montado em lobo cinza.       | Carga: 110% Phys. CD: 2 Turnos.             |
+| **C6**  | Goblin Assassin   | Phys | 105%    | **8**        | Adaga dupla, negro.          | Backstab: 150% Phys (4 Turnos).             |
+| **C7**  | Orc Brute         | Phys | 125%    | **10**       | Verde escuro, pele grossa.   | Pancada: 120% + Stun 1 Turno. CD: 3 Turnos. |
+| **C8**  | Orc Axeman        | Phys | 110%    | **9**        | Lança machados curtos.       | Atirar: 110% Phys. CD: 2 Turnos.            |
+| **C9**  | Orc Sorcerer      | Mag  | 110%    | **9**        | Tatuagens tribais vermelhas. | Blood: +20% Atk Aliado (5 Turnos).          |
+| **C10** | Orc Lancer        | Phys | 115%    | **9**        | Lança longa de bronze.       | Estocada: 115% Phys. CD: 2 Turnos.          |
+| **C11** | Hobgoblin         | Phys | 120%    | **10**       | Mais alto, couro.            | Tática: +10% Def Aliados.                   |
+| **C12** | Orc Leader        | Phys | 110%    | **9**        | Capacete com crina.          | Grito: +10% Atk Speed (7 Turnos).           |
+| **C13** | Orc Berserker     | Phys | 130%    | **10**       | Espadas duplas.              | Fúria: Atk +40% (HP <30%).                  |
+| **C14** | Goblin Tinker     | Phys | 90%     | **7**        | Mochila com frascos.         | Bomba: 80% Mag AoE (3 Turnos).              |
+| **C15** | Goblin Drummer    | Mag  | 70%     | **6**        | Tambor gigante.              | Marcha: Speed +20% Aliados.                 |
+| **C16** | Orc Slave         | Phys | 100%    | **8**        | Chicote longo.               | Chicote: 90% + Sangue (3 Turnos).           |
+| **C17** | Heavy Orc         | Phys | 120%    | **10**       | Ferro batido.                | Muralha: Def +40% (2 Turnos).               |
+| **C18** | Goblin Trapper    | Phys | 80%     | **6**        | Segura rede.                 | Rede: Enraíza 1 Turno (5 Turnos).           |
+| **C19** | Orc Scout         | Phys | 95%     | **8**        | Tapa olho, luneta.           | Mark: Alvo +10% Dmg.                        |
+| **C20** | Half-Orc          | Phys | 110%    | **9**        | Mistura humano.              | Saque: Dobra ouro loot.                     |
 
 ### Mortos-Vivos (30)
 
-| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual               | Skill (Dmg/Ef/CD)            |
-| :------ | :---------------- | :--- | :------ | :----------- | :------------------- | :--------------------------- |
-| **C21** | Basic Skeleton    | Phys | 105%    | **8**        | Ossos.               | Golpe: 105% Phys (4s).       |
-| **C22** | Skeleton Archer   | Phys | 90%     | **7**        | Aljava nas costelas. | Salva: 2x 60% Phys (7s).     |
-| **C23** | Skeleton Mage     | Mag  | 110%    | **9**        | Mastro roxo.         | Seta: 100% Mag (6s).         |
-| **C24** | Skeleton Guard    | Phys | 100%    | **8**        | Escudo podre.        | Bloqueio: Def +20% (8s).     |
-| **C25** | Armored Skeleton  | Phys | 105%    | **8**        | Peitoral velho.      | Passivo: Resist Phys +10%.   |
-| **C26** | Starving Zombie   | Phys | 115%    | **9**        | Sem um braço.        | Mordida: Veneno 2%/s (10s).  |
-| **C27** | Slow Zombie       | Phys | 120%    | **10**       | Camponês.            | Passivo: +50% HP.            |
-| **C28** | Bloated Zombie    | Mag  | 130%    | **10**       | Barriga cinza.       | Explode: 150% AoE (Morte).   |
-| **C29** | Fast Ghoul        | Phys | 125%    | **10**       | 4 patas.             | Garra: 110% Atk Speed +.     |
-| **C30** | Corrupted Ghoul   | Phys | 115%    | **9**        | Olhos amarelos.      | Salto: 120% Dmg (8s).        |
-| **C31** | Lesser Wraith     | Mag  | 100%    | **8**        | Fumaça cinza.        | Dreno: 10 Mana (15s).        |
-| **C32** | Apparition        | Mag  | 110%    | **9**        | Véu branco.          | Passivo: Esquiva Phys +20%.  |
-| **C33** | Shadow            | Mag  | 120%    | **10**       | Silhueta negra.      | Invisível: 2s (20s).         |
-| **C34** | Dried Mummy       | Phys | 110%    | **9**        | Faixas amarelas.     | Fragil: Alvo -20% Def (12s). |
-| **C35** | Headless Skeleton | Phys | 120%    | **10**       | Carrega crânio.      | Arremesso: 100% Phys (10s).  |
-| **C36** | Floating Skull    | Mag  | 130%    | **10**       | Aura azul.           | Raio: 120% Mag (8s).         |
-| **C37** | Corpse Remnants   | Phys | 80%     | **6**        | Pilha de ossos.      | Reforma: Cura 5% HP (20s).   |
-| **C38** | Skeleton Knight   | Phys | 125%    | **10**       | Espada quebrada.     | Estocada: 130% Phys (10s).   |
-| **C39** | Lesser Hellhound  | Phys | 115%    | **9**        | Olhos fogo.          | Mordida: Queima 3s (5s).     |
-| **C40** | Giant Skeleton    | Phys | 140%    | **11**       | 3 metros.            | Pisotear: 100% AoE (12s).    |
-| **C41** | Wandering Spirit  | Mag  | 100%    | **8**        | Rosto agonia.        | Grito: -15% Atk (15s).       |
-| **C42** | Runner Zombie     | Phys | 120%    | **10**       | Atleta morto.        | Rapidez: Speed +30%.         |
-| **C43** | Scarecrow         | Mag  | 90%     | **7**        | Palha/Sacos.         | Medo: Fuga 2s (20s).         |
-| **C44** | Possessed Doll    | Mag  | 110%    | **9**        | Madeira/Pano.        | Alfinete: 110% Mag (8s).     |
-| **C45** | Hollow Armor      | Phys | 130%    | **10**       | Sem corpo.           | Passivo: Imune a Veneno.     |
-| **C46** | Explosive Corpse  | Mag  | 200%    | **16**       | Com bomba.           | Explode: 200% Mag (Morte).   |
-| **C47** | Ravenous Shadow   | Mag  | 120%    | **10**       | Boca enorme.         | Dreno: 5% Dmg = Heal.        |
-| **C48** | Ghost Child       | Mag  | 80%     | **6**        | Criança chora.       | Choro: -30% Speed (15s).     |
-| **C49** | Tomb Warrior      | Phys | 135%    | **11**       | Runas antigas.       | Golpe: 140% Phys (12s).      |
-| **C50** | Necro Mage        | Mag  | 120%    | **10**       | Cajado fêmur.        | Sombra: 130% Mag (8s).       |
+| ID      | Nome              | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual               | Skill (Dmg/Ef/CD)                    |
+| :------ | :---------------- | :--- | :------ | :----------- | :------------------- | :----------------------------------- |
+| **C21** | Basic Skeleton    | Phys | 105%    | **8**        | Ossos.               | Golpe: 105% Phys (1 Turno).          |
+| **C22** | Skeleton Archer   | Phys | 90%     | **7**        | Aljava nas costelas. | Salva: 2x 60% Phys (2 Turnos).       |
+| **C23** | Skeleton Mage     | Mag  | 110%    | **9**        | Mastro roxo.         | Seta: 100% Mag (2 Turnos).           |
+| **C24** | Skeleton Guard    | Phys | 100%    | **8**        | Escudo podre.        | Bloqueio: Def +20% (3 Turnos).       |
+| **C25** | Armored Skeleton  | Phys | 105%    | **8**        | Peitoral velho.      | Passivo: Resist Phys +10%.           |
+| **C26** | Starving Zombie   | Phys | 115%    | **9**        | Sem um braço.        | Mordida: Veneno 2%/Turno (3 Turnos). |
+| **C27** | Slow Zombie       | Phys | 120%    | **10**       | Camponês.            | Passivo: +50% HP.                    |
+| **C28** | Bloated Zombie    | Mag  | 130%    | **10**       | Barriga cinza.       | Explode: 150% AoE (Morte).           |
+| **C29** | Fast Ghoul        | Phys | 125%    | **10**       | 4 patas.             | Garra: 110% Atk Speed +.             |
+| **C30** | Corrupted Ghoul   | Phys | 115%    | **9**        | Olhos amarelos.      | Salto: 120% Dmg (3 Turnos).          |
+| **C31** | Lesser Wraith     | Mag  | 100%    | **8**        | Fumaça cinza.        | Dreno: 10 Mana (5 Turnos).           |
+| **C32** | Apparition        | Mag  | 110%    | **9**        | Véu branco.          | Passivo: Esquiva Phys +20%.          |
+| **C33** | Shadow            | Mag  | 120%    | **10**       | Silhueta negra.      | Invisível: 1 Turno (7 Turnos).       |
+| **C34** | Dried Mummy       | Phys | 110%    | **9**        | Faixas amarelas.     | Fragil: Alvo -20% Def (4 Turnos).    |
+| **C35** | Headless Skeleton | Phys | 120%    | **10**       | Carrega crânio.      | Arremesso: 100% Phys (3 Turnos).     |
+| **C36** | Floating Skull    | Mag  | 130%    | **10**       | Aura azul.           | Raio: 120% Mag (3 Turnos).           |
+| **C37** | Corpse Remnants   | Phys | 80%     | **6**        | Pilha de ossos.      | Reforma: Cura 5% HP (7 Turnos).      |
+| **C38** | Skeleton Knight   | Phys | 125%    | **10**       | Espada quebrada.     | Estocada: 130% Phys (3 Turnos).      |
+| **C39** | Lesser Hellhound  | Phys | 115%    | **9**        | Olhos fogo.          | Mordida: Queima 1 Turno (2 Turnos).  |
+| **C40** | Giant Skeleton    | Phys | 140%    | **11**       | Altura de 3m.        | Pisotear: 100% AoE (4 Turnos).       |
+| **C41** | Wandering Spirit  | Mag  | 100%    | **8**        | Rosto agonia.        | Grito: -15% Atk (5 Turnos).          |
+| **C42** | Runner Zombie     | Phys | 120%    | **10**       | Atleta morto.        | Rapidez: Speed +30%.                 |
+| **C43** | Scarecrow         | Mag  | 90%     | **7**        | Palha/Sacos.         | Medo: Fuga 1 Turno (7 Turnos).       |
+| **C44** | Possessed Doll    | Mag  | 110%    | **9**        | Madeira/Pano.        | Alfinete: 110% Mag (3 Turnos).       |
+| **C45** | Hollow Armor      | Phys | 130%    | **10**       | Sem corpo.           | Passivo: Imune a Veneno.             |
+| **C46** | Explosive Corpse  | Mag  | 200%    | **16**       | Com bomba.           | Explode: 200% Mag (Morte).           |
+| **C47** | Ravenous Shadow   | Mag  | 120%    | **10**       | Boca enorme.         | Dreno: 5% Dmg = Heal.                |
+| **C48** | Ghost Child       | Mag  | 80%     | **6**        | Criança chora.       | Choro: -30% Speed (5 Turnos).        |
+| **C49** | Tomb Warrior      | Phys | 135%    | **11**       | Runas antigas.       | Golpe: 140% Phys (4 Turnos).         |
+| **C50** | Necro Mage        | Mag  | 120%    | **10**       | Cajado fêmur.        | Sombra: 130% Mag (3 Turnos).         |
 
 ### Bestas & Animais (30)
 
-| ID      | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                  | Skill (Dmg/Ef/CD)                  |
-| :------ | :------------------ | :--- | :------ | :----------- | :---------------------- | :--------------------------------- |
-| **C51** | Forest Wolf         | Phys | 110%    | **9**        | Marrom.                 | Mordida: 110% Phys (5s).           |
-| **C52** | Grey Wolf           | Phys | 100%    | **8**        | Cinza espessa.          | Uivo: +10% Atk matilha (15s).      |
-| **C53** | Starving Wolf       | Phys | 120%    | **10**       | Magro.                  | Frenesi: Atk Speed +20% (<50% HP). |
-| **C54** | White Wolf          | Phys | 115%    | **9**        | Albino.                 | Salto: 120% Phys (8s).             |
-| **C55** | Brown Bear          | Phys | 130%    | **10**       | Grande.                 | Patada: 130% + Knockback (10s).    |
-| **C56** | Black Bear          | Phys | 115%    | **9**        | Menor.                  | Garras: 110% Phys (5s).            |
-| **C57** | Polar Bear          | Phys | 125%    | **10**       | Branco.                 | Abraço: Stun 2s (15s).             |
-| **C58** | Wild Boar           | Phys | 125%    | **10**       | Presas.                 | Investida: 125% + Stun 1s (10s).   |
-| **C59** | Frost Boar          | Phys | 115%    | **9**        | Cristais.               | Frio: -20% Speed (8s).             |
-| **C60** | Saber-toothed Tiger | Phys | 135%    | **11**       | Caninos.                | Corte: Sangue 3%/s (6s).           |
-| **C61** | Snow Leopard        | Phys | 130%    | **10**       | Manchas cinza.          | Bote: 140% Phys (Início).          |
-| **C62** | Giant Eagle         | Phys | 120%    | **10**       | 5 metros.               | Rasante: 120% + Pushback (8s).     |
-| **C63** | Hunting Falcon      | Phys | 90%     | **7**        | Rápido.                 | Cego: Miss +20% (10s).             |
-| **C64** | Shadow Owl          | Mag  | 100%    | **8**        | Penas que absorvem luz. | Confundir: Erra prox atk (15s).    |
-| **C65** | Blood Bat           | Phys | 85%     | **7**        | Orelhas G.              | Drito: Drena 5 HP (6s).            |
-| **C66** | Giant Bat           | Phys | 110%    | **9**        | 2 metros.               | Eco: Revela invisíveis (20s).      |
-| **C67** | Sewer Rat           | Phys | 80%     | **6**        | Sujo.                   | Peste: Stats -10% (15s).           |
-| **C68** | Plague Rat          | Phys | 95%     | **8**        | Olhos Verm.             | Infecção: DoT 2%/s (10s).          |
-| **C69** | Venom Snake         | Phys | 100%    | **8**        | Verde.                  | Veneno: DoT 4%/s (8s).             |
-| **C70** | Constrictor Snake   | Phys | 120%    | **10**       | Grossa.                 | Constringir: Stun 3s (20s).        |
-| **C71** | Crocodile           | Phys | 140%    | **11**       | Verde musgo.            | Mordida: 150% Phys (12s).          |
-| **C72** | Common Spider       | Phys | 90%     | **7**        | Oito olhos.             | Teia: Slow 30% (10s).              |
-| **C73** | Weaver Spider       | Phys | 105%    | **8**        | Listrada.               | Prisão: Imobiliza 2s (18s).        |
-| **C74** | Fire Fox            | Mag  | 110%    | **9**        | Faíscas.                | Ignição: 80% Mag + Queima (10s).   |
-| **C75** | Tundra Elk          | Phys | 110%    | **9**        | Chifres gelo.           | Chifrada: 130% Phys (10s).         |
-| **C76** | Fire Boar           | Phys | 120%    | **10**       | Presas incan.           | Calor: 90% Phys + Queima (8s).     |
-| **C77** | Lightning Wolf      | Mag  | 115%    | **9**        | Estática.               | Choque: 100% Mag (7s).             |
-| **C78** | Runic Bear          | Mag  | 120%    | **10**       | Runas.                  | Escudo: Absorve 50 (20s).          |
-| **C79** | Shadow Spider       | Mag  | 100%    | **8**        | Translúcida.            | Sombra: Invisível 2s (15s).        |
-| **C80** | Stone Boar          | Phys | 130%    | **10**       | Granito.                | Resist: +30% Phys Def (15s).       |
+| ID      | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual                  | Skill (Dmg/Ef/CD)                          |
+| :------ | :------------------ | :--- | :------ | :----------- | :---------------------- | :----------------------------------------- |
+| **C51** | Forest Wolf         | Phys | 110%    | **9**        | Marrom.                 | Mordida: 110% Phys (2 Turnos).             |
+| **C52** | Grey Wolf           | Phys | 100%    | **8**        | Cinza espessa.          | Uivo: +10% Atk matilha (5 Turnos).         |
+| **C53** | Starving Wolf       | Phys | 120%    | **10**       | Magro.                  | Frenesi: Atk Speed +20% (<50% HP).         |
+| **C54** | White Wolf          | Phys | 115%    | **9**        | Albino.                 | Salto: 120% Phys (3 Turnos).               |
+| **C55** | Brown Bear          | Phys | 130%    | **10**       | Grande.                 | Patada: 130% + Knockback (3 Turnos).       |
+| **C56** | Black Bear          | Phys | 115%    | **9**        | Menor.                  | Garras: 110% Phys (2 Turnos).              |
+| **C57** | Polar Bear          | Phys | 125%    | **10**       | Branco.                 | Abraço: Stun 1 Turno (5 Turnos).           |
+| **C58** | Wild Boar           | Phys | 125%    | **10**       | Presas.                 | Investida: 125% + Stun 1 Turno (3 Turnos). |
+| **C59** | Frost Boar          | Phys | 115%    | **9**        | Cristais.               | Frio: -20% Speed (3 Turnos).               |
+| **C60** | Saber-toothed Tiger | Phys | 135%    | **11**       | Caninos.                | Corte: Sangue 3%/Turno (2 Turnos).         |
+| **C61** | Snow Leopard        | Phys | 130%    | **10**       | Manchas cinza.          | Bote: 140% Phys (Início).                  |
+| **C62** | Giant Eagle         | Phys | 120%    | **10**       | Envergadura 5m.         | Rasante: 120% + Pushback (3 Turnos).       |
+| **C63** | Hunting Falcon      | Phys | 90%     | **7**        | Rápido.                 | Cego: Miss +20% (3 Turnos).                |
+| **C64** | Shadow Owl          | Mag  | 100%    | **8**        | Penas que absorvem luz. | Confundir: Erra prox atk (5 Turnos).       |
+| **C65** | Blood Bat           | Phys | 85%     | **7**        | Orelhas G.              | Drito: Drena 5 HP (2 Turnos).              |
+| **C66** | Giant Bat           | Phys | 110%    | **9**        | Envergadura 2m.         | Eco: Revela invisíveis (7 Turnos).         |
+| **C67** | Sewer Rat           | Phys | 80%     | **6**        | Sujo.                   | Peste: Stats -10% (5 Turnos).              |
+| **C68** | Plague Rat          | Phys | 95%     | **8**        | Olhos Verm.             | Infecção: DoT 2%/Turno (3 Turnos).         |
+| **C69** | Venom Snake         | Phys | 100%    | **8**        | Verde.                  | Veneno: DoT 4%/Turno (3 Turnos).           |
+| **C70** | Constrictor Snake   | Phys | 120%    | **10**       | Grossa.                 | Constringir: Stun 1 Turno (7 Turnos).      |
+| **C71** | Crocodile           | Phys | 140%    | **11**       | Verde musgo.            | Mordida: 150% Phys (4 Turnos).             |
+| **C72** | Common Spider       | Phys | 90%     | **7**        | Oito olhos.             | Teia: Slow 30% (3 Turnos).                 |
+| **C73** | Weaver Spider       | Phys | 105%    | **8**        | Listrada.               | Prisão: Imobiliza 1 Turno (6 Turnos).      |
+| **C74** | Fire Fox            | Mag  | 110%    | **9**        | Faíscas.                | Ignição: 80% Mag + Queima (3 Turnos).      |
+| **C75** | Tundra Elk          | Phys | 110%    | **9**        | Chifres gelo.           | Chifrada: 130% Phys (3 Turnos).            |
+| **C76** | Fire Boar           | Phys | 120%    | **10**       | Presas incan.           | Calor: 90% Phys + Queima (3 Turnos).       |
+| **C77** | Lightning Wolf      | Mag  | 115%    | **9**        | Estática.               | Choque: 100% Mag (2 Turnos).               |
+| **C78** | Runic Bear          | Mag  | 120%    | **10**       | Runas.                  | Escudo: Absorve 50 (7 Turnos).             |
+| **C79** | Shadow Spider       | Mag  | 100%    | **8**        | Translúcida.            | Sombra: Invisível 1 Turno (5 Turnos).      |
+| **C80** | Stone Boar          | Phys | 130%    | **10**       | Granito.                | Resist: +30% Phys Def (5 Turnos).          |
 
 ### Insetos (20)
 
-| ID       | Nome                    | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)           |
-| :------- | :---------------------- | :--- | :------ | :----------- | :------------ | :-------------------------- |
-| **C81**  | Giant Wasp              | Phys | 100%    | **8**        | Neon, ferrão. | Ferrada: Veneno 3%/s (6s).  |
-| **C82**  | Soldier Bee             | Phys | 90%     | **7**        | Zumbido.      | Sacrifício: 200% Morre.     |
-| **C83**  | Horned Beetle           | Phys | 115%    | **9**        | Casco preto.  | Carga: 130% + Knock (100).  |
-| **C84**  | Bombardier Beetle       | Mag  | 105%    | **8**        | Laranja.      | Explode: 120% AoE (Morte).  |
-| **C85**  | Giant Centipede         | Phys | 110%    | **9**        | Vermelha.     | Enroscar: Stun 1s (8s).     |
-| **C86**  | Yellow Scorpion         | Phys | 95%     | **8**        | Pequeno.      | Paralisia: Stun 2s (15s).   |
-| **C87**  | Black Scorpion          | Phys | 120%    | **10**       | Pinças.       | Esmagar: 140% Phys (10s).   |
-| **C88**  | Mantis                  | Phys | 130%    | **10**       | Foice.        | Corte: 150% Phys (7s).      |
-| **C89**  | Silk Caterpillar        | Mag  | 80%     | **6**        | Felpuda.      | Casulo: Imobiliza 3s (20s). |
-| **C90**  | Hallucination Butterfly | Mag  | 85%     | **7**        | Colorida.     | Pó: Confusão 3s AoE (18s).  |
-| **C91**  | Jumping Spider          | Phys | 115%    | **9**        | Pula alto.    | Salto: 130% Atk (12s).      |
-| **C92**  | Devouring Termite       | Phys | 100%    | **8**        | Mandíbulas.   | Corrosão: -10 Def (15s).    |
-| **C93**  | Sewer Roach             | Phys | 105%    | **8**        | Marrom.       | Casco: Imune a Crit.        |
-| **C94**  | Thunder Cricket         | Mag  | 90%     | **7**        | Elétrico.     | Chirp: Silêncio 2s (15s).   |
-| **C95**  | Magical Firefly         | Mag  | 80%     | **6**        | Luz Azul.     | Cego: Miss +30% (12s).      |
-| **C96**  | Soldier Ant             | Phys | 110%    | **9**        | Vermelha.     | Mordida: 110% (5s).         |
-| **C97**  | Acid Ant                | Phys | 105%    | **8**        | Verde.        | Ácido: DoT 2%/s (8s).       |
-| **C98**  | Crystal Spider          | Mag  | 115%    | **9**        | Quartzo.      | Raio: 110% Mag (10s).       |
-| **C99**  | Jewel Beetle            | Mag  | 95%     | **8**        | Brilhante.    | Reflexo: 10% Refletido.     |
-| **C100** | Plague Fly              | Mag  | 85%     | **7**        | Vermelho.     | Doença: -10% Speed (15s).   |
+| ID       | Nome                    | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)                     |
+| :------- | :---------------------- | :--- | :------ | :----------- | :------------ | :------------------------------------ |
+| **C81**  | Giant Wasp              | Phys | 100%    | **8**        | Neon, ferrão. | Ferrada: Veneno 3%/Turno (2 Turnos).  |
+| **C82**  | Soldier Bee             | Phys | 90%     | **7**        | Zumbido.      | Sacrifício: 200% Morre.               |
+| **C83**  | Horned Beetle           | Phys | 115%    | **9**        | Casco preto.  | Carga: 130% + Knock (100).            |
+| **C84**  | Bombardier Beetle       | Mag  | 105%    | **8**        | Laranja.      | Explode: 120% AoE (Morte).            |
+| **C85**  | Giant Centipede         | Phys | 110%    | **9**        | Vermelha.     | Enroscar: Stun 1 Turno (3 Turnos).    |
+| **C86**  | Yellow Scorpion         | Phys | 95%     | **8**        | Pequeno.      | Paralisia: Stun 1 Turno (5 Turnos).   |
+| **C87**  | Black Scorpion          | Phys | 120%    | **10**       | Pinças.       | Esmagar: 140% Phys (3 Turnos).        |
+| **C88**  | Mantis                  | Phys | 130%    | **10**       | Foice.        | Corte: 150% Phys (2 Turnos).          |
+| **C89**  | Silk Caterpillar        | Mag  | 80%     | **6**        | Felpuda.      | Casulo: Imobiliza 1 Turno (7 Turnos). |
+| **C90**  | Hallucination Butterfly | Mag  | 85%     | **7**        | Colorida.     | Pó: Confusão 1 Turno AoE (6 Turnos).  |
+| **C91**  | Jumping Spider          | Phys | 115%    | **9**        | Pula alto.    | Salto: 130% Atk (4 Turnos).           |
+| **C92**  | Devouring Termite       | Phys | 100%    | **8**        | Mandíbulas.   | Corrosão: -10 Def (5 Turnos).         |
+| **C93**  | Sewer Roach             | Phys | 105%    | **8**        | Marrom.       | Casco: Imune a Crit.                  |
+| **C94**  | Thunder Cricket         | Mag  | 90%     | **7**        | Elétrico.     | Chirp: Silêncio 1 Turno (5 Turnos).   |
+| **C95**  | Magical Firefly         | Mag  | 80%     | **6**        | Luz Azul.     | Cego: Miss +30% (4 Turnos).           |
+| **C96**  | Soldier Ant             | Phys | 110%    | **9**        | Vermelha.     | Mordida: 110% (2 Turnos).             |
+| **C97**  | Acid Ant                | Phys | 105%    | **8**        | Verde.        | Ácido: DoT 2%/Turno (3 Turnos).       |
+| **C98**  | Crystal Spider          | Mag  | 115%    | **9**        | Quartzo.      | Raio: 110% Mag (3 Turnos).            |
+| **C99**  | Jewel Beetle            | Mag  | 95%     | **8**        | Brilhante.    | Reflexo: 10% Refletido.               |
+| **C100** | Plague Fly              | Mag  | 85%     | **7**        | Vermelho.     | Doença: -10% Speed (5 Turnos).        |
 
 ### Elementais (20)
 
-| ID       | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)           |
-| :------- | :------------------ | :--- | :------ | :----------- | :------------ | :-------------------------- |
-| **C101** | Will-o'-the-Wisp    | Mag  | 90%     | **7**        | Esfera azul.  | Choque: 90% (5s).           |
-| **C102** | Fire Elemental      | Mag  | 115%    | **9**        | Humano chama. | Queima: 5%/s (8s).          |
-| **C103** | Magma Hand          | Phys | 120%    | **10**       | Pedra/Lava.   | Calor: 120% + Queima (10s). |
-| **C104** | Ice Elemental       | Mag  | 105%    | **8**        | Escultura.    | Congelar: Slow 50% (12s).   |
-| **C105** | Ice Shard           | Phys | 110%    | **9**        | Estalactite.  | Estocada: 130% (7s).        |
-| **C106** | Clay Golem          | Phys | 125%    | **10**       | Massa barro.  | Regen: 3% HP/s (20s).       |
-| **C107** | Sand Golem          | Phys | 115%    | **9**        | Redemoinho.   | Cego: Visão Baixa (15s).    |
-| **C108** | Water Elemental     | Mag  | 100%    | **8**        | Bolha.        | Prisão: Stun 2s (18s).      |
-| **C109** | Breeze Spirit       | Mag  | 85%     | **7**        | Ar visível.   | Vento: Empurra (10s).       |
-| **C110** | Lightning Elemental | Mag  | 110%    | **9**        | Faíscas.      | Cadeia: 2 alvos (10s).      |
-| **C111** | Stone Gargoyle      | Phys | 125%    | **10**       | Cinza.        | Queda: 140% AoE (15s).      |
-| **C112** | Ruby Gargoyle       | Mag  | 120%    | **10**       | Vermelho.     | Raio: 150% (12s).           |
-| **C113** | Mud Elemental       | Phys | 115%    | **9**        | Barro preto.  | Lento: -40% Speed (10s).    |
-| **C114** | Steam Elemental     | Mag  | 100%    | **8**        | Nuvem branca. | Queima: 100% AoE (15s).     |
-| **C115** | Iron Golem          | Phys | 140%    | **11**       | Blocos.       | Resist: Imune Sangue.       |
-| **C116** | Earth Spirit        | Phys | 120%    | **10**       | Pedras flu.   | Terremoto: Stun 1s (20s).   |
-| **C117** | Ash Elemental       | Mag  | 100%    | **8**        | Fumaça.       | Sufocar: Silêncio 3s (15s). |
-| **C118** | Plant Elemental     | Mag  | 95%     | **8**        | Raízes.       | Laço: Imobiliza (12s).      |
-| **C119** | Glass Golem         | Phys | 120%    | **10**       | Afiado.       | Sangue: 5%/s (8s).          |
-| **C120** | Lesser Archon       | Mag  | 130%    | **10**       | Luz pura.     | Banir: Remove Buff (30s).   |
+| ID       | Nome                | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)                     |
+| :------- | :------------------ | :--- | :------ | :----------- | :------------ | :------------------------------------ |
+| **C101** | Will-o'-the-Wisp    | Mag  | 90%     | **7**        | Esfera azul.  | Choque: 90% (2 Turnos).               |
+| **C102** | Fire Elemental      | Mag  | 115%    | **9**        | Humano chama. | Queima: 5%/Turno (3 Turnos).          |
+| **C103** | Magma Hand          | Phys | 120%    | **10**       | Pedra/Lava.   | Calor: 120% + Queima (3 Turnos).      |
+| **C104** | Ice Elemental       | Mag  | 105%    | **8**        | Escultura.    | Congelar: Slow 50% (4 Turnos).        |
+| **C105** | Ice Shard           | Phys | 110%    | **9**        | Estalactite.  | Estocada: 130% (2 Turnos).            |
+| **C106** | Clay Golem          | Phys | 125%    | **10**       | Massa barro.  | Regen: 3% HP/s (7 Turnos).            |
+| **C107** | Sand Golem          | Phys | 115%    | **9**        | Redemoinho.   | Cego: Visão Baixa (5 Turnos).         |
+| **C108** | Water Elemental     | Mag  | 100%    | **8**        | Bolha.        | Prisão: Stun 1 Turno (6 Turnos).      |
+| **C109** | Breeze Spirit       | Mag  | 85%     | **7**        | Ar visível.   | Vento: Empurra (3 Turnos).            |
+| **C110** | Lightning Elemental | Mag  | 110%    | **9**        | Faíscas.      | Cadeia: 2 alvos (3 Turnos).           |
+| **C111** | Stone Gargoyle      | Phys | 125%    | **10**       | Cinza.        | Queda: 140% AoE (5 Turnos).           |
+| **C112** | Ruby Gargoyle       | Mag  | 120%    | **10**       | Vermelho.     | Raio: 150% (4 Turnos).                |
+| **C113** | Mud Elemental       | Phys | 115%    | **9**        | Barro preto.  | Lento: -40% Speed (3 Turnos).         |
+| **C114** | Steam Elemental     | Mag  | 100%    | **8**        | Nuvem branca. | Queima: 100% AoE (5 Turnos).          |
+| **C115** | Iron Golem          | Phys | 140%    | **11**       | Blocos.       | Resist: Imune Sangue.                 |
+| **C116** | Earth Spirit        | Phys | 120%    | **10**       | Pedras flu.   | Terremoto: Stun 1 Turno (7 Turnos).   |
+| **C117** | Ash Elemental       | Mag  | 100%    | **8**        | Fumaça.       | Sufocar: Silêncio 1 Turno (5 Turnos). |
+| **C118** | Plant Elemental     | Mag  | 95%     | **8**        | Raízes.       | Laço: Imobiliza (4 Turnos).           |
+| **C119** | Glass Golem         | Phys | 120%    | **10**       | Afiado.       | Sangue: 5%/Turno (3 Turnos).          |
+| **C120** | Lesser Archon       | Mag  | 130%    | **10**       | Luz pura.     | Banir: Remove Buff (10 Turnos).       |
 
 ### Demônios (20)
 
-| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)         |
-| :------- | :--------------- | :--- | :------ | :----------- | :------------ | :------------------------ |
-| **C121** | Imp              | Mag  | 100%    | **8**        | Vermelho.     | Fogo: 100% (6s).          |
-| **C122** | Shadow Demon     | Mag  | 110%    | **9**        | Negro.        | Sombra: Invisível (20s).  |
-| **C123** | Hellhound        | Phys | 115%    | **9**        | Chama olhos.  | Mordida: Queima (8s).     |
-| **C124** | Lesser Succubus  | Mag  | 95%     | **8**        | Sedução.      | Charme: Não ataca (25s).  |
-| **C125** | Winged Demon     | Phys | 110%    | **9**        | Carnudo.      | Rasante: Ataca longe.     |
-| **C126** | Corrupted Spirit | Mag  | 105%    | **8**        | Distorcido.   | Grito: -20% Atk (15s).    |
-| **C127** | Floating Eye     | Mag  | 115%    | **9**        | Pupila G.     | Raio: Stun 2s (15s).      |
-| **C128** | Tentacle         | Phys | 100%    | **8**        | Negro.        | Agarrar: Imobiliza (20s). |
-| **C129** | Abyss Voice      | Mag  | 110%    | **9**        | Névoa boca.   | Silêncio: 4s (20s).       |
-| **C130** | Stitched Horror  | Phys | 130%    | **10**       | Retalhos.     | Pancada: 140% (12s).      |
-| **C131** | Treasure Imp     | Mag  | 70%     | **6**        | Saco ouro.    | Fuga: Turno 3 some.       |
-| **C132** | Nightmare        | Mag  | 120%    | **10**       | Cavalo fogo.  | Pavor: Fear 3s (18s).     |
-| **C133** | Flame Lord       | Mag  | 135%    | **11**       | Roxo.         | Inferno: 130% AoE (15s).  |
-| **C134** | Void Spawn       | Mag  | 110%    | **9**        | Estelar.      | Dreno: 20 Mana (15s).     |
-| **C135** | Occultist        | Mag  | 100%    | **8**        | Olhos negros. | Mald: Luck = 0 (30s).     |
-| **C136** | Chained Demon    | Phys | 125%    | **10**       | Algemas.      | Chicote: Puxa (10s).      |
-| **C137** | Devourer         | Phys | 140%    | **11**       | Boca peito.   | Engolir: Dmg p/ HP.       |
-| **C138** | Blood Gargoyle   | Phys | 120%    | **10**       | Sangue.       | Sede: Cura 50% Dmg.       |
-| **C139** | Cursed Statue    | Mag  | 115%    | **9**        | 4 braços.     | Maldição: -50% Cura.      |
-| **C140** | Chaos Wraith     | Mag  | 110%    | **9**        | Instável.     | Caos: Elem aleatório.     |
+| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual        | Skill (Dmg/Ef/CD)               |
+| :------- | :--------------- | :--- | :------ | :----------- | :------------ | :------------------------------ |
+| **C121** | Imp              | Mag  | 100%    | **8**        | Vermelho.     | Fogo: 100% (2 Turnos).          |
+| **C122** | Shadow Demon     | Mag  | 110%    | **9**        | Negro.        | Sombra: Invisível (7 Turnos).   |
+| **C123** | Hellhound        | Phys | 115%    | **9**        | Chama olhos.  | Mordida: Queima (3 Turnos).     |
+| **C124** | Lesser Succubus  | Mag  | 95%     | **8**        | Sedução.      | Charme: Não ataca (8 Turnos).   |
+| **C125** | Winged Demon     | Phys | 110%    | **9**        | Carnudo.      | Rasante: Ataca longe.           |
+| **C126** | Corrupted Spirit | Mag  | 105%    | **8**        | Distorcido.   | Grito: -20% Atk (5 Turnos).     |
+| **C127** | Floating Eye     | Mag  | 115%    | **9**        | Pupila G.     | Raio: Stun 1 Turno (5 Turnos).  |
+| **C128** | Tentacle         | Phys | 100%    | **8**        | Negro.        | Agarrar: Imobiliza (7 Turnos).  |
+| **C129** | Abyss Voice      | Mag  | 110%    | **9**        | Névoa boca.   | Silêncio: 1 Turno (7 Turnos).   |
+| **C130** | Stitched Horror  | Phys | 130%    | **10**       | Retalhos.     | Pancada: 140% (4 Turnos).       |
+| **C131** | Treasure Imp     | Mag  | 70%     | **6**        | Saco ouro.    | Fuga: Turno 3 some.             |
+| **C132** | Nightmare        | Mag  | 120%    | **10**       | Cavalo fogo.  | Pavor: Fear 1 Turno (6 Turnos). |
+| **C133** | Flame Lord       | Mag  | 135%    | **11**       | Roxo.         | Inferno: 130% AoE (5 Turnos).   |
+| **C134** | Void Spawn       | Mag  | 110%    | **9**        | Estelar.      | Dreno: 20 Mana (5 Turnos).      |
+| **C135** | Occultist        | Mag  | 100%    | **8**        | Olhos negros. | Mald: Luck = 0 (10 Turnos).     |
+| **C136** | Chained Demon    | Phys | 125%    | **10**       | Algemas.      | Chicote: Puxa (3 Turnos).       |
+| **C137** | Devourer         | Phys | 140%    | **11**       | Boca peito.   | Engolir: Dmg p/ HP.             |
+| **C138** | Blood Gargoyle   | Phys | 120%    | **10**       | Sangue.       | Sede: Cura 50% Dmg.             |
+| **C139** | Cursed Statue    | Mag  | 115%    | **9**        | 4 braços.     | Maldição: -50% Cura.            |
+| **C140** | Chaos Wraith     | Mag  | 110%    | **9**        | Instável.     | Caos: Elem aleatório.           |
 
 ### Dracônicos (10)
 
-| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)       |
-| :------- | :--------------- | :--- | :------ | :----------- | :------------- | :---------------------- |
-| **C141** | Green Dragonet   | Mag  | 105%    | **8**        | Verde.         | Ácido: -15 Def (12s).   |
-| **C142** | Red Dragonet     | Mag  | 110%    | **9**        | Vermelho.      | Faísca: 110% (8s).      |
-| **C143** | Blue Dragonet    | Mag  | 105%    | **8**        | Azul.          | Choque: Stun 1s (15s).  |
-| **C144** | Fire Lizard      | Phys | 115%    | **9**        | Fogo.          | Calor: Queima toque.    |
-| **C145** | Lightning Lizard | Phys | 115%    | **9**        | Raio.          | Carga: 120% + Choque.   |
-| **C146** | Pseudo-Dragon    | Mag  | 100%    | **8**        | Camaleão.      | Invis: 5s (30s).        |
-| **C147** | Young Wurm       | Phys | 140%    | **11**       | Metálico.      | Bote: 140% (7s).        |
-| **C148** | Mountain Drake   | Phys | 130%    | **10**       | Alado.         | Vento: Knock AoE (15s). |
-| **C149** | Bone Drake       | Phys | 125%    | **10**       | Esqueleto dra. | Sopro: 110% + Medo.     |
-| **C150** | Sand Dragon      | Phys | 145%    | **12**       | Terra.         | Emboscada: +50% 1º Atk. |
+| ID       | Nome             | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)                |
+| :------- | :--------------- | :--- | :------ | :----------- | :------------- | :------------------------------- |
+| **C141** | Green Dragonet   | Mag  | 105%    | **8**        | Verde.         | Ácido: -15 Def (4 Turnos).       |
+| **C142** | Red Dragonet     | Mag  | 110%    | **9**        | Vermelho.      | Faísca: 110% (3 Turnos).         |
+| **C143** | Blue Dragonet    | Mag  | 105%    | **8**        | Azul.          | Choque: Stun 1 Turno (5 Turnos). |
+| **C144** | Fire Lizard      | Phys | 115%    | **9**        | Fogo.          | Calor: Queima toque.             |
+| **C145** | Lightning Lizard | Phys | 115%    | **9**        | Raio.          | Carga: 120% + Choque.            |
+| **C146** | Pseudo-Dragon    | Mag  | 100%    | **8**        | Camaleão.      | Invis: 2 Turnos (10 Turnos).     |
+| **C147** | Young Wurm       | Phys | 140%    | **11**       | Metálico.      | Bote: 140% (2 Turnos).           |
+| **C148** | Mountain Drake   | Phys | 130%    | **10**       | Alado.         | Vento: Knock AoE (5 Turnos).     |
+| **C149** | Bone Drake       | Phys | 125%    | **10**       | Esqueleto dra. | Sopro: 110% + Medo.              |
+| **C150** | Sand Dragon      | Phys | 145%    | **12**       | Terra.         | Emboscada: +50% 1º Atk.          |
 
 ### Humanos/Bandidos (20)
 
-| ID       | Nome                  | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)        |
-| :------- | :-------------------- | :--- | :------ | :----------- | :------------- | :----------------------- |
-| **C151** | Thief                 | Phys | 90%     | **7**        | Capuz.         | Roubo: Rouba Item.       |
-| **C152** | Mugger                | Phys | 100%    | **8**        | Porrete.       | Atordoar: Stun 2s (12s). |
-| **C153** | Bandit Archer         | Phys | 85%     | **7**        | Arco.          | Veneno: Flecha Ven.      |
-| **C154** | Dark Mage             | Mag  | 110%    | **9**        | Túnica.        | Seta: 12 Mag Somb. (8s). |
-| **C155** | Mercenary             | Phys | 115%    | **9**        | Couro/Espada.  | Bloqueio: Def +30% (5s). |
-| **C156** | Brawler               | Phys | 105%    | **8**        | Enfaixado.     | Combo: 2x 60% Dmg.       |
-| **C157** | Cultist               | Mag  | 95%     | **8**        | Máscara cabra. | Mald: -20% Atk (15s).    |
-| **C158** | Soldier               | Phys | 110%    | **9**        | Desertor.      | União: +20% Def Al.      |
-| **C159** | Assassin              | Phys | 100%    | **8**        | Capa verde.    | Sangue: 5%/s (10s).      |
-| **C160** | River Pirate          | Phys | 110%    | **9**        | Tapa olho.     | Gancho: Puxa (12s).      |
-| **C161** | Smuggler              | Phys | 120%    | **10**       | Fardos.        | Carga: 130% Lento.       |
-| **C162** | Ninja                 | Phys | 105%    | **8**        | Preto.         | Shuriken: 80% (Veloz).   |
-| **C163** | Rogue Monk            | Phys | 110%    | **9**        | Robe sujo.     | Palma: Knockback (10s).  |
-| **C164** | Fanatic               | Mag  | 120%    | **10**       | Livro fogo.    | Julgar: 140% (12s).      |
-| **C165** | Necromancer           | Mag  | 115%    | **9**        | Pálido.        | Erguer: Cria Esq Raso.   |
-| **C166** | Hunter                | Phys | 90%     | **7**        | Besta/Rede.    | Rede: Imobiliza (20s).   |
-| **C167** | Duelist               | Phys | 115%    | **9**        | Vendado.       | Riposte: Contra-atk.     |
-| **C168** | Executioner           | Phys | 140%    | **11**       | Capuz/Machad.  | Decap: 300% (HP <20%).   |
-| **C169** | Repeating Crossbowman | Phys | 95%     | **8**        | Mecânica.      | Tiro: 3x 40% (10s).      |
-| **C170** | Spy                   | Phys | 85%     | **7**        | Camponês.      | Veneno: Infecção Sile.   |
+| ID       | Nome                  | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)                  |
+| :------- | :-------------------- | :--- | :------ | :----------- | :------------- | :--------------------------------- |
+| **C151** | Thief                 | Phys | 90%     | **7**        | Capuz.         | Roubo: Rouba Item.                 |
+| **C152** | Mugger                | Phys | 100%    | **8**        | Porrete.       | Atordoar: Stun 1 Turno (4 Turnos). |
+| **C153** | Bandit Archer         | Phys | 85%     | **7**        | Arco.          | Veneno: Flecha Ven.                |
+| **C154** | Dark Mage             | Mag  | 110%    | **9**        | Túnica.        | Seta: 12 Mag Somb. (3 Turnos).     |
+| **C155** | Mercenary             | Phys | 115%    | **9**        | Couro/Espada.  | Bloqueio: Def +30% (2 Turnos).     |
+| **C156** | Brawler               | Phys | 105%    | **8**        | Enfaixado.     | Combo: 2x 60% Dmg.                 |
+| **C157** | Cultist               | Mag  | 95%     | **8**        | Máscara cabra. | Mald: -20% Atk (5 Turnos).         |
+| **C158** | Soldier               | Phys | 110%    | **9**        | Desertor.      | União: +20% Def Al.                |
+| **C159** | Assassin              | Phys | 100%    | **8**        | Capa verde.    | Sangue: 5%/Turno (3 Turnos).       |
+| **C160** | River Pirate          | Phys | 110%    | **9**        | Tapa olho.     | Gancho: Puxa (4 Turnos).           |
+| **C161** | Smuggler              | Phys | 120%    | **10**       | Fardos.        | Carga: 130% Lento.                 |
+| **C162** | Ninja                 | Phys | 105%    | **8**        | Preto.         | Shuriken: 80% (Veloz).             |
+| **C163** | Rogue Monk            | Phys | 110%    | **9**        | Robe sujo.     | Palma: Knockback (3 Turnos).       |
+| **C164** | Fanatic               | Mag  | 120%    | **10**       | Livro fogo.    | Julgar: 140% (4 Turnos).           |
+| **C165** | Necromancer           | Mag  | 115%    | **9**        | Pálido.        | Erguer: Cria Esq Raso.             |
+| **C166** | Hunter                | Phys | 90%     | **7**        | Besta/Rede.    | Rede: Imobiliza (7 Turnos).        |
+| **C167** | Duelist               | Phys | 115%    | **9**        | Vendado.       | Riposte: Contra-atk.               |
+| **C168** | Executioner           | Phys | 140%    | **11**       | Capuz/Machad.  | Decap: 300% (HP <20%).             |
+| **C169** | Repeating Crossbowman | Phys | 95%     | **8**        | Mecânica.      | Tiro: 3x 40% (3 Turnos).           |
+| **C170** | Spy                   | Phys | 85%     | **7**        | Camponês.      | Veneno: Infecção Sile.             |
 
 ### Aquáticos (15)
 
-| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)         |
-| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :------------------------ |
-| **C171** | Piranha                | Phys | 80%     | **6**        | Vermelho.      | Enxame: +10% Dmg/un.      |
-| **C172** | Swamp Squid            | Phys | 110%    | **9**        | Verde.         | Tinta: Miss 50% (15s).    |
-| **C173** | Fishman                | Phys | 105%    | **8**        | Lança osso.    | Estocada: 120% (Veloz).   |
-| **C174** | Sea Siren              | Mag  | 90%     | **7**        | Algas.         | Canto: Sono 2s (20s).     |
-| **C175** | Water Snake            | Phys | 100%    | **8**        | Listrada.      | Paralisia: 1s (10s).      |
-| **C176** | Water Elemental Spirit | Mag  | 115%    | **9**        | Corrente.      | Bolha: Silêncio 3s (15s). |
-| **C177** | Shark Hybrid           | Phys | 135%    | **11**       | Híbrido.       | Mordida: 160% (12s).      |
-| **C178** | Turtle                 | Phys | 90%     | **7**        | Coral.         | Retrair: Def +80% (20s).  |
-| **C179** | Poisonous Jellyfish    | Mag  | 100%    | **8**        | Luz.           | Choque: 110% AoE (15s).   |
-| **C180** | Giant Octopus          | Phys | 125%    | **10**       | Gigante.       | Agarrar: 2 alvos (25s).   |
-| **C181** | Giant Toad             | Phys | 115%    | **9**        | Língua G.      | Língua: Puxa/Stun (10s).  |
-| **C182** | Shadow Dugong          | Mag  | 110%    | **9**        | Negro.         | Eco: Stun 1s AoE (18s).   |
-| **C183** | Lake Spirit            | Mag  | 85%     | **7**        | Água pura.     | Cura: 20% Heal (15s).     |
-| **C184** | Hard-shell Crustacean  | Phys | 120%    | **10**       | Carranguejo F. | Pinça: Quebra Escudo.     |
-| **C185** | Nereid                 | Mag  | 105%    | **8**        | Escamas N.     | Maldição: Drena 2%.       |
+| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)                   |
+| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :---------------------------------- |
+| **C171** | Piranha                | Phys | 80%     | **6**        | Vermelho.      | Enxame: +10% Dmg/un.                |
+| **C172** | Swamp Squid            | Phys | 110%    | **9**        | Verde.         | Tinta: Miss 50% (5 Turnos).         |
+| **C173** | Fishman                | Phys | 105%    | **8**        | Lança osso.    | Estocada: 120% (Veloz).             |
+| **C174** | Sea Siren              | Mag  | 90%     | **7**        | Algas.         | Canto: Sono 1 Turno (7 Turnos).     |
+| **C175** | Water Snake            | Phys | 100%    | **8**        | Listrada.      | Paralisia: 1 Turno (3 Turnos).      |
+| **C176** | Water Elemental Spirit | Mag  | 115%    | **9**        | Corrente.      | Bolha: Silêncio 1 Turno (5 Turnos). |
+| **C177** | Shark Hybrid           | Phys | 135%    | **11**       | Híbrido.       | Mordida: 160% (4 Turnos).           |
+| **C178** | Turtle                 | Phys | 90%     | **7**        | Coral.         | Retrair: Def +80% (7 Turnos).       |
+| **C179** | Poisonous Jellyfish    | Mag  | 100%    | **8**        | Luz.           | Choque: 110% AoE (5 Turnos).        |
+| **C180** | Giant Octopus          | Phys | 125%    | **10**       | Gigante.       | Agarrar: 2 alvos (8 Turnos).        |
+| **C181** | Giant Toad             | Phys | 115%    | **9**        | Língua G.      | Língua: Puxa/Stun (3 Turnos).       |
+| **C182** | Shadow Dugong          | Mag  | 110%    | **9**        | Negro.         | Eco: Stun 1 Turno AoE (6 Turnos).   |
+| **C183** | Lake Spirit            | Mag  | 85%     | **7**        | Água pura.     | Cura: 20% Heal (5 Turnos).          |
+| **C184** | Hard-shell Crustacean  | Phys | 120%    | **10**       | Carranguejo F. | Pinça: Quebra Escudo.               |
+| **C185** | Nereid                 | Mag  | 105%    | **8**        | Escamas N.     | Maldição: Drena 2%.                 |
 
 ### Plantas/Fungos (15)
 
-| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)         |
-| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :------------------------ |
-| **C186** | Spore Mushroom         | Mag  | 100%    | **8**        | Manchado spot. | Explode: 140% AoE.        |
-| **C187** | Hallucination Mushroom | Mag  | 85%     | **7**        | Roxo.          | Confuse: Atk Al (4s).     |
-| **C188** | Thorny Bush            | Phys | 110%    | **9**        | Arbusto.       | Sangue: 3%/s (8s).        |
-| **C189** | Black Lotus            | Mag  | 115%    | **9**        | Aura roxa.     | Veneno: 6%/s (15s).       |
-| **C190** | Walking Root           | Phys | 100%    | **8**        | Galhos.        | Tropeço: Pula turno (12). |
-| **C191** | Rotting Fungus         | Mag  | 95%     | **8**        | Fumaça.        | Doença: -20% Stats.       |
-| **C192** | Vining Creeper         | Phys | 110%    | **9**        | Cipó dentes.   | Stun 2s (15s).            |
-| **C193** | Cursed Tree            | Phys | 130%    | **10**       | Rosto tronco.  | Esmagar: 130% (10s).      |
-| **C194** | Shadow Sprout          | Mag  | 90%     | **7**        | Pétalas N.     | Dreno: 5 Mana (10s).      |
-| **C195** | Ent Sapling            | Phys | 110%    | **9**        | 1.5 metro.     | Chute: Knock (8s).        |
-| **C196** | Cactus                 | Phys | 105%    | **8**        | Redondo.       | Espinhos: Reflete 15%.    |
-| **C197** | Silver Fern            | Mag  | 80%     | **6**        | Prateada.      | Clarão: Miss 50% (20s).   |
-| **C198** | Parasitic Moss         | Mag  | 100%    | **8**        | Verde tapete.  | Dreno: 2% p/ Cura Al.     |
-| **C199** | Carnivorous Orchid     | Phys | 120%    | **10**       | Boca aberta.   | Mordida: 120% (10s).      |
-| **C200** | Slime                  | Phys | 100%    | **8**        | Gelatina V.    | Ácido: Reduz Def (10s).   |
+| ID       | Nome                   | Atk  | Dmg (%) | Ex: Dmg (L1) | Visual         | Skill (Dmg/Ef/CD)            |
+| :------- | :--------------------- | :--- | :------ | :----------- | :------------- | :--------------------------- |
+| **C186** | Spore Mushroom         | Mag  | 100%    | **8**        | Manchado spot. | Explode: 140% AoE.           |
+| **C187** | Hallucination Mushroom | Mag  | 85%     | **7**        | Roxo.          | Confuse: Atk Al (1 Turno).   |
+| **C188** | Thorny Bush            | Phys | 110%    | **9**        | Arbusto.       | Sangue: 3%/Turno (3 Turnos). |
+| **C189** | Black Lotus            | Mag  | 115%    | **9**        | Aura roxa.     | Veneno: 6%/Turno (5 Turnos). |
+| **C190** | Walking Root           | Phys | 100%    | **8**        | Galhos.        | Tropeço: Pula turno (12).    |
+| **C191** | Rotting Fungus         | Mag  | 95%     | **8**        | Fumaça.        | Doença: -20% Stats.          |
+| **C192** | Vining Creeper         | Phys | 110%    | **9**        | Cipó dentes.   | Stun 1 Turno (5 Turnos).     |
+| **C193** | Cursed Tree            | Phys | 130%    | **10**       | Rosto tronco.  | Esmagar: 130% (3 Turnos).    |
+| **C194** | Shadow Sprout          | Mag  | 90%     | **7**        | Pétalas N.     | Dreno: 5 Mana (3 Turnos).    |
+| **C195** | Ent Sapling            | Phys | 110%    | **9**        | 1.5 metro.     | Chute: Knock (3 Turnos).     |
+| **C196** | Cactus                 | Phys | 105%    | **8**        | Redondo.       | Espinhos: Reflete 15%.       |
+| **C197** | Silver Fern            | Mag  | 80%     | **6**        | Prateada.      | Clarão: Miss 50% (7 Turnos). |
+| **C198** | Parasitic Moss         | Mag  | 100%    | **8**        | Verde tapete.  | Dreno: 2% p/ Cura Al.        |
+| **C199** | Carnivorous Orchid     | Phys | 120%    | **10**       | Boca aberta.   | Mordida: 120% (3 Turnos).    |
+| **C200** | Slime                  | Phys | 100%    | **8**        | Gelatina V.    | Ácido: Reduz Def (3 Turnos). |
 
 ---
 
 **[BESTIÁRIO TÉCNICO COMPLETO FINALIZADO - 260 UNIDADES DETALHADAS PARA PROGRAMAÇÃO]**
+# 12c. MODOS MULTIPLAYER E INTERAÇÃO ENTRE REINOS
+
+## 1. Visão Geral
+
+_Heroes of Majesty_ oferece uma experiência conectada, permitindo que jogadores interajam tanto de forma cooperativa quanto competitiva. Existem dois modos principais de Multiplayer Síncrono, além da camada Assíncrona sempre ativa.
+
+---
+
+## 2. Camada Assíncrona (Sempre Ativa)
+
+Independente do modo escolhido, todos os jogadores participam de um ecossistema global.
+
+### 2.1 Caravanas de Comércio
+
+- **Descrição:** Envio de recursos (Ouro, Madeira, Pedra) para amigos ou aleatórios.
+- **Mecânica:** O jogador despacha uma caravana que leva 4 horas reais para chegar.
+- **Benefício:** Quem envia ganha IP e Reputação; quem recebe ganha sobrevivência.
+
+### 2.2 Fofocas e Boatos (Social Gossip)
+
+- **Descrição:** O Conselheiro Real comenta feitos de outros jogadores na Taverna.
+- **Exemplo:** _"Dizem que o Rei de 'ShadowKeep' perdeu seu melhor herói para um rato..."_
+- **Imersão:** Cria a sensação de um mundo vivo e compartilhado.
+
+### 2.3 Mercado Global de Lendas (Hall da Fama)
+
+Jogadores podem ofertar seus heróis do **Hall da Fama** para serem contratados por outros jogadores em um mercado rotativo.
+
+**Mecânica de Contrato Único:**
+
+- **Oferta:** Você disponibiliza "Sir Kaelen (Lenda)" no mercado.
+- **Exclusividade:** Apenas **1 Jogador** no mundo pode contratar esse herói por vez. Primeiro a clicar, leva a exclusividade.
+- **Duração:** O contrato dura exatamente **1 Ciclo (30 min)**. Após isso, o herói retorna ao mercado ou ao dono.
+
+**Recompensas (Renda Passiva):**
+
+- O pagamento pelo aluguel (em Ouro) é acumulado em um "Baú do Legado".
+- **Resgate:** O dono recebe todo o ouro acumulado automaticamente no **início de sua próxima partida**, garantindo um boost inicial na economia.
+
+**Registro de Aventuras:**
+
+- Cada contrato gera uma entrada nas **"Crônicas do Mercenário"** (vide 05b) do herói.
+- O dono pode ler onde seu herói esteve: _"Kaelen ajudou Player_BR a matar o Boss Kraken."_
+- O histórico original da lenda permanece inalterado; apenas o anexo de mercenário cresce.
+
+---
+
+## 3. Modo Co-op: "Aliança Real" (2 Jogadores)
+
+Neste modo, dois jogadores compartilham o objetivo de sobreviver aos 4 Ciclos do Apocalipse.
+
+### 3.1 Estrutura da Partida
+
+- **Duração:** 4 Ciclos (2 Horas).
+- **Setup:** Cada jogador gerencia seu **próprio reino** (mapa separado), mas os mundos são "vizinhos fronteiriços".
+
+### 3.2 Mecânicas Exclusivas
+
+#### 🤝 Portal de Ajuda Mútua
+
+- Jogadores podem abrir um **Portal Teletransportador** (Custo: 500g e 50 IP).
+- Permite enviar **1 Grupo de Heróis (Até 3)** para o mapa do aliado temporariamente (Duração: 10 min / 200 Turnos).
+- **Uso:** Ajudar a matar um Boss que está dizimando a base do amigo ou defender contra uma Onda excessiva.
+
+#### 📦 Troca Direta de Recursos (Real-Time)
+
+- Transferência imediata de Ouro ou Recursos via menu de diplomacia.
+- Taxa de Câmbio: 10% (O "imposto de transporte").
+
+#### 🛡️ Defesa Coordenada
+
+- As Ondas de Inimigos são sincronizadas.
+- Jogadores podem combinar estratégias via Chat: _"Eu seguro a onda de Goblins às 14:00, você foca em matar o Dragão."_
+
+#### ❤️ Ressurreição Compartilhada
+
+- Se um herói morrer no mapa do aliado, o aliado pode gastar seus próprios recursos (Clérigo/Item) para revivê-lo.
+
+---
+
+## 4. Modo PvP: "Guerra dos Tronos" (1v1 Competitivo)
+
+Dois reinos competem pela supremacia. O objetivo não é destruir a base inimiga diretamente, mas **sabotar** a gestão do oponente até que ele colapse perante os monstros (PvPvE).
+
+### 4.1 Estrutura da Partida
+
+- **Duração:** Até um reino cair (Game Over) ou 4 Ciclos (Pontuação Final).
+- **Vitória:** O último Rei em pé ou quem tiver mais Pontos de Glória ao final.
+
+### 4.2 Mecânicas de Sabotagem (IP Ofensivo)
+
+Ao invés de pedir ajuda ao Conselheiro, o jogador gasta IP para **Prejudicar** o rival.
+
+| Ação de Sabotagem     | Custo  | Efeito no Rival                                                                     |
+| :-------------------- | :----- | :---------------------------------------------------------------------------------- |
+| **Enviar Espião**     | 100 IP | Revela o mapa do inimigo (Fog of War) por 20 Turnos.                                |
+| **Semear Discórdia**  | 200 IP | Reduz a Afinidade global dos heróis inimigos em -10.                                |
+| **Subornar Mercador** | 300 IP | Preços do Mercado inimigo sobem +50% por 100 Turnos.                                |
+| **Atrair Monstros**   | 500 IP | Desvia a próxima Onda de Monstros do seu mapa para o do inimigo (+50% Inimigos lá). |
+
+### 4.3 Invasão de Heróis (Raid)
+
+- O jogador pode enviar um **Grupo de Invasão** (Liderado por heróis com traço "Aggressive").
+- **Objetivo:** Saquear recursos, matar NPCs (Ferreiro/Estalajadeiro) ou duelar com heróis inimigos.
+- **Risco:** Se os invasores morrerem no reino inimigo, o rival ganha todo o loot e equipamentos deles.
+
+### 4.4 O Duelo Final (Ciclo 4)
+
+- Se ambos sobreviverem até o Ciclo 4, os mapas se fundem.
+- Inicia-se uma **Guerra Total** onde os exércitos de heróis se encontram no centro.
+- O vencedor do combate final leva a coroa.
+
+---
+
+## 5. Resumo dos Modos
+
+| Característica | Assíncrono             | Co-op (Aliança)              | PvP (Guerra)                 |
+| :------------- | :--------------------- | :--------------------------- | :--------------------------- |
+| **Interação**  | Indireta (Caravanas)   | Direta (Portal)              | Hostil (Sabotagem)           |
+| **Tempo**      | Offline / Pausado      | Real-Time Sincronizado       | Real-Time Sincronizado       |
+| **Objetivo**   | Farmar Recursos        | Sobrevivência Mútua          | Eliminação / Pontuação       |
+| **Risco**      | Baixo (Perda de tempo) | Médio (Morte em mapa alheio) | Alto (Perda total de heróis) |
 # 12. SISTEMA DE MONSTROS: IA P.A.I.N.
 
 ## 12.1 Visão Geral: Os Inimigos Autônomos
@@ -9201,7 +10134,7 @@ Periodicamente (a cada 20 dias), uma **horda** ataca a vila.
 
 ```
 [ALERTA - 5 min antes]
-Conselheiro: "Detectei movimento em massa.
+Conselheiro: "Detectada movimentação sísmica no quadrante (45,12).
 Invasão de Goblins em 5 minutos. Prepare defesas!"
 
 [FASE 1: Aproximação]
@@ -9419,7 +10352,7 @@ Monge: speed = 160; // EXTREMAMENTE rápido
 timeToNextAction = baseTime / (speed / 100)
 
 // Exemplo:
-baseTime = 3000ms (3 segundos padrão)
+baseTime = 3000ms (1 Turno padrão)
 
 Guerreiro (speed 80): 3000 / 0.8 = 3750ms (~3.8s por ação)
 Monge (speed 160): 3000 / 1.6 = 1875ms (~1.9s por ação)
@@ -9535,7 +10468,7 @@ Exemplo: Bardo cantando "Melodia de Ataque"
 ### Atordoamento (Stun)
 
 ```
-[Herói atordoado por 3s]
+[Herói atordoado por 1 Turno]
 ┌─────────────────────────┐
 │ X ─ X ─ X ─ [Herói]     │ ← Não progride na timeline
 └─────────────────────────┘
@@ -9761,7 +10694,7 @@ class CombatTimeline {
 
 ### Sistema de Combate Baseado em Turnos Rápidos
 
-O combate acontece em **micro-turnos** (1 turno = 1 segundo real).
+O combate acontece em **Turnos** (1 Turno = 3 Segundos).
 
 #### Fórmula de Dano
 
@@ -10886,392 +11819,86 @@ function generateNarrativePrompt(event: CombatEvent): string {
 Se tivermos apenas 10 tags por categoria e usarmos 4 categorias:
 `10 * 10 * 10 * 10` = **10.000 combinações únicas de prompt** para o _mesmo_ tipo de ataque.
 
-Como a IA (Temperature 0.6) escreve cada combinação de forma diferente a cada vez, a repetição textual se torna **estatisticamente impossível**.
-
-**Exemplo Real:**
-
-Com apenas **50 tags no banco** distribuídas em 8 categorias:
-
-- 6 tags de WEATHER
-- 8 tags de WEAPON
-- 6 tags de EMOTION
-- 5 tags de CRITICAL
-- ...
-
-**Combinações possíveis:** `6 × 8 × 6 × 5` = **1.440 prompts únicos**
-
 Se a IA gerar 100 textos diferentes para cada prompt (Temperature 0.6): **144.000 textos únicos**.
 
----
+### 18.4 Sopa de Tags na Geração de Backstory (História Pregressa)
 
-## 19. CONFIGURAÇÃO DO MODELO (WEBLLM)
+A "Sopa" não serve apenas para combate. Ela é fundamental para criar a alma dos heróis no momento do recrutamento. O jogo sorteia tags de diferentes categorias de vida (Origem, Trauma, Ambição, Medo) para compor um personagem tridimensional.
 
-### 19.1 O Modelo Escolhido
+**Exemplo de Geração de Herói (Sopa de Criação):**
 
-- **Modelo:** `Llama-3.2-3B-Instruct-q4f16_1-MLC`
-- **Justificativa:** É o estado da arte para eficiência em _edge devices_. Ocupa ~2.2GB de VRAM, rodando confortavelmente em placas GTX 1060+ e iGPUs modernas (M1/M2/AMD RDNA), entregando qualidade narrativa superior a modelos 7B antigos.
+- **Nome Gerado:** Kaelen, o Quebrado
+- **Tags Sorteadas:**
+  - `ORIGIN:` [Filho de Ferreiro, Vila Queimada]
+  - `TRAUMA:` [Medo de Fogo, Cicatriz no Rosto]
+  - `AMBITION:` [Reconstruir o Lar, Proteger os Fracos]
+  - `SECRET:` [Roubou a espada do mestre]
 
-**Requisitos:**
+**Prompt Gerado para a LLM:**
 
-- GPU com suporte a WebGPU (Chrome 113+, Edge 113+)
-- ~4GB de VRAM disponível (2.2GB modelo + overhead)
-- Taxa de geração: ~15-30 tokens/segundo em GPUs mid-range
+> "Crie uma breve biografia (2 frases) para Kaelen. O user quer um tom melancólico. Use as tags: [Vila Queimada, Medo de Fogo, Roubou a espada]."
 
-### 19.2 Parâmetros de Inferência (Calibrados)
+**Resultado Narrativo:**
 
-Estas configurações são **obrigatórias** para evitar alucinações (poesia excessiva) ou textos cortados.
+> "Kaelen empunha uma lâmina que não é sua, roubada das cinzas da forja de seu pai. Ele luta não pela glória, mas para abafar o estalo da madeira queimando que ainda ouve em seus pesadelos."
 
-```typescript
-const INFERENCE_CONFIG = {
-  temperature: 0.6, // Criatividade controlada (0.8 é muito caótico, 0.4 é robótico)
-  top_p: 0.9, // Corta caudas estatísticas improváveis
-  max_tokens: 150, // Força brevidade (1-2 frases)
-  stop: [
-    // Vital para o Llama 3 parar de falar
-    "<|eot_id|>",
-    "User:",
-    "\n\n",
-  ],
-};
-```
+Isso cria um herói com **motivações reais**. O sistema de jogo (Lógico) lerá a tag `Medo de Fogo` e aplicará um debuff quando ele lutar contra Dragões, fechando o ciclo entre a narrativa gerada e a mecânica de jogo.
 
-**Por que esses valores?**
+### 18.5 Expansão: Sopa Universal (Ouro em Palavras)
 
-| Parâmetro     | Valor | Justificativa                                   |
-| ------------- | ----- | ----------------------------------------------- | ---- | ---------------------------------- |
-| `temperature` | 0.6   | Equilíbrio perfeito entre variedade e coerência |
-| `top_p`       | 0.9   | Previne escolhas estatisticamente absurdas      |
-| `max_tokens`  | 150   | 1-2 frases (30-60 palavras em português)        |
-| `stop`        | `["<  | eot_id                                          | >"]` | Previne loop infinito do Llama 3.2 |
+A técnica de "Sopa de Tags" permeia todos os sistemas do Majesty, convertendo dados frios em calor narrativo e mecânico.
 
-### 19.3 O System Prompt Otimizado (Few-Shot)
+#### A. Sopa de Mundo (World Gen & Clima)
 
-Este prompt foi testado exaustivamente para o **Llama 3.2 3B**. Ele usa a técnica _Few-Shot_ (dar exemplos) para "travar" o estilo do modelo no tom "Dark Fantasy/Visceral" do jogo.
+O ambiente não é apenas um fundo estático. As tags de clima e bioma alteram a percepção e as regras.
 
-```text
-Você é o Motor de Narrativa do jogo "Heroes of Majesty". Converta dados do jogo em texto curto, visceral e medieval.
+- **Tags Sorteadas:** `[Chuva Ácida, Pântano, Névoa Tóxica]`
+- **Narrativa Gerada:** "A chuva chia ao tocar a armadura de Kaelen, o metal escurecendo sob a corrosão."
+- **Efeito de Gameplay:** Tags como `Ácida` ativam a regra `Corrosion_Tick`, danificando durabilidade de armaduras a cada turno.
 
-DIRETRIZES RÍGIDAS:
-1. BREVIDADE: Máximo 1 ou 2 frases. Seja seco.
-2. SEM POESIA: Não use metáforas como "dança da morte" ou "alma". Descreva sangue, metal, impacto e som.
-3. SEM NÚMEROS: Nunca cite valores numéricos (HP, Dano).
-4. USO DE TAGS: Incorpore os conceitos enviados entre colchetes [ ] de forma natural.
-5. PLACEHOLDERS: Mantenha {HERO} e {MONSTER} exatos.
+#### B. Sopa de Loot (A Alma dos Itens)
 
-EXEMPLOS DE ESTILO (Copie este padrão):
+Cada item lendário nasce de uma sopa de tags baseada no momento do drop (Quem matou? Onde? Como?).
 
-User: Contexto: Ataque Crítico. Tags: [lama, estalo seco, costelas].
-Assistant: {HERO} firma o pé na lama e enterra a arma, quebrando as costelas de {MONSTER} com um estalo seco.
+- **Contexto:** Kaelen matou o Rei Lich com um acerto crítico de fogo.
+- **Tags Sorteadas:** `[Ossos, Cinzas, Realeza Caída, Chama Eterna]`
+- **Item Gerado:** _Coroa de Cinzas do Rei Morto_
+- **Descrição:** "Ainda quente ao toque, esta coroa de osso cheira a soberania queimada."
+- **Stats Derivados:** A tag `Chama Eterna` adiciona o efeito `Burn Chance +10%`.
 
-User: Contexto: Magia de Fogo. Tags: [cheiro de enxofre, pele derretendo, clarão].
-Assistant: Um clarão cega o campo enquanto o cheiro de enxofre e pele derretendo emana de {MONSTER}.
+#### C. Sopa Social (Banter & Fofoca)
 
-User: Contexto: Banter (Ladrão para Guerreiro). Tags: [ouro, lento, ferrugem].
-Assistant: "Lento demais, pilha de ferrugem. Esse ouro já tem dono."
+Conversas entre heróis (Banter) usam tags de personalidade e histórico recente.
 
-Responda apenas com o texto narrativo final.
-```
+- **Contexto:** Lila (Gananciosa) e Kaelen (Honrado) descansando após batalha.
+- **Tags:** `[Roubo Recente, Cicatriz Nova (Kaelen), Saco de Ouro (Lila)]`
+- **Diálogo Gerado:**
+  - _Lila:_ "Bela cicatriz, Kaelen. Combina com sua carteira vazia."
+  - _Kaelen:_ "E esse ouro pesa na sua consciência, ladra?"
+- **Efeito:** Gera um log de `Affinity Change: -5` (Rivalidade).
 
-**Por que Few-Shot funciona?**
+#### D. Sopa de Logs Contextuais (O Historiador)
 
-Modelos pequenos (3B) não têm "memória de longo prazo" como GPT-4. Few-Shot ensina o padrão **no contexto imediato**, funcionando como "mini-treinamento" em cada chamada.
+O sistema gera resumos inteligentes de períodos longos, condensando centenas de linhas de log em um parágrafo coerente.
+
+- **Input:** [Kaelen matou 50 Goblins, Kaelen quase morreu 2x, Kaelen ganhou 500g]
+- **Tags:** `[Massacre, Sobrevivente, Riqueza Súbita]`
+- **Log de Fim de Dia:** "O dia foi um banho de sangue lucrativo para Kaelen, que emergiu de uma montanha de cadáveres goblins com os bolsos cheios e a armadura quase destruída."
 
 ---
 
-## 20. IMPLEMENTAÇÃO TÉCNICA (ANGULAR + WEBGPU)
-
-### 20.1 Serviço de IA (`llm.service.ts`)
-
-Este serviço gerencia a WebGPU e mantém o modelo aquecido na memória do navegador.
-
-```typescript
-import { Injectable, signal } from "@angular/core";
-import {
-  CreateMLCEngine,
-  MLCEngine,
-  InitProgressCallback,
-} from "@mlc-ai/web-llm";
-
-// Configuração Travada para Produção
-const MODEL_ID = "Llama-3.2-3B-Instruct-q4f16_1-MLC";
-const SYSTEM_PROMPT = `Você é o Motor de Narrativa do jogo "Heroes of Majesty". Converta dados do jogo em texto curto, visceral e medieval.
-
-DIRETRIZES RÍGIDAS:
-1. BREVIDADE: Máximo 1 ou 2 frases. Seja seco.
-2. SEM POESIA: Não use metáforas como "dança da morte" ou "alma". Descreva sangue, metal, impacto e som.
-3. SEM NÚMEROS: Nunca cite valores numéricos (HP, Dano).
-4. USO DE TAGS: Incorpore os conceitos enviados entre colchetes [ ] de forma natural.
-5. PLACEHOLDERS: Mantenha {HERO} e {MONSTER} exatos.
-
-EXEMPLOS DE ESTILO (Copie este padrão):
-
-User: Contexto: Ataque Crítico. Tags: [lama, estalo seco, costelas].
-Assistant: {HERO} firma o pé na lama e enterra a arma, quebrando as costelas de {MONSTER} com um estalo seco.
-
-User: Contexto: Magia de Fogo. Tags: [cheiro de enxofre, pele derretendo, clarão].
-Assistant: Um clarão cega o campo enquanto o cheiro de enxofre e pele derretendo emana de {MONSTER}.
-
-User: Contexto: Banter (Ladrão para Guerreiro). Tags: [ouro, lento, ferrugem].
-Assistant: "Lento demais, pilha de ferrugem. Esse ouro já tem dono."
-
-Responda apenas com o texto narrativo final.`;
-
-@Injectable({ providedIn: "root" })
-export class LlmService {
-  private engine: MLCEngine | null = null;
-
-  // Sinais Reativos para UI
-  public isReady = signal(false);
-  public progress = signal(0); // 0 a 100%
-  public currentAction = signal(""); // "Baixando shaders", "Carregando pesos"
-
-  async init() {
-    if (this.engine) return;
-
-    const initCallback: InitProgressCallback = (report) => {
-      this.progress.set(report.progress * 100);
-      this.currentAction.set(report.text);
-    };
-
-    try {
-      this.engine = await CreateMLCEngine(MODEL_ID, {
-        initProgressCallback: initCallback,
-        logLevel: "WARN", // Reduz poluição no console
-      });
-      this.isReady.set(true);
-      console.log("✅ Llama 3.2 3B carregado na GPU");
-    } catch (e) {
-      console.error("❌ WebGPU não suportada ou erro de carga", e);
-      // Implementar Fallback para texto estático aqui
-      this.fallbackToStaticText();
-    }
-  }
-
-  async generateFlavorText(userPrompt: string): Promise<string> {
-    if (!this.engine) {
-      return this.getFallbackText();
-    }
-
-    try {
-      const reply = await this.engine.chat.completions.create({
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: userPrompt },
-        ],
-        temperature: 0.6,
-        top_p: 0.9,
-        max_tokens: 150,
-        stop: ["<|eot_id|>", "User:", "\n\n"],
-      });
-
-      return reply.choices[0].message.content || "";
-    } catch (e) {
-      console.warn("⚠️ Erro na geração, usando fallback", e);
-      return this.getFallbackText();
-    }
-  }
-
-  private fallbackToStaticText() {
-    // Modo de compatibilidade para GPUs sem WebGPU
-    console.warn("⚠️ Modo Fallback ativado - usando textos estáticos");
-  }
-
-  private getFallbackText(): string {
-    // Pool de textos genéricos como backup
-    const fallbacks = [
-      "O golpe atinge o alvo com força brutal.",
-      "Metal contra carne. Sangue jorra.",
-      "Um ataque certeiro derruba o inimigo.",
-    ];
-    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
-  }
-}
-```
-
-### 20.2 Consumo no Componente (`combat-log.component.ts`)
-
-O componente recebe o evento do Backend (Deno) já com as Tags sorteadas e solicita a narração.
-
-```typescript
-import { Component, signal } from "@angular/core";
-import { LlmService } from "./llm.service";
-
-// Exemplo de payload vindo do Deno (WebSocket/API)
-interface CombatEventPayload {
-  hero: string;
-  monster: string;
-  isCritical: boolean;
-  damage: number;
-  // O Deno já fez o trabalho sujo de ir no Postgres e sortear as tags:
-  narrativeTags: string[];
-}
-
-@Component({
-  selector: "app-combat-log",
-  template: `
-    <div class="combat-log">
-      <h3>Timeline de Combate</h3>
-
-      @if (!llm.isReady()) {
-        <div class="loading">
-          <progress [value]="llm.progress()" max="100"></progress>
-          <p>{{ llm.currentAction() }}</p>
-        </div>
-      }
-
-      <div class="logs">
-        @for (log of logs(); track $index) {
-          <div class="log-entry" [class.critical]="log.isCritical">
-            <span class="timestamp">{{ log.time }}</span>
-            <span class="text">{{ log.text }}</span>
-          </div>
-        }
-      </div>
-    </div>
-  `,
-  styles: [
-    `
-      .combat-log {
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid #00ff00;
-        padding: 1rem;
-        height: 400px;
-        overflow-y: auto;
-      }
-
-      .log-entry {
-        padding: 0.5rem;
-        border-left: 3px solid #00bfff;
-        margin-bottom: 0.5rem;
-        animation: slideIn 0.3s ease;
-      }
-
-      .log-entry.critical {
-        border-left-color: #ff0000;
-        background: rgba(255, 0, 0, 0.1);
-        animation: pulse 0.5s infinite;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-      }
-    `,
-  ],
-})
-export class CombatLogComponent {
-  logs = signal<Array<{ time: string; text: string; isCritical: boolean }>>([]);
-
-  constructor(public llm: LlmService) {
-    // Inicializar o modelo ao carregar o componente
-    this.llm.init();
-  }
-
-  async onCombatEvent(event: CombatEventPayload) {
-    // 1. Montar o Prompt com as Tags vindas do Backend
-    const prompt = `
-      Contexto: ${event.isCritical ? "Ataque Crítico" : "Ataque Normal"}.
-      Ator: ${event.hero}. Alvo: ${event.monster}.
-      Tags Obrigatórias: [${event.narrativeTags.join(", ")}].
-    `.trim();
-
-    // 2. Gerar Texto (Async - não bloqueia UI)
-    const text = await this.llm.generateFlavorText(prompt);
-
-    // 3. Substituir Placeholders finais (Segurança)
-    const finalText = text
-      .replace("{HERO}", event.hero)
-      .replace("{MONSTER}", event.monster);
-
-    // 4. Adicionar ao Log Visual
-    const timestamp = new Date().toLocaleTimeString();
-    this.logs.update((l) =>
-      [
-        { time: timestamp, text: finalText, isCritical: event.isCritical },
-        ...l,
-      ].slice(0, 100),
-    ); // Limitar a 100 logs
-  }
-}
-```
-
-**Integração com WebSocket (Deno → Angular):**
-
-```typescript
-// websocket.service.ts
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-
-@Injectable({ providedIn: 'root' })
-export class WebSocketService {
-  private ws: WebSocket | null = null;
-  public combatEvents$ = new Subject<CombatEventPayload>();
-
-  connect(url: string) {
-    this.ws = new WebSocket(url);
-
-    this.ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === 'COMBAT_EVENT') {
-        this.combatEvents$.next(data.payload);
-      }
-    };
-  }
-}
-
-// No componente:
-constructor(
-  private ws: WebSocketService,
-  public llm: LlmService
-) {
-  this.ws.connect('ws://localhost:8000/game');
-  this.ws.combatEvents$.subscribe(event => {
-    this.onCombatEvent(event);
-  });
-}
-```
-
 ---
 
-## 21. CONCLUSÃO TÉCNICA
+## 19. CONCLUSÃO DA ARQUITETURA
 
 Esta arquitetura resolve o trilema da narrativa em jogos:
 
-### ✅ Vantagens da Arquitetura
+### ✅ Vantagens do Modelo Híbrido
 
-1. **Custo Zero:** Roda na GPU do cliente, poupando milhares de dólares em API (vs OpenAI/Claude)
-2. **Variedade Infinita:** A combinação de _Postgres → Deno RAM Mixer → Llama 3.2_ garante que o jogador nunca lerá a mesma frase duas vezes em 500 horas
-3. **Controle Total:** O System Prompt rígido e a lógica determinística do Deno impedem que a IA "quebre" o jogo inventando regras que não existem
-4. **Performance:** Geração em ~50-200ms (dependendo da GPU), não bloqueante
-5. **Privacidade:** Nenhum dado do jogador sai da máquina
-6. **Modding Friendly:** Comunidade pode adicionar tags ao banco PostgreSQL
-
-### 📊 Benchmarks Esperados
-
-| Hardware     | Tempo de Carregamento | Tokens/seg | Latência/Texto |
-| ------------ | --------------------- | ---------- | -------------- |
-| GTX 1060 6GB | ~15s                  | 15-20      | ~200ms         |
-| RTX 3060     | ~8s                   | 30-40      | ~100ms         |
-| RTX 4090     | ~4s                   | 60+        | ~50ms          |
-| M1/M2 Mac    | ~10s                  | 25-35      | ~120ms         |
-
-### 🎯 KPIs de Sucesso
+1.  **Imprevisibilidade Controlada:** A IA gera prosa infinita, mas o jogo dita as regras, impedindo alucinações.
+2.  **Profundidade Psicológica:** Através das Sopas de Tags de Backstory e Personalidade, os heróis deixam de ser números e viram personagens.
+3.  **Custo Zero:** Todo o processamento é local, usando a GPU do jogador, sem depender de APIs externas pagas.
+4.  **Imersão Total:** O jogador não vê números subindo, vê histórias acontecendo.
 
 **Métrica 1: Taxa de Repetição**
 
@@ -11289,7 +11916,6 @@ Esta arquitetura resolve o trilema da narrativa em jogos:
 - Medição: Telemetria integrada
 
 ---
-
 # 📜 CONCLUSÃO
 
 Esta documentação define **todas as mecânicas funcionais** de **Heroes of Majesty: Console Edition**.

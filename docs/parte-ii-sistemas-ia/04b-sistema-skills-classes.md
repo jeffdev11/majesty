@@ -404,23 +404,23 @@ graph TD
 
 ### 🌟 Skills Passivas (15)
 
-| #   | Passiva                  | Requer   | Efeito                                            | Momento Ideal (Contexto)                                      |
-| :-- | :----------------------- | :------- | :------------------------------------------------ | :------------------------------------------------------------ |
-| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                            | Torna o Elfo o mestre da movimentação no campo.               |
-| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.                     | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
-| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.                  | Aumenta a resistência do Elfo para expedições longas.         |
-| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                      | Multiplica o efeito de todas as flechas e lâminas místicas.   |
-| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.               | Melhora a defesa passiva do herói sem gastar mana.            |
-| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.                 | Permite que o Elfo atue por mais tempo com magia.             |
-| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.                    | Garante que cada tiro conte contra inimigos de elite.         |
-| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                       | Torna o Elfo a escolha perfeita para missões noturnas.        |
-| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.                 | Sustentação de mana infinita se o herói for bem gerenciado.   |
-| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.                | Proteção contra outros atacantes à distância.                 |
-| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                          | Torna o Elfo um "Anti-Mago" nato.                             |
-| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (10 Turnos). | Vingança poderosa para virar uma luta perdida.                |
-| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                       | Aumenta a frequência de uso de habilidades poderosas.         |
-| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10min).             | Evita mortes acidentais por erros de posicionamento.          |
-| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.                  | O estado de perfeição elfo, dominante em todas as distâncias. |
+| #   | Passiva                  | Requer   | Efeito                                              | Momento Ideal (Contexto)                                      |
+| :-- | :----------------------- | :------- | :-------------------------------------------------- | :------------------------------------------------------------ |
+| 1   | **Elven Grace**          | Nível 1  | +25% Speed permanente.                              | Torna o Elfo o mestre da movimentação no campo.               |
+| 2   | **Mystic Vision**        | Nível 1  | Detecta invisíveis e ocultos.                       | Crítico contra Ladinos inimigos ou monstros que se escondem.  |
+| 3   | **Longevity**            | Nível 2  | +20% HP máximo, imune a doenças.                    | Aumenta a resistência do Elfo para expedições longas.         |
+| 4   | **Arcane Affinity**      | Nível 2  | +20% dano mágico permanente.                        | Multiplica o efeito de todas as flechas e lâminas místicas.   |
+| 5   | **Supernatural Evasion** | Nível 3  | +18% chance de esquivar permanente.                 | Melhora a defesa passiva do herói sem gastar mana.            |
+| 6   | **Ancestral Wisdom**     | Nível 3  | +30% Mana max, -10% custo skills.                   | Permite que o Elfo atue por mais tempo com magia.             |
+| 7   | **Elven Precision**      | Nível 4  | +15% Crítico + Penetra Defesa.                      | Garante que cada tiro conte contra inimigos de elite.         |
+| 8   | **Lunar Protection**     | Nível 4  | +15% stats durante a noite.                         | Torna o Elfo a escolha perfeita para missões noturnas.        |
+| 9   | **Magic Harmony**        | Nível 5  | Regenera 3% Mana por skill usada.                   | Sustentação de mana infinita se o herói for bem gerenciado.   |
+| 10  | **Shadow Cloak**         | Nível 5  | +15% Esquiva contra magia/flechas.                  | Proteção contra outros atacantes à distância.                 |
+| 11  | **Arcane Resilience**    | Nível 6  | +35% Resistência Mágica.                            | Torna o Elfo um "Anti-Mago" nato.                             |
+| 12  | **Soul Link**            | Nível 7  | Quando aliado morre, ganha +50% dano (10 Turnos).   | Vingança poderosa para virar uma luta perdida.                |
+| 13  | **Arcane Master**        | Nível 8  | Cooldowns reduzidos em 15%.                         | Aumenta a frequência de uso de habilidades poderosas.         |
+| 14  | **Elven Immortality**    | Nível 9  | Revive com 1 HP ao morrer (1x/10 min (200 Turnos)). | Evita mortes acidentais por erros de posicionamento.          |
+| 15  | **Transcendence**        | Nível 10 | +60% Mana, +40% Dano, Custo 50%.                    | O estado de perfeição elfo, dominante em todas as distâncias. |
 
 ---
 
@@ -554,7 +554,7 @@ graph TD
 | 8   | **Eternal Blessing**   | Nível 4  | Começa combate com +20% stats (3t).           | Garante uma vantagem explosiva em cada novo encontro.           |
 | 9   | **Divine Rebirth**     | Nível 5  | Revive com 30% HP (1x por partida).           | Segunda chance automática para o baluarte do reino.             |
 | 10  | **Guardian Shield**    | Nível 5  | Bloqueia ataques para aliados no mesmo local. | Atuação como o protetor supremo dos heróis mais fracos.         |
-| 11  | **Expanded Aura**      | Nível 6  | Alcance de auras +50% (18m).                  | Protege o grupo mesmo quando eles se espalham um pouco.         |
+| 11  | **Expanded Aura**      | Nível 6  | Auras afetam **todo o Local (+Adjacentes)**.  | Protege o grupo mesmo quando eles se espalham um pouco.         |
 | 12  | **Devoted**            | Nível 7  | Curas custam -20% Mana.                       | Permite economizar mana para habilidades de ataque e aura.      |
 | 13  | **Bastion**            | Nível 8  | +50% Defense se não mover por 1 Turno.        | Invicto em lutas contra inimigos que não têm repulsão.          |
 | 14  | **Purification**       | Nível 9  | Remove todos debuffs a cada 4 turnos.         | Auto-sustento contra venenos, pragas e lentidões.               |
@@ -674,7 +674,7 @@ graph TD
 | :-- | :-------------------- | :------- | :--------------------------------------------- | :----------------------------------------------------------------- |
 | 1   | **Inspiration Gain**  | Nível 1  | Ganha 20 Mana ao ver kill de aliado.           | Permite que o Bardo nunca pare de cantar durante o combate.        |
 | 2   | **Charismatic**       | Nível 1  | +30% afinidade natural com heróis.             | Acelera a formação de grupos e combos de afinidade.                |
-| 3   | **Musical Reach**     | Nível 2  | Raio das canções +5m (Total 20m).              | Protege aliados que lutam na retaguarda ou estão distantes.        |
+| 3   | **Musical Reach**     | Nível 2  | Canções afetam **todo o Local**.               | Protege aliados que lutam na retaguarda ou estão distantes.        |
 | 4   | **Multitasking**      | Nível 2  | Pode cantar e atacar simultaneamente.          | Garante que o Bardo contribua com dano sem cessar o suporte.       |
 | 5   | **Sonic Mastery**     | Nível 3  | +15% dano sonoro permanente.                   | Melhora as magias ofensivas do Bardo.                              |
 | 6   | **Natural Performer** | Nível 3  | Canções custam -20% Mana.                      | Eficiência econômica para expedições de longa duração.             |
@@ -718,7 +718,7 @@ graph TD
 | :-- | :----------------------- | :------- | :------- | :----------- | :-------------------------------------------------------- | :------- | :-------------------------------------------------------- |
 | 1   | **Palm Strike** 👊       | 10 Mana  | 1 Turno  | **55**       | Soco rápido, 55 dano, gera 1 combo                        | Nível 1  | Início da sequência para acumular combos rapidamente.     |
 | 2   | **Spinning Kick** 🦵     | 15 Mana  | 1 Turno  | **280 AoE**  | Ataque 360°, 70 dano, atinge até 4 inimigos               | Nível 1  | Combater múltiplos inimigos que cercaram o Monge.         |
-| 3   | **Wind Dash** 💨         | 20 Mana  | 1 Turno  | -            | Teleporta 15m instantly, gera 2 combos                    | Nível 2  | Para se aproximar instantaneamente de alvos à distância.  |
+| 3   | **Wind Dash** 💨         | 20 Mana  | 1 Turno  | -            | Teleporta para **qualquer ponto do Local**, gera 2 combos | Nível 2  | Para se aproximar instantaneamente de alvos à distância.  |
 | 4   | **Dragon Punch** 🐉      | 25 Mana  | 2 Turnos | **120**      | 3 socos rápidos (ação única), 40 dano cada, gera 3 combos | Nível 2  | Contra alvos únicos para maximizar o acúmulo de recursos. |
 | 5   | **Meditation** 🧘        | 0 Mana   | 4 Turnos | -            | Regenera 50 Mana, gasta turno                             | Nível 3  | Momento de pausa segura para restaurar energia vital.     |
 | 6   | **Hundred-Hand Slap** ✋ | 30 Mana  | 3 Turnos | **200**      | Ataque frenético em alvo único, 10 hits                   | Nível 3  | Descarregar o burst de dano em um oponente imobilizado.   |

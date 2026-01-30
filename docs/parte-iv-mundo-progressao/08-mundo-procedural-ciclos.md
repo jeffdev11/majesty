@@ -20,7 +20,7 @@ heroes.forEach((hero) => {
 // 2. Torres e construções têm visão estática
 buildings.forEach((building) => {
   if (building.type === "WATCHTOWER") {
-    visibleNodes.push(...getNodesInRadius(building.position, 50));
+    visibleNodes.push(...getNodesInRadius(building.position, 1)); // Raio de Locais Adjacentes
   }
 });
 
@@ -58,7 +58,7 @@ Rei (Elite). Loot estimado: Alto. Risco: EXTREMO."
 
 ### Estrutura da Partida
 
-Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 minutos** (Total: 2 horas ou mais).
+Cada partida dura **8 dias** divididos em **4 ciclos** de 2 dias cada. Cada ciclo tem duração real de **30 min (600 Turnos)** (Total: 2h ou mais).
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -232,9 +232,8 @@ Dia 4:      Traições começam, conflitos PvP aumentam. Preparação para Inver
 
 - Heróis perdem -1 HP/Turno ao ar livre
 - Torres consomem lenha para manter aquecidas
-- Moral -10 global
 
-**Solução:** Construir "Fogueiras" (100g cada, área 10m aquecida)
+**Solução:** Construir "Fogueiras" (100g cada, aquece o Local)
 
 #### Eventos Globais Únicos do Ciclo 3
 
@@ -300,7 +299,6 @@ Os eventos aleatórios normais **continuam acontecendo durante os Dias 7 e 8**.
 **LUA DE SANGUE PECMANENTE:**
 
 - Monstros +100% HP/Attack (sempre ativo)
-- Heróis -20% Moral (constante)
 - Mortos reanimam automaticamente após 100 Turnos
 
 **FENDAS MÁGICAS:**
@@ -343,7 +341,6 @@ Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória o
 | ----------------- | --------- | -------- | --------- | ---------------------------- |
 | **Tom**           | Esperança | Conflito | Desespero | Épico                        |
 | **Dificuldade**   | ★☆☆☆      | ★★☆☆     | ★★★☆      | ★★★★                         |
-| **Moral Médio**   | 80%       | 60%      | 40%       | 20%                          |
 | **Taxa de Morte** | 10%       | 30%      | 50%       | 80%                          |
 | **Ouro/Dia**      | +500g     | +300g    | +100g     | Variável (economia circular) |
 | **Eventos/Dia**   | 0.5       | 1.0      | 1.5       | 3.0                          |
@@ -383,12 +380,10 @@ Dia 8+:     Redenções heroicas, últimas alianças. BATALHA FINAL - Vitória o
 
 ## 8.3 Ciclo Dia/Noite: Perigo após o Pôr do Sol
 
-### Mecânica
+O mundo tem um **ciclo de 15 min (300 Turnos)** (tempo real):
 
-O mundo tem um **ciclo de 15 minutos** (tempo real):
-
-- **8 minutos:** Dia (seguro)
-- **7 minutos:** Noite (perigoso)
+- **8 min (160 Turnos):** Dia (seguro)
+- **7 min (140 Turnos):** Noite (perigoso)
 
 ### Mudanças Noturnas
 
@@ -415,7 +410,7 @@ Heróis sem **iluminação** sofrem:
 ```
 [18:45] 🌅 SYS [Mundo] [Noite] Sol se pôs. Penalidade ativa.
 [18:46] 💬 CHAT [Lila] "É muito escuro... preciso de luz."
-[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina 20m/100 Turnos.
+[18:47] ✨ CAST [Gandalf] [-20 MP] Conjura 🔥 Bola de Fogo. Ilumina o Local/100 Turnos.
 [18:48] 👣 MOVE [Kaelen] [Retornou] Voltou à vila por medo.
 ```
 
@@ -450,7 +445,6 @@ Heróis sem **iluminação** sofrem:
 - **Frequência:** Dia 4, Dia 6, Dia 8
 - **Efeito:**
   - Todos monstros ganham +100% HP/Attack
-  - Heróis têm -10 Moral
   - Mortos-vivos spawnam em massa
   - **Boss Global** aparece
 
@@ -484,7 +478,7 @@ Exército: 50 Esqueletos, 10 Necromantes
 
 O Rei Vilão envia **ondas periódicas** de monstros diretamente contra a Casa Central.
 
-- **Frequência:** A cada 12 horas (tempo do jogo).
+- **Frequência:** A cada 12 horas (tempo do jogo - 150 Turnos).
 - **Escalonamento:** Cada nova onda é **20% mais forte** que a anterior.
 
 **Desafio Estratégico:**
@@ -506,6 +500,36 @@ Reino Salvo. Partida Concluída.
 
 Gerando Crônicas do Reino...
 ```
+
+---
+
+## 8.5 Tempos de Viagem e Eficiência de Ações
+
+Em _Heroes of Majesty_, o tempo é um recurso precioso. Cada ação consome **Turnos** do Ciclo de Dia/Noite.
+
+### Tabela de Tempos de Viagem (Deslocamento Global)
+
+Considerando que cada **Tile** (Local do Mapa) representa uma área significativa (Floresta Inteira, Bairro da Vila, Dungeon):
+
+| Tipo de Deslocamento               | Tempo Real | Turnos    | Descrição                                               |
+| :--------------------------------- | :--------- | :-------- | :------------------------------------------------------ |
+| **Viagem entre Locais Adjacentes** | 60s        | 20 Turnos | Tempo para cruzar a fronteira de um Tile para outro.    |
+| **Viagem Longa (Teleporte)**       | 10s        | 3 Turnos  | Viajando via Portal Mágico ou Skill de Teleporte.       |
+| **Fuga de Combate**                | 15s        | 5 Turnos  | Tempo para recuar de um Tile perigoso para um seguro.   |
+| **Patrulha no Local**              | 120s       | 40 Turnos | Tempo para explorar completamente um Tile desconhecido. |
+| **Busca por Monstros**             | 60s        | 20 Turnos | Procurar inimigos escondidos no local atual.            |
+
+### Tabela de Tempos de Ação em Construções
+
+| Ação                      | Tempo Real | Turnos       | Descrição                                 |
+| :------------------------ | :--------- | :----------- | :---------------------------------------- |
+| **Descanso na Taverna**   | 60s        | 20 Turnos    | Recupera Fadiga e HP/Mana.                |
+| **Visita ao Mercado**     | 15s        | 5 Turnos     | Comprar/Vender itens (Logística).         |
+| **Treinamento na Guilda** | 60s-120s   | 20-40 Turnos | Aprender nova skill ou melhorar atributo. |
+| **Rezar no Templo**       | 30s        | 10 Turnos    | Remover maldição ou ganhar abençoamento.  |
+| **Forjar Item**           | 90s        | 30 Turnos    | Criar equipamento no Ferreiro.            |
+
+> **Nota:** Estes tempos são **simulados** para os heróis (IA). O jogador não precisa "esperar" olhando para a tela de loading, mas verá no log que o herói está "Ocupado: Comprando Poções (5 Turnos restantes)".
 
 ---
 

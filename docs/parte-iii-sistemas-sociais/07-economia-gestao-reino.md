@@ -129,18 +129,18 @@ Conselheiro: "Compra realizada. Estoque atualizado:
 **"Decreto de Guerra Total"**
 
 - **Custo:** 500 Ouro
-- **Duração:** 10 minutos (200 Turnos)
+- **Duração:** 10 min (200 Turnos)
 - **Buff:** +30% Ataque Global, +20% XP
 - **Risco:** 20% chance de evento "Motim" (1 herói fica com -50 Lealdade)
 
 ### Lista de Decretos
 
-| Nome                  | Custo | Buff                                            | Risco                                   |
-| --------------------- | ----- | ----------------------------------------------- | --------------------------------------- |
-| **Banquete Real**     | 300g  | +10% all stats, sem deserções por 15 min        | Pode atrair ladrões (invasão Goblin)    |
-| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança) | -10 Affect global (reclamam)            |
-| **Bênção Divina**     | 800g  | +50% Regeneração de HP/Mana por 5 min           | Pode atrair mortos-vivos (sentem magia) |
-| **Dia de Folga**      | 0g    | Heróis param de lutar por 5 min (descansam)     | Perde oportunidades de loot             |
+| Nome                  | Custo | Buff                                                  | Risco                                   |
+| --------------------- | ----- | ----------------------------------------------------- | --------------------------------------- |
+| **Banquete Real**     | 300g  | +10% all stats, sem deserções por 15 min (300 Turnos) | Pode atrair ladrões (invasão Goblin)    |
+| **Toque de Recolher** | 200g  | Heróis retornam à vila ao anoitecer (segurança)       | -10 Affect global (reclamam)            |
+| **Bênção Divina**     | 800g  | +50% Regeneração de HP/Mana por 5 min (100 Turnos)    | Pode atrair mortos-vivos (sentem magia) |
+| **Dia de Folga**      | 0g    | Heróis param de lutar por 5 min (100 Turnos)          | Perde oportunidades de loot             |
 
 ### Uso Estratégico
 
@@ -181,12 +181,12 @@ motivados. Mas atenção: Gandalf está murmurando sobre
 
 #### Valores Iniciais
 
-| Atributo                | Valor                       |
-| ----------------------- | --------------------------- |
-| **IP Máximo**           | 100 IP                      |
-| **IP Inicial**          | 100 IP (começa cheio)       |
-| **Regeneração Base**    | +1 IP a cada 3s (20 IP/min) |
-| **Velocidade de Gasto** | Variável (10-30 IP/ação)    |
+| Atributo                | Valor                                 |
+| ----------------------- | ------------------------------------- |
+| **IP Máximo**           | 100 IP                                |
+| **IP Inicial**          | 100 IP (começa cheio)                 |
+| **Regeneração Base**    | +1 IP a cada 3s (1 Turno / 20 IP/min) |
+| **Velocidade de Gasto** | Variável (10-30 IP/ação)              |
 
 #### Tabela Completa de Custos
 
@@ -224,7 +224,7 @@ tar Herói (Comando Avançado)\*\* | -50 IP | Rara |
 #### 1. Corte Real (Tier 1)
 
 **Custo:** 500 Ouro  
-**Efeito:** Regeneração +100% (1 IP/3s → 2 IP/3s)  
+**Efeito:** Regeneração +100% (1 IP/3s → 2 IP/3s (2 IP/Turno))  
 **Quando comprar:** Ciclo 1 (primeiros 20 dias)
 
 ```
@@ -275,13 +275,13 @@ Se 80%+ dos heróis têm Lealdade > 70%:
 
 #### Eventos que Afetam IP
 
-| Evento                     | Efeito em IP                  | Duração                               |
-| -------------------------- | ----------------------------- | ------------------------------------- |
-| **Festival da Vila**       | +50% regeneração              | 10 min (`200 Turnos`)                 |
-| **Motim**                  | -50% regeneração + Custo +50% | Até resolver                          |
-| **Vitória contra Boss**    | +25 IP imediato               | Instantâneo                           |
-| **Morte de Herói Popular** | -10 IP/min por 5 min          | 5 min (`100 Turnos`)                  |
-| **Traição**                | IP máximo -20 (100→80)        | Permanente até reconquistar confiança |
+| Evento                     | Efeito em IP                      | Duração                               |
+| -------------------------- | --------------------------------- | ------------------------------------- |
+| **Festival da Vila**       | +50% regeneração                  | 10 min (200 Turnos)                   |
+| **Motim**                  | -50% regeneração + Custo +50%     | Até resolver                          |
+| **Vitória contra Boss**    | +25 IP imediato                   | Instantâneo                           |
+| **Morte de Herói Popular** | -10 IP/min por 5 min (100 Turnos) | 5 min (100 Turnos)                    |
+| **Traição**                | IP máximo -20 (100→80)            | Permanente até reconquistar confiança |
 
 ---
 
@@ -357,7 +357,7 @@ Aguarde regeneração ou economize.
 ```
 🚫 SEM INFLUENCE!
 Você não pode dar comandos.
-Aguarde 30s para recuperar 10 IP.
+Aguarde 30s (10 Turnos) para recuperar 10 IP.
 ```
 
 ---
@@ -375,7 +375,7 @@ Situação:
 Problema: Não tem IP suficiente!
 
 Soluções:
-1. Aguardar 30s (regenera 10 IP = total 25 IP)
+1. Aguardar 30s (10 Turnos) (regenera 10 IP = total 25 IP)
 2. Usar comando simples ao Conselheiro (10 IP):
    "Avise a Lila para recuar!" (Conselheiro envia aviso)
 3. APRENDER: Sempre manter reserva de 30 IP!
@@ -449,7 +449,7 @@ Mesmo sendo rei, você não pode fazer TUDO o tempo todo.
 #### Regeneração com Modificadores
 
 ```typescript
-const regenBase = 1; // 1 IP a cada 3s
+const regenBase = 1; // 1 IP a cada 3s (1 Turno)
 const upgradeMultiplier = hasCorteReal ? 2 : 1;
 const eventBonus = getActiveEventBonus("ip_regen");
 

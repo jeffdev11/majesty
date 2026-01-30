@@ -11,61 +11,62 @@ O **Conselheiro Real** não é apenas um chatbot. Ele é:
 
 ### Características Únicas
 
-| Propriedade       | Valor                                          |
-| ----------------- | ---------------------------------------------- |
-| **Mortalidade**   | Pode morrer (mas respawna após 5 minutos)      |
-| **Mobilidade**    | Se desloca pela vila (pode estar indisponível) |
-| **Personalidade** | 3 arquétipos disponíveis                       |
-| **Custo de Uso**  | 10 IP (Influence Points) por interação         |
+| Propriedade       | Valor                                              |
+| ----------------- | -------------------------------------------------- |
+| **Mortalidade**   | Pode morrer (mas respawna após 5 min (100 Turnos)) |
+| **Mobilidade**    | Se desloca pela vila (pode estar indisponível)     |
+| **Personalidade** | 3 arquétipos disponíveis                           |
+| **Custo de Uso**  | 10 IP (Influence Points) por interação             |
 
 ---
 
-## 6.2 Chat Interativo via NLP
+## 6.2 Interação Natural & Contextual
 
-### Interface de Comando
+Esqueça comandos de linha como `/buy` ou `/attack`. O Conselheiro Real utiliza um modelo de linguagem avançado para **interpretar sua intenção** com base no contexto do jogo. Você fala como um Rei, e ele entende como um servo leal (ou sarcástico).
 
-**Localização:** Painel P7 (presente em todos os workspaces)
+### Interface de Diálogo
 
-**Ativação:** Pressionar `/` (barra) foca o input instantaneamente
+**Ativação:** Basta começar a digitar. O prompt `Majesty>` está sempre ouvindo.
 
-### Categorias de Comando
+### Exemplos de Interação (Intenção -> Ação)
 
-#### 1. Comandos Administrativos
+#### 1. Gestão e Economia
 
-```
-/buy [item] [quantidade]
-/upgrade [building]
-/recruit [class]
-/unlock [skill_name]
-```
+- **Jogador:** "Precisamos de mais poções, compre 10."
+  - _Ação do Sistema:_ Executa compra de 10 Health Potions.
+  - _Resposta:_ "Feito, Majestade. O estoque está seguro."
+- **Jogador:** "Melhore a Guilda dos Guerreiros, eles estão fracos."
+  - _Ação do Sistema:_ Upgrade `Warrior_Guild` para Nível 2.
+- **Jogador:** "Recrute um novo mago, precisamos de magia."
+  - _Ação do Sistema:_ Inicia processo de recrutamento de `Mage`.
 
-#### 2. Comandos Sociais
+#### 2. Dinâmica Social
 
-```
-/send letter [hero] [mensagem]
-/who is [hero_name]?
-/why is [hero] angry?
-/show relationships [hero]
-```
+- **Jogador:** "Por que a Lila está tão brava?"
+  - _Ação do Sistema:_ Consulta tabela `affinity_logs` e `personality`.
+  - _Resposta:_ "Ela odeia Kaelen por roubar o loot do Dragão ontem. Sugiro um presente."
+- **Jogador:** "Mande uma carta para ela pedindo desculpas em meu nome e envie 300 de ouro."
+  - _Ação do Sistema:_ Envia Carta (+Afinidade) e transfere 300g.
+- **Jogador:** "Quem são os amigos de Kaelen?"
+  - _Ação do Sistema:_ Exibe grafo de relacionamentos de Kaelen.
 
-#### 3. Comandos Estratégicos
+#### 3. Estratégia e Táticas
 
-```
-/attack [location] with [hero]
-/defend [location]
-/scout [area]
-/retreat all
-```
+- **Jogador:** "Aquele posto avançado no norte está em perigo. Mande Kaelen para lá."
+  - _Ação do Sistema:_ Cria uma `Defend_Quest` no Norte com restrição `Hero: Kaelen`.
+- **Jogador:** "Ordene que todos recuem! O inverno chegou."
+  - _Ação do Sistema:_ Emite `Retreat_Call` global.
+- **Jogador:** "Onde está o covil dos Goblins?"
+  - _Ação do Sistema:_ Marca no mapa se já foi descoberto ou sugere missão de exploração.
 
 #### 4. Consultas Analíticas
 
-```
-/summary today
-/who is fighting?
-/what happened to [hero]?
-/top killers
-/economy report
-```
+- **Jogador:** "Como foi o dia hoje?"
+  - _Ação do Sistema:_ Gera resumo dos logs do dia.
+- **Jogador:** "Quem mais matou monstros?"
+  - _Ação do Sistema:_ Exibe ranking de Kills.
+- **Jogador:** "Estamos falindo?"
+  - _Ação do Sistema:_ Analisa fluxo de caixa e projeta falência.
 
 ### Exemplo de Conversa
 
@@ -81,7 +82,7 @@ compensação em ouro ou ela pode iniciar PvP."
 Jogador: "Envie uma carta para a Lila pedindo desculpas e mande 300 de ouro."
 
 Conselheiro: "Carta enviada. Custo: 25 IP. Lila deve
-receber em aproximadamente 20 segundos."
+receber em aproximadamente 20s (7 Turnos)."
 ```
 
 ---
@@ -185,7 +186,7 @@ de kill. Recomendo intervenção diplomática."
 "Majestade, baseado nos padrões atuais, prevejo:
 - 60% chance de PvP entre Kaelen e Lila nas
   próximas 2 horas.
-- Invasão de Goblins estimada para 05:30 min.
+- Invasão de Goblins estimada para 05:30 min (110 Turnos).
 - Gandalf está próximo de Level Up (XP: 480/500)."
 ```
 
@@ -238,7 +239,7 @@ O jogador pode enviar o Conselheiro para espionar:
 
 **Consequências:**
 
-- Conselheiro fica **incomunicável** por 2-5 minutos
+- Conselheiro fica **incomunicável** por 2-5 min (40-100 Turnos)
 - **Risco:** 10% chance de ser morto por monstros
 - **Recompensa:** Intel sobre:
   - Localização de chefes
@@ -256,8 +257,8 @@ Conselheiro: "Majestade... com todo respeito, você
 é PÉSSIMO nisso. Vou vender informações do reino
 para a Guilda Mercante. Tchau! 💼"
 
-[ALERTA] Conselheiro fugiu! Ficará ausente por 10
-minutos. Todos comandos NLP desabilitados.
+[ALERTA] Conselheiro fugiu! Ficará ausente por 10 min (200 Turnos).
+Todos comandos NLP desabilitados.
 ```
 
 ---

@@ -100,10 +100,10 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 #### **P - Proactivity Extrema**
 
-| Valor    | Título                  | Buffs                                                                                                                               | Debuffs                                                                                |
-| -------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando a menos de 100m da vila<br>Obedece cartas instantaneamente<br>+15% vigilância (detecta inimigos +1 Turno antes) | Nunca explora além de 150m da vila<br>-30% XP de exploração<br>Recusa missões de scout |
-| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                          | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%   |
+| Valor    | Título                  | Buffs                                                                                                                                       | Debuffs                                                                                    |
+| -------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **≤0.1** | 🛡️ **Guarda Leal**      | +20% Defense quando em **Locais Adjacentes à Vila**<br>Obedece cartas instantaneamente<br>+15% vigilância (detecta inimigos +1 Turno antes) | Nunca explora além de 3 Locais da vila<br>-30% XP de exploração<br>Recusa missões de scout |
+| **≥0.9** | ⚡ **Desbravador Nato** | +30% Velocidade de Ação<br>Descobre áreas ocultas 50% mais rápido<br>+25% XP de exploração                                                  | Pode ignorar cartas (30% chance)<br>-20% Defense (imprudente)<br>Risco de morte +15%       |
 
 #### **E - Ethics Extrema**
 
@@ -117,7 +117,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 | Valor    | Título               | Buffs                                                                                                           | Debuffs                                                                                          |
 | -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | **≤0.1** | 🐺 **Lobo Alfa**     | +40% stats quando lutando sozinho<br>Não sofre penalidade por estar sozinho<br>+20% velocidade quando sem grupo | -50% XP quando em grupo<br>Nunca compartilha recursos<br>Affinity máxima com qualquer herói: +30 |
-| **≥0.9** | 🤝 **Líder Natural** | +25% stats para aliados próximos (10m)<br>Grupos formam 2x mais rápido<br>Compartilha buffs com o time          | -30% stats quando sozinho<br>Recusa lutar sem grupo (foge)<br>Dá itens valiosos para aliados     |
+| **≥0.9** | 🤝 **Líder Natural** | +25% stats para aliados no mesmo **Local**<br>Grupos formam 2x mais rápido<br>Compartilha buffs com o time      | -30% stats quando sozinho<br>Recusa lutar sem grupo (foge)<br>Dá itens valiosos para aliados     |
 
 #### **M - Mind Extremo**
 
@@ -141,13 +141,13 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 
 **Comportamentos por faixa:**
 
-| Valor       | Comportamento        | Exemplo Prático                                                     |
-| ----------- | -------------------- | ------------------------------------------------------------------- |
-| **0.0-0.2** | Extremamente reativo | Só sai da vila se receber carta direta. Patrulha em raio de 50m.    |
-| **0.3-0.4** | Cauteloso            | Explora apenas áreas seguras (já reveladas). Evita névoa de guerra. |
-| **0.5-0.6** | Equilibrado          | Explora quando não há ameaças próximas. Balanceia segurança e ação. |
-| **0.7-0.8** | Aventureiro          | Busca ativamente monstros. Entra em névoa de guerra.                |
-| **0.9-1.0** | Temerário            | Vai direto para bosses sozinho. Ignora avisos de perigo.            |
+| Valor       | Comportamento        | Exemplo Prático                                                              |
+| ----------- | -------------------- | ---------------------------------------------------------------------------- |
+| **0.0-0.2** | Extremamente reativo | Só sai da vila se receber carta direta. Patrulha apenas o **Local da Vila**. |
+| **0.3-0.4** | Cauteloso            | Explora apenas áreas seguras (já reveladas). Evita névoa de guerra.          |
+| **0.5-0.6** | Equilibrado          | Explora quando não há ameaças próximas. Balanceia segurança e ação.          |
+| **0.7-0.8** | Aventureiro          | Busca ativamente monstros. Entra em névoa de guerra.                         |
+| **0.9-1.0** | Temerário            | Vai direto para bosses sozinho. Ignora avisos de perigo.                     |
 
 **Exemplos em gameplay:**
 
@@ -324,7 +324,7 @@ Quando um herói atinge valores **extremos** (≤0.1 ou ≥0.9) em qualquer veto
 **Reação a Morte de Aliado:**
 
 - Affect 0.2: Entra em pânico, foge ou ataca furiosamente boss (alterna)
-- Affect 0.5: Fica triste (-10% stats por 5min)
+- Affect 0.5: Fica triste (-10% stats por 5 min (100 Turnos))
 - Affect 0.9: Continua focado, sem mudança de comportamento
 
 **Reação a Crítico (Sorte):**
@@ -565,7 +565,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Ethics 0.2 (Sem Escrúpulos)
 - Objetivo: Aumentar para evitar traições
 - Custo: 200g (base) + 50g (nível 6) + 200g (oposta à classe) = **450g**
-- Tempo: 60s
+- Tempo: 60s (20 Turnos)
 - Resultado: Ethics 0.2 → 0.33 (+0.13)
 
 **Exemplo 2: Guerreiro Tático**
@@ -574,7 +574,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Mind 0.4 (Impulsivo)
 - Objetivo: Torná-lo mais estratégico
 - Custo: 400g (base) + 150g (nível 8) + 400g (oposta à classe) = **950g**
-- Tempo: 90s
+- Tempo: 90s (30 Turnos)
 - Resultado: Mind 0.4 → 0.51 (+0.11)
 
 **Exemplo 3: Druida Líder**
@@ -583,7 +583,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 - Trait Atual: Cooperation 0.7 (Sociável)
 - Objetivo: Torná-la Líder Natural (≥0.9)
 - Custo: 800g (base) - 240g (natural da classe, -30%) = **560g**
-- Tempo: 120s
+- Tempo: 120s (40 Turnos)
 - Resultado: Cooperation 0.7 → 0.78 (+0.08)
 - **Precisa de mais 2 treinamentos para atingir 0.9**
 
@@ -592,7 +592,7 @@ A Escola Estoica permite ao Majesty **moldar a personalidade** dos heróis atrav
 **Regras importantes:**
 
 1. **Sem Diminuir Traits:** Só é possível aumentar, nunca diminuir
-2. **Cooldown por Herói:** Cada herói só pode treinar 1x a cada 5 minutos
+2. **Cooldown por Herói:** Cada herói só pode treinar 1x a cada 5 min (100 Turnos)
 3. **Máximo por Trait:** Não pode ultrapassar 1.0
 4. **Herói Indisponível:** Durante treinamento, herói não pode sair da vila
 5. **Cancelamento:** Se cancelado, perde 50% do ouro pago
@@ -732,7 +732,7 @@ A personalidade base é **modulada** por estados temporários e peculiaridades p
 - **Stats Base:** HP Muito Alto, Mana Médio, Defesa Muito Alta
 - **Viés P.E.C.M.A.:** Ethics ↑↑↑, Cooperation ↑↑, Proactivity ↑
 - **Comportamento:** Extremamente honrado, protege aliados, autossacrifica-se
-- **Mecânica Única:** **Aura Sagrada** - Buffa aliados em 12m (+15% Defense)
+- **Mecânica Única:** **Aura Sagrada** - Buffa aliados no mesmo **Local** (+15% Defense)
 - **Recurso Especial:** **Mana** (regenera com o tempo, gasta em habilidades)
 
 #### 💀 Necromante (Necromancer)
@@ -798,7 +798,7 @@ Para incentivar diferentes composições de reino e recompensar o investimento e
 
 ---
 
-## 4.6 Geração Procedural de Biografia e Identidade (LLM)
+## 4.4.1 Geração Procedural de Biografia e Identidade (LLM)
 
 Sempre que o jogador escolhe um herói de uma determinada classe para recrutar, o sistema gera instantaneamente uma **identidade única**. Este processo combina variáveis fixas, sorteios em tabelas de tags e processamento de linguagem natural (LLM).
 
@@ -847,7 +847,7 @@ O jogo envia para a IA o seguinte contexto estruturado:
 
 ---
 
-## 4.7 Sistema de Loot e Economia
+## 4.5 Sistema de Loot e Economia
 
 ### Loot Instanciado (Individual)
 
@@ -880,8 +880,8 @@ Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de 
 
 - **Mecânica:** O herói realiza trabalhos manuais (Taverna, Ferreiro).
 - **Pagador:** O salário é pago pela **população civil**, injetando novo ouro na economia (Faucet), e não pelo Tesouro Real.
-- **Rendimento:** Ganha **100 Ouro a cada 30 segundos**.
-- **Frequência:** Permitido apenas **1 vez por dia (a cada 15 min)**.
+- **Rendimento:** Ganha **100 Ouro a cada 10 Turnos/30s**.
+- **Frequência:** Permitido apenas **1 vez por dia (a cada 15 min (300 Turnos))**.
 - **Exceção de Morte:** Após renascer (respawn), o trabalho é liberado imediatamente sem cooldown.
 - **Limite:** Ao atingir **500 Ouro**, o herói é **forçado a sair** do trabalho.
 
@@ -891,7 +891,7 @@ Se um herói estiver sem ouro e não quiser/puder caçar (ex: HP baixo, medo de 
 
 ### Morte e Retorno
 
-Quando um herói "morre", ele é resgatado, perde o ouro e entra em um estado de recuperação (60s).
+Quando um herói "morre", ele é resgatado, perde o ouro e entra em um estado de recuperação (20 Turnos/60s).
 Após recuperar a consciência, se estiver sem ouro, ele realiza trabalhos na cidade (toca música, ajuda na forja) para comprar equipamento básico antes de voltar a se aventurar.
 
 Este ciclo garante que heróis nunca fiquem "presos" sem ter como jogar.
@@ -909,7 +909,7 @@ Este ciclo garante que heróis nunca fiquem "presos" sem ter como jogar.
 | **Bardo**      | Taverna do Javali             | "Tocando alaúde por gorjetas"           |
 | **Monge**      | Moinho de Trigo               | "Carregando sacos de farinha (treino)"  |
 
-**Duração:** 2 a 5 minutos (dependendo do nível). Após esse tempo, ele retorna à ativa.
+**Duração:** 40 a 100 Turnos (dependendo do nível). Após esse tempo, ele retorna à ativa.
 
 ### Guardas da Cidade (Mercenários)
 
